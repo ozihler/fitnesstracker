@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {WorkoutSelectionComponent} from "./workout-selection/workout-selection.component";
 import {WorkoutsOverview} from "./workouts-overview/workouts-overview.component";
-import {WorkoutOverview} from "./workout-overview/workout-overview.component";
+import {CreateWorkoutComponent} from "./create-workout/create-workout.component";
 import {CreateMuscleGroupComponent} from "./create-muscle-group/create-muscle-group.component";
 import {CreateExerciseComponent} from "./create-exercise/create-exercise.component";
 import {CreateSetComponent} from "./create-set/create-set.component";
@@ -35,7 +35,7 @@ const routes: Routes = [
   * */
   {path: "workout-selection", component: WorkoutSelectionComponent},
   {path: "workouts-overview", component: WorkoutsOverview},
-  {path: "workouts/:id", component: WorkoutOverview},
+  {path: "create-workout", component: CreateWorkoutComponent},
   {path: "create-muscle-group", component: CreateMuscleGroupComponent},
   {path: "create-exercise/:muscleGroupName", component: CreateExerciseComponent},
   {path: "create-set", component: CreateSetComponent},

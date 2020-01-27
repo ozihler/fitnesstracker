@@ -9,6 +9,7 @@ import {ExerciseFactory} from "./exercise.factory";
 import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {WorkoutRaw} from "./workout-raw";
+import {environment} from "../../environments/environment";
 
 
 @Injectable({
@@ -17,8 +18,10 @@ import {WorkoutRaw} from "./workout-raw";
 export class WorkoutService {
   private muscleGroups: MuscleGroup[] = [];
   static idCounter = 1;
+  private baseUrl: string;
 
   constructor(private httpClient: HttpClient) {
+    this.baseUrl = environment.baseUrl;
   }
 
   newMuscleGroup(muscleGroupNames: string): Observable<MuscleGroup[]> {
@@ -64,74 +67,7 @@ export class WorkoutService {
   newWorkout(): Observable<Workout> {
     let body = {title: "new Workout"};
 
-    return this.httpClient.post<WorkoutRaw>("http://localhost:5000/api/workouts", body)
-      .pipe(
-        map(data => WorkoutFactory.fromRaw(data))
-      );
-  }
-
-  static dummyData() {
-    return WorkoutFactory.fromRaw({
-      id: WorkoutService.idCounter++,
-      muscleGroups: [
-        MuscleGroupFactory.from({
-          name: "Chest",
-          exercises: [
-            {
-              name: "Bench Press",
-              sets: [
-                {repetitions: 12, weight: 50, waitingTime: 45},
-                {repetitions: 12, weight: 40, waitingTime: 45},
-                {repetitions: 12, weight: 40, waitingTime: 45}
-              ]
-            },
-            {
-              name: "Dumbbell Bench Press",
-              sets: [
-                {repetitions: 12, weight: 20, waitingTime: 45},
-                {repetitions: 11, weight: 60, waitingTime: 45},
-                {repetitions: 10, weight: 60, waitingTime: 45}
-              ]
-            },
-            {
-              name: "Flying Dumbbells",
-              sets: [
-                {repetitions: 12, weight: 65, waitingTime: 45},
-                {repetitions: 12, weight: 60, waitingTime: 45},
-                {repetitions: 10, weight: 60, waitingTime: 45}
-              ]
-            }
-          ]
-        }),
-        MuscleGroupFactory.from({
-          name: "Triceps",
-          exercises: [
-            {name: "Lat Pulldown"},
-            {name: "Lat Low Overhead"},
-            {name: "Inverted Dips"}
-          ]
-        }),
-        MuscleGroupFactory.from({
-          name: "Shoulders",
-          exercises: [
-            {name: "Arnold Press"},
-            {name: "Combined Side Front"},
-            {name: "Wide row"}
-          ]
-        })
-      ]
-    });
-  }
-
-  deleteMuscleGroup(muscleGroup: MuscleGroup) {
-    console.log("Delete muscle group ", muscleGroup.name);
-  }
-
-  deleteExercise(exercise: Exercise) {
-    console.log("Delete exercise: ", exercise.name)
-  }
-
-  deleteSet(exercise: Exercise, indexInSets: number) {
-    console.log("Delete set ", exercise.name, indexInSets);
+    return this.httpClient.post<WorkoutRaw>(this.baseUrl+"/api/workouts", body)
+      .pipe(map(data => WorkoutFactory.fromRaw(data)));
   }
 }

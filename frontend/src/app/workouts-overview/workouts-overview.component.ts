@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
             class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom">{{workout}}
     </button>
     <i class="fa fa-plus-circle" aria-hidden="true"></i>
-    <button (click)="createWorkout()"
+    <button routerLink="/create-workout"
             class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom">New Workout
     </button>
   `,
@@ -27,17 +27,9 @@ export class WorkoutsOverview implements OnInit {
   ];
 
 
-  constructor(private workoutService: WorkoutService,
-              private router: Router) {
+  constructor( ) {
   }
 
   ngOnInit() {
-  }
-
-  createWorkout() {
-    this.workoutService.newWorkout()
-      .subscribe(workout => {
-        this.router.navigate(['workouts/' + workout.id]);
-      });
   }
 }

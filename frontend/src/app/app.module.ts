@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WorkoutSelectionComponent } from './workout-selection/workout-selection.component';
 import { WorkoutsOverview } from './workouts-overview/workouts-overview.component';
-import { WorkoutOverview } from './workout-overview/workout-overview.component';
+import { CreateWorkoutComponent } from './create-workout/create-workout.component';
 import { CreateMuscleGroupComponent } from './create-muscle-group/create-muscle-group.component';
  import { ElementSelection } from './muscle-group-selection/muscle-group-selection.component';
 import {ReactiveFormsModule} from "@angular/forms";
@@ -21,7 +21,7 @@ import {HttpClientModule} from "@angular/common/http";
     AppComponent,
     WorkoutSelectionComponent,
     WorkoutsOverview,
-    WorkoutOverview,
+    CreateWorkoutComponent,
     CreateMuscleGroupComponent,
      ElementSelection,
     CreateExerciseComponent,

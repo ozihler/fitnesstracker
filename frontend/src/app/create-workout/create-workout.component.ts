@@ -5,9 +5,9 @@ import {ButtonNode, NodeType} from "../workout-details-view/button-group/button-
 import {Workout} from '../shared/workout';
 
 @Component({
-  selector: 'app-workout',
+  selector: 'app-create-workout',
   template: `
-    <div>{{workoutTree.name}}</div>
+    <div>{{workout.creationDate}} {{workout.title}}</div>
     =============================
     <app-button-group [node]="workoutTree"
                       (changeSelectionEvent)="changeSelection($event)">
@@ -22,19 +22,23 @@ import {Workout} from '../shared/workout';
   `,
   styles: []
 })
-export class WorkoutOverview implements OnInit {
+export class CreateWorkoutComponent implements OnInit {
   workoutTree: ButtonNode;
   selectedElements = [];
   selectedType: NodeType;
+  private workout: Workout;
 
 
   constructor(private workoutService: WorkoutService) {
   }
 
   ngOnInit() {
-    let workout: Workout = {id: Id.from(1 + ""), name: new Date().toDateString(), muscleGroups: []};
+    this.workoutService.newWorkout()
+      .subscribe(workout => {
+        this.workout = workout;
+        this.workoutTree = new ButtonNode(this.workout.id, this.workout.title, [], 0, NodeType.WORKOUT);
 
-    this.workoutTree = new ButtonNode(workout.id, workout.name, [], 0, NodeType.WORKOUT);
+      });
 
     this.workoutService.fetchMuscleGroups()
       .subscribe(muscleGroups => {
