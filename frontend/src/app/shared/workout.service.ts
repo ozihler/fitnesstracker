@@ -6,6 +6,9 @@ import {Workout} from "./workout";
 import {WorkoutFactory} from "./workout.factory";
 import {Exercise} from "./exercise";
 import {ExerciseFactory} from "./exercise.factory";
+import {HttpClient} from "@angular/common/http";
+import {map} from "rxjs/operators";
+import {WorkoutRaw} from "./workout-raw";
 
 
 @Injectable({
@@ -15,7 +18,7 @@ export class WorkoutService {
   private muscleGroups: MuscleGroup[] = [];
   static idCounter = 1;
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
   }
 
   newMuscleGroup(muscleGroupNames: string): Observable<MuscleGroup[]> {
@@ -59,10 +62,11 @@ export class WorkoutService {
   }
 
   newWorkout(): Observable<Workout> {
-    return from([WorkoutFactory.fromRaw({
-      id: WorkoutService.idCounter++,
-      muscleGroups: []
-    })]);
+    let body = {title: new Date().toString()};
+    return this.httpClient.post<WorkoutRaw>("/workouts", body)
+      .pipe(
+        map(data => WorkoutFactory.fromRaw(data))
+      );
   }
 
   static dummyData() {
