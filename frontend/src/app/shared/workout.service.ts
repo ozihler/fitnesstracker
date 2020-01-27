@@ -62,8 +62,9 @@ export class WorkoutService {
   }
 
   newWorkout(): Observable<Workout> {
-    let body = {title: new Date().toString()};
-    return this.httpClient.post<WorkoutRaw>("/workouts", body)
+    let body = {title: "new Workout"};
+
+    return this.httpClient.post<WorkoutRaw>("http://localhost:5000/api/workouts", body)
       .pipe(
         map(data => WorkoutFactory.fromRaw(data))
       );

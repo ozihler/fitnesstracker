@@ -14,6 +14,7 @@ import { AddExerciseComponent } from './add-exercise/add-exercise.component';
 import { CreateSetComponent } from './create-set/create-set.component';
 import { FitScreenPipe } from './shared/fit-screen.pipe';
 import { ButtonTreeComponent } from './workout-details-view/button-group/button-tree.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ButtonTreeComponent } from './workout-details-view/button-group/button-
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

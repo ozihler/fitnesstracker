@@ -4,7 +4,6 @@ import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.GID;
 import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
 
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
 public class WorkoutDocument {
