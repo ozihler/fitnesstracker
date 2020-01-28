@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
-import {from, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {MuscleGroup} from "./muscle-group";
 import {MuscleGroupFactory} from "./muscle-group.factory";
 import {Workout} from "./workout";
 import {WorkoutFactory} from "./workout.factory";
-import {Exercise} from "./exercise";
 import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {WorkoutRaw} from "./workout-raw";
@@ -23,10 +22,11 @@ export class WorkoutService {
   }
 
   newMuscleGroup(muscleGroupNames: string): Observable<MuscleGroup[]> {
-    return this.httpClient.post<MuscleGroupsRaw>("/muscle-groups", {muscleGroupNames: muscleGroupNames})
+    return this.httpClient.post<MuscleGroupsRaw>(this.baseUrl + "/muscle-groups", {muscleGroupNames: muscleGroupNames})
       .pipe(map(response => MuscleGroupFactory.fromMultiple(response.muscleGroups)));
 
   }
+
   fetchMuscleGroups(): Observable<MuscleGroup[]> {
     return this.httpClient.get<MuscleGroupsRaw>(this.baseUrl + "/muscle-groups")
       .pipe(

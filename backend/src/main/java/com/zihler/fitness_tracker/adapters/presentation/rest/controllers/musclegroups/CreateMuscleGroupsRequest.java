@@ -12,4 +12,8 @@ public class CreateMuscleGroupsRequest {
     public String getMuscleGroupNames() {
         return muscleGroupNames;
     }
+
+    public void setMuscleGroupNames(String muscleGroupNames) {
+        this.muscleGroupNames = muscleGroupNames;
+    }
 }

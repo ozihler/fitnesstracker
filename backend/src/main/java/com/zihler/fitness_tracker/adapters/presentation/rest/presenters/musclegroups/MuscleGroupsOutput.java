@@ -3,7 +3,6 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.presenters.muscleg
 import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGroupDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGroupsDocument;
 
-import java.util.List;
 import java.util.Set;
 
 import static java.util.stream.Collectors.toSet;

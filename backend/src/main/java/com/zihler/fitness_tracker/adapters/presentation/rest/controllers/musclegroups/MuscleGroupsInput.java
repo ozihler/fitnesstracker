@@ -4,6 +4,7 @@ import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGro
 import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGroupsDocument;
 import com.zihler.fitness_tracker.domain.values.Name;
 
+import java.util.Arrays;
 import java.util.Set;
 
 import static java.util.stream.Collectors.toSet;
@@ -22,11 +23,10 @@ public class MuscleGroupsInput {
             throw new EmptyMuscleGroupsRequest();
         }
 
-        Set<MuscleGroupDocument> documents = Set.of(muscleGroupNames.split("/[ ;,.]+/")).stream()
+        Set<MuscleGroupDocument> documents = Arrays.stream(muscleGroupNames.split("[ ;,.]+"))
                 .map(Name::of)
                 .map(MuscleGroupDocument::of)
                 .collect(toSet());
-
 
         return  MuscleGroupsDocument.of(documents);
     }

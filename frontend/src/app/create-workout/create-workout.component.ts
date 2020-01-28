@@ -41,15 +41,21 @@ export class CreateWorkoutComponent implements OnInit {
         console.log("Tree: ", this.workoutTree);
       });
 
+    this.fetchMuscleGroups();
+
+  }
+
+  private fetchMuscleGroups() {
     this.workoutService.fetchMuscleGroups()
       .subscribe(muscleGroups => {
         this.selectedElements = muscleGroups.map(mG => SelectableElementFactory.from(mG.name, Type.Muscle_Group));
       });
-
   }
 
-  selectElement(selection: any) {
-    console.log("Element selected: ", selection);
+  selectElement(selection: SelectableElement) {
+    if (selection.type === Type.Workout) {
+      this.fetchMuscleGroups();
+    }
 
   }
 

@@ -8,8 +8,8 @@ public class RestMuscleGroupsPresenter implements MuscleGroupsPresenter {
     private ResponseEntity<MuscleGroupsViewModel> response;
 
     @Override
-    public void present(MuscleGroupsDocument muscleGroupsDocument) {
-        var output = new MuscleGroupsOutput(muscleGroupsDocument);
+    public void present(MuscleGroupsDocument muscleGroups) {
+        var output = new MuscleGroupsOutput(muscleGroups);
         this.response = ResponseEntity.ok(output.toViewModel());
     }
 

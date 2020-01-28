@@ -13,10 +13,6 @@ public class MuscleGroupsDocument {
         this.muscleGroups = muscleGroups;
     }
 
-    public static MuscleGroupsDocument of(MuscleGroups muscleGroups) {
-        return new MuscleGroupsDocument(muscleGroups.getMuscleGroups().stream().map(MuscleGroupDocument::of).collect(toSet()));
-    }
-
     public static MuscleGroupsDocument of(Set<MuscleGroupDocument> documents) {
         return new MuscleGroupsDocument(documents);
     }
