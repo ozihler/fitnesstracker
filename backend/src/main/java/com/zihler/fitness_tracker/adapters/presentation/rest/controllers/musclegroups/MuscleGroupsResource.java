@@ -37,6 +37,10 @@ public class MuscleGroupsResource {
 
         MuscleGroupsDocument muscleGroups = input.muscleGroups();
 
+        // todo implement store muscle groups use case
+
+        presenter.present(muscleGroups);
+
         return presenter.getResponse();
     }
 }
