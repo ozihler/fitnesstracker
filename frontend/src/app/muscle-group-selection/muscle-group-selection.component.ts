@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {NodeType} from '../workout-details-view/button-group/button-node';
+import {SelectableElement} from "../shared/selectable-element";
+import {Type} from "../workout-details-view/button-group/button-node";
 
 @Component({
   selector: 'app-element-selection',
@@ -8,35 +9,40 @@ import {NodeType} from '../workout-details-view/button-group/button-node';
       <div>
         <button
           (click)="select(element)"
-          *ngFor="let element of elements">{{element}}</button>
+          *ngFor="let element of elements">{{element.name}}</button>
       </div>
       <div>
-        <button routerLink="/create-{{getNodeType()  }}">Create {{getTitle() }}</button>
+        <button routerLink="/create-{{formatLink(type)}}">Create {{format(type)}} </button>
       </div>
     </div>  `,
   styles: []
 })
 export class ElementSelection implements OnInit {
 
-  @Input() elements: string[];
-  @Input() type: NodeType;
-  @Output() selectedElement = new EventEmitter<any>();
+  private type: Type;
+  @Input() elements: SelectableElement[];
+  @Output() selectedElement = new EventEmitter<SelectableElement>();
 
   constructor() {
   }
 
   ngOnInit() {
+    if (this.elements && this.elements.length) {
+      this.type = this.elements[0].type;
+    } else {
+      this.type = Type.Muscle_Group;
+    }
   }
 
-  select(element: string) {
-    this.selectedElement.emit({element: element, nodeType: this.type});
+  select(element: SelectableElement) {
+    this.selectedElement.emit(element);
   }
 
-  getNodeType() {
-    return NodeType[this.type].toString().toLowerCase().replace("_", "-");
+  format(type: Type) {
+    return Type[type].replace("_", " ");
   }
 
-  getTitle() {
-    return NodeType[this.type].toString().toLowerCase().replace("_", " ");
+  formatLink(type: Type) {
+    return Type[type].toLowerCase().replace("_", "-");
   }
 }

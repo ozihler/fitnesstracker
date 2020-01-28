@@ -1,20 +1,21 @@
 import {Component, OnInit} from '@angular/core';
 import {WorkoutService} from "../shared/workout.service";
-import {ButtonNode, NodeType} from "../workout-details-view/button-group/button-node";
+import {ButtonNode, Type} from "../workout-details-view/button-group/button-node";
 import {Workout} from '../shared/workout';
+import {SelectableElement} from "../shared/selectable-element";
+import {SelectableElementFactory} from "../shared/selectable-element-factory";
 
 @Component({
   selector: 'app-create-workout',
   template: `
     <div>{{workout.creationDate}} {{workout.title}}</div>
     =============================
-    <app-button-group [node]="workoutTree"
-                      (changeSelectionEvent)="changeSelection($event)">
-    </app-button-group>
+    <app-button-tree [node]="workoutTree"
+                     (changeSelectionEvent)="changeSelection($event)">
+    </app-button-tree>
     =============================
     <app-element-selection
       [elements]="selectedElements"
-      [type]="selectedType"
       (selectedElement)="selectElement($event)">
     </app-element-selection>
     =============================
@@ -23,8 +24,7 @@ import {Workout} from '../shared/workout';
 })
 export class CreateWorkoutComponent implements OnInit {
   workoutTree: ButtonNode;
-  selectedElements = [];
-  selectedType: NodeType;
+  selectedElements: SelectableElement[] = [];
   private workout: Workout;
 
 
@@ -35,12 +35,13 @@ export class CreateWorkoutComponent implements OnInit {
     this.workoutService.newWorkout()
       .subscribe(workout => {
         this.workout = workout;
-        this.workoutTree = new ButtonNode(this.workout.id, this.workout.title, [], 0, NodeType.WORKOUT);
+        this.workoutTree = new ButtonNode(this.workout.id, this.workout.title, [], 0, Type.Workout);
       });
 
     this.workoutService.fetchMuscleGroups()
       .subscribe(muscleGroups => {
-        this.selectedElements = muscleGroups.map(mG => mG.name);
+        this.selectedElements = muscleGroups.map(mG => SelectableElementFactory.from(mG.name, Type.Muscle_Group));
+
       });
 
   }

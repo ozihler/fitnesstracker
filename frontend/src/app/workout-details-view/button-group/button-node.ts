@@ -1,17 +1,17 @@
 import {sizeOf} from "../../shared/array-utils";
 import {GID} from "../../shared/gid";
 
-export enum NodeType {
-  WORKOUT,
-  MUSCLE_GROUP = 1,
-  EXERCISE = 2,
-  SET = 3
+export enum Type {
+  Workout,
+  Muscle_Group = 1,
+  Exercise = 2,
+  Set = 3
 }
 
 
 export class ButtonNode {
 
-  static MAX_LEVEL: number = Object.values(NodeType).length;
+  static MAX_LEVEL: number = Object.values(Type).length;
 
   static LEVEL_CLASSES = {1: 'uk-button-secondary', 2: 'uk-button-primary', 3: 'uk-button-default'};
 
@@ -19,7 +19,7 @@ export class ButtonNode {
               private _name: string,
               private _children: ButtonNode[],
               private _level: number,
-              private _type: NodeType) {
+              private _type: Type) {
   }
 
   isLeaf(): boolean {

@@ -1,5 +1,5 @@
 import {MuscleGroup} from "./muscle-group";
-import {ButtonNode, NodeType} from "../workout-details-view/button-group/button-node";
+import {ButtonNode, Type} from "../workout-details-view/button-group/button-node";
 import {Exercise} from "./exercise";
 import {Set} from "./set"
 import {GID} from "./gid";
@@ -12,14 +12,14 @@ export class SubtreeFactory {
       GID.from(muscleGroup.name),
       muscleGroup.name,
       SubtreeFactory.formatExercises(muscleGroup.exercises),
-      1, NodeType.MUSCLE_GROUP);
+      1, Type.Muscle_Group);
   }
 
   private static formatExercises(exercises: Exercise[]) {
     if (!exercises) {
       return [];
     }
-    return exercises.map(e => new ButtonNode(GID.from(e.name), e.name, SubtreeFactory.formatSets(e.name, e.sets), 2, NodeType.EXERCISE));
+    return exercises.map(e => new ButtonNode(GID.from(e.name), e.name, SubtreeFactory.formatSets(e.name, e.sets), 2, Type.Exercise));
   }
 
   private static formatSets(exerciseName: string, sets: Set[]) {
@@ -28,7 +28,7 @@ export class SubtreeFactory {
     }
     return sets
       .map((s, index) => {
-        return new ButtonNode(GID.from(exerciseName + "_" + index), `${s.repetitions}[reps]|${s.weight}[kg]|${s.waitingTime}[s]`, [], 3, NodeType.SET);
+        return new ButtonNode(GID.from(exerciseName + "_" + index), `${s.repetitions}[reps]|${s.weight}[kg]|${s.waitingTime}[s]`, [], 3, Type.Set);
       });
   }
 }

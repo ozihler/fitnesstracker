@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 @Repository
 public class InMemoryMuscleGroupsRepository implements IFetchMuscleGroups {
@@ -16,6 +17,13 @@ public class InMemoryMuscleGroupsRepository implements IFetchMuscleGroups {
 
     public InMemoryMuscleGroupsRepository() {
         this.muscleGroups = new HashMap<>();
+        testData();
+    }
+
+    private void testData() {
+        Set.of("Chest", "Triceps", "Shoulders"
+//                , "Back", "Abs", "Biceps", "Legs"
+        ).forEach(name -> this.muscleGroups.put(Name.of(name), new MuscleGroup(Name.of(name))));
     }
 
     @Override

@@ -9,7 +9,7 @@ public class Name {
         this.name = name;
     }
 
-    public static Name from(String name) {
+    public static Name of(String name) {
         return new Name(name);
     }
 

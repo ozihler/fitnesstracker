@@ -3,7 +3,7 @@ import {ButtonNode} from "./button-node";
 import {GID} from "../../shared/gid";
 
 @Component({
-  selector: 'app-button-group',
+  selector: 'app-button-tree',
   template: `
     <div class="uk-grid uk-grid-collapse">
 
@@ -26,11 +26,11 @@ import {GID} from "../../shared/gid";
 
     <div *ngIf="shouldShowChildren()">
       <div *ngFor="let child of this.node.children">
-        <app-button-group
+        <app-button-tree
           (deleteNodeEvent)="deleteNode($event)"
           (changeSelectionEvent)="changeSelection($event)"
           [node]="child">
-        </app-button-group>
+        </app-button-tree>
       </div>
 
     </div>

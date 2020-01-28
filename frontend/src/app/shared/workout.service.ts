@@ -11,6 +11,7 @@ import {map} from "rxjs/operators";
 import {WorkoutRaw} from "./workout-raw";
 import {environment} from "../../environments/environment";
 import {MuscleGroupRaw} from "./muscle-group-raw";
+import {MuscleGroupsRaw} from "./muscle-groups-raw";
 
 
 @Injectable({
@@ -62,9 +63,9 @@ export class WorkoutService {
   }
 
   fetchMuscleGroups(): Observable<MuscleGroup[]> {
-    return this.httpClient.get<MuscleGroupRaw[]>(this.baseUrl + "/muscleGroups")
+    return this.httpClient.get<MuscleGroupsRaw>(this.baseUrl + "/muscleGroups")
       .pipe(
-        map(muscleGroupsRaw => MuscleGroupFactory.fromMultiple(muscleGroupsRaw))
+        map(response => MuscleGroupFactory.fromMultiple(response.muscleGroups))
       );
   }
 
