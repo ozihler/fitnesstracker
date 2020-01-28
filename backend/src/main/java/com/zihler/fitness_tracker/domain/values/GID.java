@@ -13,6 +13,10 @@ public class GID {
         return new GID(new Random().nextLong());
     }
 
+    public static GID of(long gid) {
+        return new GID(gid);
+    }
+
     public long toLong() {
         return gid;
     }

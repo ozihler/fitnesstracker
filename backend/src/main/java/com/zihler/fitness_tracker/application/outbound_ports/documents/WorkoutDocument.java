@@ -7,22 +7,27 @@ import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
 import java.time.ZonedDateTime;
 
 public class WorkoutDocument {
-    private final GID id;
+    private final GID gid;
     private final ZonedDateTime creationDateTime;
     private final WorkoutTitle workoutTitle;
+    private MuscleGroupsDocument muscleGroups;
 
-    public WorkoutDocument(GID id, ZonedDateTime creationDateTime, WorkoutTitle workoutTitle) {
-        this.id = id;
+    public WorkoutDocument(GID gid, ZonedDateTime creationDateTime, WorkoutTitle workoutTitle, MuscleGroupsDocument muscleGroups) {
+        this.gid = gid;
         this.creationDateTime = creationDateTime;
         this.workoutTitle = workoutTitle;
+        this.muscleGroups = muscleGroups;
     }
 
     public static WorkoutDocument of(Workout workout) {
-        return new WorkoutDocument(workout.getId(), workout.getCreationDateTime(), workout.getWorkoutTitle());
+        return new WorkoutDocument(workout.getGid(),
+                workout.getCreationDateTime(),
+                workout.getWorkoutTitle(),
+                MuscleGroupsDocument.of(workout.getMuscleGroups()));
     }
 
-    public GID getId() {
-        return id;
+    public GID getGid() {
+        return gid;
     }
 
     public ZonedDateTime getCreationDateTime() {
@@ -33,5 +38,7 @@ public class WorkoutDocument {
         return workoutTitle;
     }
 
-
+    public MuscleGroupsDocument getMuscleGroups() {
+        return this.muscleGroups;
+    }
 }

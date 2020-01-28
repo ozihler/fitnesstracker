@@ -6,7 +6,7 @@ import {MuscleGroupFactory} from "./muscle-group.factory";
 export class WorkoutFactory {
   static fromRaw(workoutRaw: WorkoutRaw): Workout {
     return {
-      id: GID.from(workoutRaw.id+""),
+      gid: GID.from(workoutRaw.gid ),
       title: workoutRaw.title,
       creationDate: new Date(workoutRaw.creationDate),
       muscleGroups: MuscleGroupFactory.fromMultiple(workoutRaw.muscleGroups)

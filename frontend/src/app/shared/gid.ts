@@ -1,13 +1,13 @@
 export class GID {
-  constructor(private _gid: string) {
+  constructor(private _gid: number) {
 
   }
 
-  get value(): string {
+  get value(): number {
     return this._gid;
   }
 
-  static from(gid: string) {
+  static from(gid: number) {
     return new GID(gid);
   }
 }

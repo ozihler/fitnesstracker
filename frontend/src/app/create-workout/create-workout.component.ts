@@ -5,6 +5,7 @@ import {Workout} from '../shared/workout';
 import {SelectableElement} from "../shared/selectable-element";
 import {SelectableElementFactory} from "../shared/selectable-element-factory";
 import {SubtreeFactory} from "../shared/subtree.factory";
+import {MuscleGroupFactory} from "../shared/muscle-group.factory";
 
 @Component({
   selector: 'app-create-workout',
@@ -38,8 +39,7 @@ export class CreateWorkoutComponent implements OnInit {
         this.workout = workout;
         console.log(workout);
         this.workoutTree = SubtreeFactory.fromWorkout(workout);
-        console.log("Tree: ", this.workoutTree);
-      });
+       });
 
     this.fetchMuscleGroups();
 
@@ -53,8 +53,11 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
   selectElement(selection: SelectableElement) {
-    if (selection.type === Type.Workout) {
-      this.fetchMuscleGroups();
+    if (selection.type === Type.Muscle_Group) {
+      this.workout.muscleGroups.push(MuscleGroupFactory.fromName(selection.name));
+      this.workoutTree = SubtreeFactory.fromWorkout(this.workout);
+      this.selectedElements = this.selectedElements.filter(m => m.name !== selection.name);
+      this.workoutService.update(this.workout);
     }
 
   }

@@ -1,7 +1,7 @@
-package com.zihler.fitness_tracker.application.outbound_ports;
+package com.zihler.fitness_tracker.application.outbound_ports.gateways;
 
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 
-public interface IStoreMuscleGroups {
+public interface StoreMuscleGroups {
     MuscleGroups as(MuscleGroups muscleGroups);
 }

@@ -1,6 +1,6 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workout;
 
-import com.zihler.fitness_tracker.application.outbound_ports.gateways.IStoreWorkouts;
+import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorkout;
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.WorkoutPresenter;
 import com.zihler.fitness_tracker.application.use_cases.create_workout.CreateWorkoutUseCase;
 import com.zihler.fitness_tracker.application.use_cases.create_workout.inbound_port.CreateWorkout;
@@ -13,7 +13,7 @@ public class CreateWorkoutController {
     private CreateWorkout createWorkout;
 
     @Autowired
-    public CreateWorkoutController(IStoreWorkouts workouts) {
+    public CreateWorkoutController(StoreWorkout workouts) {
         this.createWorkout = new CreateWorkoutUseCase(workouts);
     }
 

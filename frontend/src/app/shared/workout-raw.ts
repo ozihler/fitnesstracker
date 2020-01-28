@@ -1,7 +1,7 @@
 import {MuscleGroupRaw} from "./muscle-group-raw";
 
 export interface WorkoutRaw {
-  id: number;
+  gid: number;
   title: string;
   creationDate: number;
   muscleGroups: MuscleGroupRaw[];

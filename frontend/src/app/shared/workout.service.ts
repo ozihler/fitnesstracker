@@ -22,13 +22,13 @@ export class WorkoutService {
   }
 
   newMuscleGroup(muscleGroupNames: string): Observable<MuscleGroup[]> {
-    return this.httpClient.post<MuscleGroupsRaw>(this.baseUrl + "/muscle-groups", {muscleGroupNames: muscleGroupNames})
+    return this.httpClient.post<MuscleGroupsRaw>(`${this.baseUrl}/muscle-groups`, {muscleGroupNames: muscleGroupNames})
       .pipe(map(response => MuscleGroupFactory.fromMultiple(response.muscleGroups)));
 
   }
 
   fetchMuscleGroups(): Observable<MuscleGroup[]> {
-    return this.httpClient.get<MuscleGroupsRaw>(this.baseUrl + "/muscle-groups")
+    return this.httpClient.get<MuscleGroupsRaw>(`${this.baseUrl}/muscle-groups`)
       .pipe(
         map(response => MuscleGroupFactory.fromMultiple(response.muscleGroups))
       );
@@ -37,7 +37,12 @@ export class WorkoutService {
   newWorkout(): Observable<Workout> {
     let body = {title: "New Workout"};
 
-    return this.httpClient.post<WorkoutRaw>(this.baseUrl + "/workouts", body)
+    return this.httpClient.post<WorkoutRaw>(`${this.baseUrl}/workouts`, body)
+      .pipe(map(data => WorkoutFactory.fromRaw(data)));
+  }
+
+  update(workout: Workout): Observable<Workout> {
+    return this.httpClient.put<WorkoutRaw>(`${this.baseUrl}/workouts`, {workout: workout})
       .pipe(map(data => WorkoutFactory.fromRaw(data)));
   }
 }

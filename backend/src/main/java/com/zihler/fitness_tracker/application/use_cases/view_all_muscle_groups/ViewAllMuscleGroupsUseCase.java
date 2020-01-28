@@ -2,7 +2,7 @@ package com.zihler.fitness_tracker.application.use_cases.view_all_muscle_groups;
 
 import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGroupDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGroupsDocument;
-import com.zihler.fitness_tracker.application.outbound_ports.gateways.IFetchMuscleGroups;
+import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchAllMuscleGroups;
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.MuscleGroupsPresenter;
 import com.zihler.fitness_tracker.application.use_cases.view_all_muscle_groups.inbound_port.ViewAllMuscleGroups;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
@@ -10,9 +10,9 @@ import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 import static java.util.stream.Collectors.toSet;
 
 public class ViewAllMuscleGroupsUseCase implements ViewAllMuscleGroups {
-    IFetchMuscleGroups fetchMuscleGroups;
+    FetchAllMuscleGroups fetchMuscleGroups;
 
-    public ViewAllMuscleGroupsUseCase(IFetchMuscleGroups fetchMuscleGroups) {
+    public ViewAllMuscleGroupsUseCase(FetchAllMuscleGroups fetchMuscleGroups) {
         this.fetchMuscleGroups = fetchMuscleGroups;
     }
 
