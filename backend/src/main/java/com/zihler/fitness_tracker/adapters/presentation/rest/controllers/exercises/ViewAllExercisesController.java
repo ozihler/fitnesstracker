@@ -11,11 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class FetchAllExercisesController {
+public class ViewAllExercisesController {
     private ViewAllExercisesForMuscleGroup viewAllExercisesForMuscleGroup;
 
     @Autowired
-    public FetchAllExercisesController(FetchExercises fetchExercises, FetchMuscleGroup fetchMuscleGroup) {
+    public ViewAllExercisesController(FetchExercises fetchExercises, FetchMuscleGroup fetchMuscleGroup) {
         this.viewAllExercisesForMuscleGroup = new ViewAllExercisesForMuscleGroupUseCase(fetchExercises, fetchMuscleGroup);
     }
 

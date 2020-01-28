@@ -1,6 +1,6 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups;
 
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercises.FetchAllExercisesController;
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercises.ViewAllExercisesController;
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.exercises.RestExercisesPresenter;
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.musclegroups.MuscleGroupsViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.musclegroups.RestMuscleGroupsPresenter;
@@ -14,13 +14,15 @@ public class MuscleGroupsResource {
 
     private CreateMuscleGroupsController createMuscleGroupsController;
     private ViewMuscleGroupsController viewMuscleGroupsController;
-    private FetchAllExercisesController fetchAllExercisesController;
+    private ViewAllExercisesController viewAllExercisesController;
 
     @Autowired
-    public MuscleGroupsResource(ViewMuscleGroupsController viewMuscleGroupsController, CreateMuscleGroupsController createMuscleGroupsController, FetchAllExercisesController fetchAllExercisesController) {
+    public MuscleGroupsResource(ViewMuscleGroupsController viewMuscleGroupsController,
+                                CreateMuscleGroupsController createMuscleGroupsController,
+                                ViewAllExercisesController viewAllExercisesController) {
         this.viewMuscleGroupsController = viewMuscleGroupsController;
         this.createMuscleGroupsController = createMuscleGroupsController;
-        this.fetchAllExercisesController = fetchAllExercisesController;
+        this.viewAllExercisesController = viewAllExercisesController;
     }
 
     @GetMapping(path = "/muscle-groups")
@@ -36,7 +38,7 @@ public class MuscleGroupsResource {
     public ResponseEntity<ExercisesViewModel> fetchAllExercisesForMuscleGroup(@PathVariable("muscleGroupName") String muscleGroupName) {
         var output = new RestExercisesPresenter();
 
-        fetchAllExercisesController.fetchAllExercisesForMuscleGroup(muscleGroupName, output);
+        viewAllExercisesController.fetchAllExercisesForMuscleGroup(muscleGroupName, output);
 
         return output.getResponse();
     }
