@@ -2,9 +2,12 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.muscle
 
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.musclegroups.MuscleGroupsViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.musclegroups.RestMuscleGroupsPresenter;
+import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGroupsDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController("/muscleGroups")
@@ -22,6 +25,17 @@ public class MuscleGroupsResource {
         var presenter = new RestMuscleGroupsPresenter();
 
         this.muscleGroupsController.viewAllMuscleGroups(presenter);
+
+        return presenter.getResponse();
+    }
+
+    @PostMapping
+    public ResponseEntity<MuscleGroupsViewModel> create(@RequestBody CreateMuscleGroupsRequest request) {
+        var presenter = new RestMuscleGroupsPresenter();
+
+        var input = new MuscleGroupsInput(request);
+
+        MuscleGroupsDocument muscleGroups = input.muscleGroups();
 
         return presenter.getResponse();
     }

@@ -7,7 +7,7 @@ import { WorkoutSelectionComponent } from './workout-selection/workout-selection
 import { WorkoutsOverview } from './workouts-overview/workouts-overview.component';
 import { CreateWorkoutComponent } from './create-workout/create-workout.component';
 import { CreateMuscleGroupComponent } from './create-muscle-group/create-muscle-group.component';
- import { ElementSelection } from './muscle-group-selection/muscle-group-selection.component';
+ import { ElementSelection } from './element-selection/element-selection.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { CreateExerciseComponent } from './create-exercise/create-exercise.component';
 import { AddExerciseComponent } from './add-exercise/add-exercise.component';

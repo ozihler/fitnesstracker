@@ -10,7 +10,6 @@ import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {WorkoutRaw} from "./workout-raw";
 import {environment} from "../../environments/environment";
-import {MuscleGroupRaw} from "./muscle-group-raw";
 import {MuscleGroupsRaw} from "./muscle-groups-raw";
 
 
@@ -40,7 +39,9 @@ export class WorkoutService {
       this.muscleGroups.push(muscleGroup);
     });
 
-    return from([createdMuscleGroups]);
+    return this.httpClient.post<MuscleGroupsRaw>("/muscle-groups", {muscleGroupNames: muscleGroupNames})
+      .pipe(map(response => MuscleGroupFactory.fromMultiple(response.muscleGroups)));
+
   }
 
   newExercise(muscleGroupName: string, exerciseNames: string): Observable<Exercise[]> {
@@ -72,7 +73,7 @@ export class WorkoutService {
   newWorkout(): Observable<Workout> {
     let body = {title: "new Workout"};
 
-    return this.httpClient.post<WorkoutRaw>(this.baseUrl+"/workouts", body)
+    return this.httpClient.post<WorkoutRaw>(this.baseUrl + "/workouts", body)
       .pipe(map(data => WorkoutFactory.fromRaw(data)));
   }
 }

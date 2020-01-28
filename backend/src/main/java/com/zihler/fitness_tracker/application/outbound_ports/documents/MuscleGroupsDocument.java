@@ -17,6 +17,10 @@ public class MuscleGroupsDocument {
         return new MuscleGroupsDocument(muscleGroups.getMuscleGroups().stream().map(MuscleGroupDocument::of).collect(toSet()));
     }
 
+    public static MuscleGroupsDocument of(Set<MuscleGroupDocument> documents) {
+        return new MuscleGroupsDocument(documents);
+    }
+
     public Set<MuscleGroupDocument> getMuscleGroups() {
         return muscleGroups;
     }

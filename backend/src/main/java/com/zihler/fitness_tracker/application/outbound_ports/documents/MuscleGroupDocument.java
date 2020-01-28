@@ -15,6 +15,10 @@ public class MuscleGroupDocument {
         return new MuscleGroupDocument(muscleGroup.getName());
     }
 
+    public static MuscleGroupDocument of(Name name) {
+        return new MuscleGroupDocument(name);
+    }
+
     public Name getName() {
         return this.name;
     }
