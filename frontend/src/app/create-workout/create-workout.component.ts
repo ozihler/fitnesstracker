@@ -17,7 +17,7 @@ import {MuscleGroupFactory} from "../shared/muscle-group.factory";
     </app-button-tree>
     =============================
     <app-element-selection
-      [elements]="selectedElements"
+      [selectableElements]="selectableElements"
       (selectedElement)="selectElement($event)">
     </app-element-selection>
     =============================
@@ -26,7 +26,7 @@ import {MuscleGroupFactory} from "../shared/muscle-group.factory";
 })
 export class CreateWorkoutComponent implements OnInit {
   workoutTree: ButtonNode;
-  selectedElements: SelectableElement[] = [];
+  selectableElements: SelectableElement[] = [];
   private workout: Workout;
 
 
@@ -37,18 +37,18 @@ export class CreateWorkoutComponent implements OnInit {
     this.workoutService.newWorkout()
       .subscribe(workout => {
         this.workout = workout;
-        console.log(workout);
         this.workoutTree = SubtreeFactory.fromWorkout(workout);
-       });
+      });
 
-    this.fetchMuscleGroups();
+    this.fetchMuscleGroupsAndFilterOut();
 
   }
 
-  private fetchMuscleGroups() {
+  private fetchMuscleGroupsAndFilterOut(filterMuscleGroups: string[] = []) {
     this.workoutService.fetchMuscleGroups()
       .subscribe(muscleGroups => {
-        this.selectedElements = muscleGroups.map(mG => SelectableElementFactory.from(mG.name, Type.Muscle_Group));
+        this.selectableElements = muscleGroups.map(mG => SelectableElementFactory.from(mG.name, Type.Muscle_Group))
+          .filter(m => filterMuscleGroups && filterMuscleGroups.indexOf(m.name) < 0);
       });
   }
 
@@ -56,7 +56,7 @@ export class CreateWorkoutComponent implements OnInit {
     if (selection.type === Type.Muscle_Group) {
       this.workout.muscleGroups.push(MuscleGroupFactory.fromName(selection.name));
       this.workoutTree = SubtreeFactory.fromWorkout(this.workout);
-      this.selectedElements = this.selectedElements.filter(m => m.name !== selection.name);
+      this.selectableElements = this.selectableElements.filter(m => m.name !== selection.name);
       this.workoutService.update(this.workout);
     }
 
@@ -64,7 +64,12 @@ export class CreateWorkoutComponent implements OnInit {
 
 
   changeSelection(node: ButtonNode) {
-    console.log("Changed selection to: ", node);
+    console.log("Selected ", node);
+    if (node.type === Type.Workout) {
+      this.fetchMuscleGroupsAndFilterOut(node.children.map(c => c.name));
+    }else if (node.type === Type.Muscle_Group) {
+      this.workoutService.fetchExercisesFor(node.name);
+    }
   }
 }
 

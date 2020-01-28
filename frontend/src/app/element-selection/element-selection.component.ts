@@ -6,7 +6,7 @@ import {Type} from "../workout-details-view/button-group/button-node";
   selector: 'app-element-selection',
   template: `
     <div>
-      <div class="uk-grid-small uk-child-width-1-2 uk-flex-center" uk-grid *ngFor="let element of elements">
+      <div class="uk-grid-small uk-child-width-1-2 uk-flex-center" uk-grid *ngFor="let element of selectableElements">
         <button class="uk-button uk-button-default" (click)="select(element)">{{element.name}}</button>
       </div>
       <div>
@@ -18,15 +18,15 @@ import {Type} from "../workout-details-view/button-group/button-node";
 export class ElementSelection implements OnInit {
 
   private type: Type;
-  @Input() elements: SelectableElement[];
+  @Input() selectableElements: SelectableElement[];
   @Output() selectedElement = new EventEmitter<SelectableElement>();
 
   constructor() {
   }
 
   ngOnInit() {
-    if (this.elements && this.elements.length) {
-      this.type = this.elements[0].type;
+    if (this.selectableElements && this.selectableElements.length) {
+      this.type = this.selectableElements[0].type;
     } else {
       this.type = Type.Muscle_Group;
     }

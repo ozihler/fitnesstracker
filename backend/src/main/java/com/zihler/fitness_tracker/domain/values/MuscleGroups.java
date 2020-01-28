@@ -18,4 +18,8 @@ public class MuscleGroups {
     public Set<MuscleGroup> getMuscleGroups() {
         return muscleGroups;
     }
+
+    public void add(MuscleGroup muscleGroup) {
+        muscleGroups.add(muscleGroup);
+    }
 }

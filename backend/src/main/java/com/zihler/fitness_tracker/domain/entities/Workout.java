@@ -25,6 +25,10 @@ public class Workout {
         return new Workout(gid, creationDateTime, workoutTitle, muscleGroups);
     }
 
+    public void add(MuscleGroup muscleGroup) {
+        this.muscleGroups.add(muscleGroup);
+    }
+
     private Workout(GID gid, ZonedDateTime creationDateTime, WorkoutTitle workoutTitle, MuscleGroups muscleGroups) {
         this.gid = gid;
         this.creationDateTime = creationDateTime;

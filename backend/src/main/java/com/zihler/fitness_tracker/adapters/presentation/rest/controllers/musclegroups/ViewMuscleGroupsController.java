@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MuscleGroupsController {
+public class ViewMuscleGroupsController {
     private ViewAllMuscleGroups viewAllMuscleGroups;
 
     @Autowired
-    public MuscleGroupsController(FetchAllMuscleGroups fetchMuscleGroups) {
+    public ViewMuscleGroupsController(FetchAllMuscleGroups fetchMuscleGroups) {
         this.viewAllMuscleGroups = new ViewAllMuscleGroupsUseCase(fetchMuscleGroups);
     }
 
