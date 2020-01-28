@@ -21,7 +21,7 @@ public class ViewAllMuscleGroupsUseCase implements ViewAllMuscleGroups {
     }
 
     @Override
-    public void fetch(MuscleGroupsPresenter presenter) {
+    public void invokeWith(MuscleGroupsPresenter presenter) {
         MuscleGroups muscleGroups = this.fetchMuscleGroups.fetchAll();
         presenter.present(toDocument(muscleGroups));
     }

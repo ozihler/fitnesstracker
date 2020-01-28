@@ -1,16 +1,13 @@
-package com.zihler.fitness_tracker.application.use_cases.update_workouts;
+package com.zihler.fitness_tracker.application.use_cases.update_workout;
 
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchMuscleGroup;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchWorkout;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorkout;
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.WorkoutPresenter;
-import com.zihler.fitness_tracker.application.use_cases.update_workouts.inbound_port.UpdateWorkout;
-import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
+import com.zihler.fitness_tracker.application.use_cases.update_workout.inbound_port.UpdateWorkout;
 import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
-
-import java.util.Set;
 
 import static java.util.stream.Collectors.toSet;
 

@@ -17,6 +17,6 @@ public class ViewMuscleGroupsController {
     }
 
     public void viewAllMuscleGroups(MuscleGroupsPresenter presenter) {
-        this.viewAllMuscleGroups.fetch(presenter);
+        this.viewAllMuscleGroups.invokeWith(presenter);
     }
 }

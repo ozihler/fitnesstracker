@@ -5,8 +5,8 @@ import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchMuscl
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchWorkout;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorkout;
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.WorkoutPresenter;
-import com.zihler.fitness_tracker.application.use_cases.update_workouts.UpdateWorkoutUseCase;
-import com.zihler.fitness_tracker.application.use_cases.update_workouts.inbound_port.UpdateWorkout;
+import com.zihler.fitness_tracker.application.use_cases.update_workout.UpdateWorkoutUseCase;
+import com.zihler.fitness_tracker.application.use_cases.update_workout.inbound_port.UpdateWorkout;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
