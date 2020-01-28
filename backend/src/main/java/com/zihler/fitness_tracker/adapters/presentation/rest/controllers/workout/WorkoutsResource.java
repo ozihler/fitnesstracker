@@ -1,9 +1,7 @@
-package com.zihler.fitness_tracker.adapters.presentation.rest;
+package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workout;
 
-import com.zihler.fitness_tracker.adapters.presentation.controllers.CreateWorkoutController;
-import com.zihler.fitness_tracker.adapters.presentation.rest.json.WorkoutToCreateRequest;
-import com.zihler.fitness_tracker.adapters.presentation.rest.json.WorkoutViewModel;
-import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.RestWorkoutPresenter;
+import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout.WorkoutViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout.RestWorkoutPresenter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

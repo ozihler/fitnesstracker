@@ -1,8 +1,7 @@
-package com.zihler.fitness_tracker.adapters.presentation.controllers;
+package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workout;
 
-import com.zihler.fitness_tracker.adapters.presentation.rest.json.WorkoutToCreateRequest;
-import com.zihler.fitness_tracker.application.outbound_ports.IStoreWorkouts;
-import com.zihler.fitness_tracker.application.outbound_ports.WorkoutPresenter;
+import com.zihler.fitness_tracker.application.outbound_ports.gateways.IStoreWorkouts;
+import com.zihler.fitness_tracker.application.outbound_ports.presenters.WorkoutPresenter;
 import com.zihler.fitness_tracker.application.use_cases.create_workout.CreateWorkoutUseCase;
 import com.zihler.fitness_tracker.application.use_cases.create_workout.inbound_port.CreateWorkout;
 import org.springframework.beans.factory.annotation.Autowired;

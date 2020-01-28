@@ -10,6 +10,7 @@ import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {WorkoutRaw} from "./workout-raw";
 import {environment} from "../../environments/environment";
+import {MuscleGroupRaw} from "./muscle-group-raw";
 
 
 @Injectable({
@@ -61,13 +62,16 @@ export class WorkoutService {
   }
 
   fetchMuscleGroups(): Observable<MuscleGroup[]> {
-    return from([this.muscleGroups]);
+    return this.httpClient.get<MuscleGroupRaw[]>(this.baseUrl + "/muscleGroups")
+      .pipe(
+        map(muscleGroupsRaw => MuscleGroupFactory.fromMultiple(muscleGroupsRaw))
+      );
   }
 
   newWorkout(): Observable<Workout> {
     let body = {title: "new Workout"};
 
-    return this.httpClient.post<WorkoutRaw>(this.baseUrl+"/api/workouts", body)
+    return this.httpClient.post<WorkoutRaw>(this.baseUrl+"/workouts", body)
       .pipe(map(data => WorkoutFactory.fromRaw(data)));
   }
 }

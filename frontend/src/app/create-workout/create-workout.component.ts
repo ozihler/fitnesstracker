@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {WorkoutService} from "../shared/workout.service";
-import {Id} from "../shared/id";
 import {ButtonNode, NodeType} from "../workout-details-view/button-group/button-node";
 import {Workout} from '../shared/workout';
 
@@ -37,7 +36,6 @@ export class CreateWorkoutComponent implements OnInit {
       .subscribe(workout => {
         this.workout = workout;
         this.workoutTree = new ButtonNode(this.workout.id, this.workout.title, [], 0, NodeType.WORKOUT);
-
       });
 
     this.workoutService.fetchMuscleGroups()

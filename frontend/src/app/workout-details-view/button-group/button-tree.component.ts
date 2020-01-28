@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ButtonNode} from "./button-node";
-import {Id} from "../../shared/id";
+import {GID} from "../../shared/gid";
 
 @Component({
   selector: 'app-button-group',
@@ -38,7 +38,7 @@ import {Id} from "../../shared/id";
 })
 export class ButtonTreeComponent implements OnInit {
   @Input() private node: ButtonNode;
-  @Output() private deleteNodeEvent = new EventEmitter<Id>();
+  @Output() private deleteNodeEvent = new EventEmitter<GID>();
   @Output() private changeSelectionEvent = new EventEmitter<ButtonNode>();
 
   private toggles = [];
@@ -69,7 +69,7 @@ export class ButtonTreeComponent implements OnInit {
     return (ButtonNode.LEVEL_CLASSES)[this.node.level];
   }
 
-  deleteNode(id: Id) {
+  deleteNode(id: GID) {
     this.deleteNodeEvent.emit(id);
   }
 

@@ -1,9 +1,6 @@
-package com.zihler.fitness_tracker.adapters.presentation.rest.json;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+package com.zihler.fitness_tracker.adapters.presentation.rest.presenters.errors;
 
 public class ErrorViewModel {
-    @JsonProperty("message")
     private String message;
 
     public ErrorViewModel(String message) {

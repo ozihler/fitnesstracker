@@ -1,5 +1,5 @@
 import {sizeOf} from "../../shared/array-utils";
-import {Id} from "../../shared/id";
+import {GID} from "../../shared/gid";
 
 export enum NodeType {
   WORKOUT,
@@ -15,7 +15,7 @@ export class ButtonNode {
 
   static LEVEL_CLASSES = {1: 'uk-button-secondary', 2: 'uk-button-primary', 3: 'uk-button-default'};
 
-  constructor(private _id: Id,
+  constructor(private _id: GID,
               private _name: string,
               private _children: ButtonNode[],
               private _level: number,
@@ -51,7 +51,7 @@ export class ButtonNode {
     return this._level;
   }
 
-  get id(): Id {
+  get id(): GID {
     return this._id;
   }
 }

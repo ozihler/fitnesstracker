@@ -1,4 +1,4 @@
-package com.zihler.fitness_tracker.adapters.presentation.rest.json;
+package com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

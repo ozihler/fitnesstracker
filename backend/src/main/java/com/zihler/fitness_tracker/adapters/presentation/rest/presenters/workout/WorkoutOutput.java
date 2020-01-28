@@ -1,7 +1,6 @@
-package com.zihler.fitness_tracker.adapters.presentation.rest.presenters.output;
+package com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout;
 
-import com.zihler.fitness_tracker.adapters.presentation.rest.json.WorkoutViewModel;
-import com.zihler.fitness_tracker.application.outbound_ports.WorkoutDocument;
+import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutDocument;
 
 public class WorkoutOutput {
     private WorkoutDocument workoutDocument;

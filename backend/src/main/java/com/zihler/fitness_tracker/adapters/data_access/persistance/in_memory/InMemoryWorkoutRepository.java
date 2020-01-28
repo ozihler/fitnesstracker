@@ -1,6 +1,6 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.in_memory;
 
-import com.zihler.fitness_tracker.application.outbound_ports.IStoreWorkouts;
+import com.zihler.fitness_tracker.application.outbound_ports.gateways.IStoreWorkouts;
 import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.GID;
 import org.springframework.stereotype.Repository;

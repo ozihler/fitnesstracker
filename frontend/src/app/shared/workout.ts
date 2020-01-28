@@ -1,7 +1,7 @@
-import {Id} from './id';
+import {GID} from './gid';
 
 export interface Workout {
-  id: Id;
+  id: GID;
   title: string;
   creationDate: Date;
 }

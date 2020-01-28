@@ -1,6 +1,5 @@
-package com.zihler.fitness_tracker.adapters.presentation.controllers;
+package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workout;
 
-import com.zihler.fitness_tracker.adapters.presentation.rest.json.WorkoutToCreateRequest;
 import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
 
 public class WorkoutToCreateInput {

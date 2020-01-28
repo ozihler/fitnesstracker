@@ -1,8 +1,8 @@
 package com.zihler.fitness_tracker.application.use_cases.create_workout;
 
-import com.zihler.fitness_tracker.application.outbound_ports.IStoreWorkouts;
-import com.zihler.fitness_tracker.application.outbound_ports.WorkoutDocument;
-import com.zihler.fitness_tracker.application.outbound_ports.WorkoutPresenter;
+import com.zihler.fitness_tracker.application.outbound_ports.gateways.IStoreWorkouts;
+import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutDocument;
+import com.zihler.fitness_tracker.application.outbound_ports.presenters.WorkoutPresenter;
 import com.zihler.fitness_tracker.application.use_cases.create_workout.inbound_port.CreateWorkout;
 import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
