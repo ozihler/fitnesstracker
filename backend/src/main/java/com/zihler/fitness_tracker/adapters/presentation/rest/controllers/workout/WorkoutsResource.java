@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("/workouts")
+@RestController
 public class WorkoutsResource {
     private CreateWorkoutController createWorkoutController;
 
@@ -17,10 +17,12 @@ public class WorkoutsResource {
         this.createWorkoutController = createWorkoutController;
     }
 
-    @PostMapping
-    public ResponseEntity<WorkoutViewModel> create(@RequestBody WorkoutToCreateRequest request) {
+    @PostMapping(path="/workouts")
+    public ResponseEntity<WorkoutViewModel> createWorkout(@RequestBody WorkoutToCreateRequest request) {
         RestWorkoutPresenter output = new RestWorkoutPresenter();
+
         this.createWorkoutController.createWorkout(request, output);
+
         return output.getResponse();
     }
 }

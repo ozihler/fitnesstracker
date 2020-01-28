@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("/muscleGroups")
+@RestController
 public class MuscleGroupsResource {
 
     @Autowired
@@ -20,7 +20,7 @@ public class MuscleGroupsResource {
 
     private MuscleGroupsController muscleGroupsController;
 
-    @GetMapping
+    @GetMapping(path = "/muscle-groups")
     public ResponseEntity<MuscleGroupsViewModel> fetchAll() {
         var presenter = new RestMuscleGroupsPresenter();
 
@@ -29,8 +29,8 @@ public class MuscleGroupsResource {
         return presenter.getResponse();
     }
 
-    @PostMapping
-    public ResponseEntity<MuscleGroupsViewModel> create(@RequestBody CreateMuscleGroupsRequest request) {
+    @PostMapping(path = "/muscle-groups")
+    public ResponseEntity<MuscleGroupsViewModel> createMuscleGroup(@RequestBody CreateMuscleGroupsRequest request) {
         var presenter = new RestMuscleGroupsPresenter();
 
         var input = new MuscleGroupsInput(request);

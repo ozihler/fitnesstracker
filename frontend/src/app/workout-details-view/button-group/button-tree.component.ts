@@ -1,44 +1,43 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ButtonNode} from "./button-node";
-import {GID} from "../../shared/gid";
 
 @Component({
   selector: 'app-button-tree',
   template: `
-    <div class="uk-grid uk-grid-collapse">
+    <div *ngIf="node">
+      <div class="uk-grid uk-grid-collapse">
 
-      <div class="uk-width-3-5">
-        <button class="uk-button uk-width-1-1 uk-text-truncate"
-                [ngClass]="getLevelClass()"
-                (click)="toggleNode()">{{node.name}}
-          <span *ngIf="!node.isLeaf()">({{node.numberOfChildren()}})</span>
-        </button>
+        <div class="uk-width-3-5">
+          <button class="uk-button uk-width-1-1 uk-text-truncate"
+                  [ngClass]="getLevelClass()"
+                  (click)="toggleNode()">{{node?.name}}
+            <span *ngIf="!node.isLeaf()">({{node?.numberOfChildren()}})</span>
+          </button>
+        </div>
+
+        <div class="uk-width-2-5">
+          <button class="">[x]</button>
+          <button class="" (click)="changeSelection(node)">[+]
+          </button>
+          <button class=" ">[E]</button>
+        </div>
+
       </div>
 
-      <div class="uk-width-2-5">
-        <button class="" (click)="deleteNode(node.id)">[x]</button>
-        <button *ngIf="!node.isDeepestLevel()" class="" [routerLink]="'node/'+node.id.value+'/create-child'">[+]
-        </button>
-        <button class=" ">[E]</button>
+      <div *ngIf="shouldShowChildren()">
+        <div *ngFor="let child of this.node.children">
+          <app-button-tree
+            [node]="child"
+            (changeSelectionEvent)="changeSelection($event)">
+          </app-button-tree>
+        </div>
+
       </div>
-
-    </div>
-
-    <div *ngIf="shouldShowChildren()">
-      <div *ngFor="let child of this.node.children">
-        <app-button-tree
-          (deleteNodeEvent)="deleteNode($event)"
-          (changeSelectionEvent)="changeSelection($event)"
-          [node]="child">
-        </app-button-tree>
-      </div>
-
     </div>
   `
 })
 export class ButtonTreeComponent implements OnInit {
   @Input() private node: ButtonNode;
-  @Output() private deleteNodeEvent = new EventEmitter<GID>();
   @Output() private changeSelectionEvent = new EventEmitter<ButtonNode>();
 
   private toggles = [];
@@ -47,7 +46,9 @@ export class ButtonTreeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.toggles[this.node.name] = false;
+    if (this.node) {
+      this.toggles[this.node.name] = false;
+    }
   }
 
   shouldShowChildren() {
@@ -66,14 +67,11 @@ export class ButtonTreeComponent implements OnInit {
   }
 
   getLevelClass() {
-    return (ButtonNode.LEVEL_CLASSES)[this.node.level];
-  }
-
-  deleteNode(id: GID) {
-    this.deleteNodeEvent.emit(id);
+    return ButtonNode.LEVEL_CLASSES[this.node.type];
   }
 
   changeSelection(node: ButtonNode) {
     this.changeSelectionEvent.emit(node);
   }
+
 }

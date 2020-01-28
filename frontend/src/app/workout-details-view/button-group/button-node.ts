@@ -1,5 +1,4 @@
 import {sizeOf} from "../../shared/array-utils";
-import {GID} from "../../shared/gid";
 
 export enum Type {
   Workout,
@@ -10,15 +9,10 @@ export enum Type {
 
 
 export class ButtonNode {
-
-  static MAX_LEVEL: number = Object.values(Type).length;
-
   static LEVEL_CLASSES = {1: 'uk-button-secondary', 2: 'uk-button-primary', 3: 'uk-button-default'};
 
-  constructor(private _id: GID,
-              private _name: string,
+  constructor(private _name: string,
               private _children: ButtonNode[],
-              private _level: number,
               private _type: Type) {
   }
 
@@ -33,11 +27,6 @@ export class ButtonNode {
   numberOfChildren(): number {
     return sizeOf(this._children);
   }
-
-  isDeepestLevel(): boolean {
-    return this.level === ButtonNode.MAX_LEVEL;
-  }
-
   get name(): string {
     return this._name;
   }
@@ -47,11 +36,7 @@ export class ButtonNode {
   }
 
 
-  get level(): number {
-    return this._level;
-  }
-
-  get id(): GID {
-    return this._id;
+  get type(): Type {
+    return this._type;
   }
 }

@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {WorkoutService} from "../shared/workout.service";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-workouts-overview',
@@ -18,12 +16,6 @@ import {Router} from "@angular/router";
 export class WorkoutsOverview implements OnInit {
   workouts: String[] = [
     "So, 22.01.2020",
-    "Sa, 21.01.2020",
-    "Fr, 20.01.2020",
-    "Do, 19.01.2020",
-    "Mi, 18.01.2020",
-    "Di, 17.01.2020",
-    "Mo, 16.01.2020",
   ];
 
 
