@@ -26,19 +26,6 @@ export class WorkoutService {
   }
 
   newMuscleGroup(muscleGroupNames: string): Observable<MuscleGroup[]> {
-    let createdMuscleGroups: MuscleGroup[] = [];
-    muscleGroupNames
-      .split(/[ ;,.]+/)
-      .forEach(muscleGroupName => {
-        if (muscleGroupName.trim().length > 0) {
-          createdMuscleGroups.push(MuscleGroupFactory.from({name: muscleGroupName.trim()}));
-        }
-      });
-
-    createdMuscleGroups.forEach(muscleGroup => {
-      this.muscleGroups.push(muscleGroup);
-    });
-
     return this.httpClient.post<MuscleGroupsRaw>("/muscle-groups", {muscleGroupNames: muscleGroupNames})
       .pipe(map(response => MuscleGroupFactory.fromMultiple(response.muscleGroups)));
 
