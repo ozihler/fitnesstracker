@@ -6,10 +6,8 @@ import {Type} from "../workout-details-view/button-group/button-node";
   selector: 'app-element-selection',
   template: `
     <div>
-      <div>
-        <button
-          (click)="select(element)"
-          *ngFor="let element of elements">{{element.name}}</button>
+      <div class="uk-grid-small uk-child-width-1-2 uk-flex-center" uk-grid *ngFor="let element of elements">
+        <button class="uk-button uk-button-default" (click)="select(element)">{{element.name}}</button>
       </div>
       <div>
         <button routerLink="/create-{{formatLink(type)}}">Create {{format(type)}} </button>
