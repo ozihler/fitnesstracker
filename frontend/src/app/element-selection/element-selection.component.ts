@@ -9,9 +9,7 @@ import {Type} from "../shared/type";
       <div class="uk-grid-small uk-child-width-1-2 uk-flex-center" uk-grid *ngFor="let element of selectableElements">
         <button class="uk-button uk-button-default" (click)="select(element)">{{element.name}}</button>
       </div>
-      <div>
-        <button routerLink="/create-{{formatLink(type)}}">Create {{format(type)}} </button>
-      </div>
+      <app-create-element (createElementEvent)="addElement($event)" [type]="type"></app-create-element>
     </div>  `,
   styles: []
 })
@@ -40,16 +38,14 @@ export class ElementSelection implements OnInit, OnChanges {
     this.selectedElement.emit(element);
   }
 
-  format(type: Type) {
-    return Type[type].replace("_", " ");
-  }
-
-  formatLink(type: Type) {
-    return Type[type].toLowerCase().replace("_", "-");
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-    //this.init();
+     //this.init();
+  }
+
+  addElement(elements: string[]) {
+    console.log("Elements ",elements)
+    elements.forEach(element => {
+      this.selectableElements.push({name: element, type: this.type});
+    })
   }
 }

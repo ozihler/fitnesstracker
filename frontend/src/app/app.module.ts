@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
 import {WorkoutSelectionComponent} from './workout-selection/workout-selection.component';
 import {WorkoutsOverview} from './workouts-overview/workouts-overview.component';
 import {CreateWorkoutComponent} from './create-workout/create-workout.component';
-import {CreateMuscleGroupComponent} from './create-muscle-group/create-muscle-group.component';
+import {CreateElementComponent} from './create-muscle-group/create-element.component';
 import {ElementSelection} from './element-selection/element-selection.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {CreateSetComponent} from './create-set/create-set.component';
@@ -20,7 +20,7 @@ import {HttpClientModule} from "@angular/common/http";
     WorkoutSelectionComponent,
     WorkoutsOverview,
     CreateWorkoutComponent,
-    CreateMuscleGroupComponent,
+    CreateElementComponent,
     ElementSelection,
     CreateSetComponent,
     FitScreenPipe,
