@@ -8,20 +8,23 @@ import {MuscleGroup} from "../shared/muscle-group";
 @Component({
   selector: 'app-create-element',
   template: `
-    <div *ngIf="!showButton">
-      <form [formGroup]="createElement"
-            (ngSubmit)="create()">
-        <div class="uk-margin">
-          <input class="uk-input"
-                 formControlName="element"
-                 type="text">
-        </div>
-        <button type="submit">Ok</button>
-      </form>
-    </div>
-    <div *ngIf="showButton">
-      <div>{{currentElementValue()}}</div>
-      <button (click)="toggleButton()">Create {{format(type)}} </button>
+    ===================================
+    <div>
+      <div *ngIf="!showButton">
+        <form [formGroup]="createElement"
+              (ngSubmit)="create()">
+          <div class="uk-margin">
+            <input class="uk-input"
+                   formControlName="element"
+                   type="text">
+          </div>
+          <button type="submit">Ok</button>
+        </form>
+      </div>
+      <div *ngIf="showButton">
+        <div>{{currentElementValue()}}</div>
+        <button (click)="toggleButton()">Create {{format(type)}} </button>
+      </div>
     </div>
   `,
   styles: []
@@ -55,7 +58,7 @@ export class CreateElementComponent implements OnInit {
 
   create() {
     if (this.hasEnteredAnything()) {
-       this.workoutService.newMuscleGroup(this.currentElementValue())
+      this.workoutService.newMuscleGroup(this.currentElementValue())
         .subscribe(createdElements => this.emit(createdElements));
     }
   }
