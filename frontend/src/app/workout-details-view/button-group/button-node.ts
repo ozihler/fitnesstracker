@@ -1,11 +1,5 @@
 import {sizeOf} from "../../shared/array-utils";
-
-export enum Type {
-  Workout,
-  Muscle_Group = 1,
-  Exercise = 2,
-  Set = 3
-}
+import {Type} from "../../shared/type";
 
 
 export class ButtonNode {

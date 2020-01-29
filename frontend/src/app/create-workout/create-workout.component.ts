@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {WorkoutService} from "../shared/workout.service";
-import {ButtonNode, Type} from "../workout-details-view/button-group/button-node";
+import {ButtonNode} from "../workout-details-view/button-group/button-node";
 import {Workout} from '../shared/workout';
 import {SelectableElement} from "../shared/selectable-element";
 import {SelectableElementFactory} from "../shared/selectable-element-factory";
 import {SubtreeFactory} from "../shared/subtree.factory";
 import {MuscleGroupFactory} from "../shared/muscle-group.factory";
+import {Type} from "../shared/type";
 
 @Component({
   selector: 'app-create-workout',

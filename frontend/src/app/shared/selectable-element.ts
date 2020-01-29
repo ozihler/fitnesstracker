@@ -1,4 +1,4 @@
-import {Type} from "../workout-details-view/button-group/button-node";
+import {Type} from "./type";
 
 export interface SelectableElement {
   name: string;

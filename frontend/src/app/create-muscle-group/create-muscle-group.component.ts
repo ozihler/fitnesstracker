@@ -1,27 +1,30 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {WorkoutService} from "../shared/workout.service";
 import {Location} from "@angular/common";
+import {Type} from "../shared/type";
 
 @Component({
   selector: 'app-create-muscle-group',
   template: `
-    <form [formGroup]="createMuscleGroup"
+    <form [formGroup]="createElement"
           (ngSubmit)="create()">
       <div class="uk-margin">
         <input class="uk-input"
-               formControlName="muscleGroup"
+               formControlName="element"
                type="text">
       </div>
       <button type="submit">Ok</button>
     </form>
-    <div>{{currentMuscleGroupName()}}</div>
+    <div>{{currentElementValue()}}</div>
   `,
   styles: []
 })
 export class CreateMuscleGroupComponent implements OnInit {
 
-  private createMuscleGroup: FormGroup;
+  @Output() createElementEvent = new EventEmitter<string>();
+
+  private createElement: FormGroup;
 
   constructor(private workoutService: WorkoutService,
               private location: Location,
@@ -34,27 +37,28 @@ export class CreateMuscleGroupComponent implements OnInit {
   }
 
   private initForm() {
-    if (this.createMuscleGroup) {
+    if (this.createElement) {
       return;
     }
-    this.createMuscleGroup = this.formBuilder.group({
-      muscleGroup: ["", Validators.required]
+    this.createElement = this.formBuilder.group({
+      element: ["", Validators.required]
     });
   }
 
   create() {
-    if (this.hasEnteredAnyMuscleGroupName()) {
-      this.workoutService.newMuscleGroup(this.currentMuscleGroupName())
+    if (this.hasEnteredAnything()) {
+      this.createElementEvent.emit(this.currentElementValue())
+      this.workoutService.newMuscleGroup(this.currentElementValue())
         .subscribe(this.goBackInHistory());
     }
   }
 
-  private hasEnteredAnyMuscleGroupName() {
-    return !!this.currentMuscleGroupName();
+  private hasEnteredAnything() {
+    return !!this.currentElementValue();
   }
 
-  private currentMuscleGroupName() {
-    return this.createMuscleGroup.get('muscleGroup').value.trim();
+  private currentElementValue() {
+    return this.createElement.get('element').value.trim();
   }
 
   private goBackInHistory() {

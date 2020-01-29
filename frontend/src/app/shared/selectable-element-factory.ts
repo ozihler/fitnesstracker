@@ -1,5 +1,5 @@
-import {Type} from "../workout-details-view/button-group/button-node";
 import {SelectableElement} from "./selectable-element";
+import {Type} from "./type";
 
 export class SelectableElementFactory {
   static from(name: string, nodeType: Type):SelectableElement {

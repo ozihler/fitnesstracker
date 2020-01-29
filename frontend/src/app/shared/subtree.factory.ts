@@ -1,8 +1,9 @@
 import {MuscleGroup} from "./muscle-group";
-import {ButtonNode, Type} from "../workout-details-view/button-group/button-node";
+import {ButtonNode} from "../workout-details-view/button-group/button-node";
 import {Exercise} from "./exercise";
 import {Set} from "./set"
 import {Workout} from "./workout";
+import {Type} from "./type";
 
 export class SubtreeFactory {
 

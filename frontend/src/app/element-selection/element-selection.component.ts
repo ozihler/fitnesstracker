@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {SelectableElement} from "../shared/selectable-element";
-import {Type} from "../workout-details-view/button-group/button-node";
+import {Type} from "../shared/type";
 
 @Component({
   selector: 'app-element-selection',
