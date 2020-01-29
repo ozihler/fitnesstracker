@@ -38,7 +38,7 @@ export class WorkoutService {
 
   fetchExercisesFor(muscleGroupName: string) {
     return this.httpClient.get<ExercisesRaw>(this.baseUrl + "/muscle-groups/" + muscleGroupName + "/exercises")
-      .subscribe(exercises=>ExerciseFactory.fromMultiple(exercises.exercises));
+      .pipe(map(exercises => ExerciseFactory.fromMultiple(exercises.exercises)));
   }
 
   newWorkout(): Observable<Workout> {

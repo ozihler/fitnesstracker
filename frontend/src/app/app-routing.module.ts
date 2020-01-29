@@ -36,6 +36,7 @@ const routes: Routes = [
   {path: "workouts-overview", component: WorkoutsOverview},
   {path: "create-workout", component: CreateWorkoutComponent},
   {path: "create-muscle-group", component: CreateMuscleGroupComponent},
+  {path: "muscle-group/:name/create-exercise", component: CreateMuscleGroupComponent},
   {path: "create-set", component: CreateSetComponent},
 
 

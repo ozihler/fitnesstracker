@@ -1,11 +1,10 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.in_memory;
 
-import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchExercises;
-import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchMuscleGroup;
-import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreMuscleGroups;
-import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchAllMuscleGroups;
+import com.zihler.fitness_tracker.application.outbound_ports.gateways.*;
 import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
+import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.Exercises;
+import com.zihler.fitness_tracker.domain.values.GID;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 import com.zihler.fitness_tracker.domain.values.Name;
 import org.springframework.stereotype.Repository;
@@ -15,11 +14,36 @@ import java.util.HashSet;
 import java.util.Map;
 
 @Repository
-public class InMemoryAllMuscleGroupsRepository implements FetchAllMuscleGroups, StoreMuscleGroups, FetchMuscleGroup, FetchExercises {
+public class InMemoryRepository
+        implements
+        FetchWorkout,
+        StoreWorkout,
+        FetchAllMuscleGroups,
+        StoreMuscleGroups,
+        FetchMuscleGroup,
+        FetchExercises {
     private Map<Name, MuscleGroup> repo;
+    private Map<GID, Workout> workouts = new HashMap<>();
 
-    public InMemoryAllMuscleGroupsRepository() {
+    public InMemoryRepository() {
         this.repo = new HashMap<>();
+    }
+
+    @Override
+    public Workout as(Workout workout) {
+        this.workouts.put(workout.getGid(), workout);
+        if (workout.getMuscleGroups() != null) {
+            MuscleGroups muscleGroups = workout.getMuscleGroups();
+            for (MuscleGroup muscleGroup : muscleGroups.getMuscleGroups()) {
+                repo.put(muscleGroup.getName(), muscleGroup);
+            }
+        }
+        return workout;
+    }
+
+    @Override
+    public Workout by(GID id) {
+        return workouts.get(id);
     }
 
     @Override

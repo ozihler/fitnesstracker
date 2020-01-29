@@ -18,6 +18,7 @@ import {MuscleGroupFactory} from "../shared/muscle-group.factory";
     =============================
     <app-element-selection
       [selectableElements]="selectableElements"
+      [type]="currentType"
       (selectedElement)="selectElement($event)">
     </app-element-selection>
     =============================
@@ -27,6 +28,7 @@ import {MuscleGroupFactory} from "../shared/muscle-group.factory";
 export class CreateWorkoutComponent implements OnInit {
   workoutTree: ButtonNode;
   selectableElements: SelectableElement[] = [];
+  currentType: Type = Type.Muscle_Group;
   private workout: Workout;
 
 
@@ -49,6 +51,7 @@ export class CreateWorkoutComponent implements OnInit {
       .subscribe(muscleGroups => {
         this.selectableElements = muscleGroups.map(mG => SelectableElementFactory.from(mG.name, Type.Muscle_Group))
           .filter(m => filterMuscleGroups && filterMuscleGroups.indexOf(m.name) < 0);
+        this.currentType = Type.Muscle_Group;
       });
   }
 
@@ -67,8 +70,12 @@ export class CreateWorkoutComponent implements OnInit {
     console.log("Selected ", node);
     if (node.type === Type.Workout) {
       this.fetchMuscleGroupsAndFilterOut(node.children.map(c => c.name));
-    }else if (node.type === Type.Muscle_Group) {
-      this.workoutService.fetchExercisesFor(node.name);
+    } else if (node.type === Type.Muscle_Group) {
+      this.workoutService.fetchExercisesFor(node.name)
+        .subscribe(exercises => {
+          this.selectableElements = exercises.map(mG => SelectableElementFactory.from(mG.name, Type.Exercise));
+          this.currentType = Type.Exercise;
+        });
     }
   }
 }

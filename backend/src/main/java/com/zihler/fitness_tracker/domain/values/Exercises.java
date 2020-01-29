@@ -7,6 +7,10 @@ import java.util.Set;
 public class Exercises {
     Set<Exercise> exercises;
 
+    public Exercises(Set<Exercise> exercises) {
+        this.exercises = exercises;
+    }
+
     public Set<Exercise> getExercises() {
         return exercises;
     }

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {SelectableElement} from "../shared/selectable-element";
 import {Type} from "../workout-details-view/button-group/button-node";
 
@@ -15,9 +15,9 @@ import {Type} from "../workout-details-view/button-group/button-node";
     </div>  `,
   styles: []
 })
-export class ElementSelection implements OnInit {
+export class ElementSelection implements OnInit, OnChanges {
 
-  private type: Type;
+  @Input() type: Type;
   @Input() selectableElements: SelectableElement[];
   @Output() selectedElement = new EventEmitter<SelectableElement>();
 
@@ -25,6 +25,10 @@ export class ElementSelection implements OnInit {
   }
 
   ngOnInit() {
+    //this.init();
+  }
+
+  private init() {
     if (this.selectableElements && this.selectableElements.length) {
       this.type = this.selectableElements[0].type;
     } else {
@@ -42,5 +46,10 @@ export class ElementSelection implements OnInit {
 
   formatLink(type: Type) {
     return Type[type].toLowerCase().replace("_", "-");
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+    //this.init();
   }
 }
