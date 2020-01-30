@@ -11,7 +11,7 @@ import {ElementSelection} from './element-selection/element-selection.component'
 import {ReactiveFormsModule} from "@angular/forms";
 import {CreateSetComponent} from './create-set/create-set.component';
 import {FitScreenPipe} from './shared/fit-screen.pipe';
-import {ButtonTreeComponent} from './workout-details-view/button-group/button-tree.component';
+import {TreeViewComponent} from './workout-details-view/tree-view.component';
 import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
@@ -24,7 +24,7 @@ import {HttpClientModule} from "@angular/common/http";
     ElementSelection,
     CreateSetComponent,
     FitScreenPipe,
-    ButtonTreeComponent
+    TreeViewComponent
   ],
   imports: [
     BrowserModule,

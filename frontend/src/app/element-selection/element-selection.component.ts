@@ -1,42 +1,35 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {SelectableElement} from "../shared/selectable-element";
 import {Type} from "../shared/type";
+import {TreeNode} from "../shared/tree-node";
 
 @Component({
   selector: 'app-element-selection',
   template: `
     <div>
-      <div class="uk-grid-small uk-child-width-1-2 uk-flex-center" uk-grid *ngFor="let element of selectableElements">
-        <button class="uk-button uk-button-default" (click)="select(element)">{{element.name}}</button>
+      <div class="uk-grid-small uk-child-width-1-2 uk-flex-center" uk-grid
+           *ngFor="let element of selectableElements">
+        <button class="uk-button uk-button-default"
+                (click)="select(element)">{{element.name}}</button>
       </div>
-      <app-create-element (createElementsEvent)="createElements($event)" [type]="type"></app-create-element>
+      <app-create-element (createElementsEvent)="createChild($event)" [type]="typeName()"></app-create-element>
     </div>  `,
   styles: []
 })
 export class ElementSelection implements OnInit, OnChanges {
 
   @Input() type: Type;
-  @Input() selectableElements: SelectableElement[];
-  @Output() selectedElement = new EventEmitter<SelectableElement>();
-  @Output() createsElementEvent = new EventEmitter<string>();
+  @Input() selectableElements: TreeNode[];
+  @Output() selectedElement = new EventEmitter<TreeNode>();
+  @Output() createsChildEvent = new EventEmitter<any>();
 
 
   constructor() {
   }
 
   ngOnInit() {
-    //this.init();
   }
 
-  private init() {
-    if (this.selectableElements && this.selectableElements.length) {
-      this.type = this.selectableElements[0].type;
-    } else {
-      this.type = Type.Muscle_Group;
-    }
-  }
-
-  select(element: SelectableElement) {
+  select(element: TreeNode) {
     this.selectedElement.emit(element);
   }
 
@@ -44,7 +37,11 @@ export class ElementSelection implements OnInit, OnChanges {
     //this.init();
   }
 
-  createElements(elements: string) {
-    this.createsElementEvent.emit(elements);
+  createChild(elementsString: string) {
+    this.createsChildEvent.emit(elementsString);
+  }
+
+  typeName() {
+    return Type[this.type];
   }
 }

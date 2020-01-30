@@ -2,8 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {WorkoutService} from "../shared/workout.service";
 import {Location} from "@angular/common";
-import {Type} from "../shared/type";
-import {MuscleGroup} from "../shared/muscle-group";
 
 @Component({
   selector: 'app-create-element',
@@ -32,7 +30,7 @@ import {MuscleGroup} from "../shared/muscle-group";
 export class CreateElementComponent implements OnInit {
 
   @Output() createElementsEvent = new EventEmitter<string>();
-  @Input() type: Type;
+  @Input() type: string;
 
   private showButton: boolean = true;
   private createElement: FormGroup;
@@ -80,7 +78,7 @@ export class CreateElementComponent implements OnInit {
     this.showButton = false;
   }
 
-  format(type: Type) {
-    return Type[type].replace("_", " ");
+  format(type: string) {
+    return type ? type.replace("_", " ") : "";
   }
 }

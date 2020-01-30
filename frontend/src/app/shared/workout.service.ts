@@ -11,8 +11,8 @@ import {environment} from "../../environments/environment";
 import {MuscleGroupsRaw} from "./muscle-groups-raw";
 import {ExerciseFactory} from "./exercise.factory";
 import {ExercisesRaw} from "./exercises-raw";
-import {ButtonNode} from "../workout-details-view/button-group/button-node";
 import {GID} from "./gid";
+import {Exercise} from "./exercise";
 
 
 @Injectable({
@@ -55,14 +55,9 @@ export class WorkoutService {
       .pipe(map(data => WorkoutFactory.fromRaw(data)));
   }
 
-  newExercises(muscleGroupName: string, exercisesString: string) {
-    return this.httpClient.post<ExercisesRaw>(`${this.baseUrl}/muscle-groups/${muscleGroupName}/exercises`, {input: exercisesString})
-      .pipe(
-        map(e => ExerciseFactory.fromMultiple(e.exercises)
-        ));
+  newExercises(muscleGroup: MuscleGroup, exercisesString: string):Observable<Exercise[]> {
+    return this.httpClient.post<ExercisesRaw>(`${this.baseUrl}/muscle-groups/${muscleGroup.name}/exercises`, {input: exercisesString})
+      .pipe(map(e => ExerciseFactory.fromMultiple(e.exercises)));
   }
 
-  fetchSetsForExercise(gid: GID, parent: string, name: string) {
-
-  }
 }

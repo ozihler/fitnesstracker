@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ButtonTreeComponent } from './button-tree.component';
+import { TreeViewComponent } from './tree-view.component';
 
 describe('ButtonGroupComponent', () => {
-  let component: ButtonTreeComponent;
-  let fixture: ComponentFixture<ButtonTreeComponent>;
+  let component: TreeViewComponent;
+  let fixture: ComponentFixture<TreeViewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ButtonTreeComponent ]
+      declarations: [ TreeViewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ButtonTreeComponent);
+    fixture = TestBed.createComponent(TreeViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

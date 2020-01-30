@@ -5,10 +5,7 @@ import {ExerciseFactory} from "./exercise.factory";
 export class MuscleGroupFactory {
 
   static from(muscleGroupRaw: MuscleGroupRaw): MuscleGroup {
-    return {
-      ...muscleGroupRaw,
-      exercises: muscleGroupRaw.exercises ? muscleGroupRaw.exercises.map(e => ExerciseFactory.from(e)) : []
-    };
+    return new MuscleGroup(undefined, muscleGroupRaw.name, muscleGroupRaw.exercises ? muscleGroupRaw.exercises.map(e => ExerciseFactory.from(e)) : []);
   }
 
   static fromMultiple(muscleGroupsRaw: MuscleGroupRaw[]): MuscleGroup[] {
