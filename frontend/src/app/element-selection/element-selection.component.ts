@@ -42,6 +42,6 @@ export class ElementSelection implements OnInit, OnChanges {
   }
 
   typeName() {
-    return Type[this.type + 1];
+    return Type[this.type];
   }
 }

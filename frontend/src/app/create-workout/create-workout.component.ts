@@ -14,7 +14,7 @@ import {Type} from "../shared/type";
     </app-button-tree>
     =============================
     <app-element-selection
-      [type]="currentSelection?.type"
+      [type]="currentSelection?.type + 1"
       [selectableElements]="selectableNodes"
       (selectedElement)="selectElement($event)"
       (createsChildEvent)="createChild($event)">
@@ -83,7 +83,7 @@ export class CreateWorkoutComponent implements OnInit {
   selectElement(selectedElement: TreeNode) {
     let foundNode = this.findSelectedElement(this.workout, selectedElement.parent);
 
-    console.log("Found node: ", foundNode)
+    console.log("Found node: ", foundNode);
     if (foundNode) {
       foundNode.children.push(selectedElement);
       this.selectableNodes = this.selectableNodes.filter(s => s.name !== selectedElement.name);
