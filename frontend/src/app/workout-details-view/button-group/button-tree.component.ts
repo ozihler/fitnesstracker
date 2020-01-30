@@ -6,21 +6,11 @@ import {ButtonNode} from "./button-node";
   template: `
     <div *ngIf="node">
       <div class="uk-grid uk-grid-collapse">
-
-        <div class="uk-width-3-5">
-          <button class="uk-button uk-width-1-1 uk-text-truncate"
-                  [ngClass]="getLevelClass()"
-                  (click)="toggleNode()">{{node?.name}}
-            <span *ngIf="!node.isLeaf()">({{node?.numberOfChildren()}})</span>
-          </button>
-        </div>
-
-        <div class="uk-width-2-5">
-          <button class="">[x]</button>
-          <button class="" (click)="changeSelection(node)">[+]
-          </button>
-          <button class=" ">[E]</button>
-        </div>
+        <button class="uk-button uk-width-1-1 uk-text-truncate" [ngClass]="getLevelClass()"
+                (click)="toggleNode()">
+          <span *ngIf="!node.isLeaf() && !isEnabled()">({{node?.numberOfChildren()}}) </span>
+          <span >{{node?.name}}</span>
+        </button>
 
       </div>
 

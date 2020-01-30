@@ -62,7 +62,7 @@ export class WorkoutService {
         ));
   }
 
-  fetchSetsForExercise(gid: GID, parent: ButtonNode, name: string) {
+  fetchSetsForExercise(gid: GID, parent: string, name: string) {
 
   }
 }
