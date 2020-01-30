@@ -20,7 +20,7 @@ export class ElementSelection implements OnInit, OnChanges {
   @Input() type: Type;
   @Input() selectableElements: TreeNode[];
   @Output() selectedElement = new EventEmitter<TreeNode>();
-  @Output() createsChildEvent = new EventEmitter<any>();
+  @Output() createsChildEvent = new EventEmitter<string>();
 
 
   constructor() {
@@ -42,6 +42,6 @@ export class ElementSelection implements OnInit, OnChanges {
   }
 
   typeName() {
-    return Type[this.type];
+    return Type[this.type + 1];
   }
 }
