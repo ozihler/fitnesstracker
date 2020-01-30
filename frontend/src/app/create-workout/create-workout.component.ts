@@ -9,8 +9,9 @@ import {Type} from "../shared/type";
   template: `
     <div>{{workout?.creationDate}} {{workout?.title}}</div>
     =============================
-    <app-button-tree [node]="workout"
-                     (changeSelectionEvent)="changeSelectionThroughTreeClick($event)">
+    <app-button-tree
+      [node]="workout"
+      (changeSelectionEvent)="changeSelectionThroughTreeClick($event)">
     </app-button-tree>
     =============================
     <app-element-selection
