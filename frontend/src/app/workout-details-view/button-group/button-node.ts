@@ -4,8 +4,8 @@ import {Type} from "../../shared/type";
 
 export class ButtonNode {
   static LEVEL_CLASSES = {1: 'uk-button-secondary', 2: 'uk-button-primary', 3: 'uk-button-default'};
-
   constructor(private _name: string,
+              private _parent: string,
               private _children: ButtonNode[],
               private _type: Type) {
   }
@@ -21,14 +21,17 @@ export class ButtonNode {
   numberOfChildren(): number {
     return sizeOf(this._children);
   }
+
   get name(): string {
     return this._name;
   }
-
   get children(): ButtonNode[] {
     return this._children;
   }
 
+  get parent(): string {
+    return this._parent;
+  }
 
   get type(): Type {
     return this._type;

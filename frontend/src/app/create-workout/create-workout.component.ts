@@ -60,13 +60,13 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
   selectElement(selection: SelectableElement) {
-     if (selection.type === Type.Muscle_Group) {
+    if (selection.type === Type.Muscle_Group) {
       this.workout.muscleGroups.push(MuscleGroupFactory.fromName(selection.name));
       this.workoutTree = SubtreeFactory.fromWorkout(this.workout);
       this.selectableElements = this.selectableElements.filter(m => m.name !== selection.name);
       this.workoutService.update(this.workout);
     } else if (selection.type == Type.Exercise) {
-
+      console.log("Chose Exercise");
     }
 
   }
@@ -81,8 +81,10 @@ export class CreateWorkoutComponent implements OnInit {
         .subscribe(exercises => {
           this.selectableElements = exercises.map(mG => SelectableElementFactory.from(mG.name, Type.Exercise));
           this.currentType = Type.Exercise;
-          //this.parentOfSelectedElement = this.currentSelection;
-          });
+          this.parentOfSelectedElement = this.currentSelection;
+        });
+    } else if (node.type === Type.Exercise) {
+      this.workoutService.fetchSetsForExercise(this.workout.gid, node.parent, node.name);
     }
   }
 
@@ -95,11 +97,10 @@ export class CreateWorkoutComponent implements OnInit {
             this.selectableElements.push({name: element.name, type: this.currentType})
           });
         });
-    }else if (this.currentType === Type.Muscle_Group && this.currentSelection) {
+    } else if (this.currentType === Type.Exercise) {
       this.workoutService.newExercises(this.parentOfSelectedElement.name, elements)
-        .subscribe(element => {
-          this.selectableElements.push({name: element.name, type: this.currentType})
-
+        .subscribe(elements => {
+          elements.forEach(element => this.selectableElements.push({name: element.name, type: this.currentType}));
         });
     }
   }
