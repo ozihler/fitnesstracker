@@ -3,8 +3,6 @@ import {WorkoutService} from "../shared/workout.service";
 import {Workout} from '../shared/workout';
 import {TreeNode} from "../shared/tree-node";
 import {Type} from "../shared/type";
-import {MuscleGroup} from "../shared/muscle-group";
-import {Exercise} from "../shared/exercise";
 
 @Component({
   selector: 'app-create-workout',
@@ -17,7 +15,7 @@ import {Exercise} from "../shared/exercise";
     =============================
     <app-element-selection
       [type]="currentSelection?.type"
-      [selectableElements]="selectableElements"
+      [selectableElements]="selectableNodes"
       (selectedElement)="selectElement($event)"
       (createsChildEvent)="createChild($event)">
     </app-element-selection>
@@ -25,8 +23,8 @@ import {Exercise} from "../shared/exercise";
   `
 })
 export class CreateWorkoutComponent implements OnInit {
+  selectableNodes: TreeNode[] = [];
   private workout: Workout;
-  selectableElements: TreeNode[] = [];
   private currentSelection: TreeNode;
 
   constructor(private workoutService: WorkoutService) {
@@ -37,7 +35,6 @@ export class CreateWorkoutComponent implements OnInit {
       .subscribe(workout => {
         this.workout = workout;
         this.currentSelection = workout;
-        console.log("Current Selection", this.currentSelection);
       });
 
     this.fetchMuscleGroupsAndFilterOut();
@@ -56,33 +53,40 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
   private updateSelectableElements(nodes: TreeNode[], children: string[]) {
-    return this.selectableElements = nodes.filter(node => children.indexOf(node.name) < 0);
+    return this.selectableNodes = nodes.filter(node => children.indexOf(node.name) < 0);
   }
 
   changeSelectionThroughTreeClick(node: TreeNode) {
-    if (node.type === Type.Workout) {
-      this.fetchMuscleGroupsAndFilterOut(node.children.map(m=>m.name));
-    } else if (node.type === Type.Muscle_Group) {
-      this.fetchExercisesForAndFilterOut(node.name, node.children.map(m=>m.name));
-    }
     this.currentSelection = node;
+    if (node.type === Type.Workout) {
+      this.fetchMuscleGroupsAndFilterOut(node.children.map(m => m.name));
+    } else if (node.type === Type.Muscle_Group) {
+      this.fetchExercisesForAndFilterOut(node.name, node.children.map(m => m.name));
+    }
   }
 
   createChild(elements: string) {
-    if (this.currentSelection.type == Type.Muscle_Group) {
+    if (this.currentSelection.type === Type.Workout) {
+      this.workoutService.newMuscleGroup(elements)
+        .subscribe(createdMuscleGroups => this.updateSelectedNodes(createdMuscleGroups));
+    } else if (this.currentSelection.type === Type.Muscle_Group) {
       this.workoutService.newExercises(this.currentSelection, elements)
-        .subscribe(createdExercises => createdExercises.forEach(exercise => this.selectableElements.push(exercise)));
+        .subscribe(createdExercises => this.updateSelectedNodes(createdExercises));
     }
 
+  }
+
+  private updateSelectedNodes(nodes: TreeNode[]) {
+    nodes.forEach(node => this.selectableNodes.push(node));
   }
 
   selectElement(selectedElement: TreeNode) {
     let foundNode = this.findSelectedElement(this.workout, selectedElement.parent);
 
-    console.log("Found node: ",foundNode)
+    console.log("Found node: ", foundNode)
     if (foundNode) {
       foundNode.children.push(selectedElement);
-      this.selectableElements = this.selectableElements.filter(s => s.name !== selectedElement.name);
+      this.selectableNodes = this.selectableNodes.filter(s => s.name !== selectedElement.name);
     }
   }
 
