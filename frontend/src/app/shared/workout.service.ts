@@ -11,7 +11,6 @@ import {environment} from "../../environments/environment";
 import {MuscleGroupsRaw} from "./muscle-groups-raw";
 import {ExerciseFactory} from "./exercise.factory";
 import {ExercisesRaw} from "./exercises-raw";
-import {GID} from "./gid";
 import {Exercise} from "./exercise";
 
 

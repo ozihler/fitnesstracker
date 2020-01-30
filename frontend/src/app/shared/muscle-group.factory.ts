@@ -14,11 +14,4 @@ export class MuscleGroupFactory {
     }
     return muscleGroupsRaw.map(muscleGroupRaw => MuscleGroupFactory.from(muscleGroupRaw));
   }
-
-  static fromName(name: string) {
-    return {
-      name: name,
-      exercises: []
-    }
-  }
 }

@@ -10,7 +10,6 @@ import {CreateElementComponent} from './create-muscle-group/create-element.compo
 import {ElementSelection} from './element-selection/element-selection.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {CreateSetComponent} from './create-set/create-set.component';
-import {FitScreenPipe} from './shared/fit-screen.pipe';
 import {TreeViewComponent} from './workout-details-view/tree-view.component';
 import {HttpClientModule} from "@angular/common/http";
 
@@ -23,8 +22,7 @@ import {HttpClientModule} from "@angular/common/http";
     CreateElementComponent,
     ElementSelection,
     CreateSetComponent,
-    FitScreenPipe,
-    TreeViewComponent
+     TreeViewComponent
   ],
   imports: [
     BrowserModule,
