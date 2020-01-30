@@ -10,8 +10,12 @@ public class Exercise {
     private Sets sets;
 
     public Exercise(Name name) {
+        this(name, Sets.empty());
+    }
+
+    public Exercise(Name name, Sets sets) {
         this.name = name;
-        this.sets = new Sets(new ArrayList<>());
+        this.sets = sets;
     }
 
     public void add(Set set) {

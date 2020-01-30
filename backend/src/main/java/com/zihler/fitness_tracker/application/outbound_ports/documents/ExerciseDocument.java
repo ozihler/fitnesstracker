@@ -16,6 +16,10 @@ public class ExerciseDocument {
         return new ExerciseDocument(name, sets);
     }
 
+    public static ExerciseDocument of(Name name) {
+        return new ExerciseDocument(name, SetsDocument.empty());
+    }
+
     public Name getName() {
         return name;
     }

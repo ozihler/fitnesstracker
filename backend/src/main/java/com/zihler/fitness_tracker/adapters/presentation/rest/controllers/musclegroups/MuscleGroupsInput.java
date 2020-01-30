@@ -2,9 +2,8 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.muscle
 
 import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGroupDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGroupsDocument;
-import com.zihler.fitness_tracker.domain.values.Name;
+import com.zihler.fitness_tracker.domain.values.Names;
 
-import java.util.Arrays;
 import java.util.Set;
 
 import static java.util.stream.Collectors.toSet;
@@ -17,17 +16,18 @@ public class MuscleGroupsInput {
     }
 
     public MuscleGroupsDocument muscleGroups() {
-
         String muscleGroupNames = request.getMuscleGroupNames();
         if (muscleGroupNames == null || muscleGroupNames.isBlank()) {
             throw new EmptyMuscleGroupsRequest();
         }
 
-        Set<MuscleGroupDocument> documents = Arrays.stream(muscleGroupNames.split("[ ;,.]+"))
-                .map(Name::of)
+        Set<MuscleGroupDocument> documents = Names.in(muscleGroupNames)
+                .values()
+                .stream()
                 .map(MuscleGroupDocument::of)
                 .collect(toSet());
 
-        return  MuscleGroupsDocument.of(documents);
+        return MuscleGroupsDocument.of(documents);
     }
+
 }

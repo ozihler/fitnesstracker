@@ -31,7 +31,7 @@ import {MuscleGroup} from "../shared/muscle-group";
 })
 export class CreateElementComponent implements OnInit {
 
-  @Output() createElementEvent = new EventEmitter<string[]>();
+  @Output() createElementsEvent = new EventEmitter<string>();
   @Input() type: Type;
 
   private showButton: boolean = true;
@@ -58,15 +58,14 @@ export class CreateElementComponent implements OnInit {
 
   create() {
     if (this.hasEnteredAnything()) {
-      this.workoutService.newMuscleGroup(this.currentElementValue())
-        .subscribe(createdElements => this.emit(createdElements));
+      this.emit(this.currentElementValue());
     }
   }
 
-  private emit(createdElements: MuscleGroup[]) {
+  private emit(createdElements: string) {
     this.showButton = true;
     this.createElement.reset();
-    this.createElementEvent.emit(createdElements.map(m => m.name))
+    this.createElementsEvent.emit(createdElements);
   }
 
   private hasEnteredAnything() {

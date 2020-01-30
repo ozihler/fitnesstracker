@@ -3,8 +3,6 @@ package com.zihler.fitness_tracker.domain.entities;
 import com.zihler.fitness_tracker.domain.values.Exercises;
 import com.zihler.fitness_tracker.domain.values.Name;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Objects;
 
 public class MuscleGroup {
@@ -13,7 +11,7 @@ public class MuscleGroup {
 
     public MuscleGroup(Name name) {
         this.name = name;
-        this.exercises = new Exercises(new HashSet<>());
+        this.exercises = Exercises.empty();
     }
 
     public Name getName() {
@@ -39,5 +37,9 @@ public class MuscleGroup {
 
     public Exercises getExercises() {
         return exercises;
+    }
+
+    public void add(Exercises exercises) {
+        exercises.getExercises().forEach(this::add);
     }
 }

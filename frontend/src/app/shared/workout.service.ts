@@ -52,4 +52,8 @@ export class WorkoutService {
     return this.httpClient.put<WorkoutRaw>(`${this.baseUrl}/workouts`, {workout: workout})
       .pipe(map(data => WorkoutFactory.fromRaw(data)));
   }
+
+  newExercises(muscleGroupName: string, exercisesString: string) {
+    return this.httpClient.post<ExercisesRaw>(`${this.baseUrl}/muscle-groups/${muscleGroupName}/exercises`);
+  }
 }

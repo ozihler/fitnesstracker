@@ -14,13 +14,14 @@ import {Type} from "../shared/type";
     <div>{{workout?.creationDate}} {{workout?.title}}</div>
     =============================
     <app-button-tree [node]="workoutTree"
-                     (changeSelectionEvent)="changeSelection($event)">
+                     (changeSelectionEvent)="changeSelectionInTree($event)">
     </app-button-tree>
     =============================
     <app-element-selection
       [selectableElements]="selectableElements"
       [type]="currentType"
-      (selectedElement)="selectElement($event)">
+      (selectedElement)="selectElement($event)"
+      (createsElementEvent)="createElements($event)">
     </app-element-selection>
     =============================
   `,
@@ -31,6 +32,8 @@ export class CreateWorkoutComponent implements OnInit {
   selectableElements: SelectableElement[] = [];
   currentType: Type = Type.Muscle_Group;
   private workout: Workout;
+  private currentSelection: SelectableElement;
+  private parentOfSelectedElement: SelectableElement;
 
 
   constructor(private workoutService: WorkoutService) {
@@ -57,17 +60,19 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
   selectElement(selection: SelectableElement) {
-    if (selection.type === Type.Muscle_Group) {
+     if (selection.type === Type.Muscle_Group) {
       this.workout.muscleGroups.push(MuscleGroupFactory.fromName(selection.name));
       this.workoutTree = SubtreeFactory.fromWorkout(this.workout);
       this.selectableElements = this.selectableElements.filter(m => m.name !== selection.name);
       this.workoutService.update(this.workout);
+    } else if (selection.type == Type.Exercise) {
+
     }
 
   }
 
 
-  changeSelection(node: ButtonNode) {
+  changeSelectionInTree(node: ButtonNode) {
     console.log("Selected ", node);
     if (node.type === Type.Workout) {
       this.fetchMuscleGroupsAndFilterOut(node.children.map(c => c.name));
@@ -76,6 +81,25 @@ export class CreateWorkoutComponent implements OnInit {
         .subscribe(exercises => {
           this.selectableElements = exercises.map(mG => SelectableElementFactory.from(mG.name, Type.Exercise));
           this.currentType = Type.Exercise;
+          //this.parentOfSelectedElement = this.currentSelection;
+          });
+    }
+  }
+
+  createElements(elements: string) {
+    console.log("Current Selection:", this.currentSelection, this.currentType)
+    if (this.currentType === Type.Muscle_Group && !this.currentSelection) {
+      this.workoutService.newMuscleGroup(elements)
+        .subscribe(createdMuscleGroups => {
+          createdMuscleGroups.forEach(element => {
+            this.selectableElements.push({name: element.name, type: this.currentType})
+          });
+        });
+    }else if (this.currentType === Type.Muscle_Group && this.currentSelection) {
+      this.workoutService.newExercises(this.parentOfSelectedElement.name, elements)
+        .subscribe(element => {
+          this.selectableElements.push({name: element.name, type: this.currentType})
+
         });
     }
   }

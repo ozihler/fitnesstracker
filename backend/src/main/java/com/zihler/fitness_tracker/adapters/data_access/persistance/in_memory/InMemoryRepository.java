@@ -1,5 +1,6 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.in_memory;
 
+import com.zihler.fitness_tracker.application.outbound_ports.StoreExercises;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.*;
 import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
 import com.zihler.fitness_tracker.domain.entities.Workout;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 @Repository
 public class InMemoryRepository
@@ -21,7 +23,8 @@ public class InMemoryRepository
         FetchAllMuscleGroups,
         StoreMuscleGroups,
         FetchMuscleGroup,
-        FetchExercises {
+        FetchExercises,
+        StoreExercises {
     private Map<Name, MuscleGroup> repo;
     private Map<GID, Workout> workouts = new HashMap<>();
 
@@ -73,5 +76,18 @@ public class InMemoryRepository
     @Override
     public MuscleGroup byName(Name name) {
         return repo.get(name);
+    }
+
+    @Override
+    public Exercises in(Name muscleGroupName, Exercises exercises) {
+        MuscleGroup muscleGroup = repo.get(muscleGroupName);
+
+        if (muscleGroup == null) {
+            muscleGroup = this.as(MuscleGroups.of(Set.of(new MuscleGroup(muscleGroupName)))).getMuscleGroups().iterator().next();
+        }
+
+        muscleGroup.add(exercises);
+
+        return exercises;
     }
 }
