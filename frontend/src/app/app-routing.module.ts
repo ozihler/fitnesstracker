@@ -38,8 +38,6 @@ const routes: Routes = [
   {path: "create-muscle-group", component: CreateElementComponent},
   {path: "muscle-group/:name/create-exercise", component: CreateElementComponent},
   {path: "create-set", component: CreateSetComponent},
-
-
   {path: "", redirectTo: "workout-selection", pathMatch: "full"}
 ];
 
