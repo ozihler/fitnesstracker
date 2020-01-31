@@ -68,7 +68,7 @@ export class CreateWorkoutComponent implements OnInit {
     }
   }
 
-  // todo extract tree
+  // todo extract tree to move convenience methods there
   private linkNodes(child: TreeNode, parent: TreeNode) {
     child.parent = parent;
     parent.children.push(child);
