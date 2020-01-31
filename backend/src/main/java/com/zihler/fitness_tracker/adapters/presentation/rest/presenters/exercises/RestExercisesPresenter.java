@@ -32,7 +32,7 @@ public class RestExercisesPresenter implements ExercisesPresenter {
                 .collect(toSet());
     }
 
-    //Output objects
+    //todo Output objects
 
     private ExerciseViewModel toViewModel(ExerciseDocument e) {
 
