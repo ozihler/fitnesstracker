@@ -12,7 +12,6 @@ public class CreateExercisesInput {
         this.exercisesNames = exercisesNames;
     }
 
-    // Todo neues Dokument
     public ExercisesToCreate toCreate() {
         Name muscleGroupName = Name.of(this.muscleGroupName);
         Names exercisesToCreate = Names.in(exercisesNames);

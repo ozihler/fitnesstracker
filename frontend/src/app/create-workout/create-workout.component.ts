@@ -59,6 +59,7 @@ export class CreateWorkoutComponent implements OnInit {
 
   selectElement(selectedElement: TreeNode) {
     let foundNode = this.findSelectedElement(this.workout, selectedElement.parent);
+    console.log("Found Parent to Add selectedElement: ", foundNode, selectedElement);
 
     if (foundNode) {
       foundNode.children.push(selectedElement);

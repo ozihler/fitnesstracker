@@ -86,7 +86,7 @@ public class InMemoryRepository
             muscleGroup = this.as(MuscleGroups.of(Set.of(new MuscleGroup(muscleGroupName)))).getMuscleGroups().iterator().next();
         }
 
-        muscleGroup.add(exercises);
+        this.repo.put(muscleGroup.getName(), muscleGroup);
 
         return exercises;
     }
