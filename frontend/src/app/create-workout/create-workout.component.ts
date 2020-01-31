@@ -62,11 +62,16 @@ export class CreateWorkoutComponent implements OnInit {
 
     if (foundNode) {
       this.selectableNodes = this.selectableNodes.filter(s => s.name !== selectedElement.name);
-      selectedElement.parent = foundNode;
-      foundNode.children.push(selectedElement);
+      this.linkNodes(selectedElement, foundNode);
       this.disableAllNodesOf(this.workout);
       this.enable(selectedElement);
     }
+  }
+
+  // todo extract tree
+  private linkNodes(child: TreeNode, parent: TreeNode) {
+    child.parent = parent;
+    parent.children.push(child);
   }
 
   private fetchExercisesForAndFilterOut(name: string, children: string[] = []) {
@@ -104,7 +109,6 @@ export class CreateWorkoutComponent implements OnInit {
     if (!node) {
       return;
     }
-    console.log("Enable Node: " + node ? node.name : "" + ", parent: " + node.parent ? node.parent.name : "undefined");
     node.isEnabled = true;
     this.enable(node.parent);
   }
