@@ -16,15 +16,15 @@ import {Type} from "../shared/type";
     =============================
     <app-element-selection
       [type]="currentSelection?.type + 1"
-      [selectableElements]="selectableNodes"
-      (selectedElement)="selectElement($event)"
+      [selectableElements]="selectableChildrenOfSelectedNode"
+      (addNodeEvent)="addNode($event)"
       (createsChildEvent)="createChild($event)">
     </app-element-selection>
     =============================
   `
 })
 export class CreateWorkoutComponent implements OnInit {
-  selectableNodes: TreeNode[] = [];
+  selectableChildrenOfSelectedNode: TreeNode[] = [];
   private workout: Workout;
   private currentSelection: TreeNode;
 
@@ -57,12 +57,14 @@ export class CreateWorkoutComponent implements OnInit {
     }
   }
 
-  selectElement(selectedElement: TreeNode) {
+
+  addNode(selectedElement: TreeNode) {
     let foundNode = this.findSelectedElement(this.workout, selectedElement.parent);
 
     if (foundNode) {
-      this.selectableNodes = this.selectableNodes.filter(s => s.name !== selectedElement.name);
       this.linkNodes(selectedElement, foundNode);
+
+      this.selectableChildrenOfSelectedNode = this.selectableChildrenOfSelectedNode.filter(s => s.name !== selectedElement.name);
       this.disableAllNodesOf(this.workout);
       this.enable(selectedElement);
     }
@@ -86,16 +88,19 @@ export class CreateWorkoutComponent implements OnInit {
     } else if (this.currentSelection.type === Type.Muscle_Group) {
       this.workoutService.newExercises(this.currentSelection, elements)
         .subscribe(createdExercises => this.updateSelectedNodes(createdExercises));
+    } else if (this.currentSelection.type === Type.Exercise) {
+      this.workoutService.newSetInExercise(this.currentSelection, elements)
+        .subscribe(createdSet => this.updateSelectedNodes(createdSet));
     }
 
   }
 
   private updateSelectedNodes(nodes: TreeNode[]) {
-    nodes.forEach(node => this.selectableNodes.push(node));
+    nodes.forEach(node => this.selectableChildrenOfSelectedNode.push(node));
   }
 
   private updateSelectableElements(nodes: TreeNode[], children: string[]) {
-    return this.selectableNodes = nodes.filter(node => children.indexOf(node.name) < 0);
+    return this.selectableChildrenOfSelectedNode = nodes.filter(node => children.indexOf(node.name) < 0);
   }
 
   private disableAllNodesOf(parent: TreeNode) {

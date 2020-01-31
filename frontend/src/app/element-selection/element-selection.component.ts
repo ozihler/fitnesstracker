@@ -19,7 +19,7 @@ export class ElementSelection implements OnInit, OnChanges {
 
   @Input() type: Type;
   @Input() selectableElements: TreeNode[];
-  @Output() selectedElement = new EventEmitter<TreeNode>();
+  @Output() addNodeEvent = new EventEmitter<TreeNode>();
   @Output() createsChildEvent = new EventEmitter<string>();
 
 
@@ -30,7 +30,7 @@ export class ElementSelection implements OnInit, OnChanges {
   }
 
   select(element: TreeNode) {
-    this.selectedElement.emit(element);
+    this.addNodeEvent.emit(element);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

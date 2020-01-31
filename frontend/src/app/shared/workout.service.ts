@@ -49,14 +49,20 @@ export class WorkoutService {
       .pipe(map(data => WorkoutFactory.fromRaw(data)));
   }
 
+
   update(workout: Workout): Observable<Workout> {
     return this.httpClient.put<WorkoutRaw>(`${this.baseUrl}/workouts`, {workout: workout})
       .pipe(map(data => WorkoutFactory.fromRaw(data)));
   }
 
-  newExercises(muscleGroup: MuscleGroup, exercisesString: string):Observable<Exercise[]> {
+  newExercises(muscleGroup: MuscleGroup, exercisesString: string): Observable<Exercise[]> {
     return this.httpClient.post<ExercisesRaw>(`${this.baseUrl}/muscle-groups/${muscleGroup.name}/exercises`, {input: exercisesString})
       .pipe(map(e => ExerciseFactory.fromMultiple(e.exercises)));
   }
 
+  newSetInExercise(exercise: Exercise, setDetails: string) {
+    return this.httpClient.post<ExercisesRaw>(`${this.baseUrl}/muscle-groups/${exercise.parent.name}/exercises/${exercise.name}/`, {setDetails: setDetails})
+      .pipe(map(e => ExerciseFactory.fromMultiple(e.exercises)));
+
+  }
 }
