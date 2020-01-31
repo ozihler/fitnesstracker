@@ -1,5 +1,6 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.presenters.exercises;
 
+import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.musclegroups.MuscleGroupViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.ExerciseViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.ExercisesViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.SetViewModel;
@@ -32,6 +33,9 @@ public class RestExercisesPresenter implements ExercisesPresenter {
     }
 
     private ExerciseViewModel toViewModel(ExerciseDocument e) {
-        return new ExerciseViewModel(e.getName().toString(), e.getSets().getSets().stream().map(s -> new SetViewModel(s.getGid().toLong(), s.getWeight().value(), s.getWeight().unitOfMeasurement().shortname(), s.getRepetitions().number(), s.getWaitingTime().value(), s.getWaitingTime().unitOfTime().shortname())).collect(Collectors.toList()));
+
+        return new ExerciseViewModel(new MuscleGroupViewModel(e.getName().toString()),
+                e.getName().toString(),
+                e.getSets().getSets().stream().map(s -> new SetViewModel(s.getGid().toLong(), s.getWeight().value(), s.getWeight().unitOfMeasurement().shortname(), s.getRepetitions().number(), s.getWaitingTime().value(), s.getWaitingTime().unitOfTime().shortname())).collect(Collectors.toList()));
     }
 }

@@ -5,8 +5,8 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.Exercise
 import com.zihler.fitness_tracker.application.outbound_ports.StoreExercises;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchMuscleGroup;
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.ExercisesPresenter;
-import com.zihler.fitness_tracker.application.use_cases.create_exercises.inbound_port.CreateExercises;
 import com.zihler.fitness_tracker.application.use_cases.create_exercises.CreateExercisesUseCase;
+import com.zihler.fitness_tracker.application.use_cases.create_exercises.inbound_port.CreateExercises;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,7 +26,7 @@ public class CreateExercisesController {
 
         var input = new CreateExercisesInput(muscleGroupName, exercisesNames.getInput());
 
-        this.createExercises.forMuscleGroup(input.muscleGroup(), input.exercises(), output);
+        this.createExercises.forMuscleGroup(input.toCreate(), output);
     }
 
 }

@@ -48,15 +48,6 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
 
-  private fetchExercisesForAndFilterOut(name: string, children: string[] = []) {
-    this.workoutService.fetchExercisesFor(name)
-      .subscribe(exercises => this.updateSelectableElements(exercises, children));
-  }
-
-  private updateSelectableElements(nodes: TreeNode[], children: string[]) {
-    return this.selectableNodes = nodes.filter(node => children.indexOf(node.name) < 0);
-  }
-
   changeSelectionThroughTreeClick(node: TreeNode) {
     this.currentSelection = node;
     if (node.type === Type.Workout) {
@@ -64,6 +55,22 @@ export class CreateWorkoutComponent implements OnInit {
     } else if (node.type === Type.Muscle_Group) {
       this.fetchExercisesForAndFilterOut(node.name, node.children.map(m => m.name));
     }
+  }
+
+  selectElement(selectedElement: TreeNode) {
+    let foundNode = this.findSelectedElement(this.workout, selectedElement.parent);
+
+    if (foundNode) {
+      foundNode.children.push(selectedElement);
+      this.selectableNodes = this.selectableNodes.filter(s => s.name !== selectedElement.name);
+      this.disableAllNodesOf(this.workout);
+      this.enableParentsOf(foundNode);
+    }
+  }
+
+  private fetchExercisesForAndFilterOut(name: string, children: string[] = []) {
+    this.workoutService.fetchExercisesFor(name)
+      .subscribe(exercises => this.updateSelectableElements(exercises, children));
   }
 
   createChild(elements: string) {
@@ -81,13 +88,21 @@ export class CreateWorkoutComponent implements OnInit {
     nodes.forEach(node => this.selectableNodes.push(node));
   }
 
-  selectElement(selectedElement: TreeNode) {
-    let foundNode = this.findSelectedElement(this.workout, selectedElement.parent);
+  private updateSelectableElements(nodes: TreeNode[], children: string[]) {
+    return this.selectableNodes = nodes.filter(node => children.indexOf(node.name) < 0);
+  }
 
-    console.log("Found node: ", foundNode);
-    if (foundNode) {
-      foundNode.children.push(selectedElement);
-      this.selectableNodes = this.selectableNodes.filter(s => s.name !== selectedElement.name);
+  private disableAllNodesOf(parent: TreeNode) {
+    parent.isEnabled = false;
+    if (parent.children) {
+      parent.children.forEach(node => this.disableAllNodesOf(node));
+    }
+  }
+
+  private enableParentsOf(foundNode: TreeNode) {
+    while (foundNode) {
+      foundNode.isEnabled = true;
+      foundNode = foundNode.parent;
     }
   }
 

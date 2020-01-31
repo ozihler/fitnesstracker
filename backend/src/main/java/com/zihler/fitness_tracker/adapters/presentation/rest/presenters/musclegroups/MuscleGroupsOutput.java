@@ -18,7 +18,7 @@ public class MuscleGroupsOutput {
         return new MuscleGroupsViewModel(toViewModels(muscleGroupsDocument.getMuscleGroups()));
     }
 
-    private Set<MuscleGroupViewModel> toViewModels(Set<MuscleGroupDocument> muscleGroups) {
+    static Set<MuscleGroupViewModel> toViewModels(Set<MuscleGroupDocument> muscleGroups) {
         return muscleGroups.stream()
                 .map(document -> new MuscleGroupViewModel(document.getName().toString()))
                 .collect(toSet());

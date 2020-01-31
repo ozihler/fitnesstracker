@@ -16,4 +16,6 @@ public class ExercisesDocument {
     public Set<ExerciseDocument> getExercises() {
         return exercises;
     }
+
+
 }

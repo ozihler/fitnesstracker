@@ -9,6 +9,6 @@ export class ExerciseFactory {
   }
 
   static fromMultiple(exercises: ExerciseRaw[]) {
-    return exercises.map(exercise => ExerciseFactory.from(exercise));
+    return exercises ? exercises.map(exercise => ExerciseFactory.from(exercise)) : [];
   }
 }
