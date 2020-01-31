@@ -43,5 +43,10 @@ export abstract class TreeNode {
     return sizeOf(this.children);
   }
 
+
+  set parent(value: TreeNode) {
+    this._parent = value;
+  }
+
   abstract get type(): Type;
 }

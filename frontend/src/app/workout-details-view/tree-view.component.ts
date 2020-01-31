@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {TreeNode} from "../shared/tree-node";
 
 @Component({
@@ -22,7 +22,7 @@ import {TreeNode} from "../shared/tree-node";
     </div>
   `
 })
-export class TreeViewComponent   {
+export class TreeViewComponent {
   @Input() private node: TreeNode;
   @Output() private changeSelectionEvent = new EventEmitter<TreeNode>();
 
@@ -35,9 +35,7 @@ export class TreeViewComponent   {
       return;
     }
     this.node.isEnabled = !this.node.isEnabled;
-    if (this.node.isEnabled) {
-      this.changeSelection(this.node);
-    }
+    this.changeSelection(this.node);
   }
 
   getLevelClass() {

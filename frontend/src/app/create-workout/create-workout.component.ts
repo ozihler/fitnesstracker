@@ -59,13 +59,13 @@ export class CreateWorkoutComponent implements OnInit {
 
   selectElement(selectedElement: TreeNode) {
     let foundNode = this.findSelectedElement(this.workout, selectedElement.parent);
-    console.log("Found Parent to Add selectedElement: ", foundNode, selectedElement);
 
     if (foundNode) {
-      foundNode.children.push(selectedElement);
       this.selectableNodes = this.selectableNodes.filter(s => s.name !== selectedElement.name);
+      selectedElement.parent = foundNode;
+      foundNode.children.push(selectedElement);
       this.disableAllNodesOf(this.workout);
-      this.enableParentsOf(foundNode);
+      this.enable(selectedElement);
     }
   }
 
@@ -100,11 +100,13 @@ export class CreateWorkoutComponent implements OnInit {
     }
   }
 
-  private enableParentsOf(foundNode: TreeNode) {
-    while (foundNode) {
-      foundNode.isEnabled = true;
-      foundNode = foundNode.parent;
+  private enable(node: TreeNode) {
+    if (!node) {
+      return;
     }
+    console.log("Enable Node: " + node ? node.name : "" + ", parent: " + node.parent ? node.parent.name : "undefined");
+    node.isEnabled = true;
+    this.enable(node.parent);
   }
 
   private findSelectedElement(node: TreeNode, selectedElement: TreeNode): TreeNode {
