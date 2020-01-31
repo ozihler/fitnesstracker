@@ -36,7 +36,7 @@ public class RestExercisesPresenter implements ExercisesPresenter {
 
     private ExerciseViewModel toViewModel(ExerciseDocument e) {
 
-        return new ExerciseViewModel(new MuscleGroupViewModel(e.getName().toString()),
+        return new ExerciseViewModel(new MuscleGroupViewModel(e.getMuscleGroup().getName().toString()),
                 e.getName().toString(),
                 e.getSets().getSets().stream().map(s -> new SetViewModel(s.getGid().toLong(), s.getWeight().value(), s.getWeight().unitOfMeasurement().shortname(), s.getRepetitions().number(), s.getWaitingTime().value(), s.getWaitingTime().unitOfTime().shortname())).collect(Collectors.toList()));
     }
