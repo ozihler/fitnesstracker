@@ -32,6 +32,8 @@ public class RestExercisesPresenter implements ExercisesPresenter {
                 .collect(toSet());
     }
 
+    //Output objects
+
     private ExerciseViewModel toViewModel(ExerciseDocument e) {
 
         return new ExerciseViewModel(new MuscleGroupViewModel(e.getName().toString()),
