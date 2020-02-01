@@ -17,7 +17,7 @@ public class WorkoutsResource {
         this.updateWorkoutController = updateWorkoutController;
     }
 
-    @PostMapping(path = "/workouts")
+    @PostMapping(path = "/api/workouts")
     public ResponseEntity<WorkoutViewModel> createWorkout(@RequestBody WorkoutToCreateRequest request) {
         RestWorkoutPresenter output = new RestWorkoutPresenter();
 
@@ -26,7 +26,7 @@ public class WorkoutsResource {
         return output.getResponse();
     }
 
-    @PutMapping(path = "/workouts")
+    @PutMapping(path = "/api/workouts")
     public ResponseEntity<WorkoutViewModel> updateWorkout(@RequestBody WorkoutViewModel request) {
         RestWorkoutPresenter output = new RestWorkoutPresenter();
 

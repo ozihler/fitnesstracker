@@ -29,7 +29,7 @@ public class MuscleGroupsResource {
         this.createExercises = createExercises;
     }
 
-    @GetMapping(path = "/muscle-groups")
+    @GetMapping(path = "/api/muscle-groups")
     public ResponseEntity<MuscleGroupsViewModel> fetchAll() {
         var presenter = new RestMuscleGroupsPresenter();
 
@@ -38,7 +38,7 @@ public class MuscleGroupsResource {
         return presenter.getResponse();
     }
 
-    @PostMapping(path = "/muscle-groups")
+    @PostMapping(path = "/api/muscle-groups")
     public ResponseEntity<MuscleGroupsViewModel> createMuscleGroup(@RequestBody CreateMuscleGroupsRequest request) {
         var presenter = new RestMuscleGroupsPresenter();
 
@@ -47,7 +47,7 @@ public class MuscleGroupsResource {
         return presenter.getResponse();
     }
 
-    @GetMapping(path = "/muscle-groups/{muscleGroupName}/exercises")
+    @GetMapping(path = "/api/muscle-groups/{muscleGroupName}/exercises")
     public ResponseEntity<ExercisesViewModel> fetchAllExercisesForMuscleGroup(@PathVariable("muscleGroupName") String muscleGroupName) {
         var output = new RestExercisesPresenter();
 
@@ -56,7 +56,7 @@ public class MuscleGroupsResource {
         return output.getResponse();
     }
 
-    @PostMapping(path = "/muscle-groups/{muscleGroupName}/exercises")
+    @PostMapping(path = "/api/muscle-groups/{muscleGroupName}/exercises")
     public ResponseEntity<ExercisesViewModel> createExercisesForMuscleGroup(@PathVariable("muscleGroupName") String muscleGroupName, @RequestBody() ExerciseNames exercisesNames) {
         var output = new RestExercisesPresenter();
 
