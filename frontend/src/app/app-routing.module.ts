@@ -32,13 +32,14 @@ const routes: Routes = [
   *
   *
   * */
-  {path: "workout-selection", component: WorkoutSelectionComponent},
   {path: "workouts-overview", component: WorkoutsOverview},
   {path: "create-workout", component: CreateWorkoutComponent},
   {path: "create-muscle-group", component: CreateElementComponent},
   {path: "muscle-group/:name/create-exercise", component: CreateElementComponent},
   {path: "create-set", component: CreateSetComponent},
-  {path: "", redirectTo: "workout-selection", pathMatch: "full"}
+  {path: "workout-selection", component: WorkoutSelectionComponent},
+  {path: '', redirectTo: 'workout-selection', pathMatch: 'full'},
+  {path: '**', redirectTo: 'workout-selection', pathMatch: 'full'}
 ];
 
 @NgModule({
