@@ -20,4 +20,9 @@ public class GID {
     public long toLong() {
         return gid;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(gid);
+    }
 }

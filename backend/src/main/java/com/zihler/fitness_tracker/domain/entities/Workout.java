@@ -51,4 +51,14 @@ public class Workout {
     public MuscleGroups getMuscleGroups() {
         return muscleGroups;
     }
+
+    @Override
+    public String toString() {
+        return "Workout{" +
+                "gid=" + gid +
+                ", creationDateTime=" + creationDateTime +
+                ", workoutTitle=" + workoutTitle +
+                ", muscleGroups=" + muscleGroups +
+                '}';
+    }
 }
