@@ -64,18 +64,17 @@ public class MuscleGroupsResource {
 
         return output.getResponse();
     }
-
-    @PostMapping(path = "/muscle-groups/{muscleGroupName}/exercises/{exerciseName}/")
-    public ResponseEntity<ExercisesViewModel> createExercisesForMuscleGroup(
-            @PathVariable("muscleGroupName") String muscleGroupName,
-            @PathVariable("exerciseName") String exerciseName,
-            @RequestBody() ExerciseNames setDetails) {
-
-        var output = new RestExercisesPresenter();
-
-        createExercises.forMuscleGroup(muscleGroupName, exercisesNames, output);
-
-        return output.getResponse();
-    }
+//    @PostMapping(path = "/muscle-groups/{muscleGroupName}/exercises/{exerciseName}/")
+//    public ResponseEntity<ExercisesViewModel> createExercisesForMuscleGroup(
+//            @PathVariable("muscleGroupName") String muscleGroupName,
+//            @PathVariable("exerciseName") String exerciseName,
+//            @RequestBody() ExerciseNames setDetails) {
+//
+//        var output = new RestExercisesPresenter();
+//
+//        createExercises.forMuscleGroup(muscleGroupName, exercisesNames, output);
+//
+//        return output.getResponse();
+//    }
 
 }
