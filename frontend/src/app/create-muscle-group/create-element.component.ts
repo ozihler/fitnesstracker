@@ -32,8 +32,8 @@ export class CreateElementComponent implements OnInit {
   @Output() createElementsEvent = new EventEmitter<string>();
   @Input() type: string;
 
-  private showButton: boolean = true;
-  private createElement: FormGroup;
+  showButton: boolean = true;
+  createElement: FormGroup;
 
   constructor(private workoutService: WorkoutService,
               private location: Location,
@@ -70,7 +70,7 @@ export class CreateElementComponent implements OnInit {
     return !!this.currentElementValue();
   }
 
-  private currentElementValue() {
+  currentElementValue() {
     return this.createElement.get('element').value ? this.createElement.get('element').value.trim() : "";
   }
 

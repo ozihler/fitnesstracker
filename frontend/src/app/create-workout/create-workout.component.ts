@@ -25,8 +25,8 @@ import {Type} from "../shared/type";
 })
 export class CreateWorkoutComponent implements OnInit {
   selectableChildrenOfSelectedNode: TreeNode[] = [];
-  private workout: Workout;
-  private currentSelection: TreeNode;
+    workout: Workout;
+    currentSelection: TreeNode;
 
   constructor(private workoutService: WorkoutService) {
   }
@@ -36,7 +36,8 @@ export class CreateWorkoutComponent implements OnInit {
       .subscribe(workout => {
         this.workout = workout;
         this.currentSelection = workout;
-      });
+      }, error => console.log(error));
+
 
     this.fetchMuscleGroupsAndFilterOut();
 

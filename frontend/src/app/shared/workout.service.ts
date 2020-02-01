@@ -44,8 +44,11 @@ export class WorkoutService {
 
   newWorkout(): Observable<Workout> {
     let body = {title: "New Workout"};
+    let url = `${this.baseUrl}/workouts`;
 
-    return this.httpClient.post<WorkoutRaw>(`${this.baseUrl}/workouts`, body)
+    console.log("New Workout request to url ", body, url);
+
+    return this.httpClient.post<WorkoutRaw>(url, body)
       .pipe(map(data => WorkoutFactory.fromRaw(data)));
   }
 

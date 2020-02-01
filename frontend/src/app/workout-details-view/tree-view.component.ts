@@ -23,8 +23,8 @@ import {TreeNode} from "../shared/tree-node";
   `
 })
 export class TreeViewComponent {
-  @Input() private node: TreeNode;
-  @Output() private changeSelectionEvent = new EventEmitter<TreeNode>();
+  @Input() node: TreeNode;
+  @Output() changeSelectionEvent = new EventEmitter<TreeNode>();
 
   constructor() {
   }

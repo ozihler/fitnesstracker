@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class WorkoutsResource {
+
     private CreateWorkoutController createWorkoutController;
     private UpdateWorkoutController updateWorkoutController;
 
@@ -22,7 +23,7 @@ public class WorkoutsResource {
         RestWorkoutPresenter output = new RestWorkoutPresenter();
 
         this.createWorkoutController.createWorkout(request, output);
-
+        System.err.println("Created workout " + output.getResponse().toString());
         return output.getResponse();
     }
 
