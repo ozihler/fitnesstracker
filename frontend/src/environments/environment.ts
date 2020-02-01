@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: `${location.origin}/api`.replace('4200', '5000')
+  baseUrl: `${location.origin}/api`
+  //.replace('4200', '5000')
 };
 
 /*
