@@ -6,9 +6,11 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.Exercise
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.SetViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.ExerciseDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.ExercisesDocument;
+import com.zihler.fitness_tracker.application.outbound_ports.documents.SetDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.ExercisesPresenter;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -38,6 +40,10 @@ public class RestExercisesPresenter implements ExercisesPresenter {
 
         return new ExerciseViewModel(new MuscleGroupViewModel(e.getMuscleGroup().getName().toString()),
                 e.getName().toString(),
-                e.getSets().getSets().stream().map(s -> new SetViewModel(s.getGid().toLong(), s.getWeight().value(), s.getWeight().unitOfMeasurement().shortname(), s.getRepetitions().number(), s.getWaitingTime().value(), s.getWaitingTime().unitOfTime().shortname())).collect(Collectors.toList()));
+                viewModel(e.getSets().getSets()));
+    }
+
+    private List<SetViewModel> viewModel(List<SetDocument> sets) {
+        return sets.stream().map(s -> new SetViewModel(s.getGid().toLong(), s.getWeight().value(), s.getWeight().unitOfMeasurement().shortname(), s.getRepetitions().number(), s.getWaitingTime().value(), s.getWaitingTime().unitOfTime().shortname())).collect(Collectors.toList());
     }
 }

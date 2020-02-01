@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {WorkoutService} from "../shared/workout.service";
 import {Location} from "@angular/common";
+import {Type} from "../shared/type";
 
 @Component({
   selector: 'app-create-element',
@@ -9,15 +10,23 @@ import {Location} from "@angular/common";
     ===================================
     <div>
       <div *ngIf="!showButton">
-        <form [formGroup]="createElement"
-              (ngSubmit)="create()">
-          <div class="uk-margin">
-            <input class="uk-input"
-                   formControlName="element"
-                   type="text">
-          </div>
-          <button type="submit">Ok</button>
-        </form>
+        <div *ngIf="!isSet()">
+          <form [formGroup]="createElement"
+                (ngSubmit)="create()">
+            <div class="uk-margin">
+              <input class="uk-input"
+                     formControlName="element"
+                     type="text">
+            </div>
+            <button type="submit">Ok</button>
+          </form>
+        </div>
+
+        <div *ngIf="isSet()">
+          <input/> Reps
+          <input/> Kg
+          <input/> s
+        </div>
       </div>
       <div *ngIf="showButton">
         <div>{{currentElementValue()}}</div>
@@ -80,5 +89,9 @@ export class CreateElementComponent implements OnInit {
 
   format(type: string) {
     return type ? type.replace("_", " ") : "";
+  }
+
+  isSet() {
+    return Type[this.type] === Type.Set;
   }
 }
