@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {WorkoutService} from "../shared/workout.service";
 import {Location} from "@angular/common";
-import {Type} from "../shared/type";
 
 @Component({
   selector: 'app-create-element',
@@ -10,28 +9,22 @@ import {Type} from "../shared/type";
     ===================================
     <div>
       <div *ngIf="!showButton">
-        <div *ngIf="!isSet()">
-          <form [formGroup]="createElement"
-                (ngSubmit)="create()">
-            <div class="uk-margin">
-              <input class="uk-input"
-                     formControlName="element"
-                     type="text">
-            </div>
-            <button type="submit">Ok</button>
-          </form>
-        </div>
+        <form [formGroup]="createElement"
+              (ngSubmit)="create()">
+          <div class="uk-margin">
+            <input class="uk-input"
+                   formControlName="element"
+                   type="text">
+          </div>
+          <button type="submit">Ok</button>
+        </form>
+      </div>
 
-        <div *ngIf="isSet()">
-          <input/> Reps
-          <input/> Kg
-          <input/> s
-        </div>
-      </div>
-      <div *ngIf="showButton">
-        <div>{{currentElementValue()}}</div>
-        <button (click)="toggleButton()">Create {{format(type)}} </button>
-      </div>
+
+    </div>
+    <div *ngIf="showButton">
+      <div>{{currentElementValue()}}</div>
+      <button (click)="toggleButton()">Create {{typename}} </button>
     </div>
   `,
   styles: []
@@ -39,7 +32,7 @@ import {Type} from "../shared/type";
 export class CreateElementComponent implements OnInit {
 
   @Output() createElementsEvent = new EventEmitter<string>();
-  @Input() type: string;
+  @Input() typename: string;
 
   showButton: boolean = true;
   createElement: FormGroup;
@@ -87,11 +80,4 @@ export class CreateElementComponent implements OnInit {
     this.showButton = false;
   }
 
-  format(type: string) {
-    return type ? type.replace("_", " ") : "";
-  }
-
-  isSet() {
-    return Type[this.type] === Type.Set;
-  }
 }

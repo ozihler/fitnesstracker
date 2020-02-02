@@ -3,8 +3,8 @@ import {RouterModule, Routes} from '@angular/router';
 import {WorkoutSelectionComponent} from "./workout-selection/workout-selection.component";
 import {WorkoutsOverview} from "./workouts-overview/workouts-overview.component";
 import {CreateWorkoutComponent} from "./create-workout/create-workout.component";
-import {CreateElementComponent} from "./create-muscle-group/create-element.component";
-import {CreateSetComponent} from "./create-set/create-set.component";
+import {CreateElementComponent} from "./create-workout/create-element.component";
+import {CreateSetComponent} from "./create-workout/create-set.component";
 
 
 const routes: Routes = [

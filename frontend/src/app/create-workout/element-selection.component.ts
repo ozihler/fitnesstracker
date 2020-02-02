@@ -11,7 +11,12 @@ import {TreeNode} from "../shared/tree-node";
         <button class="uk-button uk-button-default"
                 (click)="select(element)">{{element.name}}</button>
       </div>
-      <app-create-element (createElementsEvent)="createChild($event)" [type]="typeName()"></app-create-element>
+      <app-create-element *ngIf="!isSet()"
+                          (createElementsEvent)="createChild($event)"
+                          [typename]="formattedTypeName()"></app-create-element>
+
+      <app-create-set *ngIf="isSet()" (createSet)="createChild($event)"
+                      [typename]="formattedTypeName()"></app-create-set>
     </div>  `,
   styles: []
 })
@@ -34,7 +39,6 @@ export class ElementSelection implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    //this.init();
   }
 
   createChild(elementsString: string) {
@@ -43,5 +47,13 @@ export class ElementSelection implements OnInit, OnChanges {
 
   typeName() {
     return Type[this.type];
+  }
+
+  isSet() {
+    return this.type === Type.Set;
+  }
+
+  formattedTypeName() {
+    return this.typeName() ? this.typeName().replace("_", " ") : "";
   }
 }

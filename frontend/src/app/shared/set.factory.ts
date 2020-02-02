@@ -1,9 +1,16 @@
 import {SetRaw} from "./set-raw";
 import {Set} from "./set";
-import {ExerciseFactory} from "./exercise.factory";
+import {Exercise} from "./exercise";
+import {GID} from "./gid";
 
 export class SetFactory {
-  static from(setRaw: SetRaw): Set {
-    return new Set(setRaw.repetitions, setRaw.weight, setRaw.waitingTime, ExerciseFactory.from(setRaw.exercise));
+  static from(setRaw: SetRaw, exercise: Exercise): Set {
+    return new Set(GID.from(setRaw.gid),
+      setRaw.weight,
+      setRaw.weightUnit,
+      setRaw.numberOfRepetitions,
+      setRaw.waitingTime,
+      setRaw.waitingTimeUnit,
+      exercise);
   }
 }

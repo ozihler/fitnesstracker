@@ -15,6 +15,10 @@ public class WaitingTime {
         return new WaitingTime(waitingTime);
     }
 
+    public static WaitingTime empty() {
+        return new WaitingTime(-1);
+    }
+
     public int value() {
         return waitingTime;
     }

@@ -2,7 +2,9 @@ package com.zihler.fitness_tracker.adapters.data_access.persistance.in_memory;
 
 import com.zihler.fitness_tracker.application.outbound_ports.StoreExercises;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.*;
+import com.zihler.fitness_tracker.domain.entities.Exercise;
 import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
+import com.zihler.fitness_tracker.domain.entities.Set;
 import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.Exercises;
 import com.zihler.fitness_tracker.domain.values.GID;
@@ -10,10 +12,7 @@ import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 import com.zihler.fitness_tracker.domain.values.Name;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Repository
 public class InMemoryRepository
@@ -21,9 +20,11 @@ public class InMemoryRepository
         FetchWorkout,
         StoreWorkout,
         FetchAllMuscleGroups,
-        StoreMuscleGroups,
         FetchMuscleGroup,
+        StoreMuscleGroups,
+        FetchExercise,
         FetchExercises,
+        StoreSet,
         StoreExercises {
     private Map<Name, MuscleGroup> repo;
     private Map<GID, Workout> workouts = new HashMap<>();
@@ -83,7 +84,7 @@ public class InMemoryRepository
         MuscleGroup muscleGroup = repo.get(muscleGroupName);
 
         if (muscleGroup == null) {
-            muscleGroup = this.as(MuscleGroups.of(Set.of(new MuscleGroup(muscleGroupName)))).getMuscleGroups().iterator().next();
+            muscleGroup = this.as(MuscleGroups.of(java.util.Set.of(new MuscleGroup(muscleGroupName)))).getMuscleGroups().iterator().next();
         }
 
         muscleGroup.add(exercises);
@@ -91,5 +92,28 @@ public class InMemoryRepository
         this.repo.put(muscleGroup.getName(), muscleGroup);
 
         return exercises;
+    }
+
+    @Override
+    public Exercise named(Name exerciseName) {
+
+        return exerciseByName(exerciseName)
+                .orElse(null);
+
+    }
+
+    private Optional<Exercise> exerciseByName(Name exerciseName) {
+        return this.repo.values().stream()
+                .map(MuscleGroup::getExercises)
+                .map(Exercises::getExercises)
+                .flatMap(Collection::stream)
+                .filter(e -> e.getName().equals(exerciseName))
+                .findFirst();
+    }
+
+    @Override
+    public Set withValues(Name exerciseName, Set setToStore) {
+        exerciseByName(exerciseName).get().getSets().add(setToStore);
+        return setToStore;
     }
 }
