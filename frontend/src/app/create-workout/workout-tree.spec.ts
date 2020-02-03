@@ -42,5 +42,9 @@ describe('Workout Tree', () => {
     let setInExercise = workoutTree.findNodeByName(Set.formatEntries(12, 50, 'kg', 45, 's'));
     expect(setInExercise.parent.name).toBe(exercise.name);
     expect(setInExercise.type).toBe(Type.Set);
+
+    let allNames: string[] = workoutTree.allIds();
+    console.log(allNames);
+
   });
 });

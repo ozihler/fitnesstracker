@@ -1,5 +1,7 @@
 import {Type} from "./type";
 import {sizeOf} from "./array-utils";
+import {WorkoutTreeVisitor} from "./workout-tree-visitor";
+
 
 export abstract class TreeNode {
   static LEVEL_CLASSES = {1: 'uk-button-secondary', 2: 'uk-button-primary', 3: 'uk-button-default'};
@@ -49,4 +51,6 @@ export abstract class TreeNode {
   }
 
   abstract get type(): Type;
+
+  public abstract accept(visitor: WorkoutTreeVisitor);
 }

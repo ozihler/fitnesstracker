@@ -2,6 +2,7 @@ import {TreeNode} from "./tree-node";
 import {Type} from "./type";
 import {Exercise} from "./exercise";
 import {GID} from "./gid";
+import {WorkoutTreeVisitor} from "./workout-tree-visitor";
 
 export class Set extends TreeNode {
 
@@ -30,5 +31,10 @@ export class Set extends TreeNode {
 
   static formatEntries(repetitions, weight: number, unitOfMeasurement: string, waitingTime: number, unitOfTime: string) {
     return `${repetitions}[reps] |${weight}[${unitOfMeasurement}] |${waitingTime}[${unitOfTime}]`;
+  }
+
+
+  accept(visitor: WorkoutTreeVisitor) {
+    visitor.visitSet(this);
   }
 }

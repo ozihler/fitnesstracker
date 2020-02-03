@@ -1,5 +1,6 @@
 import {Workout} from "../shared/workout";
 import {TreeNode} from "../shared/tree-node";
+import {IdCollector} from "../shared/id-collector";
 
 export class WorkoutTree {
   constructor(private _root: Workout) {
@@ -86,5 +87,11 @@ export class WorkoutTree {
 
   findNodeByName(nodeName: string) {
     return WorkoutTree.findByName(this.root, nodeName);
+  }
+
+  allIds() {
+    let idCollector = new IdCollector();
+    this.root.accept(idCollector);
+    return idCollector.ids;
   }
 }
