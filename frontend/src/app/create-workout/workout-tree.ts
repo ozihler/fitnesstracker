@@ -10,18 +10,18 @@ export class WorkoutTree {
     return this._root;
   }
 
+  static enable(node: TreeNode): void {
+    if (!node) {
+      return;
+    }
+    node.isEnabled = true;
+    this.enable(node.parent);
+  }
+
   // todo extract tree to move convenience methods there
   private static linkNodes(child: TreeNode, parent: TreeNode) {
     child.parent = parent;
     parent.children.push(child);
-  }
-
-  addNode(selectedElement: TreeNode) {
-    let foundNode = this.find(this._root, selectedElement.parent);
-
-    if (foundNode) {
-      WorkoutTree.linkNodes(selectedElement, foundNode);
-    }
   }
 
   disableAllNodesOf(parent: TreeNode) {
@@ -31,36 +31,60 @@ export class WorkoutTree {
     }
   }
 
-  enable(node: TreeNode) {
-    if (!node) {
-      return;
-    }
-    node.isEnabled = true;
-    this.enable(node.parent);
-  }
-
-  private find(node: TreeNode, elementToFind: TreeNode): TreeNode {
-    if (!elementToFind) {
-      return node;
-    }
-
-    if (node.name === elementToFind.name) {
-      return node;
-    } else {
-      return this.findNodeInChildren(elementToFind, node.children);
-    }
-  }
-
-  private findNodeInChildren(elementToFind: TreeNode, children: TreeNode[]) {
-    if (!children) {
+  static findNodeInChildren(elementToFind: TreeNode, nodesToSearch: TreeNode[]) {
+    if (!nodesToSearch) {
       return undefined;
     }
-    for (const child of children) {
-      let foundNode = this.find(child, elementToFind);
+
+    for (const child of nodesToSearch) {
+      let foundNode = WorkoutTree.find(elementToFind, child);
 
       if (foundNode) {
         return foundNode;
       }
     }
+  }
+
+  static find(elementToFind: TreeNode, nodeToSearch: TreeNode): TreeNode {
+    if (!elementToFind || nodeToSearch.name === elementToFind.name) {
+      return nodeToSearch;
+    }
+
+    return WorkoutTree.findNodeInChildren(elementToFind, nodeToSearch.children);
+  }
+
+  private static findByName(nodeToSearch: TreeNode, name: string) {
+    if (!nodeToSearch) {
+      return undefined;
+    }
+
+    if (nodeToSearch.name === name) {
+      return nodeToSearch;
+    }
+
+    if (!nodeToSearch.children) {
+      return undefined;
+    }
+
+    for (const child of nodeToSearch.children) {
+      let node = WorkoutTree.findByName(child, name);
+      if (node) {
+        return node;
+      }
+    }
+
+    return undefined;
+  }
+
+  addNode(nodeToAdd: TreeNode) {
+    let foundNode = WorkoutTree.find(nodeToAdd.parent, this.root);
+
+    if (foundNode) {
+      WorkoutTree.linkNodes(nodeToAdd, foundNode);
+    }
+  }
+
+  findNodeByName(nodeName: string) {
+    return WorkoutTree.findByName(this.root, nodeName);
   }
 }
