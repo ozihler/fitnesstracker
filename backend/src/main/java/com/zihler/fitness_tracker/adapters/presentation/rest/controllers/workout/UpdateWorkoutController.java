@@ -15,8 +15,8 @@ public class UpdateWorkoutController {
     private UpdateWorkout updateWorkout;
 
     @Autowired
-    public UpdateWorkoutController(FetchWorkout fetchWorkout, StoreWorkout storeWorkouts, FetchMuscleGroup fetchMuscleGroup) {
-        this.updateWorkout = new UpdateWorkoutUseCase(fetchWorkout,storeWorkouts, fetchMuscleGroup);
+    public UpdateWorkoutController(FetchWorkout fetchWorkout, StoreWorkout storeWorkout, FetchMuscleGroup fetchMuscleGroup) {
+        this.updateWorkout = new UpdateWorkoutUseCase(fetchWorkout, storeWorkout, fetchMuscleGroup);
     }
 
     public void updateWorkout(WorkoutViewModel request, WorkoutPresenter output) {

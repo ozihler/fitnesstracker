@@ -1,6 +1,6 @@
 package com.zihler.fitness_tracker.domain.values;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class GID {
     private long gid;
@@ -10,7 +10,7 @@ public class GID {
     }
 
     public static GID random() {
-        return new GID(new Random().nextLong());
+        return new GID(ThreadLocalRandom.current().nextLong(0L, Long.MAX_VALUE));
     }
 
     public static GID of(long gid) {

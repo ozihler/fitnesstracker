@@ -59,22 +59,22 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
 
+  // todo extract tree to move convenience methods there
+  private static linkNodes(child: TreeNode, parent: TreeNode) {
+    child.parent = parent;
+    parent.children.push(child);
+  }
+
   addNode(selectedElement: TreeNode) {
     let foundNode = this.findSelectedElement(this.workout, selectedElement.parent);
 
     if (foundNode) {
-      this.linkNodes(selectedElement, foundNode);
+      CreateWorkoutComponent.linkNodes(selectedElement, foundNode);
 
       this.selectableChildrenOfSelectedNode = this.selectableChildrenOfSelectedNode.filter(s => s.name !== selectedElement.name);
       this.disableAllNodesOf(this.workout);
       this.enable(selectedElement);
     }
-  }
-
-  // todo extract tree to move convenience methods there
-  private linkNodes(child: TreeNode, parent: TreeNode) {
-    child.parent = parent;
-    parent.children.push(child);
   }
 
   private fetchExercisesForAndFilterOut(name: string, children: string[] = []) {
@@ -91,7 +91,7 @@ export class CreateWorkoutComponent implements OnInit {
         .subscribe(createdExercises => this.updateSelectedNodes(createdExercises));
     } else if (this.currentSelection.type === Type.Exercise) {
       this.workoutService.newSetInExercise(this.currentSelection, elements)
-        .subscribe(createdSet => this.updateSelectedNodes(createdSet));
+        .subscribe(createdSet => this.updateSelectedNodes([createdSet]));
     }
 
   }

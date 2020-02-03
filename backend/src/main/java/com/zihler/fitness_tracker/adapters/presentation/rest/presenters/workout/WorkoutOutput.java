@@ -5,6 +5,7 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutV
 import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGroupsDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutDocument;
 
+import java.time.Clock;
 import java.util.Set;
 
 import static java.util.stream.Collectors.toSet;
@@ -19,7 +20,7 @@ public class WorkoutOutput {
     public WorkoutViewModel toViewModel() {
         return new WorkoutViewModel(
                 workoutDocument.getGid().toLong(),
-                workoutDocument.getCreationDateTime().toInstant().toEpochMilli(),
+                workoutDocument.getCreationDateTime().withZoneSameInstant(Clock.systemDefaultZone().getZone()).toInstant().toEpochMilli(),
                 workoutDocument.getWorkoutTitle().toString(),
                 toViewModel(workoutDocument.getMuscleGroups())
         );

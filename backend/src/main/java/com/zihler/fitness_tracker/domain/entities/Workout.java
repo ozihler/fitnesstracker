@@ -21,12 +21,8 @@ public class Workout {
         return new Workout(workoutTitle);
     }
 
-    public static Workout updateWorkout(GID gid, ZonedDateTime creationDateTime, WorkoutTitle workoutTitle, MuscleGroups muscleGroups) {
+    public static Workout update(GID gid, ZonedDateTime creationDateTime, WorkoutTitle workoutTitle, MuscleGroups muscleGroups) {
         return new Workout(gid, creationDateTime, workoutTitle, muscleGroups);
-    }
-
-    public void add(MuscleGroup muscleGroup) {
-        this.muscleGroups.add(muscleGroup);
     }
 
     private Workout(GID gid, ZonedDateTime creationDateTime, WorkoutTitle workoutTitle, MuscleGroups muscleGroups) {

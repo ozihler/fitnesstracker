@@ -1,5 +1,6 @@
 package com.zihler.fitness_tracker.application.use_cases.update_workout;
 
+import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGroupsDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchMuscleGroup;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchWorkout;
@@ -9,6 +10,8 @@ import com.zihler.fitness_tracker.application.use_cases.update_workout.inbound_p
 import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 
+import java.time.ZonedDateTime;
+
 import static java.util.stream.Collectors.toSet;
 
 public class UpdateWorkoutUseCase implements UpdateWorkout {
@@ -16,9 +19,9 @@ public class UpdateWorkoutUseCase implements UpdateWorkout {
     private FetchWorkout fetchWorkout;
     private StoreWorkout storeWorkouts;
 
-    public UpdateWorkoutUseCase(FetchWorkout fetchWorkout, StoreWorkout storeWorkouts, FetchMuscleGroup fetchMuscleGroup) {
+    public UpdateWorkoutUseCase(FetchWorkout fetchWorkout, StoreWorkout storeWorkout, FetchMuscleGroup fetchMuscleGroup) {
         this.fetchWorkout = fetchWorkout;
-        this.storeWorkouts = storeWorkouts;
+        this.storeWorkouts = storeWorkout;
         this.fetchMuscleGroup = fetchMuscleGroup;
     }
 
@@ -26,21 +29,32 @@ public class UpdateWorkoutUseCase implements UpdateWorkout {
     public void callWith(WorkoutDocument update, WorkoutPresenter output) {
         Workout old = fetchWorkout.by(update.getGid());
 
-        if (!old.getCreationDateTime().equals(update.getCreationDateTime())) {
+        if (creationTimesDiffer(old, update)) {
             throw new DifferingCreationTimeException(old, update);
         }
 
-        MuscleGroups updatedMuscleGroups = new MuscleGroups(update.getMuscleGroups()
-                .getMuscleGroups()
-                .stream()
-                .map(m -> fetchMuscleGroup.byName(m.getName()))
-                .collect(toSet()));
+        MuscleGroups workoutMuscleGroups = fetchMuscleGroups(update.getMuscleGroups());
 
-        Workout updatedWorkout = Workout.updateWorkout(old.getGid(), old.getCreationDateTime(), update.getWorkoutTitle(), updatedMuscleGroups);
+        Workout updatedWorkout = Workout.update(old.getGid(), old.getCreationDateTime(), update.getWorkoutTitle(), workoutMuscleGroups);
 
         Workout storedUpdatedWorkout = storeWorkouts.as(updatedWorkout);
 
         output.present(WorkoutDocument.of(storedUpdatedWorkout));
+    }
+
+    private MuscleGroups fetchMuscleGroups(MuscleGroupsDocument muscleGroups) {
+        return new MuscleGroups(muscleGroups.getMuscleGroups()
+                .stream()
+                .map(m -> fetchMuscleGroup.byName(m.getName()))
+                .collect(toSet()));
+    }
+
+    private boolean creationTimesDiffer(Workout old, WorkoutDocument update) {
+        return asMillis(old, old.getCreationDateTime()) != asMillis(old, update.getCreationDateTime());
+    }
+
+    private long asMillis(Workout old, ZonedDateTime creationDateTime) {
+        return old.getCreationDateTime().toInstant().toEpochMilli();
     }
 
 

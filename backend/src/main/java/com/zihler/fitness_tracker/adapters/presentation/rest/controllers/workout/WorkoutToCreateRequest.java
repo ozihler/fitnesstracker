@@ -6,6 +6,13 @@ public class WorkoutToCreateRequest {
     @JsonProperty("title")
     private String title;
 
+    public WorkoutToCreateRequest() {
+    }
+
+    WorkoutToCreateRequest(String title) {
+        this.title = title;
+    }
+
     public String getTitle() {
         return title;
     }

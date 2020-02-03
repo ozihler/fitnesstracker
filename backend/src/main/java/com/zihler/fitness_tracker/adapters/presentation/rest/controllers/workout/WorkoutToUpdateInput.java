@@ -9,6 +9,7 @@ import com.zihler.fitness_tracker.domain.values.GID;
 import com.zihler.fitness_tracker.domain.values.Name;
 import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
 
+import java.time.Clock;
 import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.Set;
@@ -25,7 +26,7 @@ public class WorkoutToUpdateInput {
     public WorkoutDocument workout() {
         return new WorkoutDocument(
                 GID.of(request.getGid()),
-                ZonedDateTime.from(Instant.ofEpochMilli(request.getCreationDate())),
+                ZonedDateTime.from(Instant.ofEpochMilli(request.getCreationDate()).atZone(Clock.systemDefaultZone().getZone())),
                 WorkoutTitle.from(request.getTitle()),
                 toDocument(request.getMuscleGroups())
         );
