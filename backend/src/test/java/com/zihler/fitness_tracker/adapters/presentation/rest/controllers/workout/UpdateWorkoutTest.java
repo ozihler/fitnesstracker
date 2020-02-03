@@ -3,11 +3,9 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workou
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.musclegroups.MuscleGroupViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout.RestWorkoutPresenter;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutViewModel;
-import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchMuscleGroup;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchWorkout;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorkout;
-import com.zihler.fitness_tracker.application.outbound_ports.presenters.WorkoutPresenter;
 import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
 import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
@@ -63,18 +61,5 @@ class UpdateWorkoutTest {
         Set<String> workoutNames = updatedWorkout.getMuscleGroups().stream().map(MuscleGroupViewModel::getName).collect(toSet());
         assertTrue(workoutNames.contains("Chest"));
         assertTrue(workoutNames.contains("Triceps"));
-    }
-
-    private class TestWorkoutPresenter implements WorkoutPresenter {
-        private WorkoutDocument workoutDocument;
-
-        public WorkoutDocument getWorkoutDocument() {
-            return workoutDocument;
-        }
-
-        @Override
-        public void present(WorkoutDocument workoutDocument) {
-            this.workoutDocument = workoutDocument;
-        }
     }
 }

@@ -1,13 +1,14 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workout;
 
-import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutDocument;
+import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout.RestWorkoutPresenter;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorkout;
-import com.zihler.fitness_tracker.application.outbound_ports.presenters.WorkoutPresenter;
 import org.junit.jupiter.api.Test;
 
 import java.time.ZonedDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CreateWorkoutTest {
@@ -18,7 +19,7 @@ class CreateWorkoutTest {
         StoreWorkout storeWorkout = workout -> workout;
         var controller = new CreateWorkoutController(storeWorkout);
         WorkoutToCreateRequest request = new WorkoutToCreateRequest("Title");
-        TestWorkoutPresenter output = new TestWorkoutPresenter();
+        RestWorkoutPresenter output = new RestWorkoutPresenter();
         ZonedDateTime before = ZonedDateTime.now();
 
         // when
@@ -27,25 +28,14 @@ class CreateWorkoutTest {
         // then
         ZonedDateTime after = ZonedDateTime.now();
 
-        WorkoutDocument result = output.getWorkoutDocument();
+        WorkoutViewModel result = output.getResponse().getBody();
 
-        assertThat(result.getWorkoutTitle().toString()).isEqualTo(request.getTitle());
-        assertThat(result.getMuscleGroups().getMuscleGroups().size()).isEqualTo(0);
-        assertTrue(result.getCreationDateTime().isAfter(before));
-        assertTrue(result.getCreationDateTime().isBefore(after));
-        assertThat(result.getGid().toLong()).isPositive();
+        assertNotNull(result);
+        assertThat(result.getTitle()).isEqualTo(request.getTitle());
+        assertThat(result.getMuscleGroups().size()).isEqualTo(0);
+        assertTrue(result.getCreationDate() > before.toInstant().toEpochMilli());
+        assertTrue(result.getCreationDate() < after.toInstant().toEpochMilli());
+        assertThat(result.getGid()).isPositive();
     }
 
-    private class TestWorkoutPresenter implements WorkoutPresenter {
-        private WorkoutDocument workoutDocument;
-
-        public WorkoutDocument getWorkoutDocument() {
-            return workoutDocument;
-        }
-
-        @Override
-        public void present(WorkoutDocument workoutDocument) {
-            this.workoutDocument = workoutDocument;
-        }
-    }
 }
