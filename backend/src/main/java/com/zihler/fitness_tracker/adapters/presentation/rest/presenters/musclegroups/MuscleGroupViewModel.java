@@ -13,4 +13,9 @@ public class MuscleGroupViewModel {
     public String getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return String.format("MuscleGroupViewModel{name='%s'}", name);
+    }
 }

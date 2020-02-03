@@ -40,4 +40,9 @@ public class WorkoutViewModel {
     public Set<MuscleGroupViewModel> getMuscleGroups() {
         return muscleGroups;
     }
+
+    @Override
+    public String toString() {
+        return String.format("WorkoutViewModel{gid=%d, creationDate=%d, title='%s', muscleGroups=%s}", gid, creationDate, title, muscleGroups);
+    }
 }
