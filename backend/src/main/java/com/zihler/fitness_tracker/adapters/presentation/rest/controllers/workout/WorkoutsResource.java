@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class WorkoutsResource {
     private static final Logger logger = LogManager.getLogger();
 
-
     private CreateWorkoutController createWorkoutController;
     private UpdateWorkoutController updateWorkoutController;
 
@@ -31,7 +30,8 @@ public class WorkoutsResource {
         RestWorkoutPresenter output = new RestWorkoutPresenter();
 
         this.createWorkoutController.createWorkout(request, output);
-        logger.info("Created workout {}", output.getResponse().toString());
+        logger.info("Created workout {}", output.getResponse().getBody());
+
         return output.getResponse();
     }
 
@@ -40,6 +40,7 @@ public class WorkoutsResource {
         RestWorkoutPresenter output = new RestWorkoutPresenter();
 
         this.updateWorkoutController.updateWorkout(request, output);
+        logger.info("Updated workout {}", output.getResponse().getBody());
 
         return output.getResponse();
     }

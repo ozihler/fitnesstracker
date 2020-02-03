@@ -3,6 +3,8 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.muscle
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups.requests.CreateMuscleGroupsRequest;
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.musclegroups.MuscleGroupsViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.musclegroups.RestMuscleGroupsPresenter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MuscleGroupsResource {
+    private static final Logger logger = LogManager.getLogger();
 
     private CreateMuscleGroupsController createMuscleGroupsController;
     private ViewMuscleGroupsController viewMuscleGroupsController;
@@ -25,20 +28,22 @@ public class MuscleGroupsResource {
 
     @GetMapping(path = "/api/muscle-groups")
     public ResponseEntity<MuscleGroupsViewModel> fetchAll() {
-        var presenter = new RestMuscleGroupsPresenter();
+        var output = new RestMuscleGroupsPresenter();
 
-        this.viewMuscleGroupsController.viewAllMuscleGroups(presenter);
+        this.viewMuscleGroupsController.viewAllMuscleGroups(output);
+        logger.info("View all muscle groups {}", output.getResponse().getBody());
 
-        return presenter.getResponse();
+        return output.getResponse();
     }
 
     @PostMapping(path = "/api/muscle-groups")
-    public ResponseEntity<MuscleGroupsViewModel> createMuscleGroup(@RequestBody CreateMuscleGroupsRequest request) {
-        var presenter = new RestMuscleGroupsPresenter();
+    public ResponseEntity<MuscleGroupsViewModel> createMuscleGroups(@RequestBody CreateMuscleGroupsRequest request) {
+        var output = new RestMuscleGroupsPresenter();
 
-        createMuscleGroupsController.createMuscleGroups(request, presenter);
+        createMuscleGroupsController.createMuscleGroups(request, output);
+        logger.info("create muscle groups {}", output.getResponse().getBody());
 
-        return presenter.getResponse();
+        return output.getResponse();
     }
 
 

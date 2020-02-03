@@ -18,4 +18,9 @@ public class MuscleGroupsViewModel {
     public Set<MuscleGroupViewModel> getMuscleGroups() {
         return muscleGroups;
     }
+
+    @Override
+    public String toString() {
+        return String.format("MuscleGroupsViewModel{%s}", muscleGroups);
+    }
 }

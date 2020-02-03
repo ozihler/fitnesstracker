@@ -51,4 +51,16 @@ public class SetViewModel {
     public String getWaitingTimeUnit() {
         return waitingTimeUnit;
     }
+
+    @Override
+    public String toString() {
+        return "SetViewModel{" +
+                "gid=" + gid +
+                ", weight=" + weight +
+                ", weightUnit='" + weightUnit + '\'' +
+                ", numberOfRepetitions=" + numberOfRepetitions +
+                ", waitingTime=" + waitingTime +
+                ", waitingTimeUnit='" + waitingTimeUnit + '\'' +
+                '}';
+    }
 }

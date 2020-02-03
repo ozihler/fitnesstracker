@@ -6,6 +6,8 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.Exercise
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.ExercisesViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.SetDetails;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.SetViewModel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,13 +15,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class ExercisesResource {
 
+    private static final Logger logger = LogManager.getLogger();
+
     private ViewAllExercisesController viewAllExercisesController;
     private CreateExercisesController createExercises;
     private AddSetToExercisesController addSetToExerciseController;
 
     @Autowired
     public ExercisesResource(ViewAllExercisesController viewAllExercisesController, CreateExercisesController createExercises, AddSetToExercisesController addSetToExerciseController) {
-
         this.viewAllExercisesController = viewAllExercisesController;
         this.createExercises = createExercises;
         this.addSetToExerciseController = addSetToExerciseController;
@@ -30,6 +33,7 @@ public class ExercisesResource {
         var output = new RestExercisesPresenter();
 
         viewAllExercisesController.fetchAllExercisesForMuscleGroup(muscleGroupName, output);
+        logger.info("fetch all exercises for muscle group {}, {}", muscleGroupName, output.getResponse().getBody());
 
         return output.getResponse();
     }
@@ -39,18 +43,20 @@ public class ExercisesResource {
         var output = new RestExercisesPresenter();
 
         createExercises.forMuscleGroup(muscleGroupName, exercisesNames, output);
+        logger.info("create exercises for muscle group {}, {}, {}", muscleGroupName, exercisesNames, output.getResponse().getBody());
 
         return output.getResponse();
     }
 
     @PostMapping(path = "api/exercises/{exerciseName}/sets")
-    public ResponseEntity<SetViewModel> createExercisesForMuscleGroup(
+    public ResponseEntity<SetViewModel> addSetToExercise(
             @PathVariable("exerciseName") String exerciseName,
             @RequestBody() SetDetails setDetails) {
 
         var output = new RestSetPresenter();
 
         addSetToExerciseController.addSetToExercises(exerciseName, setDetails, output);
+        logger.info("add set {} to exercise {}, response {}", setDetails, exerciseName, output.getResponse().getBody());
 
         return output.getResponse();
     }

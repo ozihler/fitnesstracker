@@ -18,4 +18,9 @@ public class ExercisesViewModel {
     public Set<ExerciseViewModel> getExercises() {
         return exercises;
     }
+
+    @Override
+    public String toString() {
+        return String.format("ExercisesViewModel{%s}", exercises);
+    }
 }

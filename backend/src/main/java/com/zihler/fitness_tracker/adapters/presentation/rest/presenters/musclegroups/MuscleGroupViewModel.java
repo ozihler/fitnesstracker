@@ -16,6 +16,6 @@ public class MuscleGroupViewModel {
 
     @Override
     public String toString() {
-        return String.format("MuscleGroupViewModel{name='%s'}", name);
+        return name;
     }
 }
