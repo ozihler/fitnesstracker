@@ -11,7 +11,6 @@ public class SetDocument {
     private Repetitions repetitions;
     private WaitingTime waitingTime;
 
-
     private SetDocument(GID gid, Weight weight, Repetitions repetitions, WaitingTime waitingTime) {
         this.gid = gid;
         this.weight = weight;
@@ -24,7 +23,7 @@ public class SetDocument {
     }
 
     public static SetDocument of(Weight weight, Repetitions repetitions, WaitingTime waitingTime) {
-        return new SetDocument(null, weight, repetitions, waitingTime);
+        return of(null, weight, repetitions, waitingTime);
     }
 
     public static SetDocument of(Set set) {

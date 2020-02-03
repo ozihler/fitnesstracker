@@ -21,7 +21,6 @@ public class AddSetToExercisesController {
         var input = new AddSetToExerciseInput(exerciseName, setDetails);
 
         addSetToExercise.invokeWith(input.exerciseName(), input.set(), output);
-
     }
 
 }
