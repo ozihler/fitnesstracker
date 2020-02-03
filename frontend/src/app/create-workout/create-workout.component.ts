@@ -3,6 +3,7 @@ import {WorkoutService} from "../shared/workout.service";
 import {Workout} from '../shared/workout';
 import {TreeNode} from "../shared/tree-node";
 import {Type} from "../shared/type";
+import {Set} from "../shared/set"
 
 @Component({
   selector: 'app-create-workout',
@@ -25,8 +26,8 @@ import {Type} from "../shared/type";
 })
 export class CreateWorkoutComponent implements OnInit {
   selectableChildrenOfSelectedNode: TreeNode[] = [];
-    workout: Workout;
-    currentSelection: TreeNode;
+  workout: Workout;
+  currentSelection: TreeNode;
 
   constructor(private workoutService: WorkoutService) {
   }
@@ -91,7 +92,7 @@ export class CreateWorkoutComponent implements OnInit {
         .subscribe(createdExercises => this.updateSelectedNodes(createdExercises));
     } else if (this.currentSelection.type === Type.Exercise) {
       this.workoutService.newSetInExercise(this.currentSelection, elements)
-        .subscribe(createdSet => this.updateSelectedNodes([createdSet]));
+        .subscribe(createdSet => this.addSetToExercise([createdSet]));
     }
 
   }
@@ -140,5 +141,10 @@ export class CreateWorkoutComponent implements OnInit {
 
       return undefined;
     }
+  }
+
+  private addSetToExercise(sets: Set[]) {
+    sets.forEach(set => this.currentSelection.children.push(set));
+
   }
 }

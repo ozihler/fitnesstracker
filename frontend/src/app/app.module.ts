@@ -10,7 +10,7 @@ import {CreateElementComponent} from './create-workout/create-element.component'
 import {ElementSelection} from './create-workout/element-selection.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {CreateSetComponent} from './create-workout/create-set.component';
-import {TreeViewComponent} from './workout-details-view/tree-view.component';
+import {TreeViewComponent} from './create-workout/tree-view.component';
 import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({

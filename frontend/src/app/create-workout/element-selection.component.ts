@@ -8,6 +8,7 @@ import {TreeNode} from "../shared/tree-node";
     <div>
       <div class="uk-grid-small uk-child-width-1-2 uk-flex-center" uk-grid
            *ngFor="let element of selectableElements">
+
         <button class="uk-button uk-button-default"
                 (click)="select(element)">{{element.name}}</button>
       </div>
