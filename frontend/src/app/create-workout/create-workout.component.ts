@@ -4,6 +4,7 @@ import {Workout} from '../shared/workout';
 import {TreeNode} from "../shared/tree-node";
 import {Type} from "../shared/type";
 import {Set} from "../shared/set"
+import {WorkoutTree} from "./workout-tree";
 
 @Component({
   selector: 'app-create-workout',
@@ -27,6 +28,7 @@ import {Set} from "../shared/set"
 export class CreateWorkoutComponent implements OnInit {
   selectableChildrenOfSelectedNode: TreeNode[] = [];
   workout: Workout;
+  workoutTree: WorkoutTree;
   currentSelection: TreeNode;
 
   constructor(private workoutService: WorkoutService) {
@@ -36,6 +38,7 @@ export class CreateWorkoutComponent implements OnInit {
     this.workoutService.newWorkout()
       .subscribe(workout => {
         this.workout = workout;
+        this.workoutTree = new WorkoutTree(workout);
         this.currentSelection = workout;
       }, error => console.log(error));
 
