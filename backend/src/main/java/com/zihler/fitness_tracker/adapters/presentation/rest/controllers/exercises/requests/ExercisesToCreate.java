@@ -1,4 +1,4 @@
-package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercises.inputs;
+package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercises.requests;
 
 import com.zihler.fitness_tracker.domain.values.Name;
 import com.zihler.fitness_tracker.domain.values.Names;

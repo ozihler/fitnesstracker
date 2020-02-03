@@ -1,4 +1,4 @@
-package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups;
+package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups.requests;
 
 public class EmptyMuscleGroupsRequest extends RuntimeException {
     public EmptyMuscleGroupsRequest() {

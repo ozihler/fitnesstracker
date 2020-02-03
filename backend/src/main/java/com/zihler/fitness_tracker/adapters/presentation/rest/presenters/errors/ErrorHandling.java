@@ -1,6 +1,6 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.presenters.errors;
 
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups.EmptyMuscleGroupsRequest;
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups.requests.EmptyMuscleGroupsRequest;
 import com.zihler.fitness_tracker.domain.exceptions.InvalidTitleException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

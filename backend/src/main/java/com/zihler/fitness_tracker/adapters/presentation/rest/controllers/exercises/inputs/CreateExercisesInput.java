@@ -1,5 +1,6 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercises.inputs;
 
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercises.requests.ExercisesToCreate;
 import com.zihler.fitness_tracker.domain.values.Name;
 import com.zihler.fitness_tracker.domain.values.Names;
 

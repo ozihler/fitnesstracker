@@ -1,5 +1,7 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups;
 
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups.inputs.MuscleGroupsInput;
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups.requests.CreateMuscleGroupsRequest;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGroupsDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreMuscleGroups;
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.MuscleGroupsPresenter;

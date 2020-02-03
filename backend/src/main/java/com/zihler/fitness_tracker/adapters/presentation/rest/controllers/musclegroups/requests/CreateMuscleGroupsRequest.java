@@ -1,4 +1,4 @@
-package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups;
+package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups.requests;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

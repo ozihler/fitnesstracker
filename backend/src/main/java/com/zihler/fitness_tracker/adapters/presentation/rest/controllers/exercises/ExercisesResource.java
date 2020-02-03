@@ -1,6 +1,5 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercises;
 
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets.AddSetToExercisesController;
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.exercises.RestExercisesPresenter;
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.set.RestSetPresenter;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.ExerciseNames;

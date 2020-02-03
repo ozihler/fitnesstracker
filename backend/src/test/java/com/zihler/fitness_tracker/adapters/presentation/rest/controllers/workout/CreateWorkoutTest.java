@@ -1,5 +1,6 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workout;
 
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workout.requests.WorkoutToCreateRequest;
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout.RestWorkoutPresenter;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorkout;

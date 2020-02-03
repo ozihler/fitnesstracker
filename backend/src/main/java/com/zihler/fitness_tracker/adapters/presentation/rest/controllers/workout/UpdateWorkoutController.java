@@ -1,5 +1,6 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workout;
 
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workout.inputs.WorkoutToUpdateInput;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchMuscleGroup;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchWorkout;

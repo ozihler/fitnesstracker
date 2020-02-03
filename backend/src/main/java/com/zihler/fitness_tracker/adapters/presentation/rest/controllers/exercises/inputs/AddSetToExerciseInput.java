@@ -1,6 +1,6 @@
-package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets.inputs;
+package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercises.inputs;
 
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets.exceptions.IllegalSetDetailsException;
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercises.exceptions.IllegalSetDetailsException;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.SetDetails;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.SetDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WaitingTime;

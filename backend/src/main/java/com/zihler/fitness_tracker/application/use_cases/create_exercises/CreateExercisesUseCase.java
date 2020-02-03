@@ -1,6 +1,6 @@
 package com.zihler.fitness_tracker.application.use_cases.create_exercises;
 
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercises.inputs.ExercisesToCreate;
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercises.requests.ExercisesToCreate;
 import com.zihler.fitness_tracker.application.outbound_ports.StoreExercises;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.ExerciseDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.ExercisesDocument;

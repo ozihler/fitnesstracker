@@ -1,5 +1,6 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups;
 
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups.requests.CreateMuscleGroupsRequest;
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.musclegroups.MuscleGroupsViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.musclegroups.RestMuscleGroupsPresenter;
 import org.springframework.beans.factory.annotation.Autowired;

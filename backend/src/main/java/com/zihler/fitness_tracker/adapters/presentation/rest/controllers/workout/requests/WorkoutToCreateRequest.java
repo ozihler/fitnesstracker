@@ -1,4 +1,4 @@
-package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workout;
+package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workout.requests;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,7 +9,7 @@ public class WorkoutToCreateRequest {
     public WorkoutToCreateRequest() {
     }
 
-    WorkoutToCreateRequest(String title) {
+    public WorkoutToCreateRequest(String title) {
         this.title = title;
     }
 

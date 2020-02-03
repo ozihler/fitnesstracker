@@ -16,6 +16,7 @@ public class Names {
         String[] names = namesString.split("[;,.]+");
 
         return new Names(Arrays.stream(names)
+                .map(String::trim)
                 .map(Name::of)
                 .collect(toSet()));
     }

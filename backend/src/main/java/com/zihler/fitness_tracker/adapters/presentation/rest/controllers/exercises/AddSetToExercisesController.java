@@ -1,6 +1,6 @@
-package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets;
+package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercises;
 
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets.inputs.AddSetToExerciseInput;
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercises.inputs.AddSetToExerciseInput;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.SetDetails;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreSet;
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.SetPresenter;
