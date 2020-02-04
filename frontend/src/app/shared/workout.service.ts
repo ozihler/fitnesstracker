@@ -56,6 +56,13 @@ export class WorkoutService {
   }
 
 
+  fetchWorkoutWithId(workoutGid: string): Observable<Workout> {
+    let url = `${this.baseUrl}/workouts?workoutGid=${workoutGid}`;
+
+    return this.httpClient.get<WorkoutRaw>(url)
+      .pipe(map(data => WorkoutFactory.fromRaw(data)));
+  }
+
   update(workout: Workout): Observable<Workout> {
     return this.httpClient.put<WorkoutRaw>(`${this.baseUrl}/workouts`, {workout: workout})
       .pipe(map(data => WorkoutFactory.fromRaw(data)));
@@ -74,7 +81,7 @@ export class WorkoutService {
   }
 
   fetchAllWorkouts() {
-    return this.httpClient.get<WorkoutsSimpleRaw>(`${this.baseUrl}/workouts`)
+    return this.httpClient.get<WorkoutsSimpleRaw>(`${this.baseUrl}/workouts/overview`)
       .pipe(map(workoutsSimpleRaw => WorkoutSimpleFactory.fromMultiple(workoutsSimpleRaw)));
   }
 }

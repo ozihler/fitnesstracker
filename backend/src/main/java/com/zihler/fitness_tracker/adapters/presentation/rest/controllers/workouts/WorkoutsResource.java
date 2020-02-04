@@ -18,15 +18,18 @@ public class WorkoutsResource {
     private CreateWorkoutController createWorkoutController;
     private UpdateWorkoutController updateWorkoutController;
     private ViewAllWorkoutsController viewAllWorkoutsController;
+    private RetrieveWorkoutByIdController retrieveWorkoutByIdController;
 
     @Autowired
     public WorkoutsResource(
             CreateWorkoutController createWorkoutController,
             UpdateWorkoutController updateWorkoutController,
-            ViewAllWorkoutsController viewAllWorkoutsController) {
+            ViewAllWorkoutsController viewAllWorkoutsController,
+            RetrieveWorkoutByIdController retrieveWorkoutByIdController) {
         this.createWorkoutController = createWorkoutController;
         this.updateWorkoutController = updateWorkoutController;
         this.viewAllWorkoutsController = viewAllWorkoutsController;
+        this.retrieveWorkoutByIdController = retrieveWorkoutByIdController;
     }
 
     @PostMapping(path = "/api/workouts")
@@ -35,6 +38,16 @@ public class WorkoutsResource {
 
         this.createWorkoutController.createWorkout(request, output);
         logger.debug("Created workout {}", output.getResponse().getBody());
+
+        return output.getResponse();
+    }
+
+    @GetMapping(path = "/api/workouts")
+    public ResponseEntity<WorkoutViewModel> fetchById(@RequestParam("workoutGid") String workoutGid) {
+        RestWorkoutPresenter output = new RestWorkoutPresenter();
+
+        this.retrieveWorkoutByIdController.retrieveForId(workoutGid, output);
+        logger.debug("All workouts:{}", output.getResponse());
 
         return output.getResponse();
     }
@@ -49,7 +62,7 @@ public class WorkoutsResource {
         return output.getResponse();
     }
 
-    @GetMapping(path = "/api/workouts")
+    @GetMapping(path = "/api/workouts/overview")
     public ResponseEntity<WorkoutsInOverviewViewModel> fetchAll() {
         RestWorkoutsInOverviewPresenter output = new RestWorkoutsInOverviewPresenter();
 

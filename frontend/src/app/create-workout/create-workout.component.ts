@@ -4,6 +4,7 @@ import {TreeNode} from "./tree/tree-node";
 import {Type} from "../shared/type";
 import {Set} from "../shared/set"
 import {WorkoutTree} from "./tree/workout-tree";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-create-workout',
@@ -29,15 +30,26 @@ export class CreateWorkoutComponent implements OnInit {
   workoutTree: WorkoutTree;
   selectableChildrenOfSelectedNode: TreeNode[] = [];
 
-  constructor(private workoutService: WorkoutService) {
+  constructor(private workoutService: WorkoutService,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.workoutService.newWorkout()
-      .subscribe(workout => {
-        this.workoutTree = new WorkoutTree(workout);
-        this.fetchMuscleGroupsAndFilterOut([]);
-      }, error => console.log(error));
+    this.route.paramMap.subscribe(params => {
+      let workoutGid = params.get("workout-gid");
+      if (workoutGid) {
+        this.workoutService.fetchWorkoutWithId(workoutGid)
+          .subscribe(
+            workout => workout => this.workoutTree = new WorkoutTree(workout),
+            error => console.log(error));
+      } else {
+        this.workoutService.newWorkout()
+          .subscribe(
+            workout => this.workoutTree = new WorkoutTree(workout),
+            error => console.log(error));
+      }
+      this.fetchMuscleGroupsAndFilterOut([])
+    });
   }
 
   changeTreeNode(node: TreeNode) {
