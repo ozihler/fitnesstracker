@@ -33,7 +33,7 @@ pipeline {
         }
         stage("Docker build") {
             steps {
-                sh "docker build -t ozihler/esdws:1 ."
+                sh "docker build -t ozihler/fitnesstracker:1 ."
             }
         }
 
@@ -43,13 +43,13 @@ pipeline {
             }
             steps {
                 sh "docker login --username " + DOCKER_HUB_CREDENTIALS_USR + " --password " + DOCKER_HUB_CREDENTIALS_PSW
-                sh "docker push ozihler/esdws:1"
+                sh "docker push ozihler/fitnesstracker:1"
             }
         }
 
         stage("Deploy to staging") {
             steps {
-                sh "docker stop /esdws || true && docker run -d --rm -p 8091:5000 --name esdws ozihler/esdws:1"
+                sh "docker stop /fitnesstracker || true && docker run -d --rm -p 8091:5000 --name fitnesstracker ozihler/fitnesstracker:1"
             }
         }
     }
