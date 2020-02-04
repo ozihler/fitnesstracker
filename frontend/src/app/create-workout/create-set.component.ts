@@ -6,7 +6,6 @@ import {Location} from "@angular/common";
 @Component({
   selector: 'app-create-set',
   template: `
-    ===================================
     <div>
       <div *ngIf="!showButton">
         <form [formGroup]="set"
@@ -20,12 +19,14 @@ import {Location} from "@angular/common";
           <div class="uk-margin">
             <input class="uk-input" formControlName="waitingTime" type="text"> s
           </div>
-          <button type="submit">Ok</button>
+          <button class="uk-button uk-width-1-1 uk-text-truncate" type="submit">Ok</button>
         </form>
       </div>
     </div>
+    <hr/>
     <div *ngIf="showButton">
-      <button [disabled]="set.valid" (click)="toggleButton()">Create {{typename}} </button>
+      <button class="uk-button uk-width-1-1 uk-text-truncate" [disabled]="set.valid" (click)="toggleButton()">
+        Create {{typename}} </button>
     </div>
   `
 })

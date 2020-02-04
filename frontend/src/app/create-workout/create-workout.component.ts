@@ -1,35 +1,33 @@
 import {Component, OnInit} from '@angular/core';
 import {WorkoutService} from "../shared/workout.service";
-import {Workout} from '../shared/workout';
-import {TreeNode} from "../shared/tree-node";
+import {TreeNode} from "./tree/tree-node";
 import {Type} from "../shared/type";
 import {Set} from "../shared/set"
-import {WorkoutTree} from "./workout-tree";
+import {WorkoutTree} from "./tree/workout-tree";
 
 @Component({
   selector: 'app-create-workout',
   template: `
-    <div>{{workout?.creationDate}} {{workout?.title}}</div>
-    =============================
+    <div>{{workoutTree?.root?.creationDate}} {{workoutTree?.root?.title}}</div>
+    <hr/>
     <app-button-tree
-      [node]="workout"
-      (changeSelectionEvent)="changeSelectionThroughTreeClick($event)">
+      [node]="workoutTree?.root"
+      [currentSelectionName]="workoutTree?.currentSelection?.name"
+      (changeSelectionEvent)="changeTreeNode($event)">
     </app-button-tree>
-    =============================
+    <hr/>
     <app-element-selection
-      [type]="currentSelection?.type + 1"
+      [currentSelection]="workoutTree?.currentSelection"
       [selectableElements]="selectableChildrenOfSelectedNode"
-      (addNodeEvent)="addNode($event)"
-      (createsChildEvent)="createChild($event)">
+      (addNodeEvent)="addSelectedItemToTree($event)"
+      (createsChildEvent)="createChildInSelection($event)">
     </app-element-selection>
-    =============================
+    <hr/>
   `
 })
 export class CreateWorkoutComponent implements OnInit {
-  selectableChildrenOfSelectedNode: TreeNode[] = [];
-  workout: Workout;
   workoutTree: WorkoutTree;
-  currentSelection: TreeNode;
+  selectableChildrenOfSelectedNode: TreeNode[] = [];
 
   constructor(private workoutService: WorkoutService) {
   }
@@ -37,47 +35,39 @@ export class CreateWorkoutComponent implements OnInit {
   ngOnInit() {
     this.workoutService.newWorkout()
       .subscribe(workout => {
-        this.workout = workout;
         this.workoutTree = new WorkoutTree(workout);
-        this.currentSelection = workout;
+        this.fetchMuscleGroupsAndFilterOut([]);
       }, error => console.log(error));
-
-
-    this.fetchMuscleGroupsAndFilterOut();
-
   }
 
-  private fetchMuscleGroupsAndFilterOut(children: string[] = []) {
-    this.workoutService.fetchMuscleGroups()
-      .subscribe(muscleGroups => this.updateSelectableElements(muscleGroups, children));
-  }
+  changeTreeNode(node: TreeNode) {
+    this.workoutTree.select(node.name);
 
-
-  changeSelectionThroughTreeClick(node: TreeNode) {
-    this.currentSelection = node;
     if (node.type === Type.Workout) {
-      this.fetchMuscleGroupsAndFilterOut(node.children.map(m => m.name));
+      this.fetchMuscleGroupsAndFilterOut(this.workoutTree.childrenOfCurrentSelection.map(m => m.name));
     } else if (node.type === Type.Muscle_Group) {
-      this.fetchExercisesForAndFilterOut(node.name, node.children.map(m => m.name));
+      this.fetchExercisesForAndFilterOut(node.name, this.workoutTree.childrenOfCurrentSelection.map(m => m.name));
     }
   }
 
+  addSelectedItemToTree(selectedElement: TreeNode) {
+    let addedNode = this.workoutTree.addNode(selectedElement);
 
-  // todo extract tree to move convenience methods there
-  private static linkNodes(child: TreeNode, parent: TreeNode) {
-    child.parent = parent;
-    parent.children.push(child);
+    if (addedNode) {
+      this.selectableChildrenOfSelectedNode = this.selectableChildrenOfSelectedNode.filter(s => s.name !== selectedElement.name);
+    }
   }
 
-  addNode(selectedElement: TreeNode) {
-    let foundNode = this.findSelectedElement(this.workout, selectedElement.parent);
-
-    if (foundNode) {
-      CreateWorkoutComponent.linkNodes(selectedElement, foundNode);
-
-      this.selectableChildrenOfSelectedNode = this.selectableChildrenOfSelectedNode.filter(s => s.name !== selectedElement.name);
-      this.disableAllNodesOf(this.workout);
-      this.enable(selectedElement);
+  createChildInSelection(elements: string) {
+    if (this.workoutTree.currentSelection.type === Type.Workout) {
+      this.workoutService.newMuscleGroup(elements)
+        .subscribe(createdMuscleGroups => this.updateSelectableNodesNodes(createdMuscleGroups));
+    } else if (this.workoutTree.currentSelection.type === Type.Muscle_Group) {
+      this.workoutService.newExercises(this.workoutTree.currentSelection, elements)
+        .subscribe(createdExercises => this.updateSelectableNodesNodes(createdExercises));
+    } else if (this.workoutTree.currentSelection.type === Type.Exercise) {
+      this.workoutService.newSetInExercise(this.workoutTree.currentSelection, elements)
+        .subscribe(createdSet => this.addSetToExercise([createdSet]));
     }
   }
 
@@ -86,68 +76,20 @@ export class CreateWorkoutComponent implements OnInit {
       .subscribe(exercises => this.updateSelectableElements(exercises, children));
   }
 
-  createChild(elements: string) {
-    if (this.currentSelection.type === Type.Workout) {
-      this.workoutService.newMuscleGroup(elements)
-        .subscribe(createdMuscleGroups => this.updateSelectedNodes(createdMuscleGroups));
-    } else if (this.currentSelection.type === Type.Muscle_Group) {
-      this.workoutService.newExercises(this.currentSelection, elements)
-        .subscribe(createdExercises => this.updateSelectedNodes(createdExercises));
-    } else if (this.currentSelection.type === Type.Exercise) {
-      this.workoutService.newSetInExercise(this.currentSelection, elements)
-        .subscribe(createdSet => this.addSetToExercise([createdSet]));
-    }
-
+  private fetchMuscleGroupsAndFilterOut(selectedChildren: string[] = []) {
+    this.workoutService.fetchMuscleGroups()
+      .subscribe(muscleGroups => this.updateSelectableElements(muscleGroups, selectedChildren));
   }
 
-  private updateSelectedNodes(nodes: TreeNode[]) {
+  private updateSelectableNodesNodes(nodes: TreeNode[]) {
     nodes.forEach(node => this.selectableChildrenOfSelectedNode.push(node));
   }
 
-  private updateSelectableElements(nodes: TreeNode[], children: string[]) {
-    return this.selectableChildrenOfSelectedNode = nodes.filter(node => children.indexOf(node.name) < 0);
-  }
-
-  private disableAllNodesOf(parent: TreeNode) {
-    parent.isEnabled = false;
-    if (parent.children) {
-      parent.children.forEach(node => this.disableAllNodesOf(node));
-    }
-  }
-
-  private enable(node: TreeNode) {
-    if (!node) {
-      return;
-    }
-    node.isEnabled = true;
-    this.enable(node.parent);
-  }
-
-  private findSelectedElement(node: TreeNode, selectedElement: TreeNode): TreeNode {
-    if (!selectedElement) {
-      return node;
-    }
-
-    if (node.name === selectedElement.name) {
-      return node;
-    } else {
-
-      if (node.children) {
-        for (const child of node.children) {
-          let foundNode = this.findSelectedElement(child, selectedElement);
-
-          if (foundNode) {
-            return foundNode;
-          }
-        }
-      }
-
-      return undefined;
-    }
+  private updateSelectableElements(nodes: TreeNode[], selectedChildren: string[]) {
+    return this.selectableChildrenOfSelectedNode = nodes.filter(node => selectedChildren.indexOf(node.name) < 0);
   }
 
   private addSetToExercise(sets: Set[]) {
-    sets.forEach(set => this.currentSelection.children.push(set));
-
+    sets.forEach(set => this.workoutTree.addNode(set));
   }
 }

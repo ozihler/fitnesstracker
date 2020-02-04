@@ -1,8 +1,7 @@
-import {TreeNode} from "./tree-node";
+import {TreeNode} from "../create-workout/tree/tree-node";
 import {Type} from "./type";
 import {Exercise} from "./exercise";
 import {GID} from "./gid";
-import {WorkoutTreeVisitor} from "./workout-tree-visitor";
 
 export class Set extends TreeNode {
 
@@ -34,7 +33,4 @@ export class Set extends TreeNode {
   }
 
 
-  accept(visitor: WorkoutTreeVisitor) {
-    visitor.visitSet(this);
-  }
 }

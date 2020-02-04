@@ -31,7 +31,7 @@ public class MuscleGroupsResource {
         var output = new RestMuscleGroupsPresenter();
 
         this.viewMuscleGroupsController.viewAllMuscleGroups(output);
-        logger.info("View all muscle groups {}", output.getResponse().getBody());
+        logger.debug("View all muscle groups {}", output.getResponse().getBody());
 
         return output.getResponse();
     }
@@ -41,7 +41,7 @@ public class MuscleGroupsResource {
         var output = new RestMuscleGroupsPresenter();
 
         createMuscleGroupsController.createMuscleGroups(request, output);
-        logger.info("create muscle groups {}", output.getResponse().getBody());
+        logger.debug("create muscle groups {}", output.getResponse().getBody());
 
         return output.getResponse();
     }

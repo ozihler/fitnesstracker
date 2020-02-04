@@ -6,10 +6,7 @@ import com.zihler.fitness_tracker.domain.entities.Exercise;
 import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
 import com.zihler.fitness_tracker.domain.entities.Set;
 import com.zihler.fitness_tracker.domain.entities.Workout;
-import com.zihler.fitness_tracker.domain.values.Exercises;
-import com.zihler.fitness_tracker.domain.values.GID;
-import com.zihler.fitness_tracker.domain.values.MuscleGroups;
-import com.zihler.fitness_tracker.domain.values.Name;
+import com.zihler.fitness_tracker.domain.values.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
@@ -18,6 +15,7 @@ import java.util.*;
 public class InMemoryRepository
         implements
         FetchWorkout,
+        FetchWorkouts,
         StoreWorkout,
         FetchAllMuscleGroups,
         FetchMuscleGroup,
@@ -115,5 +113,10 @@ public class InMemoryRepository
     public Set withValues(Name exerciseName, Set setToStore) {
         exerciseByName(exerciseName).get().getSets().add(setToStore);
         return setToStore;
+    }
+
+    @Override
+    public Workouts all() {
+        return new Workouts(new ArrayList<>(this.workouts.values()));
     }
 }

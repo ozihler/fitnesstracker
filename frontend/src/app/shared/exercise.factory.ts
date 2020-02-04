@@ -5,7 +5,13 @@ import {SetFactory} from "./set.factory";
 
 export class ExerciseFactory {
   static from(exerciseRaw: ExerciseRaw): Exercise {
-    return new Exercise(exerciseRaw.name, MuscleGroupFactory.from(exerciseRaw.muscleGroup), exerciseRaw.sets.map(set => SetFactory.from(set, ExerciseFactory.from(exerciseRaw))));
+    let muscleGroup = MuscleGroupFactory.from(exerciseRaw.muscleGroup);
+
+    let exercise = new Exercise(exerciseRaw.name, muscleGroup, []);
+
+    exercise.children = exerciseRaw.sets.map(set => SetFactory.from(set, exercise));
+
+    return exercise;
   }
 
   static fromMultiple(exercises: ExerciseRaw[]) {

@@ -6,7 +6,6 @@ import {Location} from "@angular/common";
 @Component({
   selector: 'app-create-element',
   template: `
-    ===================================
     <div>
       <div *ngIf="!showButton">
         <form [formGroup]="createElement"
@@ -16,15 +15,13 @@ import {Location} from "@angular/common";
                    formControlName="element"
                    type="text">
           </div>
-          <button type="submit">Ok</button>
+          <button class="uk-button uk-width-1-1 uk-text-truncate" type="submit">Ok</button>
         </form>
       </div>
-
-
     </div>
     <div *ngIf="showButton">
       <div>{{currentElementValue()}}</div>
-      <button (click)="toggleButton()">Create {{typename}} </button>
+      <button (click)="toggleButton()" class="uk-button uk-width-1-1 uk-text-truncate">Create {{typename}} </button>
     </div>
   `,
   styles: []

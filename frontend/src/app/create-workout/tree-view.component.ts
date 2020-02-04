@@ -1,58 +1,54 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {TreeNode} from "../shared/tree-node";
-import {Type} from "../shared/type";
+import {TreeNode} from "./tree/tree-node";
 
 @Component({
   selector: 'app-button-tree',
   template: `
-    <div *ngIf="!isSet()" class="uk-grid uk-grid-collapse">
+    <div class="uk-grid uk-grid-collapse" *ngIf="node?.isEnabled">
       <button class="uk-button uk-width-1-1 uk-text-truncate"
-              [ngClass]="getLevelClass()"
-              (click)="toggleNode()">
-        <span *ngIf="node && !node?.isLeaf && !node?.isEnabled">({{node?.numberOfChildren}}) </span>
+              [ngClass]="getLevelClass"
+              [disabled]="node.isLeaf"
+              (click)="changeSelection()">
+        <span *ngIf="node && !node?.isLeaf">({{node?.numberOfChildren}}) </span>
         <span>{{node?.name}}</span>
       </button>
     </div>
-    <div *ngIf="isSet()">
-      <span>{{node?.name}}</span>
-    </div>
 
-    <div *ngIf="this.node?.isEnabled && this.node?.hasChildren">
-      <div *ngFor="let child of this.node?.children">
+    <div *ngIf="node?.hasChildren">
+      <div *ngFor="let child of node?.children">
         <app-button-tree
+          [currentSelectionName]="currentSelectionName"
           [node]="child"
-          (changeSelectionEvent)="changeSelection($event)">
+          (changeSelectionEvent)="this.changeSelectionEvent.emit($event);">
         </app-button-tree>
       </div>
-
     </div>
   `
 })
 export class TreeViewComponent {
   @Input() node: TreeNode;
+  @Input() currentSelectionName: string;
   @Output() changeSelectionEvent = new EventEmitter<TreeNode>();
 
   constructor() {
   }
 
-
-  toggleNode() {
-    if (!this.node) {
-      return;
+  get getLevelClass() {
+    if (this.isSelectedNode()) {
+      return "uk-button-danger";
     }
-    this.node.isEnabled = !this.node.isEnabled;
-    this.changeSelection(this.node);
-  }
-
-  getLevelClass() {
     return this.node ? TreeNode.LEVEL_CLASSES[this.node.type] : "";
   }
 
-  changeSelection(node: TreeNode) {
-    this.changeSelectionEvent.emit(node);
+  changeSelection() {
+    if (!this.node) {
+      return;
+    }
+
+    this.changeSelectionEvent.emit(this.node);
   }
 
-  isSet() {
-    return this.node && this.node.type === Type.Set
+  private isSelectedNode() {
+    return this.currentSelectionName && this.node && this.currentSelectionName === this.node.name;
   }
 }

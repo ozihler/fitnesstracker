@@ -1,0 +1,87 @@
+import {Workout} from "../../shared/workout";
+import {TreeNode} from "./tree-node";
+import {EnableNodeVisitor} from "./enable-node.visitor";
+import {DisableAllNodesVisitor} from "./disable-all-nodes.visitor";
+import {NodeByNameCollectorVisitor} from "./node-by-name-collector.visitor";
+
+export class WorkoutTree {
+  constructor(private _root: Workout) {
+    this.select(_root.name);
+  }
+
+  private _currentSelection: TreeNode;
+
+  get currentSelection(): TreeNode {
+    return this._currentSelection;
+  }
+
+  set currentSelection(value: TreeNode) {
+    this._currentSelection = value;
+  }
+
+  get childrenOfCurrentSelection(): TreeNode[] {
+    return this.currentSelection && this.currentSelection.children ? this.currentSelection.children : [];
+  }
+
+  get root(): Workout {
+    return this._root;
+  }
+
+  get someChildrenAreEnabled() {
+    return this.currentSelection.children.some(value => value.isEnabled);
+  }
+
+  enable(nodeName: string): void {
+    if (!nodeName) {
+      return;
+    }
+
+    this.disableAllNodes();
+
+    let enableNodeVisitor = EnableNodeVisitor.find(nodeName, this.root);
+
+    enableNodeVisitor.enableNodes();
+  }
+
+  disableAllNodes(): void {
+    this.root.accept(new DisableAllNodesVisitor())
+  }
+
+  addNode(nodeToAdd: TreeNode): boolean {
+    if (!nodeToAdd.parent) {
+      return this.link(nodeToAdd, this.root);
+    }
+    let foundParentOfNode = this.findNodeByName(nodeToAdd.parent.name);
+    if (foundParentOfNode) {
+      return this.link(nodeToAdd, foundParentOfNode);
+    } else {
+      return false;
+    }
+  }
+
+  findNodeByName(nodeName: string): TreeNode {
+    let nodeByNameCollectorVisitor = new NodeByNameCollectorVisitor(nodeName);
+    this.root.accept(nodeByNameCollectorVisitor);
+    return nodeByNameCollectorVisitor.foundNode;
+  }
+
+  select(nodeName: string) {
+    this.currentSelection = this.findNodeByName(nodeName);
+
+    if (this.currentSelection.isEnabled && this.someChildrenAreEnabled) {
+      this.disableChildrenOf(this.currentSelection);
+    } else {
+      this.enable(this.currentSelection.name);
+    }
+  }
+
+  private link(nodeToAdd: TreeNode, parent: TreeNode) {
+    nodeToAdd.linkToParent(parent);
+    this.enable(nodeToAdd.name);
+    return true;
+  }
+
+  private disableChildrenOf(currentSelection: TreeNode) {
+    currentSelection.children.forEach(child => child.accept(new DisableAllNodesVisitor()));
+  }
+}

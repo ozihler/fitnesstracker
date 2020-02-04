@@ -15,6 +15,8 @@ import {Exercise} from "./exercise";
 import {SetFactory} from "./set.factory";
 import {SetRaw} from "./set-raw";
 import {Set} from "./set";
+import {WorkoutsSimpleRaw} from "./workouts-simple-raw";
+import {WorkoutSimpleFactory} from "./workout-simple.factory";
 
 
 @Injectable({
@@ -49,8 +51,6 @@ export class WorkoutService {
     let body = {title: "New Workout"};
     let url = `${this.baseUrl}/workouts`;
 
-    console.log("New Workout request to url ", body, url);
-
     return this.httpClient.post<WorkoutRaw>(url, body)
       .pipe(map(data => WorkoutFactory.fromRaw(data)));
   }
@@ -71,5 +71,10 @@ export class WorkoutService {
     return this.httpClient.post<SetRaw>(`${this.baseUrl}/exercises/${exercise.name}/sets`, {setDetails: setDetails})
       .pipe(map(e => SetFactory.from(e, exercise)));
 
+  }
+
+  fetchAllWorkouts() {
+    return this.httpClient.get<WorkoutsSimpleRaw>(`${this.baseUrl}/workouts`)
+      .pipe(map(workoutsSimpleRaw => WorkoutSimpleFactory.fromMultiple(workoutsSimpleRaw)));
   }
 }

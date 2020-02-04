@@ -1,7 +1,7 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercises;
 
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercises.inputs.CreateExercisesInput;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.ExerciseNames;
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercises.requests.ExerciseNames;
 import com.zihler.fitness_tracker.application.outbound_ports.StoreExercises;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchMuscleGroup;
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.ExercisesPresenter;
