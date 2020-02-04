@@ -37,6 +37,7 @@ export class CreateWorkoutComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       let workoutGid = params.get("workout-gid");
+      console.log("WorkoutID:"+workoutGid)
       if (workoutGid) {
         this.workoutService.fetchWorkoutWithId(workoutGid)
           .subscribe(

@@ -45,7 +45,7 @@ public class UpdateWorkoutUseCase implements UpdateWorkout {
     private MuscleGroups fetchMuscleGroups(MuscleGroupsDocument muscleGroups) {
         return new MuscleGroups(muscleGroups.getMuscleGroups()
                 .stream()
-                .map(m -> fetchMuscleGroup.byName(m.getName()))
+                .map(m -> fetchMuscleGroup.by(m.getName()))
                 .collect(toSet()));
     }
 

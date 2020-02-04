@@ -5,6 +5,7 @@ import {WorkoutSimple} from "../shared/workout-simple";
 @Component({
   selector: 'app-workouts-overview',
   template: `
+    <h3>Select or create a workout</h3>
     <button routerLink="/create-workout/{{workout.gid.value}}"
             *ngFor="let workout of workouts"
             class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom">{{workout.title}} {{workout.creationDate}}
@@ -18,7 +19,6 @@ import {WorkoutSimple} from "../shared/workout-simple";
 })
 export class WorkoutsOverview implements OnInit {
   workouts: WorkoutSimple[] = [];
-
 
   constructor(private workoutService: WorkoutService) {
   }

@@ -29,7 +29,7 @@ public class SetsResource {
         var output = new RestSetPresenter();
 
         addSetToExerciseController.addSetToExercises(exerciseName, setDetails, output);
-        logger.debug("add set {} to exercise {}, response {}", setDetails, exerciseName, output.getResponse().getBody());
+        logger.info("add set {} to exercise {}, response {}", setDetails, exerciseName, output.getResponse().getBody());
 
         return output.getResponse();
     }

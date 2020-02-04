@@ -26,7 +26,7 @@ public class ViewAllExercisesForMuscleGroupUseCase implements ViewAllExercisesFo
 
     @Override
     public void invokeWith(MuscleGroupDocument muscleGroup, ExercisesPresenter output) {
-        MuscleGroup foundMuscleGroup = fetchMuscleGroup.byName(muscleGroup.getName());
+        MuscleGroup foundMuscleGroup = fetchMuscleGroup.by(muscleGroup.getName());
         Exercises exercises = fetchExercises.forMuscleGroup(foundMuscleGroup);
         output.present(toDocument(exercises));
     }

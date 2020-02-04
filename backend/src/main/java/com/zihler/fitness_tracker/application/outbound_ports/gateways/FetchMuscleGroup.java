@@ -4,5 +4,5 @@ import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
 import com.zihler.fitness_tracker.domain.values.Name;
 
 public interface FetchMuscleGroup {
-    MuscleGroup byName(Name name);
+    MuscleGroup by(Name name);
 }

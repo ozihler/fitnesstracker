@@ -29,7 +29,7 @@ public class CreateExercisesUseCase implements CreateExercises {
                                ExercisesPresenter output) {
 
         // todo create roles
-        MuscleGroup muscleGroup = this.fetchMuscleGroup.byName(exercisesToCreate.parentMuscleGroup());
+        MuscleGroup muscleGroup = this.fetchMuscleGroup.by(exercisesToCreate.parentMuscleGroup());
 
         Exercises exercisesToStore = toEntities(exercisesToCreate, muscleGroup);
 

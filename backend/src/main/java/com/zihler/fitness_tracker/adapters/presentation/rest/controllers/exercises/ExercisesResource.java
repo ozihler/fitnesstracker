@@ -27,7 +27,7 @@ public class ExercisesResource {
         var output = new RestExercisesPresenter();
 
         viewAllExercisesController.fetchAllExercisesForMuscleGroup(muscleGroupName, output);
-        logger.debug("fetch all exercises for muscle group {}, {}", muscleGroupName, output.getResponse().getBody());
+        logger.info("fetch all exercises for muscle group {}, {}", muscleGroupName, output.getResponse().getBody());
 
         return output.getResponse();
     }
@@ -37,7 +37,7 @@ public class ExercisesResource {
         var output = new RestExercisesPresenter();
 
         createExercises.forMuscleGroup(muscleGroupName, exercisesNames, output);
-        logger.debug("create exercises for muscle group {}, {}, {}", muscleGroupName, exercisesNames, output.getResponse().getBody());
+        logger.info("create exercises for muscle group {}, {}, {}", muscleGroupName, exercisesNames, output.getResponse().getBody());
 
         return output.getResponse();
     }

@@ -73,7 +73,7 @@ public class InMemoryRepository
     }
 
     @Override
-    public MuscleGroup byName(Name name) {
+    public MuscleGroup by(Name name) {
         return repo.get(name);
     }
 

@@ -37,7 +37,7 @@ public class WorkoutsResource {
         RestWorkoutPresenter output = new RestWorkoutPresenter();
 
         this.createWorkoutController.createWorkout(request, output);
-        logger.debug("Created workout {}", output.getResponse().getBody());
+        logger.info("Created workout {}", output.getResponse().getBody());
 
         return output.getResponse();
     }
@@ -47,7 +47,7 @@ public class WorkoutsResource {
         RestWorkoutPresenter output = new RestWorkoutPresenter();
 
         this.retrieveWorkoutByIdController.retrieveForId(workoutGid, output);
-        logger.debug("All workouts:{}", output.getResponse());
+        logger.info("All workouts:{}", output.getResponse());
 
         return output.getResponse();
     }
@@ -57,7 +57,7 @@ public class WorkoutsResource {
         RestWorkoutPresenter output = new RestWorkoutPresenter();
 
         this.updateWorkoutController.updateWorkout(request, output);
-        logger.debug("Updated workout {}", output.getResponse().getBody());
+        logger.info("Updated workout {}", output.getResponse().getBody());
 
         return output.getResponse();
     }
@@ -67,7 +67,7 @@ public class WorkoutsResource {
         RestWorkoutsInOverviewPresenter output = new RestWorkoutsInOverviewPresenter();
 
         this.viewAllWorkoutsController.viewAllWorkouts(output);
-        logger.debug("All workouts:{}", output.getResponse());
+        logger.info("All workouts:{}", output.getResponse());
 
         return output.getResponse();
     }

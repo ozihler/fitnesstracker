@@ -63,6 +63,11 @@ export class WorkoutService {
       .pipe(map(data => WorkoutFactory.fromRaw(data)));
   }
 
+  fetchAllWorkouts() {
+    return this.httpClient.get<WorkoutsSimpleRaw>(`${this.baseUrl}/workouts/overview`)
+      .pipe(map(workoutsSimpleRaw => WorkoutSimpleFactory.fromMultiple(workoutsSimpleRaw)));
+  }
+
   update(workout: Workout): Observable<Workout> {
     return this.httpClient.put<WorkoutRaw>(`${this.baseUrl}/workouts`, {workout: workout})
       .pipe(map(data => WorkoutFactory.fromRaw(data)));
@@ -78,10 +83,5 @@ export class WorkoutService {
     return this.httpClient.post<SetRaw>(`${this.baseUrl}/exercises/${exercise.name}/sets`, {setDetails: setDetails})
       .pipe(map(e => SetFactory.from(e, exercise)));
 
-  }
-
-  fetchAllWorkouts() {
-    return this.httpClient.get<WorkoutsSimpleRaw>(`${this.baseUrl}/workouts/overview`)
-      .pipe(map(workoutsSimpleRaw => WorkoutSimpleFactory.fromMultiple(workoutsSimpleRaw)));
   }
 }
