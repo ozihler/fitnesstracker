@@ -2,7 +2,6 @@ package com.zihler.fitness_tracker.application.use_cases.update_workout;
 
 import com.zihler.fitness_tracker.application.outbound_ports.documents.ExerciseDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGroupDocument;
-import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGroupsDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchExercise;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchMuscleGroup;
@@ -14,14 +13,11 @@ import com.zihler.fitness_tracker.domain.entities.Exercise;
 import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
 import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
-import com.zihler.fitness_tracker.domain.values.Name;
 import com.zihler.fitness_tracker.domain.values.Sets;
 
 import java.time.ZonedDateTime;
-import java.util.Set;
 
 import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toSet;
 
 public class UpdateWorkoutUseCase implements UpdateWorkout {
     private FetchMuscleGroup fetchMuscleGroup;
@@ -65,19 +61,12 @@ public class UpdateWorkoutUseCase implements UpdateWorkout {
         output.present(WorkoutDocument.of(storedUpdatedWorkout));
     }
 
-    private Set<Name> toNames(MuscleGroupsDocument muscleGroups) {
-        return muscleGroups.getMuscleGroups()
-                .stream()
-                .map(MuscleGroupDocument::getName)
-                .collect(toSet());
-    }
-
     private boolean creationTimesDiffer(Workout old, WorkoutDocument update) {
-        return asMillis(old, old.getCreationDateTime()) != asMillis(old, update.getCreationDateTime());
+        return asMillis(old.getCreationDateTime()) != asMillis(update.getCreationDateTime());
     }
 
-    private long asMillis(Workout old, ZonedDateTime creationDateTime) {
-        return old.getCreationDateTime().toInstant().toEpochMilli();
+    private long asMillis(ZonedDateTime creationDateTime) {
+        return creationDateTime.toInstant().toEpochMilli();
     }
 
 
