@@ -27,6 +27,10 @@ export class WorkoutTree {
     return this._root;
   }
 
+  set root(value: Workout) {
+    this._root = value;
+  }
+
   get someChildrenAreEnabled() {
     return this.currentSelection.children.some(value => value.isEnabled);
   }

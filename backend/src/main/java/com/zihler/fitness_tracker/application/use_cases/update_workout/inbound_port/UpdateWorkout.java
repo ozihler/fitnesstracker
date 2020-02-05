@@ -4,5 +4,5 @@ import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutDo
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.WorkoutPresenter;
 
 public interface UpdateWorkout {
-    void callWith(WorkoutDocument workout, WorkoutPresenter output);
+    void invokeWith(WorkoutDocument workout, WorkoutPresenter output);
 }

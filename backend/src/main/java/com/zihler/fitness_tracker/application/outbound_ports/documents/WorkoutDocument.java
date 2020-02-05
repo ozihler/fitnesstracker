@@ -1,33 +1,33 @@
 package com.zihler.fitness_tracker.application.outbound_ports.documents;
 
 import com.zihler.fitness_tracker.domain.entities.Workout;
-import com.zihler.fitness_tracker.domain.values.GID;
+import com.zihler.fitness_tracker.domain.values.WorkoutId;
 import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
 
 import java.time.ZonedDateTime;
 
 public class WorkoutDocument {
-    private final GID gid;
+    private final WorkoutId workoutId;
     private final ZonedDateTime creationDateTime;
     private final WorkoutTitle workoutTitle;
     private MuscleGroupsDocument muscleGroups;
 
-    public WorkoutDocument(GID gid, ZonedDateTime creationDateTime, WorkoutTitle workoutTitle, MuscleGroupsDocument muscleGroups) {
-        this.gid = gid;
+    public WorkoutDocument(WorkoutId workoutId, ZonedDateTime creationDateTime, WorkoutTitle workoutTitle, MuscleGroupsDocument muscleGroups) {
+        this.workoutId = workoutId;
         this.creationDateTime = creationDateTime;
         this.workoutTitle = workoutTitle;
         this.muscleGroups = muscleGroups;
     }
 
     public static WorkoutDocument of(Workout workout) {
-        return new WorkoutDocument(workout.getGid(),
+        return new WorkoutDocument(workout.getWorkoutId(),
                 workout.getCreationDateTime(),
                 workout.getWorkoutTitle(),
                 MuscleGroupsDocument.of(workout.getMuscleGroups()));
     }
 
-    public GID getGid() {
-        return gid;
+    public WorkoutId getWorkoutId() {
+        return workoutId;
     }
 
     public ZonedDateTime getCreationDateTime() {
@@ -39,6 +39,6 @@ public class WorkoutDocument {
     }
 
     public MuscleGroupsDocument getMuscleGroups() {
-        return this.muscleGroups;
+        return muscleGroups;
     }
 }

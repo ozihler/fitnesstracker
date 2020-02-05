@@ -37,7 +37,7 @@ export class CreateWorkoutComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       let workoutGid = params.get("workout-gid");
-      console.log("WorkoutID:"+workoutGid)
+      console.log("WorkoutID:" + workoutGid)
       if (workoutGid) {
         this.workoutService.fetchWorkoutWithId(workoutGid)
           .subscribe(
@@ -68,6 +68,8 @@ export class CreateWorkoutComponent implements OnInit {
 
     if (addedNode) {
       this.selectableChildrenOfSelectedNode = this.selectableChildrenOfSelectedNode.filter(s => s.name !== selectedElement.name);
+      this.workoutService.update(this.workoutTree.root)
+        .subscribe(workout => this.workoutTree.root = workout);
     }
   }
 

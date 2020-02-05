@@ -69,8 +69,43 @@ export class WorkoutService {
   }
 
   update(workout: Workout): Observable<Workout> {
-    return this.httpClient.put<WorkoutRaw>(`${this.baseUrl}/workouts`, {workout: workout})
+    let body = {
+      workout: {
+        gid: workout.gid.value,
+        creationDate: workout.creationDate.getMilliseconds(),
+        title: workout.title,
+        muscleGroups: workout.children.map(value => this.toJson(value))
+      }
+    };
+    return this.httpClient.put<WorkoutRaw>(`${this.baseUrl}/workouts`, body)
       .pipe(map(data => WorkoutFactory.fromRaw(data)));
+  }
+
+  private toJson(muscleGroup: MuscleGroup) {
+    return {
+      name: muscleGroup.name,
+      exercises: muscleGroup.children.map(exercise => this.toExerciseRequest(exercise))
+    }
+  }
+
+  // todo extract interfaces for requests
+
+  private toExerciseRequest(exercise: Exercise) {
+    return {
+      name: exercise.name,
+      sets: exercise.children.map(set => this.toSetRequest(<Set>set))
+    }
+  }
+
+  private toSetRequest(set: Set) {
+    return {
+      gid: set.gid.value,
+      weight: set.weight,
+      weightUnit: set.weightUnit,
+      numberOfRepetitions: set.numberOfRepetitions,
+      waitingTime: set.waitingTime,
+      waitingTimeUnit: set.waitingTimeUnit
+    }
   }
 
   newExercises(muscleGroup: MuscleGroup, exercisesString: string): Observable<Exercise[]> {

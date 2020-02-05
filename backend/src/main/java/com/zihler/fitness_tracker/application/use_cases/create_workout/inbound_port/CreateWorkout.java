@@ -4,5 +4,5 @@ import com.zihler.fitness_tracker.application.outbound_ports.presenters.WorkoutP
 import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
 
 public interface CreateWorkout {
-    void with(WorkoutTitle workoutTitle, WorkoutPresenter presenter);
+    void invokeWith(WorkoutTitle workoutTitle, WorkoutPresenter output);
 }

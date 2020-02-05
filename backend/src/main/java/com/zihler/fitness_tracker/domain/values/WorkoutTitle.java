@@ -15,7 +15,7 @@ public class WorkoutTitle {
         this.title = title;
     }
 
-    public static WorkoutTitle from(String title) {
+    public static WorkoutTitle of(String title) {
         return new WorkoutTitle(title);
     }
 
@@ -26,8 +26,12 @@ public class WorkoutTitle {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         WorkoutTitle that = (WorkoutTitle) o;
         return Objects.equals(title, that.title);
     }

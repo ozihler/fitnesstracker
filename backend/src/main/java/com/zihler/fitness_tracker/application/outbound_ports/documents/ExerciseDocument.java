@@ -14,6 +14,14 @@ public class ExerciseDocument {
         this.muscleGroup = muscleGroup;
     }
 
+    public ExerciseDocument(Name name) {
+        this(null, name, new SetsDocument());
+    }
+
+    private ExerciseDocument(Name name, SetsDocument sets) {
+        this(null, name, sets);
+    }
+
     public static ExerciseDocument of(MuscleGroupDocument muscleGroup, Name name, SetsDocument sets) {
         return new ExerciseDocument(muscleGroup, name, sets);
     }
@@ -32,5 +40,11 @@ public class ExerciseDocument {
 
     public MuscleGroupDocument getMuscleGroup() {
         return muscleGroup;
+    }
+
+    public ExerciseDocument add(SetDocument set) {
+        var sets = new SetsDocument();
+        sets.add(set);
+        return new ExerciseDocument(name, sets);
     }
 }

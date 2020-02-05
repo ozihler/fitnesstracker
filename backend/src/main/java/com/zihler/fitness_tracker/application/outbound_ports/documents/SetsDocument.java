@@ -11,6 +11,10 @@ public class SetsDocument {
         this.sets = sets;
     }
 
+    SetsDocument() {
+        this(new ArrayList<>());
+    }
+
     public static SetsDocument of(List<SetDocument> sets) {
         return new SetsDocument(sets);
     }
@@ -20,6 +24,10 @@ public class SetsDocument {
     }
 
     public List<SetDocument> getSets() {
-        return this.sets;
+        return sets;
+    }
+
+    public void add(SetDocument set) {
+        sets.add(set);
     }
 }

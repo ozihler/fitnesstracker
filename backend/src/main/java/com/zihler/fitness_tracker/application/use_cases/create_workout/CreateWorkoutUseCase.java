@@ -15,7 +15,7 @@ public class CreateWorkoutUseCase implements CreateWorkout {
     }
 
     @Override
-    public void with(WorkoutTitle workoutTitle, WorkoutPresenter output) {
+    public void invokeWith(WorkoutTitle workoutTitle, WorkoutPresenter output) {
         Workout workout = Workout.newWorkout(workoutTitle);
         Workout stored = workouts.as(workout);
         output.present(WorkoutDocument.of(stored));

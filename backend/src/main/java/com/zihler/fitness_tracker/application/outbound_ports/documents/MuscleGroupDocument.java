@@ -8,9 +8,19 @@ import java.util.Objects;
 
 public class MuscleGroupDocument {
     private Name name;
+    private ExercisesDocument exercises;
 
-    private MuscleGroupDocument(Name name) {
+    public ExercisesDocument getExercises() {
+        return exercises;
+    }
+
+    public MuscleGroupDocument(Name name) {
+        this(name, new ExercisesDocument());
+    }
+
+    public MuscleGroupDocument(Name name, ExercisesDocument exercises) {
         this.name = name;
+        this.exercises = exercises;
     }
 
     public static MuscleGroupDocument of(MuscleGroup muscleGroup) {
@@ -22,7 +32,13 @@ public class MuscleGroupDocument {
     }
 
     public Name getName() {
-        return this.name;
+        return name;
+    }
+
+    public MuscleGroupDocument add(ExerciseDocument exercise) {
+        ExercisesDocument exercises = new ExercisesDocument();
+        exercises.add(exercise);
+        return new MuscleGroupDocument(name, exercises);
     }
 
     @Override
@@ -32,8 +48,12 @@ public class MuscleGroupDocument {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         MuscleGroupDocument that = (MuscleGroupDocument) o;
         return Objects.equals(name, that.name);
     }

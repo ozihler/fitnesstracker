@@ -28,6 +28,27 @@ export class Set extends TreeNode {
     this._gid = value;
   }
 
+
+  get weight(): number {
+    return this._weight;
+  }
+
+  get weightUnit(): string {
+    return this._weightUnit;
+  }
+
+  get numberOfRepetitions(): number {
+    return this._numberOfRepetitions;
+  }
+
+  get waitingTime(): number {
+    return this._waitingTime;
+  }
+
+  get waitingTimeUnit(): string {
+    return this._waitingTimeUnit;
+  }
+
   static formatEntries(repetitions, weight: number, unitOfMeasurement: string, waitingTime: number, unitOfTime: string) {
     return `${repetitions}[reps] |${weight}[${unitOfMeasurement}] |${waitingTime}[${unitOfTime}]`;
   }

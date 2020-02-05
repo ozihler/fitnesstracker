@@ -1,6 +1,8 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.zihler.fitness_tracker.domain.values.UnitOfMeasurement;
+import com.zihler.fitness_tracker.domain.values.UnitOfTime;
 
 public class SetViewModel {
     @JsonProperty("gid")
@@ -23,6 +25,12 @@ public class SetViewModel {
         this.numberOfRepetitions = numberOfRepetitions;
         this.waitingTime = waitingTime;
         this.waitingTimeUnit = waitingTimeUnit;
+    }
+
+    public static SetViewModel of(long gid, float weight, int numberOfRepetitions, int waitingTime) {
+        return new SetViewModel(
+                gid, weight, UnitOfMeasurement.KILOGRAMM.shortname(), numberOfRepetitions, waitingTime, UnitOfTime.SECONDS.shortname()
+        );
     }
 
     public SetViewModel() {

@@ -21,13 +21,13 @@ public class UpdateWorkoutUseCase implements UpdateWorkout {
 
     public UpdateWorkoutUseCase(FetchWorkout fetchWorkout, StoreWorkout storeWorkout, FetchMuscleGroup fetchMuscleGroup) {
         this.fetchWorkout = fetchWorkout;
-        this.storeWorkouts = storeWorkout;
+        storeWorkouts = storeWorkout;
         this.fetchMuscleGroup = fetchMuscleGroup;
     }
 
     @Override
-    public void callWith(WorkoutDocument update, WorkoutPresenter output) {
-        Workout old = fetchWorkout.by(update.getGid());
+    public void invokeWith(WorkoutDocument update, WorkoutPresenter output) {
+        Workout old = fetchWorkout.by(update.getWorkoutId());
 
         if (creationTimesDiffer(old, update)) {
             throw new DifferingCreationTimeException(old, update);
@@ -35,7 +35,7 @@ public class UpdateWorkoutUseCase implements UpdateWorkout {
 
         MuscleGroups workoutMuscleGroups = fetchMuscleGroups(update.getMuscleGroups());
 
-        Workout updatedWorkout = Workout.update(old.getGid(), old.getCreationDateTime(), update.getWorkoutTitle(), workoutMuscleGroups);
+        Workout updatedWorkout = Workout.update(old.getWorkoutId(), old.getCreationDateTime(), update.getWorkoutTitle(), workoutMuscleGroups);
 
         Workout storedUpdatedWorkout = storeWorkouts.as(updatedWorkout);
 

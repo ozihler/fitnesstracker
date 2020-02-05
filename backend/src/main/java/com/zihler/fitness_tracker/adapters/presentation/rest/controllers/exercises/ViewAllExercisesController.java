@@ -1,13 +1,14 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercises;
 
-import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGroupDocument;
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups.inputs.MuscleGroupInput;
+import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.exercises.RestExercisesPresenter;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.ExercisesViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchExercises;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchMuscleGroup;
-import com.zihler.fitness_tracker.application.outbound_ports.presenters.ExercisesPresenter;
 import com.zihler.fitness_tracker.application.use_cases.view_all_exercises_for_muscle_group.ViewAllExercisesForMuscleGroupUseCase;
 import com.zihler.fitness_tracker.application.use_cases.view_all_exercises_for_muscle_group.inbound_port.ViewAllExercisesForMuscleGroup;
-import com.zihler.fitness_tracker.domain.values.Name;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -19,9 +20,13 @@ public class ViewAllExercisesController {
         this.viewAllExercisesForMuscleGroup = new ViewAllExercisesForMuscleGroupUseCase(fetchExercises, fetchMuscleGroup);
     }
 
-    public void fetchAllExercisesForMuscleGroup(String muscleGroupName, ExercisesPresenter output) {
-        MuscleGroupDocument muscleGroup = MuscleGroupDocument.of(Name.of(muscleGroupName));
+    public ResponseEntity<ExercisesViewModel> viewAllExercisesOfMuscleGroup(String muscleGroupName) {
+        var input = new MuscleGroupInput(muscleGroupName);
+        var output = new RestExercisesPresenter();
 
-        this.viewAllExercisesForMuscleGroup.invokeWith(muscleGroup, output);
+        this.viewAllExercisesForMuscleGroup.invokeWith(input.muscleGroup(), output);
+
+        return output.getResponse();
     }
+
 }
