@@ -8,7 +8,7 @@ import static java.util.stream.Collectors.toSet;
 public class Names {
     private Set<Name> names;
 
-    public Names(Set<Name> names) {
+    private Names(Set<Name> names) {
         this.names = names;
     }
 
@@ -21,7 +21,12 @@ public class Names {
                 .collect(toSet()));
     }
 
+    public static Names of(Set<Name> names) {
+        return new Names(names);
+    }
+
     public Set<Name> values() {
         return names;
     }
+
 }

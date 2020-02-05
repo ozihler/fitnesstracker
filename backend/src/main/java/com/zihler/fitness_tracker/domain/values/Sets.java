@@ -9,7 +9,7 @@ public class Sets {
 
     private List<Set> sets;
 
-    public Sets(List<Set> sets) {
+    private Sets(List<Set> sets) {
         this.sets = sets;
     }
 
@@ -17,11 +17,15 @@ public class Sets {
         return new Sets(new ArrayList<>());
     }
 
+    public static Sets of(List<Set> sets) {
+        return new Sets(sets);
+    }
+
     public List<Set> getSets() {
         return sets;
     }
 
     public void add(Set set) {
-        this.sets.add(set);
+        sets.add(set);
     }
 }

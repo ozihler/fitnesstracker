@@ -16,7 +16,7 @@ public class AddSetToExerciseUseCase implements AddSetToExercise {
 
     @Override
     public void invokeWith(Name exerciseName, SetDocument set, SetPresenter output) {
-        Set setToCreate = Set.newSet(set.getWeight(), set.getRepetitions(), set.getWaitingTime());
+        Set setToCreate = Set.of(set.getWeight(), set.getRepetitions(), set.getWaitingTime());
         Set storedSet = storeSet.withValues(exerciseName, setToCreate);
         output.present(SetDocument.of(storedSet));
     }

@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Exercises {
-    Set<Exercise> exercises;
+    private Set<Exercise> exercises;
 
     public Exercises(Set<Exercise> exercises) {
         this.exercises = exercises;
@@ -25,6 +25,7 @@ public class Exercises {
     }
 
     public void add(Exercise exercise) {
-        this.exercises.add(exercise);
+        exercises.add(exercise);
     }
+
 }

@@ -12,14 +12,14 @@ public class Exercise {
         this(muscleGroup, name, Sets.empty());
     }
 
-    public Exercise(MuscleGroup muscleGroup, Name name, Sets sets) {
+    private Exercise(MuscleGroup muscleGroup, Name name, Sets sets) {
         this.muscleGroup = muscleGroup;
         this.name = name;
         this.sets = sets;
     }
 
     public void add(Set set) {
-        this.sets.add(set);
+        sets.add(set);
     }
 
     public Name getName() {
@@ -32,5 +32,9 @@ public class Exercise {
 
     public MuscleGroup getMuscleGroup() {
         return muscleGroup;
+    }
+
+    public void addAll(Sets sets) {
+        this.sets = sets;
     }
 }

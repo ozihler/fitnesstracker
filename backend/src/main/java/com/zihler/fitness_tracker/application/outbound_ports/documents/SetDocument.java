@@ -27,7 +27,7 @@ public class SetDocument {
     }
 
     public static SetDocument of(Set set) {
-        return of(set.getWorkoutId(), set.getWeight(), set.getRepetitions(), set.getWaitingTime());
+        return of(set.getWeight(), set.getRepetitions(), set.getWaitingTime());
     }
 
     public WorkoutId getWorkoutId() {

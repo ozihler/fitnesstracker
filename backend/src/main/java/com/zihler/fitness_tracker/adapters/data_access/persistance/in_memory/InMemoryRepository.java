@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+import static java.util.stream.Collectors.toSet;
+
 @Repository
 public class InMemoryRepository
         implements
@@ -17,6 +19,7 @@ public class InMemoryRepository
         FetchWorkouts,
         StoreWorkout,
         FetchAllMuscleGroups,
+        FetchMuscleGroups,
         FetchMuscleGroup,
         StoreMuscleGroups,
         FetchExercise,
@@ -117,5 +120,15 @@ public class InMemoryRepository
     @Override
     public Workouts all() {
         return new Workouts(new ArrayList<>(workouts.values()));
+    }
+
+    @Override
+    public MuscleGroups by(Names names) {
+        return MuscleGroups.of(names.values()
+                .stream()
+                .map(name -> repo.get(name))
+                .filter(Objects::nonNull)
+                .collect(toSet())
+        );
     }
 }

@@ -3,6 +3,7 @@ package com.zihler.fitness_tracker.domain.values;
 import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
 import org.apache.logging.log4j.util.Strings;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class MuscleGroups {
@@ -10,6 +11,10 @@ public class MuscleGroups {
 
     public MuscleGroups(Set<MuscleGroup> muscleGroups) {
         this.muscleGroups = muscleGroups;
+    }
+
+    public MuscleGroups() {
+        this(new HashSet<>());
     }
 
     public static MuscleGroups of(Set<MuscleGroup> muscleGroups) {
@@ -26,6 +31,10 @@ public class MuscleGroups {
 
     @Override
     public String toString() {
-        return "MuscleGroups[" + Strings.join(muscleGroups,',') +"]";
+        return "MuscleGroups[" + Strings.join(muscleGroups, ',') + "]";
+    }
+
+    public void clear() {
+        muscleGroups.clear();
     }
 }

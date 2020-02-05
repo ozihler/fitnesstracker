@@ -40,7 +40,7 @@ public class ViewAllExercisesForMuscleGroupUseCase implements ViewAllExercisesFo
     }
 
     private SetsDocument toDocument(Sets sets) {
-        return SetsDocument.of(sets.getSets().stream().map(set -> SetDocument.of(set.getWorkoutId(), set.getWeight(), set.getRepetitions(), set.getWaitingTime())).collect(toList()));
+        return SetsDocument.of(sets.getSets().stream().map(set -> SetDocument.of(set.getWeight(), set.getRepetitions(), set.getWaitingTime())).collect(toList()));
     }
 
 }

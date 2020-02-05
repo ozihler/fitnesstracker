@@ -5,9 +5,11 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workout
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutFullViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutToUpdate;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.SetViewModel;
+import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchExercise;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchMuscleGroup;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchWorkout;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorkout;
+import com.zihler.fitness_tracker.domain.entities.Exercise;
 import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
 import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
@@ -32,8 +34,8 @@ class UpdateWorkoutTest {
         FetchMuscleGroup fetchMuscleGroup = MuscleGroup::new;
         StoreWorkout storeWorkout = workout -> workout;
 
-
-        var controller = new UpdateWorkoutController(fetchWorkout, storeWorkout, fetchMuscleGroup);
+        FetchExercise fetchExercise = exerciseName -> new Exercise(null, exerciseName);
+        var controller = new UpdateWorkoutController(fetchWorkout, storeWorkout, fetchMuscleGroup, fetchExercise);
 
 
         long gid = 1234L;

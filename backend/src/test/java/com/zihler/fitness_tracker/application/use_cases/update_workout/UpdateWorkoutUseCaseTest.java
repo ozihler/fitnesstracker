@@ -1,6 +1,7 @@
 package com.zihler.fitness_tracker.application.use_cases.update_workout;
 
 import com.zihler.fitness_tracker.application.outbound_ports.documents.*;
+import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchExercise;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchMuscleGroup;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchWorkout;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorkout;
@@ -35,10 +36,11 @@ class UpdateWorkoutUseCaseTest {
         FetchWorkout fetchWorkout = workouts::get;
 
         FetchMuscleGroup fetchMuscleGroup = MuscleGroup::new;
+        FetchExercise fetchExercise = e -> new Exercise(null, e);
 
         WorkoutDocument initialWorkout = initWorkout(storeWorkout);
 
-        UpdateWorkout updateWorkoutUseCase = new UpdateWorkoutUseCase(fetchWorkout, storeWorkout, fetchMuscleGroup);
+        UpdateWorkout updateWorkoutUseCase = new UpdateWorkoutUseCase(fetchWorkout, storeWorkout, fetchMuscleGroup, fetchExercise);
         TestWorkoutPresenter output = new TestWorkoutPresenter();
 
         MuscleGroupsDocument muscleGroups = new MuscleGroupsDocument(

@@ -36,7 +36,5 @@ class FlatWorkoutTest {
         assertTrue(exerciseNames.contains(ExerciseName.of("Flying")));
         assertTrue(exerciseNames.contains(ExerciseName.of("Dumbbell Bench Press")));
 
-//        flatWorkout.getExercises
-
     }
 }

@@ -1,6 +1,10 @@
 package com.zihler.fitness_tracker.application.outbound_ports.documents;
 
+import com.zihler.fitness_tracker.domain.entities.Exercise;
 import com.zihler.fitness_tracker.domain.values.Name;
+
+import static java.util.stream.Collectors.toList;
+
 
 public class ExerciseDocument {
     private Name name;
@@ -28,6 +32,10 @@ public class ExerciseDocument {
 
     public static ExerciseDocument of(MuscleGroupDocument muscleGroup, Name name) {
         return of(muscleGroup, name, SetsDocument.empty());
+    }
+
+    public static ExerciseDocument of(Exercise e) {
+        return new ExerciseDocument(e.getName(), SetsDocument.of(e.getSets().getSets().stream().map(s -> SetDocument.of(s.getWeight(), s.getRepetitions(), s.getWaitingTime())).collect(toList())));
     }
 
     public Name getName() {
