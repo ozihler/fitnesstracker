@@ -36,6 +36,7 @@ public class UpdateWorkoutUseCase implements UpdateWorkout {
 
         old.clear();
 
+        // todo introduce UpdatedWorkout/UpdatedMuscleGroups/UpdatedExercises/UpdatedSets Roles
         MuscleGroups workoutMuscleGroups = new MuscleGroups();
         for (MuscleGroupDocument m : update.getMuscleGroups().getMuscleGroups()) {
             MuscleGroup muscleGroup = new MuscleGroup(m.getName());
