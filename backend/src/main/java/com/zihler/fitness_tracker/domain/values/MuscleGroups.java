@@ -1,6 +1,5 @@
 package com.zihler.fitness_tracker.domain.values;
 
-import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
 import org.apache.logging.log4j.util.Strings;
 
 import java.util.HashSet;

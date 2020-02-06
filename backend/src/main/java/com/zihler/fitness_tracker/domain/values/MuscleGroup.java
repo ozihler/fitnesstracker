@@ -1,7 +1,4 @@
-package com.zihler.fitness_tracker.domain.entities;
-
-import com.zihler.fitness_tracker.domain.values.Exercises;
-import com.zihler.fitness_tracker.domain.values.Name;
+package com.zihler.fitness_tracker.domain.values;
 
 import java.util.Objects;
 
@@ -11,7 +8,7 @@ public class MuscleGroup {
 
     public MuscleGroup(Name name) {
         this.name = name;
-        this.exercises = Exercises.empty();
+        exercises = Exercises.empty();
     }
 
     public Name getName() {
@@ -19,13 +16,17 @@ public class MuscleGroup {
     }
 
     public void add(Exercise exercise) {
-        this.exercises.add(exercise);
+        exercises.add(exercise);
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         MuscleGroup that = (MuscleGroup) o;
         return Objects.equals(name, that.name);
     }

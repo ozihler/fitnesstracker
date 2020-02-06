@@ -6,10 +6,13 @@ import com.zihler.fitness_tracker.application.outbound_ports.documents.SetDocume
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WaitingTime;
 import com.zihler.fitness_tracker.domain.values.Name;
 import com.zihler.fitness_tracker.domain.values.Repetitions;
+import com.zihler.fitness_tracker.domain.values.UnitOfTime;
 import com.zihler.fitness_tracker.domain.values.Weight;
 import org.apache.logging.log4j.util.Strings;
 
 import java.util.List;
+
+import static com.zihler.fitness_tracker.domain.values.UnitOfMeasurement.KILOGRAMM;
 
 public class AddSetToExerciseInput {
     private final String exerciseName;
@@ -55,7 +58,7 @@ public class AddSetToExerciseInput {
 
     private Weight weightFrom(String part) {
         float weightValue = Float.parseFloat(part);
-        return Weight.of(weightValue);
+        return Weight.of(weightValue, KILOGRAMM);
     }
 
     private Repetitions repetitionsFrom(String part) {
@@ -65,7 +68,7 @@ public class AddSetToExerciseInput {
     private WaitingTime waitingTimeFrom(List<String> parts) {
         WaitingTime waitingTime = WaitingTime.empty();
         if (parts.size() >= 3) {
-            waitingTime = WaitingTime.of(Integer.parseInt(parts.get(2)));
+            waitingTime = WaitingTime.of(Integer.parseInt(parts.get(2)), UnitOfTime.SECONDS);
         }
         return waitingTime;
     }

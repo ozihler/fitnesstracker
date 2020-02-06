@@ -5,8 +5,8 @@ import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchExerc
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchMuscleGroup;
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.ExercisesPresenter;
 import com.zihler.fitness_tracker.application.use_cases.view_all_exercises_for_muscle_group.inbound_port.ViewAllExercisesForMuscleGroup;
-import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
 import com.zihler.fitness_tracker.domain.values.Exercises;
+import com.zihler.fitness_tracker.domain.values.MuscleGroup;
 import com.zihler.fitness_tracker.domain.values.Sets;
 
 import java.util.Set;

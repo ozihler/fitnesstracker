@@ -1,11 +1,11 @@
 package com.zihler.fitness_tracker.application.use_cases.create_muscle_groups;
 
-import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreMuscleGroups;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGroupDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGroupsDocument;
+import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreMuscleGroups;
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.MuscleGroupsPresenter;
 import com.zihler.fitness_tracker.application.use_cases.create_muscle_groups.inbound_port.CreateMuscleGroups;
-import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
+import com.zihler.fitness_tracker.domain.values.MuscleGroup;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 
 import java.util.Set;
@@ -23,7 +23,7 @@ public class CreateMuscleGroupsUseCase implements CreateMuscleGroups {
     public void callWith(MuscleGroupsDocument muscleGroupsDocument, MuscleGroupsPresenter presenter) {
         MuscleGroups muscleGroups = new MuscleGroups(toEntities(muscleGroupsDocument));
 
-        MuscleGroups storedMuscleGroups = this.store.as(muscleGroups);
+        MuscleGroups storedMuscleGroups = store.as(muscleGroups);
 
         presenter.present(toDocument(storedMuscleGroups));
     }
@@ -36,9 +36,9 @@ public class CreateMuscleGroupsUseCase implements CreateMuscleGroups {
 
     private Set<MuscleGroup> toEntities(MuscleGroupsDocument muscleGroupsDocument) {
         return muscleGroupsDocument.getMuscleGroups()
-                    .stream()
-                    .map(MuscleGroupDocument::getName)
-                    .map(MuscleGroup::new)
-                    .collect(toSet());
+                .stream()
+                .map(MuscleGroupDocument::getName)
+                .map(MuscleGroup::new)
+                .collect(toSet());
     }
 }

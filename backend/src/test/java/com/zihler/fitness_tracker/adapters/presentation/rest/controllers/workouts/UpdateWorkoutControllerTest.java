@@ -9,14 +9,15 @@ import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchExerc
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchMuscleGroup;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchWorkout;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorkout;
-import com.zihler.fitness_tracker.domain.entities.Exercise;
-import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
 import com.zihler.fitness_tracker.domain.entities.Workout;
+import com.zihler.fitness_tracker.domain.values.Exercise;
+import com.zihler.fitness_tracker.domain.values.MuscleGroup;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
 import org.junit.jupiter.api.Test;
 
 import java.time.ZonedDateTime;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,7 +25,7 @@ import java.util.Set;
 import static java.util.stream.Collectors.toSet;
 import static org.junit.jupiter.api.Assertions.*;
 
-class UpdateWorkoutTest {
+class UpdateWorkoutControllerTest {
 
     @Test
     void updateWorkoutTest() {
@@ -57,7 +58,7 @@ class UpdateWorkoutTest {
 
                 )),
                 new MuscleGroupFullViewModel("Triceps", List.of(
-                        new ExerciseFullViewModel("Bench Press", List.of(
+                        new ExerciseFullViewModel("Lat Pull", List.of(
                                 SetViewModel.of(7, 50, 12, 45),
                                 SetViewModel.of(8, 50, 12, 45),
                                 SetViewModel.of(9, 50, 12, 45)
@@ -68,21 +69,32 @@ class UpdateWorkoutTest {
 
         WorkoutToUpdate jsonRequest = new WorkoutToUpdate(updatedWorkoutRequest);
 
-        var updatedWorkout = controller.updateWorkout(jsonRequest).getBody();
+        var fullWorkoutViewModel = controller.updateWorkout(jsonRequest).getBody();
 
         // Workout
-        assertNotNull(updatedWorkout);
-        assertEquals(gid, updatedWorkout.getGid());
-        assertEquals(newTitle, updatedWorkout.getTitle());
-        assertEquals(creationDate, updatedWorkout.getCreationDate());
+        assertNotNull(fullWorkoutViewModel);
+        assertEquals(gid, fullWorkoutViewModel.getGid());
+        assertEquals(newTitle, fullWorkoutViewModel.getTitle());
+        assertEquals(creationDate, fullWorkoutViewModel.getCreationDate());
 
         // Muscle groups
-        assertEquals(2, updatedWorkout.getMuscleGroups().size());
-        Set<String> workoutNames = updatedWorkout.getMuscleGroups().stream().map(MuscleGroupFullViewModel::getName).collect(toSet());
-        assertTrue(workoutNames.contains("Chest"));
-        assertTrue(workoutNames.contains("Triceps"));
+        assertEquals(2, fullWorkoutViewModel.getMuscleGroups().size());
+        Set<String> muscleGroupNames = fullWorkoutViewModel.getMuscleGroups().stream().map(MuscleGroupFullViewModel::getName).collect(toSet());
+        assertTrue(muscleGroupNames.contains("Chest"));
+        assertTrue(muscleGroupNames.contains("Triceps"));
 
         // Exercises
-//        updatedWorkout.getMuscleGroups().stream().map(m->m.)
+        Set<String> exerciseNames = fullWorkoutViewModel.getMuscleGroups()
+                .stream()
+                .map(MuscleGroupFullViewModel::getExercises)
+                .flatMap(Collection::stream)
+                .map(ExerciseFullViewModel::getName)
+                .collect(toSet());
+
+        assertEquals(3, exerciseNames.size());
+        assertTrue(exerciseNames.contains("Bench Press"));
+        assertTrue(exerciseNames.contains("Lat Pull"));
+        assertTrue(exerciseNames.contains("Flying"));
+
     }
 }

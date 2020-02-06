@@ -9,9 +9,9 @@ import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchWorko
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorkout;
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.WorkoutPresenter;
 import com.zihler.fitness_tracker.application.use_cases.update_workout.inbound_port.UpdateWorkout;
-import com.zihler.fitness_tracker.domain.entities.Exercise;
-import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
 import com.zihler.fitness_tracker.domain.entities.Workout;
+import com.zihler.fitness_tracker.domain.values.Exercise;
+import com.zihler.fitness_tracker.domain.values.MuscleGroup;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 import com.zihler.fitness_tracker.domain.values.Sets;
 

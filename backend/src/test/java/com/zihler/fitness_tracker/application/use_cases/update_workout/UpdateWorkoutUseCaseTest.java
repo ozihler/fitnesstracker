@@ -9,8 +9,6 @@ import com.zihler.fitness_tracker.application.outbound_ports.presenters.WorkoutP
 import com.zihler.fitness_tracker.application.use_cases.create_workout.CreateWorkoutUseCase;
 import com.zihler.fitness_tracker.application.use_cases.create_workout.inbound_port.CreateWorkout;
 import com.zihler.fitness_tracker.application.use_cases.update_workout.inbound_port.UpdateWorkout;
-import com.zihler.fitness_tracker.domain.entities.Exercise;
-import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
 import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.*;
 import org.junit.jupiter.api.Test;
@@ -21,6 +19,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static com.zihler.fitness_tracker.domain.values.UnitOfMeasurement.KILOGRAMM;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -46,8 +45,8 @@ class UpdateWorkoutUseCaseTest {
         MuscleGroupsDocument muscleGroups = new MuscleGroupsDocument(
                 Set.of(new MuscleGroupDocument(Name.of("Chest"))
                         .add(new ExerciseDocument(Name.of("Bench Press"))
-                                .add(new SetDocument(WorkoutId.of(1L), Weight.of(50), Repetitions.of(12), WaitingTime.of(45)))
-                                .add(new SetDocument(WorkoutId.of(2L), Weight.of(55), Repetitions.of(12), WaitingTime.of(45))))));
+                                .add(new SetDocument(Weight.of(50, KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS)))
+                                .add(new SetDocument(Weight.of(55, KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS))))));
 
         WorkoutDocument updatedWorkoutInput = new WorkoutDocument(initialWorkout.getWorkoutId(), initialWorkout.getCreationDateTime(), WorkoutTitle.of("New Title"), muscleGroups);
         updateWorkoutUseCase.invokeWith(updatedWorkoutInput, output);

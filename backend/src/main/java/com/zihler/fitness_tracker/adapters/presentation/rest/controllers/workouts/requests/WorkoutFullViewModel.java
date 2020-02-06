@@ -13,6 +13,9 @@ public class WorkoutFullViewModel {
     @JsonProperty("title")
     private String title;
 
+    @JsonProperty("muscleGroups")
+    private Set<MuscleGroupFullViewModel> muscleGroups;
+
     public WorkoutFullViewModel() {
     }
 
@@ -38,9 +41,6 @@ public class WorkoutFullViewModel {
     public Set<MuscleGroupFullViewModel> getMuscleGroups() {
         return muscleGroups;
     }
-
-    @JsonProperty("muscleGroups")
-    private Set<MuscleGroupFullViewModel> muscleGroups;
 
 
 }

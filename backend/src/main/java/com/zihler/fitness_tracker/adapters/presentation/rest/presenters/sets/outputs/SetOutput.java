@@ -10,9 +10,10 @@ public class SetOutput {
         this.set = set;
     }
 
+
     public SetViewModel toViewModel() {
         return new SetViewModel(
-                set.getWorkoutId().toLong(),
+                0,
                 set.getWeight().value(),
                 set.getWeight().unitOfMeasurement().shortname(),
                 set.getRepetitions().number(),

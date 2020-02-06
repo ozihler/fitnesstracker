@@ -1,6 +1,6 @@
 package com.zihler.fitness_tracker.application.outbound_ports.documents;
 
-import com.zihler.fitness_tracker.domain.entities.Exercise;
+import com.zihler.fitness_tracker.domain.values.Exercise;
 import com.zihler.fitness_tracker.domain.values.Name;
 
 import static java.util.stream.Collectors.toList;

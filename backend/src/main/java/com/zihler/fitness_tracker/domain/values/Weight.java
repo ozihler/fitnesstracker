@@ -2,8 +2,6 @@ package com.zihler.fitness_tracker.domain.values;
 
 import com.zihler.fitness_tracker.domain.exceptions.InvalidWeightException;
 
-import static com.zihler.fitness_tracker.domain.values.UnitOfMeasurement.KILOGRAMM;
-
 public class Weight {
     private float weight;
     private UnitOfMeasurement unitOfMeasurement;
@@ -16,8 +14,8 @@ public class Weight {
         this.unitOfMeasurement = unitOfMeasurement;
     }
 
-    public static Weight of(float weight) {
-        return new Weight(weight, KILOGRAMM);
+    public static Weight of(float weight, UnitOfMeasurement unitOfMeasurement) {
+        return new Weight(weight, unitOfMeasurement);
     }
 
     public float value() {

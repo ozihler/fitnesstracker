@@ -1,14 +1,12 @@
 package com.zihler.fitness_tracker.domain.values;
 
-import com.zihler.fitness_tracker.domain.entities.Exercise;
-
 import java.util.HashSet;
 import java.util.Set;
 
 public class Exercises {
     private Set<Exercise> exercises;
 
-    public Exercises(Set<Exercise> exercises) {
+    private Exercises(Set<Exercise> exercises) {
         this.exercises = exercises;
     }
 
@@ -16,7 +14,7 @@ public class Exercises {
         return new Exercises(exercises);
     }
 
-    public static Exercises empty() {
+    static Exercises empty() {
         return new Exercises(new HashSet<>());
     }
 

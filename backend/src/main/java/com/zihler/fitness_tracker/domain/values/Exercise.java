@@ -1,7 +1,6 @@
-package com.zihler.fitness_tracker.domain.entities;
+package com.zihler.fitness_tracker.domain.values;
 
-import com.zihler.fitness_tracker.domain.values.Name;
-import com.zihler.fitness_tracker.domain.values.Sets;
+import com.zihler.fitness_tracker.domain.entities.Set;
 
 public class Exercise {
     private MuscleGroup muscleGroup;
