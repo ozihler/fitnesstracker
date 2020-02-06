@@ -39,7 +39,7 @@ class UpdateWorkoutUseCaseTest {
 
         WorkoutDocument initialWorkout = initWorkout(storeWorkout);
 
-        UpdateWorkout updateWorkoutUseCase = new UpdateWorkoutUseCase(fetchWorkout, storeWorkout, fetchMuscleGroup, fetchExercise);
+        UpdateWorkout updateWorkoutUseCase = new UpdateWorkoutUseCase(fetchWorkout, storeWorkout);
         TestWorkoutPresenter output = new TestWorkoutPresenter();
 
         MuscleGroupsDocument muscleGroups = new MuscleGroupsDocument(

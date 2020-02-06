@@ -5,13 +5,9 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workout
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutFullViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutToUpdate;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.SetViewModel;
-import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchExercise;
-import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchMuscleGroup;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchWorkout;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorkout;
 import com.zihler.fitness_tracker.domain.entities.Workout;
-import com.zihler.fitness_tracker.domain.values.Exercise;
-import com.zihler.fitness_tracker.domain.values.MuscleGroup;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
 import org.junit.jupiter.api.Test;
@@ -32,11 +28,9 @@ class UpdateWorkoutControllerTest {
         ZonedDateTime workoutCreationTime = ZonedDateTime.now();
 
         FetchWorkout fetchWorkout = id -> new Workout(id, workoutCreationTime, WorkoutTitle.of("Title"), new MuscleGroups(new HashSet<>()));
-        FetchMuscleGroup fetchMuscleGroup = MuscleGroup::new;
         StoreWorkout storeWorkout = workout -> workout;
 
-        FetchExercise fetchExercise = exerciseName -> new Exercise(null, exerciseName);
-        var controller = new UpdateWorkoutController(fetchWorkout, storeWorkout, fetchMuscleGroup, fetchExercise);
+        var controller = new UpdateWorkoutController(fetchWorkout, storeWorkout);
 
 
         long gid = 1234L;
@@ -84,10 +78,8 @@ class UpdateWorkoutControllerTest {
         assertTrue(muscleGroupNames.contains("Triceps"));
 
         // Exercises
-        Set<String> exerciseNames = fullWorkoutViewModel.getMuscleGroups()
+        Set<String> exerciseNames = exercises(fullWorkoutViewModel)
                 .stream()
-                .map(MuscleGroupFullViewModel::getExercises)
-                .flatMap(Collection::stream)
                 .map(ExerciseFullViewModel::getName)
                 .collect(toSet());
 
@@ -96,5 +88,22 @@ class UpdateWorkoutControllerTest {
         assertTrue(exerciseNames.contains("Lat Pull"));
         assertTrue(exerciseNames.contains("Flying"));
 
+        // sets
+        long numberOfSetsInWholeWorkout = exercises(fullWorkoutViewModel)
+                .stream()
+                .map(ExerciseFullViewModel::getSets)
+                .mapToLong(Collection::size)
+                .sum();
+
+        assertEquals(9, numberOfSetsInWholeWorkout);
+
+    }
+
+    private Set<ExerciseFullViewModel> exercises(WorkoutFullViewModel fullWorkoutViewModel) {
+        return fullWorkoutViewModel.getMuscleGroups()
+                .stream()
+                .map(MuscleGroupFullViewModel::getExercises)
+                .flatMap(Collection::stream)
+                .collect(toSet());
     }
 }

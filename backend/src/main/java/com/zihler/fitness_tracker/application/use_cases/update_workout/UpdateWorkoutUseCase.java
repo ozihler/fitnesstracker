@@ -3,8 +3,6 @@ package com.zihler.fitness_tracker.application.use_cases.update_workout;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.ExerciseDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGroupDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutDocument;
-import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchExercise;
-import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchMuscleGroup;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchWorkout;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorkout;
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.WorkoutPresenter;
@@ -20,16 +18,12 @@ import java.time.ZonedDateTime;
 import static java.util.stream.Collectors.toList;
 
 public class UpdateWorkoutUseCase implements UpdateWorkout {
-    private FetchMuscleGroup fetchMuscleGroup;
-    private FetchExercise fetchExercise;
     private FetchWorkout fetchWorkout;
     private StoreWorkout storeWorkouts;
 
-    public UpdateWorkoutUseCase(FetchWorkout fetchWorkout, StoreWorkout storeWorkout, FetchMuscleGroup fetchMuscleGroup, FetchExercise fetchExercise) {
+    public UpdateWorkoutUseCase(FetchWorkout fetchWorkout, StoreWorkout storeWorkout) {
         this.fetchWorkout = fetchWorkout;
         storeWorkouts = storeWorkout;
-        this.fetchMuscleGroup = fetchMuscleGroup;
-        this.fetchExercise = fetchExercise;
     }
 
     @Override
@@ -44,9 +38,9 @@ public class UpdateWorkoutUseCase implements UpdateWorkout {
 
         MuscleGroups workoutMuscleGroups = new MuscleGroups();
         for (MuscleGroupDocument m : update.getMuscleGroups().getMuscleGroups()) {
-            MuscleGroup muscleGroup = fetchMuscleGroup.by(m.getName());
+            MuscleGroup muscleGroup = new MuscleGroup(m.getName());
             for (ExerciseDocument e : m.getExercises().getExercises()) {
-                Exercise exercise = fetchExercise.named(e.getName());
+                Exercise exercise = new Exercise(muscleGroup, e.getName());
                 Sets sets = Sets.of(e.getSets().getSets().stream().map(s -> new com.zihler.fitness_tracker.domain.entities.Set(s.getWeight(), s.getRepetitions(), s.getWaitingTime())).collect(toList()));
                 exercise.addAll(sets);
                 muscleGroup.add(exercise);

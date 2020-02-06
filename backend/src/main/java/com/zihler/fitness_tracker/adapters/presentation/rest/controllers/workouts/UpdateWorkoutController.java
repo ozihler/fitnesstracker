@@ -4,8 +4,6 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workout
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutFullViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutToUpdate;
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout.RestUpdatedWorkoutPresenter;
-import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchExercise;
-import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchMuscleGroup;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchWorkout;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorkout;
 import com.zihler.fitness_tracker.application.use_cases.update_workout.UpdateWorkoutUseCase;
@@ -19,8 +17,8 @@ public class UpdateWorkoutController {
     private UpdateWorkout updateWorkout;
 
     @Autowired
-    public UpdateWorkoutController(FetchWorkout fetchWorkout, StoreWorkout storeWorkout, FetchMuscleGroup fetchMuscleGroup, FetchExercise fetchExercise) {
-        updateWorkout = new UpdateWorkoutUseCase(fetchWorkout, storeWorkout, fetchMuscleGroup, fetchExercise);
+    public UpdateWorkoutController(FetchWorkout fetchWorkout, StoreWorkout storeWorkout) {
+        updateWorkout = new UpdateWorkoutUseCase(fetchWorkout, storeWorkout);
     }
 
     public ResponseEntity<WorkoutFullViewModel> updateWorkout(WorkoutToUpdate request) {
