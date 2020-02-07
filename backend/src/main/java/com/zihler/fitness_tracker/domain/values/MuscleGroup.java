@@ -3,6 +3,7 @@ package com.zihler.fitness_tracker.domain.values;
 import java.util.Objects;
 
 public class MuscleGroup {
+    // replace with muscle group name
     private Name name;
     private Exercises exercises;
 

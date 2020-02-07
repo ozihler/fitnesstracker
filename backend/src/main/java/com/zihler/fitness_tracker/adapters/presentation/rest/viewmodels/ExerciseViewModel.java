@@ -37,4 +37,6 @@ public class ExerciseViewModel {
     public String toString() {
         return String.format("ExerciseViewModel{muscleGroup=%s, name='%s', sets=%s}", muscleGroup, name, sets);
     }
+
+
 }

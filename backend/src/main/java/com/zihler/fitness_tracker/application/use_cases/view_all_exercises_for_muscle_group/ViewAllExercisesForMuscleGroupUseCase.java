@@ -31,6 +31,7 @@ public class ViewAllExercisesForMuscleGroupUseCase implements ViewAllExercisesFo
         output.present(toDocument(exercises));
     }
 
+    //todo fetch exercises richtig implementieren.
     private ExercisesDocument toDocument(Exercises exercises) {
         return ExercisesDocument.of(toDocuments(exercises));
     }
