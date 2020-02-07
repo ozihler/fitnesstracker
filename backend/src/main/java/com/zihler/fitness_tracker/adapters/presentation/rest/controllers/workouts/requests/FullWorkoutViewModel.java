@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Set;
 
-public class WorkoutFullViewModel {
+public class FullWorkoutViewModel {
 
     @JsonProperty("gid")
     private String gid;
@@ -14,12 +14,12 @@ public class WorkoutFullViewModel {
     private String title;
 
     @JsonProperty("muscleGroups")
-    private Set<MuscleGroupFullViewModel> muscleGroups;
+    private Set<FullMuscleGroupViewModel> muscleGroups;
 
-    public WorkoutFullViewModel() {
+    public FullWorkoutViewModel() {
     }
 
-    public WorkoutFullViewModel(String gid, long creationDate, String title, Set<MuscleGroupFullViewModel> muscleGroups) {
+    public FullWorkoutViewModel(String gid, long creationDate, String title, Set<FullMuscleGroupViewModel> muscleGroups) {
         this.gid = gid;
         this.creationDate = creationDate;
         this.title = title;
@@ -38,7 +38,7 @@ public class WorkoutFullViewModel {
         return title;
     }
 
-    public Set<MuscleGroupFullViewModel> getMuscleGroups() {
+    public Set<FullMuscleGroupViewModel> getMuscleGroups() {
         return muscleGroups;
     }
 

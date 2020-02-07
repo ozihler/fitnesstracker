@@ -4,17 +4,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class MuscleGroupFullViewModel {
+public class FullMuscleGroupViewModel {
     @JsonProperty("name")
     private String name;
     @JsonProperty("exercises")
-    private List<ExerciseFullViewModel> exercises;
+    private List<FullExerciseViewModel> exercises;
 
-    public MuscleGroupFullViewModel() {
+    public FullMuscleGroupViewModel() {
 
     }
 
-    public MuscleGroupFullViewModel(String name, List<ExerciseFullViewModel> exercises) {
+    public FullMuscleGroupViewModel(String name, List<FullExerciseViewModel> exercises) {
         this.name = name;
         this.exercises = exercises;
     }
@@ -23,7 +23,7 @@ public class MuscleGroupFullViewModel {
         return name;
     }
 
-    public List<ExerciseFullViewModel> getExercises() {
+    public List<FullExerciseViewModel> getExercises() {
         return exercises;
     }
 }

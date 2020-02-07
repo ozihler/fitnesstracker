@@ -1,7 +1,7 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.inputs;
 
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups.inputs.MuscleGroupsFullInput;
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutFullViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.FullWorkoutViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutToUpdate;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutDocument;
 import com.zihler.fitness_tracker.domain.values.WorkoutId;
@@ -19,7 +19,7 @@ public class WorkoutToUpdateInput {
     }
 
     public WorkoutDocument workout() {
-        WorkoutFullViewModel workout = request.getWorkout();
+        FullWorkoutViewModel workout = request.getWorkout();
 
         return new WorkoutDocument(
                 WorkoutId.of(workout.getGid()),

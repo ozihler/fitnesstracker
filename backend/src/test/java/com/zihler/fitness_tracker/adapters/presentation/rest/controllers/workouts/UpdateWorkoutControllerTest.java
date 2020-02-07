@@ -1,10 +1,10 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts;
 
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.ExerciseFullViewModel;
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.MuscleGroupFullViewModel;
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutFullViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.FullExerciseViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.FullMuscleGroupViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.FullWorkoutViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutToUpdate;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.SetViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullSetViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchWorkout;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorkout;
 import com.zihler.fitness_tracker.domain.entities.Workout;
@@ -37,25 +37,25 @@ class UpdateWorkoutControllerTest {
         String newTitle = "New Title";
         long creationDate = workoutCreationTime.toInstant().toEpochMilli();
 
-        var updatedWorkoutRequest = new WorkoutFullViewModel(gid, creationDate, newTitle, Set.of(
-                new MuscleGroupFullViewModel("Chest", List.of(
-                        new ExerciseFullViewModel("Bench Press", List.of(
-                                SetViewModel.of(50, 12, 45),
-                                SetViewModel.of(50, 12, 45),
-                                SetViewModel.of(50, 12, 45)
+        var updatedWorkoutRequest = new FullWorkoutViewModel(gid, creationDate, newTitle, Set.of(
+                new FullMuscleGroupViewModel("Chest", List.of(
+                        new FullExerciseViewModel("Bench Press", List.of(
+                                FullSetViewModel.of(50, 12, 45),
+                                FullSetViewModel.of(50, 12, 45),
+                                FullSetViewModel.of(50, 12, 45)
                         )),
-                        new ExerciseFullViewModel("Flying", List.of(
-                                SetViewModel.of(50, 12, 45),
-                                SetViewModel.of(50, 12, 45),
-                                SetViewModel.of(50, 12, 45)
+                        new FullExerciseViewModel("Flying", List.of(
+                                FullSetViewModel.of(50, 12, 45),
+                                FullSetViewModel.of(50, 12, 45),
+                                FullSetViewModel.of(50, 12, 45)
                         ))
 
                 )),
-                new MuscleGroupFullViewModel("Triceps", List.of(
-                        new ExerciseFullViewModel("Lat Pull", List.of(
-                                SetViewModel.of(50, 12, 45),
-                                SetViewModel.of(50, 12, 45),
-                                SetViewModel.of(50, 12, 45)
+                new FullMuscleGroupViewModel("Triceps", List.of(
+                        new FullExerciseViewModel("Lat Pull", List.of(
+                                FullSetViewModel.of(50, 12, 45),
+                                FullSetViewModel.of(50, 12, 45),
+                                FullSetViewModel.of(50, 12, 45)
                         ))
                 ))
 
@@ -73,14 +73,14 @@ class UpdateWorkoutControllerTest {
 
         // Muscle groups
         assertEquals(2, fullWorkoutViewModel.getMuscleGroups().size());
-        Set<String> muscleGroupNames = fullWorkoutViewModel.getMuscleGroups().stream().map(MuscleGroupFullViewModel::getName).collect(toSet());
+        Set<String> muscleGroupNames = fullWorkoutViewModel.getMuscleGroups().stream().map(FullMuscleGroupViewModel::getName).collect(toSet());
         assertTrue(muscleGroupNames.contains("Chest"));
         assertTrue(muscleGroupNames.contains("Triceps"));
 
         // Exercises
         Set<String> exerciseNames = exercises(fullWorkoutViewModel)
                 .stream()
-                .map(ExerciseFullViewModel::getName)
+                .map(FullExerciseViewModel::getName)
                 .collect(toSet());
 
         assertEquals(3, exerciseNames.size());
@@ -91,7 +91,7 @@ class UpdateWorkoutControllerTest {
         // sets
         long numberOfSetsInWholeWorkout = exercises(fullWorkoutViewModel)
                 .stream()
-                .map(ExerciseFullViewModel::getSets)
+                .map(FullExerciseViewModel::getSets)
                 .mapToLong(Collection::size)
                 .sum();
 
@@ -99,10 +99,10 @@ class UpdateWorkoutControllerTest {
 
     }
 
-    private Set<ExerciseFullViewModel> exercises(WorkoutFullViewModel fullWorkoutViewModel) {
+    private Set<FullExerciseViewModel> exercises(FullWorkoutViewModel fullWorkoutViewModel) {
         return fullWorkoutViewModel.getMuscleGroups()
                 .stream()
-                .map(MuscleGroupFullViewModel::getExercises)
+                .map(FullMuscleGroupViewModel::getExercises)
                 .flatMap(Collection::stream)
                 .collect(toSet());
     }

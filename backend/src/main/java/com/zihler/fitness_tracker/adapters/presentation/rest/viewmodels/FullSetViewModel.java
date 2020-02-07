@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.zihler.fitness_tracker.domain.values.UnitOfMeasurement;
 import com.zihler.fitness_tracker.domain.values.UnitOfTime;
 
-public class SetViewModel {
+public class FullSetViewModel {
     @JsonProperty("weight")
     private float weight;
     @JsonProperty("weightUnit")
@@ -16,7 +16,7 @@ public class SetViewModel {
     @JsonProperty("waitingTimeUnit")
     private String waitingTimeUnit;
 
-    public SetViewModel(float weight, String weightUnit, int numberOfRepetitions, int waitingTime, String waitingTimeUnit) {
+    public FullSetViewModel(float weight, String weightUnit, int numberOfRepetitions, int waitingTime, String waitingTimeUnit) {
         this.weight = weight;
         this.weightUnit = weightUnit;
         this.numberOfRepetitions = numberOfRepetitions;
@@ -24,13 +24,13 @@ public class SetViewModel {
         this.waitingTimeUnit = waitingTimeUnit;
     }
 
-    public static SetViewModel of(float weight, int numberOfRepetitions, int waitingTime) {
-        return new SetViewModel(
+    public static FullSetViewModel of(float weight, int numberOfRepetitions, int waitingTime) {
+        return new FullSetViewModel(
                 weight, UnitOfMeasurement.KILOGRAMM.shortname(), numberOfRepetitions, waitingTime, UnitOfTime.SECONDS.shortname()
         );
     }
 
-    public SetViewModel() {
+    public FullSetViewModel() {
     }
 
     public float getWeight() {

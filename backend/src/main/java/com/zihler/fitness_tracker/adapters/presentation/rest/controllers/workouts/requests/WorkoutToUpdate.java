@@ -4,16 +4,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class WorkoutToUpdate {
     @JsonProperty("workout")
-    private WorkoutFullViewModel workout;
+    private FullWorkoutViewModel workout;
 
-    public WorkoutToUpdate(WorkoutFullViewModel workout) {
+    public WorkoutToUpdate(FullWorkoutViewModel workout) {
         this.workout = workout;
     }
 
     public WorkoutToUpdate() {
     }
 
-    public WorkoutFullViewModel getWorkout() {
+    public FullWorkoutViewModel getWorkout() {
         return workout;
     }
 }

@@ -1,25 +1,25 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout.outputs;
 
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutFullViewModel;
-import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.musclegroups.outputs.MuscleGroupsFullOutput;
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.FullWorkoutViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.musclegroups.outputs.FullMuscleGroupsOutput;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutDocument;
 
 import java.time.Clock;
 import java.time.ZonedDateTime;
 
-public class WorkoutFullOutput {
+public class FullWorkoutOutput {
     private WorkoutDocument document;
 
-    public WorkoutFullOutput(WorkoutDocument document) {
+    public FullWorkoutOutput(WorkoutDocument document) {
         this.document = document;
     }
 
-    public WorkoutFullViewModel toViewModel() {
-        return new WorkoutFullViewModel(
+    public FullWorkoutViewModel toViewModel() {
+        return new FullWorkoutViewModel(
                 document.getWorkoutId().toLong(),
                 formatCreationTime(document.getCreationDateTime()),
                 document.getWorkoutTitle().toString(),
-                new MuscleGroupsFullOutput(document.getMuscleGroups()).toViewModel()
+                new FullMuscleGroupsOutput(document.getMuscleGroups()).toViewModel()
         );
     }
 

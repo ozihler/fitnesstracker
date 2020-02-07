@@ -2,7 +2,7 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.resources;
 
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets.AddSetToExercisesController;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets.requests.SetDetails;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.SetViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullSetViewModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ public class SetsResource {
     }
 
     @PostMapping(path = "api/exercises/{exerciseName}/sets")
-    public ResponseEntity<SetViewModel> addSetToExercise(
+    public ResponseEntity<FullSetViewModel> addSetToExercise(
             @PathVariable("exerciseName") String exerciseName,
             @RequestBody() SetDetails setDetails) {
 

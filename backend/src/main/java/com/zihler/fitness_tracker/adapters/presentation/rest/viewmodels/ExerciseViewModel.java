@@ -10,9 +10,9 @@ public class ExerciseViewModel {
     @JsonProperty("name")
     private String name;
     @JsonProperty("sets")
-    private List<SetViewModel> sets;
+    private List<FullSetViewModel> sets;
 
-    public ExerciseViewModel(MuscleGroupNameViewModel muscleGroup, String name, List<SetViewModel> sets) {
+    public ExerciseViewModel(MuscleGroupNameViewModel muscleGroup, String name, List<FullSetViewModel> sets) {
         this.muscleGroup = muscleGroup;
         this.name = name;
         this.sets = sets;
@@ -25,7 +25,7 @@ public class ExerciseViewModel {
         return name;
     }
 
-    public List<SetViewModel> getSets() {
+    public List<FullSetViewModel> getSets() {
         return sets;
     }
 
