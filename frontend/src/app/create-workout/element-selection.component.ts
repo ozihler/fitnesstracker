@@ -24,8 +24,7 @@ import {TreeNode} from "./tree/tree-node";
                             [typename]="formattedTypeName"></app-create-element>
       </div>
       <div *ngIf="isExercise">
-        <app-create-set (createSet)="createChild($event)"
-                        [typename]="formattedTypeName"></app-create-set>
+        <app-create-set (createSet)="createChild($event)"></app-create-set>
       </div>
     </div>  `,
   styles: []

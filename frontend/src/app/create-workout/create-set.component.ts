@@ -1,82 +1,111 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {WorkoutService} from "../shared/workout.service";
-import {Location} from "@angular/common";
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {SetFormValues} from "./form/set-form-values";
+import {ChangeValue} from "./form/change-value";
 
 @Component({
   selector: 'app-create-set',
   template: `
+    <div class="uk-flex-center">
+      <span>{{currentValues}}</span>
+    </div>
     <div>
-      <div *ngIf="!showButton">
-        <form [formGroup]="set"
-              (ngSubmit)="create()">
-          <div class="uk-margin">
-            <input class="uk-input" formControlName="weight" type="text"> kg
-          </div>
-          <div class="uk-margin">
-            <input class="uk-input" formControlName="repetitions" type="text"> #
-          </div>
-          <div class="uk-margin">
-            <input class="uk-input" formControlName="waitingTime" type="text"> s
-          </div>
-          <button class="uk-button uk-width-1-1 uk-text-truncate" type="submit">Ok</button>
-        </form>
-      </div>
+      <button class="uk-button uk-width-1-1 uk-text-truncate"
+              (click)="disableOtherUpdates('NONE')">Toggle Set Parts
+      </button>
+    </div>
+    <div>
+      <app-set-values
+        [formValues]="formValues.weight"
+        (updateEvent)="update($event)"
+        (disableOtherUpdatesEvent)="disableOtherUpdates($event)">
+
+      </app-set-values>
+      <app-set-values
+        [formValues]="formValues.repetitions"
+        (updateEvent)="update($event)"
+        (disableOtherUpdatesEvent)="disableOtherUpdates($event)">
+
+      </app-set-values>
+      <app-set-values
+        [formValues]="formValues.waitingTime"
+        (updateEvent)="update($event)"
+        (disableOtherUpdatesEvent)="disableOtherUpdates($event)">
+      </app-set-values>
     </div>
     <hr/>
     <div *ngIf="showButton">
-      <button class="uk-button uk-width-1-1 uk-text-truncate" [disabled]="set.valid" (click)="toggleButton()">
-        Create {{typename}} </button>
+      <button class="uk-button uk-width-1-1 uk-text-truncate"
+              (click)="submit()">
+        Add Set
+      </button>
     </div>
   `
 })
 export class CreateSetComponent implements OnInit {
 
+  formValues = {
+    weight: SetFormValues.of(
+      [-5, -1, -.5],
+      [.5, 1, 5],
+      true,
+      "kg",
+      "weight"),
+    repetitions: SetFormValues.of(
+      [-5, -2, -1],
+      [1, 2, 5],
+      true,
+      "#",
+      "repetitions"),
+    waitingTime: SetFormValues.of(
+      [-10, -5, -1],
+      [1, 5, 10],
+      true,
+      "s",
+      "waitingTime")
+  };
+
   @Output() createSet = new EventEmitter<string>();
-  @Input() typename: string;
 
   showButton: boolean = true;
-  set: FormGroup;
 
-  constructor(private workoutService: WorkoutService,
-              private location: Location,
-              private formBuilder: FormBuilder) {
+  constructor() {
 
   }
 
   ngOnInit() {
-    this.initForm();
   }
 
-  create() {
-    if (this.set.valid) {
-      this.emitNewSetEvent(this.concatenateValues());
-    }
+  submit() {
+    this.emitNewSetEvent(this.concatenateValues);
   }
 
-  toggleButton() {
-    this.showButton = false;
+
+  get concatenateValues() {
+    return `${this.formValues.weight.currentValue}_${this.formValues.repetitions.currentValue}_${this.formValues.waitingTime.currentValue}`;
   }
 
-  private initForm() {
-    if (this.set) {
-      return;
-    }
-    this.set = this.formBuilder.group({
-      weight: ["", Validators.required],
-      repetitions: ["", Validators.required],
-      waitingTime: [""]
-    });
+  get currentValues() {
+    return CreateSetComponent.format(this.formValues.weight)
+      + CreateSetComponent.format(this.formValues.repetitions)
+      + CreateSetComponent.format(this.formValues.waitingTime);
+
   }
 
-  private concatenateValues() {
-    return `${this.set.get('weight').value}_${this.set.get('repetitions').value}_${this.set.get('waitingTime').value}`;
+  private static format(values: SetFormValues) {
+    return values.currentValue ? values.currentValue + " " + values.unit + ", " : "";
   }
 
   private emitNewSetEvent(createdElements: string) {
     this.showButton = true;
-    this.set.reset();
     this.createSet.emit(createdElements);
   }
 
+  update(changedValue: ChangeValue) {
+    this.formValues[changedValue.formControlName].currentValue = changedValue.changeValue;
+  }
+
+  disableOtherUpdates(otherValuesName: string) {
+    Object.keys(this.formValues)
+      .forEach(name => this.formValues[name].isDisabled = name !== otherValuesName);
+  }
 }

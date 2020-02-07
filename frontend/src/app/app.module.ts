@@ -12,6 +12,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {CreateSetComponent} from './create-workout/create-set.component';
 import {TreeViewComponent} from './create-workout/tree-view.component';
 import {HttpClientModule} from "@angular/common/http";
+import {SetValuesComponent} from './create-workout/set-values.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {HttpClientModule} from "@angular/common/http";
     CreateElementComponent,
     ElementSelection,
     CreateSetComponent,
-     TreeViewComponent
+    TreeViewComponent,
+    SetValuesComponent
   ],
   imports: [
     BrowserModule,
