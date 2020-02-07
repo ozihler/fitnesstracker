@@ -39,6 +39,7 @@ const routes: Routes = [
   {path: "muscle-group/:name/create-exercise", component: CreateElementComponent},
   {path: "create-set", component: CreateSetComponent},
   {path: "workout-selection", component: WorkoutSelectionComponent},
+  {path: "workouts-overview", component: WorkoutsOverview},
   {path: '', redirectTo: 'workout-selection', pathMatch: 'full'},
   {path: '**', redirectTo: 'workout-selection', pathMatch: 'full'}
 ];

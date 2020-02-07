@@ -9,6 +9,7 @@ import {ActivatedRoute} from "@angular/router";
 @Component({
   selector: 'app-create-workout',
   template: `
+    <a routerLink="/workouts-overview">Back to Overview</a>
     <div>{{workoutTree?.root?.creationDate}} {{workoutTree?.root?.title}}</div>
     <hr/>
     <app-button-tree
@@ -66,8 +67,8 @@ export class CreateWorkoutComponent implements OnInit {
     let addedNode = this.workoutTree.addNode(selectedElement);
 
     if (addedNode) {
-      if (selectedElement.type !== Type.Set) {
-        this.selectableChildrenOfSelectedNode = this.selectableChildrenOfSelectedNode.filter(s => s.name !== selectedElement.name);
+      if (this.isSelectableElement(selectedElement)) {
+        this.removeFromSelectableElements(selectedElement);
       }
 
       this.workoutService.update(this.workoutTree.root)
@@ -76,6 +77,14 @@ export class CreateWorkoutComponent implements OnInit {
           this.workoutTree.enable(selectedElement.name);
         });
     }
+  }
+
+  private removeFromSelectableElements(selectedElement: TreeNode) {
+    this.selectableChildrenOfSelectedNode = this.selectableChildrenOfSelectedNode.filter(s => s.name !== selectedElement.name);
+  }
+
+  private isSelectableElement(selectedElement: TreeNode) {
+    return selectedElement.type !== Type.Set;
   }
 
   createChildInSelection(elements: string) {

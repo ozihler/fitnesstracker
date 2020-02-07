@@ -7,6 +7,27 @@ export class SetFormValues {
               private _currentValue: number) {
   }
 
+
+  set negativeValues(value: number[]) {
+    this._negativeValues = value;
+  }
+
+  set positiveValues(value: number[]) {
+    this._positiveValues = value;
+  }
+
+  set unit(value: string) {
+    this._unit = value;
+  }
+
+  set valueName(value: string) {
+    this._valueName = value;
+  }
+
+  set currentValue(value: number) {
+    this._currentValue = value;
+  }
+
   get unit(): string {
     return this._unit;
   }
