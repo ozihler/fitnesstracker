@@ -10,6 +10,7 @@ export abstract class TreeNode {
   protected constructor(private _parent: TreeNode,
                         private _name,
                         private _children: TreeNode[]) {
+    this.linkToChildren();
   }
 
 
@@ -72,5 +73,13 @@ export abstract class TreeNode {
   linkToParent(parent: TreeNode) {
     this.parent = parent;
     parent.children.push(this);
+  }
+
+
+  linkToChildren() {
+    if (!this.children) {
+      return;
+    }
+    this.children.forEach(child => child.parent = this);
   }
 }

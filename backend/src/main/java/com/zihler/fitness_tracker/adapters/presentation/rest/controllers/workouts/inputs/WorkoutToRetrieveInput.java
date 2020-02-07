@@ -10,6 +10,6 @@ public class WorkoutToRetrieveInput {
     }
 
     public WorkoutId workoutGid() {
-        return WorkoutId.of(Long.parseLong(workoutGid));
+        return WorkoutId.of(workoutGid);
     }
 }

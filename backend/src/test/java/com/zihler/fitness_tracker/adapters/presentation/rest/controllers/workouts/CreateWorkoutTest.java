@@ -3,6 +3,7 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workou
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutToCreate;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutAndMuscleGroupNamesViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorkout;
+import com.zihler.fitness_tracker.domain.values.WorkoutId;
 import org.junit.jupiter.api.Test;
 
 import java.time.ZonedDateTime;
@@ -17,7 +18,7 @@ class CreateWorkoutTest {
     void createWorkout() {
         // given
         StoreWorkout storeWorkout = workout -> workout;
-        var controller = new CreateWorkoutController(storeWorkout);
+        var controller = new CreateWorkoutController(storeWorkout, () -> WorkoutId.of("12345"));
         WorkoutToCreate request = new WorkoutToCreate("Title");
         ZonedDateTime before = ZonedDateTime.now();
 
@@ -29,9 +30,9 @@ class CreateWorkoutTest {
         assertNotNull(result);
         assertThat(result.getTitle()).isEqualTo(request.getTitle());
         assertThat(result.getMuscleGroups().size()).isEqualTo(0);
-        assertTrue(result.getCreationDate() > before.toInstant().toEpochMilli());
+        assertTrue(result.getCreationDate() >= before.toInstant().toEpochMilli());
         assertTrue(result.getCreationDate() < after.toInstant().toEpochMilli());
-        assertThat(result.getGid()).isPositive();
+        assertThat(result.getGid()).isEqualTo("12345");
     }
 
 }

@@ -56,6 +56,19 @@ export class WorkoutService {
   }
 
 
+  update(workout: Workout): Observable<Workout> {
+    let body = {
+      workout: {
+        gid: workout.gid.value,
+        creationDate: new Date(workout.creationDate).getTime(),
+        title: workout.title,
+        muscleGroups: workout.children.map(value => this.toJson(value))
+      }
+    };
+    return this.httpClient.put<WorkoutRaw>(`${this.baseUrl}/workouts`, body)
+      .pipe(map(data => WorkoutFactory.fromRaw(data)));
+  }
+
   fetchWorkoutWithId(workoutGid: string): Observable<Workout> {
     let url = `${this.baseUrl}/workouts?workoutGid=${workoutGid}`;
 
@@ -66,19 +79,6 @@ export class WorkoutService {
   fetchAllWorkouts() {
     return this.httpClient.get<WorkoutsSimpleRaw>(`${this.baseUrl}/workouts/overview`)
       .pipe(map(workoutsSimpleRaw => WorkoutSimpleFactory.fromMultiple(workoutsSimpleRaw)));
-  }
-
-  update(workout: Workout): Observable<Workout> {
-    let body = {
-      workout: {
-        gid: workout.gid.value,
-        creationDate: workout.creationDate.getMilliseconds(),
-        title: workout.title,
-        muscleGroups: workout.children.map(value => this.toJson(value))
-      }
-    };
-    return this.httpClient.put<WorkoutRaw>(`${this.baseUrl}/workouts`, body)
-      .pipe(map(data => WorkoutFactory.fromRaw(data)));
   }
 
   private toJson(muscleGroup: MuscleGroup) {
@@ -99,7 +99,6 @@ export class WorkoutService {
 
   private toSetRequest(set: Set) {
     return {
-      gid: set.gid.value,
       weight: set.weight,
       weightUnit: set.weightUnit,
       numberOfRepetitions: set.numberOfRepetitions,
@@ -116,7 +115,7 @@ export class WorkoutService {
   newSetInExercise(exercise: Exercise, setDetails: string): Observable<Set> {
 
     return this.httpClient.post<SetRaw>(`${this.baseUrl}/exercises/${exercise.name}/sets`, {setDetails: setDetails})
-      .pipe(map(e => SetFactory.from(e, exercise)));
+      .pipe(map(e => SetFactory.from(e)));
 
   }
 }

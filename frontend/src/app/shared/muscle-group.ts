@@ -12,4 +12,5 @@ export class MuscleGroup extends TreeNode {
   get type(): Type {
     return Type.Muscle_Group;
   }
+
 }

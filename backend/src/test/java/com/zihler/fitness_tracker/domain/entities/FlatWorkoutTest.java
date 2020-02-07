@@ -15,7 +15,7 @@ class FlatWorkoutTest {
 
     @Test
     void createOrderedSets() {
-        FlatWorkout flatWorkout = new FlatWorkout(WorkoutId.of(1), ZonedDateTime.now(), WorkoutTitle.of("Title"));
+        FlatWorkout flatWorkout = new FlatWorkout(WorkoutId.of("1"), ZonedDateTime.now(), WorkoutTitle.of("Title"));
         flatWorkout.add(FlatSet.of(flatWorkout.getWorkoutId(), MuscleGroupName.of("Chest"), ExerciseName.of("Bench Press"), Weight.of(50, KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS)));
         flatWorkout.add(FlatSet.of(flatWorkout.getWorkoutId(), MuscleGroupName.of("Chest"), ExerciseName.of("Flying"), Weight.of(25, KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS)));
         flatWorkout.add(FlatSet.of(flatWorkout.getWorkoutId(), MuscleGroupName.of("Chest"), ExerciseName.of("Bench Press"), Weight.of(40, KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS)));

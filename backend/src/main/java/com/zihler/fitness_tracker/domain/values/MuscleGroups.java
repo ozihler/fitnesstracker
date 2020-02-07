@@ -33,7 +33,4 @@ public class MuscleGroups {
         return "MuscleGroups[" + Strings.join(muscleGroups, ',') + "]";
     }
 
-    public void clear() {
-        muscleGroups.clear();
-    }
 }

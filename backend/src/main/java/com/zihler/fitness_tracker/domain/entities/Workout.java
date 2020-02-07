@@ -5,7 +5,6 @@ import com.zihler.fitness_tracker.domain.values.WorkoutId;
 import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
 
 import java.time.ZonedDateTime;
-import java.util.HashSet;
 
 public class Workout {
     private final WorkoutId workoutId;
@@ -13,12 +12,12 @@ public class Workout {
     private WorkoutTitle workoutTitle;
     private MuscleGroups muscleGroups;
 
-    private Workout(WorkoutTitle workoutTitle) {
-        this(WorkoutId.random(), ZonedDateTime.now(), workoutTitle, new MuscleGroups(new HashSet<>()));
+    private Workout(WorkoutTitle workoutTitle, WorkoutId workoutId) {
+        this(workoutId, ZonedDateTime.now(), workoutTitle, new MuscleGroups());
     }
 
-    public static Workout newWorkout(WorkoutTitle workoutTitle) {
-        return new Workout(workoutTitle);
+    public static Workout newWorkout(WorkoutTitle workoutTitle, WorkoutId workoutId) {
+        return new Workout(workoutTitle, workoutId);
     }
 
     public static Workout update(WorkoutId workoutId, ZonedDateTime creationDateTime, WorkoutTitle workoutTitle, MuscleGroups muscleGroups) {
@@ -58,7 +57,4 @@ public class Workout {
                 '}';
     }
 
-    public void clear() {
-        muscleGroups.clear();
-    }
 }

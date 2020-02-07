@@ -4,13 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class WorkoutInOverviewViewModel {
     @JsonProperty("gid")
-    private long gid;
+    private String gid;
     @JsonProperty("creationDate")
     private long creationDate;
     @JsonProperty("title")
     private String title;
 
-    public WorkoutInOverviewViewModel(long gid, long creationDate, String title) {
+    public WorkoutInOverviewViewModel(String gid, long creationDate, String title) {
         this.gid = gid;
         this.creationDate = creationDate;
         this.title = title;
@@ -19,7 +19,7 @@ public class WorkoutInOverviewViewModel {
     public WorkoutInOverviewViewModel() {
     }
 
-    public long getGid() {
+    public String getGid() {
         return gid;
     }
 

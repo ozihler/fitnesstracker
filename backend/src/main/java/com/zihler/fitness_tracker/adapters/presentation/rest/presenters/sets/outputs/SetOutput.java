@@ -13,7 +13,6 @@ public class SetOutput {
 
     public SetViewModel toViewModel() {
         return new SetViewModel(
-                0,
                 set.getWeight().value(),
                 set.getWeight().unitOfMeasurement().shortname(),
                 set.getRepetitions().number(),

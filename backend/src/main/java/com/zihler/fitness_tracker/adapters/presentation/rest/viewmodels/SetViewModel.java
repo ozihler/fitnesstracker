@@ -5,8 +5,6 @@ import com.zihler.fitness_tracker.domain.values.UnitOfMeasurement;
 import com.zihler.fitness_tracker.domain.values.UnitOfTime;
 
 public class SetViewModel {
-    @JsonProperty("gid")
-    private long gid;
     @JsonProperty("weight")
     private float weight;
     @JsonProperty("weightUnit")
@@ -18,8 +16,7 @@ public class SetViewModel {
     @JsonProperty("waitingTimeUnit")
     private String waitingTimeUnit;
 
-    public SetViewModel(long gid, float weight, String weightUnit, int numberOfRepetitions, int waitingTime, String waitingTimeUnit) {
-        this.gid = gid;
+    public SetViewModel(float weight, String weightUnit, int numberOfRepetitions, int waitingTime, String waitingTimeUnit) {
         this.weight = weight;
         this.weightUnit = weightUnit;
         this.numberOfRepetitions = numberOfRepetitions;
@@ -27,17 +24,13 @@ public class SetViewModel {
         this.waitingTimeUnit = waitingTimeUnit;
     }
 
-    public static SetViewModel of(long gid, float weight, int numberOfRepetitions, int waitingTime) {
+    public static SetViewModel of(float weight, int numberOfRepetitions, int waitingTime) {
         return new SetViewModel(
-                gid, weight, UnitOfMeasurement.KILOGRAMM.shortname(), numberOfRepetitions, waitingTime, UnitOfTime.SECONDS.shortname()
+                weight, UnitOfMeasurement.KILOGRAMM.shortname(), numberOfRepetitions, waitingTime, UnitOfTime.SECONDS.shortname()
         );
     }
 
     public SetViewModel() {
-    }
-
-    public long getGid() {
-        return gid;
     }
 
     public float getWeight() {
@@ -63,7 +56,6 @@ public class SetViewModel {
     @Override
     public String toString() {
         return "SetViewModel{" +
-                "gid=" + gid +
                 ", weight=" + weight +
                 ", weightUnit='" + weightUnit + '\'' +
                 ", numberOfRepetitions=" + numberOfRepetitions +

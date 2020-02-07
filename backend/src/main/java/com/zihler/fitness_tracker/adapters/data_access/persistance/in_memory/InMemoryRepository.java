@@ -13,6 +13,7 @@ import static java.util.stream.Collectors.toSet;
 @Repository
 public class InMemoryRepository
         implements
+        GenerateWorkoutId,
         FetchWorkout,
         FetchWorkouts,
         StoreWorkout,
@@ -128,5 +129,14 @@ public class InMemoryRepository
                 .filter(Objects::nonNull)
                 .collect(toSet())
         );
+    }
+
+    private static int currentId = 1;
+    private int userId = 1;
+
+
+    @Override
+    public WorkoutId next() {
+        return WorkoutId.of(String.format("WORKOUT-%d-%d", userId, currentId++));
     }
 }

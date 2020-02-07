@@ -122,7 +122,7 @@ class UpdateWorkoutUseCaseTest {
     }
 
     private WorkoutDocument initWorkout(StoreWorkout repo) {
-        CreateWorkout createWorkout = new CreateWorkoutUseCase(repo);
+        CreateWorkout createWorkout = new CreateWorkoutUseCase(repo, () -> WorkoutId.of("987654L"));
         TestWorkoutPresenter output = new TestWorkoutPresenter();
         createWorkout.invokeWith(WorkoutTitle.of("Start Title"), output);
         return output.workoutDocument;

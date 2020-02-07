@@ -7,7 +7,7 @@ import java.util.Set;
 public class WorkoutFullViewModel {
 
     @JsonProperty("gid")
-    private long gid;
+    private String gid;
     @JsonProperty("creationDate")
     private long creationDate;
     @JsonProperty("title")
@@ -19,14 +19,14 @@ public class WorkoutFullViewModel {
     public WorkoutFullViewModel() {
     }
 
-    public WorkoutFullViewModel(long gid, long creationDate, String title, Set<MuscleGroupFullViewModel> muscleGroups) {
+    public WorkoutFullViewModel(String gid, long creationDate, String title, Set<MuscleGroupFullViewModel> muscleGroups) {
         this.gid = gid;
         this.creationDate = creationDate;
         this.title = title;
         this.muscleGroups = muscleGroups;
     }
 
-    public long getGid() {
+    public String getGid() {
         return gid;
     }
 

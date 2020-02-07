@@ -4,7 +4,7 @@ import {MuscleGroup} from "./muscle-group";
 import {Type} from "./type";
 
 export class Exercise extends TreeNode {
-  constructor(name: string, parent: MuscleGroup, sets: Set[] = []) {
+  constructor(parent: MuscleGroup, name: string, sets: Set[] = []) {
     super(parent, name, sets);
   }
 

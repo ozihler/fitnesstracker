@@ -1,7 +1,7 @@
 import {WorkoutTree} from "./workout-tree";
 import {Type} from "../../shared/type";
 import {Workout} from "../../shared/workout";
-import {GID} from "../../shared/gid";
+import {WorkoutId} from "../../shared/workoutId";
 import {Set} from "../../shared/set";
 import {MuscleGroup} from "../../shared/muscle-group";
 import {Exercise} from "../../shared/exercise";
@@ -11,13 +11,13 @@ describe('Workout Tree', () => {
 
 
   it('should have a workout node as tree', () => {
-    let workout = new Workout(GID.from(1), new Date(Date.now()), "Workout", []);
+    let workout = new Workout(WorkoutId.from(1), new Date(Date.now()), "Workout", []);
     let workoutTree = new WorkoutTree(workout);
     expect(workoutTree.root.type).toBe(Type.Workout);
   });
 
   it('can add nodes to tree', () => {
-    let workout = new Workout(GID.from(1), new Date(Date.now()), "Workout", []);
+    let workout = new Workout(WorkoutId.from(1), new Date(Date.now()), "Workout", []);
     let workoutTree = new WorkoutTree(workout);
 
     let muscleGroup = new MuscleGroup(undefined, "Chest", []);
@@ -28,7 +28,7 @@ describe('Workout Tree', () => {
     expect(nodeOfMuscleGroup.type).toBe(Type.Muscle_Group);
     expect(nodeOfMuscleGroup.parent.name).toBe(workout.name);
 
-    let exercise = new Exercise("Bench Press", muscleGroup, []);
+    let exercise = new Exercise(muscleGroup, "Bench Press", []);
     workoutTree.addNode(exercise);
 
     let nodeOfExercise = workoutTree.findNodeByName("Bench Press");
@@ -37,7 +37,7 @@ describe('Workout Tree', () => {
     expect(nodeOfExercise.parent.name).toBe(muscleGroup.name);
 
 
-    let set = new Set(GID.from(2), 50, 'kg', 12, 45, 's', exercise);
+    let set = new Set(WorkoutId.from(2), 50, 'kg', 12, 45, 's', exercise);
     workoutTree.addNode(set);
 
     let setInExercise = workoutTree.findNodeByName(Set.formatEntries(12, 50, 'kg', 45, 's'));
@@ -55,23 +55,23 @@ describe('Workout Tree', () => {
                /\          /        /  \         \
              set set     set      set  set       set
      */
-    let workout = new Workout(GID.from(1), new Date(Date.now()), "Workout", []);
+    let workout = new Workout(WorkoutId.from(1), new Date(Date.now()), "Workout", []);
 
     let chest = new MuscleGroup(workout, "Chest", []);
-    let benchPress = new Exercise("Bench Press", chest, []);
-    let set = new Set(GID.from(2), 50, 'kg', 12, 45, 's', benchPress);
-    let set1 = new Set(GID.from(2), 50, 'kg', 12, 45, 's', benchPress);
+    let benchPress = new Exercise(chest, "Bench Press", []);
+    let set = new Set(WorkoutId.from(2), 50, 'kg', 12, 45, 's', benchPress);
+    let set1 = new Set(WorkoutId.from(2), 50, 'kg', 12, 45, 's', benchPress);
 
-    let dumbbellBP = new Exercise("Dumbbell Bench Press", chest, []);
-    let set2 = new Set(GID.from(3), 50, 'kg', 12, 45, 's', dumbbellBP);
+    let dumbbellBP = new Exercise(chest, "Dumbbell Bench Press", []);
+    let set2 = new Set(WorkoutId.from(3), 50, 'kg', 12, 45, 's', dumbbellBP);
 
     let triceps = new MuscleGroup(workout, "Triceps", []);
-    let latPull = new Exercise("Lat Pull", triceps, []);
-    let set3 = new Set(GID.from(5), 20, 'kg', 12, 45, 's', latPull);
-    let set4 = new Set(GID.from(6), 15, 'kg', 12, 45, 's', latPull);
+    let latPull = new Exercise(triceps, "Lat Pull", []);
+    let set3 = new Set(WorkoutId.from(5), 20, 'kg', 12, 45, 's', latPull);
+    let set4 = new Set(WorkoutId.from(6), 15, 'kg', 12, 45, 's', latPull);
 
-    let overheadLatPull = new Exercise("Overhead Lat Pull", triceps, []);
-    let set5 = new Set(GID.from(7), 10, 'kg', 12, 45, 's', overheadLatPull);
+    let overheadLatPull = new Exercise(triceps, "Overhead Lat Pull", []);
+    let set5 = new Set(WorkoutId.from(7), 10, 'kg', 12, 45, 's', overheadLatPull);
 
     let workoutTree = new WorkoutTree(workout);
     workoutTree.addNode(chest);

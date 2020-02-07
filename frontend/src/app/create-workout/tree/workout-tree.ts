@@ -3,6 +3,7 @@ import {TreeNode} from "./tree-node";
 import {EnableNodeVisitor} from "./enable-node.visitor";
 import {DisableAllNodesVisitor} from "./disable-all-nodes.visitor";
 import {NodeByNameCollectorVisitor} from "./node-by-name-collector.visitor";
+import {Type} from "../../shared/type";
 
 export class WorkoutTree {
   constructor(private _root: Workout) {
@@ -52,7 +53,7 @@ export class WorkoutTree {
   }
 
   addNode(nodeToAdd: TreeNode): boolean {
-    if (!nodeToAdd.parent) {
+    if (nodeToAdd.type === Type.Muscle_Group) {
       return this.link(nodeToAdd, this.root);
     }
     let foundParentOfNode = this.findNodeByName(nodeToAdd.parent.name);

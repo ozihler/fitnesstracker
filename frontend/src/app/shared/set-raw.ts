@@ -1,5 +1,4 @@
 export interface SetRaw {
-  gid: number,
   numberOfRepetitions: number;
   weight: number;
   weightUnit: string;

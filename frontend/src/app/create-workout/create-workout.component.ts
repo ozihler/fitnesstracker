@@ -41,7 +41,7 @@ export class CreateWorkoutComponent implements OnInit {
       if (workoutGid) {
         this.workoutService.fetchWorkoutWithId(workoutGid)
           .subscribe(
-            workout => workout => this.workoutTree = new WorkoutTree(workout),
+            workout => this.workoutTree = new WorkoutTree(workout),
             error => console.log(error));
       } else {
         this.workoutService.newWorkout()
@@ -67,9 +67,15 @@ export class CreateWorkoutComponent implements OnInit {
     let addedNode = this.workoutTree.addNode(selectedElement);
 
     if (addedNode) {
-      this.selectableChildrenOfSelectedNode = this.selectableChildrenOfSelectedNode.filter(s => s.name !== selectedElement.name);
+      if (selectedElement.type !== Type.Set) {
+        this.selectableChildrenOfSelectedNode = this.selectableChildrenOfSelectedNode.filter(s => s.name !== selectedElement.name);
+      }
+
       this.workoutService.update(this.workoutTree.root)
-        .subscribe(workout => this.workoutTree.root = workout);
+        .subscribe(workout => {
+          this.workoutTree.root = workout;
+          this.workoutTree.enable(selectedElement.name);
+        });
     }
   }
 
@@ -97,6 +103,7 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
   private updateSelectableNodesNodes(nodes: TreeNode[]) {
+    this.updateParents(nodes, this.workoutTree.currentSelection);
     nodes.forEach(node => this.selectableChildrenOfSelectedNode.push(node));
   }
 
@@ -105,6 +112,11 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
   private addSetToExercise(sets: Set[]) {
-    sets.forEach(set => this.workoutTree.addNode(set));
+    this.updateParents(sets, this.workoutTree.currentSelection);
+    sets.forEach(set => this.addSelectedItemToTree(set));
+  }
+
+  private updateParents(nodes: TreeNode[], parent: TreeNode) {
+    nodes.forEach(node => node.parent = parent);
   }
 }

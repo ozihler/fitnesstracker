@@ -33,29 +33,29 @@ class UpdateWorkoutControllerTest {
         var controller = new UpdateWorkoutController(fetchWorkout, storeWorkout);
 
 
-        long gid = 1234L;
+        String gid = "1234L";
         String newTitle = "New Title";
         long creationDate = workoutCreationTime.toInstant().toEpochMilli();
 
         var updatedWorkoutRequest = new WorkoutFullViewModel(gid, creationDate, newTitle, Set.of(
                 new MuscleGroupFullViewModel("Chest", List.of(
                         new ExerciseFullViewModel("Bench Press", List.of(
-                                SetViewModel.of(1, 50, 12, 45),
-                                SetViewModel.of(2, 50, 12, 45),
-                                SetViewModel.of(3, 50, 12, 45)
+                                SetViewModel.of(50, 12, 45),
+                                SetViewModel.of(50, 12, 45),
+                                SetViewModel.of(50, 12, 45)
                         )),
                         new ExerciseFullViewModel("Flying", List.of(
-                                SetViewModel.of(4, 50, 12, 45),
-                                SetViewModel.of(5, 50, 12, 45),
-                                SetViewModel.of(6, 50, 12, 45)
+                                SetViewModel.of(50, 12, 45),
+                                SetViewModel.of(50, 12, 45),
+                                SetViewModel.of(50, 12, 45)
                         ))
 
                 )),
                 new MuscleGroupFullViewModel("Triceps", List.of(
                         new ExerciseFullViewModel("Lat Pull", List.of(
-                                SetViewModel.of(7, 50, 12, 45),
-                                SetViewModel.of(8, 50, 12, 45),
-                                SetViewModel.of(9, 50, 12, 45)
+                                SetViewModel.of(50, 12, 45),
+                                SetViewModel.of(50, 12, 45),
+                                SetViewModel.of(50, 12, 45)
                         ))
                 ))
 
