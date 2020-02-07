@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {SetFormValues} from "./form/set-form-values";
 import {ChangeValue} from "./form/change-value";
 
@@ -41,7 +41,7 @@ import {ChangeValue} from "./form/change-value";
     </div>
   `
 })
-export class CreateSetComponent implements OnInit {
+export class CreateSetComponent {
 
   formValues = {
     weight: SetFormValues.of(
@@ -70,9 +70,6 @@ export class CreateSetComponent implements OnInit {
 
   constructor() {
 
-  }
-
-  ngOnInit() {
   }
 
   submit() {
