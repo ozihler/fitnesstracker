@@ -19,11 +19,11 @@ public class AddSetToExercisesController {
         addSetToExercise = new AddSetToExerciseUseCase(storeSet);
     }
 
-    public ResponseEntity<FullSetViewModel> addSetToExercises(String exerciseName, SetDetails setDetails) {
-        var input = new AddSetToExerciseInput(exerciseName, setDetails);
+    public ResponseEntity<FullSetViewModel> addSetToExercise(String workoutId, String exerciseName, SetDetails setDetails) {
+        var input = new AddSetToExerciseInput(workoutId, exerciseName, setDetails);
         var output = new RestSetPresenter();
 
-        addSetToExercise.invokeWith(input.exerciseName(), input.set(), output);
+        addSetToExercise.invokeWith(input.workoutId(), input.exerciseName(), input.set(), output);
 
         return output.getResponse();
     }

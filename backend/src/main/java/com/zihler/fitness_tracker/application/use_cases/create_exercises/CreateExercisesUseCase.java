@@ -33,7 +33,7 @@ public class CreateExercisesUseCase implements CreateExercises {
 
         Exercises exercisesToStore = toEntities(exercisesToCreate, muscleGroup);
 
-        Exercises storedExercises = storeExercises.in(muscleGroup.getName(), exercisesToStore);
+        Exercises storedExercises = storeExercises.forMuscleGroup(muscleGroup.getName(), exercisesToStore);
 
         ExercisesDocument exercisesDocumentToPresent = toDocuments(storedExercises);
 

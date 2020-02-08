@@ -23,7 +23,7 @@ import {SelectionService} from "../shared/selection.service";
       [currentSelection]="workoutTree?.currentSelection"
       [selectableElements]="selectableChildrenOfSelectedNode"
       (addNodeEvent)="addSelectedItemToTree($event)"
-      (createsChildEvent)="createChildInSelection($event)">
+      (createsChildEvent)="createSelectableElement($event)">
     </app-element-selection>
     <hr/>
   `
@@ -89,22 +89,25 @@ export class CreateWorkoutComponent implements OnInit {
     return selectedElement.type !== Type.Set;
   }
 
-  createChildInSelection(elements: string) {
+  createSelectableElement(elements: string) {
     if (this.workoutTree.currentSelection.type === Type.Workout) {
       this.selectionService.newMuscleGroup(elements)
-        .subscribe(createdMuscleGroups => this.updateSelectableNodesNodes(createdMuscleGroups));
+        .subscribe(createdMuscleGroups => this.updateSelectableNodes(createdMuscleGroups));
     } else if (this.workoutTree.currentSelection.type === Type.Muscle_Group) {
       this.selectionService.createExercises(this.workoutTree.currentSelection, elements)
-        .subscribe(createdExercises => this.updateSelectableNodesNodes(createdExercises));
+        .subscribe(createdExercises => this.updateSelectableNodes(createdExercises));
     } else if (this.workoutTree.currentSelection.type === Type.Exercise) {
-      this.selectionService.addSetToExerciseExercise(this.workoutTree.currentSelection, elements)
+      this.selectionService.addSetToExerciseExercise(this.workoutTree.root.gid, this.workoutTree.currentSelection, elements)
         .subscribe(createdSet => this.addSetToExercise([createdSet]));
     }
   }
 
   private fetchExercisesForAndFilterOut(name: string, children: string[] = []) {
     this.selectionService.fetchExercisesFor(name)
-      .subscribe(exercises => this.updateSelectableElements(exercises, children));
+      .subscribe(exercises => {
+        this.updateParents(exercises, this.workoutTree.currentSelection);
+        this.updateSelectableElements(exercises, children)
+      });
   }
 
   private fetchMuscleGroupsAndFilterOut(selectedChildren: string[] = []) {
@@ -112,7 +115,7 @@ export class CreateWorkoutComponent implements OnInit {
       .subscribe(muscleGroups => this.updateSelectableElements(muscleGroups, selectedChildren));
   }
 
-  private updateSelectableNodesNodes(nodes: TreeNode[]) {
+  private updateSelectableNodes(nodes: TreeNode[]) {
     this.updateParents(nodes, this.workoutTree.currentSelection);
     nodes.forEach(node => this.selectableChildrenOfSelectedNode.push(node));
   }

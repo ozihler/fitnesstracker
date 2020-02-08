@@ -45,19 +45,19 @@ export class CreateSetComponent {
 
   formValues = {
     weight: SetFormValues.of(
-      [-5, -1, -.5],
-      [.5, 1, 5],
+      [-.5, -1, -10],
+      [.5, 1, 10],
       true,
       "kg",
       "weight"),
     repetitions: SetFormValues.of(
-      [-5, -2, -1],
+      [-1, -2, -5],
       [1, 2, 5],
       true,
       "#",
       "repetitions"),
     waitingTime: SetFormValues.of(
-      [-10, -5, -1],
+      [-1, -5, -10],
       [1, 5, 10],
       true,
       "s",

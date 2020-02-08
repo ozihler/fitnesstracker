@@ -4,10 +4,7 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets.ex
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets.requests.SetDetails;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.SetDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WaitingTime;
-import com.zihler.fitness_tracker.domain.values.Name;
-import com.zihler.fitness_tracker.domain.values.Repetitions;
-import com.zihler.fitness_tracker.domain.values.UnitOfTime;
-import com.zihler.fitness_tracker.domain.values.Weight;
+import com.zihler.fitness_tracker.domain.values.*;
 import org.apache.logging.log4j.util.Strings;
 
 import java.util.List;
@@ -17,8 +14,10 @@ import static com.zihler.fitness_tracker.domain.values.UnitOfMeasurement.KILOGRA
 public class AddSetToExerciseInput {
     private final String exerciseName;
     private final SetDetails setDetails;
+    private final String workoutId;
 
-    public AddSetToExerciseInput(String exerciseName, SetDetails setDetails) {
+    public AddSetToExerciseInput(String workoutId, String exerciseName, SetDetails setDetails) {
+        this.workoutId = workoutId;
         this.exerciseName = exerciseName;
         this.setDetails = setDetails;
     }
@@ -75,5 +74,9 @@ public class AddSetToExerciseInput {
 
     public Name exerciseName() {
         return Name.of(exerciseName);
+    }
+
+    public WorkoutId workoutId() {
+        return WorkoutId.of(workoutId);
     }
 }

@@ -12,6 +12,7 @@ import {Exercise} from "./exercise";
 import {Set} from "./set";
 import {SetRaw} from "./set-raw";
 import {SetFactory} from "./set.factory";
+import {WorkoutId} from "./workoutId";
 
 
 @Injectable({
@@ -44,8 +45,8 @@ export class SelectionService {
       .pipe(map(e => ExerciseFactory.fromMultiple(e.exercises)));
   }
 
-  addSetToExerciseExercise(exercise: Exercise, setDetails: string): Observable<Set> {
-    return this.httpClient.post<SetRaw>(`${this.baseUrl}/exercises/${exercise.name}/sets`, {setDetails: setDetails})
+  addSetToExerciseExercise(workoutId: WorkoutId, exercise: Exercise, setDetails: string): Observable<Set> {
+    return this.httpClient.post<SetRaw>(`${this.baseUrl}/workouts/${workoutId.value}/exercises/${exercise.name}/sets`, {setDetails: setDetails})
       .pipe(map(e => SetFactory.from(e)));
   }
 }

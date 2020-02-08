@@ -1,15 +1,13 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.in_memory;
 
-import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchWorkout;
-import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchWorkouts;
-import com.zihler.fitness_tracker.application.outbound_ports.gateways.GenerateWorkoutId;
-import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorkout;
+import com.zihler.fitness_tracker.application.outbound_ports.gateways.*;
+import com.zihler.fitness_tracker.domain.entities.Set;
 import com.zihler.fitness_tracker.domain.entities.Workout;
-import com.zihler.fitness_tracker.domain.values.WorkoutId;
-import com.zihler.fitness_tracker.domain.values.Workouts;
+import com.zihler.fitness_tracker.domain.values.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,16 +17,16 @@ public class InMemoryWorkoutRepository
         GenerateWorkoutId,
         FetchWorkout,
         FetchWorkouts,
-        StoreWorkout {
-    private Map<WorkoutId, Workout> workouts;
+        StoreWorkout,
+        StoreSet {
 
-    public InMemoryWorkoutRepository() {
-        workouts = new HashMap<>();
-    }
+    private static int currentId = 1;
+    private int userId = 1;
 
+    private Map<WorkoutId, Workout> workouts = new HashMap<>();
 
     @Override
-    public Workout as(Workout workout) {
+    public Workout withValues(Workout workout) {
         workouts.put(workout.getWorkoutId(), workout);
         return workout;
     }
@@ -43,12 +41,29 @@ public class InMemoryWorkoutRepository
         return new Workouts(new ArrayList<>(workouts.values()));
     }
 
-    private static int currentId = 1;
-    private int userId = 1;
-
     @Override
     public WorkoutId next() {
-        return WorkoutId.of(String.format("WORKOUT-%d-%d", userId, currentId++));
+        WorkoutId nextWorkoutId;
+        do {
+            nextWorkoutId = WorkoutId.of(String.format("WORKOUT-%d-%d", userId, currentId++));
+        } while (workouts.containsKey(nextWorkoutId));
+
+        return nextWorkoutId;
+    }
+
+    @Override
+    public Set withValues(WorkoutId workoutId, Name exerciseName, Set setToStore) {
+        Workout workout = workouts.get(workoutId);
+        workout.getMuscleGroups().getMuscleGroups()
+                .stream()
+                .map(MuscleGroup::getExercises)
+                .map(Exercises::getExercises)
+                .flatMap(Collection::stream)
+                .filter(e -> e.getName().equals(exerciseName))
+                .findFirst().get()
+                .getSets()
+                .add(setToStore);
+        return setToStore;
     }
 
 }

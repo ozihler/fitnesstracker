@@ -55,7 +55,7 @@ public class UpdatableWorkout {
     }
 
     public void store() {
-        self = storeWorkout.as(self);
+        self = storeWorkout.withValues(self);
     }
 
     public void present() {

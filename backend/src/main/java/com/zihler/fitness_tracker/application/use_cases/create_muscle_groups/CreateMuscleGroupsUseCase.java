@@ -23,7 +23,7 @@ public class CreateMuscleGroupsUseCase implements CreateMuscleGroups {
     public void callWith(MuscleGroupsDocument muscleGroupsDocument, MuscleGroupsPresenter presenter) {
         MuscleGroups muscleGroups = new MuscleGroups(toEntities(muscleGroupsDocument));
 
-        MuscleGroups storedMuscleGroups = store.as(muscleGroups);
+        MuscleGroups storedMuscleGroups = store.withValues(muscleGroups);
 
         presenter.present(toDocument(storedMuscleGroups));
     }

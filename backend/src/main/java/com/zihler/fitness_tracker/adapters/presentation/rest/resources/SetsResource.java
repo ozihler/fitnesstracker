@@ -21,12 +21,13 @@ public class SetsResource {
         this.addSetToExerciseController = addSetToExerciseController;
     }
 
-    @PostMapping(path = "api/exercises/{exerciseName}/sets")
+    @PostMapping(path = "api/workouts/{workoutId}/exercises/{exerciseName}/sets")
     public ResponseEntity<FullSetViewModel> addSetToExercise(
+            @PathVariable("workoutId") String workoutId,
             @PathVariable("exerciseName") String exerciseName,
             @RequestBody() SetDetails setDetails) {
 
-        var addedSet = addSetToExerciseController.addSetToExercises(exerciseName, setDetails);
+        var addedSet = addSetToExerciseController.addSetToExercise(workoutId, exerciseName, setDetails);
 
         logger.info("add set {} to exercise {}, response {}", setDetails, exerciseName, addedSet.getBody());
 

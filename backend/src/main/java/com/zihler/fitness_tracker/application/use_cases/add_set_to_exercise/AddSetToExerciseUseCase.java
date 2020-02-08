@@ -6,6 +6,7 @@ import com.zihler.fitness_tracker.application.outbound_ports.presenters.SetPrese
 import com.zihler.fitness_tracker.application.use_cases.add_set_to_exercise.inbound_port.AddSetToExercise;
 import com.zihler.fitness_tracker.domain.entities.Set;
 import com.zihler.fitness_tracker.domain.values.Name;
+import com.zihler.fitness_tracker.domain.values.WorkoutId;
 
 public class AddSetToExerciseUseCase implements AddSetToExercise {
     private StoreSet storeSet;
@@ -15,9 +16,9 @@ public class AddSetToExerciseUseCase implements AddSetToExercise {
     }
 
     @Override
-    public void invokeWith(Name exerciseName, SetDocument set, SetPresenter output) {
+    public void invokeWith(WorkoutId workoutId, Name exerciseName, SetDocument set, SetPresenter output) {
         Set setToCreate = Set.of(set.getWeight(), set.getRepetitions(), set.getWaitingTime());
-        Set storedSet = storeSet.withValues(exerciseName, setToCreate);
+        Set storedSet = storeSet.withValues(workoutId, exerciseName, setToCreate);
         output.present(SetDocument.of(storedSet));
     }
 }
