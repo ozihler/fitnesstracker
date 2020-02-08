@@ -3,16 +3,14 @@ package com.zihler.fitness_tracker.domain.values;
 import com.zihler.fitness_tracker.domain.entities.Set;
 
 public class Exercise {
-    private MuscleGroup muscleGroup;
     private Name name;
     private Sets sets;
 
-    public Exercise(MuscleGroup muscleGroup, Name name) {
-        this(muscleGroup, name, Sets.empty());
+    public Exercise(Name name) {
+        this(name, Sets.empty());
     }
 
-    private Exercise(MuscleGroup muscleGroup, Name name, Sets sets) {
-        this.muscleGroup = muscleGroup;
+    private Exercise(Name name, Sets sets) {
         this.name = name;
         this.sets = sets;
     }
@@ -27,10 +25,6 @@ public class Exercise {
 
     public Sets getSets() {
         return sets;
-    }
-
-    public MuscleGroup getMuscleGroup() {
-        return muscleGroup;
     }
 
     public void addAll(Sets sets) {

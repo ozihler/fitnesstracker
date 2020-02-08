@@ -40,7 +40,7 @@ public class UpdatableWorkout {
             workoutMuscleGroups.add(muscleGroup);
 
             for (ExerciseDocument e : m.getExercises().getExercises()) {
-                Exercise exercise = new Exercise(muscleGroup, e.getName());
+                Exercise exercise = new Exercise(e.getName());
                 Sets sets = Sets.of(e.getSets().getSets().stream().map(s -> new com.zihler.fitness_tracker.domain.entities.Set(s.getWeight(), s.getRepetitions(), s.getWaitingTime())).collect(toList()));
                 exercise.addAll(sets);
 

@@ -22,9 +22,9 @@ class ViewAllExercisesControllerTest {
     void test() {
         MuscleGroup expectedMuscleGroup = new MuscleGroup(Name.of("Chest"));
         Set<Exercise> expectedExercises = Set.of(
-                new Exercise(expectedMuscleGroup, Name.of("Bench Press")),
-                new Exercise(expectedMuscleGroup, Name.of("Dumbbell Bench Press")),
-                new Exercise(expectedMuscleGroup, Name.of("Overhead Dumbbell Pull")));
+                new Exercise(Name.of("Bench Press")),
+                new Exercise(Name.of("Dumbbell Bench Press")),
+                new Exercise(Name.of("Overhead Dumbbell Pull")));
 
         FetchExercises fetchExercises = (muscleGroup -> Exercises.of(expectedExercises));
         FetchMuscleGroup fetchMuscleGroup = name -> expectedMuscleGroup;

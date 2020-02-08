@@ -26,8 +26,6 @@ class ExercisesFullInput {
     }
 
     private ExerciseDocument toDocument(FullExerciseViewModel e) {
-        return ExerciseDocument.of(null,
-                Name.of(e.getName()),
-                new SetsFullInput(e.getSets()).toDocument());
+        return ExerciseDocument.of(Name.of(e.getName()), new SetsFullInput(e.getSets()).toDocument());
     }
 }

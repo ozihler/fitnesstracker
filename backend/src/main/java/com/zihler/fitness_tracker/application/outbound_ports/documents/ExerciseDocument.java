@@ -9,29 +9,23 @@ import static java.util.stream.Collectors.toList;
 public class ExerciseDocument {
     private Name name;
     private SetsDocument sets;
-    private MuscleGroupDocument muscleGroup;
 
 
-    private ExerciseDocument(MuscleGroupDocument muscleGroup, Name name, SetsDocument sets) {
+    private ExerciseDocument(Name name, SetsDocument sets) {
         this.name = name;
         this.sets = sets;
-        this.muscleGroup = muscleGroup;
     }
 
     public ExerciseDocument(Name name) {
-        this(null, name, new SetsDocument());
+        this(name, new SetsDocument());
     }
 
-    private ExerciseDocument(Name name, SetsDocument sets) {
-        this(null, name, sets);
+    public static ExerciseDocument of(Name name, SetsDocument sets) {
+        return new ExerciseDocument(name, sets);
     }
 
-    public static ExerciseDocument of(MuscleGroupDocument muscleGroup, Name name, SetsDocument sets) {
-        return new ExerciseDocument(muscleGroup, name, sets);
-    }
-
-    public static ExerciseDocument of(MuscleGroupDocument muscleGroup, Name name) {
-        return of(muscleGroup, name, SetsDocument.empty());
+    public static ExerciseDocument of(Name name) {
+        return of(name, SetsDocument.empty());
     }
 
     public static ExerciseDocument of(Exercise e) {
@@ -44,10 +38,6 @@ public class ExerciseDocument {
 
     public SetsDocument getSets() {
         return sets;
-    }
-
-    public MuscleGroupDocument getMuscleGroup() {
-        return muscleGroup;
     }
 
     public ExerciseDocument add(SetDocument set) {

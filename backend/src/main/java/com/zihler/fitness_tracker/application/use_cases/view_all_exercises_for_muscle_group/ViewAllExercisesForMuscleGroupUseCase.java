@@ -1,6 +1,9 @@
 package com.zihler.fitness_tracker.application.use_cases.view_all_exercises_for_muscle_group;
 
-import com.zihler.fitness_tracker.application.outbound_ports.documents.*;
+import com.zihler.fitness_tracker.application.outbound_ports.documents.ExerciseDocument;
+import com.zihler.fitness_tracker.application.outbound_ports.documents.ExercisesDocument;
+import com.zihler.fitness_tracker.application.outbound_ports.documents.SetDocument;
+import com.zihler.fitness_tracker.application.outbound_ports.documents.SetsDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchExercises;
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.ExercisesPresenter;
 import com.zihler.fitness_tracker.application.use_cases.view_all_exercises_for_muscle_group.inbound_port.ViewAllExercisesForMuscleGroup;
@@ -31,9 +34,7 @@ public class ViewAllExercisesForMuscleGroupUseCase implements ViewAllExercisesFo
 
     private Set<ExerciseDocument> toDocuments(Exercises exercises) {
         return exercises.getExercises().stream()
-                .map(exercise -> ExerciseDocument.of(
-                        MuscleGroupDocument.of(exercise.getMuscleGroup()),
-                        exercise.getName(),
+                .map(exercise -> ExerciseDocument.of(exercise.getName(),
                         toDocument(exercise.getSets())))
                 .collect(Collectors.toSet());
     }

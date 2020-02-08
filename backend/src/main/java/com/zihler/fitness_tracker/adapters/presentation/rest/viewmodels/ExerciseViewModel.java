@@ -5,15 +5,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 public class ExerciseViewModel {
-    @JsonProperty("muscleGroup")
-    private MuscleGroupNameViewModel muscleGroup;//todo remove this!
     @JsonProperty("name")
     private String name;
     @JsonProperty("sets")
     private List<FullSetViewModel> sets;
 
-    public ExerciseViewModel(MuscleGroupNameViewModel muscleGroup, String name, List<FullSetViewModel> sets) {
-        this.muscleGroup = muscleGroup;
+    public ExerciseViewModel(String name, List<FullSetViewModel> sets) {
         this.name = name;
         this.sets = sets;
     }
@@ -29,13 +26,10 @@ public class ExerciseViewModel {
         return sets;
     }
 
-    public MuscleGroupNameViewModel getMuscleGroup() {
-        return muscleGroup;
-    }
 
     @Override
     public String toString() {
-        return String.format("ExerciseViewModel{muscleGroup=%s, name='%s', sets=%s}", muscleGroup, name, sets);
+        return String.format("ExerciseViewModel{name='%s', sets=%s}", name, sets);
     }
 
 

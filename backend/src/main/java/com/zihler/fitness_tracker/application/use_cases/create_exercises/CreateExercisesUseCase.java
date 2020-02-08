@@ -3,7 +3,6 @@ package com.zihler.fitness_tracker.application.use_cases.create_exercises;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercises.requests.ExercisesToCreate;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.ExerciseDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.ExercisesDocument;
-import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGroupDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchMuscleGroup;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreExercises;
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.ExercisesPresenter;
@@ -31,7 +30,7 @@ public class CreateExercisesUseCase implements CreateExercises {
         // todo create roles
         MuscleGroup muscleGroup = fetchMuscleGroup.by(exercisesToCreate.parentMuscleGroup());
 
-        Exercises exercisesToStore = toEntities(exercisesToCreate, muscleGroup);
+        Exercises exercisesToStore = toEntities(exercisesToCreate);
 
         Exercises storedExercises = storeExercises.forMuscleGroup(muscleGroup.getName(), exercisesToStore);
 
@@ -41,18 +40,18 @@ public class CreateExercisesUseCase implements CreateExercises {
 
     }
 
-    private Exercises toEntities(ExercisesToCreate exercisesToCreate, MuscleGroup muscleGroup) {
+    private Exercises toEntities(ExercisesToCreate exercisesToCreate) {
         return Exercises.of(exercisesToCreate.exercisesToCreate()
                 .values()
                 .stream()
-                .map(name -> new Exercise(muscleGroup, name))
+                .map(Exercise::new)
                 .collect(toSet()));
     }
 
     private ExercisesDocument toDocuments(Exercises storedExercises) {
         return ExercisesDocument.of(storedExercises.getExercises()
                 .stream()
-                .map(e -> ExerciseDocument.of(MuscleGroupDocument.of(e.getMuscleGroup()), e.getName()))
+                .map(ExerciseDocument::of)
                 .collect(toSet()));
     }
 
