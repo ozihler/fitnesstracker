@@ -17,7 +17,9 @@ import {TreeNode} from "./tree/tree-node";
              *ngFor="let element of selectableElements">
           <app-selectable-element
             [element]="element"
-            (selectElementEvent)="select($event)">
+            (selectElementEvent)="select($event)"
+            (deleteElementEvent)="delete($event)"
+          >
 
           </app-selectable-element>
 
@@ -93,5 +95,14 @@ export class ElementSelection implements OnInit {
 
   childTypeName() {
     return Type[this.currentSelection ? this.currentSelection.type + 1 : 0];
+  }
+
+  delete(node: TreeNode) {
+    if (node.type == Type.Muscle_Group) {
+      console.log("Delete Musclegroup ", node);
+    } else if (node.type == Type.Exercise) {
+      console.log("Delete Exercise ", node);
+    }
+
   }
 }
