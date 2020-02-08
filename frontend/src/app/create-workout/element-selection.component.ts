@@ -52,6 +52,16 @@ export class ElementSelection implements OnInit {
     this.addNodeEvent.emit(element);
   }
 
+  delete(element: TreeNode) {
+
+    //todo make sure workouts that used a musclegroup/exercise can still be loaded: e.g., only add a flag "used" or so
+    if (element.type == Type.Muscle_Group) {
+      console.log("Delete Musclegroup ", element);
+    } else if (element.type == Type.Exercise) {
+      console.log("Delete Exercise ", element);
+    }
+  }
+
   createChild(elementsString: string) {
     this.createsChildEvent.emit(elementsString);
   }
@@ -95,14 +105,5 @@ export class ElementSelection implements OnInit {
 
   childTypeName() {
     return Type[this.currentSelection ? this.currentSelection.type + 1 : 0];
-  }
-
-  delete(node: TreeNode) {
-    if (node.type == Type.Muscle_Group) {
-      console.log("Delete Musclegroup ", node);
-    } else if (node.type == Type.Exercise) {
-      console.log("Delete Exercise ", node);
-    }
-
   }
 }
