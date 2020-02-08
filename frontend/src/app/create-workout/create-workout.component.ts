@@ -44,21 +44,25 @@ export class CreateWorkoutComponent implements OnInit {
       if (workoutGid) {
         this.workoutService.fetchWorkoutWithId(workoutGid)
           .subscribe(
-            workout => this.workoutTree = new WorkoutTree(workout),
+            workout => {
+              this.workoutTree = new WorkoutTree(workout);
+              this.fetchMuscleGroupsAndFilterOut(this.workoutTree.childrenOfCurrentSelection.map(c => c.name));
+            },
             error => console.log(error));
       } else {
         this.workoutService.newWorkout()
           .subscribe(
-            workout => this.workoutTree = new WorkoutTree(workout),
+            workout => {
+              this.workoutTree = new WorkoutTree(workout);
+              this.fetchMuscleGroupsAndFilterOut(this.workoutTree.childrenOfCurrentSelection.map(c => c.name));
+            },
             error => console.log(error));
       }
-      this.fetchMuscleGroupsAndFilterOut([])
     });
   }
 
   changeTreeNode(node: TreeNode) {
     this.workoutTree.select(node.name);
-
     this.fetchChildrenOf(node);
   }
 
@@ -67,22 +71,6 @@ export class CreateWorkoutComponent implements OnInit {
       this.fetchMuscleGroupsAndFilterOut(this.workoutTree.childrenOfCurrentSelection.map(m => m.name));
     } else if (node.type === Type.Muscle_Group) {
       this.fetchExercisesForAndFilterOut(node.name, this.workoutTree.childrenOfCurrentSelection.map(m => m.name));
-    }
-  }
-
-  addSelectedItemToTree(selectedElement: TreeNode) {
-    let addedNode = this.workoutTree.addNode(selectedElement);
-
-    if (addedNode) {
-      if (CreateWorkoutComponent.isSelectableElement(selectedElement)) {
-        this.removeFromSelectableElements(selectedElement);
-      }
-
-      this.workoutService.updateWorkout(this.workoutTree.root)
-        .subscribe(workout => {
-          this.workoutTree.root = workout;
-          this.workoutTree.enable(selectedElement.name);
-        });
     }
   }
 
@@ -104,6 +92,22 @@ export class CreateWorkoutComponent implements OnInit {
     } else if (this.workoutTree.currentSelection.type === Type.Exercise) {
       this.selectionService.addSetToExerciseExercise(this.workoutTree.root.gid, this.workoutTree.currentSelection, elements)
         .subscribe(createdSet => this.addSetToExercise([createdSet]));
+    }
+  }
+
+  addSelectedItemToTree(selectedElement: TreeNode) {
+    let addedNode = this.workoutTree.addNode(selectedElement);
+
+    if (addedNode) {
+      if (CreateWorkoutComponent.isSelectableElement(selectedElement)) {
+        this.removeFromSelectableElements(selectedElement);
+      }
+
+      this.workoutService.updateWorkout(this.workoutTree.root)
+        .subscribe(workout => {
+          this.workoutTree.root = workout;
+          this.workoutTree.enable(selectedElement.name);
+        });
     }
   }
 
