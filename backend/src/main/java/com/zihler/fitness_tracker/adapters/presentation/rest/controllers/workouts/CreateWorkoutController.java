@@ -6,8 +6,8 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout.
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutAndMuscleGroupNamesViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.GenerateWorkoutId;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorkout;
-import com.zihler.fitness_tracker.application.use_cases.create_workout.CreateWorkoutUseCase;
-import com.zihler.fitness_tracker.application.use_cases.create_workout.inbound_port.CreateWorkout;
+import com.zihler.fitness_tracker.application.use_cases.workouts.create_workout.CreateWorkoutUseCase;
+import com.zihler.fitness_tracker.application.use_cases.workouts.create_workout.inbound_port.CreateWorkout;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;

@@ -5,14 +5,16 @@ import com.zihler.fitness_tracker.domain.values.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
+
+import static java.util.stream.Collectors.toSet;
 
 @Repository
 public class InMemoryMuscleGroupsExercisesRepository
         implements
         FetchAllMuscleGroups,
         FetchMuscleGroup,
+        StoreMuscleGroup,
         StoreMuscleGroups,
         FetchExercises,
         StoreExercises {
@@ -28,7 +30,7 @@ public class InMemoryMuscleGroupsExercisesRepository
 
     @Override
     public MuscleGroups fetchAll() {
-        return MuscleGroups.of(new HashSet<>(muscleGroupsAndExercises.values()));
+        return MuscleGroups.of(muscleGroupsAndExercises.values().stream().filter(MuscleGroup::isSelectable).collect(toSet()));
     }
 
     @Override
@@ -71,4 +73,9 @@ public class InMemoryMuscleGroupsExercisesRepository
         return exercises;
     }
 
+    @Override
+    public MuscleGroup withValues(MuscleGroup muscleGroup) {
+        muscleGroupsAndExercises.put(muscleGroup.getName(), muscleGroup);
+        return muscleGroup;
+    }
 }

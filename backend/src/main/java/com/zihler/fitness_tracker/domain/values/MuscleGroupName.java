@@ -34,4 +34,8 @@ public class MuscleGroupName {
     public int hashCode() {
         return Objects.hash(muscleGroupName);
     }
+
+    public Name getName() {
+        return muscleGroupName;
+    }
 }

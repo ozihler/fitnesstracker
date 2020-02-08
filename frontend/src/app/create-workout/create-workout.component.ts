@@ -23,7 +23,8 @@ import {SelectionService} from "../shared/selection.service";
       [currentSelection]="workoutTree?.currentSelection"
       [selectableElements]="selectableChildrenOfSelectedNode"
       (addNodeEvent)="addSelectedItemToTree($event)"
-      (createsChildEvent)="createSelectableElement($event)">
+      (createsChildEvent)="createSelectableElement($event)"
+      (deleteNodeEvent)="deleteSelectableElement($event)">
     </app-element-selection>
     <hr/>
   `
@@ -58,6 +59,10 @@ export class CreateWorkoutComponent implements OnInit {
   changeTreeNode(node: TreeNode) {
     this.workoutTree.select(node.name);
 
+    this.fetchChildrenOf(node);
+  }
+
+  private fetchChildrenOf(node: TreeNode) {
     if (node.type === Type.Workout) {
       this.fetchMuscleGroupsAndFilterOut(this.workoutTree.childrenOfCurrentSelection.map(m => m.name));
     } else if (node.type === Type.Muscle_Group) {
@@ -131,5 +136,17 @@ export class CreateWorkoutComponent implements OnInit {
 
   private updateParents(nodes: TreeNode[], parent: TreeNode) {
     nodes.forEach(node => node.parent = parent);
+  }
+
+  deleteSelectableElement(element: TreeNode) {
+
+    //todo make sure workouts that used a musclegroup/exercise can still be loaded: e.g., only add a flag "used" or so
+    if (element.type == Type.Muscle_Group) {
+      this.selectionService.deleteMuscleGroup(element.name)
+        .subscribe(() => this.fetchChildrenOf(this.workoutTree.currentSelection)/*just reload the whole thing*/);
+    } else if (element.type == Type.Exercise) {
+      this.selectionService.deleteExercise(element.name)
+        .subscribe(deletedExercise => this.fetchChildrenOf(this.workoutTree.currentSelection));
+    }
   }
 }

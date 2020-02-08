@@ -13,6 +13,8 @@ import {Set} from "./set";
 import {SetRaw} from "./set-raw";
 import {SetFactory} from "./set.factory";
 import {WorkoutId} from "./workoutId";
+import {MuscleGroupRaw} from "./muscle-group-raw";
+import {ExerciseRaw} from "./exercise-raw";
 
 
 @Injectable({
@@ -48,5 +50,15 @@ export class SelectionService {
   addSetToExerciseExercise(workoutId: WorkoutId, exercise: Exercise, setDetails: string): Observable<Set> {
     return this.httpClient.post<SetRaw>(`${this.baseUrl}/workouts/${workoutId.value}/exercises/${exercise.name}/sets`, {setDetails: setDetails})
       .pipe(map(e => SetFactory.from(e)));
+  }
+
+  deleteMuscleGroup(muscleGroupName: string): Observable<MuscleGroup> {
+    return this.httpClient.delete<MuscleGroupRaw>(this.baseUrl + "/muscle-groups/" + muscleGroupName)
+      .pipe(map(muscleGroup => MuscleGroupFactory.from(muscleGroup)));
+  }
+
+  deleteExercise(name: string): Observable<Exercise> {
+    return this.httpClient.get<ExerciseRaw>(this.baseUrl + "/exercises/" + name)
+      .pipe(map(exercise => ExerciseFactory.from(exercise)));
   }
 }

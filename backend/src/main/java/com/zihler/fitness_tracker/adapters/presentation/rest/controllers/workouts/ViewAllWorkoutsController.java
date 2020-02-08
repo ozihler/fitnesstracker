@@ -3,8 +3,8 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workou
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout.RestWorkoutsInOverviewPresenter;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutsInOverviewViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchWorkouts;
-import com.zihler.fitness_tracker.application.use_cases.view_all_workouts.ViewAllWorkoutsUseCase;
-import com.zihler.fitness_tracker.application.use_cases.view_all_workouts.inbound_port.ViewAllWorkouts;
+import com.zihler.fitness_tracker.application.use_cases.workouts.view_all_workouts.ViewAllWorkoutsUseCase;
+import com.zihler.fitness_tracker.application.use_cases.workouts.view_all_workouts.inbound_port.ViewAllWorkouts;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 

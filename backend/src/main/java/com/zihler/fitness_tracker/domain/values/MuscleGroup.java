@@ -6,6 +6,7 @@ public class MuscleGroup {
     // replace with muscle group name
     private Name name;
     private Exercises exercises;
+    private boolean isSelectable = true;
 
     public MuscleGroup(Name name) {
         this(name, Exercises.empty());
@@ -47,5 +48,13 @@ public class MuscleGroup {
 
     public void add(Exercises exercises) {
         exercises.getExercises().forEach(this::add);
+    }
+
+    public void setSelectable(boolean isSelectable) {
+        this.isSelectable = isSelectable;
+    }
+
+    public boolean isSelectable() {
+        return isSelectable;
     }
 }

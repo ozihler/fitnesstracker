@@ -5,8 +5,8 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets.re
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.sets.RestSetPresenter;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullSetViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreSet;
-import com.zihler.fitness_tracker.application.use_cases.add_set_to_exercise.AddSetToExerciseUseCase;
-import com.zihler.fitness_tracker.application.use_cases.add_set_to_exercise.inbound_port.AddSetToExercise;
+import com.zihler.fitness_tracker.application.use_cases.exercises.add_set_to_exercise.AddSetToExerciseUseCase;
+import com.zihler.fitness_tracker.application.use_cases.exercises.add_set_to_exercise.inbound_port.AddSetToExercise;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 

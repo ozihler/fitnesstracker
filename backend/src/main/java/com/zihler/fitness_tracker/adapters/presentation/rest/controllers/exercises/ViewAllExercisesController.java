@@ -4,8 +4,8 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.muscleg
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.exercises.RestExercisesPresenter;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.ExercisesViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchExercises;
-import com.zihler.fitness_tracker.application.use_cases.view_all_exercises_for_muscle_group.ViewAllExercisesForMuscleGroupUseCase;
-import com.zihler.fitness_tracker.application.use_cases.view_all_exercises_for_muscle_group.inbound_port.ViewAllExercisesForMuscleGroup;
+import com.zihler.fitness_tracker.application.use_cases.exercises.view_all_exercises_for_muscle_group.ViewAllExercisesForMuscleGroupUseCase;
+import com.zihler.fitness_tracker.application.use_cases.exercises.view_all_exercises_for_muscle_group.inbound_port.ViewAllExercisesForMuscleGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;

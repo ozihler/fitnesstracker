@@ -4,8 +4,8 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workout
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.FullWorkoutViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout.RestFullWorkoutPresenter;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchWorkout;
-import com.zihler.fitness_tracker.application.use_cases.view_single_workout.ViewSingleWorkoutUseCase;
-import com.zihler.fitness_tracker.application.use_cases.view_single_workout.inbound_port.ViewSingleWorkout;
+import com.zihler.fitness_tracker.application.use_cases.workouts.view_single_workout.ViewSingleWorkoutUseCase;
+import com.zihler.fitness_tracker.application.use_cases.workouts.view_single_workout.inbound_port.ViewSingleWorkout;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
