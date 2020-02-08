@@ -35,4 +35,8 @@ public class ExerciseName {
     public int hashCode() {
         return Objects.hash(exerciseName);
     }
+
+    public Name getName() {
+        return exerciseName;
+    }
 }

@@ -1,7 +1,12 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.in_memory;
 
+import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.FileSystem;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.*;
 import com.zihler.fitness_tracker.domain.values.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -12,6 +17,7 @@ import java.util.Set;
 import static java.util.stream.Collectors.toSet;
 
 @Repository
+@Profile("prod")
 public class InMemoryMuscleGroupsExercisesRepository
         implements
         FetchAllMuscleGroups,
@@ -22,14 +28,26 @@ public class InMemoryMuscleGroupsExercisesRepository
         StoreExercises,
         FetchExercise,
         StoreExercise {
+    private static final Logger logger = LogManager.getLogger();
+
+    private FileSystem fileSystem = new FileSystem();
+
     private Map<Name, MuscleGroup> muscleGroupsAndExercises;
 
+    @Autowired
     public InMemoryMuscleGroupsExercisesRepository() {
         initMuscleGroupsAndExercises();
     }
 
     private void initMuscleGroupsAndExercises() {
         muscleGroupsAndExercises = new HashMap<>();
+
+        fileSystem.readMuscleGroupsAndExercises()
+                .getMuscleGroups()
+                .forEach(muscleGroup -> muscleGroupsAndExercises.put(muscleGroup.getName(), muscleGroup));
+
+        logger.debug("Loaded musclegroups: " + muscleGroupsAndExercises);
+
     }
 
     @Override
@@ -39,7 +57,7 @@ public class InMemoryMuscleGroupsExercisesRepository
 
     @Override
     public MuscleGroups withValues(MuscleGroups muscleGroups) {
-        muscleGroups.getMuscleGroups().forEach(muscleGroup -> muscleGroupsAndExercises.put(muscleGroup.getName(), muscleGroup));
+        muscleGroups.getMuscleGroups().forEach(this::withValues);
         return muscleGroups;
     }
 
@@ -67,12 +85,12 @@ public class InMemoryMuscleGroupsExercisesRepository
         MuscleGroup muscleGroup = muscleGroupsAndExercises.get(muscleGroupName);
 
         if (muscleGroup == null) {
-            muscleGroup = withValues(MuscleGroups.of(java.util.Set.of(new MuscleGroup(muscleGroupName)))).getMuscleGroups().iterator().next();
+            muscleGroup = new MuscleGroup(muscleGroupName, exercises);
+        } else {
+            muscleGroup.add(exercises);
         }
 
-        muscleGroup.add(exercises);
-
-        muscleGroupsAndExercises.put(muscleGroup.getName(), muscleGroup);
+        withValues(muscleGroup);
 
         return exercises;
     }
@@ -80,6 +98,7 @@ public class InMemoryMuscleGroupsExercisesRepository
     @Override
     public MuscleGroup withValues(MuscleGroup muscleGroup) {
         muscleGroupsAndExercises.put(muscleGroup.getName(), muscleGroup);
+
         return muscleGroup;
     }
 

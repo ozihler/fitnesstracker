@@ -20,6 +20,10 @@ public class MuscleGroups {
         return new MuscleGroups(muscleGroups);
     }
 
+    public static MuscleGroups muscleGroups(MuscleGroup... muscleGroups) {
+        return of(Set.of(muscleGroups));
+    }
+
     public Set<MuscleGroup> getMuscleGroups() {
         return muscleGroups;
     }

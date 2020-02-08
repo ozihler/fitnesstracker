@@ -18,6 +18,10 @@ public class Exercises {
         return new Exercises(new HashSet<>());
     }
 
+    public static Exercises of(Exercise... exercises) {
+        return of(Set.of(exercises));
+    }
+
     public Set<Exercise> getExercises() {
         return exercises;
     }
