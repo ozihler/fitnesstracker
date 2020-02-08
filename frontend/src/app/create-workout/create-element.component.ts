@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {WorkoutService} from "../shared/workout.service";
 import {Location} from "@angular/common";
 
 @Component({
@@ -34,8 +33,7 @@ export class CreateElementComponent implements OnInit {
   showButton: boolean = true;
   createElement: FormGroup;
 
-  constructor(private workoutService: WorkoutService,
-              private location: Location,
+  constructor(private location: Location,
               private formBuilder: FormBuilder) {
 
   }

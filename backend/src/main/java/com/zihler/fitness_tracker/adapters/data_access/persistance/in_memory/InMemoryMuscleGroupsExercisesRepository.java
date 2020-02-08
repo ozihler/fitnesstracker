@@ -2,7 +2,6 @@ package com.zihler.fitness_tracker.adapters.data_access.persistance.in_memory;
 
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.*;
 import com.zihler.fitness_tracker.domain.entities.Set;
-import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.*;
 import org.springframework.stereotype.Repository;
 
@@ -11,12 +10,8 @@ import java.util.*;
 import static java.util.stream.Collectors.toSet;
 
 @Repository
-public class InMemoryRepository
+public class InMemoryMuscleGroupsExercisesRepository
         implements
-        GenerateWorkoutId,
-        FetchWorkout,
-        FetchWorkouts,
-        StoreWorkout,
         FetchAllMuscleGroups,
         FetchMuscleGroups,
         FetchMuscleGroup,
@@ -25,43 +20,24 @@ public class InMemoryRepository
         FetchExercises,
         StoreSet,
         StoreExercises {
-    private Map<Name, MuscleGroup> mGE;
-    private Map<WorkoutId, Workout> workouts;
+    private Map<Name, MuscleGroup> muscleGroupsAndExercises;
 
-    public InMemoryRepository() {
+    public InMemoryMuscleGroupsExercisesRepository() {
         initMuscleGroupsAndExercises();
-        workouts = new HashMap<>();
     }
 
     private void initMuscleGroupsAndExercises() {
-        mGE = new HashMap<>();
-    }
-
-    @Override
-    public Workout as(Workout workout) {
-        workouts.put(workout.getWorkoutId(), workout);
-        if (workout.getMuscleGroups() != null) {
-            MuscleGroups muscleGroups = workout.getMuscleGroups();
-            for (MuscleGroup muscleGroup : muscleGroups.getMuscleGroups()) {
-                mGE.put(muscleGroup.getName(), muscleGroup);
-            }
-        }
-        return workout;
-    }
-
-    @Override
-    public Workout by(WorkoutId id) {
-        return workouts.get(id);
+        muscleGroupsAndExercises = new HashMap<>();
     }
 
     @Override
     public MuscleGroups fetchAll() {
-        return MuscleGroups.of(new HashSet<>(mGE.values()));
+        return MuscleGroups.of(new HashSet<>(muscleGroupsAndExercises.values()));
     }
 
     @Override
     public MuscleGroups as(MuscleGroups muscleGroups) {
-        muscleGroups.getMuscleGroups().forEach(muscleGroup -> mGE.put(muscleGroup.getName(), muscleGroup));
+        muscleGroups.getMuscleGroups().forEach(muscleGroup -> muscleGroupsAndExercises.put(muscleGroup.getName(), muscleGroup));
         return muscleGroups;
     }
 
@@ -72,7 +48,7 @@ public class InMemoryRepository
 
     private MuscleGroup find(MuscleGroupName muscleGroupName) {
 
-        return mGE.values()
+        return muscleGroupsAndExercises.values()
                 .stream()
                 .filter(muscleGroup1 -> muscleGroupName.toString().equals(muscleGroup1.getName().toString()))
                 .findFirst()
@@ -81,12 +57,12 @@ public class InMemoryRepository
 
     @Override
     public MuscleGroup by(Name name) {
-        return mGE.get(name);
+        return muscleGroupsAndExercises.get(name);
     }
 
     @Override
     public Exercises in(Name muscleGroupName, Exercises exercises) {
-        MuscleGroup muscleGroup = mGE.get(muscleGroupName);
+        MuscleGroup muscleGroup = muscleGroupsAndExercises.get(muscleGroupName);
 
         if (muscleGroup == null) {
             muscleGroup = as(MuscleGroups.of(java.util.Set.of(new MuscleGroup(muscleGroupName)))).getMuscleGroups().iterator().next();
@@ -94,7 +70,7 @@ public class InMemoryRepository
 
         muscleGroup.add(exercises);
 
-        mGE.put(muscleGroup.getName(), muscleGroup);
+        muscleGroupsAndExercises.put(muscleGroup.getName(), muscleGroup);
 
         return exercises;
     }
@@ -108,7 +84,7 @@ public class InMemoryRepository
     }
 
     private Optional<Exercise> exerciseByName(Name exerciseName) {
-        return mGE.values().stream()
+        return muscleGroupsAndExercises.values().stream()
                 .map(MuscleGroup::getExercises)
                 .map(Exercises::getExercises)
                 .flatMap(Collection::stream)
@@ -123,27 +99,14 @@ public class InMemoryRepository
     }
 
     @Override
-    public Workouts all() {
-        return new Workouts(new ArrayList<>(workouts.values()));
-    }
-
-    @Override
     public MuscleGroups by(Names names) {
         return MuscleGroups.of(names.values()
                 .stream()
-                .map(name -> mGE.get(name))
+                .map(name -> muscleGroupsAndExercises.get(name))
                 .filter(Objects::nonNull)
                 .collect(toSet())
         );
     }
 
-    private static int currentId = 1;
-    private int userId = 1;
-
-
-    @Override
-    public WorkoutId next() {
-        return WorkoutId.of(String.format("WORKOUT-%d-%d", userId, currentId++));
-    }
 
 }

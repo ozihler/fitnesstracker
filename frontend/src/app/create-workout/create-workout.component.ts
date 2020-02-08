@@ -5,6 +5,7 @@ import {Type} from "../shared/type";
 import {Set} from "../shared/set"
 import {WorkoutTree} from "./tree/workout-tree";
 import {ActivatedRoute} from "@angular/router";
+import {SelectionService} from "../shared/selection.service";
 
 @Component({
   selector: 'app-create-workout',
@@ -32,6 +33,7 @@ export class CreateWorkoutComponent implements OnInit {
   selectableChildrenOfSelectedNode: TreeNode[] = [];
 
   constructor(private workoutService: WorkoutService,
+              private selectionService: SelectionService,
               private route: ActivatedRoute) {
   }
 
@@ -67,11 +69,11 @@ export class CreateWorkoutComponent implements OnInit {
     let addedNode = this.workoutTree.addNode(selectedElement);
 
     if (addedNode) {
-      if (this.isSelectableElement(selectedElement)) {
+      if (CreateWorkoutComponent.isSelectableElement(selectedElement)) {
         this.removeFromSelectableElements(selectedElement);
       }
 
-      this.workoutService.update(this.workoutTree.root)
+      this.workoutService.updateWorkout(this.workoutTree.root)
         .subscribe(workout => {
           this.workoutTree.root = workout;
           this.workoutTree.enable(selectedElement.name);
@@ -83,30 +85,30 @@ export class CreateWorkoutComponent implements OnInit {
     this.selectableChildrenOfSelectedNode = this.selectableChildrenOfSelectedNode.filter(s => s.name !== selectedElement.name);
   }
 
-  private isSelectableElement(selectedElement: TreeNode) {
+  private static isSelectableElement(selectedElement: TreeNode) {
     return selectedElement.type !== Type.Set;
   }
 
   createChildInSelection(elements: string) {
     if (this.workoutTree.currentSelection.type === Type.Workout) {
-      this.workoutService.newMuscleGroup(elements)
+      this.selectionService.newMuscleGroup(elements)
         .subscribe(createdMuscleGroups => this.updateSelectableNodesNodes(createdMuscleGroups));
     } else if (this.workoutTree.currentSelection.type === Type.Muscle_Group) {
-      this.workoutService.newExercises(this.workoutTree.currentSelection, elements)
+      this.selectionService.createExercises(this.workoutTree.currentSelection, elements)
         .subscribe(createdExercises => this.updateSelectableNodesNodes(createdExercises));
     } else if (this.workoutTree.currentSelection.type === Type.Exercise) {
-      this.workoutService.newSetInExercise(this.workoutTree.currentSelection, elements)
+      this.selectionService.addSetToExerciseExercise(this.workoutTree.currentSelection, elements)
         .subscribe(createdSet => this.addSetToExercise([createdSet]));
     }
   }
 
   private fetchExercisesForAndFilterOut(name: string, children: string[] = []) {
-    this.workoutService.fetchExercisesFor(name)
+    this.selectionService.fetchExercisesFor(name)
       .subscribe(exercises => this.updateSelectableElements(exercises, children));
   }
 
   private fetchMuscleGroupsAndFilterOut(selectedChildren: string[] = []) {
-    this.workoutService.fetchMuscleGroups()
+    this.selectionService.createMuscleGroups()
       .subscribe(muscleGroups => this.updateSelectableElements(muscleGroups, selectedChildren));
   }
 
