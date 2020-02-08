@@ -22,6 +22,10 @@ export abstract class TreeNode {
     return this._name;
   }
 
+  set name(value) {
+    this._name = value;
+  }
+
   get children(): TreeNode[] {
     return this._children;
   }

@@ -16,6 +16,7 @@ import {SetValuesComponent} from './create-workout/set-values.component';
 import {SelectableElementComponent} from './create-workout/selectable-element.component';
 import {AngularFontAwesomeModule} from "angular-font-awesome";
 import {WorkoutTitleComponent} from './create-workout/workout-title.component';
+import {DatePipe} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import {WorkoutTitleComponent} from './create-workout/workout-title.component';
     HttpClientModule,
     AngularFontAwesomeModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -23,11 +23,15 @@ export class Workout extends TreeNode {
     return this._gid;
   }
 
-  get creationDate(): Date {
-    return this._creationDate;
+  set gid(value: WorkoutId) {
+    this._gid = value;
   }
 
-  static empty() {
-    return new Workout(WorkoutId.from("UNDEFINED YET"), new Date(0), "", []);
+  set creationDate(value: Date) {
+    this._creationDate = value;
+  }
+
+  get creationDate(): Date {
+    return this._creationDate;
   }
 }

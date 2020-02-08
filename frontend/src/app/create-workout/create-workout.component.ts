@@ -6,13 +6,17 @@ import {Set} from "../shared/set"
 import {WorkoutTree} from "./tree/workout-tree";
 import {ActivatedRoute} from "@angular/router";
 import {SelectionService} from "../shared/selection.service";
+import {WorkoutTitleUpdate} from "./workout-title-update";
 
 @Component({
   selector: 'app-create-workout',
   template: `
     <a routerLink="/workouts-overview">Back to Overview</a>
-    <div>{{workoutTree?.root?.creationDate}} {{workoutTree?.root?.title}}</div>
-    <app-workout-title></app-workout-title>
+    <app-workout-title
+      [workoutTitle]="workoutTree?.root?.title"
+      [workoutCreationDate]="workoutTree?.root?.creationDate"
+      (changeTitleEvent)="updateWorkoutTitle($event)">
+    </app-workout-title>
     <hr/>
     <app-button-tree
       [node]="workoutTree?.root"
@@ -93,12 +97,16 @@ export class CreateWorkoutComponent implements OnInit {
         this.removeFromSelectableElements(selectedElement);
       }
 
-      this.workoutService.updateWorkout(this.workoutTree.root)
-        .subscribe(workout => {
-          this.workoutTree.root = workout;
-          this.workoutTree.enable(selectedElement.name);
-        });
+      this.updateWorkoutAndEnable(selectedElement);
     }
+  }
+
+  private updateWorkoutAndEnable(selectedElement: TreeNode) {
+    this.workoutService.updateWorkout(this.workoutTree.root)
+      .subscribe(workout => {
+        this.workoutTree.root = workout;
+        this.workoutTree.enable(selectedElement.name);
+      });
   }
 
   private fetchExercisesForAndFilterOut(name: string, children: string[] = []) {
@@ -138,7 +146,18 @@ export class CreateWorkoutComponent implements OnInit {
         .subscribe(() => this.fetchChildrenOf(this.workoutTree.currentSelection)/*just reload the whole thing*/);
     } else if (element.type == Type.Exercise) {
       this.selectionService.deleteExercise(element.name)
-        .subscribe(deletedExercise => this.fetchChildrenOf(this.workoutTree.currentSelection));
+        .subscribe(() => this.fetchChildrenOf(this.workoutTree.currentSelection));
     }
+  }
+
+  updateWorkoutTitle(updatedWorkout: WorkoutTitleUpdate) {
+    // just save the whole damn thing
+    let selectedElement = this.workoutTree.currentSelection;
+
+    console.log(updatedWorkout)
+    this.workoutTree.root.name = updatedWorkout.workoutTitle;
+    this.workoutTree.root.creationDate = updatedWorkout.workoutCreationDate;
+
+    this.updateWorkoutAndEnable(selectedElement);
   }
 }

@@ -8,7 +8,7 @@ import java.time.ZonedDateTime;
 
 public class Workout {
     private final WorkoutId workoutId;
-    private final ZonedDateTime creationDateTime;
+    private final ZonedDateTime creationDateTime; // todo only use Date, not date time...
     private WorkoutTitle workoutTitle;
     private MuscleGroups muscleGroups;
 
