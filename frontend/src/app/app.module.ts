@@ -13,6 +13,8 @@ import {CreateSetComponent} from './create-workout/create-set.component';
 import {TreeViewComponent} from './create-workout/tree-view.component';
 import {HttpClientModule} from "@angular/common/http";
 import {SetValuesComponent} from './create-workout/set-values.component';
+import {SelectableElementComponent} from './create-workout/selectable-element.component';
+import {AngularFontAwesomeModule} from "angular-font-awesome";
 
 @NgModule({
   declarations: [
@@ -24,13 +26,15 @@ import {SetValuesComponent} from './create-workout/set-values.component';
     ElementSelection,
     CreateSetComponent,
     TreeViewComponent,
-    SetValuesComponent
+    SetValuesComponent,
+    SelectableElementComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

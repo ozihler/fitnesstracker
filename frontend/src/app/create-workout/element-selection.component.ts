@@ -15,9 +15,12 @@ import {TreeNode} from "./tree/tree-node";
       <div *ngIf="!isExercise">
         <div class="uk-grid-small uk-child-width-1-2 uk-flex-center" uk-grid
              *ngFor="let element of selectableElements">
+          <app-selectable-element
+            [element]="element"
+            (selectElementEvent)="select($event)">
 
-          <button class="uk-button uk-button-default"
-                  (click)="select(element)">{{element.name}}</button>
+          </app-selectable-element>
+
         </div>
         <hr/>
         <app-create-element (createElementsEvent)="createChild($event)"
