@@ -26,4 +26,8 @@ export class Workout extends TreeNode {
   get creationDate(): Date {
     return this._creationDate;
   }
+
+  static empty() {
+    return new Workout(WorkoutId.from("UNDEFINED YET"), new Date(0), "", []);
+  }
 }

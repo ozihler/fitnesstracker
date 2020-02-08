@@ -15,6 +15,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {SetValuesComponent} from './create-workout/set-values.component';
 import {SelectableElementComponent} from './create-workout/selectable-element.component';
 import {AngularFontAwesomeModule} from "angular-font-awesome";
+import {WorkoutTitleComponent} from './create-workout/workout-title.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {AngularFontAwesomeModule} from "angular-font-awesome";
     CreateSetComponent,
     TreeViewComponent,
     SetValuesComponent,
-    SelectableElementComponent
+    SelectableElementComponent,
+    WorkoutTitleComponent
   ],
   imports: [
     BrowserModule,

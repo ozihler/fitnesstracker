@@ -12,6 +12,7 @@ import {SelectionService} from "../shared/selection.service";
   template: `
     <a routerLink="/workouts-overview">Back to Overview</a>
     <div>{{workoutTree?.root?.creationDate}} {{workoutTree?.root?.title}}</div>
+    <app-workout-title></app-workout-title>
     <hr/>
     <app-button-tree
       [node]="workoutTree?.root"
@@ -132,8 +133,6 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
   deleteSelectableElement(element: TreeNode) {
-
-    //todo make sure workouts that used a musclegroup/exercise can still be loaded: e.g., only add a flag "used" or so
     if (element.type == Type.Muscle_Group) {
       this.selectionService.deleteMuscleGroup(element.name)
         .subscribe(() => this.fetchChildrenOf(this.workoutTree.currentSelection)/*just reload the whole thing*/);
