@@ -29,7 +29,7 @@ class ViewAllExercisesControllerTest {
         FetchExercises fetchExercises = (muscleGroup -> Exercises.of(expectedExercises));
         FetchMuscleGroup fetchMuscleGroup = name -> expectedMuscleGroup;
 
-        var controller = new ViewAllExercisesController(fetchExercises, fetchMuscleGroup);
+        var controller = new ViewAllExercisesController(fetchExercises);
 
         ResponseEntity<ExercisesViewModel> exercisesOfMuscleGroup = controller.viewAllExercisesOfMuscleGroup("Chest");
 
@@ -41,7 +41,6 @@ class ViewAllExercisesControllerTest {
         Set<String> actualExerciseNames = actualExercises.stream().map(ExerciseViewModel::getName).collect(toSet());
         Set<String> expectedExercisesNames = expectedExercises.stream().map(Exercise::getName).map(Name::toString).collect(toSet());
         assertTrue(actualExerciseNames.containsAll(expectedExercisesNames));
-
     }
 
 }

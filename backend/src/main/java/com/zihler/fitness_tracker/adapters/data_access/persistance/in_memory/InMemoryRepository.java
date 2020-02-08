@@ -25,11 +25,16 @@ public class InMemoryRepository
         FetchExercises,
         StoreSet,
         StoreExercises {
-    private Map<Name, MuscleGroup> repo;
-    private Map<WorkoutId, Workout> workouts = new HashMap<>();
+    private Map<Name, MuscleGroup> mGE;
+    private Map<WorkoutId, Workout> workouts;
 
     public InMemoryRepository() {
-        repo = new HashMap<>();
+        initMuscleGroupsAndExercises();
+        workouts = new HashMap<>();
+    }
+
+    private void initMuscleGroupsAndExercises() {
+        mGE = new HashMap<>();
     }
 
     @Override
@@ -38,7 +43,7 @@ public class InMemoryRepository
         if (workout.getMuscleGroups() != null) {
             MuscleGroups muscleGroups = workout.getMuscleGroups();
             for (MuscleGroup muscleGroup : muscleGroups.getMuscleGroups()) {
-                repo.put(muscleGroup.getName(), muscleGroup);
+                mGE.put(muscleGroup.getName(), muscleGroup);
             }
         }
         return workout;
@@ -51,36 +56,37 @@ public class InMemoryRepository
 
     @Override
     public MuscleGroups fetchAll() {
-        return MuscleGroups.of(new HashSet<>(repo.values()));
+        return MuscleGroups.of(new HashSet<>(mGE.values()));
     }
 
     @Override
     public MuscleGroups as(MuscleGroups muscleGroups) {
-        muscleGroups.getMuscleGroups().forEach(muscleGroup -> repo.put(muscleGroup.getName(), muscleGroup));
+        muscleGroups.getMuscleGroups().forEach(muscleGroup -> mGE.put(muscleGroup.getName(), muscleGroup));
         return muscleGroups;
     }
 
     @Override
-    public Exercises forMuscleGroup(MuscleGroup muscleGroup) {
-        return find(muscleGroup).getExercises();
+    public Exercises forMuscleGroup(MuscleGroupName muscleGroupName) {
+        return find(muscleGroupName).getExercises();
     }
 
-    private MuscleGroup find(MuscleGroup muscleGroup) {
-        return repo.values()
+    private MuscleGroup find(MuscleGroupName muscleGroupName) {
+
+        return mGE.values()
                 .stream()
-                .filter(muscleGroup1 -> muscleGroup.getName().equals(muscleGroup1.getName()))
+                .filter(muscleGroup1 -> muscleGroupName.toString().equals(muscleGroup1.getName().toString()))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Could not find Muscle Group with name " + muscleGroup));
+                .orElseThrow(() -> new RuntimeException("Could not find Muscle Group with name " + muscleGroupName.toString()));
     }
 
     @Override
     public MuscleGroup by(Name name) {
-        return repo.get(name);
+        return mGE.get(name);
     }
 
     @Override
     public Exercises in(Name muscleGroupName, Exercises exercises) {
-        MuscleGroup muscleGroup = repo.get(muscleGroupName);
+        MuscleGroup muscleGroup = mGE.get(muscleGroupName);
 
         if (muscleGroup == null) {
             muscleGroup = as(MuscleGroups.of(java.util.Set.of(new MuscleGroup(muscleGroupName)))).getMuscleGroups().iterator().next();
@@ -88,7 +94,7 @@ public class InMemoryRepository
 
         muscleGroup.add(exercises);
 
-        repo.put(muscleGroup.getName(), muscleGroup);
+        mGE.put(muscleGroup.getName(), muscleGroup);
 
         return exercises;
     }
@@ -102,7 +108,7 @@ public class InMemoryRepository
     }
 
     private Optional<Exercise> exerciseByName(Name exerciseName) {
-        return repo.values().stream()
+        return mGE.values().stream()
                 .map(MuscleGroup::getExercises)
                 .map(Exercises::getExercises)
                 .flatMap(Collection::stream)
@@ -125,7 +131,7 @@ public class InMemoryRepository
     public MuscleGroups by(Names names) {
         return MuscleGroups.of(names.values()
                 .stream()
-                .map(name -> repo.get(name))
+                .map(name -> mGE.get(name))
                 .filter(Objects::nonNull)
                 .collect(toSet())
         );
@@ -139,4 +145,5 @@ public class InMemoryRepository
     public WorkoutId next() {
         return WorkoutId.of(String.format("WORKOUT-%d-%d", userId, currentId++));
     }
+
 }

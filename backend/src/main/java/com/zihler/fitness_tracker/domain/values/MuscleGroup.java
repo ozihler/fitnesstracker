@@ -8,8 +8,12 @@ public class MuscleGroup {
     private Exercises exercises;
 
     public MuscleGroup(Name name) {
+        this(name, Exercises.empty());
+    }
+
+    public MuscleGroup(Name name, Exercises exercises) {
         this.name = name;
-        exercises = Exercises.empty();
+        this.exercises = exercises;
     }
 
     public Name getName() {
