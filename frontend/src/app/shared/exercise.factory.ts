@@ -4,7 +4,7 @@ import {SetFactory} from "./set.factory";
 
 export class ExerciseFactory {
   static from(exerciseRaw: ExerciseRaw): Exercise {
-    let sets = exerciseRaw.sets.map(set => SetFactory.from(set));
+    let sets = exerciseRaw.sets ? exerciseRaw.sets.map(set => SetFactory.from(set)) : [];
     return new Exercise(undefined, exerciseRaw.name, sets);
   }
 

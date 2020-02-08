@@ -1,8 +1,10 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.resources;
 
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercises.CreateExercisesController;
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercises.MakeExerciseUnselectableController;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercises.ViewAllExercisesController;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercises.requests.ExerciseNames;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.ExerciseNameViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.ExercisesViewModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,11 +18,15 @@ public class ExercisesResource {
 
     private ViewAllExercisesController viewAllExercisesController;
     private CreateExercisesController createExercises;
+    private MakeExerciseUnselectableController makeExerciseUnselectableController;
 
     @Autowired
-    public ExercisesResource(ViewAllExercisesController viewAllExercisesController, CreateExercisesController createExercises) {
+    public ExercisesResource(ViewAllExercisesController viewAllExercisesController,
+                             CreateExercisesController createExercises,
+                             MakeExerciseUnselectableController makeExerciseUnselectableController) {
         this.viewAllExercisesController = viewAllExercisesController;
         this.createExercises = createExercises;
+        this.makeExerciseUnselectableController = makeExerciseUnselectableController;
     }
 
     @GetMapping(path = "/api/muscle-groups/{muscleGroupName}/exercises")
@@ -41,6 +47,15 @@ public class ExercisesResource {
         logger.info("create exercises for muscle group {}, names {}, response {}", muscleGroupName, exercisesNames, exercises.getBody());
 
         return exercises;
+    }
+
+    @DeleteMapping(path = "/api/exercises/{exerciseName}")
+    public ResponseEntity<ExerciseNameViewModel> makeExerciseUnselectable(@PathVariable("exerciseName") String exerciseName) {
+        ResponseEntity<ExerciseNameViewModel> deletedExercise = makeExerciseUnselectableController.makeUnselectable(exerciseName);
+
+        logger.info("create muscle groups {}", deletedExercise.getBody());
+
+        return deletedExercise;
     }
 
 }

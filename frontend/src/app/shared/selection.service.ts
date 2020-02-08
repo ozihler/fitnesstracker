@@ -58,7 +58,7 @@ export class SelectionService {
   }
 
   deleteExercise(name: string): Observable<Exercise> {
-    return this.httpClient.get<ExerciseRaw>(this.baseUrl + "/exercises/" + name)
+    return this.httpClient.delete<ExerciseRaw>(this.baseUrl + "/exercises/" + name)
       .pipe(map(exercise => ExerciseFactory.from(exercise)));
   }
 }

@@ -18,15 +18,15 @@ public class MuscleGroupsResource {
 
     private CreateMuscleGroupsController createMuscleGroupsController;
     private ViewMuscleGroupsController viewMuscleGroupsController;
-    private MakeMuscleGroupUnselectableController deleteMuscleGroupController;
+    private MakeMuscleGroupUnselectableController makeMuscleGroupUnselectableController;
 
     @Autowired
     public MuscleGroupsResource(ViewMuscleGroupsController viewMuscleGroupsController,
                                 CreateMuscleGroupsController createMuscleGroupsController,
-                                MakeMuscleGroupUnselectableController deleteMuscleGroupController) {
+                                MakeMuscleGroupUnselectableController makeMuscleGroupUnselectableController) {
         this.viewMuscleGroupsController = viewMuscleGroupsController;
         this.createMuscleGroupsController = createMuscleGroupsController;
-        this.deleteMuscleGroupController = deleteMuscleGroupController;
+        this.makeMuscleGroupUnselectableController = makeMuscleGroupUnselectableController;
     }
 
     @GetMapping(path = "/api/muscle-groups")
@@ -48,8 +48,8 @@ public class MuscleGroupsResource {
     }
 
     @DeleteMapping(path = "/api/muscle-groups/{muscleGroupName}")
-    public ResponseEntity<MuscleGroupNameViewModel> deleteMuscleGroup(@PathVariable("muscleGroupName") String muscleGroupName) {
-        ResponseEntity<MuscleGroupNameViewModel> deletedMuscleGroup = deleteMuscleGroupController.makeUnselectable(muscleGroupName);
+    public ResponseEntity<MuscleGroupNameViewModel> makeMuscleGroupUnselectable(@PathVariable("muscleGroupName") String muscleGroupName) {
+        ResponseEntity<MuscleGroupNameViewModel> deletedMuscleGroup = makeMuscleGroupUnselectableController.makeUnselectable(muscleGroupName);
 
         logger.info("create muscle groups {}", deletedMuscleGroup.getBody());
 

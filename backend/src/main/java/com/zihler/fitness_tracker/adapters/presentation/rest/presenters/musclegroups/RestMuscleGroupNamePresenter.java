@@ -5,7 +5,7 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.musclegr
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.MuscleGroupNameViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGroupDocument;
 
-public class RestMuscleGroupPresenter
+public class RestMuscleGroupNamePresenter
         extends RestPresenter<MuscleGroupNameViewModel>
         implements MuscleGroupPresenter {
     @Override

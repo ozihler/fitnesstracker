@@ -1,7 +1,7 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups;
 
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups.inputs.MuscleGroupNameInput;
-import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.musclegroups.RestMuscleGroupPresenter;
+import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.musclegroups.RestMuscleGroupNamePresenter;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.MuscleGroupNameViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchMuscleGroup;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreMuscleGroup;
@@ -21,7 +21,7 @@ public class MakeMuscleGroupUnselectableController {
     }
 
     public ResponseEntity<MuscleGroupNameViewModel> makeUnselectable(String muscleGroupName) {
-        var output = new RestMuscleGroupPresenter();
+        var output = new RestMuscleGroupNamePresenter();
         var input = new MuscleGroupNameInput(muscleGroupName);
 
         makeMuscleGroupUnselectable.invokeWith(input.muscleGroupName(), output);

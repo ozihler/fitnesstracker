@@ -5,7 +5,7 @@ import com.zihler.fitness_tracker.domain.values.Name;
 import org.springframework.http.ResponseEntity;
 
 public class MuscleGroupNameOutput {
-    private Name name;
+    private Name name; // todo make MuscleGroupName
 
     public MuscleGroupNameOutput(Name name) {
         this.name = name;
@@ -14,5 +14,4 @@ public class MuscleGroupNameOutput {
     public ResponseEntity<MuscleGroupNameViewModel> toViewModel() {
         return ResponseEntity.ok(new MuscleGroupNameViewModel(name.toString()));
     }
-
 }
