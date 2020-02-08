@@ -41,23 +41,12 @@ export class CreateWorkoutComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       let workoutGid = params.get("workout-gid");
-      if (workoutGid) {
-        this.workoutService.fetchWorkoutWithId(workoutGid)
-          .subscribe(
-            workout => {
-              this.workoutTree = new WorkoutTree(workout);
-              this.fetchMuscleGroupsAndFilterOut(this.workoutTree.childrenOfCurrentSelection.map(c => c.name));
-            },
-            error => console.log(error));
-      } else {
-        this.workoutService.newWorkout()
-          .subscribe(
-            workout => {
-              this.workoutTree = new WorkoutTree(workout);
-              this.fetchMuscleGroupsAndFilterOut(this.workoutTree.childrenOfCurrentSelection.map(c => c.name));
-            },
-            error => console.log(error));
-      }
+      this.workoutService.createNewOrFetchWorkoutWithId(workoutGid)
+        .subscribe(workout => {
+            this.workoutTree = new WorkoutTree(workout);
+            this.fetchMuscleGroupsAndFilterOut(this.workoutTree.childrenOfCurrentSelection.map(c => c.name));
+          },
+          error => console.log(error));
     });
   }
 

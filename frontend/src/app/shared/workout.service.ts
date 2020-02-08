@@ -23,12 +23,28 @@ export class WorkoutService {
     this.baseUrl = environment.baseUrl;
   }
 
-  newWorkout(): Observable<Workout> {
-    let body = {title: "New Workout"};
-    let url = `${this.baseUrl}/workouts`;
-
-    return this.httpClient.post<WorkoutRaw>(url, body)
+  createNewOrFetchWorkoutWithId(workoutGid: string): Observable<Workout> {
+    return this.createWorkoutRequest(workoutGid)
       .pipe(map(data => WorkoutFactory.fromRaw(data)));
+  }
+
+  private createWorkoutRequest(workoutGid: string) {
+    if (!workoutGid) {
+      return this.createNewWorkoutRequest();
+    } else {
+      return this.fetchWorkoutByIdRequest(workoutGid);
+    }
+  }
+
+  private fetchWorkoutByIdRequest(workoutGid: string) {
+    let url = `${this.baseUrl}/workouts?workoutGid=${workoutGid}`;
+    return this.httpClient.get<WorkoutRaw>(url);
+  }
+
+  private createNewWorkoutRequest() {
+    let url = `${this.baseUrl}/workouts`;
+    let body = {title: "New Workout"};
+    return this.httpClient.post<WorkoutRaw>(url, body);
   }
 
   updateWorkout(workout: Workout): Observable<Workout> {
@@ -41,13 +57,6 @@ export class WorkoutService {
       }
     };
     return this.httpClient.put<WorkoutRaw>(`${this.baseUrl}/workouts`, body)
-      .pipe(map(data => WorkoutFactory.fromRaw(data)));
-  }
-
-  fetchWorkoutWithId(workoutGid: string): Observable<Workout> {
-    let url = `${this.baseUrl}/workouts?workoutGid=${workoutGid}`;
-
-    return this.httpClient.get<WorkoutRaw>(url)
       .pipe(map(data => WorkoutFactory.fromRaw(data)));
   }
 
