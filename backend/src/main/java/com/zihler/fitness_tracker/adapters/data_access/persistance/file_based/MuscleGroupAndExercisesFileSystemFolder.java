@@ -36,23 +36,24 @@ public class MuscleGroupAndExercisesFileSystemFolder {
     }
 
     private MuscleGroupFilesInput fetchAllFiles() {
-        List<File> muscleGroupFiles = readFilesFromFolder();
-
-        var rawInput = new MuscleGroupRawFilesInput(muscleGroupFiles);
+        MuscleGroupRawFilesInput rawInput = readFromFileSystem();
 
         return rawInput.muscleGroupFiles();
     }
 
-    private List<File> readFilesFromFolder() {
+    private MuscleGroupRawFilesInput readFromFileSystem() {
+        List<File> muscleGroupFiles;
         try (Stream<Path> walk = Files.walk(folder.toAbsolutePath())) {
 
-            return walk.filter(Files::isRegularFile)
+            muscleGroupFiles = walk.filter(Files::isRegularFile)
                     .map(Path::toFile)
                     .collect(toList());
 
         } catch (IOException e) {
             throw new LoadingMuscleGroupsAndExercisesFromFileSystemFailed(e.getCause());
         }
+
+        return new MuscleGroupRawFilesInput(muscleGroupFiles);
     }
 
     public MuscleGroups store(MuscleGroups toStore) {
