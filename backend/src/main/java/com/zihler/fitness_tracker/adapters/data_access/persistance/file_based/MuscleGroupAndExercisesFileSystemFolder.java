@@ -36,12 +36,18 @@ public class MuscleGroupAndExercisesFileSystemFolder {
     }
 
     private MuscleGroupFilesInput fetchAllFiles() {
-        MuscleGroupRawFilesInput rawInput = readFromFileSystem();
+        MuscleGroupRawFilesInput rawInput = readFilesFromFileSystem();
 
         return rawInput.muscleGroupFiles();
     }
 
-    private MuscleGroupRawFilesInput readFromFileSystem() {
+    private MuscleGroupRawFilesInput readFilesFromFileSystem() {
+        List<File> muscleGroupFiles = readFiles();
+
+        return new MuscleGroupRawFilesInput(muscleGroupFiles);
+    }
+
+    private List<File> readFiles() {
         List<File> muscleGroupFiles;
         try (Stream<Path> walk = Files.walk(folder.toAbsolutePath())) {
 
@@ -52,8 +58,7 @@ public class MuscleGroupAndExercisesFileSystemFolder {
         } catch (IOException e) {
             throw new LoadingMuscleGroupsAndExercisesFromFileSystemFailed(e.getCause());
         }
-
-        return new MuscleGroupRawFilesInput(muscleGroupFiles);
+        return muscleGroupFiles;
     }
 
     public MuscleGroups store(MuscleGroups toStore) {
