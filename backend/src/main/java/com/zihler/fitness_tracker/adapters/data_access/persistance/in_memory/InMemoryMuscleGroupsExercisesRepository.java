@@ -48,7 +48,7 @@ public class InMemoryMuscleGroupsExercisesRepository
                 .forEach(muscleGroup -> muscleGroupsAndExercises.put(muscleGroup.getName(), muscleGroup));
 
         logger.debug("Loaded muscle groups: " + muscleGroupsAndExercises);
-
+        System.out.println("Hello World");
     }
 
     @Override
