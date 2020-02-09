@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.exceptions.LoadingMuscleGroupsAndExercisesFromFileSystemFailed;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.inputs.MuscleGroupFilesInput;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.inputs.MuscleGroupRawFilesInput;
 import com.zihler.fitness_tracker.domain.values.MuscleGroup;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 
@@ -12,13 +13,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toSet;
 
 public class MuscleGroupAndExercisesFileSystemFolder {
 
@@ -32,35 +30,29 @@ public class MuscleGroupAndExercisesFileSystemFolder {
     }
 
     public MuscleGroups readMuscleGroupsAndExercises() {
-        List<File> muscleGroupFiles = new ArrayList<>();
-        try (Stream<Path> walk = Files.walk(folder.toAbsolutePath())) {
-            muscleGroupFiles = walk.filter(Files::isRegularFile)
-                    .map(Path::toFile)
-                    .collect(toList());
-        } catch (IOException e) {
-            throwException(e);
-        }
-
-        Set<MuscleGroupFile> files = muscleGroupFiles.stream()
-                .map(this::readMuscleGroup)
-                .collect(toSet());
-
-        var input = new MuscleGroupFilesInput(files);
+        var input = fetchAllFiles();
 
         return input.muscleGroups();
     }
 
-    private MuscleGroupFile readMuscleGroup(File file) {
-        try {
-            return new ObjectMapper().readValue(file, MuscleGroupFile.class);
-        } catch (IOException e) {
-            throwException(e);
-            return null;
-        }
+    private MuscleGroupFilesInput fetchAllFiles() {
+        List<File> muscleGroupFiles = readFilesFromFolder();
+
+        var rawInput = new MuscleGroupRawFilesInput(muscleGroupFiles);
+
+        return rawInput.muscleGroupFiles();
     }
 
-    private void throwException(IOException e) {
-        throw new LoadingMuscleGroupsAndExercisesFromFileSystemFailed(e.getCause());
+    private List<File> readFilesFromFolder() {
+        try (Stream<Path> walk = Files.walk(folder.toAbsolutePath())) {
+
+            return walk.filter(Files::isRegularFile)
+                    .map(Path::toFile)
+                    .collect(toList());
+
+        } catch (IOException e) {
+            throw new LoadingMuscleGroupsAndExercisesFromFileSystemFailed(e.getCause());
+        }
     }
 
     public MuscleGroups store(MuscleGroups toStore) {
@@ -79,7 +71,7 @@ public class MuscleGroupAndExercisesFileSystemFolder {
             objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
             objectMapper.writeValue(new File(pathname), muscleGroupFile);
         } catch (IOException e) {
-            throwException(e);
+            throw new LoadingMuscleGroupsAndExercisesFromFileSystemFailed(e.getCause());
         }
     }
 
@@ -88,7 +80,7 @@ public class MuscleGroupAndExercisesFileSystemFolder {
             try {
                 Files.createDirectories(folder);
             } catch (IOException e) {
-                throwException(e);
+                throw new LoadingMuscleGroupsAndExercisesFromFileSystemFailed(e.getCause());
             }
         }
     }
