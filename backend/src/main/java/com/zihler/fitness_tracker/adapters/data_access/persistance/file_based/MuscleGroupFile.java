@@ -2,20 +2,20 @@ package com.zihler.fitness_tracker.adapters.data_access.persistance.file_based;
 
 import java.util.List;
 
-class MuscleGroupJson {
+public class MuscleGroupFile {
     private String name;
     private List<String> exercises;
 
-    public MuscleGroupJson() {
+    public MuscleGroupFile() {
     }
 
-    private MuscleGroupJson(String name, List<String> exercises) {
+    private MuscleGroupFile(String name, List<String> exercises) {
         this.name = name;
         this.exercises = exercises;
     }
 
-    public static MuscleGroupJson of(String name, List<String> exercises) {
-        return new MuscleGroupJson(name, exercises);
+    public static MuscleGroupFile of(String name, List<String> exercises) {
+        return new MuscleGroupFile(name, exercises);
     }
 
     public List<String> getExercises() {

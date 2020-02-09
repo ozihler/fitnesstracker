@@ -1,6 +1,6 @@
 package com.zihler.fitness_tracker.adapters.gateways.json;
 
-import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.FileSystem;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.MuscleGroupAndExercisesFileSystemFolder;
 import com.zihler.fitness_tracker.domain.values.Exercise;
 import com.zihler.fitness_tracker.domain.values.Exercises;
 import com.zihler.fitness_tracker.domain.values.MuscleGroup;
@@ -16,10 +16,10 @@ import static com.zihler.fitness_tracker.domain.values.MuscleGroups.muscleGroups
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class FileSystemIOTest {
+public class MuscleGroupAndExercisesFileSystemFolderIOTest {
     @Test
     void testWriteReadMuscleGroupsToFileSystem() {
-        var fs = new FileSystem();
+        var fs = new MuscleGroupAndExercisesFileSystemFolder();
 
         var toStore = muscleGroups(
                 muscleGroup("Chest", "Bench Press", "Push Ups", "Incline Dumbbell Bench Press"),

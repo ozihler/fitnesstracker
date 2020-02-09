@@ -3,6 +3,7 @@ package com.zihler.fitness_tracker.adapters.data_access.persistance.file_based;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.exceptions.LoadingMuscleGroupsAndExercisesFromFileSystemFailed;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.inputs.MuscleGroupFilesInput;
 import com.zihler.fitness_tracker.domain.values.MuscleGroup;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 
@@ -13,40 +14,45 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 
-public class FileSystem {
+public class MuscleGroupAndExercisesFileSystemFolder {
 
     private Path folder;
+    private String folderName;
 
-    public FileSystem() {
+    public MuscleGroupAndExercisesFileSystemFolder() {
+        folderName = "muscleGroupsAndExercises";
         makeSourcePath();
         createFolderIfNecessary();
     }
 
     public MuscleGroups readMuscleGroupsAndExercises() {
-        List<File> muscleGroupFiles = loadFromFile();
+        List<File> muscleGroupFiles = new ArrayList<>();
+        try (Stream<Path> walk = Files.walk(folder.toAbsolutePath())) {
+            muscleGroupFiles = walk.filter(Files::isRegularFile)
+                    .map(Path::toFile)
+                    .collect(toList());
+        } catch (IOException e) {
+            throwException(e);
+        }
 
-        return MuscleGroups.of(muscleGroupFiles.stream()
+        Set<MuscleGroupFile> files = muscleGroupFiles.stream()
                 .map(this::readMuscleGroup)
-                .filter(Objects::nonNull)
-                .map(this::toEntity)
-                .collect(toSet()));
+                .collect(toSet());
+
+        var input = new MuscleGroupFilesInput(files);
+
+        return input.muscleGroups();
     }
 
-    private MuscleGroup toEntity(MuscleGroupJson muscleGroupJson) {
-        String[] exerciseNames = muscleGroupJson.getExercises().toArray(String[]::new);
-        String name = muscleGroupJson.getName();
-        return MuscleGroup.muscleGroup(name, exerciseNames);
-    }
-
-    private MuscleGroupJson readMuscleGroup(File file) {
+    private MuscleGroupFile readMuscleGroup(File file) {
         try {
-            return new ObjectMapper().readValue(file, MuscleGroupJson.class);
+            return new ObjectMapper().readValue(file, MuscleGroupFile.class);
         } catch (IOException e) {
             throwException(e);
             return null;
@@ -57,33 +63,21 @@ public class FileSystem {
         throw new LoadingMuscleGroupsAndExercisesFromFileSystemFailed(e.getCause());
     }
 
-    private List<File> loadFromFile() {
-        List<File> files = new ArrayList<>();
-        try (Stream<Path> walk = Files.walk(folder.toAbsolutePath())) {
-            files = walk.filter(Files::isRegularFile)
-                    .map(Path::toFile)
-                    .collect(toList());
-        } catch (IOException e) {
-            throwException(e);
-        }
-        return files;
-    }
-
     public MuscleGroups store(MuscleGroups toStore) {
         for (MuscleGroup muscleGroup : toStore.getMuscleGroups()) {
             String pathname = toFilePath(muscleGroup);
-            MuscleGroupJson muscleGroupJson = MuscleGroupJson.of(muscleGroup.getName().toString(), muscleGroup.getExercises().getExercises().stream().map(e -> e.getName().toString()).collect(toList()));
-            write(pathname, muscleGroupJson);
+            MuscleGroupFile muscleGroupFile = MuscleGroupFile.of(muscleGroup.getName().toString(), muscleGroup.getExercises().getExercises().stream().map(e -> e.getName().toString()).collect(toList()));
+            write(pathname, muscleGroupFile);
         }
 
         return toStore;
     }
 
-    private void write(String pathname, MuscleGroupJson muscleGroupJson) {
+    private void write(String pathname, MuscleGroupFile muscleGroupFile) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-            objectMapper.writeValue(new File(pathname), muscleGroupJson);
+            objectMapper.writeValue(new File(pathname), muscleGroupFile);
         } catch (IOException e) {
             throwException(e);
         }
@@ -101,7 +95,7 @@ public class FileSystem {
 
     private void makeSourcePath() {
         Path source = Paths.get(getClass().getResource("/").getPath());
-        folder = Paths.get(source.toAbsolutePath() + "/muscleGroupsAndExercises");
+        folder = Paths.get(source.toAbsolutePath() + "/" + folderName);
     }
 
     private String toFilePath(MuscleGroup muscleGroup) {

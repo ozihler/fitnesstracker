@@ -1,6 +1,6 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.in_memory;
 
-import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.FileSystem;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.MuscleGroupAndExercisesFileSystemFolder;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.*;
 import com.zihler.fitness_tracker.domain.values.*;
 import org.apache.logging.log4j.LogManager;
@@ -30,7 +30,7 @@ public class InMemoryMuscleGroupsExercisesRepository
         StoreExercise {
     private static final Logger logger = LogManager.getLogger();
 
-    private FileSystem fileSystem = new FileSystem();
+    private MuscleGroupAndExercisesFileSystemFolder muscleGroupAndExercisesFileSystemFolder = new MuscleGroupAndExercisesFileSystemFolder();
 
     private Map<Name, MuscleGroup> muscleGroupsAndExercises;
 
@@ -42,11 +42,12 @@ public class InMemoryMuscleGroupsExercisesRepository
     private void initMuscleGroupsAndExercises() {
         muscleGroupsAndExercises = new HashMap<>();
 
-        fileSystem.readMuscleGroupsAndExercises()
-                .getMuscleGroups()
+        MuscleGroups muscleGroups = muscleGroupAndExercisesFileSystemFolder.readMuscleGroupsAndExercises();
+
+        muscleGroups.getMuscleGroups()
                 .forEach(muscleGroup -> muscleGroupsAndExercises.put(muscleGroup.getName(), muscleGroup));
 
-        logger.debug("Loaded musclegroups: " + muscleGroupsAndExercises);
+        logger.debug("Loaded muscle groups: " + muscleGroupsAndExercises);
 
     }
 
