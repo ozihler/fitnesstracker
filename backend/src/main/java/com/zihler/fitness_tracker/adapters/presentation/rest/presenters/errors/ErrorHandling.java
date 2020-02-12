@@ -1,6 +1,7 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.presenters.errors;
 
 import com.zihler.fitness_tracker.adapters.data_access.persistance.exceptions.LoadingMuscleGroupsAndExercisesFromFileSystemFailed;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.exceptions.StoringMuscleGroupsAndExercisesToFileSystemFailed;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups.requests.EmptyMuscleGroupsRequest;
 import com.zihler.fitness_tracker.domain.exceptions.InvalidTitleException;
 import org.apache.logging.log4j.LogManager;
@@ -32,6 +33,11 @@ public class ErrorHandling {
 
     @ExceptionHandler(value = LoadingMuscleGroupsAndExercisesFromFileSystemFailed.class)
     public ResponseEntity<ErrorViewModel> handleLoadingMuscleGroupsAndExercisesFromFileSystemFailed(Exception bad) {
+        return status(INTERNAL_SERVER_ERROR).body(new ErrorViewModel(bad.getMessage()));
+    }
+
+    @ExceptionHandler(value = StoringMuscleGroupsAndExercisesToFileSystemFailed.class)
+    public ResponseEntity<ErrorViewModel> handleStoringMuscleGroupsAndExercisesToFileSystemFailed(Exception bad) {
         return status(INTERNAL_SERVER_ERROR).body(new ErrorViewModel(bad.getMessage()));
     }
 

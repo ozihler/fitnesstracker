@@ -15,7 +15,7 @@ public class MuscleGroupFilesInput {
         this.files = files;
     }
 
-    public MuscleGroups muscleGroups() {
+    public MuscleGroups toMuscleGroups() {
         return MuscleGroups.of(files
                 .stream()
                 .filter(Objects::nonNull)

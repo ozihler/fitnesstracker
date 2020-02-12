@@ -1,19 +1,18 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.in_memory;
 
-import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.MuscleGroupAndExercisesFileSystemFolder;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.MuscleGroupAndExercisesFileSystemDirectory;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.*;
 import com.zihler.fitness_tracker.domain.values.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
+import static com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.MuscleGroupAndExercisesFileSystemDirectory.makeDirectory;
 import static java.util.stream.Collectors.toSet;
 
 @Repository
@@ -30,7 +29,7 @@ public class InMemoryMuscleGroupsExercisesRepository
         StoreExercise {
     private static final Logger logger = LogManager.getLogger();
 
-    private MuscleGroupAndExercisesFileSystemFolder muscleGroupAndExercisesFileSystemFolder = new MuscleGroupAndExercisesFileSystemFolder();
+    private MuscleGroupAndExercisesFileSystemDirectory muscleGroupAndExercisesFileSystemDirectory;
 
     private Map<Name, MuscleGroup> muscleGroupsAndExercises;
 
@@ -40,15 +39,15 @@ public class InMemoryMuscleGroupsExercisesRepository
     }
 
     private void initMuscleGroupsAndExercises() {
+        muscleGroupAndExercisesFileSystemDirectory = makeDirectory();
         muscleGroupsAndExercises = new HashMap<>();
 
-        MuscleGroups muscleGroups = muscleGroupAndExercisesFileSystemFolder.readMuscleGroupsAndExercises();
+        MuscleGroups muscleGroups = muscleGroupAndExercisesFileSystemDirectory.fetch();
 
         muscleGroups.getMuscleGroups()
                 .forEach(muscleGroup -> muscleGroupsAndExercises.put(muscleGroup.getName(), muscleGroup));
 
         logger.debug("Loaded muscle groups: " + muscleGroupsAndExercises);
-        System.out.println("Hello World");
     }
 
     @Override
@@ -100,6 +99,7 @@ public class InMemoryMuscleGroupsExercisesRepository
     public MuscleGroup withValues(MuscleGroup muscleGroup) {
         muscleGroupsAndExercises.put(muscleGroup.getName(), muscleGroup);
 
+        muscleGroupAndExercisesFileSystemDirectory.save(new MuscleGroups(new HashSet<>(muscleGroupsAndExercises.values())));
         return muscleGroup;
     }
 

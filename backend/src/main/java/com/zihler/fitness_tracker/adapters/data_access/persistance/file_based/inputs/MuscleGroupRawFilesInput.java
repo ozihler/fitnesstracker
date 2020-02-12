@@ -12,7 +12,7 @@ public class MuscleGroupRawFilesInput {
         this.muscleGroupFiles = muscleGroupFiles;
     }
 
-    public MuscleGroupFilesInput muscleGroupFiles() {
+    public MuscleGroupFilesInput toMuscleGroupFiles() {
         return new MuscleGroupFilesInput(muscleGroupFiles.stream()
                 .map(MuscleGroupRawFileInput::new)
                 .map(MuscleGroupRawFileInput::muscleGroupFile)

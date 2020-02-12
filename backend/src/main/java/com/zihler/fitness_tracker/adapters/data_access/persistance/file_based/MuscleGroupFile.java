@@ -29,4 +29,8 @@ public class MuscleGroupFile {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String fileName() {
+        return name.replace(" ","_") + ".json";
+    }
 }

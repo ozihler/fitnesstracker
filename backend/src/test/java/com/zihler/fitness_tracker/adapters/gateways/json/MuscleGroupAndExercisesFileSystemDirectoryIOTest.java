@@ -1,6 +1,6 @@
 package com.zihler.fitness_tracker.adapters.gateways.json;
 
-import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.MuscleGroupAndExercisesFileSystemFolder;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.MuscleGroupAndExercisesFileSystemDirectory;
 import com.zihler.fitness_tracker.domain.values.Exercise;
 import com.zihler.fitness_tracker.domain.values.Exercises;
 import com.zihler.fitness_tracker.domain.values.MuscleGroup;
@@ -16,19 +16,19 @@ import static com.zihler.fitness_tracker.domain.values.MuscleGroups.muscleGroups
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MuscleGroupAndExercisesFileSystemFolderIOTest {
+public class MuscleGroupAndExercisesFileSystemDirectoryIOTest {
     @Test
     void testWriteReadMuscleGroupsToFileSystem() {
-        var fs = new MuscleGroupAndExercisesFileSystemFolder();
+        var fs = MuscleGroupAndExercisesFileSystemDirectory.makeDirectory();
 
         var toStore = muscleGroups(
                 muscleGroup("Chest", "Bench Press", "Push Ups", "Incline Dumbbell Bench Press"),
                 muscleGroup("Shoulders", "Arnold Press", "Side Lifts", "Wide Barbell Lift"),
                 muscleGroup("Triceps", "Lat Pull", "Overhead Lat Pull", "Dips"));
 
-        var stored = fs.store(toStore);
+        var stored = fs.save(toStore);
 
-        var muscleGroups = fs.readMuscleGroupsAndExercises();
+        var muscleGroups = fs.fetch();
 
         var storedMGs = muscleGroups.getMuscleGroups();
         assertEquals(3, storedMGs.size());
