@@ -27,7 +27,7 @@ public class MuscleGroupAndExercisesFileSystemDirectory {
 
     private MuscleGroupAndExercisesFileSystemDirectory() {
         folderName = "muscleGroupsAndExercises";
-        makeSourcePath();
+        makeFolderPath();
         createFolderIfNecessary();
         configureFileWriter();
     }
@@ -55,7 +55,8 @@ public class MuscleGroupAndExercisesFileSystemDirectory {
 
     private List<File> fetchFilesFromFileSystem() {
         try {
-            return Files.walk(folder.toAbsolutePath()).filter(Files::isRegularFile)
+            return Files.walk(folder.toAbsolutePath())
+                    .filter(Files::isRegularFile)
                     .map(Path::toFile)
                     .collect(toList());
         } catch (IOException e) {
@@ -96,9 +97,8 @@ public class MuscleGroupAndExercisesFileSystemDirectory {
         }
     }
 
-    private void makeSourcePath() {
+    private void makeFolderPath() {
         String path = getClass().getResource("/").getPath().replace("/C:","C:");
-        System.err.println(path);
         Path source = Paths.get(path);
         folder = Paths.get(source.toAbsolutePath() + "/" + folderName);
     }
