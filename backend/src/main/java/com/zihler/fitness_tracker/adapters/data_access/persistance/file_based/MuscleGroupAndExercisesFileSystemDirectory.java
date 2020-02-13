@@ -19,6 +19,7 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
+// todo extract FileSystem/Folder logic to reuse in InMemoryWorkoutRepo
 public class MuscleGroupAndExercisesFileSystemDirectory {
 
     private Path folder;
