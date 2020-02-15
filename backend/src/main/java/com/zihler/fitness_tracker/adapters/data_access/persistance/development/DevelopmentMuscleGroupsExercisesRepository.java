@@ -1,6 +1,6 @@
-package com.zihler.fitness_tracker.adapters.data_access.persistance.in_memory;
+package com.zihler.fitness_tracker.adapters.data_access.persistance.development;
 
-import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.musclegroups.MuscleGroupAndExercisesFileSystemDirectory;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.musclegroups.MuscleGroupAndExercisesFileSystemDirectory;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.*;
 import com.zihler.fitness_tracker.domain.values.*;
 import org.apache.logging.log4j.LogManager;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-import static com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.musclegroups.MuscleGroupAndExercisesFileSystemDirectory.makeDirectory;
+import static com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.musclegroups.MuscleGroupAndExercisesFileSystemDirectory.makeDirectory;
 import static java.util.stream.Collectors.toSet;
 
 @Repository

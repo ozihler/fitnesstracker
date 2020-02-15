@@ -1,4 +1,4 @@
-package com.zihler.fitness_tracker.adapters.data_access.persistance.exceptions;
+package com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.exceptions;
 
 public class ConfiguringFileSystemFailed extends RuntimeException {
     private static final long serialVersionUID = -5244069092587260368L;

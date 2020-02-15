@@ -1,6 +1,6 @@
-package com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.musclegroups.outputs;
+package com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.musclegroups.outputs;
 
-import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.musclegroups.MuscleGroupFile;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.musclegroups.MuscleGroupFile;
 import com.zihler.fitness_tracker.domain.values.Exercises;
 import com.zihler.fitness_tracker.domain.values.MuscleGroup;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;

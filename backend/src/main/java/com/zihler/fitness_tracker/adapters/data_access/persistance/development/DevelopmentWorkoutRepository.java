@@ -1,4 +1,4 @@
-package com.zihler.fitness_tracker.adapters.data_access.persistance.in_memory;
+package com.zihler.fitness_tracker.adapters.data_access.persistance.development;
 
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.*;
 import com.zihler.fitness_tracker.domain.entities.Set;

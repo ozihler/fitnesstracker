@@ -1,10 +1,10 @@
-package com.zihler.fitness_tracker.adapters.data_access.persistance.file_based;
+package com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.zihler.fitness_tracker.adapters.data_access.persistance.exceptions.ConfiguringFileSystemFailed;
-import com.zihler.fitness_tracker.adapters.data_access.persistance.exceptions.LoadingDataFromFileSystemFailed;
-import com.zihler.fitness_tracker.adapters.data_access.persistance.exceptions.StoringToFileSystemFailed;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.exceptions.ConfiguringFileSystemFailed;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.exceptions.LoadingDataFromFileSystemFailed;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.exceptions.StoringToFileSystemFailed;
 
 import java.io.File;
 import java.io.IOException;

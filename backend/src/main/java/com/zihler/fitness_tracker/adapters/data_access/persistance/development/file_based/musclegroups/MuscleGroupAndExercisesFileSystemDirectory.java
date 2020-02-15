@@ -1,8 +1,8 @@
-package com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.musclegroups;
+package com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.musclegroups;
 
-import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.FileSystemDirectory;
-import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.musclegroups.inputs.MuscleGroupFilesInput;
-import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.musclegroups.outputs.MuscleGroupFilesOutput;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.FileSystemDirectory;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.musclegroups.inputs.MuscleGroupFilesInput;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.musclegroups.outputs.MuscleGroupFilesOutput;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 
 public class MuscleGroupAndExercisesFileSystemDirectory {
