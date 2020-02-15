@@ -12,6 +12,7 @@ import {TreeNode} from "./tree/tree-node";
         <span *ngIf="node && !node?.isLeaf">({{node?.numberOfChildren}}) </span>
         <span>{{node?.name}}</span>
       </button>
+      <button (click)="removeFromWorkout(node)">DEL</button>
     </div>
 
     <div *ngIf="node?.hasChildren">
@@ -19,7 +20,9 @@ import {TreeNode} from "./tree/tree-node";
         <app-button-tree
           [currentSelectionName]="currentSelectionName"
           [node]="child"
-          (changeSelectionEvent)="this.changeSelectionEvent.emit($event);">
+          (changeSelectionEvent)="this.changeSelectionEvent.emit($event);"
+          (removeFromWorkoutEvent)="removeFromWorkout($event);"
+        >
         </app-button-tree>
       </div>
     </div>
@@ -29,6 +32,7 @@ export class TreeViewComponent {
   @Input() node: TreeNode;
   @Input() currentSelectionName: string;
   @Output() changeSelectionEvent = new EventEmitter<TreeNode>();
+  @Output() removeFromWorkoutEvent = new EventEmitter<TreeNode>();
 
   constructor() {
   }
@@ -50,5 +54,9 @@ export class TreeViewComponent {
 
   private isSelectedNode() {
     return this.currentSelectionName && this.node && this.currentSelectionName === this.node.name;
+  }
+
+  removeFromWorkout(node: TreeNode) {
+    this.removeFromWorkoutEvent.emit(node);
   }
 }

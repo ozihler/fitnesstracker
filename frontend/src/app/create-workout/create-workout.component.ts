@@ -21,7 +21,9 @@ import {WorkoutTitleUpdate} from "./workout-title-update";
     <app-button-tree
       [node]="workoutTree?.root"
       [currentSelectionName]="workoutTree?.currentSelection?.name"
-      (changeSelectionEvent)="changeTreeNode($event)">
+      (changeSelectionEvent)="changeTreeNode($event)"
+      (removeFromWorkoutEvent)="removeNodeFromWorkout($event)"
+    >
     </app-button-tree>
     <hr/>
     <app-element-selection
@@ -159,5 +161,9 @@ export class CreateWorkoutComponent implements OnInit { // todo rename to "edit 
     this.workoutTree.root.creationDate = updatedWorkout.workoutCreationDate;
 
     this.updateWorkoutAndEnable(selectedElement);
+  }
+
+  removeNodeFromWorkout(nodeToDelete: TreeNode) {
+    this.workoutTree.delete(nodeToDelete);
   }
 }

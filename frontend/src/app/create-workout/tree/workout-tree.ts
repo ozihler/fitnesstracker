@@ -89,4 +89,10 @@ export class WorkoutTree {
   private disableChildrenOf(currentSelection: TreeNode) {
     currentSelection.children.forEach(child => child.accept(new DisableAllNodesVisitor()));
   }
+
+  delete(nodeToDelete: TreeNode) {
+    let treeNode = this.findNodeByName(nodeToDelete.name);
+    treeNode.parent.children.filter(c => c.name != nodeToDelete.name);
+    nodeToDelete.parent = undefined;
+  }
 }
