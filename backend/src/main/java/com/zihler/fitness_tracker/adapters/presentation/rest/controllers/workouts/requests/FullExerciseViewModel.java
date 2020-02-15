@@ -2,6 +2,7 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workou
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullSetViewModel;
+import org.apache.logging.log4j.util.Strings;
 
 import java.util.List;
 
@@ -25,5 +26,13 @@ public class FullExerciseViewModel {
 
     public List<FullSetViewModel> getSets() {
         return sets;
+    }
+
+    @Override
+    public String toString() {
+        return "FullExerciseViewModel{" +
+                "name='" + name + '\'' +
+                ", sets=" + Strings.join(sets, ',') +
+                '}';
     }
 }

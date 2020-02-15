@@ -1,10 +1,13 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.workouts.outputs;
 
-import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.musclegroups.MuscleGroupFile;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.workouts.WorkoutFile;
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.FullExerciseViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.FullMuscleGroupViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullSetViewModel;
 import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.Exercises;
 import com.zihler.fitness_tracker.domain.values.MuscleGroup;
+import com.zihler.fitness_tracker.domain.values.Sets;
 
 import java.util.List;
 
@@ -31,16 +34,27 @@ public class WorkoutFilesOutput {
         );
     }
 
-    private List<MuscleGroupFile> toMuscleGroupFiles(Workout workout) {
+    private List<FullMuscleGroupViewModel> toMuscleGroupFiles(Workout workout) {
         return workout.getMuscleGroups().getMuscleGroups().stream()
-                .map(m -> MuscleGroupFile.of(asString(m), asStrings(m.getExercises()))).collect(toUnmodifiableList());
+                .map(m -> new FullMuscleGroupViewModel(asString(m), asStrings(m.getExercises()))).collect(toUnmodifiableList());
     }
 
     private String asString(MuscleGroup muscleGroup) {
         return muscleGroup.getName().toString();
     }
 
-    private List<String> asStrings(Exercises exercises) {
-        return exercises.getExercises().stream().map(e -> e.getName().toString()).collect(toList());
+    private List<FullExerciseViewModel> asStrings(Exercises exercises) {
+        return exercises.getExercises().stream().map(e -> new FullExerciseViewModel(e.getName().toString(), toViewModel(e.getSets()))).collect(toList());
+    }
+
+    private List<FullSetViewModel> toViewModel(Sets sets) {
+        return sets.getSets().stream()
+                .map(s -> new FullSetViewModel(
+                        s.getWeight().value(),
+                        s.getWeight().unitOfMeasurement().shortname(),
+                        s.getRepetitions().number(),
+                        s.getWaitingTime().value(),
+                        s.getWaitingTime().unitOfTime().shortname()))
+                .collect(toList());
     }
 }

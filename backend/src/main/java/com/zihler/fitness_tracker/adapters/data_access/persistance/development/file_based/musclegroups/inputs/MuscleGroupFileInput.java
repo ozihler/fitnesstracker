@@ -13,6 +13,6 @@ public class MuscleGroupFileInput {
     public MuscleGroup muscleGroup() {
         String[] exerciseNames = muscleGroupFile.getExercises().toArray(String[]::new);
         String name = muscleGroupFile.getName();
-        return MuscleGroup.of(name, exerciseNames);
+        return MuscleGroup.withoutSets(name, exerciseNames);
     }
 }

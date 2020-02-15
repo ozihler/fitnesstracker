@@ -9,6 +9,14 @@ public enum UnitOfTime {
         this.shortname = shortname;
     }
 
+    public static UnitOfTime fromShortName(String waitingTimeUnit) {
+        switch (waitingTimeUnit) {
+            case "s":
+            default:
+                return SECONDS;
+        }
+    }
+
     public String shortname() {
         return shortname;
     }

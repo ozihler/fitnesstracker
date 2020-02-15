@@ -4,6 +4,8 @@ import com.zihler.fitness_tracker.adapters.data_access.persistance.development.f
 
 import java.util.List;
 
+import static org.apache.logging.log4j.util.Strings.join;
+
 public class MuscleGroupFile implements JsonReadWritableFile {
     private String name;
     private List<String> exercises;
@@ -35,5 +37,13 @@ public class MuscleGroupFile implements JsonReadWritableFile {
     @Override
     public String fileName() {
         return name.replace(" ", "_") + ".json";
+    }
+
+    @Override
+    public String toString() {
+        return "MuscleGroupFile{" +
+                "name='" + name + '\'' +
+                ", exercises=" + join(exercises, ',') +
+                '}';
     }
 }

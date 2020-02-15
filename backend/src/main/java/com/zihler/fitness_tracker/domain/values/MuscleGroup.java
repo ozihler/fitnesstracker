@@ -1,5 +1,6 @@
 package com.zihler.fitness_tracker.domain.values;
 
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -28,7 +29,7 @@ public class MuscleGroup {
         return of(name, Exercises.of(exercises));
     }
 
-    public static MuscleGroup of(String muscleGroupName, String... exerciseNames) {
+    public static MuscleGroup withoutSets(String muscleGroupName, String... exerciseNames) {
         return of(muscleGroupName, Exercises.of(Arrays.stream(exerciseNames).map(Exercise::of).collect(toSet())));
     }
 

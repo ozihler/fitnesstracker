@@ -12,4 +12,12 @@ public enum UnitOfMeasurement {
     public String shortname() {
         return shortname;
     }
+
+    public static UnitOfMeasurement fromShortName(String shortname) {
+        switch (shortname) {
+            case "kg":
+            default:
+                return KILOGRAMM;
+        }
+    }
 }

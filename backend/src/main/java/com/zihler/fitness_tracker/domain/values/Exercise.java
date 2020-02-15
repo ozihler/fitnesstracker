@@ -18,9 +18,14 @@ public class Exercise {
         this.sets = sets;
     }
 
+    public static Exercise of(String name, Sets sets) {
+        return new Exercise(Name.of(name), sets);
+    }
+
     public static Exercise of(String name) {
         return new Exercise(Name.of(name));
     }
+
 
     public void add(Set set) {
         sets.add(set);

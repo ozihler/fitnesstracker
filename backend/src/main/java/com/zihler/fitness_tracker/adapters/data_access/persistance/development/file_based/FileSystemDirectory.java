@@ -54,7 +54,9 @@ public class FileSystemDirectory<T extends JsonReadWritableFile> {
 
     public void store(JsonReadWritableFile file) {
         try {
-            fileWriter().writeValue(fileNamed(file.fileName()), file);
+            File rawFile = fileNamed(file.fileName());
+            fileWriter().writeValue(rawFile, file);
+            logger.debug("Stored file " + file + " into raw file " + rawFile);
         } catch (IOException e) {
             throw new StoringToFileSystemFailed(e.getCause());
         }
@@ -72,7 +74,7 @@ public class FileSystemDirectory<T extends JsonReadWritableFile> {
                     .map(this::read)
                     .collect(Collectors.toSet());
         } catch (IOException e) {
-            throw new LoadingDataFromFileSystemFailed(e.getCause());
+            throw new LoadingDataFromFileSystemFailed(e);
         }
     }
 
@@ -80,7 +82,7 @@ public class FileSystemDirectory<T extends JsonReadWritableFile> {
         try {
             return fileWriter().readValue(file, classToConvertFileInto);
         } catch (IOException e) {
-            throw new LoadingDataFromFileSystemFailed(e.getCause());
+            throw new LoadingDataFromFileSystemFailed(e);
         }
     }
 

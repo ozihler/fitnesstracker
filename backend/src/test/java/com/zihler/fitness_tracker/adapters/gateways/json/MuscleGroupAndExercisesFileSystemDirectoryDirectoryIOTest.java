@@ -11,7 +11,6 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.zihler.fitness_tracker.domain.values.MuscleGroup.of;
 import static com.zihler.fitness_tracker.domain.values.MuscleGroups.muscleGroups;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -22,9 +21,9 @@ public class MuscleGroupAndExercisesFileSystemDirectoryDirectoryIOTest {
         var fs = MuscleGroupAndExercisesFileSystemDirectory.makeDirectory();
 
         var toStore = muscleGroups(
-                of("Chest", "Bench Press", "Push Ups", "Incline Dumbbell Bench Press"),
-                of("Shoulders", "Arnold Press", "Side Lifts", "Wide Barbell Lift"),
-                of("Triceps", "Lat Pull", "Overhead Lat Pull", "Dips"));
+                MuscleGroup.withoutSets("Chest", "Bench Press", "Push Ups", "Incline Dumbbell Bench Press"),
+                MuscleGroup.withoutSets("Shoulders", "Arnold Press", "Side Lifts", "Wide Barbell Lift"),
+                MuscleGroup.withoutSets("Triceps", "Lat Pull", "Overhead Lat Pull", "Dips"));
 
         var stored = fs.save(toStore);
 

@@ -22,33 +22,37 @@ public class ErrorHandling {
 
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<ErrorViewModel> handleGenericException(Exception bad) {
-        logger.error(bad.toString());
-        bad.printStackTrace();
+        logger.error(bad);
         return status(I_AM_A_TEAPOT).body(new ErrorViewModel(Arrays.toString(bad.getStackTrace()) + ", " + bad.getMessage()));
     }
 
     @ExceptionHandler(value = InvalidTitleException.class)
     public ResponseEntity<ErrorViewModel> handleInvalidTitleException(Exception bad) {
+        logger.error(bad);
         return status(BAD_REQUEST).body(new ErrorViewModel(bad.getMessage()));
     }
 
     @ExceptionHandler(value = ConfiguringFileSystemFailed.class)
     public ResponseEntity<ErrorViewModel> handleConfiguringFileSystemFailed(Exception bad) {
+        logger.error(bad);
         return status(INTERNAL_SERVER_ERROR).body(new ErrorViewModel(bad.getMessage()));
     }
 
     @ExceptionHandler(value = LoadingDataFromFileSystemFailed.class)
     public ResponseEntity<ErrorViewModel> handleLoadingDataFromFileSystemFailed(Exception bad) {
+        logger.error(bad);
         return status(INTERNAL_SERVER_ERROR).body(new ErrorViewModel(bad.getMessage()));
     }
 
     @ExceptionHandler(value = StoringToFileSystemFailed.class)
     public ResponseEntity<ErrorViewModel> handleStoringMuscleGroupsAndExercisesToFileSystemFailed(Exception bad) {
+        logger.error(bad);
         return status(INTERNAL_SERVER_ERROR).body(new ErrorViewModel(bad.getMessage()));
     }
 
     @ExceptionHandler(value = EmptyMuscleGroupsRequest.class)
     public ResponseEntity<ErrorViewModel> handleEmptyMuscleGroupsRequest(Exception bad) {
+        logger.error(bad);
         return status(BAD_REQUEST).body(new ErrorViewModel(bad.getMessage()));
     }
 }
