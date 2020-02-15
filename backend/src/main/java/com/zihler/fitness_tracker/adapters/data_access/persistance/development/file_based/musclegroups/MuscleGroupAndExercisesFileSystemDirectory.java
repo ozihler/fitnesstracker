@@ -18,7 +18,7 @@ public class MuscleGroupAndExercisesFileSystemDirectory {
     }
 
     public MuscleGroups fetch() {
-        return new MuscleGroupFilesInput(fileSystemDirectory.fetchAllFilesFromFileSystem())
+        return new MuscleGroupFilesInput(fileSystemDirectory.fetchAllFilesInDirectory())
                 .toMuscleGroups();
     }
 

@@ -52,28 +52,31 @@ public class FileSystemDirectory<T extends JsonReadWritableFile> {
         return new FileSystemDirectory<T>(dirName, classToConvertFileInto);
     }
 
-    public void store(JsonReadWritableFile fileOutput) {
+    public void store(JsonReadWritableFile file) {
         try {
-            File fileToStore = new File(this.pathToFolder.toAbsolutePath() + "/" + fileOutput.fileName());
-            fileWriter().writeValue(fileToStore, fileOutput);
+            fileWriter().writeValue(fileNamed(file.fileName()), file);
         } catch (IOException e) {
             throw new StoringToFileSystemFailed(e.getCause());
         }
     }
 
-    public Set<T> fetchAllFilesFromFileSystem() {
+    private File fileNamed(String fileName) {
+        return new File(this.pathToFolder.toAbsolutePath() + "/" + fileName);
+    }
+
+    public Set<T> fetchAllFilesInDirectory() {
         try {
             return Files.walk(pathToFolder.toAbsolutePath())
                     .filter(Files::isRegularFile)
                     .map(Path::toFile)
-                    .map(this::convertToClass)
+                    .map(this::read)
                     .collect(Collectors.toSet());
         } catch (IOException e) {
             throw new LoadingDataFromFileSystemFailed(e.getCause());
         }
     }
 
-    private T convertToClass(File file) {
+    private T read(File file) {
         try {
             return fileWriter().readValue(file, classToConvertFileInto);
         } catch (IOException e) {

@@ -19,7 +19,7 @@ public class WorkoutFileSystemDirectory {
     }
 
     public Workouts fetch() {
-        return new WorkoutFilesInput(fileSystemDirectory.fetchAllFilesFromFileSystem())
+        return new WorkoutFilesInput(fileSystemDirectory.fetchAllFilesInDirectory())
                 .workouts();
     }
 
