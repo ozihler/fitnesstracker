@@ -1,7 +1,8 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.presenters.errors;
 
-import com.zihler.fitness_tracker.adapters.data_access.persistance.exceptions.LoadingMuscleGroupsAndExercisesFromFileSystemFailed;
-import com.zihler.fitness_tracker.adapters.data_access.persistance.exceptions.StoringMuscleGroupsAndExercisesToFileSystemFailed;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.exceptions.ConfiguringFileSystemFailed;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.exceptions.LoadingDataFromFileSystemFailed;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.exceptions.StoringToFileSystemFailed;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups.requests.EmptyMuscleGroupsRequest;
 import com.zihler.fitness_tracker.domain.exceptions.InvalidTitleException;
 import org.apache.logging.log4j.LogManager;
@@ -31,12 +32,17 @@ public class ErrorHandling {
         return status(BAD_REQUEST).body(new ErrorViewModel(bad.getMessage()));
     }
 
-    @ExceptionHandler(value = LoadingMuscleGroupsAndExercisesFromFileSystemFailed.class)
-    public ResponseEntity<ErrorViewModel> handleLoadingMuscleGroupsAndExercisesFromFileSystemFailed(Exception bad) {
+    @ExceptionHandler(value = ConfiguringFileSystemFailed.class)
+    public ResponseEntity<ErrorViewModel> handleConfiguringFileSystemFailed(Exception bad) {
         return status(INTERNAL_SERVER_ERROR).body(new ErrorViewModel(bad.getMessage()));
     }
 
-    @ExceptionHandler(value = StoringMuscleGroupsAndExercisesToFileSystemFailed.class)
+    @ExceptionHandler(value = LoadingDataFromFileSystemFailed.class)
+    public ResponseEntity<ErrorViewModel> handleLoadingDataFromFileSystemFailed(Exception bad) {
+        return status(INTERNAL_SERVER_ERROR).body(new ErrorViewModel(bad.getMessage()));
+    }
+
+    @ExceptionHandler(value = StoringToFileSystemFailed.class)
     public ResponseEntity<ErrorViewModel> handleStoringMuscleGroupsAndExercisesToFileSystemFailed(Exception bad) {
         return status(INTERNAL_SERVER_ERROR).body(new ErrorViewModel(bad.getMessage()));
     }

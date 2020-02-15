@@ -2,7 +2,7 @@ package com.zihler.fitness_tracker.adapters.data_access.persistance.file_based;
 
 import java.util.List;
 
-public class MuscleGroupFile {
+public class MuscleGroupFile implements JsonReadWritableFile {
     private String name;
     private List<String> exercises;
 
@@ -30,7 +30,8 @@ public class MuscleGroupFile {
         this.name = name;
     }
 
+    @Override
     public String fileName() {
-        return name.replace(" ","_") + ".json";
+        return name.replace(" ", "_") + ".json";
     }
 }

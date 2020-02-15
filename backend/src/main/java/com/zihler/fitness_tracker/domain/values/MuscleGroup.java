@@ -28,7 +28,7 @@ public class MuscleGroup {
         return of(name, Exercises.of(exercises));
     }
 
-    public static MuscleGroup muscleGroup(String muscleGroupName, String... exerciseNames) {
+    public static MuscleGroup of(String muscleGroupName, String... exerciseNames) {
         return of(muscleGroupName, Exercises.of(Arrays.stream(exerciseNames).map(Exercise::of).collect(toSet())));
     }
 

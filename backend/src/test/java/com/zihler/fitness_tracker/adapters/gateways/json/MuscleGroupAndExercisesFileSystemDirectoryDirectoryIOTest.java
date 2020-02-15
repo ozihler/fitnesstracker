@@ -11,20 +11,20 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.zihler.fitness_tracker.domain.values.MuscleGroup.muscleGroup;
+import static com.zihler.fitness_tracker.domain.values.MuscleGroup.of;
 import static com.zihler.fitness_tracker.domain.values.MuscleGroups.muscleGroups;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MuscleGroupAndExercisesFileSystemDirectoryIOTest {
+public class MuscleGroupAndExercisesFileSystemDirectoryDirectoryIOTest {
     @Test
     void testWriteReadMuscleGroupsToFileSystem() {
         var fs = MuscleGroupAndExercisesFileSystemDirectory.makeDirectory();
 
         var toStore = muscleGroups(
-                muscleGroup("Chest", "Bench Press", "Push Ups", "Incline Dumbbell Bench Press"),
-                muscleGroup("Shoulders", "Arnold Press", "Side Lifts", "Wide Barbell Lift"),
-                muscleGroup("Triceps", "Lat Pull", "Overhead Lat Pull", "Dips"));
+                of("Chest", "Bench Press", "Push Ups", "Incline Dumbbell Bench Press"),
+                of("Shoulders", "Arnold Press", "Side Lifts", "Wide Barbell Lift"),
+                of("Triceps", "Lat Pull", "Overhead Lat Pull", "Dips"));
 
         var stored = fs.save(toStore);
 

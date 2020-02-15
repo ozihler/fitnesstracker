@@ -1,68 +1,29 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.file_based;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.zihler.fitness_tracker.adapters.data_access.persistance.exceptions.LoadingMuscleGroupsAndExercisesFromFileSystemFailed;
-import com.zihler.fitness_tracker.adapters.data_access.persistance.exceptions.StoringMuscleGroupsAndExercisesToFileSystemFailed;
-import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.inputs.MuscleGroupRawFilesInput;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.inputs.MuscleGroupFilesInput;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.outputs.MuscleGroupFilesOutput;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.outputs.MuscleGroupRawFileOutput;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.outputs.MuscleGroupsRawFilesOutput;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-
-// todo extract FileSystem/Folder logic to reuse in InMemoryWorkoutRepo
 public class MuscleGroupAndExercisesFileSystemDirectory {
 
-    private Path folder;
-    private String folderName;
-    private ObjectMapper jsonFileWriter;
-
-    private MuscleGroupAndExercisesFileSystemDirectory() {
-        folderName = "muscleGroupsAndExercises";
-        makeFolderPath();
-        createFolderIfNecessary();
-        configureFileWriter();
-    }
+    private FileSystemDirectory<MuscleGroupFile> fileSystemDirectory;
 
     public static MuscleGroupAndExercisesFileSystemDirectory makeDirectory() {
-        return new MuscleGroupAndExercisesFileSystemDirectory();
+        return new MuscleGroupAndExercisesFileSystemDirectory("muscleGroupsAndExercises");
     }
 
-    private void configureFileWriter() {
-        jsonFileWriter = new ObjectMapper();
-        jsonFileWriter.configure(SerializationFeature.INDENT_OUTPUT, true);
+    private MuscleGroupAndExercisesFileSystemDirectory(String folderName) {
+        this.fileSystemDirectory = FileSystemDirectory.mkDir("folderName", MuscleGroupFile.class);
     }
+
 
     public MuscleGroups fetch() {
-        return fetchFromFileSystem()
-                .toMuscleGroupFiles()
+        return new MuscleGroupFilesInput(fileSystemDirectory.fetchAllFilesFromFileSystem())
                 .toMuscleGroups();
-    }
-
-    public MuscleGroupRawFilesInput fetchFromFileSystem() {
-        List<File> muscleGroupFiles = fetchFilesFromFileSystem();
-
-        return new MuscleGroupRawFilesInput(muscleGroupFiles);
-    }
-
-    private List<File> fetchFilesFromFileSystem() {
-        try {
-            return Files.walk(folder.toAbsolutePath())
-                    .filter(Files::isRegularFile)
-                    .map(Path::toFile)
-                    .collect(toList());
-        } catch (IOException e) {
-            throw new LoadingMuscleGroupsAndExercisesFromFileSystemFailed(e.getCause());
-        }
     }
 
     public MuscleGroups save(MuscleGroups muscleGroupsToStore) {
@@ -71,7 +32,7 @@ public class MuscleGroupAndExercisesFileSystemDirectory {
                 .of(muscleGroupsToStore)
                 .files();
 
-        new MuscleGroupsRawFilesOutput(folder, files)
+        new MuscleGroupsRawFilesOutput(files)
                 .rawFiles()
                 .forEach(this::writeToFileSystem);
 
@@ -79,29 +40,8 @@ public class MuscleGroupAndExercisesFileSystemDirectory {
     }
 
     private void writeToFileSystem(MuscleGroupRawFileOutput output) {
-        try {
-            jsonFileWriter.writeValue(output.file(), output.muscleGroup());
-        } catch (IOException e) {
-            throw new StoringMuscleGroupsAndExercisesToFileSystemFailed(e.getCause());
-        }
+        this.fileSystemDirectory.store(output);
     }
 
-    private void createFolderIfNecessary() {
-        if (Files.exists(folder)) {
-            return;
-        }
-
-        try {
-            Files.createDirectories(folder);
-        } catch (IOException e) {
-            throw new LoadingMuscleGroupsAndExercisesFromFileSystemFailed(e.getCause());
-        }
-    }
-
-    private void makeFolderPath() {
-        String path = getClass().getResource("/").getPath().replace("/C:","C:");
-        Path source = Paths.get(path);
-        folder = Paths.get(source.toAbsolutePath() + "/" + folderName);
-    }
 
 }

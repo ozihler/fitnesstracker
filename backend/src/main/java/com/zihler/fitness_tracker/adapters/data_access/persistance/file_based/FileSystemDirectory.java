@@ -1,0 +1,88 @@
+package com.zihler.fitness_tracker.adapters.data_access.persistance.file_based;
+
+import com.fasterxml.jackson.core.json.JsonWriteContext;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.exceptions.ConfiguringFileSystemFailed;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.exceptions.LoadingDataFromFileSystemFailed;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.exceptions.StoringToFileSystemFailed;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.outputs.FileOutput;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.reducing;
+import static java.util.stream.Collectors.toList;
+
+// todo extract FileSystem/Folder logic to reuse in InMemoryWorkoutRepo
+public class FileSystemDirectory<T extends JsonReadWritableFile> {
+
+    private Path pathToFolder;
+    private Class<T> classToConvertFileInto;
+
+    private FileSystemDirectory(String folderName, Class<T> classToConvertFileInto) {
+        pathToFolder = createFolderWith(folderName);
+        this.classToConvertFileInto = classToConvertFileInto;
+    }
+
+    private Path createFolderWith(String folderName) {
+        Path pathToFolder = Paths.get(source().toAbsolutePath() + "/" + folderName);
+        if (!Files.exists(pathToFolder)) {
+            try {
+                Files.createDirectories(pathToFolder);
+            } catch (IOException e) {
+                throw new ConfiguringFileSystemFailed(e.getCause());
+            }
+        }
+        return pathToFolder;
+    }
+
+    private Path source() {
+        return Paths.get(getClass().getResource("/").getPath().replace("/C:","C:"));
+    }
+
+    public static <T extends JsonReadWritableFile>  FileSystemDirectory<T> mkDir(String dirName, Class<T> classToConvertFileInto) {
+        return new FileSystemDirectory<T>(dirName, classToConvertFileInto);
+    }
+
+    public Set<T> fetchAllFilesFromFileSystem() {
+        try {
+            return Files.walk(pathToFolder.toAbsolutePath())
+                    .filter(Files::isRegularFile)
+                    .map(Path::toFile)
+                    .map(this::convertToClass)
+                    .collect(Collectors.toSet());
+        } catch (IOException e) {
+            throw new LoadingDataFromFileSystemFailed(e.getCause());
+        }
+    }
+
+    private T convertToClass(File file) {
+        try {
+            return fileWriter().readValue(file, classToConvertFileInto);
+        } catch (IOException e) {
+            throw new LoadingDataFromFileSystemFailed(e.getCause());
+        }
+    }
+
+    private ObjectMapper fileWriter() {
+        ObjectMapper jsonFileWriter = new ObjectMapper();
+        jsonFileWriter.configure(SerializationFeature.INDENT_OUTPUT, true);
+        return jsonFileWriter;
+    }
+
+    public void store(FileOutput fileOutput) {
+        try {
+            fileWriter().writeValue(new File(this.pathToFolder.toAbsolutePath() + "/" + fileOutput.data().fileName()), fileOutput.data());
+        } catch (IOException e) {
+            throw new StoringToFileSystemFailed(e.getCause());
+        }
+    }
+
+}
