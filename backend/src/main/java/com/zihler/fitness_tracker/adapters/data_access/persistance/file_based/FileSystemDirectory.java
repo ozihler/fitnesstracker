@@ -1,24 +1,18 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.file_based;
 
-import com.fasterxml.jackson.core.json.JsonWriteContext;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.exceptions.ConfiguringFileSystemFailed;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.exceptions.LoadingDataFromFileSystemFailed;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.exceptions.StoringToFileSystemFailed;
-import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.outputs.FileOutput;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.reducing;
-import static java.util.stream.Collectors.toList;
 
 // todo extract FileSystem/Folder logic to reuse in InMemoryWorkoutRepo
 public class FileSystemDirectory<T extends JsonReadWritableFile> {
@@ -44,10 +38,10 @@ public class FileSystemDirectory<T extends JsonReadWritableFile> {
     }
 
     private Path source() {
-        return Paths.get(getClass().getResource("/").getPath().replace("/C:","C:"));
+        return Paths.get(getClass().getResource("/").getPath().replace("/C:", "C:"));
     }
 
-    public static <T extends JsonReadWritableFile>  FileSystemDirectory<T> mkDir(String dirName, Class<T> classToConvertFileInto) {
+    public static <T extends JsonReadWritableFile> FileSystemDirectory<T> mkDir(String dirName, Class<T> classToConvertFileInto) {
         return new FileSystemDirectory<T>(dirName, classToConvertFileInto);
     }
 
@@ -77,9 +71,10 @@ public class FileSystemDirectory<T extends JsonReadWritableFile> {
         return jsonFileWriter;
     }
 
-    public void store(FileOutput fileOutput) {
+    public void store(JsonReadWritableFile fileOutput) {
         try {
-            fileWriter().writeValue(new File(this.pathToFolder.toAbsolutePath() + "/" + fileOutput.data().fileName()), fileOutput.data());
+            File fileToStore = new File(this.pathToFolder.toAbsolutePath() + "/" + fileOutput.fileName());
+            fileWriter().writeValue(fileToStore, fileOutput);
         } catch (IOException e) {
             throw new StoringToFileSystemFailed(e.getCause());
         }

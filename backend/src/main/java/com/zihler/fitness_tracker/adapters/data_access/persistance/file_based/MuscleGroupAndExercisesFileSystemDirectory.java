@@ -2,11 +2,7 @@ package com.zihler.fitness_tracker.adapters.data_access.persistance.file_based;
 
 import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.inputs.MuscleGroupFilesInput;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.outputs.MuscleGroupFilesOutput;
-import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.outputs.MuscleGroupRawFileOutput;
-import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.outputs.MuscleGroupsRawFilesOutput;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
-
-import java.util.List;
 
 public class MuscleGroupAndExercisesFileSystemDirectory {
 
@@ -28,18 +24,14 @@ public class MuscleGroupAndExercisesFileSystemDirectory {
 
     public MuscleGroups save(MuscleGroups muscleGroupsToStore) {
 
-        List<MuscleGroupFile> files = MuscleGroupFilesOutput
-                .of(muscleGroupsToStore)
-                .files();
-
-        new MuscleGroupsRawFilesOutput(files)
-                .rawFiles()
+        MuscleGroupFilesOutput.of(muscleGroupsToStore)
+                .files()
                 .forEach(this::writeToFileSystem);
 
         return muscleGroupsToStore;
     }
 
-    private void writeToFileSystem(MuscleGroupRawFileOutput output) {
+    private void writeToFileSystem(MuscleGroupFile output) {
         this.fileSystemDirectory.store(output);
     }
 
