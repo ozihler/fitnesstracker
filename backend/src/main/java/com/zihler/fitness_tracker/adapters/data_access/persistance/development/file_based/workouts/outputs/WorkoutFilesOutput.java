@@ -1,8 +1,8 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.workouts.outputs;
 
-import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.workouts.WorkoutFile;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.FullExerciseViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.FullMuscleGroupViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.FullWorkoutViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullSetViewModel;
 import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.Exercises;
@@ -25,8 +25,8 @@ public class WorkoutFilesOutput {
         return new WorkoutFilesOutput(toStore);
     }
 
-    public WorkoutFile file() {
-        return WorkoutFile.of(
+    public FullWorkoutViewModel file() {
+        return FullWorkoutViewModel.of(
                 this.toStore.getWorkoutId().toString(),
                 this.toStore.getWorkoutTitle().toString(),
                 this.toStore.getCreationDateTime().toInstant().toEpochMilli(),

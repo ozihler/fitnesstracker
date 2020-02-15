@@ -1,7 +1,7 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.workouts.inputs;
 
-import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.workouts.WorkoutFile;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.FullMuscleGroupViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.FullWorkoutViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullSetViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WaitingTime;
 import com.zihler.fitness_tracker.domain.entities.Set;
@@ -15,22 +15,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WorkoutFileInput {
-    private WorkoutFile workoutFile;
+    private FullWorkoutViewModel workoutFile;
 
-    WorkoutFileInput(WorkoutFile workoutFile) {
+    WorkoutFileInput(FullWorkoutViewModel workoutFile) {
         this.workoutFile = workoutFile;
     }
 
     public Workout workout() {
         return new Workout(
-                WorkoutId.of(workoutFile.getWorkoutId()),
+                WorkoutId.of(workoutFile.getGid()),
                 ZonedDateTime.from(Instant.ofEpochMilli(workoutFile.getCreationDate()).atZone(Clock.systemDefaultZone().getZone())),
                 WorkoutTitle.of(workoutFile.getTitle()),
                 toMuscleGroups(workoutFile)
         );
     }
 
-    private MuscleGroups toMuscleGroups(WorkoutFile w) {
+    private MuscleGroups toMuscleGroups(FullWorkoutViewModel w) {
         java.util.Set<MuscleGroup> muscleGroups = w.getMuscleGroups()
                 .stream()
                 .map(this::toMuscleGroup)

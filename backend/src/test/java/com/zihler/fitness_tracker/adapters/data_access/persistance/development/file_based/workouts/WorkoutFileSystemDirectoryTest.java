@@ -40,8 +40,6 @@ class WorkoutFileSystemDirectoryTest {
         assertEquals(1, workouts1.size());
         Workout workout1 = workouts1.get(0);
         assertEquals(workout.getWorkoutId(), workout1.getWorkoutId());
-
-
     }
 
 }

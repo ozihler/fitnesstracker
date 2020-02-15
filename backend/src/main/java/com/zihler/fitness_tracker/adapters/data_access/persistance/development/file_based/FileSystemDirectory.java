@@ -16,7 +16,7 @@ import java.nio.file.Paths;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class FileSystemDirectory<T extends JsonReadWritableFile> {
+public class FileSystemDirectory<T extends Namable> {
     private static final Logger logger = LogManager.getLogger();
     private static final String APP_NAME = "fitness-tracker";
 
@@ -48,13 +48,13 @@ public class FileSystemDirectory<T extends JsonReadWritableFile> {
         return sourcePath;
     }
 
-    public static <T extends JsonReadWritableFile> FileSystemDirectory<T> mkDir(String dirName, Class<T> classToConvertFileInto) {
+    public static <T extends Namable> FileSystemDirectory<T> mkDir(String dirName, Class<T> classToConvertFileInto) {
         return new FileSystemDirectory<T>(dirName, classToConvertFileInto);
     }
 
-    public void store(JsonReadWritableFile file) {
+    public void store(Namable file) {
         try {
-            File rawFile = fileNamed(file.fileName());
+            File rawFile = fileNamed(file.name());
             fileWriter().writeValue(rawFile, file);
             logger.debug("Stored file " + file + " into raw file " + rawFile);
         } catch (IOException e) {

@@ -3,15 +3,16 @@ package com.zihler.fitness_tracker.adapters.data_access.persistance.development.
 import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.FileSystemDirectory;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.workouts.inputs.WorkoutFilesInput;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.workouts.outputs.WorkoutFilesOutput;
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.FullWorkoutViewModel;
 import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.Workouts;
 
 public class WorkoutFileSystemDirectory {
 
-    private FileSystemDirectory<WorkoutFile> fileSystemDirectory;
+    private FileSystemDirectory<FullWorkoutViewModel> fileSystemDirectory;
 
     private WorkoutFileSystemDirectory(String folderName) {
-        this.fileSystemDirectory = FileSystemDirectory.mkDir(folderName, WorkoutFile.class);
+        this.fileSystemDirectory = FileSystemDirectory.mkDir(folderName, FullWorkoutViewModel.class);
     }
 
     public static WorkoutFileSystemDirectory makeDirectory() {
@@ -24,7 +25,7 @@ public class WorkoutFileSystemDirectory {
     }
 
     public Workout save(Workout workout) {
-        WorkoutFile file = WorkoutFilesOutput.of(workout).file();
+        FullWorkoutViewModel file = WorkoutFilesOutput.of(workout).file();
         this.fileSystemDirectory.store(file);
         return workout;
     }

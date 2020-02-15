@@ -1,12 +1,12 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.musclegroups;
 
-import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.JsonReadWritableFile;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.Namable;
 
 import java.util.List;
 
 import static org.apache.logging.log4j.util.Strings.join;
 
-public class MuscleGroupFile implements JsonReadWritableFile {
+public class MuscleGroupFile implements Namable {
     private String name;
     private List<String> exercises;
 
@@ -35,7 +35,7 @@ public class MuscleGroupFile implements JsonReadWritableFile {
     }
 
     @Override
-    public String fileName() {
+    public String name() {
         return name.replace(" ", "_") + ".json";
     }
 
