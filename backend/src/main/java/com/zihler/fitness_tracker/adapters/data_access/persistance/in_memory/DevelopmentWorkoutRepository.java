@@ -4,6 +4,7 @@ import com.zihler.fitness_tracker.application.outbound_ports.gateways.*;
 import com.zihler.fitness_tracker.domain.entities.Set;
 import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.*;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -12,7 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Repository
-public class InMemoryWorkoutRepository
+@Profile("prod")
+public class DevelopmentWorkoutRepository
         implements
         GenerateWorkoutId,
         FetchWorkout,
