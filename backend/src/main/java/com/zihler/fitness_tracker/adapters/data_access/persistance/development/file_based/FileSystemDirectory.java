@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.exceptions.ConfiguringFileSystemFailed;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.exceptions.LoadingDataFromFileSystemFailed;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.exceptions.StoringToFileSystemFailed;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,29 +17,35 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class FileSystemDirectory<T extends JsonReadWritableFile> {
+    private static final Logger logger = LogManager.getLogger();
+    private static final String APP_NAME = "fitness-tracker";
 
     private Path pathToFolder;
     private Class<T> classToConvertFileInto;
 
     private FileSystemDirectory(String folderName, Class<T> classToConvertFileInto) {
-        pathToFolder = createFolderWith(folderName);
+        createFolderWith(folderName);
         this.classToConvertFileInto = classToConvertFileInto;
     }
 
-    private Path createFolderWith(String folderName) {
-        Path pathToFolder = Paths.get(source().toAbsolutePath() + "/" + folderName);
-        if (!Files.exists(pathToFolder)) {
-            try {
-                Files.createDirectories(pathToFolder);
-            } catch (IOException e) {
-                throw new ConfiguringFileSystemFailed(e.getCause());
-            }
+    private void createFolderWith(String folderName) {
+        this.pathToFolder = pathToFolder(folderName);
+
+        if (Files.exists(pathToFolder)) {
+            return;
         }
-        return pathToFolder;
+
+        try {
+            Files.createDirectories(pathToFolder);
+        } catch (IOException e) {
+            throw new ConfiguringFileSystemFailed(e.getCause());
+        }
     }
 
-    private Path source() {
-        return Paths.get(getClass().getResource("/").getPath().replace("/C:", "C:"));
+    private Path pathToFolder(String folderName) {
+        Path sourcePath = Paths.get(String.format("%s/%s/%s", System.getProperty("user.home"), APP_NAME, folderName));
+        logger.debug("Source path is: " + sourcePath.toAbsolutePath());
+        return sourcePath;
     }
 
     public static <T extends JsonReadWritableFile> FileSystemDirectory<T> mkDir(String dirName, Class<T> classToConvertFileInto) {
