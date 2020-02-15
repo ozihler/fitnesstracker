@@ -14,9 +14,8 @@ public class MuscleGroupAndExercisesFileSystemDirectory {
     }
 
     private MuscleGroupAndExercisesFileSystemDirectory(String folderName) {
-        this.fileSystemDirectory = FileSystemDirectory.mkDir("folderName", MuscleGroupFile.class);
+        this.fileSystemDirectory = FileSystemDirectory.mkDir(folderName, MuscleGroupFile.class);
     }
-
 
     public MuscleGroups fetch() {
         return new MuscleGroupFilesInput(fileSystemDirectory.fetchAllFilesFromFileSystem())
@@ -35,6 +34,4 @@ public class MuscleGroupAndExercisesFileSystemDirectory {
     private void writeToFileSystem(MuscleGroupFile output) {
         this.fileSystemDirectory.store(output);
     }
-
-
 }

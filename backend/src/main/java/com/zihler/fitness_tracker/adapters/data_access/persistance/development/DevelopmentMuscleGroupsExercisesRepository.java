@@ -97,8 +97,8 @@ public class DevelopmentMuscleGroupsExercisesRepository
     @Override
     public MuscleGroup withValues(MuscleGroup muscleGroup) {
         muscleGroupsAndExercises.put(muscleGroup.getName(), muscleGroup);
-
-        fileSystemDirectory.save(new MuscleGroups(new HashSet<>(muscleGroupsAndExercises.values())));
+        MuscleGroups toStore = new MuscleGroups(new HashSet<>(muscleGroupsAndExercises.values()));
+        fileSystemDirectory.save(toStore);
         return muscleGroup;
     }
 

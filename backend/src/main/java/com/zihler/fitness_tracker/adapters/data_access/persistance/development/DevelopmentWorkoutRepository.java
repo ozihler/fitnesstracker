@@ -1,5 +1,6 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.development;
 
+import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.workouts.WorkoutFileSystemDirectory;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.*;
 import com.zihler.fitness_tracker.domain.entities.Set;
 import com.zihler.fitness_tracker.domain.entities.Workout;
@@ -25,11 +26,21 @@ public class DevelopmentWorkoutRepository
     private static int currentId = 1;
     private int userId = 1;
 
-    private Map<WorkoutId, Workout> workouts = new HashMap<>();
+    private Map<WorkoutId, Workout> workouts;
+    private WorkoutFileSystemDirectory fileSystemDirectory;
+
+    public DevelopmentWorkoutRepository() {
+        workouts = new HashMap<>();
+        fileSystemDirectory = WorkoutFileSystemDirectory.makeDirectory();
+        fileSystemDirectory.fetch()
+                .getWorkouts()
+                .forEach(workout -> workouts.put(workout.getWorkoutId(), workout));
+    }
 
     @Override
     public Workout withValues(Workout workout) {
         workouts.put(workout.getWorkoutId(), workout);
+        fileSystemDirectory.save(workout);
         return workout;
     }
 
@@ -40,7 +51,7 @@ public class DevelopmentWorkoutRepository
 
     @Override
     public Workouts all() {
-        return new Workouts(new ArrayList<>(workouts.values()));
+        return Workouts.of(new ArrayList<>(workouts.values()));
     }
 
     @Override
@@ -65,6 +76,7 @@ public class DevelopmentWorkoutRepository
                 .findFirst().get()
                 .getSets()
                 .add(setToStore);
+        fileSystemDirectory.save(workout);
         return setToStore;
     }
 
