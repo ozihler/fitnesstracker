@@ -1,6 +1,6 @@
-package com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.outputs;
+package com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.musclegroups.outputs;
 
-import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.MuscleGroupFile;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.musclegroups.MuscleGroupFile;
 import com.zihler.fitness_tracker.domain.values.Exercises;
 import com.zihler.fitness_tracker.domain.values.MuscleGroup;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
@@ -12,12 +12,12 @@ import static java.util.stream.Collectors.toList;
 public class MuscleGroupFilesOutput {
     public MuscleGroups toStore;
 
-    private MuscleGroupFilesOutput(MuscleGroups toStore) {
-        this.toStore = toStore;
-    }
-
     public static MuscleGroupFilesOutput of(MuscleGroups toStore) {
         return new MuscleGroupFilesOutput(toStore);
+    }
+
+    private MuscleGroupFilesOutput(MuscleGroups toStore) {
+        this.toStore = toStore;
     }
 
     public List<MuscleGroupFile> files() {

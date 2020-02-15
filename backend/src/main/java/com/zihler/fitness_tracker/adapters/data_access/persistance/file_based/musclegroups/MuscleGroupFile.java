@@ -1,4 +1,6 @@
-package com.zihler.fitness_tracker.adapters.data_access.persistance.file_based;
+package com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.musclegroups;
+
+import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.JsonReadWritableFile;
 
 import java.util.List;
 

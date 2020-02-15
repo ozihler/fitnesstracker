@@ -1,6 +1,6 @@
 package com.zihler.fitness_tracker.adapters.gateways.json;
 
-import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.MuscleGroupAndExercisesFileSystemDirectory;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.musclegroups.MuscleGroupAndExercisesFileSystemDirectory;
 import com.zihler.fitness_tracker.domain.values.Exercise;
 import com.zihler.fitness_tracker.domain.values.Exercises;
 import com.zihler.fitness_tracker.domain.values.MuscleGroup;

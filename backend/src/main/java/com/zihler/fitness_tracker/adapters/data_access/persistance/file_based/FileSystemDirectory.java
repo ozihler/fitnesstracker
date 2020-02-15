@@ -14,7 +14,6 @@ import java.nio.file.Paths;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-// todo extract FileSystem/Folder logic to reuse in InMemoryWorkoutRepo
 public class FileSystemDirectory<T extends JsonReadWritableFile> {
 
     private Path pathToFolder;
@@ -45,6 +44,15 @@ public class FileSystemDirectory<T extends JsonReadWritableFile> {
         return new FileSystemDirectory<T>(dirName, classToConvertFileInto);
     }
 
+    public void store(JsonReadWritableFile fileOutput) {
+        try {
+            File fileToStore = new File(this.pathToFolder.toAbsolutePath() + "/" + fileOutput.fileName());
+            fileWriter().writeValue(fileToStore, fileOutput);
+        } catch (IOException e) {
+            throw new StoringToFileSystemFailed(e.getCause());
+        }
+    }
+
     public Set<T> fetchAllFilesFromFileSystem() {
         try {
             return Files.walk(pathToFolder.toAbsolutePath())
@@ -69,15 +77,6 @@ public class FileSystemDirectory<T extends JsonReadWritableFile> {
         ObjectMapper jsonFileWriter = new ObjectMapper();
         jsonFileWriter.configure(SerializationFeature.INDENT_OUTPUT, true);
         return jsonFileWriter;
-    }
-
-    public void store(JsonReadWritableFile fileOutput) {
-        try {
-            File fileToStore = new File(this.pathToFolder.toAbsolutePath() + "/" + fileOutput.fileName());
-            fileWriter().writeValue(fileToStore, fileOutput);
-        } catch (IOException e) {
-            throw new StoringToFileSystemFailed(e.getCause());
-        }
     }
 
 }
