@@ -34,7 +34,7 @@ import {WorkoutTitleUpdate} from "./workout-title-update";
     <hr/>
   `
 })
-export class CreateWorkoutComponent implements OnInit {
+export class CreateWorkoutComponent implements OnInit { // todo rename to "edit Workout component" or similar, see angular book
   workoutTree: WorkoutTree;
   selectableChildrenOfSelectedNode: TreeNode[] = [];
 
@@ -154,7 +154,7 @@ export class CreateWorkoutComponent implements OnInit {
     // just save the whole damn thing
     let selectedElement = this.workoutTree.currentSelection;
 
-    console.log(updatedWorkout)
+    console.log(updatedWorkout);
     this.workoutTree.root.name = updatedWorkout.workoutTitle;
     this.workoutTree.root.creationDate = updatedWorkout.workoutCreationDate;
 
