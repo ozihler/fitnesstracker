@@ -28,7 +28,7 @@ public class DevelopmentMuscleGroupsExercisesRepository
         StoreExercise {
     private static final Logger logger = LogManager.getLogger();
 
-    private MuscleGroupAndExercisesFileSystemDirectory muscleGroupAndExercisesFileSystemDirectory;
+    private MuscleGroupAndExercisesFileSystemDirectory fileSystemDirectory;
 
     private Map<Name, MuscleGroup> muscleGroupsAndExercises;
 
@@ -38,10 +38,10 @@ public class DevelopmentMuscleGroupsExercisesRepository
     }
 
     private void initMuscleGroupsAndExercises() {
-        muscleGroupAndExercisesFileSystemDirectory = makeDirectory();
+        fileSystemDirectory = makeDirectory();
         muscleGroupsAndExercises = new HashMap<>();
 
-        MuscleGroups muscleGroups = muscleGroupAndExercisesFileSystemDirectory.fetch();
+        MuscleGroups muscleGroups = fileSystemDirectory.fetch();
 
         muscleGroups.getMuscleGroups()
                 .forEach(muscleGroup -> muscleGroupsAndExercises.put(muscleGroup.getName(), muscleGroup));
@@ -98,7 +98,7 @@ public class DevelopmentMuscleGroupsExercisesRepository
     public MuscleGroup withValues(MuscleGroup muscleGroup) {
         muscleGroupsAndExercises.put(muscleGroup.getName(), muscleGroup);
 
-        muscleGroupAndExercisesFileSystemDirectory.save(new MuscleGroups(new HashSet<>(muscleGroupsAndExercises.values())));
+        fileSystemDirectory.save(new MuscleGroups(new HashSet<>(muscleGroupsAndExercises.values())));
         return muscleGroup;
     }
 
