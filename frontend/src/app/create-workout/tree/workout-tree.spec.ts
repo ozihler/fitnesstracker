@@ -17,7 +17,7 @@ describe('Workout Tree', () => {
   });
 
   it('can add nodes to tree', () => {
-    let workout = new Workout(WorkoutId.from(1), new Date(Date.now()), "Workout", []);
+    let workout = new Workout(WorkoutId.from("1"), new Date(Date.now()), "Workout", []);
     let workoutTree = new WorkoutTree(workout);
 
     let muscleGroup = new MuscleGroup(undefined, "Chest", []);
@@ -37,7 +37,7 @@ describe('Workout Tree', () => {
     expect(nodeOfExercise.parent.name).toBe(muscleGroup.name);
 
 
-    let set = new Set(WorkoutId.from(2), 50, 'kg', 12, 45, 's', exercise);
+    let set = new Set(50, 'kg', 12, 45, 's', exercise);
     workoutTree.addNode(set);
 
     let setInExercise = workoutTree.findNodeByName(Set.formatEntries(12, 50, 'kg', 45, 's'));
@@ -45,6 +45,7 @@ describe('Workout Tree', () => {
     expect(setInExercise.type).toBe(Type.Set);
   });
 
+  // todo fix tests
   it('should enable all parents of a node identified by name', () => {
     /*
                              Workout
