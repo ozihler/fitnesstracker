@@ -52,6 +52,7 @@ export class WorkoutTree {
     this.root.accept(new DisableAllNodesVisitor())
   }
 
+  // Todo this should not have a parameter of type tree node but only names and a type --> should create a node and return it
   addNode(nodeToAdd: TreeNode): boolean {
     if (nodeToAdd.type === Type.Muscle_Group) {
       return this.link(nodeToAdd, this.root);

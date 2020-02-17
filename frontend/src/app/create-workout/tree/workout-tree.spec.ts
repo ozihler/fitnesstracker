@@ -59,11 +59,11 @@ describe('Workout Tree', () => {
       let {workout, chest, benchPress, set, set1, dumbbellBP, set2, triceps, latPull, set3, set4, overheadLatPull, set5, workoutTree} = createSimpleTree();
       workoutTree.select(set.name);
 
-      //  expect(workout.isEnabled).toBe(true);
-      //  expect(chest.isEnabled).toBe(true);
-      //expect(benchPress.isEnabled).toBe(true);
+      expect(workout.isEnabled).toBe(true);
+      expect(chest.isEnabled).toBe(true);
+      expect(benchPress.isEnabled).toBe(true);
       //expect(set.isEnabled).toBe(true);
-      //expect(set1.isEnabled).toBe(false);
+      //expect(set1.isEnabled).toBe(true);
 
       //workoutTree.delete(set.name);
       //expect(workout.isEnabled).toBe(true);
