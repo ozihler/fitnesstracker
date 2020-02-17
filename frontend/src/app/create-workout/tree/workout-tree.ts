@@ -90,16 +90,12 @@ export class WorkoutTree {
     currentSelection.children.forEach(child => child.accept(new DisableAllNodesVisitor()));
   }
 
-  delete(nodeToDelete: TreeNode) {
-    let treeNode = this.findNodeByName(nodeToDelete.name);
+  delete(nodeName: string) {
+    let treeNode = this.findNodeByName(nodeName);
 
     this.removeFromParent(treeNode);
 
-    if (this.hasSiblings(treeNode)) {
-      this.enableFirstSiblingOf(treeNode);
-    } else {
-      this.enableParentOf(treeNode);
-    }
+    this.enableParentOf(treeNode);
   }
 
   private removeFromParent(treeNode: TreeNode) {

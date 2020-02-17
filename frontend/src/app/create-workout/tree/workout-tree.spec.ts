@@ -45,48 +45,39 @@ describe('Workout Tree', () => {
     expect(setInExercise.type).toBe(Type.Set);
   });
 
+  it('should correctly delete nodes', () => {
+
+      /*
+                               Workout
+                              /      \
+                        Chest         Triceps
+                        / \               /  \
+              BenchPress  DumbbellBP  LatPull OverheadLatPull
+                 /\          /        /  \         \
+               set set1    set2   set3  set4      set5
+       */
+      let {workout, chest, benchPress, set, set1, dumbbellBP, set2, triceps, latPull, set3, set4, overheadLatPull, set5, workoutTree} = createSimpleTree();
+      workoutTree.select(set.name);
+
+      //  expect(workout.isEnabled).toBe(true);
+      //  expect(chest.isEnabled).toBe(true);
+      //expect(benchPress.isEnabled).toBe(true);
+      //expect(set.isEnabled).toBe(true);
+      //expect(set1.isEnabled).toBe(false);
+
+      //workoutTree.delete(set.name);
+      //expect(workout.isEnabled).toBe(true);
+      //expect(chest.isEnabled).toBe(true);
+      //expect(benchPress.isEnabled).toBe(true);
+      //expect(set.isEnabled).toBe(false);
+      //expect(workoutTree.findNodeByName(set.name)).toBe(undefined);
+
+    }
+  );
+
+
   it('should enable all parents of a node identified by name', () => {
-    /*
-                             Workout
-                            /      \
-                      Chest         Triceps
-                      / \               /  \
-            BenchPress  DumbbellBP  LatPull OverheadLatPull
-               /\          /        /  \         \
-             set set     set      set  set       set
-     */
-    let workout = new Workout(WorkoutId.from("1"), new Date(Date.now()), "Workout", []);
-
-    let chest = new MuscleGroup(workout, "Chest", []);
-    let benchPress = new Exercise(chest, "Bench Press", []);
-    let set = new Set(50, 'kg', 12, 45, 's', benchPress);
-    let set1 = new Set(50, 'kg', 12, 45, 's', benchPress);
-
-    let dumbbellBP = new Exercise(chest, "Dumbbell Bench Press", []);
-    let set2 = new Set(50, 'kg', 12, 45, 's', dumbbellBP);
-
-    let triceps = new MuscleGroup(workout, "Triceps", []);
-    let latPull = new Exercise(triceps, "Lat Pull", []);
-    let set3 = new Set(20, 'kg', 12, 45, 's', latPull);
-    let set4 = new Set(15, 'kg', 12, 45, 's', latPull);
-
-    let overheadLatPull = new Exercise(triceps, "Overhead Lat Pull", []);
-    let set5 = new Set(10, 'kg', 12, 45, 's', overheadLatPull);
-
-    let workoutTree = new WorkoutTree(workout);
-    workoutTree.addNode(chest);
-    workoutTree.addNode(triceps);
-    workoutTree.addNode(benchPress);
-    workoutTree.addNode(dumbbellBP);
-    workoutTree.addNode(latPull);
-    workoutTree.addNode(overheadLatPull);
-    workoutTree.addNode(set);
-    workoutTree.addNode(set1);
-    workoutTree.addNode(set2);
-    workoutTree.addNode(set3);
-    workoutTree.addNode(set4);
-    workoutTree.addNode(set5);
-    workoutTree.disableAllNodes();
+    let {workout, chest, benchPress, set, set1, dumbbellBP, set2, triceps, latPull, set3, set4, overheadLatPull, set5, workoutTree} = createSimpleTree();
 
     assertDisabled([workout, chest, benchPress, set, set1, dumbbellBP, set2, triceps, latPull, set3, set4, overheadLatPull, set5]);
 
@@ -149,6 +140,66 @@ describe('Workout Tree', () => {
     assertDisabled([benchPress, set, set1, dumbbellBP, set2, set5]);
     assertEnabled([workout, chest, triceps, latPull, set3, set4, overheadLatPull]);
   });
+
+  function createSimpleTree() {
+    /*
+                             Workout
+                            /      \
+                      Chest         Triceps
+                      / \               /  \
+            BenchPress  DumbbellBP  LatPull OverheadLatPull
+               /\          /        /  \         \
+             set set1    set2   set3  set4      set5
+     */
+    let workout = new Workout(WorkoutId.from("1"), new Date(Date.now()), "Workout", []);
+
+    let chest = new MuscleGroup(workout, "Chest", []);
+    let benchPress = new Exercise(chest, "Bench Press", []);
+    let set = new Set(50, 'kg', 12, 45, 's', benchPress);
+    let set1 = new Set(50, 'kg', 12, 45, 's', benchPress);
+
+    let dumbbellBP = new Exercise(chest, "Dumbbell Bench Press", []);
+    let set2 = new Set(50, 'kg', 12, 45, 's', dumbbellBP);
+
+    let triceps = new MuscleGroup(workout, "Triceps", []);
+    let latPull = new Exercise(triceps, "Lat Pull", []);
+    let set3 = new Set(20, 'kg', 12, 45, 's', latPull);
+    let set4 = new Set(15, 'kg', 12, 45, 's', latPull);
+
+    let overheadLatPull = new Exercise(triceps, "Overhead Lat Pull", []);
+    let set5 = new Set(10, 'kg', 12, 45, 's', overheadLatPull);
+
+    let workoutTree = new WorkoutTree(workout);
+    workoutTree.addNode(chest);
+    workoutTree.addNode(triceps);
+    workoutTree.addNode(benchPress);
+    workoutTree.addNode(dumbbellBP);
+    workoutTree.addNode(latPull);
+    workoutTree.addNode(overheadLatPull);
+    workoutTree.addNode(set);
+    workoutTree.addNode(set1);
+    workoutTree.addNode(set2);
+    workoutTree.addNode(set3);
+    workoutTree.addNode(set4);
+    workoutTree.addNode(set5);
+    workoutTree.disableAllNodes();
+    return {
+      workout,
+      chest,
+      benchPress,
+      set,
+      set1,
+      dumbbellBP,
+      set2,
+      triceps,
+      latPull,
+      set3,
+      set4,
+      overheadLatPull,
+      set5,
+      workoutTree
+    };
+  }
 
   function assertEnabled(nodes: TreeNode[]) {
     assertNodes(nodes, true);
