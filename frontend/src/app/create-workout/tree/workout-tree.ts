@@ -92,7 +92,17 @@ export class WorkoutTree {
 
   delete(nodeToDelete: TreeNode) {
     let treeNode = this.findNodeByName(nodeToDelete.name);
-    treeNode.parent.children.filter(c => c.name != nodeToDelete.name);
-    nodeToDelete.parent = undefined;
+    treeNode.parent.children = treeNode.parent.children.filter(c => c.name != treeNode.name);
+    if (this.hasSiblings(treeNode)) {
+      this.enableFirstSibling(treeNode);
+    }
+  }
+
+  private enableFirstSibling(treeNode: TreeNode) {
+    return treeNode.parent.children[0].enable();
+  }
+
+  private hasSiblings(treeNode: TreeNode) {
+    return treeNode.parent.children && treeNode.parent.children.length > 0;
   }
 }
