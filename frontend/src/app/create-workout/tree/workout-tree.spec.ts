@@ -11,7 +11,7 @@ describe('Workout Tree', () => {
 
 
   it('should have a workout node as tree', () => {
-    let workout = new Workout(WorkoutId.from(1), new Date(Date.now()), "Workout", []);
+    let workout = new Workout(WorkoutId.from("1"), new Date(Date.now()), "Workout", []);
     let workoutTree = new WorkoutTree(workout);
     expect(workoutTree.root.type).toBe(Type.Workout);
   });
@@ -45,7 +45,6 @@ describe('Workout Tree', () => {
     expect(setInExercise.type).toBe(Type.Set);
   });
 
-  // todo fix tests
   it('should enable all parents of a node identified by name', () => {
     /*
                              Workout
@@ -56,23 +55,23 @@ describe('Workout Tree', () => {
                /\          /        /  \         \
              set set     set      set  set       set
      */
-    let workout = new Workout(WorkoutId.from(1), new Date(Date.now()), "Workout", []);
+    let workout = new Workout(WorkoutId.from("1"), new Date(Date.now()), "Workout", []);
 
     let chest = new MuscleGroup(workout, "Chest", []);
     let benchPress = new Exercise(chest, "Bench Press", []);
-    let set = new Set(WorkoutId.from(2), 50, 'kg', 12, 45, 's', benchPress);
-    let set1 = new Set(WorkoutId.from(2), 50, 'kg', 12, 45, 's', benchPress);
+    let set = new Set(50, 'kg', 12, 45, 's', benchPress);
+    let set1 = new Set(50, 'kg', 12, 45, 's', benchPress);
 
     let dumbbellBP = new Exercise(chest, "Dumbbell Bench Press", []);
-    let set2 = new Set(WorkoutId.from(3), 50, 'kg', 12, 45, 's', dumbbellBP);
+    let set2 = new Set(50, 'kg', 12, 45, 's', dumbbellBP);
 
     let triceps = new MuscleGroup(workout, "Triceps", []);
     let latPull = new Exercise(triceps, "Lat Pull", []);
-    let set3 = new Set(WorkoutId.from(5), 20, 'kg', 12, 45, 's', latPull);
-    let set4 = new Set(WorkoutId.from(6), 15, 'kg', 12, 45, 's', latPull);
+    let set3 = new Set(20, 'kg', 12, 45, 's', latPull);
+    let set4 = new Set(15, 'kg', 12, 45, 's', latPull);
 
     let overheadLatPull = new Exercise(triceps, "Overhead Lat Pull", []);
-    let set5 = new Set(WorkoutId.from(7), 10, 'kg', 12, 45, 's', overheadLatPull);
+    let set5 = new Set(10, 'kg', 12, 45, 's', overheadLatPull);
 
     let workoutTree = new WorkoutTree(workout);
     workoutTree.addNode(chest);
