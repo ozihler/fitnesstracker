@@ -93,27 +93,37 @@ export class WorkoutTree {
 
   delete(nodeName: string) {
     let treeNode = this.findNodeByName(nodeName);
+    console.log("Tree node", treeNode);
 
     this.removeFromParent(treeNode);
 
-    this.enableParentOf(treeNode);
+    if (this.hasSiblings(treeNode) && !this.isSet(treeNode)) {
+      this.select(treeNode.parent.children[0].name);
+    } else if (!this.hasSiblings(treeNode) && this.isSet(treeNode)) {
+      // do nothing! Leave the parent expanded.
+    } else {
+      this.enableParentOf(treeNode);
+    }
   }
 
-  private removeFromParent(treeNode: TreeNode) {
-    treeNode.parent.children = treeNode.parent.children.filter(c => c.name != treeNode.name);
-  }
-
-  private enableFirstSiblingOf(treeNode: TreeNode) {
-    return treeNode.parent.children[0].enable();
+  private isSet(treeNode: TreeNode) {
+    return treeNode.type === Type.Set;
   }
 
   private hasSiblings(treeNode: TreeNode) {
-    return treeNode.parent.children && treeNode.parent.children.length > 0;
+    return treeNode.parent.children.length > 0;
+  }
+
+  private removeFromParent(treeNode: TreeNode) {
+    console.log("Children before: ", treeNode.parent.children);
+    let count = 0;
+    treeNode.parent.children = treeNode.parent.children.filter(c => c.name != treeNode.name && count++ === 0);
+    console.log("Children after: ", treeNode.parent.children)
   }
 
   private enableParentOf(treeNode: TreeNode) {
     if (treeNode.parent) {
-      treeNode.parent.enable();
+      this.select(treeNode.parent.name);
     }
   }
 }

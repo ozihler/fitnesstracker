@@ -4,7 +4,6 @@ import {Exercise} from "./exercise";
 
 export class Set extends TreeNode {
 
-
   constructor(
     private _weight: number,
     private _weightUnit: string,
