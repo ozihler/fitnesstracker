@@ -33,7 +33,7 @@ export class WorkoutTree {
   }
 
   get someChildrenAreEnabled() {
-    return this.currentSelection.children.some(value => value.isEnabled);
+    return this.currentSelection.children && this.currentSelection.children.some(value => value.isEnabled);
   }
 
   enable(nodeName: string): void {
@@ -93,14 +93,11 @@ export class WorkoutTree {
 
   delete(nodeName: string) {
     let treeNode = this.findNodeByName(nodeName);
-    console.log("Tree node", treeNode);
 
     this.removeFromParent(treeNode);
 
-    if (this.hasSiblings(treeNode) && !this.isSet(treeNode)) {
+    if (this.hasSiblings(treeNode)) {
       this.select(treeNode.parent.children[0].name);
-    } else if (!this.hasSiblings(treeNode) && this.isSet(treeNode)) {
-      // do nothing! Leave the parent expanded.
     } else {
       this.enableParentOf(treeNode);
     }
@@ -115,10 +112,8 @@ export class WorkoutTree {
   }
 
   private removeFromParent(treeNode: TreeNode) {
-    console.log("Children before: ", treeNode.parent.children);
     let count = 0;
     treeNode.parent.children = treeNode.parent.children.filter(c => c.name != treeNode.name && count++ === 0);
-    console.log("Children after: ", treeNode.parent.children)
   }
 
   private enableParentOf(treeNode: TreeNode) {
