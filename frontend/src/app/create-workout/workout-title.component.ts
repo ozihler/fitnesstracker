@@ -18,14 +18,14 @@ import {DatePipe} from "@angular/common";
           <input class="uk-input" type="date" [value]="formattedDate" formControlName="workoutCreationDate">
           <input class="uk-input" type="time" [value]="formattedTime" formControlName="workoutCreationTime">
           <input class="uk-input" type="text" [value]="title" formControlName="workoutTitle">
-          <button class="uk-button uk-button-primary" type="submit">
+
+          <button class="uk-button uk-button-primary uk-width-1-2" type="submit">
             <fa name="save"></fa>
           </button>
+          <button class="uk-button uk-button-default uk-width-1-2" (click)="cancelEditing()">
+            <fa name="times"></fa>
+          </button>
         </form>
-        <button class="uk-button uk-button-default"
-                (click)="cancelEditing()">
-          <fa name="times"></fa>
-        </button>
       </div>
     </div>
   `
