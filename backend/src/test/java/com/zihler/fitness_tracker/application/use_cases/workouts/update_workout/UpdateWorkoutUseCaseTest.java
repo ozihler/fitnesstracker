@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.zihler.fitness_tracker.domain.values.UnitOfMeasurement.KILOGRAMM;
@@ -43,7 +42,7 @@ class UpdateWorkoutUseCaseTest {
                                 .add(new SetDocument(Weight.of(50, KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS)))
                                 .add(new SetDocument(Weight.of(55, KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS))))));
 
-        WorkoutDocument updatedWorkoutInput = new WorkoutDocument(initialWorkout.getWorkoutId(), initialWorkout.getCreationDateTime(), WorkoutTitle.of("New Title"), muscleGroups);
+        WorkoutDocument updatedWorkoutInput = new WorkoutDocument(initialWorkout.getWorkoutId(), CreationDate.from(initialWorkout.getCreationDate()), WorkoutTitle.of("New Title"), muscleGroups);
         updateWorkoutUseCase.invokeWith(updatedWorkoutInput, output);
 
         WorkoutDocument updatedWorkoutOutput = output.workoutDocument;
@@ -105,9 +104,9 @@ class UpdateWorkoutUseCaseTest {
     }
 
     private void assertCreationTimeEqualsBetween(WorkoutDocument updatedWorkoutInput, WorkoutDocument updatedWorkoutOutput, Workout storedWorkout, WorkoutDocument initialWorkout) {
-        assertEquals(storedWorkout.getCreationDateTime(), updatedWorkoutInput.getCreationDateTime());
-        assertEquals(storedWorkout.getCreationDateTime(), updatedWorkoutOutput.getCreationDateTime());
-        assertEquals(storedWorkout.getCreationDateTime(), initialWorkout.getCreationDateTime());
+        assertEquals(storedWorkout.getCreationDateTime(), updatedWorkoutInput.getCreationDate());
+        assertEquals(storedWorkout.getCreationDateTime(), updatedWorkoutOutput.getCreationDate());
+        assertEquals(storedWorkout.getCreationDateTime(), initialWorkout.getCreationDate());
     }
 
     private void assertIdEqualsBetween(WorkoutDocument updatedWorkoutInput, WorkoutDocument updatedWorkoutOutput, Workout storedWorkout, WorkoutDocument initialWorkout) {

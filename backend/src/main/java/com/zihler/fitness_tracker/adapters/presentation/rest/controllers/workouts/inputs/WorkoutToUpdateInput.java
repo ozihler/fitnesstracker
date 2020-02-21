@@ -4,12 +4,13 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.muscleg
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.FullWorkoutViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutToUpdate;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutDocument;
+import com.zihler.fitness_tracker.domain.values.CreationDate;
 import com.zihler.fitness_tracker.domain.values.WorkoutId;
 import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
 
 import java.time.Clock;
 import java.time.Instant;
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 
 public class WorkoutToUpdateInput {
     private WorkoutToUpdate request;
@@ -23,7 +24,7 @@ public class WorkoutToUpdateInput {
 
         return new WorkoutDocument(
                 WorkoutId.of(workout.getGid()),
-                ZonedDateTime.from(Instant.ofEpochMilli(workout.getCreationDate()).atZone(Clock.systemDefaultZone().getZone())),
+                CreationDate.from(workout.getCreationDate()),
                 WorkoutTitle.of(workout.getTitle()),
                 new MuscleGroupsFullInput(workout.getMuscleGroups()).toDocument()
         );

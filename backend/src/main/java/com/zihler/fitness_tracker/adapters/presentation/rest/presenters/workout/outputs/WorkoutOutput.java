@@ -5,8 +5,6 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutA
 import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGroupsDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutDocument;
 
-import java.time.Clock;
-import java.time.ZonedDateTime;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -18,14 +16,10 @@ public class WorkoutOutput {
         this.workoutDocument = workoutDocument;
     }
 
-    static long formatCreationTime(ZonedDateTime creationDateTime) {
-        return creationDateTime.withZoneSameInstant(Clock.systemDefaultZone().getZone()).toInstant().toEpochMilli();
-    }
-
     public WorkoutAndMuscleGroupNamesViewModel toViewModel() {
         return new WorkoutAndMuscleGroupNamesViewModel(
                 workoutDocument.getWorkoutId().toLong(),
-                formatCreationTime(workoutDocument.getCreationDateTime()),
+                workoutDocument.getCreationDate().toMillis(),
                 workoutDocument.getWorkoutTitle().toString(),
                 toViewModel(workoutDocument.getMuscleGroups())
         );

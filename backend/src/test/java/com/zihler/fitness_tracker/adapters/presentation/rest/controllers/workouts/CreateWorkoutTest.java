@@ -6,7 +6,7 @@ import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorko
 import com.zihler.fitness_tracker.domain.values.WorkoutId;
 import org.junit.jupiter.api.Test;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -20,12 +20,12 @@ class CreateWorkoutTest {
         StoreWorkout storeWorkout = workout -> workout;
         var controller = new CreateWorkoutController(storeWorkout, () -> WorkoutId.of("12345"));
         WorkoutToCreate request = new WorkoutToCreate("Title");
-        ZonedDateTime before = ZonedDateTime.now();
+        LocalDate before = LocalDate.now();
 
         // when
         WorkoutAndMuscleGroupNamesViewModel result = controller.createWorkout(request).getBody();
 
-        ZonedDateTime after = ZonedDateTime.now();
+        LocalDate after = LocalDate.now();
 
         assertNotNull(result);
         assertThat(result.getTitle()).isEqualTo(request.getTitle());

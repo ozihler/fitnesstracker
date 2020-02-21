@@ -5,14 +5,11 @@ import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGro
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorkout;
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.WorkoutPresenter;
-import com.zihler.fitness_tracker.application.use_cases.workouts.update_workout.DifferingCreationTimeException;
 import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.Exercise;
 import com.zihler.fitness_tracker.domain.values.MuscleGroup;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 import com.zihler.fitness_tracker.domain.values.Sets;
-
-import java.time.ZonedDateTime;
 
 import static java.util.stream.Collectors.toList;
 
@@ -28,10 +25,6 @@ public class UpdatableWorkout {
     }
 
     public void updateWith(WorkoutDocument update) {
-        if (creationTimesDiffer(self, update)) {
-            throw new DifferingCreationTimeException(self, update);
-        }
-
         // todo introduce UpdatedWorkout/UpdatedMuscleGroups/UpdatedExercises/UpdatedSets Roles
         MuscleGroups workoutMuscleGroups = new MuscleGroups();
 
@@ -62,11 +55,4 @@ public class UpdatableWorkout {
         output.present(WorkoutDocument.of(self));
     }
 
-    private static long asMillis(ZonedDateTime creationDateTime) {
-        return creationDateTime.toInstant().toEpochMilli();
-    }
-
-    private static boolean creationTimesDiffer(Workout old, WorkoutDocument update) {
-        return asMillis(old.getCreationDateTime()) != asMillis(update.getCreationDateTime());
-    }
 }

@@ -6,7 +6,7 @@ import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.*;
 import org.junit.jupiter.api.Test;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import static com.zihler.fitness_tracker.domain.values.MuscleGroup.of;
@@ -20,7 +20,7 @@ class WorkoutFileSystemDirectoryTest {
 
         Workout workout = new Workout(
                 WorkoutId.of("x-1-2"),
-                ZonedDateTime.now(),
+                LocalDate.now(),
                 WorkoutTitle.of("WORKOUT TITLE"),
                 muscleGroups(
                         of("Chest",

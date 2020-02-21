@@ -12,7 +12,7 @@ import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
 import org.junit.jupiter.api.Test;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ class UpdateWorkoutControllerTest {
 
     @Test
     void updateWorkoutTest() {
-        ZonedDateTime workoutCreationTime = ZonedDateTime.now();
+        LocalDate workoutCreationTime = LocalDate.now();
 
         FetchWorkout fetchWorkout = id -> new Workout(id, workoutCreationTime, WorkoutTitle.of("Title"), new MuscleGroups(new ArrayList<>()));
         StoreWorkout storeWorkout = workout -> workout;

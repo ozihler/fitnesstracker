@@ -1,15 +1,34 @@
 package com.zihler.fitness_tracker.domain.values;
 
-import java.time.LocalDateTime;
+import java.time.*;
 
 public class CreationDate {
-    private final LocalDateTime creationDate;
+    private static ZoneId zone = Clock.systemDefaultZone().getZone();
 
-    public CreationDate() {
-        this.creationDate = LocalDateTime.now();
+    private final LocalDate creationDate;
+
+    public CreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
     }
 
-    public static CreationDate from() {
-        return new CreationDate();
+    public static CreationDate from(LocalDate creationDate) {
+        return new CreationDate(creationDate);
+    }
+
+    public static CreationDate from(long creationDateInMillis) {
+        return from(LocalDate.from(Instant.ofEpochMilli(creationDateInMillis).atZone(zone)));
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
+    public long toMillis() {
+        return getCreationDate().atStartOfDay(zone).toInstant().toEpochMilli();
+    }
+
+    @Override
+    public String toString() {
+        return creationDate.toString();
     }
 }

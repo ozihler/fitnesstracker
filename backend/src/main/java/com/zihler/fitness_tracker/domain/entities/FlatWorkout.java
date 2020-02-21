@@ -5,16 +5,16 @@ import com.zihler.fitness_tracker.domain.values.MuscleGroupName;
 import com.zihler.fitness_tracker.domain.values.WorkoutId;
 import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 public class FlatWorkout {
     private WorkoutId workoutId;
-    private ZonedDateTime creationDateTime;
+    private LocalDate creationDateTime;
     private WorkoutTitle workoutTitle;
     private FlatSets sets = new FlatSets();
 
-    FlatWorkout(WorkoutId workoutId, ZonedDateTime creationDateTime, WorkoutTitle workoutTitle) {
+    FlatWorkout(WorkoutId workoutId, LocalDate creationDateTime, WorkoutTitle workoutTitle) {
         this.workoutId = workoutId;
         this.creationDateTime = creationDateTime;
         this.workoutTitle = workoutTitle;
@@ -28,7 +28,7 @@ public class FlatWorkout {
         return workoutId;
     }
 
-    public ZonedDateTime getCreationDateTime() {
+    public LocalDate getCreationDateTime() {
         return creationDateTime;
     }
 

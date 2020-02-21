@@ -15,13 +15,13 @@ import {DatePipe} from "@angular/common";
       </button>
       <div *ngIf="editing">
         <form [formGroup]="editForm" (ngSubmit)="saveEditing()">
-          <input class="uk-input" type="date" [value]="formattedDate" formControlName="workoutCreationDate">
-          <input class="uk-input" type="time" [value]="formattedTime" formControlName="workoutCreationTime">
           <input class="uk-input" type="text" [value]="title" formControlName="workoutTitle">
+          <input class="uk-input" type="date" [value]="formattedDate" formControlName="workoutCreationDate">
 
           <button class="uk-button uk-button-primary uk-width-1-2" type="submit">
             <fa name="save"></fa>
           </button>
+
           <button class="uk-button uk-button-default uk-width-1-2" (click)="cancelEditing()">
             <fa name="times"></fa>
           </button>
@@ -48,11 +48,6 @@ export class WorkoutTitleComponent implements OnInit {
     return this.workoutCreationDate ? this.datePipe.transform(this.workoutCreationDate, 'yyyy-MM-dd') : '';
   }
 
-  get formattedTime() {
-    return this.workoutCreationDate ? this.datePipe.transform(this.workoutCreationDate, 'hh:mm', 'GMT+1') : '';
-
-  }
-
   get title() {
     return this.workoutTitle ? this.workoutTitle : '';
   }
@@ -60,8 +55,7 @@ export class WorkoutTitleComponent implements OnInit {
   ngOnInit() {
     this.editForm = this.formBuilder.group({
         workoutCreationDate: ['', Validators.required],
-        workoutCreationTime: ['', Validators.required],
-        workoutTitle: ['', Validators.required]
+        workoutCreationTime: ['', Validators.required]
       }
     );
   }
@@ -74,8 +68,7 @@ export class WorkoutTitleComponent implements OnInit {
     // todo fix value propagation when untouched...
     let update: WorkoutTitleUpdate = {
       workoutTitle: this.valueOf('workoutTitle'),
-      workoutCreationDate: this.valueOf('workoutCreationDate'),
-      workoutCreationTime: this.valueOf('workoutCreationTime')
+      workoutCreationDate: this.valueOf('workoutCreationDate')
     };
     this.changeTitleEvent.emit(update);
     this.cancelEditing();

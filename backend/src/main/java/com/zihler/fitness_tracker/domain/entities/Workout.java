@@ -4,27 +4,28 @@ import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 import com.zihler.fitness_tracker.domain.values.WorkoutId;
 import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
+import java.time.LocalDate;
 
 public class Workout {
     private final WorkoutId workoutId;
-    private final ZonedDateTime creationDateTime; // todo only use Date, not date time...
+    private final LocalDate creationDateTime; // todo only use Date, not date time...
     private WorkoutTitle workoutTitle;
     private MuscleGroups muscleGroups;
 
     private Workout(WorkoutTitle workoutTitle, WorkoutId workoutId) {
-        this(workoutId, ZonedDateTime.now(), workoutTitle, new MuscleGroups());
+        this(workoutId, LocalDate.now(), workoutTitle, new MuscleGroups());
     }
 
     public static Workout newWorkout(WorkoutTitle workoutTitle, WorkoutId workoutId) {
         return new Workout(workoutTitle, workoutId);
     }
 
-    public static Workout update(WorkoutId workoutId, ZonedDateTime creationDateTime, WorkoutTitle workoutTitle, MuscleGroups muscleGroups) {
+    public static Workout update(WorkoutId workoutId, LocalDate creationDateTime, WorkoutTitle workoutTitle, MuscleGroups muscleGroups) {
         return new Workout(workoutId, creationDateTime, workoutTitle, muscleGroups);
     }
 
-    public Workout(WorkoutId workoutId, ZonedDateTime creationDateTime, WorkoutTitle workoutTitle, MuscleGroups muscleGroups) {
+    public Workout(WorkoutId workoutId, LocalDate creationDateTime, WorkoutTitle workoutTitle, MuscleGroups muscleGroups) {
         this.workoutId = workoutId;
         this.creationDateTime = creationDateTime;
         this.workoutTitle = workoutTitle;
@@ -35,7 +36,7 @@ public class Workout {
         return workoutId;
     }
 
-    public ZonedDateTime getCreationDateTime() {
+    public LocalDate getCreationDateTime() {
         return creationDateTime;
     }
 

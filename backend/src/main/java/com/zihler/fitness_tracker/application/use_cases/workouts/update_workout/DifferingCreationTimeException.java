@@ -7,6 +7,6 @@ public class DifferingCreationTimeException extends RuntimeException {
     private static final long serialVersionUID = -7449225177657163161L;
 
     public DifferingCreationTimeException(Workout old, WorkoutDocument update) {
-        super(String.format("Creation times were supposed to be the same but were different: old: %s, update: %s", old.getCreationDateTime(), update.getCreationDateTime()));
+        super(String.format("Creation times were supposed to be the same but were different: old: %s, update: %s", old.getCreationDateTime(), update.getCreationDate()));
     }
 }
