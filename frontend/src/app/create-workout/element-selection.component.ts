@@ -13,21 +13,18 @@ import {TreeNode} from "./tree/tree-node";
       </div>
 
       <div *ngIf="!isExercise">
-        <div class="uk-grid-small uk-child-width-1-2 uk-flex-center" uk-grid
-             *ngFor="let element of selectableElements">
+        <div *ngFor="let element of selectableElements">
           <app-selectable-element
             [element]="element"
             (selectElementEvent)="select($event)"
-            (deleteElementEvent)="delete($event)"
-          >
-
+            (deleteElementEvent)="delete($event)">
           </app-selectable-element>
-
         </div>
         <hr/>
         <app-create-element (createElementsEvent)="createChild($event)"
                             [typename]="formattedTypeName"></app-create-element>
       </div>
+
       <div *ngIf="isExercise">
         <app-create-set (createSet)="createChild($event)"></app-create-set>
       </div>

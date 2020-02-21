@@ -22,8 +22,7 @@ import {WorkoutTitleUpdate} from "./workout-title-update";
       [node]="workoutTree?.root"
       [currentSelectionName]="workoutTree?.currentSelection?.name"
       (changeSelectionEvent)="changeTreeNode($event)"
-      (removeFromWorkoutEvent)="removeNodeFromWorkout($event)"
-    >
+      (removeFromWorkoutEvent)="removeNodeFromWorkout($event)">
     </app-button-tree>
     <hr/>
     <app-element-selection

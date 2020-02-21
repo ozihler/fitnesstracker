@@ -13,9 +13,10 @@ import {Type} from "../shared/type";
         <span *ngIf="node && !node?.isLeaf">({{node?.numberOfChildren}}) </span>
         <span>{{node?.name}}</span>
       </button>
-      <button class="uk-button uk-width-1-3 uk-text-truncate"
+      <button class="uk-button uk-width-1-3"
               *ngIf="!isWorkout()"
-              (click)="removeFromWorkout(node)">DEL
+              (click)="removeFromWorkout(node)">
+          <fa name="trash"></fa>
       </button>
     </div>
 
