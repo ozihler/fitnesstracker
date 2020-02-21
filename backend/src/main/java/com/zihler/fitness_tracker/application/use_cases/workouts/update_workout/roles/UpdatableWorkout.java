@@ -5,6 +5,7 @@ import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGro
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorkout;
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.WorkoutPresenter;
+import com.zihler.fitness_tracker.domain.entities.Set;
 import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.*;
 
@@ -31,14 +32,14 @@ public class UpdatableWorkout {
 
             for (ExerciseDocument e : m.getExercises().getExercises()) {
                 Exercise exercise = new Exercise(e.getName());
-                Sets sets = Sets.of(e.getSets().getSets().stream().map(s -> new com.zihler.fitness_tracker.domain.entities.Set(s.getWeight(), s.getRepetitions(), s.getWaitingTime())).collect(toList()));
+                Sets sets = Sets.of(e.getSets().getSets().stream().map(s -> new Set(s.getWeight(), s.getRepetitions(), s.getWaitingTime())).collect(toList()));
                 exercise.addAll(sets);
 
                 muscleGroup.add(exercise);
             }
         }
 
-        self = Workout.update(self.getWorkoutId(), self.getCreationDate(), update.getWorkoutTitle(), workoutMuscleGroups);
+        self = Workout.update(self.getWorkoutId(), update.getCreationDate(), update.getWorkoutTitle(), workoutMuscleGroups);
     }
 
     public void store() {

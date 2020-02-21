@@ -10,7 +10,7 @@ import {DatePipe} from "@angular/common";
       <button class="uk-button uk-button-default uk-width-1-1"
               *ngIf="!editing"
               (click)="enableEditing()">
-         {{workoutTitle}}
+        {{workoutTitle}}
         <fa name="edit" class="uk-align-right"></fa>
       </button>
       <div *ngIf="editing">
@@ -54,8 +54,8 @@ export class WorkoutTitleComponent implements OnInit {
 
   ngOnInit() {
     this.editForm = this.formBuilder.group({
-        workoutCreationDate: ['', Validators.required],
-        workoutCreationTime: ['', Validators.required]
+        workoutTitle: ['', Validators.required],
+        workoutCreationDate: ['', Validators.required]
       }
     );
   }
@@ -67,15 +67,16 @@ export class WorkoutTitleComponent implements OnInit {
   saveEditing() {
     // todo fix value propagation when untouched...
     let update: WorkoutTitleUpdate = {
-      workoutTitle: this.valueOf('workoutTitle'),
-      workoutCreationDate: this.valueOf('workoutCreationDate')
+      workoutTitle: this.valueOf('workoutTitle')?this.valueOf('workoutTitle'):this.workoutTitle,
+      workoutCreationDate: this.valueOf('workoutCreationDate') ? this.valueOf('workoutCreationDate') : this.workoutCreationDate
     };
+    console.error("EMITTING: ", update);
     this.changeTitleEvent.emit(update);
     this.cancelEditing();
   }
 
   private valueOf(path: string) {
-    return this.editForm.get(path).value;
+    return this.editForm.get(path).value
   }
 
   cancelEditing() {

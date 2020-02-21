@@ -158,6 +158,7 @@ export class CreateWorkoutComponent implements OnInit {
     let selectedElement = this.workoutTree.currentSelection;
     this.workoutTree.root.name = updatedWorkout.workoutTitle;
     this.workoutTree.root.creationDate = updatedWorkout.workoutCreationDate;
+    console.error("UPDATE: ", updatedWorkout);
     this.updateWorkoutAndEnable(selectedElement);
   }
 

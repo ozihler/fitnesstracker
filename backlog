@@ -3,3 +3,4 @@
 - Copy Workout
 - Only store exercises with at least one muscle group permanently
 - only strike though deleted items, confirm deletion required
+- delete Workout (make unselectable)
