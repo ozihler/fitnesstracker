@@ -96,12 +96,8 @@ export class WorkoutTree {
 
     this.removeFromParent(treeNode);
 
-    if (this.hasSiblings(treeNode)) {
-      this.currentSelection = treeNode.parent.children[0];
-    } else {
-      if (treeNode.parent) {
-        this.currentSelection = treeNode.parent;
-      }
+    if (treeNode.parent) {
+      this.currentSelection = treeNode.parent;
     }
   }
 

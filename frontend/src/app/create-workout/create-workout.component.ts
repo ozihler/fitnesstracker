@@ -166,7 +166,5 @@ export class CreateWorkoutComponent implements OnInit {
 
   removeNodeFromWorkout(nodeToDelete: TreeNode) {
     this.workoutTree.delete(nodeToDelete.name);
-    this.changeTreeNode(this.workoutTree.currentSelection);
-
   }
 }
