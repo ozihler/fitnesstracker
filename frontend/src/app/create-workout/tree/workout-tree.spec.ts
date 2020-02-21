@@ -60,36 +60,36 @@ describe('Workout Tree', () => {
       workoutTree.select(set.name);
 
 
-      expect(workoutTree.findNodeByName(set2.name).isEnabled).toBe(false);
-      expect(workoutTree.findNodeByName(latPull.name).isEnabled).toBe(false);
-      expect(workoutTree.findNodeByName(set3.name).isEnabled).toBe(false);
-      expect(workoutTree.findNodeByName(set4.name).isEnabled).toBe(false);
-      expect(workoutTree.findNodeByName(overheadLatPull.name).isEnabled).toBe(false);
-      expect(workoutTree.findNodeByName(set5.name).isEnabled).toBe(false);
-      expect(workoutTree.findNodeByName(workout.name).isEnabled).toBe(true);
+      expect(workoutTree.findNodeByName(set2.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(latPull.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(set3.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(set4.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(overheadLatPull.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(set5.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(workout.name)).toBeDefined();
 
-      expect(workoutTree.findNodeByName(chest.name).isEnabled).toBe(true);
-      expect(workoutTree.findNodeByName(triceps.name).isEnabled).toBe(true);
-      expect(workoutTree.findNodeByName(benchPress.name).isEnabled).toBe(true);
-      expect(workoutTree.findNodeByName(dumbbellBP.name).isEnabled).toBe(true);
-      expect(workoutTree.findNodeByName(set1.name).isEnabled).toBe(true);
+      expect(workoutTree.findNodeByName(chest.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(triceps.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(benchPress.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(dumbbellBP.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(set1.name)).toBeDefined();
       expect(workoutTree.findNodeByName(set.name).isEnabled).toBe(true)
 
       workoutTree.delete(set.name);
 
-      expect(workoutTree.findNodeByName(set2.name).isEnabled).toBe(false);
-      expect(workoutTree.findNodeByName(latPull.name).isEnabled).toBe(false);
-      expect(workoutTree.findNodeByName(set3.name).isEnabled).toBe(false);
-      expect(workoutTree.findNodeByName(set4.name).isEnabled).toBe(false);
-      expect(workoutTree.findNodeByName(overheadLatPull.name).isEnabled).toBe(false);
-      expect(workoutTree.findNodeByName(set5.name).isEnabled).toBe(false);
-      expect(workoutTree.findNodeByName(workout.name).isEnabled).toBe(true);
+      expect(workoutTree.findNodeByName(set2.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(latPull.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(set3.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(set4.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(overheadLatPull.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(set5.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(workout.name)).toBeDefined();
 
-      expect(workoutTree.findNodeByName(chest.name).isEnabled).toBe(true);
-      expect(workoutTree.findNodeByName(triceps.name).isEnabled).toBe(true);
-      expect(workoutTree.findNodeByName(benchPress.name).isEnabled).toBe(true);
-      expect(workoutTree.findNodeByName(dumbbellBP.name).isEnabled).toBe(true);
-      expect(workoutTree.findNodeByName(set1.name).isEnabled).toBe(true);
+      expect(workoutTree.findNodeByName(chest.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(triceps.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(benchPress.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(dumbbellBP.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(set1.name)).toBeDefined();
       expect(workoutTree.findNodeByName(set.name)).not.toBeDefined()
 
     }
@@ -98,7 +98,7 @@ describe('Workout Tree', () => {
   //Todo test what happens when there is no child in the parent after deletion > enable parent
 
   //todo try replacing workoutTree.findNodeByName > variable (e.g. chest)
-  it('should delete muscle group and all its children and enable the first child of the parent of that muscle group', () => {
+  it('should delete muscle group and all its children', () => {
 
       /*
                                Workout
@@ -113,24 +113,24 @@ describe('Workout Tree', () => {
       workoutTree.select(chest.name);
 
 
-      expect(workoutTree.findNodeByName(set2.name).isEnabled).toBe(false);
-      expect(workoutTree.findNodeByName(set3.name).isEnabled).toBe(false);
-      expect(workoutTree.findNodeByName(set4.name).isEnabled).toBe(false);
-      expect(workoutTree.findNodeByName(set5.name).isEnabled).toBe(false);
-      expect(workoutTree.findNodeByName(latPull.name).isEnabled).toBe(false);
-      expect(workoutTree.findNodeByName(overheadLatPull.name).isEnabled).toBe(false);
+      expect(workoutTree.findNodeByName(set2.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(set3.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(set4.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(set5.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(latPull.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(overheadLatPull.name)).toBeDefined();
 
-      expect(workoutTree.findNodeByName(workout.name).isEnabled).toBe(true);
-      expect(workoutTree.findNodeByName(chest.name).isEnabled).toBe(true);
-      expect(workoutTree.findNodeByName(triceps.name).isEnabled).toBe(true);
-      expect(workoutTree.findNodeByName(benchPress.name).isEnabled).toBe(true);
-      expect(workoutTree.findNodeByName(dumbbellBP.name).isEnabled).toBe(true);
-      expect(workoutTree.findNodeByName(set1.name).isEnabled).toBe(false);
-      expect(workoutTree.findNodeByName(set.name).isEnabled).toBe(false)
+      expect(workoutTree.findNodeByName(workout.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(chest.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(triceps.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(benchPress.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(dumbbellBP.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(set1.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(set.name)).toBeDefined();
 
       workoutTree.delete(chest.name);
 
-      expect(workoutTree.findNodeByName(workout.name).isEnabled).toBe(true);
+      expect(workoutTree.findNodeByName(workout.name)).toBeDefined();
 
       // Remove chest sub tree
       expect(workoutTree.findNodeByName(chest.name)).not.toBeDefined();
@@ -141,18 +141,18 @@ describe('Workout Tree', () => {
       expect(workoutTree.findNodeByName(set.name)).not.toBeDefined()
 
       // enable triceps
-      expect(workoutTree.findNodeByName(triceps.name).isEnabled).toBe(true);
-      expect(workoutTree.findNodeByName(latPull.name).isEnabled).toBe(true);
-      expect(workoutTree.findNodeByName(overheadLatPull.name).isEnabled).toBe(true);
+      expect(workoutTree.findNodeByName(triceps.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(latPull.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(overheadLatPull.name)).toBeDefined();
 
       // disable children of exercises of triceps
-      expect(workoutTree.findNodeByName(set3.name).isEnabled).toBe(false);
-      expect(workoutTree.findNodeByName(set4.name).isEnabled).toBe(false);
-      expect(workoutTree.findNodeByName(set5.name).isEnabled).toBe(false);
+      expect(workoutTree.findNodeByName(set3.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(set4.name)).toBeDefined();
+      expect(workoutTree.findNodeByName(set5.name)).toBeDefined();
     }
   );
 
-  it('should correctly delete exercise and enable sibling exercise if present', () => {
+  it('should correctly delete exercise', () => {
 
       /*
                                Workout
@@ -171,29 +171,11 @@ describe('Workout Tree', () => {
       workoutTree.delete(benchPress.name);
 
 
-    expect(workoutTree.findNodeByName(workout.name).isEnabled).toBe(true);
+      // Remove bench press sub tree
+      expect(workoutTree.findNodeByName(benchPress.name)).not.toBeDefined();
+      expect(workoutTree.findNodeByName(set.name)).not.toBeDefined();
+      expect(workoutTree.findNodeByName(set1.name)).not.toBeDefined();
 
-    // Remove bench press sub tree
-    expect(workoutTree.findNodeByName(benchPress.name)).not.toBeDefined();
-    expect(workoutTree.findNodeByName(set.name)).not.toBeDefined();
-    expect(workoutTree.findNodeByName(set1.name)).not.toBeDefined();
-
-
-    expect(workoutTree.findNodeByName(chest.name).isEnabled).toBe(true);
-
-    // enable dumbbell bench press (sibling of bench press)
-    expect(workoutTree.findNodeByName(dumbbellBP.name).isEnabled).toBe(true);
-    expect(workoutTree.findNodeByName(set2.name).isEnabled).toBe(true);
-
-    // enable triceps
-    expect(workoutTree.findNodeByName(triceps.name).isEnabled).toBe(true);
-
-    // disable children of triceps
-    expect(workoutTree.findNodeByName(overheadLatPull.name).isEnabled).toBe(false);
-    expect(workoutTree.findNodeByName(latPull.name).isEnabled).toBe(false);
-    expect(workoutTree.findNodeByName(set3.name).isEnabled).toBe(false);
-    expect(workoutTree.findNodeByName(set4.name).isEnabled).toBe(false);
-    expect(workoutTree.findNodeByName(set5.name).isEnabled).toBe(false);
     }
   );
 
