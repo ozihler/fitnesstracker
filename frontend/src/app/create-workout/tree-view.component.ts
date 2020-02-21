@@ -59,7 +59,6 @@ export class TreeViewComponent {
       }
     }
 
-    console.log("Classes", classes);
     return classes;
   }
 
