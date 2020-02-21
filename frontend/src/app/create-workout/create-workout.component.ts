@@ -36,7 +36,8 @@ import {WorkoutTitleUpdate} from "./workout-title-update";
     <hr/>
   `
 })
-export class CreateWorkoutComponent implements OnInit { // todo rename to "edit Workout component" or similar, see angular book
+export class CreateWorkoutComponent implements OnInit {
+  // todo rename to "edit Workout component" or similar, see angular book
   workoutTree: WorkoutTree;
   selectableChildrenOfSelectedNode: TreeNode[] = [];
 
@@ -91,7 +92,7 @@ export class CreateWorkoutComponent implements OnInit { // todo rename to "edit 
     }
   }
 
-  // todo do enable selected Item!
+  // todo do enable selected Item (or not, test whats better and make a list)
   addSelectedItemToTree(selectedElement: TreeNode) {
     let addedNode = this.workoutTree.addNode(selectedElement);
 
