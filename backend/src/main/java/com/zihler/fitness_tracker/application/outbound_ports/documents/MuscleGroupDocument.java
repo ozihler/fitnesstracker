@@ -6,7 +6,7 @@ import com.zihler.fitness_tracker.domain.values.Name;
 
 import java.util.Objects;
 
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toList;
 
 public class MuscleGroupDocument {
     private Name name;
@@ -27,7 +27,7 @@ public class MuscleGroupDocument {
 
     public static MuscleGroupDocument of(MuscleGroup muscleGroup) {
         return new MuscleGroupDocument(muscleGroup.getName(),
-                ExercisesDocument.of(muscleGroup.getExercises().getExercises().stream().map(ExerciseDocument::of).collect(toSet())));
+                ExercisesDocument.of(muscleGroup.getExercises().getExercises().stream().map(ExerciseDocument::of).collect(toList())));
     }
 
     public static MuscleGroupDocument of(Name name) {

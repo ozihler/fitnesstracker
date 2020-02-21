@@ -8,7 +8,7 @@ import com.zihler.fitness_tracker.domain.values.Name;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toList;
 
 class ExercisesFullInput {
     private List<FullExerciseViewModel> exercises;
@@ -21,7 +21,7 @@ class ExercisesFullInput {
         return ExercisesDocument.of(
                 exercises.stream()
                         .map(this::toDocument)
-                        .collect(toSet())
+                        .collect(toList())
         );
     }
 

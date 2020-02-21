@@ -7,9 +7,9 @@ import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutDo
 
 import java.time.Clock;
 import java.time.ZonedDateTime;
-import java.util.Set;
+import java.util.List;
 
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toList;
 
 public class WorkoutOutput {
     private WorkoutDocument workoutDocument;
@@ -31,10 +31,10 @@ public class WorkoutOutput {
         );
     }
 
-    private Set<MuscleGroupNameViewModel> toViewModel(MuscleGroupsDocument muscleGroups) {
+    private List<MuscleGroupNameViewModel> toViewModel(MuscleGroupsDocument muscleGroups) {
         return muscleGroups.getMuscleGroups().
                 stream()
                 .map(m -> new MuscleGroupNameViewModel(m.getName().toString()))
-                .collect(toSet());
+                .collect(toList());
     }
 }

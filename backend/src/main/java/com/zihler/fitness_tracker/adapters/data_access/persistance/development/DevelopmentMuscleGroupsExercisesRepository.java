@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.*;
 
 import static com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.musclegroups.MuscleGroupAndExercisesFileSystemDirectory.makeDirectory;
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toList;
 
 @Repository
 @Profile("prod")
@@ -51,7 +51,7 @@ public class DevelopmentMuscleGroupsExercisesRepository
 
     @Override
     public MuscleGroups fetchAll() {
-        return MuscleGroups.of(muscleGroupsAndExercises.values().stream().filter(MuscleGroup::isSelectable).collect(toSet()));
+        return MuscleGroups.of(muscleGroupsAndExercises.values().stream().filter(MuscleGroup::isSelectable).collect(toList()));
     }
 
     @Override
@@ -62,7 +62,7 @@ public class DevelopmentMuscleGroupsExercisesRepository
 
     @Override
     public Exercises forMuscleGroup(MuscleGroupName muscleGroupName) {
-        return Exercises.of(find(muscleGroupName).getExercises().getExercises().stream().filter(Exercise::isSelectable).collect(toSet()));
+        return Exercises.of(find(muscleGroupName).getExercises().getExercises().stream().filter(Exercise::isSelectable).collect(toList()));
     }
 
     private MuscleGroup find(MuscleGroupName muscleGroupName) {
@@ -97,7 +97,7 @@ public class DevelopmentMuscleGroupsExercisesRepository
     @Override
     public MuscleGroup withValues(MuscleGroup muscleGroup) {
         muscleGroupsAndExercises.put(muscleGroup.getName(), muscleGroup);
-        MuscleGroups toStore = new MuscleGroups(new HashSet<>(muscleGroupsAndExercises.values()));
+        MuscleGroups toStore = new MuscleGroups(new ArrayList<>(muscleGroupsAndExercises.values()));
         fileSystemDirectory.save(toStore);
         return muscleGroup;
     }
@@ -124,7 +124,7 @@ public class DevelopmentMuscleGroupsExercisesRepository
                 .get();
 
 
-        return forMuscleGroup(muscleGroup.getName(), Exercises.of(Set.of(exercise)))
+        return forMuscleGroup(muscleGroup.getName(), Exercises.of(List.of(exercise)))
                 .getExercises()
                 .stream()
                 .findFirst()

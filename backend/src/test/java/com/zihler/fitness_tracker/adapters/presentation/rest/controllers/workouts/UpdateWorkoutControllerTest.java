@@ -14,11 +14,11 @@ import org.junit.jupiter.api.Test;
 
 import java.time.ZonedDateTime;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import java.util.List;
 
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UpdateWorkoutControllerTest {
@@ -27,7 +27,7 @@ class UpdateWorkoutControllerTest {
     void updateWorkoutTest() {
         ZonedDateTime workoutCreationTime = ZonedDateTime.now();
 
-        FetchWorkout fetchWorkout = id -> new Workout(id, workoutCreationTime, WorkoutTitle.of("Title"), new MuscleGroups(new HashSet<>()));
+        FetchWorkout fetchWorkout = id -> new Workout(id, workoutCreationTime, WorkoutTitle.of("Title"), new MuscleGroups(new ArrayList<>()));
         StoreWorkout storeWorkout = workout -> workout;
 
         var controller = new UpdateWorkoutController(fetchWorkout, storeWorkout);
@@ -37,7 +37,7 @@ class UpdateWorkoutControllerTest {
         String newTitle = "New Title";
         long creationDate = workoutCreationTime.toInstant().toEpochMilli();
 
-        var updatedWorkoutRequest = new FullWorkoutViewModel(gid, creationDate, newTitle, Set.of(
+        var updatedWorkoutRequest = new FullWorkoutViewModel(gid, creationDate, newTitle, List.of(
                 new FullMuscleGroupViewModel("Chest", List.of(
                         new FullExerciseViewModel("Bench Press", List.of(
                                 FullSetViewModel.of(50, 12, 45),
@@ -73,15 +73,15 @@ class UpdateWorkoutControllerTest {
 
         // Muscle groups
         assertEquals(2, fullWorkoutViewModel.getMuscleGroups().size());
-        Set<String> muscleGroupNames = fullWorkoutViewModel.getMuscleGroups().stream().map(FullMuscleGroupViewModel::getName).collect(toSet());
+        List<String> muscleGroupNames = fullWorkoutViewModel.getMuscleGroups().stream().map(FullMuscleGroupViewModel::getName).collect(toList());
         assertTrue(muscleGroupNames.contains("Chest"));
         assertTrue(muscleGroupNames.contains("Triceps"));
 
         // Exercises
-        Set<String> exerciseNames = exercises(fullWorkoutViewModel)
+        List<String> exerciseNames = exercises(fullWorkoutViewModel)
                 .stream()
                 .map(FullExerciseViewModel::getName)
-                .collect(toSet());
+                .collect(toList());
 
         assertEquals(3, exerciseNames.size());
         assertTrue(exerciseNames.contains("Bench Press"));
@@ -99,11 +99,11 @@ class UpdateWorkoutControllerTest {
 
     }
 
-    private Set<FullExerciseViewModel> exercises(FullWorkoutViewModel fullWorkoutViewModel) {
+    private List<FullExerciseViewModel> exercises(FullWorkoutViewModel fullWorkoutViewModel) {
         return fullWorkoutViewModel.getMuscleGroups()
                 .stream()
                 .map(FullMuscleGroupViewModel::getExercises)
                 .flatMap(Collection::stream)
-                .collect(toSet());
+                .collect(toList());
     }
 }

@@ -2,7 +2,7 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Set;
+import java.util.List;
 
 public class WorkoutAndMuscleGroupNamesViewModel {
     @JsonProperty("gid")
@@ -12,9 +12,9 @@ public class WorkoutAndMuscleGroupNamesViewModel {
     @JsonProperty("title")
     private String title;
     @JsonProperty("muscleGroups")
-    private Set<MuscleGroupNameViewModel> muscleGroups;
+    private List<MuscleGroupNameViewModel> muscleGroups;
 
-    public WorkoutAndMuscleGroupNamesViewModel(String gid, long creationDate, String title, Set<MuscleGroupNameViewModel> muscleGroups) {
+    public WorkoutAndMuscleGroupNamesViewModel(String gid, long creationDate, String title, List<MuscleGroupNameViewModel> muscleGroups) {
         this.gid = gid;
         this.creationDate = creationDate;
         this.title = title;
@@ -36,7 +36,7 @@ public class WorkoutAndMuscleGroupNamesViewModel {
         return title;
     }
 
-    public Set<MuscleGroupNameViewModel> getMuscleGroups() {
+    public List<MuscleGroupNameViewModel> getMuscleGroups() {
         return muscleGroups;
     }
 

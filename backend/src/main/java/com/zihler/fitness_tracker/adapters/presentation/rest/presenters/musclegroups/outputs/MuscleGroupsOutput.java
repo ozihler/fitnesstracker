@@ -4,9 +4,9 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.MuscleGr
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.MuscleGroupsViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGroupsDocument;
 
-import java.util.Set;
+import java.util.List;
 
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toList;
 
 public class MuscleGroupsOutput {
     private MuscleGroupsDocument muscleGroupsDocument;
@@ -19,11 +19,11 @@ public class MuscleGroupsOutput {
         return new MuscleGroupsViewModel(toViewModels());
     }
 
-    private Set<MuscleGroupNameViewModel> toViewModels() {
+    private List<MuscleGroupNameViewModel> toViewModels() {
         return muscleGroupsDocument.getMuscleGroups()
                 .stream()
                 .map(MuscleGroupOutput::new)
                 .map(MuscleGroupOutput::toViewModel)
-                .collect(toSet());
+                .collect(toList());
     }
 }

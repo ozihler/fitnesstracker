@@ -12,7 +12,7 @@ import com.zihler.fitness_tracker.domain.values.MuscleGroupName;
 import com.zihler.fitness_tracker.domain.values.Sets;
 
 import java.util.List;
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
@@ -28,15 +28,15 @@ public class ViewAllExercisesForMuscleGroupUseCase implements ViewAllExercisesFo
     @Override
     public void invokeWith(MuscleGroupName muscleGroupName, ExercisesPresenter output) {
         Exercises exercises = fetchExercises.forMuscleGroup(muscleGroupName);
-        Set<ExerciseDocument> documents = toDocuments(exercises);
+        List<ExerciseDocument> documents = toDocuments(exercises);
         output.present(ExercisesDocument.of(documents));
     }
 
-    private Set<ExerciseDocument> toDocuments(Exercises exercises) {
+    private List<ExerciseDocument> toDocuments(Exercises exercises) {
         return exercises.getExercises().stream()
                 .map(exercise -> ExerciseDocument.of(exercise.getName(),
                         toDocument(exercise.getSets())))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     private SetsDocument toDocument(Sets sets) {

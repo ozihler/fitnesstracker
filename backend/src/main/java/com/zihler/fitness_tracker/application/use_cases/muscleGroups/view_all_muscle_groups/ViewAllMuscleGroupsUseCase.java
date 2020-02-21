@@ -7,7 +7,7 @@ import com.zihler.fitness_tracker.application.outbound_ports.presenters.MuscleGr
 import com.zihler.fitness_tracker.application.use_cases.muscleGroups.view_all_muscle_groups.inbound_port.ViewAllMuscleGroups;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toList;
 
 public class ViewAllMuscleGroupsUseCase implements ViewAllMuscleGroups {
     private FetchAllMuscleGroups fetchMuscleGroups;
@@ -17,7 +17,7 @@ public class ViewAllMuscleGroupsUseCase implements ViewAllMuscleGroups {
     }
 
     private static MuscleGroupsDocument toDocument(MuscleGroups muscleGroups) {
-        return new MuscleGroupsDocument(muscleGroups.getMuscleGroups().stream().map(MuscleGroupDocument::of).collect(toSet()));
+        return new MuscleGroupsDocument(muscleGroups.getMuscleGroups().stream().map(MuscleGroupDocument::of).collect(toList()));
     }
 
     @Override

@@ -7,7 +7,7 @@ import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGro
 import com.zihler.fitness_tracker.domain.values.Name;
 import org.junit.jupiter.api.Test;
 
-import java.util.Set;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,7 +22,7 @@ class MuscleGroupsInputTest {
                 .extracting(muscleGroupsDocument -> muscleGroupsDocument.getMuscleGroups().size())
                 .isEqualTo(4);
 
-        Set<MuscleGroupDocument> muscleGroups = input.muscleGroups().getMuscleGroups();
+        List<MuscleGroupDocument> muscleGroups = input.muscleGroups().getMuscleGroups();
 
         assertThat(muscleGroups).contains(MuscleGroupDocument.of(Name.of("a")));
         assertThat(muscleGroups).contains(MuscleGroupDocument.of(Name.of("b")));

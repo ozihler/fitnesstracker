@@ -5,9 +5,9 @@ import com.zihler.fitness_tracker.domain.values.MuscleGroupName;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import java.util.List;
 
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toList;
 
 class FlatSets {
     private List<FlatSet> sets = new ArrayList<>();
@@ -16,11 +16,11 @@ class FlatSets {
         sets.add(set);
     }
 
-    Set<MuscleGroupName> getMuscleGroupNames() {
-        return sets.stream().map(FlatSet::getMuscleGroupName).collect(toSet());
+    List<MuscleGroupName> getMuscleGroupNames() {
+        return sets.stream().map(FlatSet::getMuscleGroupName).collect(toList());
     }
 
-    Set<ExerciseName> getExerciseNames() {
-        return sets.stream().map(FlatSet::getExerciseName).collect(toSet());
+    List<ExerciseName> getExerciseNames() {
+        return sets.stream().map(FlatSet::getExerciseName).collect(toList());
     }
 }

@@ -31,22 +31,22 @@ public class WorkoutFileInput {
     }
 
     private MuscleGroups toMuscleGroups(FullWorkoutViewModel w) {
-        java.util.Set<MuscleGroup> muscleGroups = w.getMuscleGroups()
+        java.util.List<MuscleGroup> muscleGroups = w.getMuscleGroups()
                 .stream()
                 .map(this::toMuscleGroup)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
 
         return MuscleGroups.of(muscleGroups);
     }
 
     private MuscleGroup toMuscleGroup(FullMuscleGroupViewModel m) {
         return MuscleGroup.of(m.getName(), Exercises.of(
-                m.getExercises().stream().map(e -> Exercise.of(e.getName(), toSetsViewModel(e.getSets()))).collect(Collectors.toSet())));
+                m.getExercises().stream().map(e -> Exercise.of(e.getName(), toSetsViewModel(e.getSets()))).collect(Collectors.toList())));
     }
 
     private Sets toSetsViewModel(List<FullSetViewModel> sets) {
         return Sets.of(sets.stream()
-                .map(s -> Set.of(Weight.of(s.getWeight(), UnitOfMeasurement.fromShortName(s.getWeightUnit())), Repetitions.of(s.getNumberOfRepetitions()), WaitingTime.of(s.getWaitingTime(), UnitOfTime.fromShortName(s.getWaitingTimeUnit()))))
+                .map(s -> Set.withValues(Weight.of(s.getWeight(), UnitOfMeasurement.fromShortName(s.getWeightUnit())), Repetitions.of(s.getNumberOfRepetitions()), WaitingTime.of(s.getWaitingTime(), UnitOfTime.fromShortName(s.getWaitingTimeUnit()))))
                 .collect(Collectors.toList()));
     }
 }

@@ -8,9 +8,9 @@ import com.zihler.fitness_tracker.application.use_cases.muscleGroups.create_musc
 import com.zihler.fitness_tracker.domain.values.MuscleGroup;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 
-import java.util.Set;
+import java.util.List;
 
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toList;
 
 public class CreateMuscleGroupsUseCase implements CreateMuscleGroups {
     private StoreMuscleGroups store;
@@ -31,14 +31,14 @@ public class CreateMuscleGroupsUseCase implements CreateMuscleGroups {
     private MuscleGroupsDocument toDocument(MuscleGroups muscleGroups) {
         return MuscleGroupsDocument.of(muscleGroups.getMuscleGroups().stream()
                 .map(MuscleGroupDocument::of)
-                .collect(toSet()));
+                .collect(toList()));
     }
 
-    private Set<MuscleGroup> toEntities(MuscleGroupsDocument muscleGroupsDocument) {
+    private List<MuscleGroup> toEntities(MuscleGroupsDocument muscleGroupsDocument) {
         return muscleGroupsDocument.getMuscleGroups()
                 .stream()
                 .map(MuscleGroupDocument::getName)
                 .map(MuscleGroup::new)
-                .collect(toSet());
+                .collect(toList());
     }
 }

@@ -2,23 +2,23 @@ package com.zihler.fitness_tracker.application.outbound_ports.documents;
 
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toList;
 
 public class MuscleGroupsDocument {
-    private Set<MuscleGroupDocument> muscleGroups;
+    private List<MuscleGroupDocument> muscleGroups;
 
-    public MuscleGroupsDocument(Set<MuscleGroupDocument> muscleGroups) {
+    public MuscleGroupsDocument(List<MuscleGroupDocument> muscleGroups) {
         this.muscleGroups = muscleGroups;
     }
 
     public MuscleGroupsDocument() {
-        this(new HashSet<>());
+        this(new ArrayList<>());
     }
 
-    public static MuscleGroupsDocument of(Set<MuscleGroupDocument> documents) {
+    public static MuscleGroupsDocument of(List<MuscleGroupDocument> documents) {
         return new MuscleGroupsDocument(documents);
     }
 
@@ -27,10 +27,10 @@ public class MuscleGroupsDocument {
                 .getMuscleGroups()
                 .stream()
                 .map(MuscleGroupDocument::of)
-                .collect(toSet()));
+                .collect(toList()));
     }
 
-    public Set<MuscleGroupDocument> getMuscleGroups() {
+    public List<MuscleGroupDocument> getMuscleGroups() {
         return muscleGroups;
     }
 

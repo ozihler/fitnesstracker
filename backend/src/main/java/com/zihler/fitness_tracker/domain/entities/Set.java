@@ -15,7 +15,7 @@ public class Set {
         this.waitingTime = waitingTime;
     }
 
-    public static Set of(Weight weight, Repetitions repetitions, WaitingTime waitingTime) {
+    public static Set withValues(Weight weight, Repetitions repetitions, WaitingTime waitingTime) {
         return new Set(weight, repetitions, waitingTime);
     }
 

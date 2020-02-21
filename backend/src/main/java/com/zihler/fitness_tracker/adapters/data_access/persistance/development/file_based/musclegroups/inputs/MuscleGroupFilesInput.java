@@ -4,14 +4,14 @@ import com.zihler.fitness_tracker.adapters.data_access.persistance.development.f
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 
 import java.util.Objects;
-import java.util.Set;
+import java.util.List;
 
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toList;
 
 public class MuscleGroupFilesInput {
-    private Set<MuscleGroupFile> files;
+    private List<MuscleGroupFile> files;
 
-    public MuscleGroupFilesInput(Set<MuscleGroupFile> files) {
+    public MuscleGroupFilesInput(List<MuscleGroupFile> files) {
         this.files = files;
     }
 
@@ -21,7 +21,7 @@ public class MuscleGroupFilesInput {
                 .filter(Objects::nonNull)
                 .map(MuscleGroupFileInput::new)
                 .map(MuscleGroupFileInput::muscleGroup)
-                .collect(toSet()));
+                .collect(toList()));
     }
 }
 

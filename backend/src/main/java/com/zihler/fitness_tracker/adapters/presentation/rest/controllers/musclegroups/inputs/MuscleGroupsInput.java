@@ -7,9 +7,9 @@ import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGro
 import com.zihler.fitness_tracker.domain.values.Name;
 import com.zihler.fitness_tracker.domain.values.Names;
 
-import java.util.Set;
+import java.util.List;
 
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toList;
 
 public class MuscleGroupsInput {
     private CreateMuscleGroupsRequest request;
@@ -24,20 +24,20 @@ public class MuscleGroupsInput {
             throw new EmptyMuscleGroupsRequest();
         }
 
-        Set<MuscleGroupDocument> documents = toDocuments(muscleGroupNames);
+        List<MuscleGroupDocument> documents = toDocuments(muscleGroupNames);
 
         return MuscleGroupsDocument.of(documents);
     }
 
-    private Set<MuscleGroupDocument> toDocuments(String muscleGroupNames) {
+    private List<MuscleGroupDocument> toDocuments(String muscleGroupNames) {
         return names(muscleGroupNames)
                 .stream()
                 .map(MuscleGroupInput::new)
                 .map(MuscleGroupInput::muscleGroup)
-                .collect(toSet());
+                .collect(toList());
     }
 
-    private Set<String> names(String muscleGroupNames) {
+    private List<String> names(String muscleGroupNames) {
         // todo find better solution for this (Names creates name objects,
         //  then converts them to strings again,
         //  and then converts them in MuscleGroupInput to names again)
@@ -45,7 +45,7 @@ public class MuscleGroupsInput {
                 .values()
                 .stream()
                 .map(Name::toString)
-                .collect(toSet());
+                .collect(toList());
     }
 
 }

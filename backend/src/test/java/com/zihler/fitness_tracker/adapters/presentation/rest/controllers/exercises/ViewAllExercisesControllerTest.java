@@ -11,9 +11,9 @@ import com.zihler.fitness_tracker.domain.values.Name;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 
-import java.util.Set;
+import java.util.List;
 
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ViewAllExercisesControllerTest {
@@ -21,7 +21,7 @@ class ViewAllExercisesControllerTest {
     @Test
     void test() {
         MuscleGroup expectedMuscleGroup = new MuscleGroup(Name.of("Chest"));
-        Set<Exercise> expectedExercises = Set.of(
+        List<Exercise> expectedExercises = List.of(
                 new Exercise(Name.of("Bench Press")),
                 new Exercise(Name.of("Dumbbell Bench Press")),
                 new Exercise(Name.of("Overhead Dumbbell Pull")));
@@ -36,10 +36,10 @@ class ViewAllExercisesControllerTest {
         ExercisesViewModel actualExercisesResponse = exercisesOfMuscleGroup.getBody();
         assertNotNull(actualExercisesResponse);
 
-        Set<ExerciseViewModel> actualExercises = actualExercisesResponse.getExercises();
+        List<ExerciseViewModel> actualExercises = actualExercisesResponse.getExercises();
         assertEquals(3, actualExercises.size());
-        Set<String> actualExerciseNames = actualExercises.stream().map(ExerciseViewModel::getName).collect(toSet());
-        Set<String> expectedExercisesNames = expectedExercises.stream().map(Exercise::getName).map(Name::toString).collect(toSet());
+        List<String> actualExerciseNames = actualExercises.stream().map(ExerciseViewModel::getName).collect(toList());
+        List<String> expectedExercisesNames = expectedExercises.stream().map(Exercise::getName).map(Name::toString).collect(toList());
         assertTrue(actualExerciseNames.containsAll(expectedExercisesNames));
     }
 

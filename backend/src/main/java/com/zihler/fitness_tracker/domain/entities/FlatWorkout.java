@@ -6,7 +6,7 @@ import com.zihler.fitness_tracker.domain.values.WorkoutId;
 import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
 
 import java.time.ZonedDateTime;
-import java.util.Set;
+import java.util.List;
 
 public class FlatWorkout {
     private WorkoutId workoutId;
@@ -40,11 +40,11 @@ public class FlatWorkout {
         return sets;
     }
 
-    Set<MuscleGroupName> getMuscleGroupNames() {
+    List<MuscleGroupName> getMuscleGroupNames() {
         return sets.getMuscleGroupNames();
     }
 
-    Set<ExerciseName> getExerciseNames() {
+    List<ExerciseName> getExerciseNames() {
         return sets.getExerciseNames();
     }
 }

@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.zihler.fitness_tracker.domain.values.UnitOfMeasurement.KILOGRAMM;
@@ -38,7 +38,7 @@ class UpdateWorkoutUseCaseTest {
         TestWorkoutPresenter output = new TestWorkoutPresenter();
 
         MuscleGroupsDocument muscleGroups = new MuscleGroupsDocument(
-                Set.of(new MuscleGroupDocument(Name.of("Chest"))
+                List.of(new MuscleGroupDocument(Name.of("Chest"))
                         .add(new ExerciseDocument(Name.of("Bench Press"))
                                 .add(new SetDocument(Weight.of(50, KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS)))
                                 .add(new SetDocument(Weight.of(55, KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS))))));

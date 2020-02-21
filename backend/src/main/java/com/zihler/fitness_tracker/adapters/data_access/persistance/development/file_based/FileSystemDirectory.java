@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class FileSystemDirectory<T extends Namable> {
@@ -66,13 +66,13 @@ public class FileSystemDirectory<T extends Namable> {
         return new File(this.pathToFolder.toAbsolutePath() + "/" + fileName);
     }
 
-    public Set<T> fetchAllFilesInDirectory() {
+    public List<T> fetchAllFilesInDirectory() {
         try {
             return Files.walk(pathToFolder.toAbsolutePath())
                     .filter(Files::isRegularFile)
                     .map(Path::toFile)
                     .map(this::read)
-                    .collect(Collectors.toSet());
+                    .collect(Collectors.toList());
         } catch (IOException e) {
             throw new LoadingDataFromFileSystemFailed(e);
         }

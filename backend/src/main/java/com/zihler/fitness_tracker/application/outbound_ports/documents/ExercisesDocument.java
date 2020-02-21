@@ -1,24 +1,24 @@
 package com.zihler.fitness_tracker.application.outbound_ports.documents;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ExercisesDocument {
-    private Set<ExerciseDocument> exercises;
+    private List<ExerciseDocument> exercises;
 
-    private ExercisesDocument(Set<ExerciseDocument> exercises) {
+    private ExercisesDocument(List<ExerciseDocument> exercises) {
         this.exercises = exercises;
     }
 
     ExercisesDocument() {
-        this(new HashSet<>());
+        this(new ArrayList<>());
     }
 
-    public static ExercisesDocument of(Set<ExerciseDocument> exercises) {
+    public static ExercisesDocument of(List<ExerciseDocument> exercises) {
         return new ExercisesDocument(exercises);
     }
 
-    public Set<ExerciseDocument> getExercises() {
+    public List<ExerciseDocument> getExercises() {
         return exercises;
     }
 

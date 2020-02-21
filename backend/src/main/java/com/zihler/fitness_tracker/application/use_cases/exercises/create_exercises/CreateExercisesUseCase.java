@@ -11,7 +11,7 @@ import com.zihler.fitness_tracker.domain.values.Exercise;
 import com.zihler.fitness_tracker.domain.values.Exercises;
 import com.zihler.fitness_tracker.domain.values.MuscleGroup;
 
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toList;
 
 public class CreateExercisesUseCase implements CreateExercises {
 
@@ -45,14 +45,14 @@ public class CreateExercisesUseCase implements CreateExercises {
                 .values()
                 .stream()
                 .map(Exercise::new)
-                .collect(toSet()));
+                .collect(toList()));
     }
 
     private ExercisesDocument toDocuments(Exercises storedExercises) {
         return ExercisesDocument.of(storedExercises.getExercises()
                 .stream()
                 .map(ExerciseDocument::of)
-                .collect(toSet()));
+                .collect(toList()));
     }
 
 

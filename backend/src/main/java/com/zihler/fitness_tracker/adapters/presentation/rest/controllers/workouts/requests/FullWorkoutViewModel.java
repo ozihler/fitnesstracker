@@ -3,9 +3,9 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workou
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.Namable;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import java.util.List;
 
 public class FullWorkoutViewModel implements Namable {
 
@@ -16,12 +16,12 @@ public class FullWorkoutViewModel implements Namable {
     @JsonProperty("title")
     private String title;
     @JsonProperty("muscleGroups")
-    private Set<FullMuscleGroupViewModel> muscleGroups;
+    private List<FullMuscleGroupViewModel> muscleGroups;
 
     public FullWorkoutViewModel() {
     }
 
-    public FullWorkoutViewModel(String gid, long creationDate, String title, Set<FullMuscleGroupViewModel> muscleGroups) {
+    public FullWorkoutViewModel(String gid, long creationDate, String title, List<FullMuscleGroupViewModel> muscleGroups) {
         this.gid = gid;
         this.creationDate = creationDate;
         this.title = title;
@@ -29,7 +29,7 @@ public class FullWorkoutViewModel implements Namable {
     }
 
     public static FullWorkoutViewModel of(String workoutId, String title, long creationDate, List<FullMuscleGroupViewModel> muscleGroups) {
-        return new FullWorkoutViewModel(workoutId, creationDate, title, new HashSet<>(muscleGroups));
+        return new FullWorkoutViewModel(workoutId, creationDate, title, new ArrayList<>(muscleGroups));
     }
 
     public String getGid() {
@@ -44,7 +44,7 @@ public class FullWorkoutViewModel implements Namable {
         return title;
     }
 
-    public Set<FullMuscleGroupViewModel> getMuscleGroups() {
+    public List<FullMuscleGroupViewModel> getMuscleGroups() {
         return muscleGroups;
     }
 

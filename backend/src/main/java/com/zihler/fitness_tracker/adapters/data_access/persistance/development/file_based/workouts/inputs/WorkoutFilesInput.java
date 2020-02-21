@@ -6,14 +6,14 @@ import com.zihler.fitness_tracker.domain.values.Workouts;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
+import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
 public class WorkoutFilesInput {
-    private Set<FullWorkoutViewModel> files;
+    private List<FullWorkoutViewModel> files;
 
-    public WorkoutFilesInput(Set<FullWorkoutViewModel> files) {
+    public WorkoutFilesInput(List<FullWorkoutViewModel> files) {
         this.files = files;
     }
 

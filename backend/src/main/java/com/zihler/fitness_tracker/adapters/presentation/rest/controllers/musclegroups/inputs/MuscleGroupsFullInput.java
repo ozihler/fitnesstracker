@@ -5,14 +5,14 @@ import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGro
 import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGroupsDocument;
 import com.zihler.fitness_tracker.domain.values.Name;
 
-import java.util.Set;
+import java.util.List;
 
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toList;
 
 public class MuscleGroupsFullInput {
-    private Set<FullMuscleGroupViewModel> muscleGroups;
+    private List<FullMuscleGroupViewModel> muscleGroups;
 
-    public MuscleGroupsFullInput(Set<FullMuscleGroupViewModel> muscleGroups) {
+    public MuscleGroupsFullInput(List<FullMuscleGroupViewModel> muscleGroups) {
         this.muscleGroups = muscleGroups;
     }
 
@@ -21,7 +21,7 @@ public class MuscleGroupsFullInput {
         return MuscleGroupsDocument.of(muscleGroups
                 .stream()
                 .map(m -> new MuscleGroupDocument(Name.of(m.getName()), new ExercisesFullInput(m.getExercises()).toDocument()))
-                .collect(toSet()));
+                .collect(toList()));
     }
 
 }

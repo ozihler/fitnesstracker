@@ -2,20 +2,20 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Set;
+import java.util.List;
 
 public class MuscleGroupsViewModel {
     @JsonProperty("muscleGroups")
-    private Set<MuscleGroupNameViewModel> muscleGroups;
+    private List<MuscleGroupNameViewModel> muscleGroups;
 
-    public MuscleGroupsViewModel(Set<MuscleGroupNameViewModel> muscleGroups) {
+    public MuscleGroupsViewModel(List<MuscleGroupNameViewModel> muscleGroups) {
         this.muscleGroups = muscleGroups;
     }
 
     public MuscleGroupsViewModel() {
     }
 
-    public Set<MuscleGroupNameViewModel> getMuscleGroups() {
+    public List<MuscleGroupNameViewModel> getMuscleGroups() {
         return muscleGroups;
     }
 

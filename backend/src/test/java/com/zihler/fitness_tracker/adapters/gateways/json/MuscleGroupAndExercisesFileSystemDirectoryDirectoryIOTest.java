@@ -8,7 +8,7 @@ import com.zihler.fitness_tracker.domain.values.Name;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.zihler.fitness_tracker.domain.values.MuscleGroups.muscleGroups;
@@ -31,8 +31,8 @@ public class MuscleGroupAndExercisesFileSystemDirectoryDirectoryIOTest {
 
         var storedMGs = muscleGroups.getMuscleGroups();
         assertEquals(3, storedMGs.size());
-        Set<String> storedMuscleGroupNames = storedMGs.stream().map(MuscleGroup::getName).map(Name::toString).collect(Collectors.toSet());
-        assertTrue(storedMuscleGroupNames.containsAll(Set.of("Chest", "Shoulders", "Triceps")));
+        List<String> storedMuscleGroupNames = storedMGs.stream().map(MuscleGroup::getName).map(Name::toString).collect(Collectors.toList());
+        assertTrue(storedMuscleGroupNames.containsAll(List.of("Chest", "Shoulders", "Triceps")));
 
 
         storedMGs.stream()
@@ -41,8 +41,8 @@ public class MuscleGroupAndExercisesFileSystemDirectoryDirectoryIOTest {
                 .flatMap(Collection::stream)
                 .map(Exercise::getName)
                 .map(Name::toString)
-                .collect(Collectors.toSet())
-                .containsAll(Set.of(
+                .collect(Collectors.toList())
+                .containsAll(List.of(
                         "Bench Press", "Push Ups", "Incline Dumbbell Bench Press",
                         "Arnold Press", "Side Lifts", "Wide Barbell Lift",
                         "Lat Pull", "Overhead Lat Pull", "Dips"

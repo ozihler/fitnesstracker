@@ -5,9 +5,9 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.Exercise
 import com.zihler.fitness_tracker.application.outbound_ports.documents.ExerciseDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.ExercisesDocument;
 
-import java.util.Set;
+import java.util.List;
 
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toList;
 
 public class ExercisesOutput {
     private ExercisesDocument exercises;
@@ -20,11 +20,11 @@ public class ExercisesOutput {
         return new ExercisesViewModel(toViewModels());
     }
 
-    private Set<ExerciseViewModel> toViewModels() {
+    private List<ExerciseViewModel> toViewModels() {
         return exercises.getExercises()
                 .stream()
                 .map(ExerciseOutput::new)
                 .map(ExerciseOutput::toViewModel)
-                .collect(toSet());
+                .collect(toList());
     }
 }
