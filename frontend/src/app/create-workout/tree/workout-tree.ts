@@ -97,9 +97,11 @@ export class WorkoutTree {
     this.removeFromParent(treeNode);
 
     if (this.hasSiblings(treeNode)) {
-      this.select(treeNode.parent.children[0].name);
+      this.currentSelection = treeNode.parent.children[0];
     } else {
-      this.enableParentOf(treeNode);
+      if (treeNode.parent) {
+        this.currentSelection = treeNode.parent;
+      }
     }
   }
 
@@ -113,12 +115,12 @@ export class WorkoutTree {
 
   private removeFromParent(treeNode: TreeNode) {
     let count = 0;
-    treeNode.parent.children = treeNode.parent.children.filter(c => c.name != treeNode.name && count++ === 0);
-  }
-
-  private enableParentOf(treeNode: TreeNode) {
-    if (treeNode.parent) {
-      this.select(treeNode.parent.name);
+    console.error("# children before: " + treeNode.parent.children.length);
+    let treeNodeIndex = treeNode.parent.children.indexOf(treeNode);
+    console.error("Tree node index: " + treeNodeIndex)
+    if (treeNodeIndex >= 0) {
+      treeNode.parent.children.splice(treeNodeIndex, 1);
     }
+    console.error("# children after delete: " + treeNode.parent.children.length);
   }
 }
