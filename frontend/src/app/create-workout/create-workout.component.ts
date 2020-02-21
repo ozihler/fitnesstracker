@@ -154,13 +154,9 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
   updateWorkoutTitle(updatedWorkout: WorkoutTitleUpdate) {
-    // just save the whole damn thing
     let selectedElement = this.workoutTree.currentSelection;
-
-    console.log(updatedWorkout);
     this.workoutTree.root.name = updatedWorkout.workoutTitle;
     this.workoutTree.root.creationDate = updatedWorkout.workoutCreationDate;
-
     this.updateWorkoutAndEnable(selectedElement);
   }
 
