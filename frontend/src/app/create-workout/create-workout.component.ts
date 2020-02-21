@@ -163,7 +163,6 @@ export class CreateWorkoutComponent implements OnInit {
 
   removeNodeFromWorkout(nodeToDelete: TreeNode) {
     this.workoutTree.delete(nodeToDelete.name);
-    console.warn("Current selection: "+ this.workoutTree.currentSelection.name)
     this.fetchChildrenOf(this.workoutTree.currentSelection);
   }
 }

@@ -17,6 +17,7 @@ import {SelectableElementComponent} from './create-workout/selectable-element.co
 import {AngularFontAwesomeModule} from "angular-font-awesome";
 import {WorkoutTitleComponent} from './create-workout/workout-title.component';
 import {CommonModule, DatePipe} from "@angular/common";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   declarations: [
@@ -32,14 +33,15 @@ import {CommonModule, DatePipe} from "@angular/common";
     SelectableElementComponent,
     WorkoutTitleComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    AngularFontAwesomeModule,
-    CommonModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        AngularFontAwesomeModule,
+        CommonModule,
+        FontAwesomeModule
+    ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
 })

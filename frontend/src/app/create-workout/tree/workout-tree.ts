@@ -111,12 +111,9 @@ export class WorkoutTree {
 
   private removeFromParent(treeNode: TreeNode) {
     let count = 0;
-    console.error("# children before: " + treeNode.parent.children.length);
     let treeNodeIndex = treeNode.parent.children.indexOf(treeNode);
-    console.error("Tree node index: " + treeNodeIndex)
     if (treeNodeIndex >= 0) {
       treeNode.parent.children.splice(treeNodeIndex, 1);
     }
-    console.error("# children after delete: " + treeNode.parent.children.length);
   }
 }

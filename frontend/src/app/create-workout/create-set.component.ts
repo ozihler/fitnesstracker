@@ -6,11 +6,11 @@ import {ChangeValue} from "./form/change-value";
   selector: 'app-create-set',
   template: `
     <div class="uk-flex-center">
-      <span>{{currentValues}}</span>
-      <button class="uk-button uk-width-1-1 uk-text-truncate"
+      <mark>{{currentValues}}</mark>
+      <button class="uk-button uk-button-primary uk-width-1-1"
               *ngIf="showButton"
               (click)="submit()">
-        Add Set
+        <fa name="plus"></fa>
       </button>
     </div>
     <hr/>
