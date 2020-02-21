@@ -94,6 +94,61 @@ describe('Workout Tree', () => {
 
     }
   );
+
+  //todo try replacing workoutTree.findNodeByName > variable (e.g. chest)
+  it('should correctly delete muscle group', () => {
+
+      /*
+                               Workout
+                              /      \
+                        Chest         Triceps
+                        / \               /  \
+              BenchPress  DumbbellBP  LatPull OverheadLatPull
+                 /\          /        /  \         \
+               set set1    set2   set3  set4      set5
+       */
+      let {workout, chest, benchPress, set, set1, dumbbellBP, set2, triceps, latPull, set3, set4, overheadLatPull, set5, workoutTree} = createSimpleTree();
+      workoutTree.select(chest.name);
+
+
+      expect(workoutTree.findNodeByName(set2.name).isEnabled).toBe(false);
+      expect(workoutTree.findNodeByName(set3.name).isEnabled).toBe(false);
+      expect(workoutTree.findNodeByName(set4.name).isEnabled).toBe(false);
+      expect(workoutTree.findNodeByName(set5.name).isEnabled).toBe(false);
+      expect(workoutTree.findNodeByName(latPull.name).isEnabled).toBe(false);
+      expect(workoutTree.findNodeByName(overheadLatPull.name).isEnabled).toBe(false);
+
+      expect(workoutTree.findNodeByName(workout.name).isEnabled).toBe(true);
+      expect(workoutTree.findNodeByName(chest.name).isEnabled).toBe(true);
+      expect(workoutTree.findNodeByName(triceps.name).isEnabled).toBe(true);
+      expect(workoutTree.findNodeByName(benchPress.name).isEnabled).toBe(true);
+      expect(workoutTree.findNodeByName(dumbbellBP.name).isEnabled).toBe(true);
+      expect(workoutTree.findNodeByName(set1.name).isEnabled).toBe(false);
+      expect(workoutTree.findNodeByName(set.name).isEnabled).toBe(false)
+
+      workoutTree.delete(chest.name);
+
+      expect(workoutTree.findNodeByName(workout.name).isEnabled).toBe(true);
+
+      // Remove chest sub tree
+      expect(workoutTree.findNodeByName(chest.name)).not.toBeDefined();
+      expect(workoutTree.findNodeByName(benchPress.name)).not.toBeDefined();
+      expect(workoutTree.findNodeByName(dumbbellBP.name)).not.toBeDefined();
+      expect(workoutTree.findNodeByName(set1.name)).not.toBeDefined();
+      expect(workoutTree.findNodeByName(set2.name)).not.toBeDefined();
+      expect(workoutTree.findNodeByName(set.name)).not.toBeDefined()
+
+      // enable triceps
+      expect(workoutTree.findNodeByName(triceps.name).isEnabled).toBe(true);
+      expect(workoutTree.findNodeByName(latPull.name).isEnabled).toBe(true);
+      expect(workoutTree.findNodeByName(overheadLatPull.name).isEnabled).toBe(true);
+
+      // disable children of exercises of triceps
+      expect(workoutTree.findNodeByName(set3.name).isEnabled).toBe(false);
+      expect(workoutTree.findNodeByName(set4.name).isEnabled).toBe(false);
+      expect(workoutTree.findNodeByName(set5.name).isEnabled).toBe(false);
+    }
+  );
   it('should correctly delete exercises', () => {
 
       /*
