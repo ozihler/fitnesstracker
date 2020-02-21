@@ -91,6 +91,7 @@ export class CreateWorkoutComponent implements OnInit { // todo rename to "edit 
     }
   }
 
+  // todo do enable selected Item!
   addSelectedItemToTree(selectedElement: TreeNode) {
     let addedNode = this.workoutTree.addNode(selectedElement);
 
