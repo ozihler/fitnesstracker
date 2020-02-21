@@ -5,13 +5,13 @@ import {TreeNode} from "./tree/tree-node";
   selector: 'app-selectable-element',
   template: `
     <div class="uk-grid uk-grid-collapse">
-      <button class="uk-button uk-button-default uk-width-3-5 uk-text-truncate"
+      <button class="uk-button uk-button-default uk-width-2-3 uk-text-truncate"
               (click)="select(element)">{{element?.name}}
       </button>
-      <button class="uk-button uk-button-secondary uk-width-1-5 ">
+     <!-- <button class="uk-button uk-button-secondary uk-width-1-5 ">
         <fa name="pencil"></fa>
-      </button>
-      <button class="uk-button uk-button-danger uk-width-1-5 "
+      </button>-->
+      <button class="uk-button uk-button-danger uk-width-1-3"
               (click)="delete(element)">
         <fa name="trash"></fa>
       </button>

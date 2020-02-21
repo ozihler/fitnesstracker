@@ -17,14 +17,14 @@ import {WorkoutTitleUpdate} from "./workout-title-update";
       [workoutCreationDate]="workoutTree?.root?.creationDate"
       (changeTitleEvent)="updateWorkoutTitle($event)">
     </app-workout-title>
-    <hr/>
+    <hr class="uk-divider-icon"/>
     <app-button-tree
       [node]="workoutTree?.root"
       [currentSelectionName]="workoutTree?.currentSelection?.name"
       (changeSelectionEvent)="changeTreeNode($event)"
       (removeFromWorkoutEvent)="removeNodeFromWorkout($event)">
     </app-button-tree>
-    <hr/>
+    <hr class="uk-divider-icon"/>
     <app-element-selection
       [currentSelection]="workoutTree?.currentSelection"
       [selectableElements]="selectableChildrenOfSelectedNode"
@@ -32,7 +32,7 @@ import {WorkoutTitleUpdate} from "./workout-title-update";
       (createsChildEvent)="createSelectableElement($event)"
       (deleteNodeEvent)="deleteSelectableElement($event)">
     </app-element-selection>
-    <hr/>
+    <hr class="uk-divider-icon"/>
     <a routerLink="/workouts-overview">Back to Overview</a>
   `
 })

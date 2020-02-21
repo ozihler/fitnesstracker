@@ -12,7 +12,9 @@ import {WorkoutSimple} from "../shared/workout-simple";
     </button>
     <button routerLink="/create-workout/{{workout.gid.value}}"
             *ngFor="let workout of workouts"
-            class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom">{{workout.gid.value}}
+            class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom">
+      {{workout.creationDate |date: 'dd.MM.yy'}}
+      {{workout.title}}
     </button>
   `,
   styles: []
