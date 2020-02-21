@@ -7,24 +7,24 @@ import {ChangeValue} from "./form/change-value";
   template: `
     <div class="uk-flex-center">
       <span>{{currentValues}}</span>
-    </div>
-    <div>
       <button class="uk-button uk-width-1-1 uk-text-truncate"
-              (click)="disableOtherUpdates('NONE')">Toggle Set Parts
+              *ngIf="showButton"
+              (click)="submit()">
+        Add Set
       </button>
     </div>
+    <hr/>
+
     <div>
       <app-set-values
         [formValues]="formValues.weight"
         (updateEvent)="update($event)"
         (disableOtherUpdatesEvent)="disableOtherUpdates($event)">
-
       </app-set-values>
       <app-set-values
         [formValues]="formValues.repetitions"
         (updateEvent)="update($event)"
         (disableOtherUpdatesEvent)="disableOtherUpdates($event)">
-
       </app-set-values>
       <app-set-values
         [formValues]="formValues.waitingTime"
@@ -32,11 +32,9 @@ import {ChangeValue} from "./form/change-value";
         (disableOtherUpdatesEvent)="disableOtherUpdates($event)">
       </app-set-values>
     </div>
-    <hr/>
-    <div *ngIf="showButton">
+    <div>
       <button class="uk-button uk-width-1-1 uk-text-truncate"
-              (click)="submit()">
-        Add Set
+              (click)="disableOtherUpdates('NONE')">Toggle Set Parts
       </button>
     </div>
   `
