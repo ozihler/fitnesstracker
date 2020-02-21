@@ -1,18 +1,22 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {TreeNode} from "./tree/tree-node";
+import {Type} from "../shared/type";
 
 @Component({
   selector: 'app-button-tree',
   template: `
     <div class="uk-grid uk-grid-collapse" *ngIf="node?.isEnabled">
-      <button class="uk-button uk-width-1-1 uk-text-truncate"
-              [ngClass]="getLevelClass"
+      <button class="uk-button uk-text-truncate"
+              [ngClass]="levelDependentClasses"
               [disabled]="node.isLeaf"
               (click)="changeSelection()">
         <span *ngIf="node && !node?.isLeaf">({{node?.numberOfChildren}}) </span>
         <span>{{node?.name}}</span>
       </button>
-      <button (click)="removeFromWorkout(node)">DEL</button>
+      <button class="uk-button uk-width-1-3 uk-text-truncate"
+              *ngIf="!isWorkout()"
+              (click)="removeFromWorkout(node)">DEL
+      </button>
     </div>
 
     <div *ngIf="node?.hasChildren">
@@ -21,8 +25,7 @@ import {TreeNode} from "./tree/tree-node";
           [currentSelectionName]="currentSelectionName"
           [node]="child"
           (changeSelectionEvent)="this.changeSelectionEvent.emit($event);"
-          (removeFromWorkoutEvent)="removeFromWorkout($event);"
-        >
+          (removeFromWorkoutEvent)="removeFromWorkout($event)">
         </app-button-tree>
       </div>
     </div>
@@ -37,11 +40,26 @@ export class TreeViewComponent {
   constructor() {
   }
 
-  get getLevelClass() {
+  get levelDependentClasses(): string[] {
+    let classes: string[] = [];
     if (this.isSelectedNode()) {
-      return "uk-button-danger";
+      classes.push("uk-button-danger");
     }
-    return this.node ? TreeNode.LEVEL_CLASSES[this.node.type] : "";
+
+    if (this.node) {
+      if(TreeNode.LEVEL_CLASSES[this.node.type]) {
+        classes.push(TreeNode.LEVEL_CLASSES[this.node.type]);
+      }
+
+      if (this.node.type === Type.Workout) {
+        classes.push("uk-width-1-1");
+      } else {
+        classes.push("uk-width-2-3");
+      }
+    }
+
+    console.log("Classes", classes);
+    return classes;
   }
 
   changeSelection() {
@@ -58,5 +76,9 @@ export class TreeViewComponent {
 
   removeFromWorkout(node: TreeNode) {
     this.removeFromWorkoutEvent.emit(node);
+  }
+
+  isWorkout() {
+    return this.node && this.node.type === Type.Workout;
   }
 }
