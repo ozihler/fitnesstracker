@@ -2,9 +2,8 @@
 - Sort MuscleGroups/Exercises
 - Only store exercises with at least one muscle group permanently
 - only strike though deleted items, confirm deletion required
-- Copy Workout
 - delete Workout (make unselectable)
 - exercise/muscleGroup should use MuscleGroupName instead of Name
 - use creation methods or new consistently
 - select set to copy values
-s
+- assure no duplicate exercises/muscle groups
