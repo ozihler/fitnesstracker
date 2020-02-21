@@ -1,6 +1,6 @@
 - can an exercise exist in multiple muscle groups?
 - Sort MuscleGroups/Exercises
-- Copy Workout
 - Only store exercises with at least one muscle group permanently
 - only strike though deleted items, confirm deletion required
+- Copy Workout
 - delete Workout (make unselectable)

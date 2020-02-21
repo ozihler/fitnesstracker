@@ -70,7 +70,6 @@ export class WorkoutTitleComponent implements OnInit {
       workoutTitle: this.valueOf('workoutTitle')?this.valueOf('workoutTitle'):this.workoutTitle,
       workoutCreationDate: this.valueOf('workoutCreationDate') ? this.valueOf('workoutCreationDate') : this.workoutCreationDate
     };
-    console.error("EMITTING: ", update);
     this.changeTitleEvent.emit(update);
     this.cancelEditing();
   }
