@@ -162,5 +162,9 @@ export class CreateWorkoutComponent implements OnInit {
 
   removeNodeFromWorkout(nodeToDelete: TreeNode) {
     this.workoutTree.delete(nodeToDelete.name);
+
+    // todo reload correct stuff
+    this.fetchMuscleGroupsAndFilterOut(this.workoutTree.childrenOfCurrentSelection.map(c => c.name));
+    //r
   }
 }
