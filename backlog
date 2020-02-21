@@ -4,3 +4,5 @@
 - only strike though deleted items, confirm deletion required
 - Copy Workout
 - delete Workout (make unselectable)
+- exercise/muscleGroup should use MuscleGroupName instead of Name
+- use creation methods or new consistently

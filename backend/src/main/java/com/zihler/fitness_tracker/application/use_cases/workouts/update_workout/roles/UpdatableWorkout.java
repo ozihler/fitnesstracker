@@ -39,7 +39,7 @@ public class UpdatableWorkout {
             }
         }
 
-        self = Workout.update(self.getWorkoutId(), update.getCreationDate(), update.getWorkoutTitle(), workoutMuscleGroups);
+        self = Workout.from(self.getWorkoutId(), update.getCreationDate(), update.getWorkoutTitle(), workoutMuscleGroups);
     }
 
     public void store() {

@@ -20,7 +20,7 @@ public class CreateWorkoutUseCase implements CreateWorkout {
 
     @Override
     public void invokeWith(WorkoutTitle workoutTitle, WorkoutPresenter output) {
-        Workout workout = Workout.newWorkout(workoutTitle, generateWorkoutId.next());
+        Workout workout = Workout.from(generateWorkoutId.next(), workoutTitle);
         Workout stored = workouts.withValues(workout);
         output.present(WorkoutDocument.of(stored));
     }

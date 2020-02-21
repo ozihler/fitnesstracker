@@ -13,7 +13,7 @@ public class FullWorkoutOutput {
 
     public FullWorkoutViewModel toViewModel() {
         return new FullWorkoutViewModel(
-                document.getWorkoutId().toLong(),
+                document.getWorkoutId().toString(),
                 document.getCreationDate().toMillis(),
                 document.getWorkoutTitle().toString(),
                 new FullMuscleGroupsOutput(document.getMuscleGroups()).toViewModel()

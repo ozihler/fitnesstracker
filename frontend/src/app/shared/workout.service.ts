@@ -11,6 +11,8 @@ import {Exercise} from "./exercise";
 import {Set} from "./set";
 import {WorkoutsSimpleRaw} from "./workouts-simple-raw";
 import {WorkoutSimpleFactory} from "./workout-simple.factory";
+import {WorkoutId} from "./workoutId";
+import {WorkoutIdRaw} from "./workout-id-raw";
 
 
 @Injectable({
@@ -60,6 +62,11 @@ export class WorkoutService {
       .pipe(map(data => WorkoutFactory.fromRaw(data)));
   }
 
+  copy(workoutId: WorkoutId): Observable<WorkoutId> {
+    return this.httpClient.post<WorkoutIdRaw>(`${this.baseUrl}/workouts/copy`, {workoutId: workoutId.value})
+      .pipe(map(copiedWorkoutId => WorkoutId.from(copiedWorkoutId.workoutId)));
+  }
+
   fetchAllWorkouts() {
     return this.httpClient.get<WorkoutsSimpleRaw>(`${this.baseUrl}/workouts/overview`)
       .pipe(map(workoutsSimpleRaw => WorkoutSimpleFactory.fromMultiple(workoutsSimpleRaw)));
@@ -89,5 +96,4 @@ export class WorkoutService {
       waitingTimeUnit: set.waitingTimeUnit
     }
   }
-
 }

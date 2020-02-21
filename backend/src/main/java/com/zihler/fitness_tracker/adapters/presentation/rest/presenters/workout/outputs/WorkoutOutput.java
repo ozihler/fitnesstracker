@@ -18,7 +18,7 @@ public class WorkoutOutput {
 
     public WorkoutAndMuscleGroupNamesViewModel toViewModel() {
         return new WorkoutAndMuscleGroupNamesViewModel(
-                workoutDocument.getWorkoutId().toLong(),
+                workoutDocument.getWorkoutId().toString(),
                 workoutDocument.getCreationDate().toMillis(),
                 workoutDocument.getWorkoutTitle().toString(),
                 toViewModel(workoutDocument.getMuscleGroups())

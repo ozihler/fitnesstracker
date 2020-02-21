@@ -18,7 +18,7 @@ class WorkoutFileSystemDirectoryTest {
     void test() {
         WorkoutFileSystemDirectory directory = WorkoutFileSystemDirectory.mkDir("test-workouts");
 
-        Workout workout = new Workout(
+        Workout workout =   Workout.from(
                 WorkoutId.of("x-1-2"),
                 CreationDate.from(LocalDate.now()), WorkoutTitle.of("WORKOUT TITLE"),
                 muscleGroups(

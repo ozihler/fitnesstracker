@@ -8,30 +8,6 @@ import {CreateSetComponent} from "./create-workout/create-set.component";
 
 
 const routes: Routes = [
-
-  /*
-  * TODO Angepasstes Konzept umsetzen: Es gibt folgende Anfangs Use Cases:
-  *   Fitness Typ auswählen (WorkoutSelection)
-  *   [x] Workout Übersicht ansehen (WorkoutsOverview)
-  *   Workout ansehen (ViewWorkout)
-  *   Workout bearbeiten (EditWorkout)
-  *   [x] Workout erstellen (WorkoutOverview)
-  *     [x] > Muskelgruppe erstellen (CreateMuscleGroup) --> Klick auf "New Muscle Group"
-  *     > Muskelgruppe hinzufügen (AddMuscleGroup) --> Klick unten auf Button
-  *     > Muskelgruppe bearbeiten (EditMuscleGroup) --> Klick oben auf Button, Übungen hinzufügen, Name ändern
-  *     > Muskelgruppe löschen (RemoveMuscleGroup) --> tbd
-  *     > Muskelgruppe Reihenfolge ändern (OrderMuscleGroup) --> Drag and Drop des Buttons
-  *         [x] > Übung erstellen (CreateExercise) --> Klick auf "New Exercise"
-  *         [x] > Übung zu Muskelgruppe hinzufügen (AddExercise) --> Klick unten auf Button
-  *         > Übung bearbeiten (EditExercise) --> Klick oben auf Exercise Button, Set hinzufügen, Name ändern
-  *         > Übung löschen (RemoveExercise) --> tbd
-  *         > Übung Reihenfolge ändern (OrderExercise) --> Drag and Drop des Buttons
-  *             > Set hinzufügen (AddSet) --> Klick auf "Add Set" in EditExercise: Reps (#), Weight (kgs), Time Waiting After Exercise (secs)
-  *             > Set bearbeiten (EditSet) --> Klick auf Set oben in Übersicht
-  *             > Set löschen (DeleteSet) --> tbd
-  *
-  *
-  * */
   {path: "workouts-overview", component: WorkoutsOverview},
   {path: "create-workout", component: CreateWorkoutComponent},
   {path: "create-workout/:workout-gid", component: CreateWorkoutComponent},

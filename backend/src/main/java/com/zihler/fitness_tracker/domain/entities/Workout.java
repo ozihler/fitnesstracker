@@ -13,19 +13,19 @@ public class Workout {
     private WorkoutTitle workoutTitle;
     private MuscleGroups muscleGroups;
 
-    private Workout(WorkoutTitle workoutTitle, WorkoutId workoutId) {
-        this(workoutId, CreationDate.from(LocalDate.now()), workoutTitle, new MuscleGroups());
+    public static Workout from(WorkoutId workoutId, WorkoutTitle workoutTitle) {
+        return from(workoutId, workoutTitle, new MuscleGroups());
     }
 
-    public static Workout newWorkout(WorkoutTitle workoutTitle, WorkoutId workoutId) {
-        return new Workout(workoutTitle, workoutId);
+    public static Workout from(WorkoutId workoutId, WorkoutTitle workoutTitle, MuscleGroups muscleGroups) {
+        return from(workoutId, CreationDate.from(LocalDate.now()), workoutTitle, muscleGroups);
     }
 
-    public static Workout update(WorkoutId workoutId, CreationDate creationDate, WorkoutTitle workoutTitle, MuscleGroups muscleGroups) {
+    public static Workout from(WorkoutId workoutId, CreationDate creationDate, WorkoutTitle workoutTitle, MuscleGroups muscleGroups) {
         return new Workout(workoutId, creationDate, workoutTitle, muscleGroups);
     }
 
-    public Workout(WorkoutId workoutId, CreationDate creationDate, WorkoutTitle workoutTitle, MuscleGroups muscleGroups) {
+    private Workout(WorkoutId workoutId, CreationDate creationDate, WorkoutTitle workoutTitle, MuscleGroups muscleGroups) {
         this.workoutId = workoutId;
         this.creationDate = creationDate;
         this.workoutTitle = workoutTitle;

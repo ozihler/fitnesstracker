@@ -1,13 +1,11 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.resources;
 
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.CreateWorkoutController;
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.UpdateWorkoutController;
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.ViewAllWorkoutsController;
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.ViewSingleWorkoutController;
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.*;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.FullWorkoutViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutToCreate;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutToUpdate;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutAndMuscleGroupNamesViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutIdViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutsInOverviewViewModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,17 +21,20 @@ public class WorkoutsResource {
     private UpdateWorkoutController updateWorkoutController;
     private ViewAllWorkoutsController viewAllWorkoutsController;
     private ViewSingleWorkoutController viewSingleWorkoutController;
+    private CopyWorkoutController copyWorkoutController;
 
     @Autowired
     public WorkoutsResource(
             CreateWorkoutController createWorkoutController,
             UpdateWorkoutController updateWorkoutController,
             ViewAllWorkoutsController viewAllWorkoutsController,
-            ViewSingleWorkoutController viewSingleWorkoutController) {
+            ViewSingleWorkoutController viewSingleWorkoutController,
+            CopyWorkoutController copyWorkoutController) {
         this.createWorkoutController = createWorkoutController;
         this.updateWorkoutController = updateWorkoutController;
         this.viewAllWorkoutsController = viewAllWorkoutsController;
         this.viewSingleWorkoutController = viewSingleWorkoutController;
+        this.copyWorkoutController = copyWorkoutController;
     }
 
     @PostMapping(path = "/api/workouts")
@@ -70,6 +71,15 @@ public class WorkoutsResource {
         logger.info("All workouts:{}", workouts);
 
         return workouts;
+    }
+
+    @PostMapping(path = "/api/workouts/copy")
+    public ResponseEntity<WorkoutIdViewModel> copyWorkout(WorkoutIdViewModel request) {
+        ResponseEntity<WorkoutIdViewModel> idOfCopiedWorkout = copyWorkoutController.copyWorkout(request);
+
+        logger.info("id of copied workout:{}", idOfCopiedWorkout);
+
+        return idOfCopiedWorkout;
     }
 
 }

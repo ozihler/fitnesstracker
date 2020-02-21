@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {WorkoutService} from "../shared/workout.service";
 import {WorkoutSimple} from "../shared/workout-simple";
+import {WorkoutId} from "../shared/workoutId";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-workouts-overview',
@@ -10,22 +12,32 @@ import {WorkoutSimple} from "../shared/workout-simple";
     <button routerLink="/create-workout"
             class="uk-button uk-button-danger uk-width-1-1 uk-margin-small-bottom">New Workout
     </button>
-    <button routerLink="/create-workout/{{workout.gid.value}}"
-            *ngFor="let workout of workouts"
-            class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom">
-      {{workout.creationDate |date: 'dd.MM.yy'}}
-      {{workout.title}}
-    </button>
-  `,
-  styles: []
+    <div *ngFor="let workout of workouts">
+      <button routerLink="/create-workout/{{workout.gid.value}}"
+              class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom">
+        {{workout.creationDate |date: 'dd.MM.yy'}}
+        {{workout.title}}
+      </button>
+      <button (click)="copy(workout.gid)">
+      </button>
+    </div>
+  `
 })
 export class WorkoutsOverview implements OnInit {
   workouts: WorkoutSimple[] = [];
 
-  constructor(private workoutService: WorkoutService) {
+  constructor(private workoutService: WorkoutService,
+              private router: Router) {
   }
 
   ngOnInit() {
     this.workoutService.fetchAllWorkouts().subscribe(workouts => this.workouts = workouts);
+  }
+
+  copy(workoutId: WorkoutId) {
+    this.workoutService.copy(workoutId)
+      .subscribe(copiedWorkoutId =>
+        this.router.navigate(['create-workout', copiedWorkoutId.value]));
+
   }
 }

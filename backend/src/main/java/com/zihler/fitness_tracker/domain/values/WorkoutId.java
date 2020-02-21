@@ -13,10 +13,6 @@ public class WorkoutId {
         return new WorkoutId(gid);
     }
 
-    public String toLong() {
-        return gid;
-    }
-
     @Override
     public String toString() {
         return gid;
