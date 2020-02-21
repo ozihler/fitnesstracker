@@ -63,6 +63,7 @@ export class WorkoutService {
   }
 
   copy(workoutId: WorkoutId): Observable<WorkoutId> {
+    console.log(workoutId.value)
     return this.httpClient.post<WorkoutIdRaw>(`${this.baseUrl}/workouts/copy`, {workoutId: workoutId.value})
       .pipe(map(copiedWorkoutId => WorkoutId.from(copiedWorkoutId.workoutId)));
   }

@@ -74,7 +74,7 @@ public class WorkoutsResource {
     }
 
     @PostMapping(path = "/api/workouts/copy")
-    public ResponseEntity<WorkoutIdViewModel> copyWorkout(WorkoutIdViewModel request) {
+    public ResponseEntity<WorkoutIdViewModel> copyWorkout(@RequestBody WorkoutIdViewModel request) {
         ResponseEntity<WorkoutIdViewModel> idOfCopiedWorkout = copyWorkoutController.copyWorkout(request);
 
         logger.info("id of copied workout:{}", idOfCopiedWorkout);
