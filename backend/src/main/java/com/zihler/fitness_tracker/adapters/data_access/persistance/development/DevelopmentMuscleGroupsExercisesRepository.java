@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-import static com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.musclegroups.MuscleGroupAndExercisesFileSystemDirectory.makeDirectory;
+import static com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.musclegroups.MuscleGroupAndExercisesFileSystemDirectory.mkDir;
 import static java.util.stream.Collectors.toList;
 
 @Repository
@@ -38,7 +38,7 @@ public class DevelopmentMuscleGroupsExercisesRepository
     }
 
     private void initMuscleGroupsAndExercises() {
-        fileSystemDirectory = makeDirectory();
+        fileSystemDirectory = mkDir("muscleGroupsAndExercises");
         muscleGroupsAndExercises = new HashMap<>();
 
         MuscleGroups muscleGroups = fileSystemDirectory.fetch();

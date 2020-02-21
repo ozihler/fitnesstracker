@@ -1,6 +1,7 @@
 package com.zihler.fitness_tracker.domain.values;
 
 import java.time.*;
+import java.util.Objects;
 
 public class CreationDate {
     private static ZoneId zone = Clock.systemDefaultZone().getZone();
@@ -19,16 +20,29 @@ public class CreationDate {
         return from(LocalDate.from(Instant.ofEpochMilli(creationDateInMillis).atZone(zone)));
     }
 
-    public LocalDate getCreationDate() {
+    public LocalDate toLocalDate() {
         return creationDate;
     }
 
     public long toMillis() {
-        return getCreationDate().atStartOfDay(zone).toInstant().toEpochMilli();
+        return toLocalDate().atStartOfDay(zone).toInstant().toEpochMilli();
     }
 
     @Override
     public String toString() {
         return creationDate.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CreationDate that = (CreationDate) o;
+        return Objects.equals(creationDate, that.creationDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(creationDate);
     }
 }

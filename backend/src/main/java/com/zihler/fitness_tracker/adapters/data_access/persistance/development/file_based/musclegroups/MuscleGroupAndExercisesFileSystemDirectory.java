@@ -9,8 +9,8 @@ public class MuscleGroupAndExercisesFileSystemDirectory {
 
     private FileSystemDirectory<MuscleGroupFile> fileSystemDirectory;
 
-    public static MuscleGroupAndExercisesFileSystemDirectory makeDirectory() {
-        return new MuscleGroupAndExercisesFileSystemDirectory("muscleGroupsAndExercises");
+    public static MuscleGroupAndExercisesFileSystemDirectory mkDir(String muscleGroupsAndExercisesDirectory) {
+        return new MuscleGroupAndExercisesFileSystemDirectory(muscleGroupsAndExercisesDirectory);
     }
 
     private MuscleGroupAndExercisesFileSystemDirectory(String folderName) {
@@ -33,5 +33,9 @@ public class MuscleGroupAndExercisesFileSystemDirectory {
 
     private void writeToFileSystem(MuscleGroupFile output) {
         this.fileSystemDirectory.store(output);
+    }
+
+    public void remove() {
+        fileSystemDirectory.remove();
     }
 }

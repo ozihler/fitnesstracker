@@ -30,4 +30,13 @@ public class WorkoutInOverviewViewModel {
     public String getTitle() {
         return title;
     }
+
+    @Override
+    public String toString() {
+        return "WorkoutInOverviewViewModel{" +
+                "gid='" + gid + '\'' +
+                ", creationDate=" + creationDate +
+                ", title='" + title + '\'' +
+                '}';
+    }
 }

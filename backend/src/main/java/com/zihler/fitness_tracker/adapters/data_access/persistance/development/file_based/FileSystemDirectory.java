@@ -3,6 +3,7 @@ package com.zihler.fitness_tracker.adapters.data_access.persistance.development.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.exceptions.ConfiguringFileSystemFailed;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.exceptions.CouldNotDeleteFolderException;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.exceptions.LoadingDataFromFileSystemFailed;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.exceptions.StoringToFileSystemFailed;
 import org.apache.logging.log4j.LogManager;
@@ -92,4 +93,15 @@ public class FileSystemDirectory<T extends Namable> {
         return jsonFileWriter;
     }
 
+    public void remove() {
+        try {
+            Files.walk(pathToFolder.toAbsolutePath())
+                    .filter(Files::isRegularFile)
+                    .map(Path::toFile)
+                    .forEach(File::delete);
+            Files.deleteIfExists(pathToFolder);
+        } catch (IOException e) {
+            throw new CouldNotDeleteFolderException(e);
+        }
+    }
 }

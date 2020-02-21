@@ -22,7 +22,7 @@ public class WorkoutDocument {
 
     public static WorkoutDocument of(Workout workout) {
         return new WorkoutDocument(workout.getWorkoutId(),
-                CreationDate.from(workout.getCreationDateTime()),
+                workout.getCreationDate(),
                 workout.getWorkoutTitle(),
                 MuscleGroupsDocument.of(workout.getMuscleGroups()));
     }

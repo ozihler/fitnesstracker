@@ -1,6 +1,7 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.presenters.errors;
 
 import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.exceptions.ConfiguringFileSystemFailed;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.exceptions.CouldNotDeleteFolderException;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.exceptions.LoadingDataFromFileSystemFailed;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.exceptions.StoringToFileSystemFailed;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups.requests.EmptyMuscleGroupsRequest;
@@ -34,6 +35,12 @@ public class ErrorHandling {
 
     @ExceptionHandler(value = ConfiguringFileSystemFailed.class)
     public ResponseEntity<ErrorViewModel> handleConfiguringFileSystemFailed(Exception bad) {
+        logger.error(bad);
+        return status(INTERNAL_SERVER_ERROR).body(new ErrorViewModel(bad.getMessage()));
+    }
+
+    @ExceptionHandler(value = CouldNotDeleteFolderException.class)
+    public ResponseEntity<ErrorViewModel> handleCouldNotDeleteFolderException(Exception bad) {
         logger.error(bad);
         return status(INTERNAL_SERVER_ERROR).body(new ErrorViewModel(bad.getMessage()));
     }

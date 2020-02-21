@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class MuscleGroupAndExercisesFileSystemDirectoryDirectoryIOTest {
     @Test
     void testWriteReadMuscleGroupsToFileSystem() {
-        var fs = MuscleGroupAndExercisesFileSystemDirectory.makeDirectory();
+        var fs = MuscleGroupAndExercisesFileSystemDirectory.mkDir("test-muscleGroupsAndExercises");
 
         var toStore = muscleGroups(
                 MuscleGroup.withoutSets("Chest", "Bench Press", "Push Ups", "Incline Dumbbell Bench Press"),
@@ -47,6 +47,8 @@ public class MuscleGroupAndExercisesFileSystemDirectoryDirectoryIOTest {
                         "Arnold Press", "Side Lifts", "Wide Barbell Lift",
                         "Lat Pull", "Overhead Lat Pull", "Dips"
                 ));
+
+        fs.remove();
     }
 
 }

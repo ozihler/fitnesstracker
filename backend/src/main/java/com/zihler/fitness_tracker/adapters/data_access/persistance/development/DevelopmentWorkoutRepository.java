@@ -31,7 +31,7 @@ public class DevelopmentWorkoutRepository
 
     public DevelopmentWorkoutRepository() {
         workouts = new HashMap<>();
-        fileSystemDirectory = WorkoutFileSystemDirectory.makeDirectory();
+        fileSystemDirectory = WorkoutFileSystemDirectory.mkDir("workouts");
         fileSystemDirectory.fetch()
                 .getWorkouts()
                 .forEach(workout -> workouts.put(workout.getWorkoutId(), workout));

@@ -16,12 +16,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class WorkoutFileSystemDirectoryTest {
     @Test
     void test() {
-        WorkoutFileSystemDirectory directory = WorkoutFileSystemDirectory.makeDirectory();
+        WorkoutFileSystemDirectory directory = WorkoutFileSystemDirectory.mkDir("test-workouts");
 
         Workout workout = new Workout(
                 WorkoutId.of("x-1-2"),
-                LocalDate.now(),
-                WorkoutTitle.of("WORKOUT TITLE"),
+                CreationDate.from(LocalDate.now()), WorkoutTitle.of("WORKOUT TITLE"),
                 muscleGroups(
                         of("Chest",
                                 Exercise.of("Bench Press",
@@ -40,6 +39,7 @@ class WorkoutFileSystemDirectoryTest {
         assertEquals(1, workouts1.size());
         Workout workout1 = workouts1.get(0);
         assertEquals(workout.getWorkoutId(), workout1.getWorkoutId());
+        directory.remove();
     }
 
 }

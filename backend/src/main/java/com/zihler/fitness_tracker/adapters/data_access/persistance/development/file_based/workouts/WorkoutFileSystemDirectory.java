@@ -15,8 +15,8 @@ public class WorkoutFileSystemDirectory {
         this.fileSystemDirectory = FileSystemDirectory.mkDir(folderName, FullWorkoutViewModel.class);
     }
 
-    public static WorkoutFileSystemDirectory makeDirectory() {
-        return new WorkoutFileSystemDirectory("workouts");
+    public static WorkoutFileSystemDirectory mkDir(String workoutsFolderPath) {
+        return new WorkoutFileSystemDirectory(workoutsFolderPath);
     }
 
     public Workouts fetch() {
@@ -28,5 +28,9 @@ public class WorkoutFileSystemDirectory {
         FullWorkoutViewModel file = WorkoutFilesOutput.of(workout).file();
         this.fileSystemDirectory.store(file);
         return workout;
+    }
+
+    public void remove() {
+        this.fileSystemDirectory.remove();
     }
 }

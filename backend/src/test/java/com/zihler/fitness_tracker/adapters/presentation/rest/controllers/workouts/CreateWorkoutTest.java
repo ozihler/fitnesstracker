@@ -3,6 +3,7 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workou
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutToCreate;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutAndMuscleGroupNamesViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorkout;
+import com.zihler.fitness_tracker.domain.values.CreationDate;
 import com.zihler.fitness_tracker.domain.values.WorkoutId;
 import org.junit.jupiter.api.Test;
 
@@ -20,18 +21,16 @@ class CreateWorkoutTest {
         StoreWorkout storeWorkout = workout -> workout;
         var controller = new CreateWorkoutController(storeWorkout, () -> WorkoutId.of("12345"));
         WorkoutToCreate request = new WorkoutToCreate("Title");
-        LocalDate before = LocalDate.now();
+        CreationDate before = CreationDate.from(LocalDate.now());
 
         // when
         WorkoutAndMuscleGroupNamesViewModel result = controller.createWorkout(request).getBody();
 
-        LocalDate after = LocalDate.now();
 
         assertNotNull(result);
         assertThat(result.getTitle()).isEqualTo(request.getTitle());
         assertThat(result.getMuscleGroups().size()).isEqualTo(0);
-        assertTrue(result.getCreationDate() >= before.toInstant().toEpochMilli());
-        assertTrue(result.getCreationDate() < after.toInstant().toEpochMilli());
+        assertTrue(result.getCreationDate() >= before.toMillis());
         assertThat(result.getGid()).isEqualTo("12345");
     }
 

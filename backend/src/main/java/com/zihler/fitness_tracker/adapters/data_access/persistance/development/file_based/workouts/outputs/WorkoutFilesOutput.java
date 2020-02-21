@@ -29,7 +29,7 @@ public class WorkoutFilesOutput {
         return FullWorkoutViewModel.of(
                 this.toStore.getWorkoutId().toString(),
                 this.toStore.getWorkoutTitle().toString(),
-                this.toStore.getCreationDateTime().toInstant().toEpochMilli(),
+                toStore.getCreationDate().toMillis(),
                 toMuscleGroupFiles(this.toStore)
         );
     }

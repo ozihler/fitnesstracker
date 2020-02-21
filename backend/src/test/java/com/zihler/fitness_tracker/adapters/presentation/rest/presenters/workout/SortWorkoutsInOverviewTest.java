@@ -19,10 +19,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class SortWorkoutsInOverviewTest {
     @Test
     void sortsFromNewestToLowest() {
-        var w1 = new WorkoutDocument(WorkoutId.of("1"), CreationDate.from(LocalDate.from(Instant.ofEpochMilli(10).atZone(Clock.systemDefaultZone().getZone()))), WorkoutTitle.of("1"), null);
-        var w2 = new WorkoutDocument(WorkoutId.of("2"), CreationDate.from(LocalDate.from(Instant.ofEpochMilli(100000).atZone(Clock.systemDefaultZone().getZone()))), WorkoutTitle.of("2"), null);
-        var w3 = new WorkoutDocument(WorkoutId.of("3"), CreationDate.from(LocalDate.from(Instant.ofEpochMilli(1000000).atZone(Clock.systemDefaultZone().getZone()))), WorkoutTitle.of("3"), null);
-        var w4 = new WorkoutDocument(WorkoutId.of("4"), CreationDate.from(LocalDate.from(Instant.ofEpochMilli(100).atZone(Clock.systemDefaultZone().getZone()))), WorkoutTitle.of("4"), null);
+        var w1 = new WorkoutDocument(WorkoutId.of("1"), CreationDate.from(LocalDate.of(2014,1,1)), WorkoutTitle.of("1"), null);
+        var w2 = new WorkoutDocument(WorkoutId.of("2"), CreationDate.from(LocalDate.of(2018,1,1)), WorkoutTitle.of("2"), null);
+        var w3 = new WorkoutDocument(WorkoutId.of("3"), CreationDate.from(LocalDate.of(2020,1,1)), WorkoutTitle.of("3"), null);
+        var w4 = new WorkoutDocument(WorkoutId.of("4"), CreationDate.from(LocalDate.of(2016,1,1)), WorkoutTitle.of("4"), null);
 
         var output = new WorkoutsInOverviewOutput(new WorkoutsDocument(List.of(w2, w1, w4, w3)));
 

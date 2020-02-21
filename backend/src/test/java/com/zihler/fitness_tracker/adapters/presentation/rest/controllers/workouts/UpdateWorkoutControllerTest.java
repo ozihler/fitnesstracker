@@ -8,6 +8,7 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullSetV
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchWorkout;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorkout;
 import com.zihler.fitness_tracker.domain.entities.Workout;
+import com.zihler.fitness_tracker.domain.values.CreationDate;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,6 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -27,7 +27,8 @@ class UpdateWorkoutControllerTest {
     void updateWorkoutTest() {
         LocalDate workoutCreationTime = LocalDate.now();
 
-        FetchWorkout fetchWorkout = id -> new Workout(id, workoutCreationTime, WorkoutTitle.of("Title"), new MuscleGroups(new ArrayList<>()));
+        CreationDate creationDate = CreationDate.from(workoutCreationTime);
+        FetchWorkout fetchWorkout = id -> new Workout(id, creationDate, WorkoutTitle.of("Title"), new MuscleGroups(new ArrayList<>()));
         StoreWorkout storeWorkout = workout -> workout;
 
         var controller = new UpdateWorkoutController(fetchWorkout, storeWorkout);
@@ -35,9 +36,8 @@ class UpdateWorkoutControllerTest {
 
         String gid = "1234L";
         String newTitle = "New Title";
-        long creationDate = workoutCreationTime.toInstant().toEpochMilli();
 
-        var updatedWorkoutRequest = new FullWorkoutViewModel(gid, creationDate, newTitle, List.of(
+        var updatedWorkoutRequest = new FullWorkoutViewModel(gid, creationDate.toMillis(), newTitle, List.of(
                 new FullMuscleGroupViewModel("Chest", List.of(
                         new FullExerciseViewModel("Bench Press", List.of(
                                 FullSetViewModel.of(50, 12, 45),
@@ -69,7 +69,7 @@ class UpdateWorkoutControllerTest {
         assertNotNull(fullWorkoutViewModel);
         assertEquals(gid, fullWorkoutViewModel.getGid());
         assertEquals(newTitle, fullWorkoutViewModel.getTitle());
-        assertEquals(creationDate, fullWorkoutViewModel.getCreationDate());
+        assertEquals(creationDate.toMillis(), fullWorkoutViewModel.getCreationDate());
 
         // Muscle groups
         assertEquals(2, fullWorkoutViewModel.getMuscleGroups().size());

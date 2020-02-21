@@ -17,7 +17,8 @@ public class WorkoutsInOverviewOutput {
     }
 
     private static WorkoutInOverviewViewModel toViewModel(WorkoutDocument w) {
-        return new WorkoutInOverviewViewModel(w.getWorkoutId().toLong(),
+        return new WorkoutInOverviewViewModel(
+                w.getWorkoutId().toLong(),
                 w.getCreationDate().toMillis(),
                 w.getWorkoutTitle().toString());
     }
