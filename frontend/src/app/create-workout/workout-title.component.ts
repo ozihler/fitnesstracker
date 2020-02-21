@@ -7,13 +7,12 @@ import {DatePipe} from "@angular/common";
   selector: 'app-workout-title',
   template: `
     <div class="uk-grid uk-grid-collapse">
-      <div *ngIf="!editing">
-        <span>{{workoutTitle}}</span>
-        <button class="uk-button uk-button-small uk-button-default"
-                (click)="enableEditing()">
-          <fa name="edit"></fa>
-        </button>
-      </div>
+      <button class="uk-button uk-button-default uk-width-1-1"
+              *ngIf="!editing"
+              (click)="enableEditing()">
+         {{workoutTitle}}
+        <fa name="edit" class="uk-align-right"></fa>
+      </button>
       <div *ngIf="editing">
         <form [formGroup]="editForm" (ngSubmit)="saveEditing()">
           <input class="uk-input" type="date" [value]="formattedDate" formControlName="workoutCreationDate">
