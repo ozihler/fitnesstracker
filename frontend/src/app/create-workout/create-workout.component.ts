@@ -11,8 +11,8 @@ import {WorkoutTitleUpdate} from "./workout-title-update";
 @Component({
   selector: 'app-create-workout',
   template: `
-    <a routerLink="/workouts-overview">Back to Overview</a>
     <app-workout-title
+      [workoutId]="workoutTree?.root?.gid?.value"
       [workoutTitle]="workoutTree?.root?.title"
       [workoutCreationDate]="workoutTree?.root?.creationDate"
       (changeTitleEvent)="updateWorkoutTitle($event)">
@@ -33,6 +33,7 @@ import {WorkoutTitleUpdate} from "./workout-title-update";
       (deleteNodeEvent)="deleteSelectableElement($event)">
     </app-element-selection>
     <hr/>
+    <a routerLink="/workouts-overview">Back to Overview</a>
   `
 })
 export class CreateWorkoutComponent implements OnInit {

@@ -6,8 +6,8 @@ import {TreeNode} from "./tree/tree-node";
   selector: 'app-element-selection',
   template: `
     <div class="uk-text-center">
-      <span>{{title}}</span>
-      <hr *ngIf="!childrenAreLeafs"/>
+      <!-- <span>{{title}}</span>
+      <hr *ngIf="!childrenAreLeafs"/>-->
       <div *ngIf="!hasSelectableElements">
         <span>{{emptyElementsText}}</span>
       </div>

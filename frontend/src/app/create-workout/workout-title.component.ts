@@ -8,7 +8,7 @@ import {DatePipe} from "@angular/common";
   template: `
     <div class="uk-grid uk-grid-collapse">
       <div *ngIf="!editing">
-        <span>{{workoutCreationDate}} {{workoutTitle}}</span>
+        <span>{{workoutTitle}}</span>
         <button class="uk-button uk-button-small uk-button-default"
                 (click)="enableEditing()">
           <fa name="edit"></fa>
@@ -35,6 +35,7 @@ export class WorkoutTitleComponent implements OnInit {
 
   @Input() workoutCreationDate: Date = new Date();
   @Input() workoutTitle: string = '';
+  @Input() workoutId: string = '';
   @Output() changeTitleEvent = new EventEmitter<any>();
   editing: boolean = false;
   editForm: FormGroup;
