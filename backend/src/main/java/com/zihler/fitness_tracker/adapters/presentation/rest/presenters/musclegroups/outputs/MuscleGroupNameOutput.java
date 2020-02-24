@@ -2,7 +2,6 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.presenters.muscleg
 
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.MuscleGroupNameViewModel;
 import com.zihler.fitness_tracker.domain.values.Name;
-import org.springframework.http.ResponseEntity;
 
 public class MuscleGroupNameOutput {
     private Name name; // todo make MuscleGroupName
@@ -11,7 +10,7 @@ public class MuscleGroupNameOutput {
         this.name = name;
     }
 
-    public ResponseEntity<MuscleGroupNameViewModel> toViewModel() {
-        return ResponseEntity.ok(new MuscleGroupNameViewModel(name.toString()));
+    public MuscleGroupNameViewModel toViewModel() {
+        return new MuscleGroupNameViewModel(name.toString());
     }
 }

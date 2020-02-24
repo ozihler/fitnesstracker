@@ -16,17 +16,11 @@ public class WorkoutsInOverviewOutput {
         this.workouts = workouts;
     }
 
-    private static WorkoutInOverviewViewModel toViewModel(WorkoutDocument w) {
-        return new WorkoutInOverviewViewModel(
-                w.getWorkoutId().toString(),
-                w.getCreationDate().toMillis(),
-                w.getWorkoutTitle().toString());
-    }
-
     public WorkoutsInOverviewViewModel workouts() {
         List<WorkoutInOverviewViewModel> viewModels = workouts.getWorkouts()
                 .stream()
-                .map(WorkoutsInOverviewOutput::toViewModel)
+                .map(WorkoutInOverviewOutput::new)
+                .map(WorkoutInOverviewOutput::toViewModel)
                 .sorted((a, b) -> -Long.compare(a.getCreationDate(), b.getCreationDate()))
                 .collect(toList());
 

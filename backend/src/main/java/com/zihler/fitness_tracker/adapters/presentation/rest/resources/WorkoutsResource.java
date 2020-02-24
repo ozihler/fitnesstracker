@@ -4,6 +4,7 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workout
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.FullWorkoutViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutToCreate;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutToUpdate;
+import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout.viewmodels.WorkoutsInOverviewGroupedByMuscleGroupViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutAndMuscleGroupNamesViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutIdViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutsInOverviewViewModel;
@@ -20,6 +21,7 @@ public class WorkoutsResource {
     private CreateWorkoutController createWorkoutController;
     private UpdateWorkoutController updateWorkoutController;
     private ViewAllWorkoutsController viewAllWorkoutsController;
+    private ViewAllWorkoutsGroupedByMuscleGroupsController viewAllWorkoutsGroupedByMuscleGroupsController;
     private ViewSingleWorkoutController viewSingleWorkoutController;
     private CopyWorkoutController copyWorkoutController;
 
@@ -28,11 +30,13 @@ public class WorkoutsResource {
             CreateWorkoutController createWorkoutController,
             UpdateWorkoutController updateWorkoutController,
             ViewAllWorkoutsController viewAllWorkoutsController,
+            ViewAllWorkoutsGroupedByMuscleGroupsController viewAllWorkoutsGroupedByMuscleGroupsController,
             ViewSingleWorkoutController viewSingleWorkoutController,
             CopyWorkoutController copyWorkoutController) {
         this.createWorkoutController = createWorkoutController;
         this.updateWorkoutController = updateWorkoutController;
         this.viewAllWorkoutsController = viewAllWorkoutsController;
+        this.viewAllWorkoutsGroupedByMuscleGroupsController = viewAllWorkoutsGroupedByMuscleGroupsController;
         this.viewSingleWorkoutController = viewSingleWorkoutController;
         this.copyWorkoutController = copyWorkoutController;
     }
@@ -71,6 +75,15 @@ public class WorkoutsResource {
         logger.info("All workouts:{}", workouts);
 
         return workouts;
+    }
+
+    @GetMapping(path = "/api/workouts/overview/groupedByMuscleGroups")
+    public ResponseEntity<WorkoutsInOverviewGroupedByMuscleGroupViewModel> viewAllWorkoutsGroupedByMuscleGroups() {
+        ResponseEntity<WorkoutsInOverviewGroupedByMuscleGroupViewModel> workoutsGroupedByMuscleGroups = viewAllWorkoutsGroupedByMuscleGroupsController.viewAllWorkoutsGroupedByMuscleGroups();
+
+        logger.info("All workouts:{}", workoutsGroupedByMuscleGroups);
+
+        return workoutsGroupedByMuscleGroups;
     }
 
     @PostMapping(path = "/api/workouts/copy")
