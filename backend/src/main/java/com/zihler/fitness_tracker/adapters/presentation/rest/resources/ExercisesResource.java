@@ -42,11 +42,11 @@ public class ExercisesResource {
     public ResponseEntity<ExercisesViewModel> createExercisesForMuscleGroup(
             @PathVariable("muscleGroupName") String muscleGroupName,
             @RequestBody() ExerciseNames exercisesNames) {
-        ResponseEntity<ExercisesViewModel> exercises = createExercises.forMuscleGroup(muscleGroupName, exercisesNames);
+        ResponseEntity<ExercisesViewModel> createdExercises = createExercises.forMuscleGroup(muscleGroupName, exercisesNames);
 
-        logger.info("create exercises for muscle group {}, names {}, response {}", muscleGroupName, exercisesNames, exercises.getBody());
+        logger.info("create exercises for muscle group {}, names {}, response {}", muscleGroupName, exercisesNames, createdExercises.getBody());
 
-        return exercises;
+        return createdExercises;
     }
 
     @DeleteMapping(path = "/api/exercises/{exerciseName}")
