@@ -51,11 +51,11 @@ public class ExercisesResource {
 
     @DeleteMapping(path = "/api/exercises/{exerciseName}")
     public ResponseEntity<ExerciseNameViewModel> makeExerciseUnselectable(@PathVariable("exerciseName") String exerciseName) {
-        ResponseEntity<ExerciseNameViewModel> deletedExercise = makeExerciseUnselectableController.makeUnselectable(exerciseName);
+        ResponseEntity<ExerciseNameViewModel> unselectableExercises = makeExerciseUnselectableController.makeUnselectable(exerciseName);
 
-        logger.info("create muscle groups {}", deletedExercise.getBody());
+        logger.info("create muscle groups {}", unselectableExercises.getBody());
 
-        return deletedExercise;
+        return unselectableExercises;
     }
 
 }
