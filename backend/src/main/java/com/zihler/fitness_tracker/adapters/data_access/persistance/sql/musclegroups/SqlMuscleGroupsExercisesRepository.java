@@ -1,8 +1,13 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups;
 
+import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.entities.ExerciseRow;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.entities.MuscleGroupRow;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.inputs.ExerciseFromDbInput;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.inputs.ExercisesFromDBInput;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.inputs.MuscleGroupFromDBInput;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.inputs.MuscleGroupsFromDBInput;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.outputs.ExerciseToDBOutput;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.outputs.ExercisesToDBOutput;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.outputs.MuscleGroupToDBOutput;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.outputs.MuscleGroupsToDBOutput;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.*;
@@ -37,32 +42,68 @@ public class SqlMuscleGroupsExercisesRepository implements
 
     @Override
     public MuscleGroups fetchAll() {
-        return new MuscleGroupsFromDBInput(muscleGroups.findAll()).muscleGroups();
+        var rows = muscleGroups.findAll();
+
+        var input = new MuscleGroupsFromDBInput(rows);
+
+        return input.muscleGroups();
     }
 
     @Override
     public Exercise byName(ExerciseName exerciseName) {
-        return null;
+        var row = this.exercises.findByNameOrThrow(exerciseName.toString());
+
+        var input = new ExerciseFromDbInput(row);
+
+        return input.exercise();
     }
 
     @Override
     public Exercises forMuscleGroup(MuscleGroupName muscleGroupName) {
-        return null;
+        var rows = exercises.findByMuscleGroup(muscleGroupName.toString());
+
+        var input = new ExercisesFromDBInput(rows);
+
+        return input.exercises();
     }
 
     @Override
     public MuscleGroup by(Name name) {
-        return null;
+        var row = muscleGroups.findByName(name.toString());
+
+        var input = new MuscleGroupFromDBInput(row);
+
+        return input.muscleGroup();
     }
 
     @Override
     public Exercise withValues(Exercise exercise) {
-        return null;
+        var originalRow = this.exercises.findByNameOrThrow(exercise.getName().toString());
+
+        var output = new ExerciseToDBOutput(exercise, originalRow.getMuscleGroup());
+
+        var rowToSave = output.exerciseRow();
+
+        var savedRow = exercises.save(rowToSave);
+
+        var input = new ExerciseFromDbInput(savedRow);
+
+        return input.exercise();
     }
 
     @Override
     public Exercises forMuscleGroup(Name muscleGroupName, Exercises exercises) {
-        return null;
+        MuscleGroupRow muscleGroupRow = this.muscleGroups.findByName(muscleGroupName.toString());
+
+        List<Exercise> exercisesToStore = exercises.getExercises();
+
+        var output = new ExercisesToDBOutput(exercisesToStore, muscleGroupRow);
+
+        List<ExerciseRow> storedExercises = this.exercises.saveAll(output.exercises());
+
+        ExercisesFromDBInput input = new ExercisesFromDBInput(storedExercises);
+
+        return input.exercises();
     }
 
     @Override

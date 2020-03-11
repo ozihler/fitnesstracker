@@ -4,6 +4,7 @@ import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.ex
 import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.exceptions.CouldNotDeleteFolderException;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.exceptions.LoadingDataFromFileSystemFailed;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.exceptions.StoringToFileSystemFailed;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.exceptions.ExerciseNotFoundInJpaRepositoryException;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups.requests.EmptyMuscleGroupsRequest;
 import com.zihler.fitness_tracker.application.use_cases.workouts.copy_workout.roles.exceptions.WorkoutNotCopiedYetException;
 import com.zihler.fitness_tracker.domain.exceptions.InvalidTitleException;
@@ -68,5 +69,10 @@ public class ErrorHandling {
     public ResponseEntity<ErrorViewModel> handleEmptyMuscleGroupsRequest(Exception bad) {
         logger.error(bad);
         return status(BAD_REQUEST).body(new ErrorViewModel(bad.getMessage()));
+    }
+    @ExceptionHandler(value = ExerciseNotFoundInJpaRepositoryException.class)
+    public ResponseEntity<ErrorViewModel> handleExerciseNotFoundInJpaRepositoryException(Exception bad) {
+        logger.error(bad);
+        return status(NOT_FOUND).body(new ErrorViewModel(bad.getMessage()));
     }
 }
