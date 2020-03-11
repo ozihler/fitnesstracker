@@ -1,4 +1,4 @@
-package com.zihler.fitness_tracker.adapters.infrastructure.errors;
+package com.zihler.fitness_tracker.adapters.infrastructure;
 
 public class ErrorViewModel {
     private String message;

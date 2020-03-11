@@ -1,4 +1,4 @@
-package com.zihler.fitness_tracker.adapters.infrastructure.configs;
+package com.zihler.fitness_tracker.adapters.infrastructure;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;

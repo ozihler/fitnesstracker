@@ -1,4 +1,4 @@
-package com.zihler.fitness_tracker.adapters.infrastructure.errors;
+package com.zihler.fitness_tracker.adapters.infrastructure;
 
 import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.exceptions.ConfiguringFileSystemFailed;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.exceptions.CouldNotDeleteFolderException;
