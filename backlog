@@ -11,3 +11,4 @@
 - Provide Set values of last time exercise was used as input default values
 - Implement Authentication with Auth0
 - FIX BUG: Distinct Muscle Groups and Exercises!!
+- TRANSACTIONAL
