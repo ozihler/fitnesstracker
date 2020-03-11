@@ -24,8 +24,9 @@ public class CopyWorkoutUseCase implements CopyWorkout {
     public void withId(WorkoutId workoutId, CopiedWorkoutPresenter output) {
         Workout targetToCopy = fetchWorkout.by(workoutId);
 
-        WorkoutToCopy workoutToCopy = new WorkoutToCopy(targetToCopy, storeWorkout, generateWorkoutId, output);
+        var workoutToCopy = new WorkoutToCopy(targetToCopy, storeWorkout, generateWorkoutId, output);
 
-        workoutToCopy.copy().presentCopiedWorkoutId();
+        workoutToCopy.makeCopy()
+                .presentCopiedWorkoutId();
     }
 }

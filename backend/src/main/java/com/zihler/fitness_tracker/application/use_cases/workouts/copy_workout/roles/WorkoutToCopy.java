@@ -22,7 +22,7 @@ public class WorkoutToCopy {
         this.output = output;
     }
 
-    public WorkoutToCopy copy() {
+    public WorkoutToCopy makeCopy() {
         Workout copyOfWorkout = Workout.from(newWorkoutId(), copyOfWorkoutTitle(), copyOfMuscleGroups());
         Workout storedCopyOfWorkout = storeWorkout.withValues(copyOfWorkout);
         idOfCopiedWorkout = storedCopyOfWorkout.getWorkoutId();
