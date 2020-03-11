@@ -1,10 +1,9 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.Namable;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.Namable;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.List;
 
 public class FullWorkoutViewModel implements Namable {

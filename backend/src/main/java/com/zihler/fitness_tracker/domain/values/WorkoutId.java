@@ -3,10 +3,10 @@ package com.zihler.fitness_tracker.domain.values;
 import java.util.Objects;
 
 public class WorkoutId {
-    private String gid;
+    private String id;
 
-    public WorkoutId(String gid) {
-        this.gid = gid;
+    public WorkoutId(String id) {
+        this.id = id;
     }
 
     public static WorkoutId of(String gid) {
@@ -15,7 +15,7 @@ public class WorkoutId {
 
     @Override
     public String toString() {
-        return gid;
+        return id;
     }
 
     @Override
@@ -27,11 +27,11 @@ public class WorkoutId {
             return false;
         }
         WorkoutId workoutId = (WorkoutId) o;
-        return Objects.equals(gid, workoutId.gid);
+        return Objects.equals(id, workoutId.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(gid);
+        return Objects.hash(id);
     }
 }
