@@ -1,6 +1,6 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups;
 
-import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.exceptions.ExerciseNotFoundInJpaRepositoryException;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.exceptions.ExerciseNotFoundException;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.entities.ExerciseRow;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -16,14 +16,15 @@ public interface JpaExercisesRepository extends JpaRepository<ExerciseRow, Strin
     default ExerciseRow findByNameOrThrow(String name) {
         ExerciseRow row = findByName(name);
         if (row == null) {
-            throw new ExerciseNotFoundInJpaRepositoryException("Could not find exercise with name " + name);
+            throw new ExerciseNotFoundException("Could not find exercise with name " + name);
         }
         return row;
     }
 
     default List<ExerciseRow> findByMuscleGroup(String muscleGroupName) {
-       return findAll().stream()
+        return findAll().stream()
                 .filter(e -> e.getMuscleGroup().getName().equalsIgnoreCase(muscleGroupName))
+                .filter(ExerciseRow::isSelectable)
                 .collect(toList());
     }
 }

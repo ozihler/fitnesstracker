@@ -19,7 +19,6 @@ public class MuscleGroupsFromDBInput {
     public MuscleGroups muscleGroups() {
         return MuscleGroups.of(muscleGroupRows
                 .stream()
-                .filter(MuscleGroupRow::isSelectable)
                 .map(MuscleGroupFromDBInput::new)
                 .map(MuscleGroupFromDBInput::muscleGroup)
                 .filter(MuscleGroup::isSelectable)

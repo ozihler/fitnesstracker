@@ -69,7 +69,7 @@ public class SqlMuscleGroupsExercisesRepository implements
 
     @Override
     public MuscleGroup by(Name name) {
-        var row = muscleGroups.findByName(name.toString());
+        var row = muscleGroups.findByNameOnlySelectableOrThrow(name.toString());
 
         var input = new MuscleGroupFromDBInput(row);
 
@@ -93,7 +93,7 @@ public class SqlMuscleGroupsExercisesRepository implements
 
     @Override
     public Exercises forMuscleGroup(Name muscleGroupName, Exercises exercises) {
-        MuscleGroupRow muscleGroupRow = this.muscleGroups.findByName(muscleGroupName.toString());
+        MuscleGroupRow muscleGroupRow = this.muscleGroups.findByNameOnlySelectableOrThrow(muscleGroupName.toString());
 
         List<Exercise> exercisesToStore = exercises.getExercises();
 
