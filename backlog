@@ -8,3 +8,5 @@
 - select set to copy values
 - assure no duplicate exercises/muscle groups
 - Group Exercises By Muscle Group
+- Provide Set values of last time exercise was used as input default values
+- Implement Authentication with Auth0

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ChangeValue} from "./form/change-value";
-import {SetFormValues} from "./form/set-form-values";
+import {ChangeValue} from "./change-value";
+import {SetFormValues} from "./set-form-values";
 
 @Component({
   selector: 'app-set-values',
