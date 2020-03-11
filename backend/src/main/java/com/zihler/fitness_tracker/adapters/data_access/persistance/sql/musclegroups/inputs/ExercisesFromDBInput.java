@@ -3,7 +3,6 @@ package com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegr
 import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.entities.ExerciseRow;
 import com.zihler.fitness_tracker.domain.values.Exercise;
 import com.zihler.fitness_tracker.domain.values.Exercises;
-import com.zihler.fitness_tracker.domain.values.MuscleGroup;
 
 import java.util.List;
 
@@ -19,8 +18,8 @@ public class ExercisesFromDBInput {
     public Exercises exercises() {
 
         List<Exercise> exercises = this.exercises.stream()
-                .map(ExerciseFromDbInput::new)
-                .map(ExerciseFromDbInput::exercise)
+                .map(ExerciseFromDBInput::new)
+                .map(ExerciseFromDBInput::exercise)
                 .collect(toList());
 
         return Exercises.of(exercises);

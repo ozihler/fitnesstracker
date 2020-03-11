@@ -3,10 +3,10 @@ package com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegr
 import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.entities.ExerciseRow;
 import com.zihler.fitness_tracker.domain.values.Exercise;
 
-public class ExerciseFromDbInput {
+public class ExerciseFromDBInput {
     private ExerciseRow exerciseRow;
 
-    public ExerciseFromDbInput(ExerciseRow exerciseRow) {
+    public ExerciseFromDBInput(ExerciseRow exerciseRow) {
         this.exerciseRow = exerciseRow;
     }
 

@@ -2,7 +2,7 @@ package com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegr
 
 import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.entities.ExerciseRow;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.entities.MuscleGroupRow;
-import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.inputs.ExerciseFromDbInput;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.inputs.ExerciseFromDBInput;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.inputs.ExercisesFromDBInput;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.inputs.MuscleGroupFromDBInput;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.inputs.MuscleGroupsFromDBInput;
@@ -53,7 +53,7 @@ public class SqlMuscleGroupsExercisesRepository implements
     public Exercise byName(ExerciseName exerciseName) {
         var row = this.exercises.findByNameOrThrow(exerciseName.toString());
 
-        var input = new ExerciseFromDbInput(row);
+        var input = new ExerciseFromDBInput(row);
 
         return input.exercise();
     }
@@ -86,7 +86,7 @@ public class SqlMuscleGroupsExercisesRepository implements
 
         var savedRow = exercises.save(rowToSave);
 
-        var input = new ExerciseFromDbInput(savedRow);
+        var input = new ExerciseFromDBInput(savedRow);
 
         return input.exercise();
     }
