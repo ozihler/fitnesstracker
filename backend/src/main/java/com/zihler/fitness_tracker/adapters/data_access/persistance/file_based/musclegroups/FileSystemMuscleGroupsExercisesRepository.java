@@ -1,6 +1,5 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.musclegroups;
 
-import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.musclegroups.MuscleGroupAndExercisesFileSystemDirectory;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.*;
 import com.zihler.fitness_tracker.domain.values.*;
 import org.apache.logging.log4j.LogManager;
