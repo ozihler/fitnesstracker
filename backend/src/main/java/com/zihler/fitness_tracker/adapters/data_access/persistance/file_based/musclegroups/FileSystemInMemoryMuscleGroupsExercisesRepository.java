@@ -15,7 +15,7 @@ import static java.util.stream.Collectors.toList;
 
 @Repository
 @Profile("dev")
-public class FileSystemMuscleGroupsExercisesRepository
+public class FileSystemInMemoryMuscleGroupsExercisesRepository
         implements
         FetchAllMuscleGroups,
         FetchMuscleGroup,
@@ -32,7 +32,7 @@ public class FileSystemMuscleGroupsExercisesRepository
     private Map<Name, MuscleGroup> muscleGroupsAndExercises;
 
     @Autowired
-    public FileSystemMuscleGroupsExercisesRepository() {
+    public FileSystemInMemoryMuscleGroupsExercisesRepository() {
         initMuscleGroupsAndExercises();
     }
 

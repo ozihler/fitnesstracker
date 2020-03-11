@@ -15,7 +15,7 @@ import java.util.Map;
 
 @Repository
 @Profile("prod")
-public class FileSystemWorkoutRepository
+public class FileSystemInMemoryWorkoutRepository
         implements
         GenerateWorkoutId,
         FetchWorkout,
@@ -29,7 +29,7 @@ public class FileSystemWorkoutRepository
     private Map<WorkoutId, Workout> workouts;
     private WorkoutFileSystemDirectory fileSystemDirectory;
 
-    public FileSystemWorkoutRepository() {
+    public FileSystemInMemoryWorkoutRepository() {
         workouts = new HashMap<>();
         fileSystemDirectory = WorkoutFileSystemDirectory.mkDir("workouts");
         fileSystemDirectory.fetch()

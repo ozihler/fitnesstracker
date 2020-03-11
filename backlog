@@ -13,4 +13,4 @@
 - FIX BUG: Distinct Muscle Groups and Exercises!!
 - TRANSACTIONAL
 - Add SQL repo for exercises
-- improve make unselectable (musclegroup, exercise)
+- improve make unselectable (musclegroup, exercise): goal: only the database knows what unselectable means (remove isSelectable from Exercise/MuscleGroup entities)
