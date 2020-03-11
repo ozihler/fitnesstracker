@@ -1,10 +1,11 @@
-package com.zihler.fitness_tracker.adapters.presentation.rest.presenters.errors;
+package com.zihler.fitness_tracker.adapters.infrastructure.errors;
 
 import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.exceptions.ConfiguringFileSystemFailed;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.exceptions.CouldNotDeleteFolderException;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.exceptions.LoadingDataFromFileSystemFailed;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.development.file_based.exceptions.StoringToFileSystemFailed;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups.requests.EmptyMuscleGroupsRequest;
+import com.zihler.fitness_tracker.application.use_cases.workouts.copy_workout.roles.exceptions.WorkoutNotCopiedYetException;
 import com.zihler.fitness_tracker.domain.exceptions.InvalidTitleException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -53,6 +54,12 @@ public class ErrorHandling {
 
     @ExceptionHandler(value = StoringToFileSystemFailed.class)
     public ResponseEntity<ErrorViewModel> handleStoringMuscleGroupsAndExercisesToFileSystemFailed(Exception bad) {
+        logger.error(bad);
+        return status(INTERNAL_SERVER_ERROR).body(new ErrorViewModel(bad.getMessage()));
+    }
+
+    @ExceptionHandler(value = WorkoutNotCopiedYetException.class)
+    public ResponseEntity<ErrorViewModel> handleWorkoutNotCopiedYetException(Exception bad) {
         logger.error(bad);
         return status(INTERNAL_SERVER_ERROR).body(new ErrorViewModel(bad.getMessage()));
     }

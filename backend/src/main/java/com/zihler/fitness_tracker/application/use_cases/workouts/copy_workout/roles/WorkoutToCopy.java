@@ -3,6 +3,7 @@ package com.zihler.fitness_tracker.application.use_cases.workouts.copy_workout.r
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.GenerateWorkoutId;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorkout;
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.CopiedWorkoutPresenter;
+import com.zihler.fitness_tracker.application.use_cases.workouts.copy_workout.roles.exceptions.WorkoutNotCopiedYetException;
 import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 import com.zihler.fitness_tracker.domain.values.WorkoutId;
@@ -43,7 +44,7 @@ public class WorkoutToCopy {
 
     public void presentCopiedWorkoutId() {
         if (idOfCopiedWorkout == null) {
-            return;
+            throw new WorkoutNotCopiedYetException("You forgot to copy the workout first");
         }
 
         output.present(idOfCopiedWorkout);
