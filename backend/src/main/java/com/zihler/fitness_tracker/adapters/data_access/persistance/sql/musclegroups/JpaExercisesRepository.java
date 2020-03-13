@@ -13,7 +13,7 @@ public interface JpaExercisesRepository extends JpaRepository<ExerciseRow, Strin
 
     default ExerciseRow findByNameOrThrow(String name) {
         ExerciseRow row = findByName(name);
-        if (row == null) {
+        if (row == null || !row.isSelectable()) {
             throw new ExerciseNotFoundException("Could not find exercise with name " + name);
         }
         return row;
@@ -21,8 +21,8 @@ public interface JpaExercisesRepository extends JpaRepository<ExerciseRow, Strin
 
     default List<ExerciseRow> findByMuscleGroup(String muscleGroupName) {
         return findAll().stream()
-                .filter(e -> e.getMuscleGroup().getName().equalsIgnoreCase(muscleGroupName))
                 .filter(ExerciseRow::isSelectable)
+                .filter(e -> e.getMuscleGroup().getName().equalsIgnoreCase(muscleGroupName))
                 .collect(toList());
     }
 }

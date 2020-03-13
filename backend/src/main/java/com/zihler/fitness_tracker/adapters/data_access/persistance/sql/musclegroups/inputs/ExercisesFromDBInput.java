@@ -18,6 +18,7 @@ public class ExercisesFromDBInput {
     public Exercises exercises() {
 
         List<Exercise> exercises = this.exercises.stream()
+                .filter(ExerciseRow::isSelectable)
                 .map(ExerciseFromDBInput::new)
                 .map(ExerciseFromDBInput::exercise)
                 .collect(toList());

@@ -4,6 +4,10 @@ import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.exception
 import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.rowtypes.MuscleGroupRow;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
+
 public interface JpaMuscleGroupsRepository extends JpaRepository<MuscleGroupRow, String> {
     MuscleGroupRow findByName(String name);
 
@@ -15,4 +19,9 @@ public interface JpaMuscleGroupsRepository extends JpaRepository<MuscleGroupRow,
         return muscleGroupRow;
     }
 
+    default List<MuscleGroupRow> findAllSelectable(){
+        return findAll().stream()
+                .filter(MuscleGroupRow::isSelectable)
+                .collect(toList());
+    }
 }

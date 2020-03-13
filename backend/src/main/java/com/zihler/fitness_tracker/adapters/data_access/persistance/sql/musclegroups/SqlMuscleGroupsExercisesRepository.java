@@ -42,7 +42,7 @@ public class SqlMuscleGroupsExercisesRepository implements
 
     @Override
     public MuscleGroups fetchAll() {
-        var rows = muscleGroups.findAll();
+        var rows = muscleGroups.findAllSelectable();
 
         var input = new MuscleGroupsFromDBInput(rows);
 
