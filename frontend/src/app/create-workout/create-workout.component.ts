@@ -128,7 +128,16 @@ export class CreateWorkoutComponent implements OnInit {
 
   private updateSelectableNodes(nodes: TreeNode[]) {
     this.updateParents(nodes, this.workoutTree.currentSelection);
-    nodes.forEach(node => this.selectableChildrenOfSelectedNode.push(node));
+
+    nodes.forEach(node => {
+      if (!this.contains(node)) {
+        this.selectableChildrenOfSelectedNode.push(node)
+      }
+    });
+  }
+
+  private contains(node: TreeNode) {
+    return this.selectableChildrenOfSelectedNode.map(s => s.name).indexOf(node.name) >= 0;
   }
 
   private updateSelectableElements(nodes: TreeNode[], selectedChildren: string[]) {

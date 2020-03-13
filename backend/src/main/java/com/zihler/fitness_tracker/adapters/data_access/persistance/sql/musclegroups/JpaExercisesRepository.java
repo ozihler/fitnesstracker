@@ -9,7 +9,6 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-@Repository
 public interface JpaExercisesRepository extends JpaRepository<ExerciseRow, String> {
     ExerciseRow findByName(String name);
 
