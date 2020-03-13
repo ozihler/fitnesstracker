@@ -39,6 +39,7 @@ public class CreateMuscleGroupsUseCase implements CreateMuscleGroups {
                 .stream()
                 .map(MuscleGroupDocument::getName)
                 .map(MuscleGroup::new)
+                .distinct()
                 .collect(toList());
     }
 }

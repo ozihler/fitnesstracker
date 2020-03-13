@@ -1,4 +1,4 @@
-package com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.entities;
+package com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.rowtypes;
 
 import javax.persistence.*;
 
@@ -10,7 +10,7 @@ public class ExerciseRow {
     private boolean isSelectable;
 
     @ManyToOne()
-    @JoinColumn(name="exercise", nullable = false)
+    @JoinColumn(name="exercises", nullable = false)
     private MuscleGroupRow muscleGroup;
 
     public ExerciseRow() {

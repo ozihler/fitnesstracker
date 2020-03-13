@@ -1,9 +1,8 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups;
 
 import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.exceptions.ExerciseNotFoundException;
-import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.entities.ExerciseRow;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.rowtypes.ExerciseRow;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 

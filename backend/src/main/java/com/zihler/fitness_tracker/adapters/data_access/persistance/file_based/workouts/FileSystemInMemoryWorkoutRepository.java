@@ -1,6 +1,5 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.workouts;
 
-import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.workouts.WorkoutFileSystemDirectory;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.*;
 import com.zihler.fitness_tracker.domain.entities.Set;
 import com.zihler.fitness_tracker.domain.entities.Workout;
@@ -58,14 +57,10 @@ public class FileSystemInMemoryWorkoutRepository
     public WorkoutId next() {
         WorkoutId nextWorkoutId;
         do {
-            nextWorkoutId = of();
+            nextWorkoutId = WorkoutId.of(String.format("%d-%d", userId, currentId++));
         } while (workouts.containsKey(nextWorkoutId));
 
         return nextWorkoutId;
-    }
-
-    private WorkoutId of() {
-        return WorkoutId.of(String.format("WORKOUT-%d-%d", userId, currentId++));
     }
 
     @Override

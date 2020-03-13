@@ -5,12 +5,12 @@ import java.util.Objects;
 public class WorkoutId {
     private String id;
 
-    public WorkoutId(String id) {
+    private WorkoutId(String id) {
         this.id = id;
     }
 
-    public static WorkoutId of(String gid) {
-        return new WorkoutId(gid);
+    public static WorkoutId of(String identifier) {
+        return new WorkoutId(String.format("WORKOUT-%s", identifier));
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups;
 
-import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.entities.ExerciseRow;
-import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.entities.MuscleGroupRow;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.rowtypes.ExerciseRow;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.rowtypes.MuscleGroupRow;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.inputs.ExerciseFromDBInput;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.inputs.ExercisesFromDBInput;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.inputs.MuscleGroupFromDBInput;

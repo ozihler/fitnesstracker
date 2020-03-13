@@ -1,9 +1,8 @@
-package com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.entities;
+package com.zihler.fitness_tracker.adapters.data_access.persistance.sql.musclegroups.rowtypes;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.workouts.rowtypes.WorkoutRow;
+
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -12,6 +11,10 @@ public class MuscleGroupRow {
     @Id
     private String name;
     private boolean isSelectable;
+
+    @ManyToMany(mappedBy = "muscleGroups")
+    private List<WorkoutRow> workouts;
+
     @OneToMany(mappedBy="muscleGroup")
     private List<ExerciseRow> exercises;
 
