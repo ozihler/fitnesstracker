@@ -5,7 +5,7 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets.re
 import com.zihler.fitness_tracker.application.outbound_ports.documents.SetDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WaitingTime;
 import com.zihler.fitness_tracker.domain.values.*;
-import org.apache.logging.log4j.util.Strings;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class AddSetToExerciseInput {
         List<String> setDetails = splitSetDetailsIntoParts();
 
         if (!hasAllRequiredParts(setDetails)) {
-            throw new IllegalSetDetailsException("Sets need to have at least weight and repetitions set! Received: " + Strings.join(setDetails, ','));
+            throw new IllegalSetDetailsException("Sets need to have at least weight and repetitions set! Received: " + String.join(",", setDetails));
         }
 
         return createSetFrom(setDetails);
@@ -52,7 +52,7 @@ public class AddSetToExerciseInput {
     }
 
     private boolean hasSetDetails() {
-        return Strings.isNotBlank(setDetails.getSetDetails());
+        return StringUtils.isNotBlank(setDetails.getSetDetails());
     }
 
     private Weight weightFrom(String part) {

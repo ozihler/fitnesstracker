@@ -2,9 +2,10 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workou
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullSetViewModel;
-import org.apache.logging.log4j.util.Strings;
 
 import java.util.List;
+
+import static java.util.stream.Collectors.joining;
 
 public class FullExerciseViewModel {
     @JsonProperty("name")
@@ -32,7 +33,7 @@ public class FullExerciseViewModel {
     public String toString() {
         return "FullExerciseViewModel{" +
                 "name='" + name + '\'' +
-                ", sets=" + Strings.join(sets, ',') +
+                ", sets=" + sets.stream().map(FullSetViewModel::toString).collect(joining(",")) +
                 '}';
     }
 }

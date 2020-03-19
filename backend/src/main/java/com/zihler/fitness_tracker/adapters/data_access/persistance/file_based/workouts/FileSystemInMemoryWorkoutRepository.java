@@ -72,7 +72,8 @@ public class FileSystemInMemoryWorkoutRepository
                 .map(Exercises::getExercises)
                 .flatMap(Collection::stream)
                 .filter(e -> e.getName().equals(exerciseName))
-                .findFirst().get()
+                .findFirst()
+                .get()
                 .getSets()
                 .add(setToStore);
         fileSystemDirectory.save(workout);

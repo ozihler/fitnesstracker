@@ -1,7 +1,7 @@
 package com.zihler.fitness_tracker.domain.values;
 
 import com.zihler.fitness_tracker.domain.exceptions.InvalidTitleException;
-import org.apache.logging.log4j.util.Strings;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Objects;
 
@@ -9,7 +9,7 @@ public class WorkoutTitle {
     private String title;
 
     private WorkoutTitle(String title) {
-        if (Strings.isBlank(title)) {
+        if (StringUtils.isBlank(title)) {
             throw new InvalidTitleException("Title cannot be blank");
         }
         this.title = title;

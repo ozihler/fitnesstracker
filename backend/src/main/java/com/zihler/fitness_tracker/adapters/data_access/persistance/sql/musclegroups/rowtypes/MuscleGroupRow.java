@@ -6,16 +6,17 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="muscle_group")
+@Table(name = "muscle_group")
 public class MuscleGroupRow {
     @Id
     private String name;
+    @Column(name = "is_selectable")
     private boolean isSelectable;
 
     @ManyToMany(mappedBy = "muscleGroups")
     private List<WorkoutRow> workouts;
 
-    @OneToMany(mappedBy="muscleGroup")
+    @OneToMany(mappedBy = "muscleGroup")
     private List<ExerciseRow> exercises;
 
 

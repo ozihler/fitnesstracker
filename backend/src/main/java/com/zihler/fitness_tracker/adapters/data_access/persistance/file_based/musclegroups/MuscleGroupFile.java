@@ -4,8 +4,6 @@ import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.Na
 
 import java.util.List;
 
-import static org.apache.logging.log4j.util.Strings.join;
-
 public class MuscleGroupFile implements Namable {
     private String name;
     private List<String> exercises;
@@ -43,7 +41,7 @@ public class MuscleGroupFile implements Namable {
     public String toString() {
         return "MuscleGroupFile{" +
                 "name='" + name + '\'' +
-                ", exercises=" + join(exercises, ',') +
+                ", exercises=" + String.join(",", exercises) +
                 '}';
     }
 }

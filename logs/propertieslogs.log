@@ -1,0 +1,15 @@
+[DEBUG] 2020-03-18 15:05:32.715 [main] idontunderstand - HELLO WORLD!
+[DEBUG] 2020-03-18 15:05:32.715 [main] idontunderstand - HELLO WORLD!
+[DEBUG] 2020-03-18 15:05:33.291 [background-preinit] ResourceBundleMessageInterpolator - Loaded expression factory via original TCCL
+[DEBUG] 2020-03-18 15:05:33.299 [background-preinit] ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator as ValidatorFactory-scoped message interpolator.
+[DEBUG] 2020-03-18 15:05:33.299 [background-preinit] ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.engine.resolver.JPATraversableResolver as ValidatorFactory-scoped traversable resolver.
+[DEBUG] 2020-03-18 15:05:33.299 [background-preinit] ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.util.ExecutableParameterNameProvider as ValidatorFactory-scoped parameter name provider.
+[DEBUG] 2020-03-18 15:05:33.300 [background-preinit] ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.engine.DefaultClockProvider as ValidatorFactory-scoped clock provider.
+[DEBUG] 2020-03-18 15:05:33.300 [background-preinit] ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.engine.scripting.DefaultScriptEvaluatorFactory as ValidatorFactory-scoped script evaluator factory.
+[DEBUG] 2020-03-18 15:05:43.497 [main] Application - HELLO WORLD!
+[DEBUG] 2020-03-18 15:05:44.032 [background-preinit] ResourceBundleMessageInterpolator - Loaded expression factory via original TCCL
+[DEBUG] 2020-03-18 15:05:44.040 [background-preinit] ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator as ValidatorFactory-scoped message interpolator.
+[DEBUG] 2020-03-18 15:05:44.040 [background-preinit] ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.engine.resolver.JPATraversableResolver as ValidatorFactory-scoped traversable resolver.
+[DEBUG] 2020-03-18 15:05:44.040 [background-preinit] ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.util.ExecutableParameterNameProvider as ValidatorFactory-scoped parameter name provider.
+[DEBUG] 2020-03-18 15:05:44.040 [background-preinit] ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.engine.DefaultClockProvider as ValidatorFactory-scoped clock provider.
+[DEBUG] 2020-03-18 15:05:44.041 [background-preinit] ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.engine.scripting.DefaultScriptEvaluatorFactory as ValidatorFactory-scoped script evaluator factory.

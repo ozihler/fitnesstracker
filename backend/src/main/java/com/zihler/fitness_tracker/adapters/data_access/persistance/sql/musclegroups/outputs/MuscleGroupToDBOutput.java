@@ -26,5 +26,4 @@ public class MuscleGroupToDBOutput {
     private List<ExerciseRow> exercises(MuscleGroupRow muscleGroupRow) {
         return new ExercisesToDBOutput(muscleGroup.getExercises().getExercises(), muscleGroupRow).exercises();
     }
-
 }

@@ -1,9 +1,10 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.apache.logging.log4j.util.Strings;
 
 import java.util.List;
+
+import static java.util.stream.Collectors.joining;
 
 public class FullMuscleGroupViewModel {
     @JsonProperty("name")
@@ -32,7 +33,7 @@ public class FullMuscleGroupViewModel {
     public String toString() {
         return "FullMuscleGroupViewModel{" +
                 "name='" + name + '\'' +
-                ", exercises=" + Strings.join(exercises, ',') +
+                ", exercises=" +  exercises.stream().map(FullExerciseViewModel::toString).collect(joining(",")) +
                 '}';
     }
 }

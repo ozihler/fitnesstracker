@@ -1,9 +1,11 @@
 package com.zihler.fitness_tracker.domain.values;
 
-import org.apache.logging.log4j.util.Strings;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.joining;
 
 public class MuscleGroups {
     private List<MuscleGroup> muscleGroups;
@@ -34,7 +36,7 @@ public class MuscleGroups {
 
     @Override
     public String toString() {
-        return "MuscleGroups[" + Strings.join(muscleGroups, ',') + "]";
+        return "MuscleGroups[" +  muscleGroups.stream().map(Object::toString).collect( joining(", ")) + "]";
     }
 
 }
