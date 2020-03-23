@@ -8,10 +8,6 @@ import com.zihler.fitness_tracker.domain.values.CreationDate;
 import com.zihler.fitness_tracker.domain.values.WorkoutId;
 import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
 
-import java.time.Clock;
-import java.time.Instant;
-import java.time.LocalDate;
-
 public class WorkoutToUpdateInput {
     private WorkoutToUpdate request;
 
@@ -23,7 +19,7 @@ public class WorkoutToUpdateInput {
         FullWorkoutViewModel workout = request.getWorkout();
 
         return new WorkoutDocument(
-                WorkoutId.of(workout.getGid()),
+                WorkoutId.of(workout.getWorkoutId()),
                 CreationDate.from(workout.getCreationDate()),
                 WorkoutTitle.of(workout.getTitle()),
                 new MuscleGroupsFullInput(workout.getMuscleGroups()).toDocument()

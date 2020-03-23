@@ -27,64 +27,68 @@ public class ErrorHandling {
 
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<ErrorViewModel> handleGenericException(Exception bad) {
-        logger.error(bad.getMessage());
+        log(bad);
         return status(I_AM_A_TEAPOT).body(new ErrorViewModel(Arrays.toString(bad.getStackTrace()) + ", " + bad.getMessage()));
     }
 
     @ExceptionHandler(value = InvalidTitleException.class)
     public ResponseEntity<ErrorViewModel> handleInvalidTitleException(Exception bad) {
-        logger.error(bad.getMessage());
+        log(bad);
         return status(BAD_REQUEST).body(new ErrorViewModel(bad.getMessage()));
     }
 
     @ExceptionHandler(value = ConfiguringFileSystemFailed.class)
     public ResponseEntity<ErrorViewModel> handleConfiguringFileSystemFailed(Exception bad) {
-        logger.error(bad.getMessage());
+        log(bad);
         return status(INTERNAL_SERVER_ERROR).body(new ErrorViewModel(bad.getMessage()));
     }
 
     @ExceptionHandler(value = CouldNotDeleteFolderException.class)
     public ResponseEntity<ErrorViewModel> handleCouldNotDeleteFolderException(Exception bad) {
-        logger.error(bad.getMessage());
+        log(bad);
         return status(INTERNAL_SERVER_ERROR).body(new ErrorViewModel(bad.getMessage()));
     }
 
     @ExceptionHandler(value = LoadingDataFromFileSystemFailed.class)
     public ResponseEntity<ErrorViewModel> handleLoadingDataFromFileSystemFailed(Exception bad) {
-        logger.error(bad.getMessage());
+        log(bad);
         return status(INTERNAL_SERVER_ERROR).body(new ErrorViewModel(bad.getMessage()));
     }
 
     @ExceptionHandler(value = StoringToFileSystemFailed.class)
     public ResponseEntity<ErrorViewModel> handleStoringMuscleGroupsAndExercisesToFileSystemFailed(Exception bad) {
-        logger.error(bad.getMessage());
+        log(bad);
         return status(INTERNAL_SERVER_ERROR).body(new ErrorViewModel(bad.getMessage()));
     }
 
     @ExceptionHandler(value = WorkoutNotCopiedYetException.class)
     public ResponseEntity<ErrorViewModel> handleWorkoutNotCopiedYetException(Exception bad) {
-        logger.error(bad.getMessage());
+        log(bad);
         return status(INTERNAL_SERVER_ERROR).body(new ErrorViewModel(bad.getMessage()));
     }
 
     @ExceptionHandler(value = EmptyMuscleGroupsRequest.class)
     public ResponseEntity<ErrorViewModel> handleEmptyMuscleGroupsRequest(Exception bad) {
-        logger.error(bad.getMessage());
+        log(bad);
         return status(BAD_REQUEST).body(new ErrorViewModel(bad.getMessage()));
     }
     @ExceptionHandler(value = ExerciseNotFoundException.class)
     public ResponseEntity<ErrorViewModel> handleExerciseNotFoundException(Exception bad) {
-        logger.error(bad.getMessage());
+        log(bad);
         return status(NOT_FOUND).body(new ErrorViewModel(bad.getMessage()));
     }
     @ExceptionHandler(value = MuscleGroupNotFoundException.class)
     public ResponseEntity<ErrorViewModel> handleMuscleGroupNotFoundException(Exception bad) {
-        logger.error(bad.getMessage());
+        log(bad);
         return status(NOT_FOUND).body(new ErrorViewModel(bad.getMessage()));
     }
     @ExceptionHandler(value = WorkoutNotFoundException.class)
     public ResponseEntity<ErrorViewModel> handleWorkoutNotFoundException(Exception bad) {
-        logger.error(bad.getMessage());
+        log(bad);
         return status(NOT_FOUND).body(new ErrorViewModel(bad.getMessage()));
+    }
+
+    private void log(Exception bad) {
+        logger.error("An exception was thrown. ", bad);
     }
 }

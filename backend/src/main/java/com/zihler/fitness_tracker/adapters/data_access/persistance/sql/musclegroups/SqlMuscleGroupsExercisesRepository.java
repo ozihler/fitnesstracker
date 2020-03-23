@@ -19,7 +19,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-@Profile("prod")
+@Profile("dev")
 public class SqlMuscleGroupsExercisesRepository implements
         FetchAllMuscleGroups,
         FetchMuscleGroup,

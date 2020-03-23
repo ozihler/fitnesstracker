@@ -42,7 +42,7 @@ public class WorkoutAndMuscleGroupNamesViewModel {
 
     @Override
     public String toString() {
-        return String.format("WorkoutViewModel{gid=%d, creationDate=%d, title='%s', muscleGroups=%s}", gid, creationDate, title, muscleGroups);
+        return String.format("WorkoutViewModel{gid=%s, creationDate=%d, title='%s', muscleGroups=%s}", gid, creationDate, title, muscleGroups);
     }
 
 

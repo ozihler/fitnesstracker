@@ -9,7 +9,7 @@ import java.util.List;
 public class FullWorkoutViewModel implements Namable {
 
     @JsonProperty("gid")
-    private String gid; // todo rename to workoutid
+    private String workoutId;
     @JsonProperty("creationDate")
     private long creationDate;
     @JsonProperty("title")
@@ -20,8 +20,8 @@ public class FullWorkoutViewModel implements Namable {
     public FullWorkoutViewModel() {
     }
 
-    public FullWorkoutViewModel(String gid, long creationDate, String title, List<FullMuscleGroupViewModel> muscleGroups) {
-        this.gid = gid;
+    public FullWorkoutViewModel(String workoutId, long creationDate, String title, List<FullMuscleGroupViewModel> muscleGroups) {
+        this.workoutId = workoutId;
         this.creationDate = creationDate;
         this.title = title;
         this.muscleGroups = muscleGroups;
@@ -31,8 +31,8 @@ public class FullWorkoutViewModel implements Namable {
         return new FullWorkoutViewModel(workoutId, creationDate, title, new ArrayList<>(muscleGroups));
     }
 
-    public String getGid() {
-        return gid;
+    public String getWorkoutId() {
+        return workoutId;
     }
 
     public long getCreationDate() {
@@ -50,6 +50,16 @@ public class FullWorkoutViewModel implements Namable {
 
     @Override
     public String name() {
-        return gid.replace(" ", "_") + ".json";
+        return workoutId.replace(" ", "_") + ".json";
+    }
+
+    @Override
+    public String toString() {
+        return "FullWorkoutViewModel{" +
+                "gid='" + workoutId + '\'' +
+                ", creationDate=" + creationDate +
+                ", title='" + title + '\'' +
+                ", muscleGroups=" + muscleGroups +
+                '}';
     }
 }

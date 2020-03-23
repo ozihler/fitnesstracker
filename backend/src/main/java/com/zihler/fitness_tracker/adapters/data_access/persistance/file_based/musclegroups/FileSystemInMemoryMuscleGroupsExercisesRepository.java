@@ -14,7 +14,7 @@ import static com.zihler.fitness_tracker.adapters.data_access.persistance.file_b
 import static java.util.stream.Collectors.toList;
 
 @Repository
-@Profile("dev")
+@Profile("prod")
 public class FileSystemInMemoryMuscleGroupsExercisesRepository
         implements
         FetchAllMuscleGroups,

@@ -67,7 +67,7 @@ class UpdateWorkoutControllerTest {
 
         // Workout
         assertNotNull(fullWorkoutViewModel);
-        assertEquals(gid, fullWorkoutViewModel.getGid());
+        assertEquals(gid, fullWorkoutViewModel.getWorkoutId());
         assertEquals(newTitle, fullWorkoutViewModel.getTitle());
         assertEquals(creationDate.toMillis(), fullWorkoutViewModel.getCreationDate());
 

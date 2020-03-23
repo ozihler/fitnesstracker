@@ -23,7 +23,7 @@ public class WorkoutFileInput {
 
     public Workout workout() {
         return   Workout.from(
-                WorkoutId.of(workoutFile.getGid()),
+                WorkoutId.of(workoutFile.getWorkoutId()),
                 CreationDate.from(LocalDate.from(Instant.ofEpochMilli(workoutFile.getCreationDate()).atZone(Clock.systemDefaultZone().getZone()))), WorkoutTitle.of(workoutFile.getTitle()),
                 toMuscleGroups(workoutFile)
         );
