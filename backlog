@@ -9,7 +9,7 @@
 - assure no duplicate exercises/muscle groups
 - Group Exercises By Muscle Group
 - Provide Set values of last time exercise was used as input default values
-- Implement Authentication with Auth0
+- Implement Authentication with Auth0 > add simple steps first and build up from there
 - TRANSACTIONAL
 - Add SQL repo for exercises
 - Use Postgresql for prod (& test), use H2 for dev
