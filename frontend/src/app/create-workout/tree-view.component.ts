@@ -16,7 +16,7 @@ import {Type} from "../shared/type";
       <button class="uk-button uk-button-danger uk-width-1-3"
               *ngIf="!isWorkout()"
               (click)="removeFromWorkout(node)">
-          <fa name="trash"></fa>
+        <i class="fa fa-trash"></i>
       </button>
     </div>
 

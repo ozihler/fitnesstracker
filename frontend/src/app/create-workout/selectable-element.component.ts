@@ -9,11 +9,11 @@ import {TreeNode} from "./tree/tree-node";
               (click)="select(element)">{{element?.name}}
       </button>
      <!-- <button class="uk-button uk-button-secondary uk-width-1-5 ">
-        <fa name="pencil"></fa>
+        <i class="fa fa-pencil"></i>
       </button>-->
       <button class="uk-button uk-button-danger uk-width-1-3"
               (click)="delete(element)">
-        <fa name="trash"></fa>
+        <i class="fa fa-trash"></i>
       </button>
     </div>`
 })

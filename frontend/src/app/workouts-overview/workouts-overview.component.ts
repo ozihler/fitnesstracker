@@ -4,6 +4,7 @@ import {WorkoutSimple} from "../shared/workout-simple";
 import {WorkoutId} from "../shared/workoutId";
 import {Router} from "@angular/router";
 
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-workouts-overview',
   template: `
@@ -20,7 +21,7 @@ import {Router} from "@angular/router";
       </button>
       <button (click)="copy(workout.gid)"
               class="uk-button uk-button-default uk-width-1-3 uk-margin-small-bottom">
-        <fa name="copy"></fa>
+        <i class="fa fa-copy"></i>
       </button>
     </div>
   `

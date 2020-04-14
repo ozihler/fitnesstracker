@@ -3,6 +3,8 @@ import {WorkoutTitleUpdate} from "./workout-title-update";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DatePipe} from "@angular/common";
 
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-workout-title',
   template: `
@@ -11,7 +13,7 @@ import {DatePipe} from "@angular/common";
               *ngIf="!editing"
               (click)="enableEditing()">
         {{workoutTitle}}
-        <fa name="edit" class="uk-align-right"></fa>
+        <i class="fa fa-edit uk-align-right"></i>
       </button>
       <div *ngIf="editing">
         <form [formGroup]="editForm" (ngSubmit)="saveEditing()">
@@ -19,11 +21,11 @@ import {DatePipe} from "@angular/common";
           <input class="uk-input" type="date" [value]="formattedDate" formControlName="workoutCreationDate">
 
           <button class="uk-button uk-button-primary uk-width-1-2" type="submit">
-            <fa name="save"></fa>
+            <i class="fa fa-save"></i>
           </button>
 
           <button class="uk-button uk-button-default uk-width-1-2" (click)="cancelEditing()">
-            <fa name="times"></fa>
+            <i class="fa fa-times"></i>
           </button>
         </form>
       </div>

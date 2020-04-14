@@ -10,7 +10,7 @@ import {ChangeValue} from "./change-value";
       <button class="uk-button uk-button-primary uk-width-1-1"
               *ngIf="showButton"
               (click)="submit()">
-        <fa name="plus"></fa>
+        <i class="fa fa-plus"></i>
       </button>
     </div>
     <hr/>
