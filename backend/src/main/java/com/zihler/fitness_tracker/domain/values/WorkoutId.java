@@ -10,7 +10,7 @@ public class WorkoutId {
     }
 
     public static WorkoutId of(String identifier) {
-        return new WorkoutId(String.format("WORKOUT-%s", identifier));
+        return new WorkoutId(String.format("%s", identifier));
     }
 
     @Override
