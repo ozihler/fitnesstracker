@@ -4,7 +4,6 @@ import {WorkoutSimple} from "../shared/workout-simple";
 import {WorkoutId} from "../shared/workoutId";
 import {Router} from "@angular/router";
 
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-workouts-overview',
   template: `

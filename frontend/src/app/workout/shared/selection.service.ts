@@ -4,7 +4,7 @@ import {MuscleGroup} from "./muscle-group";
 import {MuscleGroupFactory} from "./muscle-group.factory";
 import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
-import {environment} from "../../environments/environment";
+import {environment} from "../../../environments/environment";
 import {MuscleGroupsRaw} from "./muscle-groups-raw";
 import {ExerciseFactory} from "./exercise.factory";
 import {ExercisesRaw} from "./exercises-raw";

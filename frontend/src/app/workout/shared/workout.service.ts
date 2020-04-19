@@ -6,7 +6,7 @@ import {WorkoutFactory} from "./workout.factory";
 import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {WorkoutRaw} from "./workout-raw";
-import {environment} from "../../environments/environment";
+import {environment} from "../../../environments/environment";
 import {Exercise} from "./exercise";
 import {Set} from "./set";
 import {WorkoutsSimpleRaw} from "./workouts-simple-raw";

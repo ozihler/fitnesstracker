@@ -23,7 +23,7 @@ import {Component, OnInit} from '@angular/core';
   `,
   styles: []
 })
-export class WorkoutSelectionComponent implements OnInit {
+export class FitnessTypeSelectionComponent implements OnInit {
 
   constructor() {
   }
