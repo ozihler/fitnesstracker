@@ -45,7 +45,7 @@ export class WorkoutTitleComponent implements OnChanges {
   }
 
   get formattedDate() {
-    return this.workoutCreationDate ? this.datePipe.transform(this.workoutCreationDate, 'yyyy-MM-dd') : '';
+    return this.workoutCreationDate ? this.datePipe.transform(this.workoutCreationDate, 'yyyy-MM-dd', '', 'de') : '';
   }
 
   get title() {

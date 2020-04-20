@@ -28,8 +28,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     SetValuesComponent,
     SelectableElementComponent,
     WorkoutTitleComponent
-  ],
-  providers: [DatePipe]
+  ]
 })
 export class WorkoutModule {
 }

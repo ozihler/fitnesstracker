@@ -15,7 +15,7 @@ import {Router} from "@angular/router";
     <div *ngFor="let workout of workouts">
       <button routerLink="/workout/create-workout/{{workout.gid.value}}"
               class="uk-button uk-button-default uk-width-2-3 uk-margin-small-bottom">
-        {{workout.creationDate |date: 'dd.MM.yy'}}
+        {{workout.creationDate | date: 'dd.MM.yy' : '':'de'}}
         {{workout.title}}
       </button>
       <button (click)="copy(workout.gid)"
