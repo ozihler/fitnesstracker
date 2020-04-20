@@ -1,9 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {WorkoutTitleUpdate} from "./workout-title-update";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DatePipe} from "@angular/common";
-
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-workout-title',
@@ -32,7 +30,7 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
     </div>
   `
 })
-export class WorkoutTitleComponent implements OnInit {
+export class WorkoutTitleComponent implements OnChanges {
 
   @Input() workoutCreationDate: Date = new Date();
   @Input() workoutTitle: string = '';
@@ -54,10 +52,10 @@ export class WorkoutTitleComponent implements OnInit {
     return this.workoutTitle ? this.workoutTitle : '';
   }
 
-  ngOnInit() {
+  ngOnChanges() {
     this.editForm = this.formBuilder.group({
-        workoutTitle: ['', Validators.required],
-        workoutCreationDate: ['', Validators.required]
+        workoutTitle: [this.title, Validators.required],
+        workoutCreationDate: [this.formattedDate, Validators.required]
       }
     );
   }
