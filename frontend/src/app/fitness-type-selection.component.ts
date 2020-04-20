@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-fitness-type-selection',
-  template: `
+  template: `    
     <h3>Select a fitness type</h3>
     <button
       routerLink="/workout/overview"
