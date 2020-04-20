@@ -33,7 +33,7 @@ import {WorkoutTitleUpdate} from "./workout-title-update";
       (deleteNodeEvent)="deleteSelectableElement($event)">
     </app-element-selection>
     <hr class="uk-divider-icon"/>
-    <a routerLink="/workouts-overview">Back to Overview</a>
+    <a routerLink="/workout/overview">Back to Overview</a>
   `
 })
 export class CreateWorkoutComponent implements OnInit {

@@ -4,8 +4,9 @@ import {FitnessTypeSelectionComponent} from "./fitness-type-selection.component"
 
 
 const routes: Routes = [
-  {path: '', redirectTo: 'workout-selection', pathMatch: 'full'},
-  {path: 'workout-selection', component: FitnessTypeSelectionComponent}
+  {path: '', redirectTo: 'fitness-type-selection', pathMatch: 'full'},
+  {path: 'fitness-type-selection', component: FitnessTypeSelectionComponent},
+  {path: 'workout', loadChildren: () => import("./workout/workout.module").then(m => m.WorkoutModule)}
 ];
 
 @NgModule({

@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {CommonModule, DatePipe} from '@angular/common';
 
 import {WorkoutRoutingModule} from './workout-routing.module';
-import {WorkoutsOverview} from "./workouts-overview/workouts-overview.component";
 import {CreateWorkoutComponent} from "./create-workout/create-workout.component";
 import {CreateElementComponent} from "./create-workout/create-element.component";
 import {ElementSelection} from "./create-workout/element-selection.component";
@@ -21,7 +20,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     WorkoutRoutingModule
   ],
   declarations: [
-     CreateWorkoutComponent,
+    CreateWorkoutComponent,
     CreateElementComponent,
     ElementSelection,
     CreateSetComponent,
