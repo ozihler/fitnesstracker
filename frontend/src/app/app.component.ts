@@ -15,7 +15,7 @@ import {DatePipe} from "@angular/common";
     </div>`
 })
 export class AppComponent {
-  private time: string;
+  time: string;
 
   constructor(private instantiationTimeService: InstantiationTimeService) {
     this.instantiationTimeService.getInstantiationTime()
@@ -36,10 +36,10 @@ class InstantiationTimeService {
       .pipe(
         map(timeAsUnixTimeStamp => {
           return this.datePipe.transform(
-           new Date(timeAsUnixTimeStamp),
-             'long',
-           '',
-           'de'
+            new Date(timeAsUnixTimeStamp),
+            'long',
+            '',
+            'de'
           )
         }));
   }
