@@ -80,13 +80,15 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
   createSelectableElement(elements: string) {
-    if (this.workoutTree.currentSelection.type === Type.Workout) {
+    const {type} = this.workoutTree.currentSelection;
+
+    if (type === Type.Workout) {
       this.selectionService.newMuscleGroup(elements)
         .subscribe(createdMuscleGroups => this.updateSelectableNodes(createdMuscleGroups));
-    } else if (this.workoutTree.currentSelection.type === Type.Muscle_Group) {
+    } else if (Type.Muscle_Group === type) {
       this.selectionService.createExercises(this.workoutTree.currentSelection, elements)
         .subscribe(createdExercises => this.updateSelectableNodes(createdExercises));
-    } else if (this.workoutTree.currentSelection.type === Type.Exercise) {
+    } else if (Type.Exercise === type) {
       this.selectionService.addSetToExerciseExercise(this.workoutTree.root.gid, this.workoutTree.currentSelection, elements)
         .subscribe(createdSet => this.addSetToExercise([createdSet]));
     }

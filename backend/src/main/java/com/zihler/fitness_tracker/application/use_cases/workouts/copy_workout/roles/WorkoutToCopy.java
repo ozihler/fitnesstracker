@@ -12,8 +12,8 @@ import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
 public class WorkoutToCopy {
     private final Workout self;
     private final StoreWorkout storeWorkout;
-    private GenerateWorkoutId generateWorkoutId;
-    private CopiedWorkoutPresenter output;
+    private final CopiedWorkoutPresenter output;
+    private final GenerateWorkoutId generateWorkoutId;
     private WorkoutId idOfCopiedWorkout;
 
     public WorkoutToCopy(Workout self, StoreWorkout storeWorkout, GenerateWorkoutId generateWorkoutId, CopiedWorkoutPresenter output) {
