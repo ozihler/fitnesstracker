@@ -4,8 +4,8 @@ import {FitnessTypeSelectionComponent} from "./fitness-type-selection.component"
 
 
 const routes: Routes = [
-  {path: '', component: FitnessTypeSelectionComponent},
-  {path: '*', component: FitnessTypeSelectionComponent},
+  {path: '', redirectTo:'fitness-type-selection', pathMatch:'full'},
+  {path: '*', redirectTo:'fitness-type-selection', pathMatch:'full'},
   {path: 'fitness-type-selection', component: FitnessTypeSelectionComponent},
   {path: 'workout', loadChildren: () => import("./workout/workout.module").then(m => m.WorkoutModule)}
 ];
