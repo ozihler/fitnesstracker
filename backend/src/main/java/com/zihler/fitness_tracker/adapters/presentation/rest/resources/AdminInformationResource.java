@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("/api/admin/instantiationTime")
+@RestController
 public class AdminInformationResource {
 
     private final long instantiationTime;
@@ -14,7 +14,7 @@ public class AdminInformationResource {
         this.instantiationTime = System.currentTimeMillis();
     }
 
-    @GetMapping
+    @GetMapping("/api/admin/instantiationTime")
     public long instantiationTime() {
         return this.instantiationTime;
     }
