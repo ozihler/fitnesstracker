@@ -12,9 +12,11 @@ import {environment} from "../../../environments/environment";
     <div>
       <a routerLink="/fitness-type-selection">Back</a>
     </div>
-    <button routerLink="/workout/create-workout"
-            class="uk-button uk-button-danger uk-width-1-1 uk-margin-small-bottom">New Workout
-    </button>
+    <div>
+      <button routerLink="/workout/create-workout"
+              class="uk-button uk-button-danger uk-width-1-1 uk-margin-small-bottom">New Workout
+      </button>
+    </div>
     <div>
       <button (click)="openDownloadLink()"
               class="uk-button uk-button-secondary uk-width-1-1 uk-margin-small-bottom">Download Workouts

@@ -45,7 +45,7 @@ public class FileSystemDirectory<T extends Namable> {
 
     private Path pathToFolder(String folderName) {
         Path sourcePath = Paths.get(String.format("%s/%s/%s", System.getProperty("user.home"), APP_NAME, folderName));
-        logger.debug("Source path is: " + sourcePath.toAbsolutePath());
+        logger.info("Source path is: " + sourcePath.toAbsolutePath());
         return sourcePath;
     }
 
