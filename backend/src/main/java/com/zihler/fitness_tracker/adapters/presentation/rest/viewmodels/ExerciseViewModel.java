@@ -13,6 +13,9 @@ public class ExerciseViewModel {
     @JsonProperty("multiplier")
     private int multiplier;
 
+    public ExerciseViewModel() {
+    }
+
     public ExerciseViewModel(String name, List<SetViewModel> sets, int multiplier) {
         this.name = name;
         this.sets = sets;

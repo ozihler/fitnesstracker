@@ -11,7 +11,7 @@ public class SetsDocument {
         this.sets = sets;
     }
 
-    SetsDocument() {
+    public SetsDocument() {
         this(new ArrayList<>());
     }
 

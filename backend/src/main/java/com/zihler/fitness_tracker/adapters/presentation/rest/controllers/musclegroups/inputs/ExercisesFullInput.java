@@ -4,6 +4,7 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets.in
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.ExerciseViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.ExerciseDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.ExercisesDocument;
+import com.zihler.fitness_tracker.domain.values.Multiplier;
 import com.zihler.fitness_tracker.domain.values.Name;
 
 import java.util.List;
@@ -26,6 +27,10 @@ class ExercisesFullInput {
     }
 
     private ExerciseDocument toDocument(ExerciseViewModel e) {
-        return ExerciseDocument.of(Name.of(e.getName()), new SetsFullInput(e.getSets()).toDocument());
+        return new ExerciseDocument(
+                Name.of(e.getName()),
+                new SetsFullInput(e.getSets()).toDocument(),
+                Multiplier.of(e.getMultiplier()));
     }
+
 }

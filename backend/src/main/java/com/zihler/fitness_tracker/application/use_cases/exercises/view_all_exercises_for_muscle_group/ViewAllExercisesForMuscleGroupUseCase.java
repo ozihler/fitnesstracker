@@ -34,8 +34,7 @@ public class ViewAllExercisesForMuscleGroupUseCase implements ViewAllExercisesFo
 
     private List<ExerciseDocument> toDocuments(Exercises exercises) {
         return exercises.getExercises().stream()
-                .map(exercise -> ExerciseDocument.of(exercise.getName(),
-                        toDocument(exercise.getSets())))
+                .map(exercise -> new ExerciseDocument(exercise.getName(), toDocument(exercise.getSets()), exercise.getMultiplier()))
                 .collect(Collectors.toList());
     }
 

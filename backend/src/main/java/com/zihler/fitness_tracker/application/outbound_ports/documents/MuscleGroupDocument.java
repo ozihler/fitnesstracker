@@ -27,7 +27,16 @@ public class MuscleGroupDocument {
 
     public static MuscleGroupDocument of(MuscleGroup muscleGroup) {
         return new MuscleGroupDocument(muscleGroup.getName(),
-                ExercisesDocument.of(muscleGroup.getExercises().getExercises().stream().map(ExerciseDocument::of).collect(toList())));
+                ExercisesDocument.of(
+                        muscleGroup.getExercises()
+                                .getExercises()
+                                .stream()
+                                .map(e ->
+                                        new ExerciseDocument(
+                                                e.getName(),
+                                                SetsDocument.of(e.getSets().getSets().stream().map(s -> SetDocument.of(s.getWeight(), s.getRepetitions(), s.getWaitingTime())).collect(toList())),
+                                                e.getMultiplier()))
+                                .collect(toList())));
     }
 
     public static MuscleGroupDocument of(Name name) {

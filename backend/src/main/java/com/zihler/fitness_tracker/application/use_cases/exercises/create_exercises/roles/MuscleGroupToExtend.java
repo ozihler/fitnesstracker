@@ -2,6 +2,8 @@ package com.zihler.fitness_tracker.application.use_cases.exercises.create_exerci
 
 import com.zihler.fitness_tracker.application.outbound_ports.documents.ExerciseDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.ExercisesDocument;
+import com.zihler.fitness_tracker.application.outbound_ports.documents.SetDocument;
+import com.zihler.fitness_tracker.application.outbound_ports.documents.SetsDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreExercises;
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.ExercisesPresenter;
 import com.zihler.fitness_tracker.domain.values.Exercise;
@@ -37,7 +39,10 @@ public class MuscleGroupToExtend {
     private ExercisesDocument toDocuments(List<Exercise> exercises) {
         return ExercisesDocument.of(exercises
                 .stream()
-                .map(ExerciseDocument::of)
+                .map(e -> new ExerciseDocument(
+                        e.getName(),
+                        SetsDocument.of(e.getSets().getSets().stream().map(s -> SetDocument.of(s.getWeight(), s.getRepetitions(), s.getWaitingTime())).collect(toList())),
+                        e.getMultiplier()))
                 .collect(toList()));
     }
 }
