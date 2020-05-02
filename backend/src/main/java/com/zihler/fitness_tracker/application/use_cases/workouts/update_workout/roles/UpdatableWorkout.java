@@ -32,7 +32,7 @@ public class UpdatableWorkout {
 
             for (ExerciseDocument e : m.getExercises().getExercises()) {
                 Sets sets = Sets.of(e.getSets().getSets().stream().map(s -> new Set(s.getWeight(), s.getRepetitions(), s.getWaitingTime())).collect(toList()));
-                Exercise exercise = Exercise.of(e.getName(),sets);
+                Exercise exercise = ExerciseInput.of(e.getName(),sets, Multiplier.defaultValue());
                 muscleGroup.add(exercise);
             }
         }

@@ -30,7 +30,7 @@ public class WorkoutFileInput {
     }
 
     private MuscleGroups toMuscleGroups(WorkoutViewModel w) {
-        java.util.List<MuscleGroup> muscleGroups = w.getMuscleGroups()
+        List<MuscleGroup> muscleGroups = w.getMuscleGroups()
                 .stream()
                 .map(this::toMuscleGroup)
                 .collect(Collectors.toList());
@@ -42,7 +42,7 @@ public class WorkoutFileInput {
         return MuscleGroup.of(m.getName(), Exercises.of(
                 m.getExercises()
                         .stream()
-                        .map(e -> Exercise.of(Name.of(e.getName()), toSetsViewModel(e.getSets())))
+                        .map(e -> ExerciseInput.of(Name.of(e.getName()), toSetsViewModel(e.getSets()), Multiplier.defaultValue()))
                         .collect(Collectors.toList()))
         );
     }

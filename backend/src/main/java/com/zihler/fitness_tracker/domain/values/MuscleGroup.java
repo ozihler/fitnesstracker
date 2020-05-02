@@ -37,7 +37,7 @@ public class MuscleGroup {
     }
 
     public static MuscleGroup withoutSets(String name, String... exerciseNames) {
-        return of(name, Exercises.of(Arrays.stream(exerciseNames).map(Exercise::of).collect(toList())));
+        return of(name, Exercises.of(Arrays.stream(exerciseNames).map(ExerciseInput::of).collect(toList())));
     }
 
     public Name getName() {

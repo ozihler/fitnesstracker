@@ -4,10 +4,7 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.Exercise
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.ExercisesViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchExercises;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchMuscleGroup;
-import com.zihler.fitness_tracker.domain.values.Exercise;
-import com.zihler.fitness_tracker.domain.values.Exercises;
-import com.zihler.fitness_tracker.domain.values.MuscleGroup;
-import com.zihler.fitness_tracker.domain.values.Name;
+import com.zihler.fitness_tracker.domain.values.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 
@@ -22,9 +19,9 @@ class ViewAllExercisesControllerTest {
     void test() {
         MuscleGroup expectedMuscleGroup =   MuscleGroup.of(Name.of("Chest"));
         List<Exercise> expectedExercises = List.of(
-                  Exercise.of("Bench Press"),
-                  Exercise.of("Dumbbell Bench Press"),
-                  Exercise.of("Overhead Dumbbell Pull"));
+                  ExerciseInput.of("Bench Press"),
+                  ExerciseInput.of("Dumbbell Bench Press"),
+                  ExerciseInput.of("Overhead Dumbbell Pull"));
 
         FetchExercises fetchExercises = (muscleGroup -> Exercises.of(expectedExercises));
         FetchMuscleGroup fetchMuscleGroup = name -> expectedMuscleGroup;

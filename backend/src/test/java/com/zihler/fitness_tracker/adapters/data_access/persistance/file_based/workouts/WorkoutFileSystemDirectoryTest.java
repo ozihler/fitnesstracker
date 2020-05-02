@@ -23,14 +23,14 @@ class WorkoutFileSystemDirectoryTest {
                 CreationDate.from(LocalDate.now()), WorkoutTitle.of("WORKOUT TITLE"),
                 muscleGroups(
                         of("Chest",
-                                Exercise.of(
+                                ExerciseInput.of(
                                         Name.of("Bench Press"),
                                         Sets.of(List.of(
                                                 Set.withValues(Weight.of(55, UnitOfMeasurement.KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS)),
                                                 Set.withValues(Weight.of(50, UnitOfMeasurement.KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS)),
                                                 Set.withValues(Weight.of(45, UnitOfMeasurement.KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS))
                                                 )
-                                        )))));
+                                        ), Multiplier.defaultValue()))));
 
 
         directory.save(workout);
