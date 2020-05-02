@@ -3,15 +3,23 @@ import {WorkoutService} from "../shared/workout.service";
 import {WorkoutSimple} from "../shared/workout-simple";
 import {WorkoutId} from "../shared/workoutId";
 import {Router} from "@angular/router";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-workouts-overview',
   template: `
     <h3>Select or create a workout</h3>
-    <a routerLink="/fitness-type-selection">Back</a>
+    <div>
+      <a routerLink="/fitness-type-selection">Back</a>
+    </div>
     <button routerLink="/workout/create-workout"
             class="uk-button uk-button-danger uk-width-1-1 uk-margin-small-bottom">New Workout
     </button>
+    <div>
+      <button (click)="openDownloadLink()"
+              class="uk-button uk-button-secondary uk-width-1-1 uk-margin-small-bottom">Download Workouts
+      </button>
+    </div>
     <div *ngFor="let workout of workouts">
       <button routerLink="/workout/create-workout/{{workout.gid.value}}"
               class="uk-button uk-button-default uk-width-2-3">
@@ -34,6 +42,10 @@ export class WorkoutsOverview implements OnInit {
 
   ngOnInit() {
     this.workoutService.fetchAllWorkouts().subscribe(workouts => this.workouts = workouts);
+  }
+
+  openDownloadLink() {
+    return window.open(environment.baseUrl + "/workouts/download");
   }
 
   copy(workoutId: WorkoutId) {
