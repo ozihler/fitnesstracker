@@ -14,12 +14,12 @@ import {Router} from "@angular/router";
     </button>
     <div *ngFor="let workout of workouts">
       <button routerLink="/workout/create-workout/{{workout.gid.value}}"
-              class="uk-button uk-button-default uk-width-2-3 uk-margin-small-bottom">
+              class="uk-button uk-button-default uk-width-2-3">
         {{workout.creationDate | date: 'dd.MM.yy' : '':'de'}}
         {{workout.title}}
       </button>
       <button (click)="copy(workout.gid)"
-              class="uk-button uk-button-default uk-width-1-3 uk-margin-small-bottom">
+              class="uk-button uk-button-default uk-width-1-3">
         <i class="fa fa-copy"></i>
       </button>
     </div>
@@ -40,7 +40,7 @@ export class WorkoutsOverview implements OnInit {
     console.log("Workout id", workoutId)
     this.workoutService.copy(workoutId)
       .subscribe(copiedWorkoutId =>
-        this.router.navigate(['create-workout', copiedWorkoutId.value]));
+        this.router.navigate(['workout/create-workout', copiedWorkoutId.value]));
 
   }
 }

@@ -21,11 +21,11 @@ public class WorkoutFilesOutput {
         this.toStore = toStore;
     }
 
-    public static WorkoutFilesOutput of(Workout toStore) {
+    public static WorkoutFilesOutput from(Workout toStore) {
         return new WorkoutFilesOutput(toStore);
     }
 
-    public FullWorkoutViewModel file() {
+    public FullWorkoutViewModel asFile() {
         return FullWorkoutViewModel.of(
                 this.toStore.getWorkoutId().toString(),
                 this.toStore.getWorkoutTitle().toString(),

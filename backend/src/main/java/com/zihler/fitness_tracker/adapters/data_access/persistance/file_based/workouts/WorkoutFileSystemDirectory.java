@@ -25,7 +25,7 @@ public class WorkoutFileSystemDirectory {
     }
 
     public Workout save(Workout workout) {
-        FullWorkoutViewModel file = WorkoutFilesOutput.of(workout).file();
+        FullWorkoutViewModel file = WorkoutFilesOutput.from(workout).asFile();
         this.fileSystemDirectory.store(file);
         return workout;
     }
