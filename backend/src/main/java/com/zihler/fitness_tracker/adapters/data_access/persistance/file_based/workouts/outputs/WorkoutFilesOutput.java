@@ -44,7 +44,7 @@ public class WorkoutFilesOutput {
     }
 
     private List<ExerciseViewModel> asStrings(Exercises exercises) {
-        return exercises.getExercises().stream().map(e -> new ExerciseViewModel(e.getName().toString(), toViewModel(e.getSets()))).collect(toList());
+        return exercises.getExercises().stream().map(e -> new ExerciseViewModel(e.getName().toString(), toViewModel(e.getSets()), exercise.getMultiplier().value())).collect(toList());
     }
 
     private List<SetViewModel> toViewModel(Sets sets) {

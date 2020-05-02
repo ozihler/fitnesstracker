@@ -43,12 +43,12 @@ class UpdateWorkoutControllerTest {
                                 SetViewModel.of(50, 12, 45),
                                 SetViewModel.of(50, 12, 45),
                                 SetViewModel.of(50, 12, 45)
-                        )),
+                        ), exercise.getMultiplier().value()),
                         new ExerciseViewModel("Flying", List.of(
                                 SetViewModel.of(50, 12, 45),
                                 SetViewModel.of(50, 12, 45),
                                 SetViewModel.of(50, 12, 45)
-                        ))
+                        ), exercise.getMultiplier().value())
 
                 )),
                 new MuscleGroupViewModel("Triceps", List.of(
@@ -56,7 +56,7 @@ class UpdateWorkoutControllerTest {
                                 SetViewModel.of(50, 12, 45),
                                 SetViewModel.of(50, 12, 45),
                                 SetViewModel.of(50, 12, 45)
-                        ))
+                        ), exercise.getMultiplier().value())
                 ))
 
         ));

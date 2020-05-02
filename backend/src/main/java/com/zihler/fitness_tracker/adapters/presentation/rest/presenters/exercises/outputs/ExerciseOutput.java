@@ -16,7 +16,8 @@ class ExerciseOutput {
 
         return new ExerciseViewModel(
                 exercise.getName().toString(),
-                setsOutput.toViewModel());
+                setsOutput.toViewModel(),
+                exercise.getMultiplier().value());
     }
 
 
