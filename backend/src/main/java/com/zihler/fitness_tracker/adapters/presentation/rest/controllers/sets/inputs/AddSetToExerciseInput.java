@@ -3,7 +3,7 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets.i
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets.exceptions.IllegalSetDetailsException;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets.requests.SetDetails;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.SetDocument;
-import com.zihler.fitness_tracker.application.outbound_ports.documents.WaitingTime;
+import com.zihler.fitness_tracker.domain.values.WaitingTime;
 import com.zihler.fitness_tracker.domain.values.*;
 import org.apache.commons.lang3.StringUtils;
 

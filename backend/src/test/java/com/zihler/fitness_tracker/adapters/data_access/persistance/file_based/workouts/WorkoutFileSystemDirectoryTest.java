@@ -1,6 +1,6 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.workouts;
 
-import com.zihler.fitness_tracker.application.outbound_ports.documents.WaitingTime;
+import com.zihler.fitness_tracker.domain.values.WaitingTime;
 import com.zihler.fitness_tracker.domain.entities.Set;
 import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.*;

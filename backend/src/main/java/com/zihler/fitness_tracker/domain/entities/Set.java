@@ -1,6 +1,6 @@
 package com.zihler.fitness_tracker.domain.entities;
 
-import com.zihler.fitness_tracker.application.outbound_ports.documents.WaitingTime;
+import com.zihler.fitness_tracker.domain.values.WaitingTime;
 import com.zihler.fitness_tracker.domain.values.Repetitions;
 import com.zihler.fitness_tracker.domain.values.Weight;
 

@@ -20,6 +20,10 @@ public class WorkoutViewModel implements Namable {
     public WorkoutViewModel() {
     }
 
+    public WorkoutViewModel(String workoutId) {
+        this(workoutId, -1L, null);
+    }
+
     public WorkoutViewModel(String workoutId, long creationDate, String title) {
         this(workoutId, creationDate, title, new ArrayList<>());
     }

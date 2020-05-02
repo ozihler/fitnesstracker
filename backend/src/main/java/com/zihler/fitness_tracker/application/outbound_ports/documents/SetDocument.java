@@ -2,6 +2,7 @@ package com.zihler.fitness_tracker.application.outbound_ports.documents;
 
 import com.zihler.fitness_tracker.domain.entities.Set;
 import com.zihler.fitness_tracker.domain.values.Repetitions;
+import com.zihler.fitness_tracker.domain.values.WaitingTime;
 import com.zihler.fitness_tracker.domain.values.Weight;
 
 public class SetDocument {

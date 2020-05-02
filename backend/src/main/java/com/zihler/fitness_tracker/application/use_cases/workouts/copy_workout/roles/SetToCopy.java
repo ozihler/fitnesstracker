@@ -1,6 +1,6 @@
 package com.zihler.fitness_tracker.application.use_cases.workouts.copy_workout.roles;
 
-import com.zihler.fitness_tracker.application.outbound_ports.documents.WaitingTime;
+import com.zihler.fitness_tracker.domain.values.WaitingTime;
 import com.zihler.fitness_tracker.domain.entities.Set;
 import com.zihler.fitness_tracker.domain.values.Repetitions;
 import com.zihler.fitness_tracker.domain.values.Weight;

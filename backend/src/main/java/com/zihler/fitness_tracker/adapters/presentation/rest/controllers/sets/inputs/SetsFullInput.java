@@ -3,7 +3,7 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets.i
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.SetViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.SetDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.SetsDocument;
-import com.zihler.fitness_tracker.application.outbound_ports.documents.WaitingTime;
+import com.zihler.fitness_tracker.domain.values.WaitingTime;
 import com.zihler.fitness_tracker.domain.values.Repetitions;
 import com.zihler.fitness_tracker.domain.values.UnitOfTime;
 import com.zihler.fitness_tracker.domain.values.Weight;

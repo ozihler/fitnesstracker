@@ -2,7 +2,7 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workou
 
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.inputs.WorkoutIdInput;
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout.WorkoutIdPresenter;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutIdViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchWorkout;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.GenerateWorkoutId;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorkout;
@@ -21,7 +21,7 @@ public class CopyWorkoutController {
         this.copyWorkout = new CopyWorkoutUseCase(fetchWorkout, storeWorkout, generateWorkoutId);
     }
 
-    public ResponseEntity<WorkoutIdViewModel> copyWorkout(WorkoutIdViewModel request) {
+    public ResponseEntity<WorkoutViewModel> copyWorkout(WorkoutViewModel request) {
         var input = new WorkoutIdInput(request);
         var output = new WorkoutIdPresenter();
 

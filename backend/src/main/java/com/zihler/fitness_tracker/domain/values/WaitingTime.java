@@ -1,6 +1,4 @@
-package com.zihler.fitness_tracker.application.outbound_ports.documents;
-
-import com.zihler.fitness_tracker.domain.values.UnitOfTime;
+package com.zihler.fitness_tracker.domain.values;
 
 public class WaitingTime {
     private int waitingTime;

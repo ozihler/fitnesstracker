@@ -1,14 +1,11 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.resources;
 
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.*;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutToCreate;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutToUpdate;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutsInOverviewGroupedByMuscleGroupViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutAndMuscleGroupNamesViewModel;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutIdViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutsViewModel;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +21,6 @@ public class WorkoutsResource {
     private UpdateWorkoutController updateWorkoutController;
     private ViewAllWorkoutsController viewAllWorkoutsController;
     private DownloadAllWorkoutsController downloadAllWorkoutsController;
-    private ViewAllWorkoutsGroupedByMuscleGroupsController viewAllWorkoutsGroupedByMuscleGroupsController;
     private ViewSingleWorkoutController viewSingleWorkoutController;
     private CopyWorkoutController copyWorkoutController;
 
@@ -34,14 +30,12 @@ public class WorkoutsResource {
             UpdateWorkoutController updateWorkoutController,
             ViewAllWorkoutsController viewAllWorkoutsController,
             DownloadAllWorkoutsController downloadAllWorkoutsController,
-            ViewAllWorkoutsGroupedByMuscleGroupsController viewAllWorkoutsGroupedByMuscleGroupsController,
             ViewSingleWorkoutController viewSingleWorkoutController,
             CopyWorkoutController copyWorkoutController) {
         this.createWorkoutController = createWorkoutController;
         this.updateWorkoutController = updateWorkoutController;
         this.viewAllWorkoutsController = viewAllWorkoutsController;
         this.downloadAllWorkoutsController = downloadAllWorkoutsController;
-        this.viewAllWorkoutsGroupedByMuscleGroupsController = viewAllWorkoutsGroupedByMuscleGroupsController;
         this.viewSingleWorkoutController = viewSingleWorkoutController;
         this.copyWorkoutController = copyWorkoutController;
     }
@@ -91,18 +85,9 @@ public class WorkoutsResource {
         return workouts;
     }
 
-    @GetMapping(path = "/api/workouts/overview/groupedByMuscleGroups")
-    public ResponseEntity<WorkoutsInOverviewGroupedByMuscleGroupViewModel> viewAllWorkoutsGroupedByMuscleGroups() {
-        ResponseEntity<WorkoutsInOverviewGroupedByMuscleGroupViewModel> workoutsGroupedByMuscleGroups = viewAllWorkoutsGroupedByMuscleGroupsController.viewAllWorkoutsGroupedByMuscleGroups();
-
-        logger.info("All workouts:{}", workoutsGroupedByMuscleGroups);
-
-        return workoutsGroupedByMuscleGroups;
-    }
-
     @PostMapping(path = "/api/workouts/copy")
-    public ResponseEntity<WorkoutIdViewModel> copyWorkout(@RequestBody WorkoutIdViewModel request) {
-        ResponseEntity<WorkoutIdViewModel> idOfCopiedWorkout = copyWorkoutController.copyWorkout(request);
+    public ResponseEntity<WorkoutViewModel> copyWorkout(@RequestBody WorkoutViewModel request) {
+        ResponseEntity<WorkoutViewModel> idOfCopiedWorkout = copyWorkoutController.copyWorkout(request);
 
         logger.info("id of copied workout:{}", idOfCopiedWorkout);
 
