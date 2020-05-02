@@ -8,7 +8,7 @@ export class WorkoutFactory {
     let muscleGroups = MuscleGroupFactory.fromMultiple(workoutRaw.muscleGroups);
 
     return new Workout(
-      WorkoutId.from(workoutRaw.gid),
+      WorkoutId.from(workoutRaw.workoutId),
       new Date(workoutRaw.creationDate),
       workoutRaw.title,
       muscleGroups);

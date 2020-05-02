@@ -1,7 +1,7 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout;
 
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout.outputs.WorkoutsInOverviewOutput;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutInOverviewViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutsDocument;
 import com.zihler.fitness_tracker.domain.values.CreationDate;
@@ -24,12 +24,12 @@ class SortWorkoutsInOverviewTest {
 
         var output = new WorkoutsInOverviewOutput(new WorkoutsDocument(List.of(w2, w1, w4, w3)));
 
-        List<WorkoutInOverviewViewModel> workouts = output.workouts().getWorkouts();
+        List<WorkoutViewModel> workouts = output.workouts().getWorkouts();
 
-        assertEquals("3", workouts.get(0).getGid());
-        assertEquals("2", workouts.get(1).getGid());
-        assertEquals("4", workouts.get(2).getGid());
-        assertEquals("1", workouts.get(3).getGid());
+        assertEquals("3", workouts.get(0).getWorkoutId());
+        assertEquals("2", workouts.get(1).getWorkoutId());
+        assertEquals("4", workouts.get(2).getWorkoutId());
+        assertEquals("1", workouts.get(3).getWorkoutId());
     }
 
 }

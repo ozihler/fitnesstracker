@@ -1,9 +1,9 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.workouts.outputs;
 
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullExerciseViewModel;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullMuscleGroupViewModel;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullWorkoutViewModel;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullSetViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.ExerciseViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.MuscleGroupViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.SetViewModel;
 import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.Exercises;
 import com.zihler.fitness_tracker.domain.values.MuscleGroup;
@@ -25,8 +25,8 @@ public class WorkoutFilesOutput {
         return new WorkoutFilesOutput(toStore);
     }
 
-    public FullWorkoutViewModel asFile() {
-        return FullWorkoutViewModel.of(
+    public WorkoutViewModel asFile() {
+        return WorkoutViewModel.of(
                 this.toStore.getWorkoutId().toString(),
                 this.toStore.getWorkoutTitle().toString(),
                 toStore.getCreationDate().toMillis(),
@@ -34,22 +34,22 @@ public class WorkoutFilesOutput {
         );
     }
 
-    private List<FullMuscleGroupViewModel> toMuscleGroupFiles(Workout workout) {
+    private List<MuscleGroupViewModel> toMuscleGroupFiles(Workout workout) {
         return workout.getMuscleGroups().getMuscleGroups().stream()
-                .map(m -> new FullMuscleGroupViewModel(asString(m), asStrings(m.getExercises()))).collect(toUnmodifiableList());
+                .map(m -> new MuscleGroupViewModel(asString(m), asStrings(m.getExercises()))).collect(toUnmodifiableList());
     }
 
     private String asString(MuscleGroup muscleGroup) {
         return muscleGroup.getName().toString();
     }
 
-    private List<FullExerciseViewModel> asStrings(Exercises exercises) {
-        return exercises.getExercises().stream().map(e -> new FullExerciseViewModel(e.getName().toString(), toViewModel(e.getSets()))).collect(toList());
+    private List<ExerciseViewModel> asStrings(Exercises exercises) {
+        return exercises.getExercises().stream().map(e -> new ExerciseViewModel(e.getName().toString(), toViewModel(e.getSets()))).collect(toList());
     }
 
-    private List<FullSetViewModel> toViewModel(Sets sets) {
+    private List<SetViewModel> toViewModel(Sets sets) {
         return sets.getSets().stream()
-                .map(s -> new FullSetViewModel(
+                .map(s -> new SetViewModel(
                         s.getWeight().value(),
                         s.getWeight().unitOfMeasurement().shortname(),
                         s.getRepetitions().number(),

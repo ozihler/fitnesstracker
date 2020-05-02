@@ -23,12 +23,12 @@ import {environment} from "../../../environments/environment";
       </button>
     </div>
     <div *ngFor="let workout of workouts">
-      <button routerLink="/workout/create-workout/{{workout.gid.value}}"
+      <button routerLink="/workout/create-workout/{{workout.workoutId.value}}"
               class="uk-button uk-button-default uk-width-2-3">
         {{workout.creationDate | date: 'dd.MM.yy' : '':'de'}}
         {{workout.title}}
       </button>
-      <button (click)="copy(workout.gid)"
+      <button (click)="copy(workout.workoutId)"
               class="uk-button uk-button-default uk-width-1-3">
         <i class="fa fa-copy"></i>
       </button>

@@ -5,17 +5,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 public class WorkoutAndMuscleGroupNamesViewModel {
-    @JsonProperty("gid")
-    private String gid;
+    @JsonProperty("workoutId")
+    private String workoutId;
     @JsonProperty("creationDate")
     private long creationDate;
     @JsonProperty("title")
     private String title;
     @JsonProperty("muscleGroups")
-    private List<MuscleGroupNameViewModel> muscleGroups;
+    private List<MuscleGroupViewModel> muscleGroups;
 
-    public WorkoutAndMuscleGroupNamesViewModel(String gid, long creationDate, String title, List<MuscleGroupNameViewModel> muscleGroups) {
-        this.gid = gid;
+    public WorkoutAndMuscleGroupNamesViewModel(String workoutId, long creationDate, String title, List<MuscleGroupViewModel> muscleGroups) {
+        this.workoutId = workoutId;
         this.creationDate = creationDate;
         this.title = title;
         this.muscleGroups = muscleGroups;
@@ -24,8 +24,8 @@ public class WorkoutAndMuscleGroupNamesViewModel {
     public WorkoutAndMuscleGroupNamesViewModel() {
     }
 
-    public String getGid() {
-        return gid;
+    public String getWorkoutId() {
+        return workoutId;
     }
 
     public long getCreationDate() {
@@ -36,13 +36,13 @@ public class WorkoutAndMuscleGroupNamesViewModel {
         return title;
     }
 
-    public List<MuscleGroupNameViewModel> getMuscleGroups() {
+    public List<MuscleGroupViewModel> getMuscleGroups() {
         return muscleGroups;
     }
 
     @Override
     public String toString() {
-        return String.format("WorkoutViewModel{gid=%s, creationDate=%d, title='%s', muscleGroups=%s}", gid, creationDate, title, muscleGroups);
+        return String.format("WorkoutViewModel{workoutId=%s, creationDate=%d, title='%s', muscleGroups=%s}", workoutId, creationDate, title, muscleGroups);
     }
 
 

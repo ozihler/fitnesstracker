@@ -4,7 +4,7 @@ import {Type} from "./type";
 import {MuscleGroup} from "./muscle-group";
 
 export class Workout extends TreeNode {
-  constructor(private _gid: WorkoutId, //todo rename to workoutId,
+  constructor(private _workoutId: WorkoutId, //todo rename to workoutId,
               private _creationDate: Date,
               name: string,
               muscleGroups: MuscleGroup[] = []) {
@@ -19,12 +19,12 @@ export class Workout extends TreeNode {
     return this.name;
   }
 
-  get gid(): WorkoutId {
-    return this._gid;
+  get workoutId(): WorkoutId {
+    return this._workoutId;
   }
 
-  set gid(value: WorkoutId) {
-    this._gid = value;
+  set workoutId(value: WorkoutId) {
+    this._workoutId = value;
   }
 
   set creationDate(value: Date) {

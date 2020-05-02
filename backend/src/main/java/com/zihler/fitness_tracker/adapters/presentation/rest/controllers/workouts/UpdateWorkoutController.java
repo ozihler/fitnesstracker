@@ -1,7 +1,7 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts;
 
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.inputs.WorkoutToUpdateInput;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullWorkoutViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutToUpdate;
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout.RestFullWorkoutPresenter;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchWorkout;
@@ -21,7 +21,7 @@ public class UpdateWorkoutController {
         updateWorkout = new UpdateWorkoutUseCase(fetchWorkout, storeWorkout);
     }
 
-    public ResponseEntity<FullWorkoutViewModel> updateWorkout(WorkoutToUpdate request) {
+    public ResponseEntity<WorkoutViewModel> updateWorkout(WorkoutToUpdate request) {
         var input = new WorkoutToUpdateInput(request);
         var output = new RestFullWorkoutPresenter();
 

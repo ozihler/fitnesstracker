@@ -1,13 +1,13 @@
 export class WorkoutId {
-  constructor(private _gid: string) {
+  constructor(private _workoutId: string) {
 
   }
 
   get value(): string {
-    return this._gid;
+    return this._workoutId;
   }
 
-  static from(gid: string) {
-    return new WorkoutId(gid);
+  static from(workoutId: string) {
+    return new WorkoutId(workoutId);
   }
 }

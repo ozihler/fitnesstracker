@@ -2,12 +2,12 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.presenters.muscleg
 
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.RestPresenter;
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.musclegroups.outputs.MuscleGroupNameOutput;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.MuscleGroupNameViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.MuscleGroupViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGroupDocument;
 import org.springframework.http.ResponseEntity;
 
 public class RestMuscleGroupNamePresenter
-        extends RestPresenter<MuscleGroupNameViewModel>
+        extends RestPresenter<MuscleGroupViewModel>
         implements MuscleGroupPresenter {
     @Override
     public void present(MuscleGroupDocument document) {

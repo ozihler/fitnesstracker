@@ -4,7 +4,7 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.muscleg
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups.MakeMuscleGroupUnselectableController;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups.ViewMuscleGroupsController;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups.requests.CreateMuscleGroupsRequest;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.MuscleGroupNameViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.MuscleGroupViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.MuscleGroupsViewModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,8 +48,8 @@ public class MuscleGroupsResource {
     }
 
     @DeleteMapping(path = "/api/muscle-groups/{muscleGroupName}")
-    public ResponseEntity<MuscleGroupNameViewModel> makeMuscleGroupUnselectable(@PathVariable("muscleGroupName") String muscleGroupName) {
-        ResponseEntity<MuscleGroupNameViewModel> deletedMuscleGroup = makeMuscleGroupUnselectableController.makeUnselectable(muscleGroupName);
+    public ResponseEntity<MuscleGroupViewModel> makeMuscleGroupUnselectable(@PathVariable("muscleGroupName") String muscleGroupName) {
+        ResponseEntity<MuscleGroupViewModel> deletedMuscleGroup = makeMuscleGroupUnselectableController.makeUnselectable(muscleGroupName);
 
         logger.info("create muscle groups {}", deletedMuscleGroup.getBody());
 

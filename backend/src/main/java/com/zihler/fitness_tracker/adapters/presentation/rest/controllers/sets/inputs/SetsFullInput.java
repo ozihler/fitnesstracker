@@ -1,6 +1,6 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets.inputs;
 
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullSetViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.SetViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.SetDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.SetsDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WaitingTime;
@@ -14,9 +14,9 @@ import static com.zihler.fitness_tracker.domain.values.UnitOfMeasurement.KILOGRA
 import static java.util.stream.Collectors.toList;
 
 public class SetsFullInput {
-    private List<FullSetViewModel> sets;
+    private List<SetViewModel> sets;
 
-    public SetsFullInput(List<FullSetViewModel> sets) {
+    public SetsFullInput(List<SetViewModel> sets) {
         this.sets = sets;
     }
 
@@ -26,7 +26,7 @@ public class SetsFullInput {
                 .collect(toList()));
     }
 
-    private SetDocument toDocument(FullSetViewModel set) {
+    private SetDocument toDocument(SetViewModel set) {
         return SetDocument.of(
                 Weight.of(set.getWeight(), KILOGRAMM),
                 Repetitions.of(set.getNumberOfRepetitions()),

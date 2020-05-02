@@ -1,13 +1,13 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.resources;
 
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.*;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullWorkoutViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutToCreate;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutToUpdate;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutsInOverviewGroupedByMuscleGroupViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutAndMuscleGroupNamesViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutIdViewModel;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutsInOverviewViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutsViewModel;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,8 +56,8 @@ public class WorkoutsResource {
     }
 
     @GetMapping(path = "/api/workouts")
-    public ResponseEntity<FullWorkoutViewModel> viewWorkoutWithId(@RequestParam("workoutGid") String workoutGid) {
-        ResponseEntity<FullWorkoutViewModel> workout = viewSingleWorkoutController.viewWorkoutWithId(workoutGid);
+    public ResponseEntity<WorkoutViewModel> viewWorkoutWithId(@RequestParam("workoutId") String workoutId) {
+        ResponseEntity<WorkoutViewModel> workout = viewSingleWorkoutController.viewWorkoutWithId(workoutId);
 
         logger.info("All workouts:{}", workout);
 
@@ -65,8 +65,8 @@ public class WorkoutsResource {
     }
 
     @PutMapping(path = "/api/workouts")
-    public ResponseEntity<FullWorkoutViewModel> updateWorkout(@RequestBody WorkoutToUpdate request) {
-        ResponseEntity<FullWorkoutViewModel> workout = updateWorkoutController.updateWorkout(request);
+    public ResponseEntity<WorkoutViewModel> updateWorkout(@RequestBody WorkoutToUpdate request) {
+        ResponseEntity<WorkoutViewModel> workout = updateWorkoutController.updateWorkout(request);
 
         logger.info("Updated workout {}", workout.getBody());
 
@@ -74,8 +74,8 @@ public class WorkoutsResource {
     }
 
     @GetMapping(path = "/api/workouts/overview")
-    public ResponseEntity<WorkoutsInOverviewViewModel> viewAllWorkouts() {
-        ResponseEntity<WorkoutsInOverviewViewModel> workouts = viewAllWorkoutsController.viewAllWorkouts();
+    public ResponseEntity<WorkoutsViewModel> viewAllWorkouts() {
+        ResponseEntity<WorkoutsViewModel> workouts = viewAllWorkoutsController.viewAllWorkouts();
 
         logger.info("All workouts:{}", workouts);
 

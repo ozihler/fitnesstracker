@@ -1,6 +1,6 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.presenters.musclegroups.outputs;
 
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.MuscleGroupNameViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.MuscleGroupViewModel;
 import com.zihler.fitness_tracker.domain.values.Name;
 
 public class MuscleGroupNameOutput {
@@ -10,7 +10,7 @@ public class MuscleGroupNameOutput {
         this.name = name;
     }
 
-    public MuscleGroupNameViewModel toViewModel() {
-        return new MuscleGroupNameViewModel(name.toString());
+    public MuscleGroupViewModel toViewModel() {
+        return new MuscleGroupViewModel(name.toString());
     }
 }

@@ -7,7 +7,7 @@ import {CreateWorkoutComponent} from "./create-workout/create-workout.component"
 const routes: Routes = [
   {path: "overview", component: WorkoutsOverview},
   {path: "create-workout", component: CreateWorkoutComponent},
-  {path: "create-workout/:workout-gid", component: CreateWorkoutComponent},
+  {path: "create-workout/:workoutId", component: CreateWorkoutComponent},
 ];
 
 @NgModule({

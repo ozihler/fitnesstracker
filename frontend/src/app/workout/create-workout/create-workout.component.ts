@@ -12,7 +12,7 @@ import {WorkoutTitleUpdate} from "./workout-title-update";
   selector: 'app-create-workout',
   template: `
     <app-workout-title
-      [workoutId]="workoutTree?.root?.gid?.value"
+      [workoutId]="workoutTree?.root?.workoutId?.value"
       [workoutTitle]="workoutTree?.root?.title"
       [workoutCreationDate]="workoutTree?.root?.creationDate"
       (changeTitleEvent)="updateWorkoutTitle($event)">
@@ -48,8 +48,8 @@ export class CreateWorkoutComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      let workoutGid = params.get("workout-gid");
-      this.workoutService.createNewOrFetchWorkoutWithId(workoutGid)
+      let workoutId = params.get("workoutId");
+      this.workoutService.createNewOrFetchWorkoutWithId(workoutId)
         .subscribe(workout => {
             this.workoutTree = new WorkoutTree(workout);
             this.fetchMuscleGroupsAndFilterOut(this.workoutTree.childrenOfCurrentSelection.map(c => c.name));
@@ -89,7 +89,7 @@ export class CreateWorkoutComponent implements OnInit {
       this.selectionService.createExercises(this.workoutTree.currentSelection, elements)
         .subscribe(createdExercises => this.updateSelectableNodes(createdExercises));
     } else if (Type.Exercise === type) {
-      this.selectionService.addSetToExerciseExercise(this.workoutTree.root.gid, this.workoutTree.currentSelection, elements)
+      this.selectionService.addSetToExerciseExercise(this.workoutTree.root.workoutId, this.workoutTree.currentSelection, elements)
         .subscribe(createdSet => this.addSetToExercise([createdSet]));
     }
   }

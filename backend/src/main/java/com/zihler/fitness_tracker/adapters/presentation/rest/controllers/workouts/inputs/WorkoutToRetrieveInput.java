@@ -3,13 +3,13 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workou
 import com.zihler.fitness_tracker.domain.values.WorkoutId;
 
 public class WorkoutToRetrieveInput {
-    private String workoutGid;
+    private String workoutId;
 
-    public WorkoutToRetrieveInput(String workoutGid) {
-        this.workoutGid = workoutGid;
+    public WorkoutToRetrieveInput(String workoutId) {
+        this.workoutId = workoutId;
     }
 
-    public WorkoutId workoutGid() {
-        return WorkoutId.of(workoutGid);
+    public WorkoutId workoutId() {
+        return WorkoutId.of(workoutId);
     }
 }

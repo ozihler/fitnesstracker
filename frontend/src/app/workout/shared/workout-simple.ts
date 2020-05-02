@@ -1,13 +1,13 @@
 import {WorkoutId} from "./workoutId";
 
 export class WorkoutSimple {
-  constructor(private _gid: WorkoutId, private  _title: string, private _creationDate: Date) {
+  constructor(private _workoutId: WorkoutId, private  _title: string, private _creationDate: Date) {
 
   }
 
 
-  get gid(): WorkoutId {
-    return this._gid;
+  get workoutId(): WorkoutId {
+    return this._workoutId;
   }
 
   get title(): string {

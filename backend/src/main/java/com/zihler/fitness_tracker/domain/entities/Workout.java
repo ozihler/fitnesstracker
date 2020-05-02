@@ -51,7 +51,7 @@ public class Workout {
     @Override
     public String toString() {
         return "Workout{" +
-                "gid=" + workoutId +
+                "workoutId=" + workoutId +
                 ", creationDate=" + creationDate +
                 ", workoutTitle=" + workoutTitle +
                 ", muscleGroups=" + muscleGroups +

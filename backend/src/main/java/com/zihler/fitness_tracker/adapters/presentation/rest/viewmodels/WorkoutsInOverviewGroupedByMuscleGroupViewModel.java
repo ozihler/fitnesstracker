@@ -1,16 +1,13 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels;
 
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.MuscleGroupNameViewModel;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutInOverviewViewModel;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class WorkoutsInOverviewGroupedByMuscleGroupViewModel {
-    private Map<MuscleGroupNameViewModel, List<WorkoutInOverviewViewModel>> muscleGroupToWorkouts;
+    private Map<MuscleGroupViewModel, List<WorkoutViewModel>> muscleGroupToWorkouts;
 
-    public WorkoutsInOverviewGroupedByMuscleGroupViewModel(Map<MuscleGroupNameViewModel, List<WorkoutInOverviewViewModel>> muscleGroupToWorkouts) {
+    public WorkoutsInOverviewGroupedByMuscleGroupViewModel(Map<MuscleGroupViewModel, List<WorkoutViewModel>> muscleGroupToWorkouts) {
         this.muscleGroupToWorkouts = muscleGroupToWorkouts;
     }
 
@@ -18,7 +15,7 @@ public class WorkoutsInOverviewGroupedByMuscleGroupViewModel {
         this(new HashMap<>());
     }
 
-    public Map<MuscleGroupNameViewModel, List<WorkoutInOverviewViewModel>> getMuscleGroupToWorkouts() {
+    public Map<MuscleGroupViewModel, List<WorkoutViewModel>> getMuscleGroupToWorkouts() {
         return muscleGroupToWorkouts;
     }
 }

@@ -1,7 +1,7 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups.inputs;
 
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets.inputs.SetsFullInput;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullExerciseViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.ExerciseViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.ExerciseDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.ExercisesDocument;
 import com.zihler.fitness_tracker.domain.values.Name;
@@ -11,9 +11,9 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 class ExercisesFullInput {
-    private List<FullExerciseViewModel> exercises;
+    private List<ExerciseViewModel> exercises;
 
-    ExercisesFullInput(List<FullExerciseViewModel> exercises) {
+    ExercisesFullInput(List<ExerciseViewModel> exercises) {
         this.exercises = exercises;
     }
 
@@ -25,7 +25,7 @@ class ExercisesFullInput {
         );
     }
 
-    private ExerciseDocument toDocument(FullExerciseViewModel e) {
+    private ExerciseDocument toDocument(ExerciseViewModel e) {
         return ExerciseDocument.of(Name.of(e.getName()), new SetsFullInput(e.getSets()).toDocument());
     }
 }

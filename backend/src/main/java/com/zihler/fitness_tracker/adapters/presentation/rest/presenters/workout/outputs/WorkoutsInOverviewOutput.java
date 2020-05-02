@@ -1,8 +1,7 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout.outputs;
 
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutInOverviewViewModel;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutsInOverviewViewModel;
-import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutDocument;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutsViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutsDocument;
 
 import java.util.List;
@@ -16,14 +15,14 @@ public class WorkoutsInOverviewOutput {
         this.workouts = workouts;
     }
 
-    public WorkoutsInOverviewViewModel workouts() {
-        List<WorkoutInOverviewViewModel> viewModels = workouts.getWorkouts()
+    public WorkoutsViewModel workouts() {
+        List<WorkoutViewModel> viewModels = workouts.getWorkouts()
                 .stream()
                 .map(WorkoutInOverviewOutput::new)
                 .map(WorkoutInOverviewOutput::toViewModel)
                 .sorted((a, b) -> -Long.compare(a.getCreationDate(), b.getCreationDate()))
                 .collect(toList());
 
-        return new WorkoutsInOverviewViewModel(viewModels);
+        return new WorkoutsViewModel(viewModels);
     }
 }

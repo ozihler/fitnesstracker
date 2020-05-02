@@ -31,7 +31,7 @@ class CreateWorkoutTest {
         assertThat(result.getTitle()).isEqualTo(request.getTitle());
         assertThat(result.getMuscleGroups().size()).isEqualTo(0);
         assertTrue(result.getCreationDate() >= before.toMillis());
-        assertThat(result.getGid()).isEqualTo("12345");
+        assertThat(result.getWorkoutId()).isEqualTo("12345");
     }
 
 }

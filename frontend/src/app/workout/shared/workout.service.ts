@@ -25,21 +25,21 @@ export class WorkoutService {
     this.baseUrl = environment.baseUrl;
   }
 
-  createNewOrFetchWorkoutWithId(workoutGid: string): Observable<Workout> {
-    return this.createWorkoutRequest(workoutGid)
+  createNewOrFetchWorkoutWithId(workoutId: string): Observable<Workout> {
+    return this.createWorkoutRequest(workoutId)
       .pipe(map(data => WorkoutFactory.fromRaw(data)));
   }
 
-  private createWorkoutRequest(workoutGid: string) {
-    if (!workoutGid) {
+  private createWorkoutRequest(workoutId: string) {
+    if (!workoutId) {
       return this.createNewWorkoutRequest();
     } else {
-      return this.fetchWorkoutByIdRequest(workoutGid);
+      return this.fetchWorkoutByIdRequest(workoutId);
     }
   }
 
-  private fetchWorkoutByIdRequest(workoutGid: string) {
-    let url = `${this.baseUrl}/workouts?workoutGid=${workoutGid}`;
+  private fetchWorkoutByIdRequest(workoutId: string) {
+    let url = `${this.baseUrl}/workouts?workoutId=${workoutId}`;
     return this.httpClient.get<WorkoutRaw>(url);
   }
 
@@ -52,7 +52,7 @@ export class WorkoutService {
   updateWorkout(workout: Workout): Observable<Workout> {
     let body = {
       workout: {
-        gid: workout.gid.value,
+        workoutId: workout.workoutId.value,
         creationDate: new Date(workout.creationDate).getTime(),
         title: workout.title,
         muscleGroups: workout.children.map(value => this.toJson(value))

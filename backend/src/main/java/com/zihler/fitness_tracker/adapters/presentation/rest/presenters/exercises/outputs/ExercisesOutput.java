@@ -2,7 +2,6 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.presenters.exercis
 
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.ExerciseViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.ExercisesViewModel;
-import com.zihler.fitness_tracker.application.outbound_ports.documents.ExerciseDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.ExercisesDocument;
 
 import java.util.List;

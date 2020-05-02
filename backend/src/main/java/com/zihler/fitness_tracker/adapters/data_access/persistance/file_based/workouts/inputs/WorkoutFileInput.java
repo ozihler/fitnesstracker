@@ -1,8 +1,8 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.workouts.inputs;
 
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullMuscleGroupViewModel;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullWorkoutViewModel;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullSetViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.MuscleGroupViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.SetViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WaitingTime;
 import com.zihler.fitness_tracker.domain.entities.Set;
 import com.zihler.fitness_tracker.domain.entities.Workout;
@@ -15,9 +15,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WorkoutFileInput {
-    private FullWorkoutViewModel workoutFile;
+    private WorkoutViewModel workoutFile;
 
-    WorkoutFileInput(FullWorkoutViewModel workoutFile) {
+    WorkoutFileInput(WorkoutViewModel workoutFile) {
         this.workoutFile = workoutFile;
     }
 
@@ -29,7 +29,7 @@ public class WorkoutFileInput {
         );
     }
 
-    private MuscleGroups toMuscleGroups(FullWorkoutViewModel w) {
+    private MuscleGroups toMuscleGroups(WorkoutViewModel w) {
         java.util.List<MuscleGroup> muscleGroups = w.getMuscleGroups()
                 .stream()
                 .map(this::toMuscleGroup)
@@ -38,7 +38,7 @@ public class WorkoutFileInput {
         return MuscleGroups.of(muscleGroups);
     }
 
-    private MuscleGroup toMuscleGroup(FullMuscleGroupViewModel m) {
+    private MuscleGroup toMuscleGroup(MuscleGroupViewModel m) {
         return MuscleGroup.of(m.getName(), Exercises.of(
                 m.getExercises()
                         .stream()
@@ -47,7 +47,7 @@ public class WorkoutFileInput {
         );
     }
 
-    private Sets toSetsViewModel(List<FullSetViewModel> sets) {
+    private Sets toSetsViewModel(List<SetViewModel> sets) {
         return Sets.of(sets.stream()
                 .map(s -> Set.withValues(Weight.of(s.getWeight(), UnitOfMeasurement.fromShortName(s.getWeightUnit())), Repetitions.of(s.getNumberOfRepetitions()), WaitingTime.of(s.getWaitingTime(), UnitOfTime.fromShortName(s.getWaitingTimeUnit()))))
                 .collect(Collectors.toList()));

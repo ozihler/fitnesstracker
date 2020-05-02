@@ -1,5 +1,5 @@
 export interface WorkoutSimpleRaw {
-  gid: string;
+  workoutId: string;
   title: string;
   creationDate: number;
 }

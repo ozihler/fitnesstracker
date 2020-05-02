@@ -6,7 +6,7 @@ import {WorkoutSimple} from "./workout-simple";
 export class WorkoutSimpleFactory {
   static fromRaw(workoutSimpleRaw: WorkoutSimpleRaw): WorkoutSimple {
     return new WorkoutSimple(
-      WorkoutId.from(workoutSimpleRaw.gid),
+      WorkoutId.from(workoutSimpleRaw.workoutId),
       workoutSimpleRaw.title,
       new Date(workoutSimpleRaw.creationDate)
     );

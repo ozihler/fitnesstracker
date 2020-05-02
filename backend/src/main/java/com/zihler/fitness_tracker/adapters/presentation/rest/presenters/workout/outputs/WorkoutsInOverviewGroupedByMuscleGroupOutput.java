@@ -2,8 +2,8 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout
 
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.musclegroups.outputs.MuscleGroupNameOutput;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutsInOverviewGroupedByMuscleGroupViewModel;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.MuscleGroupNameViewModel;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutInOverviewViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.MuscleGroupViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGroupDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutsDocument;
 
@@ -21,7 +21,7 @@ public class WorkoutsInOverviewGroupedByMuscleGroupOutput {
 
     public WorkoutsInOverviewGroupedByMuscleGroupViewModel workoutsGroupedByMuscleGroup() {
 
-        Map<MuscleGroupNameViewModel, List<WorkoutInOverviewViewModel>> muscleGroupToWorkout = new HashMap<>();
+        Map<MuscleGroupViewModel, List<WorkoutViewModel>> muscleGroupToWorkout = new HashMap<>();
 
         workouts.getWorkouts()
                 .forEach(workout -> {

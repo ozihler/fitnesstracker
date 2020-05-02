@@ -6,16 +6,16 @@ import java.util.List;
 
 public class MuscleGroupsViewModel {
     @JsonProperty("muscleGroups")
-    private List<MuscleGroupNameViewModel> muscleGroups;
+    private List<MuscleGroupViewModel> muscleGroups;
 
-    public MuscleGroupsViewModel(List<MuscleGroupNameViewModel> muscleGroups) {
+    public MuscleGroupsViewModel(List<MuscleGroupViewModel> muscleGroups) {
         this.muscleGroups = muscleGroups;
     }
 
     public MuscleGroupsViewModel() {
     }
 
-    public List<MuscleGroupNameViewModel> getMuscleGroups() {
+    public List<MuscleGroupViewModel> getMuscleGroups() {
         return muscleGroups;
     }
 
