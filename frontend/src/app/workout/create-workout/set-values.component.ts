@@ -16,6 +16,8 @@ import {SetFormValues} from "./set-form-values";
         <div class="uk-width-1-1">
           <input class="uk-form-width-small uk-input"
                  formControlName="value"
+                 (change)="changeValueDirectly()"
+                 (keyup)="changeValueDirectly()"
                  type="number"> {{formValues?.unit}}
         </div>
 
@@ -67,5 +69,9 @@ export class SetValuesComponent implements OnInit {
 
   toggleButton() {
     this.disableOtherUpdatesEvent.emit(this.formValues.valueName);
+  }
+
+  changeValueDirectly() {
+    this.changeValue(0);
   }
 }
