@@ -1,7 +1,7 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups.inputs;
 
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets.inputs.SetsFullInput;
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.FullExerciseViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullExerciseViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.ExerciseDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.ExercisesDocument;
 import com.zihler.fitness_tracker.domain.values.Name;

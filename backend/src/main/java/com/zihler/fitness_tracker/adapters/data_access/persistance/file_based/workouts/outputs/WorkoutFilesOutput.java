@@ -1,8 +1,8 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.workouts.outputs;
 
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.FullExerciseViewModel;
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.FullMuscleGroupViewModel;
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.FullWorkoutViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullExerciseViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullMuscleGroupViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullWorkoutViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullSetViewModel;
 import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.Exercises;

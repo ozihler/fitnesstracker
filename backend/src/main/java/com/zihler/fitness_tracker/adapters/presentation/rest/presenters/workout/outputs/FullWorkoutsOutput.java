@@ -1,7 +1,7 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout.outputs;
 
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.FullWorkoutViewModel;
-import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout.viewmodels.FullWorkoutsViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullWorkoutViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullWorkoutsViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutsDocument;
 
 import java.util.List;

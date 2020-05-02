@@ -39,7 +39,7 @@ export class Set extends TreeNode {
   }
 
   static formatEntries(repetitions, weight: number, unitOfMeasurement: string, waitingTime: number, unitOfTime: string) {
-    return `${repetitions}[reps] |${weight}[${unitOfMeasurement}] |${waitingTime}[${unitOfTime}]`;
+    return `${weight} ${unitOfMeasurement}, ${repetitions} #, ${waitingTime} ${unitOfTime}`;
   }
 
 

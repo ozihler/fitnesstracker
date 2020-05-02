@@ -1,4 +1,4 @@
-package com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout.viewmodels;
+package com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels;
 
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.MuscleGroupNameViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutInOverviewViewModel;

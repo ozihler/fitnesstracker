@@ -1,7 +1,6 @@
-package com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout.viewmodels;
+package com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.FullWorkoutViewModel;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.workouts.inputs;
 
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.FullWorkoutViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullWorkoutViewModel;
 import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.Workouts;
 

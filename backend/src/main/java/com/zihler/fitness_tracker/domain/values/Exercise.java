@@ -3,29 +3,52 @@ package com.zihler.fitness_tracker.domain.values;
 import com.zihler.fitness_tracker.domain.entities.Set;
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class Exercise {
     private Name name;
     private Sets sets;
+    private Multiplier multiplier;
     private boolean isSelectable = true;
 
-    public Exercise(Name name) {
-        this(name, Sets.empty());
-    }
-
-    private Exercise(Name name, Sets sets) {
+    private Exercise(Name name, Sets sets, Multiplier multiplier) {
         this.name = name;
         this.sets = sets;
-    }
-
-    public static Exercise of(String name, Sets sets) {
-        return new Exercise(Name.of(name), sets);
+        this.multiplier = multiplier;
     }
 
     public static Exercise of(String name) {
-        return new Exercise(Name.of(name));
+        name = name.trim();
+        // note: a single wielding exercise can be either dumbbell or barbell,
+        // whereas it gets pretty adventurous to wield two barbells at the same time ;)
+        // So double wielding are >>always<< dumbbell for now.
+        if (isSingleWieldingExercise(name)) {
+            return of(Name.of(name), Sets.empty());
+        } else {
+            return dualWieldingDumbbellExercise(name);
+        }
     }
 
+    private static boolean isSingleWieldingExercise(String inputExerciseName) {
+        return !Pattern.compile("^2#.+")
+                .matcher(inputExerciseName)
+                .find();
+    }
+
+    private static Exercise dualWieldingDumbbellExercise(String inputExerciseName) {
+        String[] nameParts = inputExerciseName.split("#");
+        Multiplier multiplier = Multiplier.of(nameParts[0]);
+        Name exerciseName = Name.of(nameParts[1]);
+        return new Exercise(exerciseName, Sets.empty(), multiplier);
+    }
+
+    public static Exercise of(Name name) {
+        return of(name.toString());
+    }
+
+    public static Exercise of(Name name, Sets sets) {
+        return new Exercise(name, sets, Multiplier.defaultValue());
+    }
 
     public void add(Set set) {
         sets.add(set);
@@ -37,6 +60,10 @@ public class Exercise {
 
     public Sets getSets() {
         return sets;
+    }
+
+    public Multiplier getMultiplier() {
+        return multiplier;
     }
 
     public void addAll(Sets sets) {
@@ -67,4 +94,6 @@ public class Exercise {
     public boolean isSelectable() {
         return isSelectable;
     }
+
+
 }

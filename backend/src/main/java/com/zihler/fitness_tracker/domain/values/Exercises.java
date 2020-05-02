@@ -15,7 +15,7 @@ public class Exercises {
         return new Exercises(exercises);
     }
 
-    static Exercises empty() {
+    public static Exercises empty() {
         return new Exercises(new ArrayList<>());
     }
 

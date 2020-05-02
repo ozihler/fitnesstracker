@@ -1,7 +1,7 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts;
 
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout.RestWorkoutsInOverviewGroupedByMuscleGroupPresenter;
-import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout.viewmodels.WorkoutsInOverviewGroupedByMuscleGroupViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutsInOverviewGroupedByMuscleGroupViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchWorkouts;
 import com.zihler.fitness_tracker.application.use_cases.workouts.view_all_workouts.ViewAllWorkoutsUseCase;
 import com.zihler.fitness_tracker.application.use_cases.workouts.view_all_workouts.inbound_port.ViewAllWorkouts;

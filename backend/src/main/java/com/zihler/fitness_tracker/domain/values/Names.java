@@ -21,10 +21,6 @@ public class Names {
                 .collect(toList()));
     }
 
-    public static Names of(List<Name> names) {
-        return new Names(names);
-    }
-
     public List<Name> values() {
         return names;
     }

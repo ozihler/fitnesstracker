@@ -1,6 +1,6 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercises.inputs;
 
-import com.zihler.fitness_tracker.domain.values.ExerciseName;
+import com.zihler.fitness_tracker.domain.values.Name;
 
 public class ExerciseNameInput {
     private String exerciseName;
@@ -9,8 +9,8 @@ public class ExerciseNameInput {
         this.exerciseName = exerciseName;
     }
 
-    public ExerciseName exerciseName() {
-        return ExerciseName.of(exerciseName);
+    public Name exerciseName() {
+        return Name.of(exerciseName);
     }
 
 }

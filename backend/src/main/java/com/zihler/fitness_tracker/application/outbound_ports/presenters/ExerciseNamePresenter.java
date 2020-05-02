@@ -1,7 +1,7 @@
 package com.zihler.fitness_tracker.application.outbound_ports.presenters;
 
-import com.zihler.fitness_tracker.domain.values.ExerciseName;
+import com.zihler.fitness_tracker.domain.values.Name;
 
 public interface ExerciseNamePresenter {
-    void present(ExerciseName exerciseName);
+    void present(Name exerciseName);
 }

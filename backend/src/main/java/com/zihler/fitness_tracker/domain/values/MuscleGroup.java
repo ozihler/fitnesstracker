@@ -12,25 +12,32 @@ public class MuscleGroup {
     private Exercises exercises;
     private boolean isSelectable = true;
 
-    public MuscleGroup(Name name) {
-        this(name, Exercises.empty());
-    }
-
-    public MuscleGroup(Name name, Exercises exercises) {
+    private MuscleGroup(Name name, Exercises exercises) {
         this.name = name;
         this.exercises = exercises;
     }
 
+    private MuscleGroup() {
+    }
+
+    public static MuscleGroup of(Name name) {
+        return of(name, Exercises.empty());
+    }
+
+    public static MuscleGroup of(Name name, Exercises exercises) {
+        return new MuscleGroup(name, exercises);
+    }
+
     public static MuscleGroup of(String name, Exercises exercises) {
-        return new MuscleGroup(Name.of(name), exercises);
+        return of(Name.of(name), exercises);
     }
 
     public static MuscleGroup of(String name, Exercise... exercises) {
         return of(name, Exercises.of(exercises));
     }
 
-    public static MuscleGroup withoutSets(String muscleGroupName, String... exerciseNames) {
-        return of(muscleGroupName, Exercises.of(Arrays.stream(exerciseNames).map(Exercise::of).collect(toList())));
+    public static MuscleGroup withoutSets(String name, String... exerciseNames) {
+        return of(name, Exercises.of(Arrays.stream(exerciseNames).map(Exercise::of).collect(toList())));
     }
 
     public Name getName() {
@@ -73,4 +80,5 @@ public class MuscleGroup {
     public boolean isSelectable() {
         return isSelectable;
     }
+
 }

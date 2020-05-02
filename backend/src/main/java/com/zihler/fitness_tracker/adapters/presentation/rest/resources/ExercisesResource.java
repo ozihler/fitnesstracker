@@ -4,7 +4,7 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercis
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercises.MakeExerciseUnselectableController;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercises.ViewAllExercisesController;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercises.requests.ExerciseNames;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.ExerciseNameViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.ExerciseViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.ExercisesViewModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,8 +50,8 @@ public class ExercisesResource {
     }
 
     @DeleteMapping(path = "/api/exercises/{exerciseName}")
-    public ResponseEntity<ExerciseNameViewModel> makeExerciseUnselectable(@PathVariable("exerciseName") String exerciseName) {
-        ResponseEntity<ExerciseNameViewModel> unselectableExercises = makeExerciseUnselectableController.makeUnselectable(exerciseName);
+    public ResponseEntity<ExerciseViewModel> makeExerciseUnselectable(@PathVariable("exerciseName") String exerciseName) {
+        ResponseEntity<ExerciseViewModel> unselectableExercises = makeExerciseUnselectableController.makeUnselectable(exerciseName);
 
         logger.info("create muscle groups {}", unselectableExercises.getBody());
 

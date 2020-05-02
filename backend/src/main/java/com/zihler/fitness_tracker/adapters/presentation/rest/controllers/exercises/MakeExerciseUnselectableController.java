@@ -2,7 +2,7 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exerci
 
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.exercises.inputs.ExerciseNameInput;
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.exercises.RestExerciseNamePresenter;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.ExerciseNameViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.ExerciseViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchExercise;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreExercise;
 import com.zihler.fitness_tracker.application.use_cases.exercises.make_exercise_unselectable.MakeExerciseUnselectableUseCase;
@@ -20,7 +20,7 @@ public class MakeExerciseUnselectableController {
         makeExerciseUnselectable = new MakeExerciseUnselectableUseCase(fetchExercise, storeExercise);
     }
 
-    public ResponseEntity<ExerciseNameViewModel> makeUnselectable(String exerciseName) {
+    public ResponseEntity<ExerciseViewModel> makeUnselectable(String exerciseName) {
         var output = new RestExerciseNamePresenter();
         var input = new ExerciseNameInput(exerciseName);
 

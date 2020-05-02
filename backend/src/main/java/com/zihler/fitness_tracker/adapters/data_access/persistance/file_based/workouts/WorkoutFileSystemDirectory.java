@@ -3,7 +3,7 @@ package com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.w
 import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.FileSystemDirectory;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.workouts.inputs.WorkoutFilesInput;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.workouts.outputs.WorkoutFilesOutput;
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.FullWorkoutViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.FullWorkoutViewModel;
 import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.Workouts;
 

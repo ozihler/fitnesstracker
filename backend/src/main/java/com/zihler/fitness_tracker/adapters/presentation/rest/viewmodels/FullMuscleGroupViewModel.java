@@ -1,4 +1,4 @@
-package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests;
+package com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

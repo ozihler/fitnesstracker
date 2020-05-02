@@ -2,6 +2,7 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ExerciseViewModel {
@@ -16,6 +17,10 @@ public class ExerciseViewModel {
     }
 
     public ExerciseViewModel() {
+    }
+
+    public ExerciseViewModel(String name) {
+        this(name, new ArrayList<>());
     }
 
     public String getName() {

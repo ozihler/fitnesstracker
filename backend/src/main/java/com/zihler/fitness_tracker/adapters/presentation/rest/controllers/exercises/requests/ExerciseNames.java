@@ -18,4 +18,8 @@ public class ExerciseNames {
     public String toString() {
         return String.format("ExerciseNames{'%s'}", input);
     }
+
+    public void setInput(String input) {
+        this.input = input;
+    }
 }

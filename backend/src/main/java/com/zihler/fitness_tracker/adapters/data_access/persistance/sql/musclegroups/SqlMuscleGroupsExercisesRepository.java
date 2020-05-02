@@ -50,7 +50,7 @@ public class SqlMuscleGroupsExercisesRepository implements
     }
 
     @Override
-    public Exercise byName(ExerciseName exerciseName) {
+    public Exercise byName(Name exerciseName) {
         var row = this.exercises.findByNameOrThrow(exerciseName.toString());
 
         var input = new ExerciseFromDBInput(row);

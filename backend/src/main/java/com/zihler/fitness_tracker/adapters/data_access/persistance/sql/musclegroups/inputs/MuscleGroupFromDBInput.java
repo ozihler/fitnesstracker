@@ -13,7 +13,7 @@ public class MuscleGroupFromDBInput {
     }
 
     public MuscleGroup muscleGroup() {
-        return new MuscleGroup(name(), exercises());
+        return   MuscleGroup.of(name(), exercises());
     }
 
     private Name name() {

@@ -6,7 +6,7 @@ import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreExerc
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.ExerciseNamePresenter;
 import com.zihler.fitness_tracker.application.use_cases.exercises.make_exercise_unselectable.inbound_port.MakeExerciseUnselectable;
 import com.zihler.fitness_tracker.domain.values.Exercise;
-import com.zihler.fitness_tracker.domain.values.ExerciseName;
+import com.zihler.fitness_tracker.domain.values.Name;
 
 public class MakeExerciseUnselectableUseCase implements MakeExerciseUnselectable {
     private FetchExercise fetchExercise;
@@ -19,10 +19,10 @@ public class MakeExerciseUnselectableUseCase implements MakeExerciseUnselectable
 
     @Override
     public void invokeWith(ExerciseNameInput input, ExerciseNamePresenter output) {
-        ExerciseName exerciseName = input.exerciseName();
+        Name exerciseName = input.exerciseName();
         Exercise exercise = fetchExercise.byName(exerciseName);
         exercise.setSelectable(false);
         Exercise storedExercise = storeExercise.withValues(exercise);
-        output.present(ExerciseName.of(storedExercise.getName().toString()));
+        output.present(Name.of(storedExercise.getName().toString()));
     }
 }
