@@ -12,6 +12,7 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.Workouts
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,7 @@ public class WorkoutsResource {
     private CreateWorkoutController createWorkoutController;
     private UpdateWorkoutController updateWorkoutController;
     private ViewAllWorkoutsController viewAllWorkoutsController;
+    private DownloadAllWorkoutsController downloadAllWorkoutsController;
     private ViewAllWorkoutsGroupedByMuscleGroupsController viewAllWorkoutsGroupedByMuscleGroupsController;
     private ViewSingleWorkoutController viewSingleWorkoutController;
     private CopyWorkoutController copyWorkoutController;
@@ -31,12 +33,14 @@ public class WorkoutsResource {
             CreateWorkoutController createWorkoutController,
             UpdateWorkoutController updateWorkoutController,
             ViewAllWorkoutsController viewAllWorkoutsController,
+            DownloadAllWorkoutsController downloadAllWorkoutsController,
             ViewAllWorkoutsGroupedByMuscleGroupsController viewAllWorkoutsGroupedByMuscleGroupsController,
             ViewSingleWorkoutController viewSingleWorkoutController,
             CopyWorkoutController copyWorkoutController) {
         this.createWorkoutController = createWorkoutController;
         this.updateWorkoutController = updateWorkoutController;
         this.viewAllWorkoutsController = viewAllWorkoutsController;
+        this.downloadAllWorkoutsController = downloadAllWorkoutsController;
         this.viewAllWorkoutsGroupedByMuscleGroupsController = viewAllWorkoutsGroupedByMuscleGroupsController;
         this.viewSingleWorkoutController = viewSingleWorkoutController;
         this.copyWorkoutController = copyWorkoutController;
@@ -72,6 +76,15 @@ public class WorkoutsResource {
     @GetMapping(path = "/api/workouts/overview")
     public ResponseEntity<WorkoutsInOverviewViewModel> viewAllWorkouts() {
         ResponseEntity<WorkoutsInOverviewViewModel> workouts = viewAllWorkoutsController.viewAllWorkouts();
+
+        logger.info("All workouts:{}", workouts);
+
+        return workouts;
+    }
+
+    @GetMapping(path = "/api/workouts/download")
+    public ResponseEntity<InputStreamResource> downloadAllWorkouts() {
+        ResponseEntity<InputStreamResource> workouts = downloadAllWorkoutsController.downloadAllWorkouts();
 
         logger.info("All workouts:{}", workouts);
 

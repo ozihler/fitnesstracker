@@ -8,6 +8,7 @@ import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.exception
 import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.exceptions.MuscleGroupNotFoundException;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.exceptions.WorkoutNotFoundException;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups.requests.EmptyMuscleGroupsRequest;
+import com.zihler.fitness_tracker.adapters.presentation.rest.exceptions.CouldNotMapWorkoutsToBytesException;
 import com.zihler.fitness_tracker.application.use_cases.workouts.copy_workout.roles.exceptions.WorkoutNotCopiedYetException;
 import com.zihler.fitness_tracker.domain.exceptions.InvalidTitleException;
 import org.slf4j.Logger;
@@ -29,6 +30,11 @@ public class ErrorHandling {
     public ResponseEntity<ErrorViewModel> handleGenericException(Exception bad) {
         log(bad);
         return status(I_AM_A_TEAPOT).body(new ErrorViewModel(Arrays.toString(bad.getStackTrace()) + ", " + bad.getMessage()));
+    }
+    @ExceptionHandler(value = CouldNotMapWorkoutsToBytesException.class)
+    public ResponseEntity<ErrorViewModel> handleCouldNotMapWorkoutsToBytesException(CouldNotMapWorkoutsToBytesException bad) {
+        log(bad);
+        return status(INTERNAL_SERVER_ERROR).body(new ErrorViewModel(Arrays.toString(bad.getStackTrace()) + ", " + bad.getMessage()));
     }
 
     @ExceptionHandler(value = InvalidTitleException.class)

@@ -3,7 +3,7 @@ package com.zihler.fitness_tracker.application.use_cases.workouts.view_all_worko
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutsDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchWorkouts;
-import com.zihler.fitness_tracker.application.outbound_ports.presenters.WorkoutsInOverviewPresenter;
+import com.zihler.fitness_tracker.application.outbound_ports.presenters.WorkoutsPresenter;
 import com.zihler.fitness_tracker.domain.values.Workouts;
 
 import java.util.List;
@@ -11,9 +11,9 @@ import java.util.stream.Collectors;
 
 public class DisplayableWorkouts {
     private final Workouts self;
-    private WorkoutsInOverviewPresenter output;
+    private WorkoutsPresenter output;
 
-    public DisplayableWorkouts(FetchWorkouts fetchWorkouts, WorkoutsInOverviewPresenter output) {
+    public DisplayableWorkouts(FetchWorkouts fetchWorkouts, WorkoutsPresenter output) {
         self = fetchWorkouts.all();
         this.output = output;
     }

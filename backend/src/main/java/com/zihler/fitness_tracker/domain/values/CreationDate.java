@@ -4,7 +4,7 @@ import java.time.*;
 import java.util.Objects;
 
 public class CreationDate {
-    private static ZoneId zone = Clock.systemDefaultZone().getZone();
+    private static final ZoneId zone = Clock.systemDefaultZone().getZone();
 
     private final LocalDate creationDate;
 

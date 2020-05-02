@@ -9,8 +9,6 @@ import com.zihler.fitness_tracker.domain.values.WorkoutId;
 import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
 import org.junit.jupiter.api.Test;
 
-import java.time.Clock;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.List;
 
