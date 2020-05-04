@@ -83,7 +83,7 @@ public class FileSystemInMemoryMuscleGroupsExercisesRepository
         MuscleGroup muscleGroup = muscleGroupsAndExercises.get(muscleGroupName);
 
         if (muscleGroup == null) {
-            muscleGroup = MuscleGroup.of(muscleGroupName, exercises);
+            muscleGroup = new MuscleGroup(muscleGroupName, exercises);
         } else {
             muscleGroup.add(exercises);
         }

@@ -17,7 +17,7 @@ class ViewAllExercisesControllerTest {
 
     @Test
     void test() {
-        MuscleGroup expectedMuscleGroup =   MuscleGroup.of(Name.of("Chest"));
+        MuscleGroup expectedMuscleGroup = new MuscleGroup(Name.of("Chest"), Exercises.empty());
         List<Exercise> expectedExercises = List.of(
                   ExerciseInput.of("Bench Press"),
                   ExerciseInput.of("Dumbbell Bench Press"),

@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.List;
 
-import static com.zihler.fitness_tracker.domain.values.MuscleGroup.of;
 import static com.zihler.fitness_tracker.domain.values.MuscleGroups.muscleGroups;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -18,19 +17,18 @@ class WorkoutFileSystemDirectoryTest {
     void test() {
         WorkoutFileSystemDirectory directory = WorkoutFileSystemDirectory.mkDir("test-workouts");
 
+        final Exercise[] bench_presses = new Exercise[]{new Exercise(Name.of("Bench Press"), Sets.of(List.of(
+                Set.withValues(Weight.of(55, UnitOfMeasurement.KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS)),
+                Set.withValues(Weight.of(50, UnitOfMeasurement.KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS)),
+                Set.withValues(Weight.of(45, UnitOfMeasurement.KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS))
+                )
+        ), Multiplier.defaultValue())};
+        final Exercises of = Exercises.of(bench_presses);
         Workout workout =   Workout.from(
                 WorkoutId.of("x-1-2"),
                 CreationDate.from(LocalDate.now()), WorkoutTitle.of("WORKOUT TITLE"),
                 muscleGroups(
-                        of("Chest",
-                                ExerciseInput.of(
-                                        Name.of("Bench Press"),
-                                        Sets.of(List.of(
-                                                Set.withValues(Weight.of(55, UnitOfMeasurement.KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS)),
-                                                Set.withValues(Weight.of(50, UnitOfMeasurement.KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS)),
-                                                Set.withValues(Weight.of(45, UnitOfMeasurement.KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS))
-                                                )
-                                        ), Multiplier.defaultValue()))));
+                        new MuscleGroup(Name.of("Chest"), of)));
 
 
         directory.save(workout);
@@ -40,7 +38,7 @@ class WorkoutFileSystemDirectoryTest {
         assertEquals(1, workouts1.size());
         Workout workout1 = workouts1.get(0);
         assertEquals(workout.getWorkoutId(), workout1.getWorkoutId());
-        directory.remove();
+        directory.clearFolder();
     }
 
 }

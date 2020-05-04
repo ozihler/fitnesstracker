@@ -1,6 +1,7 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.Namable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.Objects;
 
 import static java.util.stream.Collectors.joining;
 
-public class MuscleGroupViewModel {
+public class MuscleGroupViewModel implements Namable {
     @JsonProperty("name")
     private String name;
     @JsonProperty("exercises")
@@ -54,5 +55,10 @@ public class MuscleGroupViewModel {
     @Override
     public int hashCode() {
         return Objects.hash(name);
+    }
+
+    @Override
+    public String name() {
+        return name;
     }
 }

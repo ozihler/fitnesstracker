@@ -1,17 +1,16 @@
 package com.zihler.fitness_tracker.adapters.gateways.json;
 
 import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.musclegroups.MuscleGroupAndExercisesFileSystemDirectory;
-import com.zihler.fitness_tracker.domain.values.Exercise;
-import com.zihler.fitness_tracker.domain.values.Exercises;
-import com.zihler.fitness_tracker.domain.values.MuscleGroup;
-import com.zihler.fitness_tracker.domain.values.Name;
+import com.zihler.fitness_tracker.domain.values.*;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.zihler.fitness_tracker.domain.values.MuscleGroups.muscleGroups;
+import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -20,10 +19,16 @@ public class MuscleGroupAndExercisesFileSystemDirectoryDirectoryIOTest {
     void testWriteReadMuscleGroupsToFileSystem() {
         var fs = MuscleGroupAndExercisesFileSystemDirectory.mkDir("test-muscleGroupsAndExercises");
 
+        final String[] strings = new String[]{"Bench Press", "Push Ups", "Incline Dumbbell Bench Press"};
+        final Exercises of = Exercises.of(Arrays.stream(strings).map(ExerciseInput::of).collect(toList()));
+        final String[] strings1 = new String[]{"Arnold Press", "Side Lifts", "Wide Barbell Lift"};
+        final Exercises of1 = Exercises.of(Arrays.stream(strings1).map(ExerciseInput::of).collect(toList()));
+        final String[] strings2 = new String[]{"Lat Pull", "Overhead Lat Pull", "Dips"};
+        final Exercises of2 = Exercises.of(Arrays.stream(strings2).map(ExerciseInput::of).collect(toList()));
         var toStore = muscleGroups(
-                MuscleGroup.withoutSets("Chest", "Bench Press", "Push Ups", "Incline Dumbbell Bench Press"),
-                MuscleGroup.withoutSets("Shoulders", "Arnold Press", "Side Lifts", "Wide Barbell Lift"),
-                MuscleGroup.withoutSets("Triceps", "Lat Pull", "Overhead Lat Pull", "Dips"));
+                new MuscleGroup(Name.of("Chest"), of),
+                new MuscleGroup(Name.of("Shoulders"), of1),
+                new MuscleGroup(Name.of("Triceps"), of2));
 
         var stored = fs.save(toStore);
 
@@ -48,7 +53,7 @@ public class MuscleGroupAndExercisesFileSystemDirectoryDirectoryIOTest {
                         "Lat Pull", "Overhead Lat Pull", "Dips"
                 ));
 
-        fs.remove();
+        fs.clearFolder();
     }
 
 }

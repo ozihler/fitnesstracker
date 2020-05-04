@@ -1,10 +1,7 @@
 package com.zihler.fitness_tracker.domain.values;
 
 
-import java.util.Arrays;
 import java.util.Objects;
-
-import static java.util.stream.Collectors.toList;
 
 public class MuscleGroup {
     // replace with muscle group name
@@ -12,38 +9,16 @@ public class MuscleGroup {
     private Exercises exercises;
     private boolean isSelectable = true;
 
-    private MuscleGroup(Name name, Exercises exercises) {
+    public MuscleGroup(Name name, Exercises exercises) {
         this.name = name;
         this.exercises = exercises;
-    }
-
-    private MuscleGroup() {
-    }
-
-    public static MuscleGroup of(Name name) {
-        return of(name, Exercises.empty());
-    }
-
-    public static MuscleGroup of(Name name, Exercises exercises) {
-        return new MuscleGroup(name, exercises);
-    }
-
-    public static MuscleGroup of(String name, Exercises exercises) {
-        return of(Name.of(name), exercises);
-    }
-
-    public static MuscleGroup of(String name, Exercise... exercises) {
-        return of(name, Exercises.of(exercises));
-    }
-
-    public static MuscleGroup withoutSets(String name, String... exerciseNames) {
-        return of(name, Exercises.of(Arrays.stream(exerciseNames).map(ExerciseInput::of).collect(toList())));
     }
 
     public Name getName() {
         return name;
     }
 
+    //todo this needs to die!!
     public void add(Exercise exercise) {
         exercises.add(exercise);
     }

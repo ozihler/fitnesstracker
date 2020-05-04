@@ -93,7 +93,7 @@ public class FileSystemDirectory<T extends Namable> {
         return jsonFileWriter;
     }
 
-    public void remove() {
+    public void clearFolder() {
         try {
             Files.walk(pathToFolder.toAbsolutePath())
                     .filter(Files::isRegularFile)

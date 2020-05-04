@@ -5,13 +5,11 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.Exercise
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.ExercisesViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchMuscleGroup;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreExercises;
-import com.zihler.fitness_tracker.domain.values.Exercise;
-import com.zihler.fitness_tracker.domain.values.Multiplier;
-import com.zihler.fitness_tracker.domain.values.MuscleGroup;
-import com.zihler.fitness_tracker.domain.values.Name;
+import com.zihler.fitness_tracker.domain.values.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Set;
 
@@ -25,10 +23,10 @@ class CreateExercisesControllerTest {
 
     @Test
     void happyCaseTest() {
-        FetchMuscleGroup fetchMuscleGroup = name -> MuscleGroup.of(name.toString());
+        FetchMuscleGroup fetchMuscleGroup = name -> new MuscleGroup(name, Exercises.of(new ArrayList<>()));
 
         StoreExercises storeExercises = (muscleGroupName, exercises) -> {
-            storedMuscleGroup = MuscleGroup.of(muscleGroupName, exercises);
+            storedMuscleGroup = new MuscleGroup(muscleGroupName, exercises);
             return exercises;
         };
 

@@ -11,9 +11,6 @@ public class MuscleGroupToCopy {
     }
 
     public MuscleGroup copy() {
-        return   MuscleGroup.of(
-                Name.of(muscleGroup.getName().toString()),
-                new ExercisesToCopy(muscleGroup.getExercises()).copy()
-        );
+        return new MuscleGroup(Name.of(muscleGroup.getName().toString()), new ExercisesToCopy(muscleGroup.getExercises()).copy());
     }
 }

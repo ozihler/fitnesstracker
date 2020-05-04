@@ -5,6 +5,7 @@ import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGro
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreMuscleGroups;
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.MuscleGroupsPresenter;
 import com.zihler.fitness_tracker.application.use_cases.muscleGroups.create_muscle_groups.inbound_port.CreateMuscleGroups;
+import com.zihler.fitness_tracker.domain.values.Exercises;
 import com.zihler.fitness_tracker.domain.values.MuscleGroup;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 
@@ -38,7 +39,7 @@ public class CreateMuscleGroupsUseCase implements CreateMuscleGroups {
         return muscleGroupsDocument.getMuscleGroups()
                 .stream()
                 .map(MuscleGroupDocument::getName)
-                .map(MuscleGroup::of)
+                .map(name -> new MuscleGroup(name, Exercises.empty()))
                 .distinct()
                 .collect(toList());
     }

@@ -1,9 +1,6 @@
 package com.zihler.fitness_tracker.application.use_cases.workouts.copy_workout.roles;
 
-import com.zihler.fitness_tracker.domain.values.Exercise;
-import com.zihler.fitness_tracker.domain.values.ExerciseInput;
-import com.zihler.fitness_tracker.domain.values.Multiplier;
-import com.zihler.fitness_tracker.domain.values.Name;
+import com.zihler.fitness_tracker.domain.values.*;
 
 public class ExerciseToCopy {
     private Exercise self;
@@ -13,7 +10,6 @@ public class ExerciseToCopy {
     }
 
     public Exercise copy() {
-        return ExerciseInput.of(
-                Name.of(self.getName().toString()), new SetsToCopy(self.getSets()).copy(), Multiplier.defaultValue());
+        return new Exercise(Name.of(self.getName().toString()), new SetsToCopy(self.getSets()).copy(), Multiplier.defaultValue());
     }
 }

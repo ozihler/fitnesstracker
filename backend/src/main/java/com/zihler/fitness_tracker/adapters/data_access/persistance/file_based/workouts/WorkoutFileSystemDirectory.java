@@ -2,7 +2,7 @@ package com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.w
 
 import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.FileSystemDirectory;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.workouts.inputs.WorkoutFilesInput;
-import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.workouts.outputs.WorkoutFilesOutput;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.workouts.outputs.WorkoutFileOutput;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutViewModel;
 import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.Workouts;
@@ -25,12 +25,12 @@ public class WorkoutFileSystemDirectory {
     }
 
     public Workout save(Workout workout) {
-        WorkoutViewModel file = WorkoutFilesOutput.from(workout).asFile();
+        WorkoutViewModel file = WorkoutFileOutput.from(workout).file();
         this.fileSystemDirectory.store(file);
         return workout;
     }
 
-    public void remove() {
-        this.fileSystemDirectory.remove();
+    public void clearFolder() {
+        this.fileSystemDirectory.clearFolder();
     }
 }

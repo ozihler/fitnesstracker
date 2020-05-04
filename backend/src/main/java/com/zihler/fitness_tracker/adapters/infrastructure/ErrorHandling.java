@@ -4,9 +4,6 @@ import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.ex
 import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.exceptions.CouldNotDeleteFolderException;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.exceptions.LoadingDataFromFileSystemFailed;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.exceptions.StoringToFileSystemFailed;
-import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.exceptions.ExerciseNotFoundException;
-import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.exceptions.MuscleGroupNotFoundException;
-import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.exceptions.WorkoutNotFoundException;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.musclegroups.requests.EmptyMuscleGroupsRequest;
 import com.zihler.fitness_tracker.adapters.presentation.rest.exceptions.CouldNotMapWorkoutsToBytesException;
 import com.zihler.fitness_tracker.application.use_cases.workouts.copy_workout.roles.exceptions.WorkoutNotCopiedYetException;
@@ -77,21 +74,6 @@ public class ErrorHandling {
     public ResponseEntity<ErrorViewModel> handleEmptyMuscleGroupsRequest(Exception bad) {
         log(bad);
         return status(BAD_REQUEST).body(new ErrorViewModel(bad.getMessage()));
-    }
-    @ExceptionHandler(value = ExerciseNotFoundException.class)
-    public ResponseEntity<ErrorViewModel> handleExerciseNotFoundException(Exception bad) {
-        log(bad);
-        return status(NOT_FOUND).body(new ErrorViewModel(bad.getMessage()));
-    }
-    @ExceptionHandler(value = MuscleGroupNotFoundException.class)
-    public ResponseEntity<ErrorViewModel> handleMuscleGroupNotFoundException(Exception bad) {
-        log(bad);
-        return status(NOT_FOUND).body(new ErrorViewModel(bad.getMessage()));
-    }
-    @ExceptionHandler(value = WorkoutNotFoundException.class)
-    public ResponseEntity<ErrorViewModel> handleWorkoutNotFoundException(Exception bad) {
-        log(bad);
-        return status(NOT_FOUND).body(new ErrorViewModel(bad.getMessage()));
     }
 
     private void log(Exception bad) {

@@ -27,12 +27,12 @@ public class UpdatableWorkout {
         MuscleGroups workoutMuscleGroups = new MuscleGroups();
 
         for (MuscleGroupDocument m : update.getMuscleGroups().getMuscleGroups()) {
-            MuscleGroup muscleGroup = MuscleGroup.of(m.getName());
+            MuscleGroup muscleGroup = new MuscleGroup(m.getName(), Exercises.empty());
             workoutMuscleGroups.add(muscleGroup);
 
             for (ExerciseDocument e : m.getExercises().getExercises()) {
                 Sets sets = Sets.of(e.getSets().getSets().stream().map(s -> new Set(s.getWeight(), s.getRepetitions(), s.getWaitingTime())).collect(toList()));
-                Exercise exercise = ExerciseInput.of(e.getName(),sets, Multiplier.defaultValue());
+                Exercise exercise = new Exercise(e.getName(), sets, Multiplier.defaultValue());
                 muscleGroup.add(exercise);
             }
         }
