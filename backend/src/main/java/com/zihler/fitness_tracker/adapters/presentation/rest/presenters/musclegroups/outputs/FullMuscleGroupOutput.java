@@ -15,7 +15,8 @@ class FullMuscleGroupOutput {
     public MuscleGroupViewModel toViewModel() {
         return new MuscleGroupViewModel(
                 document.getName().toString(),
-                new FullExercisesOutput(document.getExercises()).toViewModel());
+                new FullExercisesOutput(document.getExercises()).toViewModel(),
+                document.isSelectable());
 
 
     }

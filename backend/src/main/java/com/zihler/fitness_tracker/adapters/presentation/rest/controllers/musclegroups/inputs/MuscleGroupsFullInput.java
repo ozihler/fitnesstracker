@@ -20,7 +20,7 @@ public class MuscleGroupsFullInput {
     public MuscleGroupsDocument toDocument() {
         return MuscleGroupsDocument.of(muscleGroups
                 .stream()
-                .map(m -> new MuscleGroupDocument(Name.of(m.getName()), new ExercisesFullInput(m.getExercises()).toDocument()))
+                .map(m -> new MuscleGroupDocument(Name.of(m.getName()), new ExercisesFullInput(m.getExercises()).toDocument(), m.isSelectable()))
                 .collect(toList()));
     }
 

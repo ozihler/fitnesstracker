@@ -42,7 +42,8 @@ public class MuscleGroupToExtend {
                 .map(e -> new ExerciseDocument(
                         e.getName(),
                         SetsDocument.of(e.getSets().getSets().stream().map(s -> SetDocument.of(s.getWeight(), s.getRepetitions(), s.getWaitingTime())).collect(toList())),
-                        e.getMultiplier()))
+                        e.getMultiplier(),
+                        e.isSelectable()))
                 .collect(toList()));
     }
 }

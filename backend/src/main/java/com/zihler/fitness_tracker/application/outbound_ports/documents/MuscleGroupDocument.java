@@ -11,18 +11,20 @@ import static java.util.stream.Collectors.toList;
 public class MuscleGroupDocument {
     private Name name;
     private ExercisesDocument exercises;
+    private boolean isSelectable;
 
     public ExercisesDocument getExercises() {
         return exercises;
     }
 
     public MuscleGroupDocument(Name name) {
-        this(name, new ExercisesDocument());
+        this(name, new ExercisesDocument(), true);
     }
 
-    public MuscleGroupDocument(Name name, ExercisesDocument exercises) {
+    public MuscleGroupDocument(Name name, ExercisesDocument exercises, boolean isSelectable) {
         this.name = name;
         this.exercises = exercises;
+        this.isSelectable = isSelectable;
     }
 
     public static MuscleGroupDocument of(MuscleGroup muscleGroup) {
@@ -35,8 +37,9 @@ public class MuscleGroupDocument {
                                         new ExerciseDocument(
                                                 e.getName(),
                                                 SetsDocument.of(e.getSets().getSets().stream().map(s -> SetDocument.of(s.getWeight(), s.getRepetitions(), s.getWaitingTime())).collect(toList())),
-                                                e.getMultiplier()))
-                                .collect(toList())));
+                                                e.getMultiplier(), e.isSelectable()))
+                                .collect(toList())),
+                muscleGroup.isSelectable());
     }
 
     public static MuscleGroupDocument of(Name name) {
@@ -50,7 +53,7 @@ public class MuscleGroupDocument {
     public MuscleGroupDocument add(ExerciseDocument exercise) {
         ExercisesDocument exercises = new ExercisesDocument();
         exercises.add(exercise);
-        return new MuscleGroupDocument(name, exercises);
+        return new MuscleGroupDocument(name, exercises, isSelectable);
     }
 
     @Override
@@ -73,5 +76,9 @@ public class MuscleGroupDocument {
     @Override
     public int hashCode() {
         return Objects.hash(name);
+    }
+
+    public boolean isSelectable() {
+        return isSelectable;
     }
 }

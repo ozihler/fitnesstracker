@@ -14,6 +14,8 @@ class FullExerciseOutput {
     public ExerciseViewModel toViewModel() {
         return new ExerciseViewModel(
                 exercise.getName().toString(),
-                new FullSetsOutput(exercise.getSets()).toViewModel(), exercise.getMultiplier().value());
+                new FullSetsOutput(exercise.getSets()).toViewModel(),
+                exercise.getMultiplier().value(),
+                exercise.isSelectable());
     }
 }

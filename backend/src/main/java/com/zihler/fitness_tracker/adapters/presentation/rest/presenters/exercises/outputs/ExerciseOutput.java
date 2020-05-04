@@ -17,7 +17,8 @@ class ExerciseOutput {
         return new ExerciseViewModel(
                 exercise.getName().toString(),
                 setsOutput.toViewModel(),
-                exercise.getMultiplier().value());
+                exercise.getMultiplier().value(),
+                exercise.isSelectable());
     }
 
 

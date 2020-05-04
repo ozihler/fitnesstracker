@@ -8,11 +8,13 @@ public class ExerciseDocument {
     private Name name;
     private SetsDocument sets;
     private Multiplier multiplier;
+    private boolean isSelectable;
 
-    public ExerciseDocument(Name name, SetsDocument sets, Multiplier multiplier) {
+    public ExerciseDocument(Name name, SetsDocument sets, Multiplier multiplier, boolean isSelectable) {
         this.name = name;
         this.sets = sets;
         this.multiplier = multiplier;
+        this.isSelectable = isSelectable;
     }
 
     public Name getName() {
@@ -25,5 +27,9 @@ public class ExerciseDocument {
 
     public Multiplier getMultiplier() {
         return this.multiplier;
+    }
+
+    public boolean isSelectable() {
+        return isSelectable;
     }
 }

@@ -43,21 +43,21 @@ class UpdateWorkoutControllerTest {
                                 SetViewModel.of(50, 12, 45),
                                 SetViewModel.of(50, 12, 45),
                                 SetViewModel.of(50, 12, 45)
-                        ), 1),
+                        ), 1,true),
                         new ExerciseViewModel("Flying", List.of(
                                 SetViewModel.of(50, 12, 45),
                                 SetViewModel.of(50, 12, 45),
                                 SetViewModel.of(50, 12, 45)
-                        ), 1)
+                        ), 1,true)
 
-                )),
+                ),true),
                 new MuscleGroupViewModel("Triceps", List.of(
                         new ExerciseViewModel("Lat Pull", List.of(
                                 SetViewModel.of(50, 12, 45),
                                 SetViewModel.of(50, 12, 45),
                                 SetViewModel.of(50, 12, 45)
-                        ),1)
-                ))
+                        ),1,true)
+                ),true)
 
         ));
 

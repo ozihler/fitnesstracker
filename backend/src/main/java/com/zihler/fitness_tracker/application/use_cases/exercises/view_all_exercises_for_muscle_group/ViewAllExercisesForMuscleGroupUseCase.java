@@ -12,7 +12,6 @@ import com.zihler.fitness_tracker.domain.values.MuscleGroupName;
 import com.zihler.fitness_tracker.domain.values.Sets;
 
 import java.util.List;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
@@ -34,7 +33,7 @@ public class ViewAllExercisesForMuscleGroupUseCase implements ViewAllExercisesFo
 
     private List<ExerciseDocument> toDocuments(Exercises exercises) {
         return exercises.getExercises().stream()
-                .map(exercise -> new ExerciseDocument(exercise.getName(), toDocument(exercise.getSets()), exercise.getMultiplier()))
+                .map(exercise -> new ExerciseDocument(exercise.getName(), toDocument(exercise.getSets()), exercise.getMultiplier(), exercise.isSelectable()))
                 .collect(Collectors.toList());
     }
 

@@ -41,7 +41,7 @@ class UpdateWorkoutUseCaseTest {
         sets.add(new SetDocument(Weight.of(55, KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS)));
         MuscleGroupsDocument muscleGroups = new MuscleGroupsDocument(
                 List.of(new MuscleGroupDocument(Name.of("Chest"))
-                        .add(new ExerciseDocument(Name.of("Bench Press"), sets, Multiplier.defaultValue()))));
+                        .add(new ExerciseDocument(Name.of("Bench Press"), sets, Multiplier.defaultValue(),true))));
 
         WorkoutDocument updatedWorkoutInput = new WorkoutDocument(initialWorkout.getWorkoutId(), initialWorkout.getCreationDate(), WorkoutTitle.of("New Title"), muscleGroups);
         updateWorkoutUseCase.invokeWith(updatedWorkoutInput, output);
