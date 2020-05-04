@@ -30,7 +30,7 @@ class ExercisesFullInput {
         return new ExerciseDocument(
                 Name.of(e.getName()),
                 new SetsFullInput(e.getSets()).toDocument(),
-                Multiplier.of(e.getMultiplier()), e.isSelectable());
+                Multiplier.of(e.getMultiplier()), e.getSelectable());
     }
 
 }
