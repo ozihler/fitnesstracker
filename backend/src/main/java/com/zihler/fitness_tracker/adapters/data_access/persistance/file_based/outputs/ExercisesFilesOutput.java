@@ -19,7 +19,8 @@ public class ExercisesFilesOutput {
                 .stream().map(e -> new ExerciseViewModel(
                         e.getName().toString(),
                         new SetsFilesOutput(e.getSets()).files(),
-                        e.getMultiplier().value()))
+                        e.getMultiplier().value(),
+                        e.isSelectable()))
                 .collect(toList());
     }
 }

@@ -12,19 +12,19 @@ public class ExerciseViewModel {
     private List<SetViewModel> sets;
     @JsonProperty("multiplier")
     private int multiplier;
+    @JsonProperty("isSelectable")
+    private boolean isSelectable;
 
-    public ExerciseViewModel() {
-    }
-
-    public ExerciseViewModel(String name, List<SetViewModel> sets, int multiplier) {
+    public ExerciseViewModel(String name, List<SetViewModel> sets, int multiplier, boolean isSelectable) {
         this.name = name;
         this.sets = sets;
         this.multiplier = multiplier;
+        this.isSelectable = isSelectable;
     }
 
 
     public ExerciseViewModel(String name) {
-        this(name, new ArrayList<>(), 1);
+        this(name, new ArrayList<>(), 1, true);
     }
 
     public String getName() {
@@ -39,12 +39,17 @@ public class ExerciseViewModel {
         return multiplier;
     }
 
+    public boolean isSelectable() {
+        return isSelectable;
+    }
+
     @Override
     public String toString() {
         return "ExerciseViewModel{" +
                 "name='" + name + '\'' +
                 ", sets=" + sets +
                 ", multiplier=" + multiplier +
+                ", isSelectable=" + isSelectable +
                 '}';
     }
 }

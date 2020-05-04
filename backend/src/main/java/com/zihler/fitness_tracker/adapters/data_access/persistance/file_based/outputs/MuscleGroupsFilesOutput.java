@@ -17,7 +17,8 @@ public class MuscleGroupsFilesOutput {
         return muscleGroups.getMuscleGroups().stream()
                 .map(m -> new MuscleGroupViewModel(
                         m.getName().toString(),
-                        new ExercisesFilesOutput(m.getExercises()).files()))
+                        new ExercisesFilesOutput(m.getExercises()).files(),
+                        m.isSelectable()))
                 .collect(Collectors.toList());
     }
 }

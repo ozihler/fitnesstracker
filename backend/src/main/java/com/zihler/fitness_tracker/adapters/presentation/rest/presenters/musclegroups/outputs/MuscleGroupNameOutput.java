@@ -4,7 +4,7 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.MuscleGr
 import com.zihler.fitness_tracker.domain.values.Name;
 
 public class MuscleGroupNameOutput {
-    private Name name; // todo make MuscleGroupName
+    private Name name;
 
     public MuscleGroupNameOutput(Name name) {
         this.name = name;
