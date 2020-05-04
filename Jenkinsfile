@@ -49,7 +49,7 @@ pipeline {
 
         stage("Deploy to staging") {
             steps {
-                sh "docker stop /fitnesstracker || true && docker run -d --rm -p 8091:5000 --name fitnesstracker ozihler/fitnesstracker:1"
+                sh "docker stop /fitnesstracker || true && sleep 10 && docker run -d --rm -p 8091:5000 --name fitnesstracker ozihler/fitnesstracker:1"
             }
         }
     }
