@@ -17,6 +17,9 @@ public class MuscleGroupViewModel implements Namable {
     @JsonProperty("isSelectable")
     private boolean isSelectable;
 
+    public MuscleGroupViewModel() {
+    }
+
     public MuscleGroupViewModel(String name) {
         this(name, new ArrayList<>(), true);
     }

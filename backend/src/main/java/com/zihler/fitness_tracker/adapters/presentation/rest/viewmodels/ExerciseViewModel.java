@@ -23,6 +23,9 @@ public class ExerciseViewModel {
     }
 
 
+    public ExerciseViewModel() {
+    }
+
     public ExerciseViewModel(String name) {
         this(name, new ArrayList<>(), 1, true);
     }
