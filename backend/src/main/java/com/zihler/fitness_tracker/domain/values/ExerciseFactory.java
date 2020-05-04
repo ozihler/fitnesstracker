@@ -2,16 +2,16 @@ package com.zihler.fitness_tracker.domain.values;
 
 import java.util.regex.Pattern;
 
-public class ExerciseInput {
-    public static Exercise of(String name) {
-        name = name.trim();
+public class ExerciseFactory {
+    public static Exercise createExerciseFrom(String inputValue) {
+        inputValue = inputValue.trim();
         // note: a single wielding exercise can be either dumbbell or barbell,
         // whereas it gets pretty adventurous to wield two barbells at the same time ;)
         // So double wielding are >>always<< dumbbell for now.
-        if (isSingleWieldingExercise(name)) {
-            return new Exercise(Name.of(name), Sets.empty(), Multiplier.defaultValue());
+        if (isSingleWieldingExercise(inputValue)) {
+            return new Exercise(Name.of(inputValue), Sets.empty(), Multiplier.defaultValue());
         } else {
-            return dualWieldingDumbbellExercise(name);
+            return dualWieldingDumbbellExercise(inputValue);
         }
     }
 

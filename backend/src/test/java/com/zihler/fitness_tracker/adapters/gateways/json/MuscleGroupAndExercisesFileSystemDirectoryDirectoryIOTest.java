@@ -20,11 +20,11 @@ public class MuscleGroupAndExercisesFileSystemDirectoryDirectoryIOTest {
         var fs = MuscleGroupAndExercisesFileSystemDirectory.mkDir("test-muscleGroupsAndExercises");
 
         final String[] strings = new String[]{"Bench Press", "Push Ups", "Incline Dumbbell Bench Press"};
-        final Exercises of = Exercises.of(Arrays.stream(strings).map(ExerciseInput::of).collect(toList()));
+        final Exercises of = Exercises.of(Arrays.stream(strings).map(ExerciseFactory::createExerciseFrom).collect(toList()));
         final String[] strings1 = new String[]{"Arnold Press", "Side Lifts", "Wide Barbell Lift"};
-        final Exercises of1 = Exercises.of(Arrays.stream(strings1).map(ExerciseInput::of).collect(toList()));
+        final Exercises of1 = Exercises.of(Arrays.stream(strings1).map(ExerciseFactory::createExerciseFrom).collect(toList()));
         final String[] strings2 = new String[]{"Lat Pull", "Overhead Lat Pull", "Dips"};
-        final Exercises of2 = Exercises.of(Arrays.stream(strings2).map(ExerciseInput::of).collect(toList()));
+        final Exercises of2 = Exercises.of(Arrays.stream(strings2).map(ExerciseFactory::createExerciseFrom).collect(toList()));
         var toStore = muscleGroups(
                 new MuscleGroup(Name.of("Chest"), of),
                 new MuscleGroup(Name.of("Shoulders"), of1),

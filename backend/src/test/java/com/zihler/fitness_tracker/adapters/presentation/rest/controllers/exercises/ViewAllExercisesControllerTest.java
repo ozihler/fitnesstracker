@@ -19,9 +19,9 @@ class ViewAllExercisesControllerTest {
     void test() {
         MuscleGroup expectedMuscleGroup = new MuscleGroup(Name.of("Chest"), Exercises.empty());
         List<Exercise> expectedExercises = List.of(
-                  ExerciseInput.of("Bench Press"),
-                  ExerciseInput.of("Dumbbell Bench Press"),
-                  ExerciseInput.of("Overhead Dumbbell Pull"));
+                  ExerciseFactory.createExerciseFrom("Bench Press"),
+                  ExerciseFactory.createExerciseFrom("Dumbbell Bench Press"),
+                  ExerciseFactory.createExerciseFrom("Overhead Dumbbell Pull"));
 
         FetchExercises fetchExercises = (muscleGroup -> Exercises.of(expectedExercises));
         FetchMuscleGroup fetchMuscleGroup = name -> expectedMuscleGroup;
