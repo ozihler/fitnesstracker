@@ -11,7 +11,7 @@ import {Exercise} from "./exercise";
 import {Set} from "./set";
 import {WorkoutEntriesRaw} from "./workout-entries-raw";
 import {WorkoutEntryFactory} from "./workout-entry.factory";
-import {WorkoutId} from "./workoutId";
+import {WorkoutId} from "./workout-id";
 import {WorkoutIdRaw} from "./workout-id-raw";
 
 

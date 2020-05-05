@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
-import {WorkoutId} from "../shared/workoutId";
+import {WorkoutId} from "../shared/workout-id";
 
 @Component({
   selector: `app-workout-entry`,

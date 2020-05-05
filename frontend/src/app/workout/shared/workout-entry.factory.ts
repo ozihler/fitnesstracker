@@ -1,4 +1,4 @@
-import {WorkoutId} from "./workoutId";
+import {WorkoutId} from "./workout-id";
 import {WorkoutEntryRaw} from "./workout-entry-raw";
 import {WorkoutEntriesRaw} from "./workout-entries-raw";
 import {WorkoutEntry} from "./workout-entry";

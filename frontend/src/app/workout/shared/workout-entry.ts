@@ -1,4 +1,4 @@
-import {WorkoutId} from "./workoutId";
+import {WorkoutId} from "./workout-id";
 
 export class WorkoutEntry {
   constructor(private _workoutId: WorkoutId, private  _title: string, private _creationDate: Date) {

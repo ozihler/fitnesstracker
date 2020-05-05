@@ -1,6 +1,6 @@
 import {WorkoutRaw} from "./workout-raw";
 import {Workout} from "./workout";
-import {WorkoutId} from "./workoutId";
+import {WorkoutId} from "./workout-id";
 import {MuscleGroupFactory} from "./muscle-group.factory";
 
 export class WorkoutFactory {

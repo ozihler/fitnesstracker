@@ -12,7 +12,7 @@ import {Exercise} from "./exercise";
 import {Set} from "./set";
 import {SetRaw} from "./set-raw";
 import {SetFactory} from "./set.factory";
-import {WorkoutId} from "./workoutId";
+import {WorkoutId} from "./workout-id";
 import {MuscleGroupRaw} from "./muscle-group-raw";
 import {ExerciseRaw} from "./exercise-raw";
 
