@@ -1,11 +1,9 @@
 import {WorkoutId} from "./workoutId";
 
-export class WorkoutSimple {
+export class WorkoutEntry {
   constructor(private _workoutId: WorkoutId, private  _title: string, private _creationDate: Date) {
 
   }
-
-
   get workoutId(): WorkoutId {
     return this._workoutId;
   }

@@ -9,8 +9,8 @@ import {WorkoutRaw} from "./workout-raw";
 import {environment} from "../../../environments/environment";
 import {Exercise} from "./exercise";
 import {Set} from "./set";
-import {WorkoutsSimpleRaw} from "./workouts-simple-raw";
-import {WorkoutSimpleFactory} from "./workout-simple.factory";
+import {WorkoutEntriesRaw} from "./workout-entries-raw";
+import {WorkoutEntryFactory} from "./workout-entry.factory";
 import {WorkoutId} from "./workoutId";
 import {WorkoutIdRaw} from "./workout-id-raw";
 
@@ -69,8 +69,8 @@ export class WorkoutService {
   }
 
   fetchAllWorkouts() {
-    return this.httpClient.get<WorkoutsSimpleRaw>(`${this.baseUrl}/workouts/overview`)
-      .pipe(map(workoutsSimpleRaw => WorkoutSimpleFactory.fromMultiple(workoutsSimpleRaw)));
+    return this.httpClient.get<WorkoutEntriesRaw>(`${this.baseUrl}/workouts/overview`)
+      .pipe(map(workoutsSimpleRaw => WorkoutEntryFactory.fromMultiple(workoutsSimpleRaw)));
   }
 
   private toJson(muscleGroup: MuscleGroup) {

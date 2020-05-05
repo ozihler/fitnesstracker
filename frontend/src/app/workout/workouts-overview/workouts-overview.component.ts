@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {WorkoutService} from "../shared/workout.service";
-import {WorkoutSimple} from "../shared/workout-simple";
+import {WorkoutEntry} from "../shared/workout-entry";
 import {WorkoutId} from "../shared/workoutId";
 import {Router} from "@angular/router";
 import {environment} from "../../../environments/environment";
@@ -43,14 +43,15 @@ import {environment} from "../../../environments/environment";
   `
 })
 export class WorkoutsOverview implements OnInit {
-  workouts: WorkoutSimple[] = [];
+  workouts: WorkoutEntry[] = [];
 
   constructor(private workoutService: WorkoutService,
               private router: Router) {
   }
 
   ngOnInit() {
-    this.workoutService.fetchAllWorkouts().subscribe(workouts => this.workouts = workouts);
+    this.workoutService.fetchAllWorkouts()
+      .subscribe(workouts => this.workouts = workouts);
   }
 
   openDownloadLink() {
@@ -58,7 +59,6 @@ export class WorkoutsOverview implements OnInit {
   }
 
   copy(workoutId: WorkoutId) {
-    console.log("Workout id", workoutId)
     this.workoutService.copy(workoutId)
       .subscribe(copiedWorkoutId =>
         this.router.navigate(['workout/create-workout', copiedWorkoutId.value]));
