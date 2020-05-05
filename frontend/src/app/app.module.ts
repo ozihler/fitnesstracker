@@ -9,6 +9,8 @@ import {FitnessTypeSelectionComponent} from "./fitness-type-selection.component"
 import {WorkoutsOverview} from "./workout/workouts-overview/workouts-overview.component";
 import {DatePipe, registerLocaleData} from "@angular/common";
 import localeDe from '@angular/common/locales/de';
+import {WorkoutModule} from "./workout/workout.module";
+import {WorkoutEntryComponent} from "./workout/workouts-overview/workout-entry.component";
 
 
 @NgModule({
@@ -16,11 +18,13 @@ import localeDe from '@angular/common/locales/de';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    WorkoutModule
   ],
   declarations: [
     AppComponent,
     WorkoutsOverview,
+    WorkoutEntryComponent,
     FitnessTypeSelectionComponent
   ],
   providers: [

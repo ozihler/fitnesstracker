@@ -4,7 +4,6 @@ import {WorkoutSimple} from "../shared/workout-simple";
 import {WorkoutId} from "../shared/workoutId";
 import {Router} from "@angular/router";
 import {environment} from "../../../environments/environment";
-
 @Component({
   selector: 'app-workouts-overview',
   template: `
@@ -23,6 +22,7 @@ import {environment} from "../../../environments/environment";
       </button>
     </div>
     <div *ngFor="let workout of workouts">
+      <!--
       <button routerLink="/workout/create-workout/{{workout.workoutId.value}}"
               class="uk-button uk-button-default uk-width-2-3">
         {{workout.creationDate | date: 'dd.MM.yy' : '':'de'}}
@@ -32,6 +32,13 @@ import {environment} from "../../../environments/environment";
               class="uk-button uk-button-default uk-width-1-3">
         <i class="fa fa-copy"></i>
       </button>
+      -->
+      <app-workout-entry
+        [workoutId]="workout.workoutId"
+        [title]="workout.title"
+        [creationDate]="workout.creationDate"
+        (copyWorkoutByIdEvent)="copy($event)">
+      </app-workout-entry>
     </div>
   `
 })
@@ -55,6 +62,5 @@ export class WorkoutsOverview implements OnInit {
     this.workoutService.copy(workoutId)
       .subscribe(copiedWorkoutId =>
         this.router.navigate(['workout/create-workout', copiedWorkoutId.value]));
-
   }
 }

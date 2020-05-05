@@ -11,6 +11,7 @@ import {SetValuesComponent} from "./create-workout/set-values.component";
 import {SelectableElementComponent} from "./create-workout/selectable-element.component";
 import {WorkoutTitleComponent} from "./create-workout/workout-title.component";
 import {ReactiveFormsModule} from "@angular/forms";
+import {WorkoutEntryComponent} from "./workouts-overview/workout-entry.component";
 
 
 @NgModule({
