@@ -1,20 +1,20 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
-import {MuscleGroup} from "./muscle-group";
-import {MuscleGroupFactory} from "./muscle-group.factory";
+import {MuscleGroup} from "../muscle-group";
+import {MuscleGroupFactory} from "../muscle-group.factory";
 import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
-import {environment} from "../../../environments/environment";
-import {MuscleGroupsRaw} from "./muscle-groups-raw";
-import {ExerciseFactory} from "./exercise.factory";
-import {ExercisesRaw} from "./exercises-raw";
-import {Exercise} from "./exercise";
-import {Set} from "./set";
-import {SetRaw} from "./set-raw";
-import {SetFactory} from "./set.factory";
-import {WorkoutId} from "./workout-id";
-import {MuscleGroupRaw} from "./muscle-group-raw";
-import {ExerciseRaw} from "./exercise-raw";
+import {environment} from "../../../../environments/environment";
+import {MuscleGroupsRaw} from "../muscle-groups-raw";
+import {ExerciseFactory} from "../exercise.factory";
+import {ExercisesRaw} from "../exercises-raw";
+import {Exercise} from "../exercise";
+import {Set} from "../set";
+import {SetRaw} from "../set-raw";
+import {SetFactory} from "../set.factory";
+import {WorkoutId} from "../workout-id";
+import {MuscleGroupRaw} from "../muscle-group-raw";
+import {ExerciseRaw} from "../exercise-raw";
 
 
 @Injectable({

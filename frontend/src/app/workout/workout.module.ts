@@ -12,6 +12,7 @@ import {SelectableElementComponent} from "./create-workout/selectable-element.co
 import {WorkoutTitleComponent} from "./create-workout/workout-title.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {WorkoutEntryComponent} from "./workouts-overview/workout-entry.component";
+import { SetFormatPipe } from './shared/pipes/set-format.pipe';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import {WorkoutEntryComponent} from "./workouts-overview/workout-entry.component
     TreeViewComponent,
     SetValuesComponent,
     SelectableElementComponent,
-    WorkoutTitleComponent
+    WorkoutTitleComponent,
+    SetFormatPipe
   ]
 })
 export class WorkoutModule {

@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {WorkoutService} from "../shared/workout.service";
+import {WorkoutService} from "../shared/services/workout.service";
 import {TreeNode} from "./tree/tree-node";
 import {Type} from "../shared/type";
 import {Set} from "../shared/set"
 import {WorkoutTree} from "./tree/workout-tree";
 import {ActivatedRoute} from "@angular/router";
-import {SelectionService} from "../shared/selection.service";
+import {SelectionService} from "../shared/services/selection.service";
 import {WorkoutTitleUpdate} from "./workout-title-update";
 
 @Component({

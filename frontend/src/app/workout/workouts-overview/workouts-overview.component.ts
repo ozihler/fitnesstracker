@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {WorkoutService} from "../shared/workout.service";
+import {WorkoutService} from "../shared/services/workout.service";
 import {WorkoutEntry} from "../shared/workout-entry";
 import {WorkoutId} from "../shared/workout-id";
 import {Router} from "@angular/router";
