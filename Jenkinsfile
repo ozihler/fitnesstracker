@@ -50,6 +50,7 @@ pipeline {
         stage("Deploy to staging") {
             steps {
                 sh "docker stop /fitnesstracker || true && sleep 10 && docker run -d --rm -p 8091:5000 -v /usr/local/fitness-tracker:/root/fitness-tracker --name fitnesstracker ozihler/fitnesstracker:1"
+                // sudo docker stop /fitnesstracker || true && sleep 10 && sudo docker run  --rm -p 8091:5000 -v /var/services/homes/alioli/Drive/fitness-tracker:/root/fitness-tracker --name fitnesstracker ozihler/fitnesstracker:1
             }
         }
     }
