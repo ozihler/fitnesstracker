@@ -1,5 +1,5 @@
 import {Set} from "./set";
-import {TreeNode} from "../create-workout/tree/tree-node";
+import {TreeNode} from "../create-edit-workout/tree/tree-node";
 import {MuscleGroup} from "./muscle-group";
 import {Type} from "./type";
 

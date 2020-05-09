@@ -1,5 +1,5 @@
 import {WorkoutId} from './workout-id';
-import {TreeNode} from "../create-workout/tree/tree-node";
+import {TreeNode} from "../create-edit-workout/tree/tree-node";
 import {Type} from "./type";
 import {MuscleGroup} from "./muscle-group";
 

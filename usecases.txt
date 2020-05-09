@@ -1,0 +1,16 @@
+- select workout
+===================
+- create/edit workout
+-- edit name
+-- edit date
+
+-- create/delete Muscle Group
+-- create/delete Exercise
+-- select/unselect Muscle Group
+-- select/unselect Exercise
+-- add/remove Set
+
+- download workouts
+- view all workouts
+- copy workout
+===================

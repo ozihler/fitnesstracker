@@ -1,5 +1,5 @@
 import {Exercise} from "./exercise";
-import {TreeNode} from "../create-workout/tree/tree-node";
+import {TreeNode} from "../create-edit-workout/tree/tree-node";
 import {Type} from "./type";
 import {Workout} from "./workout";
 
