@@ -14,9 +14,7 @@ public class MuscleGroupViewModel implements Namable {
     private String name;
     @JsonProperty("exercises")
     private List<ExerciseViewModel> exercises;
-
-    @JsonProperty("isSelectable")
-    private boolean selectable;
+    private boolean isSelectable;
 
     public MuscleGroupViewModel() {
     }
@@ -25,14 +23,15 @@ public class MuscleGroupViewModel implements Namable {
         this(name, new ArrayList<>(), true);
     }
 
-    public MuscleGroupViewModel(String name, List<ExerciseViewModel> exercises, boolean selectable) {
+    public MuscleGroupViewModel(String name, List<ExerciseViewModel> exercises, boolean isSelectable) {
         this.name = name;
         this.exercises = exercises;
-        this.selectable = selectable;
+        this.isSelectable = isSelectable;
     }
 
-    public boolean isSelectable() {
-        return selectable;
+
+    public boolean getIsSelectable() {
+        return isSelectable;
     }
 
     public String getName() {
@@ -48,7 +47,7 @@ public class MuscleGroupViewModel implements Namable {
         return "MuscleGroupViewModel{" +
                 "name='" + name + '\'' +
                 ", exercises=" + exercises +
-                ", isSelectable=" + selectable +
+                ", isSelectable=" + isSelectable +
                 '}';
     }
 
