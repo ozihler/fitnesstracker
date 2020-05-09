@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {TreeNode} from "./tree/tree-node";
-import {Type} from "../shared/type";
+import {TreeNode} from "../workout-tree/tree-node";
+import {Type} from "../../shared/type";
 
 @Component({
   selector: 'app-button-tree',

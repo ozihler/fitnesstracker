@@ -1,23 +1,23 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {TreeNode} from "./tree/tree-node";
+import {TreeNode} from "../../workout-tree/tree-node";
 
 @Component({
-  selector: 'app-selectable-element',
+  selector: 'app-selectable-muscle-group-or-exercise',
   template: `
     <div class="uk-grid uk-grid-collapse">
+      <!-- todo select-muscle-group-or-exercise.component-->
       <button class="uk-button uk-button-default uk-width-2-3 uk-text-truncate"
               (click)="select(element)">{{element?.name}}
       </button>
-     <!-- <button class="uk-button uk-button-secondary uk-width-1-5 ">
-        <i class="fa fa-pencil"></i>
-      </button>-->
+
+      <!-- todo delete-muscle-group-or-exercise.component-->
       <button class="uk-button uk-button-danger uk-width-1-3"
               (click)="delete(element)">
         <i class="fa fa-trash"></i>
       </button>
     </div>`
 })
-export class SelectableElementComponent implements OnInit {
+export class SelectableMuscleGroupOrExerciseComponent implements OnInit {
 
   @Input() element: TreeNode;
   @Output() selectElementEvent = new EventEmitter<TreeNode>()

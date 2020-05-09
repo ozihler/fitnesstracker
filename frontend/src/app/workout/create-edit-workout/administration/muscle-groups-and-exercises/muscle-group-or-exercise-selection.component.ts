@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Type} from "../shared/type";
-import {TreeNode} from "./tree/tree-node";
+import {Type} from "../../../shared/type";
+import {TreeNode} from "../../workout-tree/tree-node";
 
 @Component({
-  selector: 'app-element-selection',
+  selector: 'muscle-group-or-exercise-selection',
   template: `
     <div class="uk-text-center">
       <div *ngIf="!hasSelectableElements">
@@ -12,19 +12,23 @@ import {TreeNode} from "./tree/tree-node";
 
       <div *ngIf="!isExercise">
         <div *ngFor="let element of selectableElements">
-          <app-selectable-element
+          <app-selectable-muscle-group-or-exercise
             [element]="element"
             (selectElementEvent)="select($event)"
             (deleteElementEvent)="delete($event)">
-          </app-selectable-element>
+          </app-selectable-muscle-group-or-exercise>
         </div>
         <hr/>
-        <app-create-element (createElementsEvent)="createChild($event)"
-                            [typename]="formattedTypeName"></app-create-element>
+        <app-muscle-groups-and-exercises-administration
+          (createElementsEvent)="createChild($event)"
+          [typename]="formattedTypeName">
+        </app-muscle-groups-and-exercises-administration>
       </div>
 
       <div *ngIf="isExercise">
-        <app-create-set (createSet)="createChild($event)"></app-create-set>
+        <app-create-set
+          (createSet)="createChild($event)">
+        </app-create-set>
       </div>
     </div>  `,
   styles: []

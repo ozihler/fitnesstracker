@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Location} from "@angular/common";
 
 @Component({
-  selector: 'app-create-element',
+  selector: 'app-muscle-groups-and-exercises-administration',
   template: `
     <div>
       <div *ngIf="!showButton">
@@ -25,7 +25,7 @@ import {Location} from "@angular/common";
   `,
   styles: []
 })
-export class CreateElementComponent implements OnInit {
+export class MuscleGroupsAndExercisesAdministrationComponent implements OnInit {
 
   @Output() createElementsEvent = new EventEmitter<string>();
   @Input() typename: string;

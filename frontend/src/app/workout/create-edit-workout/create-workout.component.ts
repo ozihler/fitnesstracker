@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {WorkoutService} from "../shared/services/workout.service";
-import {TreeNode} from "./tree/tree-node";
+import {TreeNode} from "./workout-tree/tree-node";
 import {Type} from "../shared/type";
 import {Set} from "../shared/set"
-import {WorkoutTree} from "./tree/workout-tree";
+import {WorkoutTree} from "./workout-tree/workout-tree";
 import {ActivatedRoute} from "@angular/router";
 import {SelectionService} from "../shared/services/selection.service";
-import {WorkoutTitleUpdate} from "./workout-title-update";
+import {WorkoutTitleUpdate} from "./title/workout-title-update";
 
 @Component({
   selector: 'app-create-workout',
@@ -25,13 +25,13 @@ import {WorkoutTitleUpdate} from "./workout-title-update";
       (removeFromWorkoutEvent)="removeNodeFromWorkout($event)">
     </app-button-tree>
     <hr class="uk-divider-icon"/>
-    <app-element-selection
+    <muscle-group-or-exercise-selection
       [currentSelection]="workoutTree?.currentSelection"
       [selectableElements]="selectableChildrenOfSelectedNode"
       (addNodeEvent)="addSelectedItemToTree($event)"
       (createsChildEvent)="createSelectableElement($event)"
       (deleteNodeEvent)="deleteSelectableElement($event)">
-    </app-element-selection>
+    </muscle-group-or-exercise-selection>
     <hr class="uk-divider-icon"/>
     <a routerLink="/workout/overview">Back to Overview</a>
   `
