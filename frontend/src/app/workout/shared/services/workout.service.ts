@@ -19,6 +19,8 @@ import {WorkoutIdRaw} from "../workout-id-raw";
   providedIn: 'root'
 })
 export class WorkoutService {
+
+  static WORKOUT_INITIAL_TITLE = "New Workout";
   private baseUrl: string;
 
   constructor(private httpClient: HttpClient) {
@@ -45,7 +47,7 @@ export class WorkoutService {
 
   private createNewWorkoutRequest() {
     let url = `${this.baseUrl}/workouts`;
-    let body = {title: "New Workout"};
+    let body = {title: WorkoutService.WORKOUT_INITIAL_TITLE};
     return this.httpClient.post<WorkoutRaw>(url, body);
   }
 

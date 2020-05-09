@@ -19,6 +19,11 @@ export class Workout extends TreeNode {
     return this.name;
   }
 
+  set title(value: string) {
+    super.name = (value);
+  }
+
+
   get workoutId(): WorkoutId {
     return this._workoutId;
   }

@@ -111,11 +111,38 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
   private updateWorkoutAndEnable(selectedElement: TreeNode) {
+    this.updateWorkoutTitleIfMuscleGroup(selectedElement);
     this.workoutService.updateWorkout(this.workoutTree.root)
       .subscribe(workout => {
         this.workoutTree.root = workout;
         this.workoutTree.enable(selectedElement.name);
       });
+  }
+
+  private updateWorkoutTitleIfMuscleGroup(selectedElement: TreeNode) {
+    if (selectedElement.type == Type.Muscle_Group) {
+      if (this.isInitialWorkoutTitle()) {
+        this.setMuscleGroupAsWorkoutTitle(selectedElement);
+      } else if (this.isMuscleGroupNotYetAppendedToTitle(selectedElement)) {
+        this.appendMuscleGroupToTitle(selectedElement);
+      }
+    }
+  }
+
+  private isInitialWorkoutTitle() {
+    return this.workoutTree.root.title === WorkoutService.WORKOUT_INITIAL_TITLE;
+  }
+
+  private setMuscleGroupAsWorkoutTitle(selectedElement: TreeNode) {
+    this.workoutTree.root.title = selectedElement.name;
+  }
+
+  private isMuscleGroupNotYetAppendedToTitle(selectedElement: TreeNode) {
+    return this.workoutTree.root.title.indexOf(selectedElement.name) < 0;
+  }
+
+  private appendMuscleGroupToTitle(selectedElement: TreeNode) {
+    this.workoutTree.root.title += " " + selectedElement.name;
   }
 
   private fetchExercisesForAndFilterOut(name: string, children: string[] = []) {
@@ -168,6 +195,13 @@ export class CreateWorkoutComponent implements OnInit {
     }
   }
 
+  private deleteMuscleGroupFromTitle(element: TreeNode) {
+    this.workoutTree.root.title = this.workoutTree.root.title.replace(element.name, ``);
+    if (this.workoutTree.root.title.trim().length === 0) {
+      this.workoutTree.root.title = WorkoutService.WORKOUT_INITIAL_TITLE;
+    }
+  }
+
   updateWorkoutTitle(updatedWorkout: WorkoutTitleUpdate) {
     let selectedElement = this.workoutTree.currentSelection;
     this.workoutTree.root.name = updatedWorkout.workoutTitle;
@@ -176,6 +210,8 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
   removeNodeFromWorkout(nodeToDelete: TreeNode) {
+    console.log("DELETED ELEMENT: ",nodeToDelete)
+    this.deleteMuscleGroupFromTitle(nodeToDelete);
     this.workoutTree.delete(nodeToDelete.name);
     this.fetchChildrenOf(this.workoutTree.currentSelection);
   }
