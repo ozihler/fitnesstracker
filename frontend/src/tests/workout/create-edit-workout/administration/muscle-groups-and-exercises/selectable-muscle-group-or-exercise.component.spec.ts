@@ -1,8 +1,8 @@
 import {async, TestBed} from "@angular/core/testing";
-import {SelectableMuscleGroupOrExerciseComponent} from "./selectable-muscle-group-or-exercise.component";
+import {SelectableMuscleGroupOrExerciseComponent} from "../../../../../app/workout/create-edit-workout/administration/muscle-groups-and-exercises/selectable-muscle-group-or-exercise.component";
 import {NO_ERRORS_SCHEMA} from "@angular/core";
-import {TreeNode} from "../../workout-tree/tree-node";
-import {MuscleGroup} from "../../../shared/muscle-group";
+import {TreeNode} from "../../../../../app/workout/create-edit-workout/workout-tree/tree-node";
+import {MuscleGroup} from "../../../../../app/workout/shared/muscle-group";
 
 
 describe('SelectableMuscleGroupOrExerciseComponent', () => {

@@ -1,7 +1,7 @@
-import {SelectionService} from "./selection.service";
+import {SelectionService} from "../../../../app/workout/shared/services/selection.service";
 import {of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {MuscleGroup} from "../muscle-group";
+import {MuscleGroup} from "../../../../app/workout/shared/muscle-group";
 import {TestBed, inject} from "@angular/core/testing";
 
 describe(`SelectionService`, () => {

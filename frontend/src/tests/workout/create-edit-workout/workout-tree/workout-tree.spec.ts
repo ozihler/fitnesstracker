@@ -1,11 +1,11 @@
-import {WorkoutTree} from "./workout-tree";
-import {Type} from "../../shared/type";
-import {Workout} from "../../shared/workout";
-import {WorkoutId} from "../../shared/workout-id";
-import {Set} from "../../shared/set";
-import {MuscleGroup} from "../../shared/muscle-group";
-import {Exercise} from "../../shared/exercise";
-import {TreeNode} from "./tree-node";
+import {WorkoutTree} from "../../../../app/workout/create-edit-workout/workout-tree/workout-tree";
+import {Type} from "../../../../app/workout/shared/type";
+import {Workout} from "../../../../app/workout/shared/workout";
+import {WorkoutId} from "../../../../app/workout/shared/workout-id";
+import {Set} from "../../../../app/workout/shared/set";
+import {MuscleGroup} from "../../../../app/workout/shared/muscle-group";
+import {Exercise} from "../../../../app/workout/shared/exercise";
+import {TreeNode} from "../../../../app/workout/create-edit-workout/workout-tree/tree-node";
 
 describe('Workout Tree', () => {
 

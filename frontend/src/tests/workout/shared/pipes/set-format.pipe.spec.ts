@@ -1,6 +1,6 @@
-import {SetFormatPipe} from './set-format.pipe';
-import {SetFactory} from "../set.factory";
-import {Set} from "../set";
+import {SetFormatPipe} from '../../../../app/workout/shared/pipes/set-format.pipe';
+import {SetFactory} from "../../../../app/workout/shared/set.factory";
+import {Set} from "../../../../app/workout/shared/set";
 
 describe('SetFormatPipe', () => {
   let pipe: SetFormatPipe;
