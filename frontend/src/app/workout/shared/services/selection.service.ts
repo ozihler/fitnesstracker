@@ -28,8 +28,17 @@ export class SelectionService {
   }
 
   newMuscleGroup(muscleGroupNames: string): Observable<MuscleGroup[]> {
-    return this.httpClient.post<MuscleGroupsRaw>(`${this.baseUrl}/muscle-groups`, {muscleGroupNames: muscleGroupNames})
-      .pipe(map(response => MuscleGroupFactory.fromMultiple(response.muscleGroups)));
+    return this.httpClient.post<MuscleGroupsRaw>(
+      `${this.baseUrl}/muscle-groups`,
+      {
+        muscleGroupNames: muscleGroupNames
+      }
+    ).pipe(
+      map(
+        response =>
+          MuscleGroupFactory.fromMultiple(response.muscleGroups)
+      )
+    );
   }
 
   getMuscleGroups(): Observable<MuscleGroup[]> {

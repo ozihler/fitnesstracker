@@ -53,6 +53,8 @@ describe(`SelectionService`, () => {
         expect(receivedMuscleGroups[0].children.length).toEqual(expectedMuscleGroups.muscleGroups[0].exercises.length);
       })
   );
+
+
 });
 
 
