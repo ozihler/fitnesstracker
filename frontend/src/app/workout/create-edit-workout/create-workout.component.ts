@@ -154,7 +154,7 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
   private fetchMuscleGroupsAndFilterOut(selectedChildren: string[] = []) {
-    this.selectionService.createMuscleGroups()
+    this.selectionService.getMuscleGroups()
       .subscribe(muscleGroups => this.updateSelectableElements(muscleGroups, selectedChildren));
   }
 

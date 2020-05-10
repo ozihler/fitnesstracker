@@ -21,7 +21,7 @@ import {ExerciseRaw} from "../exercise-raw";
   providedIn: 'root'
 })
 export class SelectionService {
-  private baseUrl: string;
+  baseUrl: string;
 
   constructor(private httpClient: HttpClient) {
     this.baseUrl = environment.baseUrl;
@@ -32,9 +32,16 @@ export class SelectionService {
       .pipe(map(response => MuscleGroupFactory.fromMultiple(response.muscleGroups)));
   }
 
-  createMuscleGroups(): Observable<MuscleGroup[]> {
+  getMuscleGroups(): Observable<MuscleGroup[]> {
     return this.httpClient.get<MuscleGroupsRaw>(`${this.baseUrl}/muscle-groups`)
-      .pipe(map(response => MuscleGroupFactory.fromMultiple(response.muscleGroups)));
+      .pipe(
+        map(
+          response =>
+            MuscleGroupFactory.fromMultiple(
+              response.muscleGroups
+            )
+        )
+      );
   }
 
   fetchExercisesFor(muscleGroupName: string) {
