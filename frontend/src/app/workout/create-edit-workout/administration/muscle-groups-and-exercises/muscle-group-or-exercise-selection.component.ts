@@ -19,10 +19,10 @@ import {TreeNode} from "../../workout-tree/tree-node";
           </app-selectable-muscle-group-or-exercise>
         </div>
         <hr/>
-        <app-muscle-groups-and-exercises-administration
+        <app-create-muscle-groups-and-exercises
           (createElementsEvent)="createChild($event)"
           [typename]="formattedTypeName">
-        </app-muscle-groups-and-exercises-administration>
+        </app-create-muscle-groups-and-exercises>
       </div>
 
       <div *ngIf="isExercise">
