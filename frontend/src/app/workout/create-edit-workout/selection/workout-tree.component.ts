@@ -3,36 +3,47 @@ import {TreeNode} from "../workout-tree/tree-node";
 import {Type} from "../../shared/type";
 
 @Component({
-  selector: 'app-button-tree',
+  selector: 'workout-tree',
   template: `
     <div class="uk-grid uk-grid-collapse" *ngIf="node?.isEnabled">
-      <button class="uk-button uk-text-truncate"
-              [ngClass]="levelDependentClasses"
-              [disabled]="node.isLeaf"
-              (click)="changeSelection()">
-        <span *ngIf="node && !node?.isLeaf">({{node?.numberOfChildren}}) </span>
-        <span>{{node?.name}}</span>
+      <button
+        id="select-editable-node"
+        class="uk-button uk-text-truncate"
+        [ngClass]="levelDependentClasses"
+        [disabled]="node.isLeaf"
+        (click)="changeSelection()">
+
+        <span *ngIf="node && !node?.isLeaf">
+          ({{node?.numberOfChildren}})
+        </span>
+
+        <span>
+          {{node?.name}}
+        </span>
       </button>
-      <button class="uk-button uk-button-danger uk-width-1-3"
-              *ngIf="!isWorkout()"
-              (click)="removeFromWorkout(node)">
+
+      <button
+        id="remove-node-from-workout-tree"
+        class="uk-button uk-button-danger uk-width-1-3"
+        *ngIf="!isWorkout()"
+        (click)="removeFromWorkout(node)">
         <i class="fa fa-trash"></i>
       </button>
     </div>
 
     <div *ngIf="node?.hasChildren">
       <div *ngFor="let child of node?.children">
-        <app-button-tree
+        <workout-tree
           [currentSelectionName]="currentSelectionName"
           [node]="child"
           (changeSelectionEvent)="this.changeSelectionEvent.emit($event);"
           (removeFromWorkoutEvent)="removeFromWorkout($event)">
-        </app-button-tree>
+        </workout-tree>
       </div>
     </div>
   `
 })
-export class TreeViewComponent {
+export class WorkoutTreeComponent {
   @Input() node: TreeNode;
   @Input() currentSelectionName: string;
   @Output() changeSelectionEvent = new EventEmitter<TreeNode>();
@@ -48,7 +59,7 @@ export class TreeViewComponent {
     }
 
     if (this.node) {
-      if(TreeNode.LEVEL_CLASSES[this.node.type]) {
+      if (TreeNode.LEVEL_CLASSES[this.node.type]) {
         classes.push(TreeNode.LEVEL_CLASSES[this.node.type]);
       }
 

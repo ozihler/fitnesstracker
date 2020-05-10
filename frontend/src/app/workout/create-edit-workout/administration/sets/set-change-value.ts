@@ -1,4 +1,4 @@
-export class ChangeValue {
+export class SetChangeValue {
 
   constructor(private _formControlName: string,
               private _changeValue: number) {

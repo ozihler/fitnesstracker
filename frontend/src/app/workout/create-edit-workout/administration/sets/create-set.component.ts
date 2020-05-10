@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {SetFormValues} from "./set-form-values";
-import {ChangeValue} from "./change-value";
+import {SetChangeValue} from "./set-change-value";
 
 @Component({
   selector: 'app-create-set',
@@ -80,6 +80,8 @@ export class CreateSetComponent {
   }
 
   get currentValues() {
+
+    // make pipe
     return CreateSetComponent.format(this.formValues.weight)
       + CreateSetComponent.format(this.formValues.repetitions)
       + CreateSetComponent.format(this.formValues.waitingTime);
@@ -95,7 +97,7 @@ export class CreateSetComponent {
     this.createSet.emit(createdElements);
   }
 
-  update(changedValue: ChangeValue) {
+  update(changedValue: SetChangeValue) {
     this.formValues[changedValue.formControlName].currentValue = changedValue.changeValue;
   }
 

@@ -18,12 +18,12 @@ import {WorkoutTitleUpdate} from "./title/workout-title-update";
       (changeTitleEvent)="updateWorkoutTitle($event)">
     </app-workout-title>
     <hr class="uk-divider-icon"/>
-    <app-button-tree
+    <workout-tree
       [node]="workoutTree?.root"
       [currentSelectionName]="workoutTree?.currentSelection?.name"
       (changeSelectionEvent)="changeTreeNode($event)"
       (removeFromWorkoutEvent)="removeNodeFromWorkout($event)">
-    </app-button-tree>
+    </workout-tree>
     <hr class="uk-divider-icon"/>
     <muscle-group-or-exercise-selection
       [currentSelection]="workoutTree?.currentSelection"

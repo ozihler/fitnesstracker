@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ChangeValue} from "./change-value";
+import {SetChangeValue} from "./set-change-value";
 import {SetFormValues} from "./set-form-values";
 
 @Component({
@@ -39,7 +39,7 @@ import {SetFormValues} from "./set-form-values";
 export class SetValuesComponent implements OnInit {
 
   @Input() formValues: SetFormValues;
-  @Output() updateEvent = new EventEmitter<ChangeValue>();
+  @Output() updateEvent = new EventEmitter<SetChangeValue>();
   @Output() disableOtherUpdatesEvent = new EventEmitter<string>();
 
   form: FormGroup;
@@ -63,7 +63,7 @@ export class SetValuesComponent implements OnInit {
       newValue = 0;
     }
     control.setValue(newValue);
-    this.updateEvent.emit(new ChangeValue(this.formValues.valueName, newValue));
+    this.updateEvent.emit(new SetChangeValue(this.formValues.valueName, newValue));
   }
 
 
