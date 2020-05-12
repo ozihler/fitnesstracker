@@ -4,7 +4,7 @@ import {Type} from "./type";
 import {MuscleGroup} from "./muscle-group";
 
 export class Workout extends TreeNode {
-  constructor(private _workoutId: WorkoutId, //todo rename to workoutId,
+  constructor(private _workoutId: WorkoutId,
               private _creationDate: Date,
               name: string,
               muscleGroups: MuscleGroup[] = []) {

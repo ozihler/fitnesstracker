@@ -3,6 +3,8 @@ import {SelectableMuscleGroupOrExerciseComponent} from "../../../../../app/worko
 import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {TreeNode} from "../../../../../app/workout/create-edit-workout/workout-tree/tree-node";
 import {MuscleGroup} from "../../../../../app/workout/shared/muscle-group";
+import {ReplacePipe} from "../../../../../app/workout/shared/pipes/replace.pipe";
+import {Exercise} from "../../../../../app/workout/shared/exercise";
 
 
 describe('SelectableMuscleGroupOrExerciseComponent', () => {
@@ -12,7 +14,8 @@ describe('SelectableMuscleGroupOrExerciseComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        SelectableMuscleGroupOrExerciseComponent
+        SelectableMuscleGroupOrExerciseComponent,
+        ReplacePipe
       ],
       schemas: [
         NO_ERRORS_SCHEMA
@@ -26,20 +29,22 @@ describe('SelectableMuscleGroupOrExerciseComponent', () => {
   it('sends a select event for the element currently present in the component', () => {
     let receivedElement: TreeNode;
 
-    component.element = new MuscleGroup(
+    component.element = new Exercise(
       undefined,
-      "Chest",
+      "Bench Press",
       []);
+
+    fixture.detectChanges();
 
     component.selectElementEvent
       .subscribe((elementToSelect) => receivedElement = elementToSelect);
 
     let debugElement = fixture.nativeElement
-      .querySelector('#ft-select-muscle-group-or-exercise-button');
+      .querySelector('#ft-select-bench-press-button');
 
     debugElement.click();
 
-    expect(receivedElement.name).toBe('Chest');
+    expect(receivedElement.name).toBe('Bench Press');
   });
 
   it('sents a delete event for the element currently present in the component', () => {
@@ -50,11 +55,13 @@ describe('SelectableMuscleGroupOrExerciseComponent', () => {
       "Chest",
       []);
 
+    fixture.detectChanges();
+
     component.deleteElementEvent
       .subscribe((elementToDelete) => receivedElement = elementToDelete);
 
     let debugElement = fixture.nativeElement
-      .querySelector('#ft-delete-muscle-group-or-exercise-button');
+      .querySelector('#ft-delete-chest-button');
 
     debugElement.click();
 

@@ -3,7 +3,7 @@ import {Type} from "../../../shared/type";
 import {TreeNode} from "../../workout-tree/tree-node";
 
 @Component({
-  selector: 'muscle-group-or-exercise-selection',
+  selector: 'app-muscle-group-or-exercise-selection',
   template: `
     <div class="uk-text-center">
       <div *ngIf="!hasSelectableElements">
@@ -33,7 +33,7 @@ import {TreeNode} from "../../workout-tree/tree-node";
     </div>  `,
   styles: []
 })
-export class ElementSelection implements OnInit {
+export class MuscleGroupOrExerciseSelectionComponent implements OnInit {
 
   @Input() currentSelection: TreeNode;
   @Input() selectableElements: TreeNode[];
@@ -61,7 +61,7 @@ export class ElementSelection implements OnInit {
   }
 
   get formattedTypeName() {
-    return ElementSelection.format(this.childTypeName());
+    return MuscleGroupOrExerciseSelectionComponent.format(this.childTypeName());
   }
 
   get hasSelectableElements() {
@@ -73,7 +73,7 @@ export class ElementSelection implements OnInit {
       return "";
     }
 
-    return "Add " + ElementSelection.format(this.childTypeName()) + " to " + this.currentSelection.name;
+    return "Add " + MuscleGroupOrExerciseSelectionComponent.format(this.childTypeName()) + " to " + this.currentSelection.name;
   }
 
   get emptyElementsText() {
@@ -81,7 +81,7 @@ export class ElementSelection implements OnInit {
       return "";
     }
 
-    return "No " + ElementSelection.format(this.childTypeName()) + " to select. Create a new one first!";
+    return "No " + MuscleGroupOrExerciseSelectionComponent.format(this.childTypeName()) + " to select. Create a new one first!";
   }
 
   get childrenAreLeafs() {

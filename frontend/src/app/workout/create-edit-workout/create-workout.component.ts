@@ -11,29 +11,29 @@ import {WorkoutTitleUpdate} from "./title/workout-title-update";
 @Component({
   selector: 'app-create-workout',
   template: `
-    <app-workout-title
-      [workoutId]="workoutTree?.root?.workoutId?.value"
-      [workoutTitle]="workoutTree?.root?.title"
-      [workoutCreationDate]="workoutTree?.root?.creationDate"
-      (changeTitleEvent)="updateWorkoutTitle($event)">
-    </app-workout-title>
-    <hr class="uk-divider-icon"/>
-    <workout-tree
-      [node]="workoutTree?.root"
-      [currentSelectionName]="workoutTree?.currentSelection?.name"
-      (changeSelectionEvent)="changeTreeNode($event)"
-      (removeFromWorkoutEvent)="removeNodeFromWorkout($event)">
-    </workout-tree>
-    <hr class="uk-divider-icon"/>
-    <muscle-group-or-exercise-selection
-      [currentSelection]="workoutTree?.currentSelection"
-      [selectableElements]="selectableChildrenOfSelectedNode"
-      (addNodeEvent)="addSelectedItemToTree($event)"
-      (createsChildEvent)="createSelectableElement($event)"
-      (deleteNodeEvent)="deleteSelectableElement($event)">
-    </muscle-group-or-exercise-selection>
-    <hr class="uk-divider-icon"/>
-    <a routerLink="/workout/overview">Back to Overview</a>
+      <app-workout-title
+              [workoutId]="workoutTree?.root?.workoutId?.value"
+              [workoutTitle]="workoutTree?.root?.title"
+              [workoutCreationDate]="workoutTree?.root?.creationDate"
+              (changeTitleEvent)="updateWorkoutTitle($event)">
+      </app-workout-title>
+      <hr class="uk-divider-icon"/>
+      <workout-tree
+              [node]="workoutTree?.root"
+              [currentSelectionName]="workoutTree?.currentSelection?.name"
+              (changeSelectionEvent)="changeTreeNode($event)"
+              (removeFromWorkoutEvent)="removeNodeFromWorkout($event)">
+      </workout-tree>
+      <hr class="uk-divider-icon"/>
+      <app-muscle-group-or-exercise-selection
+              [currentSelection]="workoutTree?.currentSelection"
+              [selectableElements]="selectableChildrenOfSelectedNode"
+              (addNodeEvent)="addSelectedItemToTree($event)"
+              (createsChildEvent)="createSelectableElement($event)"
+              (deleteNodeEvent)="deleteSelectableElement($event)">
+      </app-muscle-group-or-exercise-selection>
+      <hr class="uk-divider-icon"/>
+      <a routerLink="/workout/overview">Back to Overview</a>
   `
 })
 export class CreateWorkoutComponent implements OnInit {

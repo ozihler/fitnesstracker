@@ -6,14 +6,13 @@ import {TreeNode} from "../../workout-tree/tree-node";
   template: `
     <div class="uk-grid uk-grid-collapse">
       <button
-        id="ft-select-muscle-group-or-exercise-button"
+        id="ft-select-{{element?.name | replace : ' ': '-' | lowercase}}-button"
         class="uk-button uk-button-default uk-width-2-3 uk-text-truncate"
-        (click)="select(element)">{{element?.name}}
-      </button>
+        (click)="select(element)">{{element?.name}}</button>
 
       <!-- todo delete-muscle-group-or-exercise.component-->
       <button
-        id="ft-delete-muscle-group-or-exercise-button"
+        id="ft-delete-{{element?.name | replace : ' ': '-' | lowercase}}-button"
         class="uk-button uk-button-danger uk-width-1-3"
         (click)="delete(element)">
         <i class="fa fa-trash"></i>
