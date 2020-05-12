@@ -23,6 +23,21 @@ describe('CreateMuscleGroupsOrExercisesComponent', () => {
     fixture.detectChanges();
   }));
 
+  it('initially shows the create (muscle groups or exercises) button', () => {
+    let createButton: HTMLButtonElement = fixture.nativeElement
+      .querySelector('#ft-show-form-to-input-new-muscle-group-or-exercise-button');
+
+    let inputField: HTMLInputElement = fixture.nativeElement
+      .querySelector('#ft-input-field-to-create-new-muscle-group-or-exercise');
+
+    let submitButton: HTMLButtonElement = fixture.nativeElement
+      .querySelector('#ft-button-to-submit-new-muscle-group-or-exercise');
+
+    expect(createButton).toBeDefined();
+    expect(inputField).toBeNull();
+    expect(submitButton).toBeNull();
+  });
+
   it('submits the input containing muscle groups or exercises to create',
     () => {
       let expectedInputFormValue = 'Chest, Triceps';
@@ -52,13 +67,8 @@ describe('CreateMuscleGroupsOrExercisesComponent', () => {
       inputField.dispatchEvent(new Event('input'))
       fixture.detectChanges()
 
-      console.log("Input: ", inputField.value)
-
       component.createElementsEvent
-        .subscribe((inputFormValue) => {
-          console.log(inputFormValue)
-          receivedInputValue = inputFormValue;
-        });
+        .subscribe(inputFormValue => receivedInputValue = inputFormValue);
 
       submitButton.click();
 
