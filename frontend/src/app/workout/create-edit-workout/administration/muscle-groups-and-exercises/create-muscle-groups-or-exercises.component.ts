@@ -21,16 +21,17 @@ import {Location} from "@angular/common";
     <div *ngIf="!showButton">
 
       <form
-        [formGroup]="muscleGroupsOrExercisesInputForm"
+        [formGroup]="form"
         (ngSubmit)="createMuscleGroupsOrExercises()">
 
         <div class="uk-margin">
           <input
             id="ft-input-field-to-create-new-muscle-group-or-exercise"
             class="uk-input"
-                 formControlName="muscleGroupsOrExercisesInputForm"
-                 type="text">
+            formControlName="muscleGroupsOrExercisesInput"
+            type="text"> 
         </div>
+
 
         <button
           id="ft-button-to-submit-new-muscle-group-or-exercise"
@@ -50,7 +51,7 @@ export class CreateMuscleGroupsOrExercisesComponent implements OnInit {
   @Input() typename: string;
 
   showButton: boolean = true;
-  muscleGroupsOrExercisesInputForm: FormGroup;
+  form: FormGroup;
 
   constructor(private location: Location,
               private formBuilder: FormBuilder) {
@@ -62,11 +63,11 @@ export class CreateMuscleGroupsOrExercisesComponent implements OnInit {
   }
 
   private initForm() {
-    if (this.muscleGroupsOrExercisesInputForm) {
+    if (this.form) {
       return;
     }
-    this.muscleGroupsOrExercisesInputForm = this.formBuilder.group({
-      element: ["", Validators.required]
+    this.form = this.formBuilder.group({
+      muscleGroupsOrExercisesInput: ["", Validators.required]
     });
   }
 
@@ -78,7 +79,7 @@ export class CreateMuscleGroupsOrExercisesComponent implements OnInit {
 
   private emit(createdElements: string) {
     this.showButton = true;
-    this.muscleGroupsOrExercisesInputForm.reset();
+    this.form.reset();
     this.createElementsEvent.emit(createdElements);
   }
 
@@ -87,7 +88,7 @@ export class CreateMuscleGroupsOrExercisesComponent implements OnInit {
   }
 
   currentElementValue() {
-    return this.muscleGroupsOrExercisesInputForm.get('element').value ? this.muscleGroupsOrExercisesInputForm.get('element').value.trim() : "";
+    return this.form.get('muscleGroupsOrExercisesInput').value ? this.form.get('muscleGroupsOrExercisesInput').value.trim() : "";
   }
 
   showInputForm() {
