@@ -23,7 +23,7 @@ describe('SelectableMuscleGroupOrExerciseComponent', () => {
     fixture.detectChanges();
   }));
 
-  it('selects the element currently present in the component', () => {
+  it('sends a select event for the element currently present in the component', () => {
     let receivedElement: TreeNode;
 
     component.element = new MuscleGroup(
@@ -36,12 +36,13 @@ describe('SelectableMuscleGroupOrExerciseComponent', () => {
 
     let debugElement = fixture.nativeElement
       .querySelector('#ft-select-muscle-group-or-exercise-button');
+
     debugElement.click();
 
     expect(receivedElement.name).toBe('Chest');
   });
 
-  it('deletes the element currently present in the component', () => {
+  it('sents a delete event for the element currently present in the component', () => {
     let receivedElement: TreeNode;
 
     component.element = new MuscleGroup(
