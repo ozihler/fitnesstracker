@@ -1,14 +1,15 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Type} from "../../../shared/type";
 import {TreeNode} from "../../workout-tree/tree-node";
+import {ReplacePipe} from "../../../shared/pipes/replace.pipe";
 
 @Component({
   selector: 'app-muscle-group-or-exercise-selection',
   template: `
     <div class="uk-text-center">
-      <div *ngIf="!hasSelectableElements">
-        <span>{{emptyElementsText}}</span>
-      </div>
+      <span
+        id="empty-elements-text"
+        *ngIf="!hasSelectableElements">{{emptyElementsText}}</span>
 
       <div *ngIf="!isExercise">
         <div *ngFor="let element of selectableElements">
@@ -21,7 +22,7 @@ import {TreeNode} from "../../workout-tree/tree-node";
         <hr/>
         <app-create-muscle-groups-and-exercises
           (createElementsEvent)="createChild($event)"
-          [typename]="formattedTypeName">
+          [typename]="child">
         </app-create-muscle-groups-and-exercises>
       </div>
 
@@ -42,7 +43,8 @@ export class MuscleGroupOrExerciseSelectionComponent implements OnInit {
   @Output() createsChildEvent = new EventEmitter<string>();
 
 
-  constructor() {
+  constructor(private replacePipe: ReplacePipe) {
+
   }
 
   ngOnInit() {
@@ -59,11 +61,6 @@ export class MuscleGroupOrExerciseSelectionComponent implements OnInit {
   createChild(elementsString: string) {
     this.createsChildEvent.emit(elementsString);
   }
-
-  get formattedTypeName() {
-    return MuscleGroupOrExerciseSelectionComponent.format(this.childTypeName());
-  }
-
   get hasSelectableElements() {
     return this.selectableElements && this.selectableElements.length > 0;
   }
@@ -73,7 +70,7 @@ export class MuscleGroupOrExerciseSelectionComponent implements OnInit {
       return "";
     }
 
-    return "Add " + MuscleGroupOrExerciseSelectionComponent.format(this.childTypeName()) + " to " + this.currentSelection.name;
+    return "Add " + this.child + " to " + this.currentSelection.name;
   }
 
   get emptyElementsText() {
@@ -81,7 +78,11 @@ export class MuscleGroupOrExerciseSelectionComponent implements OnInit {
       return "";
     }
 
-    return "No " + MuscleGroupOrExerciseSelectionComponent.format(this.childTypeName()) + " to select. Create a new one first!";
+    return "No " + this.child + " to select. Create a new one first!";
+  }
+
+  get child() {
+    return this.replacePipe.transform(this.childTypeName(), "_", " ");
   }
 
   get childrenAreLeafs() {
@@ -91,10 +92,6 @@ export class MuscleGroupOrExerciseSelectionComponent implements OnInit {
 
   get isExercise() {
     return this.currentSelection && this.currentSelection.type === Type.Exercise;
-  }
-
-  private static format(typeName: string) {
-    return typeName ? typeName.replace("_", " ") : "";
   }
 
   childTypeName() {

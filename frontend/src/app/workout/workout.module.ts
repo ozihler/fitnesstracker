@@ -32,7 +32,8 @@ import {ReplacePipe} from "./shared/pipes/replace.pipe";
     WorkoutTitleComponent,
     SetFormatPipe,
     ReplacePipe
-  ]
+  ],
+  providers: [ReplacePipe]
 })
 export class WorkoutModule {
 }

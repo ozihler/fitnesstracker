@@ -22,6 +22,7 @@ describe('MuscleGroupOrExerciseSelectionComponent', () => {
         CreateMuscleGroupsOrExercisesComponent,
         ReplacePipe
       ],
+      providers: [ReplacePipe],
       schemas: [
         NO_ERRORS_SCHEMA
       ]
@@ -31,6 +32,30 @@ describe('MuscleGroupOrExerciseSelectionComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
+
+  it('shows nothing if there is no element selected', () => {
+    expect(
+      fixture.debugElement
+        .nativeElement
+        .querySelector('#empty-elements-text')
+        .innerHTML
+        .length)
+      .toBe(0);
+  });
+
+  it('shows text that there are no element to select first', () => {
+
+    component.currentSelection = new MuscleGroup(undefined, 'Chest', []);
+    fixture.detectChanges();
+
+    expect(
+      fixture.debugElement
+        .nativeElement
+        .querySelector('#empty-elements-text')
+        .innerHTML
+        .length)
+      .toBeGreaterThan(0);
+  });
 
   it('shows existing muscle groups, exercises, or sets', () => {
     let workout: Workout =
@@ -46,7 +71,6 @@ describe('MuscleGroupOrExerciseSelectionComponent', () => {
       );
     component.currentSelection = workout
     component.selectableElements = workout.children;
-
     fixture.detectChanges();
 
     let nativeElement = fixture.debugElement.nativeElement;
