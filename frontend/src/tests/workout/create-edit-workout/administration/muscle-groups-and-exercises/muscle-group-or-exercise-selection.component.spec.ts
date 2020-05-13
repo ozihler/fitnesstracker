@@ -60,8 +60,35 @@ describe('MuscleGroupOrExerciseSelectionComponent', () => {
   });
 
   it('can create a new muscle group to select', () => {
+    let receivedEmittedMuscleGroup;
+    let expectedEmittedMuscleGroup ="Chest";
+    component.createsChildEvent.subscribe(emittedElement => receivedEmittedMuscleGroup = emittedElement);
 
+    showCreateMuscleGroupOrExerciseInputField();
+    inputMuscleGroup(expectedEmittedMuscleGroup);
+    submitMuscleGroup();
+
+    expect(receivedEmittedMuscleGroup).toEqual(expectedEmittedMuscleGroup)
   });
+
+  function showCreateMuscleGroupOrExerciseInputField() {
+    fixture.nativeElement.querySelector('#ft-show-form-to-input-new-muscle-group-or-exercise-button').click()
+    fixture.detectChanges();
+  }
+
+  function inputMuscleGroup(expectedEmittedMuscleGroup: string) {
+    let inputField: HTMLInputElement = fixture.nativeElement
+      .querySelector('#ft-input-field-to-create-new-muscle-group-or-exercise');
+    inputField.value = expectedEmittedMuscleGroup;
+    inputField.dispatchEvent(new Event('input'));
+  }
+
+  function submitMuscleGroup() {
+    let submitButton: HTMLButtonElement = fixture.nativeElement
+      .querySelector('#ft-button-to-submit-new-muscle-group-or-exercise');
+    submitButton.click();
+    fixture.detectChanges();
+  }
 
   it('can create a new exercise to select', () => {
 
