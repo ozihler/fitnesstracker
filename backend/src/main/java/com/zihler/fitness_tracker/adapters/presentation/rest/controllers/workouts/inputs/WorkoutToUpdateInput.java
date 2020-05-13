@@ -22,7 +22,8 @@ public class WorkoutToUpdateInput {
                 WorkoutId.of(workout.getWorkoutId()),
                 CreationDate.from(workout.getCreationDate()),
                 WorkoutTitle.of(workout.getTitle()),
-                new MuscleGroupsFullInput(workout.getMuscleGroups()).toDocument()
+                new MuscleGroupsFullInput(workout.getMuscleGroups()).toDocument(),
+                false
         );
     }
 

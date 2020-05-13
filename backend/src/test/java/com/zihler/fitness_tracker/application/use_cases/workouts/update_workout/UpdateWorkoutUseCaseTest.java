@@ -43,7 +43,7 @@ class UpdateWorkoutUseCaseTest {
                 List.of(new MuscleGroupDocument(Name.of("Chest"))
                         .add(new ExerciseDocument(Name.of("Bench Press"), sets, Multiplier.defaultValue(),true))));
 
-        WorkoutDocument updatedWorkoutInput = new WorkoutDocument(initialWorkout.getWorkoutId(), initialWorkout.getCreationDate(), WorkoutTitle.of("New Title"), muscleGroups);
+        WorkoutDocument updatedWorkoutInput = new WorkoutDocument(initialWorkout.getWorkoutId(), initialWorkout.getCreationDate(), WorkoutTitle.of("New Title"), muscleGroups, false);
         updateWorkoutUseCase.invokeWith(updatedWorkoutInput, output);
 
         WorkoutDocument updatedWorkoutOutput = output.workoutDocument;

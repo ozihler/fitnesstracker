@@ -14,6 +14,7 @@ public class FullWorkoutsOutput {
     public FullWorkoutsOutput(WorkoutsDocument workouts) {
         List<WorkoutViewModel> fullWorkouts = workouts.getWorkouts()
                 .stream()
+                .filter(workout-> !workout.isDeleted())
                 .map(FullWorkoutOutput::new)
                 .map(FullWorkoutOutput::toViewModel)
                 .collect(toList());

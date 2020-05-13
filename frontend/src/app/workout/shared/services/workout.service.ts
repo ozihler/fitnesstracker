@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
+import {Observable, of} from "rxjs";
 import {MuscleGroup} from "../muscle-group";
 import {Workout} from "../workout";
 import {WorkoutFactory} from "../workout.factory";
@@ -64,10 +64,19 @@ export class WorkoutService {
       .pipe(map(data => WorkoutFactory.fromRaw(data)));
   }
 
-  copy(workoutId: WorkoutId): Observable<WorkoutId> {
-    console.log(workoutId.value)
-    return this.httpClient.post<WorkoutIdRaw>(`${this.baseUrl}/workouts/copy`, {workoutId: workoutId.value})
+  copyWorkoutWithId(workoutId: WorkoutId): Observable<WorkoutId> {
+    return this.httpClient.post<WorkoutIdRaw>(
+      `${this.baseUrl}/workouts/copy`,
+      {workoutId: workoutId.value})
       .pipe(map(copiedWorkoutId => WorkoutId.from(copiedWorkoutId.workoutId)));
+  }
+
+  deleteWorkoutWithId(workoutId: WorkoutId) {
+    return this.httpClient.delete<WorkoutRaw>(
+      `${this.baseUrl}/workouts/${workoutId.value}`)
+      .pipe(
+        map(deletedWorkoutRaw => WorkoutFactory.fromRaw(deletedWorkoutRaw))
+      );
   }
 
   fetchAllWorkouts() {

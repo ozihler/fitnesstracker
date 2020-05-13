@@ -1,5 +1,6 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.resources;
 
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.DeleteWorkoutController;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.*;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutToCreate;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutToUpdate;
@@ -13,6 +14,8 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
+
 @RestController
 public class WorkoutsResource {
 
@@ -23,6 +26,7 @@ public class WorkoutsResource {
     private DownloadAllWorkoutsController downloadAllWorkoutsController;
     private ViewSingleWorkoutController viewSingleWorkoutController;
     private CopyWorkoutController copyWorkoutController;
+    private DeleteWorkoutController deleteWorkoutController;
 
     @Autowired
     public WorkoutsResource(
@@ -31,13 +35,14 @@ public class WorkoutsResource {
             ViewAllWorkoutsController viewAllWorkoutsController,
             DownloadAllWorkoutsController downloadAllWorkoutsController,
             ViewSingleWorkoutController viewSingleWorkoutController,
-            CopyWorkoutController copyWorkoutController) {
+            CopyWorkoutController copyWorkoutController, DeleteWorkoutController deleteWorkoutController) {
         this.createWorkoutController = createWorkoutController;
         this.updateWorkoutController = updateWorkoutController;
         this.viewAllWorkoutsController = viewAllWorkoutsController;
         this.downloadAllWorkoutsController = downloadAllWorkoutsController;
         this.viewSingleWorkoutController = viewSingleWorkoutController;
         this.copyWorkoutController = copyWorkoutController;
+        this.deleteWorkoutController = deleteWorkoutController;
     }
 
     @PostMapping(path = "/api/workouts")
@@ -92,6 +97,15 @@ public class WorkoutsResource {
         logger.info("id of copied workout:{}", idOfCopiedWorkout);
 
         return idOfCopiedWorkout;
+    }
+
+    @DeleteMapping(path = "/api/workouts/{workoutId}")
+    public ResponseEntity<WorkoutViewModel> deleteWorkout(@PathVariable("workoutId") String workoutId) {
+        ResponseEntity<WorkoutViewModel> deletedWorkout = deleteWorkoutController.deleteWorkout(workoutId);
+
+        logger.info("deleted workout with id {}", Objects.requireNonNull(deletedWorkout.getBody()).getWorkoutId());
+
+        return deletedWorkout;
     }
 
 }

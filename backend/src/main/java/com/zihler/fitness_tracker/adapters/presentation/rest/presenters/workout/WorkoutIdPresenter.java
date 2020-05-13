@@ -7,7 +7,9 @@ import com.zihler.fitness_tracker.application.outbound_ports.presenters.CopiedWo
 import com.zihler.fitness_tracker.domain.values.WorkoutId;
 import org.springframework.http.ResponseEntity;
 
-public class WorkoutIdPresenter extends RestPresenter<WorkoutViewModel> implements CopiedWorkoutPresenter {
+public class WorkoutIdPresenter
+        extends RestPresenter<WorkoutViewModel>
+        implements CopiedWorkoutPresenter {
     @Override
     public void present(WorkoutId workoutId) {
         WorkoutIdOutput output = new WorkoutIdOutput(workoutId);

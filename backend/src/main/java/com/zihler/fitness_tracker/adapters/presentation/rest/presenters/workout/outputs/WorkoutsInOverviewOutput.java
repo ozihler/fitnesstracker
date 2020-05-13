@@ -18,6 +18,7 @@ public class WorkoutsInOverviewOutput {
     public WorkoutsViewModel workouts() {
         List<WorkoutViewModel> viewModels = workouts.getWorkouts()
                 .stream()
+                .filter(workout -> !workout.isDeleted())
                 .map(WorkoutInOverviewOutput::new)
                 .map(WorkoutInOverviewOutput::toViewModel)
                 .sorted((a, b) -> -Long.compare(a.getCreationDate(), b.getCreationDate()))

@@ -4,6 +4,7 @@ import {WorkoutEntry} from "../shared/workout-entry";
 import {WorkoutId} from "../shared/workout-id";
 import {Router} from "@angular/router";
 import {environment} from "../../../environments/environment";
+
 @Component({
   selector: 'app-workouts-overview',
   template: `
@@ -26,7 +27,8 @@ import {environment} from "../../../environments/environment";
         [workoutId]="workout.workoutId"
         [title]="workout.title"
         [creationDate]="workout.creationDate"
-        (copyWorkoutByIdEvent)="copy($event)">
+        (copyWorkoutWithIdEvent)="copyWorkoutWithId($event)"
+        (deleteWorkoutWithIdEvent)="deleteWorkoutWithId($event)">
       </app-workout-entry>
     </div>
   `
@@ -47,9 +49,14 @@ export class WorkoutsOverview implements OnInit {
     return window.open(environment.baseUrl + "/workouts/download");
   }
 
-  copy(workoutId: WorkoutId) {
-    this.workoutService.copy(workoutId)
+  copyWorkoutWithId(workoutId: WorkoutId) {
+    this.workoutService.copyWorkoutWithId(workoutId)
       .subscribe(copiedWorkoutId =>
         this.router.navigate(['workout/create-workout', copiedWorkoutId.value]));
+  }
+
+  deleteWorkoutWithId(workoutId: WorkoutId) {
+    this.workoutService.deleteWorkoutWithId(workoutId)
+      .subscribe(deletedWorkout => this.ngOnInit());
   }
 }

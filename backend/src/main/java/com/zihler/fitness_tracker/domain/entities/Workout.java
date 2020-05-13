@@ -12,6 +12,7 @@ public class Workout {
     private CreationDate creationDate;
     private WorkoutTitle workoutTitle;
     private MuscleGroups muscleGroups;
+    private boolean isDeleted;
 
     public static Workout from(WorkoutId workoutId, WorkoutTitle workoutTitle) {
         return from(workoutId, workoutTitle, new MuscleGroups());
@@ -48,6 +49,14 @@ public class Workout {
         return muscleGroups;
     }
 
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
     @Override
     public String toString() {
         return "Workout{" +
@@ -57,5 +66,4 @@ public class Workout {
                 ", muscleGroups=" + muscleGroups +
                 '}';
     }
-
 }
