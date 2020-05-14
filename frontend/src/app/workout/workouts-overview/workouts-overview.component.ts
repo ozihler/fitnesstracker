@@ -57,6 +57,8 @@ export class WorkoutsOverview implements OnInit {
 
   deleteWorkoutWithId(workoutId: WorkoutId) {
     this.workoutService.deleteWorkoutWithId(workoutId)
-      .subscribe(deletedWorkout => this.ngOnInit());
+      .subscribe(deletedWorkout => {
+        this.workouts = this.workouts.filter(w => w.workoutId.value !== deletedWorkout.workoutId.value);
+      });
   }
 }
