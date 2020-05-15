@@ -20,6 +20,10 @@ import {Type} from "../../shared/type";
         <span>
           {{node?.name}}
         </span>
+
+        <span>
+          ({{node?.cumulateWeight()}} kg)
+        </span>
       </button>
 
       <button

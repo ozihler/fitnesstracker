@@ -116,4 +116,8 @@ export class WorkoutTree {
       treeNode.parent.children.splice(treeNodeIndex, 1);
     }
   }
+
+  public getCumulativeWeight(): number {
+    return 0;
+  }
 }

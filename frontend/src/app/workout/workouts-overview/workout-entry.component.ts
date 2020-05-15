@@ -3,6 +3,7 @@ import {WorkoutId} from "../shared/workout-id";
 
 @Component({
   selector: `app-workout-entry`,
+  styles: [``],
   template: `
     <div class="uk-divider">
       <button (click)="delete()"
@@ -11,8 +12,7 @@ import {WorkoutId} from "../shared/workout-id";
       </button>
       <button routerLink="/workout/create-workout/{{workoutId?.value}}"
               class="uk-button uk-button-default uk-width-3-5">
-        {{creationDate | date: 'dd.MM.yy' : '':'de'}}
-        {{title}}
+        {{creationDate | date: 'dd.MM.yy' : '':'de'}} {{title}}
       </button>
       <button (click)="copy()"
               class="uk-button uk-button-secondary uk-width-1-5">

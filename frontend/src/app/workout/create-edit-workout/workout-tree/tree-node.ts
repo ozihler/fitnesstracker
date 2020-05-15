@@ -1,9 +1,10 @@
 import {Type} from "../../shared/type";
 import {sizeOf} from "../../shared/array-utils";
 import {NodeVisitor} from "./node.visitor";
+import {Cumulatable} from "../../shared/cumulatable";
 
 
-export abstract class TreeNode {
+export abstract class TreeNode implements Cumulatable{
   static LEVEL_CLASSES = {1: 'uk-button-secondary', 2: 'uk-button-primary', 3: 'uk-button-default'};
   private _isEnabled: boolean = false;
 
@@ -85,5 +86,15 @@ export abstract class TreeNode {
       return;
     }
     this.children.forEach(child => child.parent = this);
+  }
+
+
+
+  cumulateWeight(): number {
+    if (!this.children || this.children.length === 0) {
+      return 0;
+    }
+    return this.children.map(node => node.cumulateWeight())
+      .reduce((before, after) => before + after);
   }
 }

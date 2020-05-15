@@ -317,5 +317,30 @@ describe('Workout Tree', () => {
       expect(node.isEnabled).toBe(expected, node.name)
     });
   }
+
+  it('can calulate the correct overall weight for a node', () => {
+    let {workout, chest, benchPress, set, set1, dumbbellBP, set2, triceps, latPull, set3, set4, overheadLatPull, set5, workoutTree} = createSimpleTree();
+    expect(set.cumulateWeight()).toBe(50 * 12);
+    expect(set1.cumulateWeight()).toBe(50 * 12);
+    expect(benchPress.cumulateWeight()).toBe(set.cumulateWeight() + set1.cumulateWeight());
+
+    expect(set2.cumulateWeight()).toBe(50 * 12);
+    expect(dumbbellBP.cumulateWeight()).toBe(set2.cumulateWeight());
+
+    expect(chest.cumulateWeight()).toBe(benchPress.cumulateWeight() + dumbbellBP.cumulateWeight());
+
+    expect(set3.cumulateWeight()).toBe(20 * 12);
+    expect(set4.cumulateWeight()).toBe(15 * 12);
+    expect(latPull.cumulateWeight()).toBe(set3.cumulateWeight() + set4.cumulateWeight());
+
+    expect(set5.cumulateWeight()).toBe(10 * 12);
+    expect(overheadLatPull.cumulateWeight()).toBe(set5.cumulateWeight());
+
+    expect(triceps.cumulateWeight()).toBe(latPull.cumulateWeight() + overheadLatPull.cumulateWeight());
+    expect(workout.cumulateWeight()).toBe(chest.cumulateWeight() + triceps.cumulateWeight());
+
+    //todo add multiplicator for dumbbell etc. into calculation
+  });
+
 });
 

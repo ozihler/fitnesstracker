@@ -1,6 +1,7 @@
 import {TreeNode} from "../create-edit-workout/workout-tree/tree-node";
 import {Type} from "./type";
 import {Exercise} from "./exercise";
+import {Cumulatable} from "./cumulatable";
 
 export class Set extends TreeNode {
 
@@ -12,6 +13,10 @@ export class Set extends TreeNode {
     private _waitingTimeUnit: string,
     parent: Exercise) {
     super(parent, `${Set.formatEntries(_numberOfRepetitions, _weight, _weightUnit, _waitingTime, _waitingTimeUnit)}`, undefined);
+  }
+
+  cumulateWeight(): number {
+    return this.weight * this.numberOfRepetitions /* *this.multiplier*/;
   }
 
   get type(): Type {
