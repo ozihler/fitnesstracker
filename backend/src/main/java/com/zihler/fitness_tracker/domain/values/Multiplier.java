@@ -17,7 +17,7 @@ public class Multiplier {
         return new Multiplier(value);
     }
 
-    public static Multiplier defaultValue() {
+    public static Multiplier ofOne() {
         return of(1);
     }
 

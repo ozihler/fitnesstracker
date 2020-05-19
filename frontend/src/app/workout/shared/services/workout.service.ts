@@ -87,7 +87,7 @@ export class WorkoutService {
   private toJson(muscleGroup: MuscleGroup) {
     return {
       name: muscleGroup.name,
-      exercises: muscleGroup.children.map(exercise => this.toExerciseRequest(exercise))
+      exercises: muscleGroup.children.map(exercise => this.toExerciseRequest(exercise as Exercise))
     }
   }
 
@@ -95,6 +95,7 @@ export class WorkoutService {
   private toExerciseRequest(exercise: Exercise) {
     return {
       name: exercise.name,
+      multiplier: exercise.multiplier,
       sets: exercise.children.map(set => WorkoutService.toSetRequest(<Set>set))
     }
   }

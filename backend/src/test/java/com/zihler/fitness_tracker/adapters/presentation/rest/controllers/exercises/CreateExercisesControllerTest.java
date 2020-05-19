@@ -42,7 +42,7 @@ class CreateExercisesControllerTest {
 
         Exercise e1 = storedMuscleGroup.getExercises().getExercises().get(0);
         assertEquals(Name.of("Bench Press"), e1.getName());
-        assertEquals(Multiplier.defaultValue(), e1.getMultiplier());
+        assertEquals(Multiplier.ofOne(), e1.getMultiplier());
 
         Exercise e2 = storedMuscleGroup.getExercises().getExercises().get(1);
         assertEquals(Name.of("Dumbbell Flys"), e2.getName());

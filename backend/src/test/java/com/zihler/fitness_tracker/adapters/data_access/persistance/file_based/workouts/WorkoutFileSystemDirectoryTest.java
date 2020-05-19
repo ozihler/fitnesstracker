@@ -22,7 +22,7 @@ class WorkoutFileSystemDirectoryTest {
                 Set.withValues(Weight.of(50, UnitOfMeasurement.KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS)),
                 Set.withValues(Weight.of(45, UnitOfMeasurement.KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS))
                 )
-        ), Multiplier.defaultValue())};
+        ), Multiplier.ofOne())};
         final Exercises of = Exercises.of(bench_presses);
         Workout workout =   Workout.from(
                 WorkoutId.of("x-1-2"),

@@ -10,6 +10,6 @@ public class ExerciseToCopy {
     }
 
     public Exercise copy() {
-        return new Exercise(Name.of(self.getName().toString()), new SetsToCopy(self.getSets()).copy(), Multiplier.defaultValue());
+        return new Exercise(Name.of(self.getName().toString()), new SetsToCopy(self.getSets()).copy(), self.getMultiplier());
     }
 }

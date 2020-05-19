@@ -29,10 +29,7 @@ describe('SelectableMuscleGroupOrExerciseComponent', () => {
   it('sends a select event for the element currently present in the component', () => {
     let receivedElement: TreeNode;
 
-    component.element = new Exercise(
-      undefined,
-      "Bench Press",
-      []);
+    component.element = new Exercise(undefined, "Bench Press", []);
 
     fixture.detectChanges();
 

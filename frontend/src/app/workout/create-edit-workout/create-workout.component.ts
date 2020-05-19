@@ -7,6 +7,7 @@ import {WorkoutTree} from "./workout-tree/workout-tree";
 import {ActivatedRoute} from "@angular/router";
 import {SelectionService} from "../shared/services/selection.service";
 import {WorkoutTitleUpdate} from "./title/workout-title-update";
+import {Exercise} from "../shared/exercise";
 
 @Component({
   selector: 'app-create-workout',
@@ -92,7 +93,7 @@ export class CreateWorkoutComponent implements OnInit {
       this.selectionService.createExercises(this.workoutTree.currentSelection, elements)
         .subscribe(createdExercises => this.updateSelectableNodes(createdExercises));
     } else if (Type.Exercise === type) {
-      this.selectionService.addSetToExerciseExercise(this.workoutTree.root.workoutId, this.workoutTree.currentSelection, elements)
+      this.selectionService.addSetToExerciseExercise(this.workoutTree.root.workoutId, this.workoutTree.currentSelection as Exercise, elements)
         .subscribe(createdSet => this.addSetToExercise([createdSet]));
     }
   }

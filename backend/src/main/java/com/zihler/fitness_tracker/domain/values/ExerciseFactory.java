@@ -9,7 +9,7 @@ public class ExerciseFactory {
         // whereas it gets pretty adventurous to wield two barbells at the same time ;)
         // So double wielding are >>always<< dumbbell for now.
         if (isSingleWieldingExercise(inputValue)) {
-            return new Exercise(Name.of(inputValue), Sets.empty(), Multiplier.defaultValue());
+            return new Exercise(Name.of(inputValue), Sets.empty(), Multiplier.ofOne());
         } else {
             return dualWieldingDumbbellExercise(inputValue);
         }
