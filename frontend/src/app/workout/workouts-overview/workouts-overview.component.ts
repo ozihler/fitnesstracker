@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {WorkoutService} from "../shared/services/workout.service";
-import {WorkoutEntry} from "../shared/workout-entry";
-import {WorkoutId} from "../shared/workout-id";
-import {Router} from "@angular/router";
-import {environment} from "../../../environments/environment";
+import {WorkoutService} from '../shared/services/workout.service';
+import {WorkoutEntry} from '../shared/workout-entry';
+import {WorkoutId} from '../shared/workout-id';
+import {Router} from '@angular/router';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-workouts-overview',
@@ -13,8 +13,10 @@ import {environment} from "../../../environments/environment";
       <a routerLink="/fitness-type-selection">Back</a>
     </div>
     <div>
-      <button routerLink="/workout/create-workout"
-              class="uk-button uk-button-danger uk-width-1-1 uk-margin-small-bottom">New Workout
+      <button
+        id="create-new-workout-button"
+        routerLink="/workout/create-workout"
+        class="uk-button uk-button-danger uk-width-1-1 uk-margin-small-bottom">New Workout
       </button>
     </div>
     <div>
@@ -33,7 +35,7 @@ import {environment} from "../../../environments/environment";
     </div>
   `
 })
-export class WorkoutsOverview implements OnInit {
+export class WorkoutsOverviewComponent implements OnInit {
   workouts: WorkoutEntry[] = [];
 
   constructor(private workoutService: WorkoutService,
@@ -46,7 +48,7 @@ export class WorkoutsOverview implements OnInit {
   }
 
   openDownloadLink() {
-    return window.open(environment.baseUrl + "/workouts/download");
+    return window.open(environment.baseUrl + '/workouts/download');
   }
 
   copyWorkoutWithId(workoutId: WorkoutId) {

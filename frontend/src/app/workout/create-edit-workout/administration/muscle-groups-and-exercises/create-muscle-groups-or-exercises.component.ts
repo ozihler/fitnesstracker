@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Location} from "@angular/common";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-create-muscle-groups-and-exercises',
@@ -29,7 +29,7 @@ import {Location} from "@angular/common";
             id="ft-input-field-to-create-new-muscle-group-or-exercise"
             class="uk-input"
             formControlName="muscleGroupsOrExercisesInput"
-            type="text"> 
+            type="text"/>
         </div>
 
 
@@ -62,13 +62,8 @@ export class CreateMuscleGroupsOrExercisesComponent implements OnInit {
     this.initForm();
   }
 
-  private initForm() {
-    if (this.form) {
-      return;
-    }
-    this.form = this.formBuilder.group({
-      muscleGroupsOrExercisesInput: ["", Validators.required]
-    });
+  currentElementValue() {
+    return this.form.get('muscleGroupsOrExercisesInput').value ? this.form.get('muscleGroupsOrExercisesInput').value.trim() : '';
   }
 
   createMuscleGroupsOrExercises() {
@@ -87,8 +82,13 @@ export class CreateMuscleGroupsOrExercisesComponent implements OnInit {
     return !!this.currentElementValue();
   }
 
-  currentElementValue() {
-    return this.form.get('muscleGroupsOrExercisesInput').value ? this.form.get('muscleGroupsOrExercisesInput').value.trim() : "";
+  private initForm() {
+    if (this.form) {
+      return;
+    }
+    this.form = this.formBuilder.group({
+      muscleGroupsOrExercisesInput: ['', Validators.required]
+    });
   }
 
   showInputForm() {

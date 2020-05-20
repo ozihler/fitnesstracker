@@ -1,18 +1,18 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from "rxjs";
-import {MuscleGroup} from "../muscle-group";
-import {Workout} from "../workout";
-import {WorkoutFactory} from "../workout.factory";
-import {HttpClient} from "@angular/common/http";
-import {map} from "rxjs/operators";
-import {WorkoutRaw} from "../workout-raw";
-import {environment} from "../../../../environments/environment";
-import {Exercise} from "../exercise";
-import {Set} from "../set";
-import {WorkoutEntriesRaw} from "../workout-entries-raw";
-import {WorkoutEntryFactory} from "../workout-entry.factory";
-import {WorkoutId} from "../workout-id";
-import {WorkoutIdRaw} from "../workout-id-raw";
+import {Observable} from 'rxjs';
+import {MuscleGroup} from '../muscle-group';
+import {Workout} from '../workout';
+import {WorkoutFactory} from '../workout.factory';
+import {HttpClient} from '@angular/common/http';
+import {map} from 'rxjs/operators';
+import {WorkoutRaw} from '../workout-raw';
+import {environment} from '../../../../environments/environment';
+import {Exercise} from '../exercise';
+import {Set} from '../set';
+import {WorkoutEntriesRaw} from '../workout-entries-raw';
+import {WorkoutEntryFactory} from '../workout-entry.factory';
+import {WorkoutId} from '../workout-id';
+import {WorkoutIdRaw} from '../workout-id-raw';
 
 
 @Injectable({
@@ -20,7 +20,7 @@ import {WorkoutIdRaw} from "../workout-id-raw";
 })
 export class WorkoutService {
 
-  static WORKOUT_INITIAL_TITLE = "New Workout";
+  static WORKOUT_INITIAL_TITLE = 'New Workout';
   private baseUrl: string;
 
   constructor(private httpClient: HttpClient) {

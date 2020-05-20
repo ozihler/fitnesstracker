@@ -1,14 +1,15 @@
 import {Component, Injectable, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {DatePipe} from "@angular/common";
-import {environment} from "../environments/environment";
-import {map} from "rxjs/operators";
+import {HttpClient} from '@angular/common/http';
+import {DatePipe} from '@angular/common';
+import {environment} from '../environments/environment';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-fitness-type-selection',
   template: `
     <h3>Select a fitness type</h3>
     <button
+      id="select-workout-button"
       routerLink="/workout/overview"
       class="uk-button
     uk-button-default

@@ -1,15 +1,17 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
-import {WorkoutTitleUpdate} from "./workout-title-update";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {DatePipe} from "@angular/common";
+import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
+import {WorkoutTitleUpdate} from './workout-title-update';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-workout-title',
   template: `
     <div class="uk-grid uk-grid-collapse">
-      <button class="uk-button uk-button-default uk-width-1-1"
-              *ngIf="!editing"
-              (click)="enableEditing()">
+      <button
+        id="edit-workout-title-button"
+        class="uk-button uk-button-default uk-width-1-1"
+        *ngIf="!editing"
+        (click)="enableEditing()">
         {{workoutTitle}}
         <i class="fa fa-edit uk-align-right"></i>
       </button>
@@ -33,15 +35,14 @@ import {DatePipe} from "@angular/common";
 export class WorkoutTitleComponent implements OnChanges {
 
   @Input() workoutCreationDate: Date = new Date();
-  @Input() workoutTitle: string = '';
-  @Input() workoutId: string = '';
+  @Input() workoutTitle = '';
+  @Input() workoutId = '';
   @Output() changeTitleEvent = new EventEmitter<any>();
-  editing: boolean = false;
+  editing = false;
   editForm: FormGroup;
 
   constructor(private datePipe: DatePipe,
               private formBuilder: FormBuilder) {
-
   }
 
   get formattedDate() {
@@ -67,7 +68,7 @@ export class WorkoutTitleComponent implements OnChanges {
   saveEditing() {
     // todo fix value propagation when untouched...
     let update: WorkoutTitleUpdate = {
-      workoutTitle: this.valueOf('workoutTitle')?this.valueOf('workoutTitle'):this.workoutTitle,
+      workoutTitle: this.valueOf('workoutTitle') ? this.valueOf('workoutTitle') : this.workoutTitle,
       workoutCreationDate: this.valueOf('workoutCreationDate') ? this.valueOf('workoutCreationDate') : this.workoutCreationDate
     };
     this.changeTitleEvent.emit(update);
@@ -75,7 +76,7 @@ export class WorkoutTitleComponent implements OnChanges {
   }
 
   private valueOf(path: string) {
-    return this.editForm.get(path).value
+    return this.editForm.get(path).value;
   }
 
   cancelEditing() {
