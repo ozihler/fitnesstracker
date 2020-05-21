@@ -3,6 +3,7 @@ import {WorkoutsOverview} from '../workout/workouts-overview.po';
 import {CreateWorkout} from '../workout/create-workout.po';
 
 export class WorkoutUser {
+  // todo maybe add an addition abstraction layer "application" or so
   private fitnessTypeSelection: FitnessTypeSelection;
   private workoutsOverview: WorkoutsOverview;
   private createWorkout: CreateWorkout;
