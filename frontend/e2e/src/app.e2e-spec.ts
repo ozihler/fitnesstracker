@@ -11,7 +11,7 @@ describe('A user', () => {
 
   const selectableMuscleGroups = ['Chest', 'Triceps', 'Shoulders', 'Biceps'];
   it('can create a workout with multiple muscle groups and exercises', () => {
-    user.navigatesToNewWorkout()
+    user.createsNewWorkout()
       .then(() => user.seesThatTitleOfWorkoutIs('New Workout'))
       .then(() => user.seesEmptyElementsText())
       .then(() => user.createsMuscleGroups('cHesT; tRICEPS,ShOulders. BiCePs'))
@@ -21,7 +21,7 @@ describe('A user', () => {
       .then(() => user.addsExercisesToMuscleGroup('bENCH PrEsS; 2#dumbbell BENch PrEss', 'Chest'))
       .then(() => user.seesThatMuscleGroupHasExercises('Chest', ['Bench Press', 'Dumbbell Bench Press']))
       // continue test here
-      .then(() => user.navigatesToNewWorkout().then(() => user.deletesSelectableMuscleGroupsWithNames(selectableMuscleGroups)))
+      .then(() => user.createsNewWorkout().then(() => user.deletesSelectableMuscleGroupsWithNames(selectableMuscleGroups)))
       .then(() => user.navigatesToWorkoutOverview().then(() => user.deletesAllWorkouts()))
     ;
   });

@@ -14,7 +14,7 @@ export class WorkoutUser {
     this.createWorkout = new CreateWorkout();
   }
 
-  navigatesToNewWorkout() {
+  createsNewWorkout() {
     return this.navigatesToWorkoutOverview()
       .then(() => this.workoutsOverview.clickNewWorkoutButton());
   }
