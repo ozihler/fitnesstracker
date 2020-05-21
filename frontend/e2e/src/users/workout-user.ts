@@ -15,22 +15,32 @@ export class WorkoutUser {
   }
 
   navigatesToNewWorkout() {
-    return this.fitnessTypeSelection.enter()
-      .then(() => this.fitnessTypeSelection.clickSelectWorkoutButton())
+    return this.navigatesToWorkoutOverview()
       .then(() => this.workoutsOverview.clickNewWorkoutButton());
   }
 
+  navigatesToWorkoutOverview() {
+    return this.fitnessTypeSelection.enter()
+      .then(() => this.fitnessTypeSelection.clickSelectWorkoutButton());
+  }
+
   createsMuscleGroups(muscleGroupNames: string) {
-    return this.createWorkout.clickCreateMuscleGroupButton()
-      .then(() => this.createWorkout.enterMuscleGroupsAsText(muscleGroupNames))
+    return this.createWorkout.clickCreateMuscleGroupsOrExercisesButton()
+      .then(() => this.createWorkout.enterSelectableItemsAsText(muscleGroupNames))
       .then(() => this.createWorkout.clickOkButton());
   }
 
   selectsMuscleGroup(muscleGroupName: string) {
-    new Button('ft-select-' + muscleGroupName.toLowerCase() + '-button').click();
+    return new Button('ft-select-' + muscleGroupName.toLowerCase() + '-button').click();
   }
 
-  addExercises(exerciseNames: string[]) {
+  createsExercises(exerciseNames: string) {
+    return this.createsMuscleGroups(exerciseNames);
+  }
+
+  addsExercisesToMuscleGroup(exercisesToAdd: string, muscleGroup: string) {
+    return this.createWorkout.selectWorkoutTreeNodeWithName(muscleGroup)
+      .then(() => this.createsExercises(exercisesToAdd));
 
   }
 
@@ -40,7 +50,9 @@ export class WorkoutUser {
   }
 
   seesSelectableMuscleGroups(selectableMuscleGroups: string[]) {
-
+    return this.createWorkout.getSelectableItemsAsButtons(selectableMuscleGroups)
+      .forEach(button => button.visibleTitleText()
+        .then(buttonText => expect(selectableMuscleGroups).toContain(buttonText)));
   }
 
   seesEmptyElementsText() {
@@ -55,5 +67,20 @@ export class WorkoutUser {
 
   deletesSelectableMuscleGroupsWithNames(selectableMuscleGroups: string[]) {
     return selectableMuscleGroups.forEach(m => this.createWorkout.deleteMuscleGroup(m));
+  }
+
+  seesThatMuscleGroupHasExercises(muscleGroup: string, exercises: string[]) {
+    return this.createWorkout.selectWorkoutTreeNodeWithName(muscleGroup)
+      .then(() => this.seesSelectableExercises(exercises));
+  }
+
+  deletesAllWorkouts() {
+    return this.workoutsOverview.deleteAllWorkouts();
+  }
+
+  private seesSelectableExercises(exercises: string[]) {
+    return this.createWorkout.getSelectableItemsAsButtons(exercises)
+      .forEach(button => button.visibleTitleText()
+        .then(buttonText => expect(exercises).toContain(buttonText)));
   }
 }

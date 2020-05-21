@@ -18,13 +18,15 @@ describe('A user', () => {
       .then(() => user.seesSelectableMuscleGroups(selectableMuscleGroups))
       .then(() => user.selectsMuscleGroup('Chest'))
       .then(() => user.seesThatTitleOfWorkoutIs('Chest'))
-      .then(() => user.addExercises(['Bench Press', '2#Dumbbell Bench Press']));
+      .then(() => user.addsExercisesToMuscleGroup('Bench Press, 2#Dumbbell Bench Press', 'Chest'))
+      .then(() => user.seesThatMuscleGroupHasExercises('Chest', ['Bench Press', 'Dumbbell Bench Press']))
+    ;
   });
 
 
   afterEach(async () => {
-    user.navigatesToNewWorkout()
-      .then(() => user.deletesSelectableMuscleGroupsWithNames(selectableMuscleGroups));
+    user.navigatesToNewWorkout().then(() => user.deletesSelectableMuscleGroupsWithNames(selectableMuscleGroups));
+    user.navigatesToWorkoutOverview().then(() => user.deletesAllWorkouts());
     // Assert that there are no errors emitted from the browser
     const logs = await browser.manage().logs().get(logging.Type.BROWSER);
     expect(logs).not.toContain(jasmine.objectContaining({

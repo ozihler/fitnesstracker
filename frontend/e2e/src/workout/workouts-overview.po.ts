@@ -1,4 +1,5 @@
 import {Button} from '../page_elements/button.pe';
+import {by, element} from 'protractor';
 
 export class WorkoutsOverview {
   private createNewWorkoutButton: Button;
@@ -9,5 +10,10 @@ export class WorkoutsOverview {
 
   clickNewWorkoutButton() {
     return this.createNewWorkoutButton.click();
+  }
+
+  deleteAllWorkouts() {
+    return element.all(by.css('.ft-delete-workout-button'))
+      .then(buttons => buttons.forEach(button => button.click()));
   }
 }

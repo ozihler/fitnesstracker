@@ -1,6 +1,7 @@
 import {Button} from '../page_elements/button.pe';
 import {InputField} from '../page_elements/input-field.pe';
 import {Span} from '../page_elements/span.pe';
+import {ReplacePipe} from '../../../src/app/workout/shared/pipes/replace.pipe';
 
 export class CreateWorkout {
 
@@ -18,11 +19,11 @@ export class CreateWorkout {
     return this.emptyElementsTextSpan.webElement();
   }
 
-  clickCreateMuscleGroupButton() {
+  clickCreateMuscleGroupsOrExercisesButton() {
     return this.showFormToInputNewMuscleGroupOrExerciseButton.click();
   }
 
-  enterMuscleGroupsAsText(muscleGroupNames: string) {
+  enterSelectableItemsAsText(muscleGroupNames: string) {
     return this.createNewMuscleGroupOrExerciseInput.enterText(muscleGroupNames);
   }
 
@@ -32,5 +33,13 @@ export class CreateWorkout {
 
   deleteMuscleGroup(muscleGroupName: string) {
     return new Button('ft-delete-' + muscleGroupName.toLowerCase() + '-button').click();
+  }
+
+  selectWorkoutTreeNodeWithName(nodeName: string) {
+    return new Button('select-' + new ReplacePipe().transform(nodeName, ' ', '-').toLowerCase() + '-editable-node').click();
+  }
+
+  getSelectableItemsAsButtons(selectableItems: string[]): Button[] {
+    return selectableItems.map(s => new Button('ft-select-' + new ReplacePipe().transform(s, ' ', '-').toLowerCase() + '-button'));
   }
 }

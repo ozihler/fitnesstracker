@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
-import {WorkoutId} from "../shared/workout-id";
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {WorkoutId} from '../shared/workout-id';
 
 @Component({
   selector: `app-workout-entry`,
@@ -7,7 +7,8 @@ import {WorkoutId} from "../shared/workout-id";
   template: `
     <div class="uk-divider">
       <button (click)="delete()"
-              class="uk-button uk-button-danger uk-width-1-5">
+              id="ft-delete-workout-{{workoutId?.value}}"
+              class="uk-button uk-button-danger uk-width-1-5 ft-delete-workout-button">
         <i class="fa fa-trash-o"></i>
       </button>
       <button routerLink="/workout/create-workout/{{workoutId?.value}}"

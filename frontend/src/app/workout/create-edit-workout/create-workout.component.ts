@@ -18,21 +18,21 @@ import {Exercise} from '../shared/exercise';
       [workoutCreationDate]="workoutTree?.root?.creationDate"
       (changeTitleEvent)="updateWorkoutTitle($event)">
     </app-workout-title>
-      <hr class="uk-divider-icon"/>
-      <workout-tree
-              [node]="workoutTree?.root"
-              [currentSelectionName]="workoutTree?.currentSelection?.name"
-              (changeSelectionEvent)="changeTreeNode($event)"
-              (removeFromWorkoutEvent)="removeNodeFromWorkout($event)">
-      </workout-tree>
-      <hr class="uk-divider-icon"/>
-      <app-muscle-group-or-exercise-selection
-        [currentSelection]="workoutTree?.currentSelection"
-        [selectableElements]="selectableChildrenOfSelectedNode"
-        (addNodeEvent)="addSelectedItemToTree($event)"
-        (createsChildEvent)="createSelectableElement($event)"
-        (deleteNodeEvent)="deleteSelectableElement($event)">
-      </app-muscle-group-or-exercise-selection>
+    <hr class="uk-divider-icon"/>
+    <app-workout-tree
+      [node]="workoutTree?.root"
+      [currentSelectionName]="workoutTree?.currentSelection?.name"
+      (changeSelectionEvent)="changeTreeNode($event)"
+      (removeFromWorkoutEvent)="removeNodeFromWorkout($event)">
+    </app-workout-tree>
+    <hr class="uk-divider-icon"/>
+    <app-muscle-group-or-exercise-selection
+      [currentSelection]="workoutTree?.currentSelection"
+      [selectableElements]="selectableChildrenOfSelectedNode"
+      (addNodeEvent)="addSelectedItemToTree($event)"
+      (createsChildEvent)="createSelectableElement($event)"
+      (deleteNodeEvent)="deleteSelectableElement($event)">
+    </app-muscle-group-or-exercise-selection>
     <hr class="uk-divider-icon"/>
     <a routerLink="/workout/overview">Back to Overview</a>
   `
