@@ -9,7 +9,6 @@ export class FitnessTypeSelection {
   }
 
   enter() {
-    //browser.get('http://localhost:5000/api/admin/purge');
     return browser.get(browser.baseUrl) as Promise<any>;
   }
 

@@ -1,6 +1,7 @@
 import {FitnessTypeSelection} from '../fitness-type-selection.po';
 import {WorkoutsOverview} from '../workout/workouts-overview.po';
 import {CreateWorkout} from '../workout/create-workout.po';
+import {Button} from '../page_elements/button.pe';
 
 export class WorkoutUser {
   private fitnessTypeSelection: FitnessTypeSelection;
@@ -26,6 +27,7 @@ export class WorkoutUser {
   }
 
   selectsMuscleGroup(muscleGroupName: string) {
+    new Button('ft-select-' + muscleGroupName.toLowerCase() + '-button').click();
   }
 
   addExercises(exerciseNames: string[]) {
@@ -49,5 +51,9 @@ export class WorkoutUser {
   cannotSeeEmptyElementsText() {
     return this.createWorkout.getEmptyElementsTextElement()
       .then(textElement => expect(textElement).not.toBeDefined());
+  }
+
+  deletesSelectableMuscleGroupsWithNames(selectableMuscleGroups: string[]) {
+    return selectableMuscleGroups.forEach(m => this.createWorkout.deleteMuscleGroup(m));
   }
 }

@@ -30,4 +30,8 @@ export class CreateWorkout {
   clickOkButton() {
     return this.buttonToSubmitNewMuscleGroupOrExercise.click();
   }
+
+  deleteMuscleGroup(muscleGroupName: string) {
+    return new Button('ft-delete-' + muscleGroupName.toLowerCase() + '-button').click();
+  }
 }
