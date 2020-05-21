@@ -21,8 +21,10 @@ describe('A user', () => {
       .then(() => user.addsExercisesToMuscleGroup('bENCH PrEsS; 2#dumbbell BENch PrEss', 'Chest'))
       .then(() => user.seesThatMuscleGroupHasExercises('Chest', ['Bench Press', 'Dumbbell Bench Press']))
       // continue test here
-      .then(() => user.createsNewWorkout().then(() => user.deletesSelectableMuscleGroupsWithNames(selectableMuscleGroups)))
-      .then(() => user.navigatesToWorkoutOverview().then(() => user.deletesAllWorkouts()))
+      .then(() => user.createsNewWorkout())
+      .then(() => user.deletesSelectableMuscleGroupsWithNames(selectableMuscleGroups))
+      .then(() => user.navigatesToWorkoutOverview())
+      .then(() => user.deletesAllWorkouts())
     ;
   });
 
