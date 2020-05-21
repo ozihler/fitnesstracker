@@ -14,7 +14,7 @@ export class WorkoutUser {
   // todo maybe add an addition abstraction layer "application" or so
   private fitnessTypeSelection: FitnessTypeSelection;
   private workoutsOverview: WorkoutsOverview;
-  private createWorkout: CreateWorkout;
+  private readonly createWorkout: CreateWorkout;
 
   static random(base, multi) {
     return base + (Math.round(Math.random() * multi));

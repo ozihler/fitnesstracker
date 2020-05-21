@@ -3,7 +3,7 @@ import {WorkoutUser} from './users/workout-user';
 import {Set} from '../../src/app/workout/shared/set';
 
 
-describe('A user', () => {
+describe('A workout user', () => {
   let user: WorkoutUser;
 
   beforeEach(() => {
@@ -12,6 +12,8 @@ describe('A user', () => {
 
   const selectableMuscleGroups = ['Chest', 'Triceps', 'Shoulders', 'Biceps'];
   it('can create a workout with multiple muscle groups and exercises', () => {
+
+    // todo summarise larger parts to smaller subsections
     user.createsNewWorkout()
       .then(() => user.seesThatTitleOfWorkoutIs('New Workout'))
       .then(() => user.seesEmptyElementsText())
