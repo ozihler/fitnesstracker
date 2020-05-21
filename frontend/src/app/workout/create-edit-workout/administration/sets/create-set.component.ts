@@ -1,13 +1,14 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {SetFormValues} from "./set-form-values";
-import {SetChangeValue} from "./set-change-value";
+import {SetFormValues} from './set-form-values';
+import {SetChangeValue} from './set-change-value';
 
 @Component({
   selector: 'app-create-set',
   template: `
     <div class="uk-flex-center">
       <mark>{{currentValues}}</mark>
-      <button class="uk-button uk-button-primary uk-width-1-1"
+      <button id="ft-add-set-to-exercise"
+              class="uk-button uk-button-primary uk-width-1-1"
               *ngIf="showButton"
               (click)="submit()">
         <i class="fa fa-plus"></i>
@@ -46,20 +47,20 @@ export class CreateSetComponent {
       [-.5, -1, -10],
       [.5, 1, 10],
       true,
-      "kg",
-      "weight"),
+      'kg',
+      'weight'),
     repetitions: SetFormValues.of(
       [-1, -2, -5],
       [1, 2, 5],
       true,
-      "#",
-      "repetitions"),
+      '#',
+      'repetitions'),
     waitingTime: SetFormValues.of(
       [-1, -5, -10],
       [1, 5, 10],
       true,
-      "s",
-      "waitingTime")
+      's',
+      'waitingTime')
   };
 
   @Output() createSet = new EventEmitter<string>();
@@ -89,7 +90,7 @@ export class CreateSetComponent {
   }
 
   private static format(values: SetFormValues) {
-    return values.currentValue ? values.currentValue + " " + values.unit + ", " : "";
+    return values.currentValue ? values.currentValue + ' ' + values.unit + ', ' : '';
   }
 
   private emitNewSetEvent(createdElements: string) {

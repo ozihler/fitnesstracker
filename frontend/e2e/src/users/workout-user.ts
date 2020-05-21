@@ -1,17 +1,23 @@
 import {FitnessTypeSelection} from '../fitness-type-selection.po';
 import {WorkoutsOverview} from '../workout/workouts-overview.po';
 import {CreateWorkout} from '../workout/create-workout.po';
+import {Set} from '../../../src/app/workout/shared/set';
 
 export class WorkoutUser {
-  // todo maybe add an addition abstraction layer "application" or so
-  private fitnessTypeSelection: FitnessTypeSelection;
-  private workoutsOverview: WorkoutsOverview;
-  private createWorkout: CreateWorkout;
 
   constructor() {
     this.fitnessTypeSelection = new FitnessTypeSelection();
     this.workoutsOverview = new WorkoutsOverview();
     this.createWorkout = new CreateWorkout();
+  }
+
+  // todo maybe add an addition abstraction layer "application" or so
+  private fitnessTypeSelection: FitnessTypeSelection;
+  private workoutsOverview: WorkoutsOverview;
+  private createWorkout: CreateWorkout;
+
+  static random(base, multi) {
+    return base + (Math.round(Math.random() * multi));
   }
 
   createsNewWorkout() {
@@ -31,7 +37,7 @@ export class WorkoutUser {
   }
 
   selectsMuscleGroup(muscleGroupName: string) {
-    return this.createWorkout.selectMuscleGroup(muscleGroupName);
+    return this.createWorkout.selectItem(muscleGroupName);
   }
 
   createsExercises(exerciseNames: string) {
@@ -65,10 +71,10 @@ export class WorkoutUser {
   }
 
   deletesSelectableMuscleGroupsWithNames(selectableMuscleGroups: string[]) {
-    return selectableMuscleGroups.forEach(m => this.createWorkout.deleteMuscleGroup(m));
+    return selectableMuscleGroups.forEach(m => this.createWorkout.deleteSelectableItem(m));
   }
 
-  seesThatMuscleGroupHasExercises(muscleGroup: string, exercises: string[]) {
+  seesThatMuscleGroupHasExercisesToSelect(muscleGroup: string, exercises: string[]) {
     return this.createWorkout.selectWorkoutTreeNodeWithName(muscleGroup)
       .then(() => this.seesSelectableExercises(exercises));
   }
@@ -82,4 +88,24 @@ export class WorkoutUser {
       .forEach(button => button.visibleTitleText()
         .then(buttonText => expect(exercises).toContain(buttonText)));
   }
+
+  selectsExercise(exercise: string) {
+    return this.selectsMuscleGroup(exercise);
+  }
+
+  addsSetsTo(exercise: string, sets: Set[]) {
+    this.createWorkout.selectWorkoutTreeNodeWithName(exercise)
+      .then(() => this.createWorkout.addSet(sets));
+  }
+
+  seesCorrectCumulatedWeightsFor(expectedValues: CumulatedWeight[]) {
+    return this.createWorkout; // todo continue;
+  }
+
+}
+
+export class CumulatedWeight {
+  name: string;
+  expectedValue: number;
+  isRoot: boolean;
 }

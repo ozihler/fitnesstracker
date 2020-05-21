@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {SetChangeValue} from "./set-change-value";
-import {SetFormValues} from "./set-form-values";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {SetChangeValue} from './set-change-value';
+import {SetFormValues} from './set-form-values';
 
 @Component({
   selector: 'app-set-values',
@@ -14,11 +14,12 @@ import {SetFormValues} from "./set-form-values";
         </button>
 
         <div class="uk-width-1-1">
-          <input class="uk-form-width-small uk-input"
-                 formControlName="value"
-                 (change)="changeValueDirectly()"
-                 (keyup)="changeValueDirectly()"
-                 type="number"> {{formValues?.unit}}
+          <input
+            class="uk-form-width-small uk-input"
+            formControlName="value"
+            (change)="changeValueDirectly()"
+            (keyup)="changeValueDirectly()"
+            type="number"> {{formValues?.unit}}
         </div>
 
         <button *ngFor="let v of formValues?.positiveValues"
@@ -53,7 +54,7 @@ export class SetValuesComponent implements OnInit {
     }
     this.form = this.formBuilder.group({
       value: ['0', [Validators.required, Validators.min(0)]],
-    })
+    });
   }
 
   changeValue(changeValue: number) {

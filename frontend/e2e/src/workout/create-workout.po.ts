@@ -2,6 +2,7 @@ import {Button} from '../page_elements/button.pe';
 import {InputField} from '../page_elements/input-field.pe';
 import {Span} from '../page_elements/span.pe';
 import {ReplacePipe} from '../../../src/app/workout/shared/pipes/replace.pipe';
+import {Set} from '../../../src/app/workout/shared/set';
 
 export class CreateWorkout {
 
@@ -10,6 +11,10 @@ export class CreateWorkout {
   private editWorkoutTitleButton = new Button('edit-workout-title-button');
   private createNewMuscleGroupOrExerciseInput = new InputField('ft-input-field-to-create-new-muscle-group-or-exercise');
   private emptyElementsTextSpan = new Span('empty-elements-text');
+
+  private static format(value: string) {
+    return new ReplacePipe().transform(value, ' ', '-').toLowerCase();
+  }
 
   getWorkoutTitle() {
     return this.editWorkoutTitleButton.visibleTitleText();
@@ -31,19 +36,23 @@ export class CreateWorkout {
     return this.buttonToSubmitNewMuscleGroupOrExercise.click();
   }
 
-  selectMuscleGroup(muscleGroupName: string) {
-    return new Button('ft-select-' + muscleGroupName.toLowerCase() + '-button').click();
+  selectItem(item: string) {
+    return new Button('ft-select-' + CreateWorkout.format(item) + '-button').click();
   }
 
-  deleteMuscleGroup(muscleGroupName: string) {
-    return new Button('ft-delete-' + muscleGroupName.toLowerCase() + '-button').click();
+  deleteSelectableItem(item: string) {
+    return new Button('ft-delete-' + CreateWorkout.format(item) + '-button').click();
+  }
+
+  getSelectableItemsAsButtons(selectableItems: string[]): Button[] {
+    return selectableItems.map(s => new Button('ft-select-' + CreateWorkout.format(s) + '-button'));
   }
 
   selectWorkoutTreeNodeWithName(nodeName: string) {
     return new Button('select-' + new ReplacePipe().transform(nodeName, ' ', '-').toLowerCase() + '-editable-node').click();
   }
 
-  getSelectableItemsAsButtons(selectableItems: string[]): Button[] {
-    return selectableItems.map(s => new Button('ft-select-' + new ReplacePipe().transform(s, ' ', '-').toLowerCase() + '-button'));
+  addSet(set: Set[]) {
+
   }
 }

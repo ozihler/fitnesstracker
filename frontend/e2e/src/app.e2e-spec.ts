@@ -1,5 +1,6 @@
 import {browser, logging} from 'protractor';
 import {WorkoutUser} from './users/workout-user';
+import {Set} from '../../src/app/workout/shared/set';
 
 
 describe('A user', () => {
@@ -19,7 +20,17 @@ describe('A user', () => {
       .then(() => user.selectsMuscleGroup('Chest'))
       .then(() => user.seesThatTitleOfWorkoutIs('Chest'))
       .then(() => user.addsExercisesToMuscleGroup('bENCH PrEsS; 2#dumbbell BENch PrEss', 'Chest'))
-      .then(() => user.seesThatMuscleGroupHasExercises('Chest', ['Bench Press', 'Dumbbell Bench Press']))
+      .then(() => user.seesThatMuscleGroupHasExercisesToSelect('Chest', ['Bench Press', 'Dumbbell Bench Press']))
+      .then(() => user.selectsExercise('Dumbbell Bench Press'))
+      .then(() => user.seesThatMuscleGroupHasExercisesToSelect('Chest', ['Bench Press']))
+      .then(() => user.addsSetsTo('Dumbbell Bench Press', [
+        new Set(25, 'kg', 10, 0, 's', undefined)
+      ]))
+      .then(() => user.seesCorrectCumulatedWeightsFor([
+        {name: 'Dumbbell Bench Press', expectedValue: 25 * 10 * 2, isRoot: false},
+        {name: 'Chest', expectedValue: 25 * 10 * 2, isRoot: false},
+        {name: 'Chest', expectedValue: 25 * 10 * 2, isRoot: true},
+      ]))
       // continue test here
       .then(() => user.createsNewWorkout())
       .then(() => user.deletesSelectableMuscleGroupsWithNames(selectableMuscleGroups))
