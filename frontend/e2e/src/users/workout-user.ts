@@ -1,7 +1,6 @@
 import {FitnessTypeSelection} from '../fitness-type-selection.po';
 import {WorkoutsOverview} from '../workout/workouts-overview.po';
 import {CreateWorkout} from '../workout/create-workout.po';
-import {Button} from '../page_elements/button.pe';
 
 export class WorkoutUser {
   private fitnessTypeSelection: FitnessTypeSelection;
@@ -31,7 +30,7 @@ export class WorkoutUser {
   }
 
   selectsMuscleGroup(muscleGroupName: string) {
-    return new Button('ft-select-' + muscleGroupName.toLowerCase() + '-button').click();
+    return this.createWorkout.selectMuscleGroup(muscleGroupName);
   }
 
   createsExercises(exerciseNames: string) {
@@ -41,7 +40,6 @@ export class WorkoutUser {
   addsExercisesToMuscleGroup(exercisesToAdd: string, muscleGroup: string) {
     return this.createWorkout.selectWorkoutTreeNodeWithName(muscleGroup)
       .then(() => this.createsExercises(exercisesToAdd));
-
   }
 
   seesThatTitleOfWorkoutIs(expectedWorkoutTitle: string) {
