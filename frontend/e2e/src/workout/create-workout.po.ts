@@ -1,22 +1,21 @@
-import {by, element} from 'protractor';
 import {Button} from '../page_elements/button.pe';
+import {InputField} from '../page_elements/input-field.pe';
+import {Span} from '../page_elements/span.pe';
 
 export class CreateWorkout {
 
-  private showFormToInputNewMuscleGroupOrExerciseButton: Button;
-  private buttonToSubmitNewMuscleGroupOrExercise: Button;
-
-  constructor() {
-    this.showFormToInputNewMuscleGroupOrExerciseButton = new Button('ft-show-form-to-input-new-muscle-group-or-exercise-button');
-    this.buttonToSubmitNewMuscleGroupOrExercise = new Button('ft-button-to-submit-new-muscle-group-or-exercise');
-  }
+  private showFormToInputNewMuscleGroupOrExerciseButton = new Button('ft-show-form-to-input-new-muscle-group-or-exercise-button');
+  private buttonToSubmitNewMuscleGroupOrExercise = new Button('ft-button-to-submit-new-muscle-group-or-exercise');
+  private editWorkoutTitleButton = new Button('edit-workout-title-button');
+  private createNewMuscleGroupOrExerciseInput = new InputField('ft-input-field-to-create-new-muscle-group-or-exercise');
+  private emptyElementsTextSpan = new Span('empty-elements-text');
 
   getWorkoutTitle() {
-    return element(by.id('edit-workout-title-button')).getText();
+    return this.editWorkoutTitleButton.visibleTitleText();
   }
 
   getEmptyElementsTextElement() {
-    return element(by.id('empty-elements-text')).getWebElement();
+    return this.emptyElementsTextSpan.webElement();
   }
 
   clickCreateMuscleGroupButton() {
@@ -24,7 +23,7 @@ export class CreateWorkout {
   }
 
   enterMuscleGroupsAsText(muscleGroupNames: string) {
-    return element(by.id('ft-input-field-to-create-new-muscle-group-or-exercise')).sendKeys(muscleGroupNames);
+    return this.createNewMuscleGroupOrExerciseInput.enterText(muscleGroupNames);
   }
 
   clickOkButton() {

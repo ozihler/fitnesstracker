@@ -10,4 +10,8 @@ export class Button {
   click() {
     return this.button.click();
   }
+
+  visibleTitleText() {
+    return this.button.getText();
+  }
 }
