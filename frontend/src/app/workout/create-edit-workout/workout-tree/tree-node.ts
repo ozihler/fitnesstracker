@@ -1,10 +1,10 @@
-import {Type} from "../../shared/type";
-import {sizeOf} from "../../shared/array-utils";
-import {NodeVisitor} from "./node.visitor";
-import {Cumulatable} from "../../shared/cumulatable";
+import {Type} from '../../shared/type';
+import {sizeOf} from '../../shared/array-utils';
+import {NodeVisitor} from './node.visitor';
+import {Cumulatable} from '../../shared/cumulatable';
 
 
-export abstract class TreeNode implements Cumulatable{
+export abstract class TreeNode implements Cumulatable {
   static LEVEL_CLASSES = {1: 'uk-button-secondary', 2: 'uk-button-primary', 3: 'uk-button-default'};
   private _isEnabled: boolean = false;
 
@@ -14,6 +14,9 @@ export abstract class TreeNode implements Cumulatable{
     this.linkToChildren();
   }
 
+  get isRoot(): boolean {
+    return !parent;
+  }
 
   get parent(): TreeNode {
     return this._parent;
@@ -87,7 +90,6 @@ export abstract class TreeNode implements Cumulatable{
     }
     this.children.forEach(child => child.parent = this);
   }
-
 
 
   cumulateWeight(): number {

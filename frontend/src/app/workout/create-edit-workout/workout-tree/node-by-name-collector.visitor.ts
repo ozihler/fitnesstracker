@@ -1,5 +1,5 @@
-import {TreeNode} from "./tree-node";
-import {NodeVisitor} from "./node.visitor";
+import {TreeNode} from './tree-node';
+import {NodeVisitor} from './node.visitor';
 
 export class NodeByNameCollectorVisitor implements NodeVisitor {
   constructor(private _nodeName: string) {
@@ -23,6 +23,7 @@ export class NodeByNameCollectorVisitor implements NodeVisitor {
   visit(node: TreeNode) {
     if (node.name === this.nodeName) {
       this.foundNode = node;
+      return;
     }
 
     if (node.children) {

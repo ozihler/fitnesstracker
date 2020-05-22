@@ -8,6 +8,7 @@ import {ActivatedRoute} from '@angular/router';
 import {SelectionService} from '../shared/services/selection.service';
 import {WorkoutTitleUpdate} from './title/workout-title-update';
 import {Exercise} from '../shared/exercise';
+import {Workout} from '../shared/workout';
 
 @Component({
   selector: 'app-create-workout',
@@ -70,9 +71,9 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
   private fetchChildrenOf(node: TreeNode) {
-    if (node.type === Type.Workout) {
+    if (Type.Workout === node.type) {
       this.fetchMuscleGroupsAndFilterOut(this.workoutTree.childrenOfCurrentSelection.map(m => m.name));
-    } else if (node.type === Type.Muscle_Group) {
+    } else if (Type.Muscle_Group === node.type) {
       this.fetchExercisesForAndFilterOut(node.name, this.workoutTree.childrenOfCurrentSelection.map(m => m.name));
     }
   }
@@ -133,15 +134,15 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
   private isInitialWorkoutTitle() {
-    return this.workoutTree.root.title === WorkoutService.WORKOUT_INITIAL_TITLE;
+    return this.workoutTree.root.name === Workout.WORKOUT_INITIAL_TITLE;
   }
 
   private setMuscleGroupAsWorkoutTitle(selectedElement: TreeNode) {
-    this.workoutTree.root.title = selectedElement.name;
+    this.workoutTree.root.name = Workout.WORKOUT_PREFIX + ' ' + selectedElement.name;
   }
 
   private isMuscleGroupNotYetAppendedToTitle(selectedElement: TreeNode) {
-    return this.workoutTree.root.title.indexOf(selectedElement.name) < 0;
+    return this.workoutTree.root.name.indexOf(selectedElement.name) < 0;
   }
 
   updateWorkoutTitle(updatedWorkout: WorkoutTitleUpdate) {
@@ -167,7 +168,7 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
   private appendMuscleGroupToTitle(selectedElement: TreeNode) {
-    this.workoutTree.root.title += ' ' + selectedElement.name;
+    this.workoutTree.root.name += ' ' + selectedElement.name;
   }
 
   private contains(node: TreeNode) {
@@ -196,9 +197,9 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
   private deleteMuscleGroupFromTitle(element: TreeNode) {
-    this.workoutTree.root.title = this.workoutTree.root.title.replace(element.name, ``);
-    if (this.workoutTree.root.title.trim().length === 0) {
-      this.workoutTree.root.title = WorkoutService.WORKOUT_INITIAL_TITLE;
+    this.workoutTree.root.name = this.workoutTree.root.name.replace(element.name, ``).trim();
+    if (this.workoutTree.root.name.replace(Workout.WORKOUT_PREFIX, '').trim().length === 0) {
+      this.workoutTree.root.name = Workout.WORKOUT_INITIAL_TITLE;
     }
   }
 

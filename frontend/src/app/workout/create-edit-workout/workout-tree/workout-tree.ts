@@ -1,9 +1,9 @@
-import {Workout} from "../../shared/workout";
-import {TreeNode} from "./tree-node";
-import {EnableNodeVisitor} from "./enable-node.visitor";
-import {DisableAllNodesVisitor} from "./disable-all-nodes.visitor";
-import {NodeByNameCollectorVisitor} from "./node-by-name-collector.visitor";
-import {Type} from "../../shared/type";
+import {Workout} from '../../shared/workout';
+import {TreeNode} from './tree-node';
+import {EnableNodeVisitor} from './enable-node.visitor';
+import {DisableAllNodesVisitor} from './disable-all-nodes.visitor';
+import {NodeByNameCollectorVisitor} from './node-by-name-collector.visitor';
+import {Type} from '../../shared/type';
 
 export class WorkoutTree {
   constructor(private _root: Workout) {
@@ -43,13 +43,13 @@ export class WorkoutTree {
 
     this.disableAllNodes();
 
-    let enableNodeVisitor = EnableNodeVisitor.find(nodeName, this.root);
+    const enableNodeVisitor = EnableNodeVisitor.find(nodeName, this.root);
 
     enableNodeVisitor.enableNodes();
   }
 
   disableAllNodes(): void {
-    this.root.accept(new DisableAllNodesVisitor())
+    this.root.accept(new DisableAllNodesVisitor());
   }
 
   // Todo this should not have a parameter of type tree node but only names and a type --> should create a node and return it
@@ -57,7 +57,7 @@ export class WorkoutTree {
     if (nodeToAdd.type === Type.Muscle_Group) {
       return this.link(nodeToAdd, this.root);
     }
-    let foundParentOfNode = this.findNodeByName(nodeToAdd.parent.name);
+    const foundParentOfNode = this.findNodeByName(nodeToAdd.parent.name);
     if (foundParentOfNode) {
       return this.link(nodeToAdd, foundParentOfNode);
     } else {
@@ -66,7 +66,7 @@ export class WorkoutTree {
   }
 
   findNodeByName(nodeName: string): TreeNode {
-    let nodeByNameCollectorVisitor = new NodeByNameCollectorVisitor(nodeName);
+    const nodeByNameCollectorVisitor = new NodeByNameCollectorVisitor(nodeName);
     this.root.accept(nodeByNameCollectorVisitor);
     return nodeByNameCollectorVisitor.foundNode;
   }
@@ -92,7 +92,7 @@ export class WorkoutTree {
   }
 
   delete(nodeName: string) {
-    let treeNode = this.findNodeByName(nodeName);
+    const treeNode = this.findNodeByName(nodeName);
 
     this.removeFromParent(treeNode);
 
@@ -110,8 +110,8 @@ export class WorkoutTree {
   }
 
   private removeFromParent(treeNode: TreeNode) {
-    let count = 0;
-    let treeNodeIndex = treeNode.parent.children.indexOf(treeNode);
+    const count = 0;
+    const treeNodeIndex = treeNode.parent.children.indexOf(treeNode);
     if (treeNodeIndex >= 0) {
       treeNode.parent.children.splice(treeNodeIndex, 1);
     }

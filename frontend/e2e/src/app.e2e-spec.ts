@@ -23,6 +23,7 @@ describe('A workout user', () => {
       .then(() => user.seesThatTitleOfWorkoutIs('Chest'))
       .then(() => user.addsExercisesToMuscleGroup('bENCH PrEsS; 2#dumbbell BENch PrEss', 'Chest'))
       .then(() => user.seesThatMuscleGroupHasExercisesToSelect('Chest', ['Bench Press', 'Dumbbell Bench Press']))
+      .then(() => user.selectsMuscleGroup('Chest'))
       .then(() => user.selectsExercise('Dumbbell Bench Press'))
       .then(() => user.seesThatMuscleGroupHasExercisesToSelect('Chest', ['Bench Press']))
       .then(() => user.addsSetsTo('Dumbbell Bench Press', [
@@ -42,7 +43,16 @@ describe('A workout user', () => {
   });
 
 
+  function cleanUpWorkoutsAndMuscleGroups() {
+    user.createsNewWorkout()
+      .then(() => user.deletesSelectableMuscleGroupsWithNames(selectableMuscleGroups))
+      .then(() => user.navigatesToWorkoutOverview())
+      .then(() => user.deletesAllWorkouts())
+    ;
+  }
+
   afterEach(async () => {
+    cleanUpWorkoutsAndMuscleGroups();
     // Assert that there are no errors emitted from the browser
     const logs = await browser.manage().logs().get(logging.Type.BROWSER);
     expect(logs).not.toContain(jasmine.objectContaining({

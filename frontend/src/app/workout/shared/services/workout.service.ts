@@ -20,11 +20,20 @@ import {WorkoutIdRaw} from '../workout-id-raw';
 })
 export class WorkoutService {
 
-  static WORKOUT_INITIAL_TITLE = 'New Workout';
-  private baseUrl: string;
-
   constructor(private httpClient: HttpClient) {
     this.baseUrl = environment.baseUrl;
+  }
+
+  private baseUrl: string;
+
+  private static toSetRequest(set: Set) {
+    return {
+      weight: set.weight,
+      weightUnit: set.weightUnit,
+      numberOfRepetitions: set.numberOfRepetitions,
+      waitingTime: set.waitingTime,
+      waitingTimeUnit: set.waitingTimeUnit
+    };
   }
 
   createNewOrFetchWorkoutWithId(workoutId: string): Observable<Workout> {
@@ -40,19 +49,8 @@ export class WorkoutService {
     }
   }
 
-  private fetchWorkoutByIdRequest(workoutId: string) {
-    let url = `${this.baseUrl}/workouts?workoutId=${workoutId}`;
-    return this.httpClient.get<WorkoutRaw>(url);
-  }
-
-  private createNewWorkoutRequest() {
-    let url = `${this.baseUrl}/workouts`;
-    let body = {title: WorkoutService.WORKOUT_INITIAL_TITLE};
-    return this.httpClient.post<WorkoutRaw>(url, body);
-  }
-
   updateWorkout(workout: Workout): Observable<Workout> {
-    let body = {
+    const body = {
       workout: {
         workoutId: workout.workoutId.value,
         creationDate: new Date(workout.creationDate).getTime(),
@@ -62,6 +60,17 @@ export class WorkoutService {
     };
     return this.httpClient.put<WorkoutRaw>(`${this.baseUrl}/workouts`, body)
       .pipe(map(data => WorkoutFactory.fromRaw(data)));
+  }
+
+  private fetchWorkoutByIdRequest(workoutId: string) {
+    const url = `${this.baseUrl}/workouts?workoutId=${workoutId}`;
+    return this.httpClient.get<WorkoutRaw>(url);
+  }
+
+  private createNewWorkoutRequest() {
+    const url = `${this.baseUrl}/workouts`;
+    const body = {title: Workout.WORKOUT_INITIAL_TITLE};
+    return this.httpClient.post<WorkoutRaw>(url, body);
   }
 
   copyWorkoutWithId(workoutId: WorkoutId): Observable<WorkoutId> {
@@ -88,7 +97,7 @@ export class WorkoutService {
     return {
       name: muscleGroup.name,
       exercises: muscleGroup.children.map(exercise => this.toExerciseRequest(exercise as Exercise))
-    }
+    };
   }
 
   // todo extract interfaces for requests
@@ -96,17 +105,7 @@ export class WorkoutService {
     return {
       name: exercise.name,
       multiplier: exercise.multiplier,
-      sets: exercise.children.map(set => WorkoutService.toSetRequest(<Set>set))
-    }
-  }
-
-  private static toSetRequest(set: Set) {
-    return {
-      weight: set.weight,
-      weightUnit: set.weightUnit,
-      numberOfRepetitions: set.numberOfRepetitions,
-      waitingTime: set.waitingTime,
-      waitingTimeUnit: set.waitingTimeUnit
-    }
+      sets: exercise.children.map(set => WorkoutService.toSetRequest(set as Set))
+    };
   }
 }

@@ -49,7 +49,7 @@ export class CreateWorkout {
   }
 
   selectWorkoutTreeNodeWithName(nodeName: string) {
-    return new Button('select-' + new ReplacePipe().transform(nodeName, ' ', '-').toLowerCase() + '-editable-node').click();
+    return new Button('select-' + CreateWorkout.format(nodeName) + '-editable-node').click();
   }
 
   addSet(set: Set[]) {

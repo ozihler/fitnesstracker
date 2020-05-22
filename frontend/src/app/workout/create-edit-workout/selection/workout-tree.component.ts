@@ -7,7 +7,7 @@ import {Type} from '../../shared/type';
   template: `
     <div class="uk-grid uk-grid-collapse" *ngIf="node?.isEnabled">
       <button
-        id="{{!node?.parent?'root-':''}}select-{{node?.name | replace : ' ': '-' | lowercase}}-editable-node"
+        id="{{!node?.isRoot?'root-':''}}select-{{node?.name | replace : ' ': '-' | lowercase}}-editable-node"
         class="uk-button uk-text-truncate"
         [ngClass]="levelDependentClasses"
         [disabled]="node.isLeaf"
@@ -16,7 +16,9 @@ import {Type} from '../../shared/type';
         <span *ngIf="node && !node?.isLeaf">
           ({{node?.numberOfChildren}})
         </span>
-
+        <span *ngIf="node && !node?.isRoot">
+          {{node?.creationDate | date: 'dd.MM.yy' : '':'de'}}
+        </span>
         <span>
           {{node?.name}}
         </span>

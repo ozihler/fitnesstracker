@@ -90,7 +90,7 @@ export class WorkoutUser {
   }
 
   selectsExercise(exercise: string) {
-    return this.selectsMuscleGroup(exercise);
+    return this.createWorkout.selectItem(exercise);
   }
 
   addsSetsTo(exercise: string, sets: Set[]) {
