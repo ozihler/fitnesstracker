@@ -55,7 +55,9 @@ describe('A workout user', () => {
         {name: 'Dumbbell Bench Press', expectedValue: 25 * 10 * 2, isRoot: false},
         {name: 'Chest', expectedValue: 25 * 10 * 2, isRoot: false},
         {name: '(W) Chest Triceps', expectedValue: 25 * 10 * 2, isRoot: true},
-      ]));
+      ]))
+    // todo continue
+    ;
   });
 
 
