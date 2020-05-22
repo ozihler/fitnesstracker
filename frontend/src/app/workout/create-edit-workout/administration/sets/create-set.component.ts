@@ -18,16 +18,19 @@ import {SetChangeValue} from './set-change-value';
 
     <div>
       <app-set-values
+        titlePrefix="weight"
         [formValues]="formValues.weight"
         (updateEvent)="update($event)"
         (disableOtherUpdatesEvent)="disableOtherUpdates($event)">
       </app-set-values>
       <app-set-values
+        titlePrefix="repetitions"
         [formValues]="formValues.repetitions"
         (updateEvent)="update($event)"
         (disableOtherUpdatesEvent)="disableOtherUpdates($event)">
       </app-set-values>
       <app-set-values
+        titlePrefix="waitingTime"
         [formValues]="formValues.waitingTime"
         (updateEvent)="update($event)"
         (disableOtherUpdatesEvent)="disableOtherUpdates($event)">

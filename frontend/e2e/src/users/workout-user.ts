@@ -99,7 +99,7 @@ export class WorkoutUser {
   }
 
   seesCorrectCumulatedWeightsFor(expectedValues: CumulatedWeight[]) {
-    return this.createWorkout; // todo continue;
+    return this.createWorkout.seesCorrectCumulatedWeightsFor(expectedValues); // todo continue;
   }
 
 }

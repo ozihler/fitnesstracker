@@ -3,6 +3,7 @@ import {InputField} from '../page_elements/input-field.pe';
 import {Span} from '../page_elements/span.pe';
 import {ReplacePipe} from '../../../src/app/workout/shared/pipes/replace.pipe';
 import {Set} from '../../../src/app/workout/shared/set';
+import {CumulatedWeight} from '../users/workout-user';
 
 export class CreateWorkout {
 
@@ -11,6 +12,14 @@ export class CreateWorkout {
   private editWorkoutTitleButton = new Button('edit-workout-title-button');
   private createNewMuscleGroupOrExerciseInput = new InputField('ft-input-field-to-create-new-muscle-group-or-exercise');
   private emptyElementsTextSpan = new Span('empty-elements-text');
+
+  private addSetToExerciseButton = new Button('ft-add-set-to-exercise');
+
+  private changeWeightButton = new Button('change-weight-button');
+  private changeRepetitionsButton = new Button('change-repetitions-button');
+
+  private weightInputField = new InputField('weight-input');
+  private repetitionsInputField = new InputField('repetitions-input');
 
   private static format(value: string) {
     return new ReplacePipe().transform(value, ' ', '-').toLowerCase();
@@ -53,7 +62,24 @@ export class CreateWorkout {
       .clickIfUnselected();
   }
 
-  addSet(set: Set[]) {
+  addSet(sets: Set[]) {
+    for (const set of sets) {
+      this.changeWeightButton.click()
+        .then(() => this.weightInputField.enterText(set.weight + ''))
+        .then(() => this.changeRepetitionsButton.click())
+        .then(() => this.repetitionsInputField.enterText(set.numberOfRepetitions + ''))
+        .then(() => this.addSetToExerciseButton.click())
+      ;
+    }
+  }
 
+  seesCorrectCumulatedWeightsFor(expectedValues: CumulatedWeight[]) {
+    let promise;
+    for (const expectedValue of expectedValues) {
+      const button = new Button('select-' + CreateWorkout.format(expectedValue.name) + '-editable-node');
+      expect(button.visibleTitleText()).toContain('(' + expectedValue.expectedValue + ' kg)');
+      promise = button.visibleTitleText(); // only here to return a promise
+    }
+    return promise;
   }
 }

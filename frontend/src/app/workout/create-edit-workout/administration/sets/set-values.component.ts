@@ -9,12 +9,14 @@ import {SetFormValues} from './set-form-values';
     <div *ngIf="!formValues?.isDisabled" class="uk-flex-center" uk-grid>
       <form [formGroup]="form">
         <button *ngFor="let v of formValues?.negativeValues"
+                id="{{titlePrefix}}-{{v}}-button"
                 class="uk-button uk-width-1-3"
                 (click)="changeValue(v)">-
         </button>
 
         <div class="uk-width-1-1">
           <input
+            id="{{titlePrefix}}-input"
             class="uk-form-width-small uk-input"
             formControlName="value"
             (change)="changeValueDirectly()"
@@ -23,6 +25,7 @@ import {SetFormValues} from './set-form-values';
         </div>
 
         <button *ngFor="let v of formValues?.positiveValues"
+                id="{{titlePrefix}}+{{v}}-button"
                 class="uk-button uk-width-1-3"
                 (click)="changeValue(v)">+
         </button>
@@ -31,6 +34,7 @@ import {SetFormValues} from './set-form-values';
 
     <div *ngIf="formValues?.isDisabled">
       <button
+        id="change-{{titlePrefix}}-button"
         class="uk-button uk-width-1-1 uk-text-truncate"
         (click)="toggleButton()">
         Change {{formValues?.valueName}} </button>
@@ -38,7 +42,7 @@ import {SetFormValues} from './set-form-values';
   `
 })
 export class SetValuesComponent implements OnInit {
-
+  @Input() titlePrefix: string;
   @Input() formValues: SetFormValues;
   @Output() updateEvent = new EventEmitter<SetChangeValue>();
   @Output() disableOtherUpdatesEvent = new EventEmitter<string>();
