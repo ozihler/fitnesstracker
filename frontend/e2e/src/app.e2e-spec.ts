@@ -1,6 +1,7 @@
 import {browser, logging} from 'protractor';
 import {WorkoutUser} from './users/workout-user';
 import {Set} from '../../src/app/workout/shared/set';
+import {Workout} from '../../src/app/workout/shared/workout';
 
 
 describe('A workout user', () => {
@@ -15,15 +16,14 @@ describe('A workout user', () => {
 
     // todo summarise larger parts to smaller subsections
     user.createsNewWorkout()
-      .then(() => user.seesThatTitleOfWorkoutIs('New Workout'))
+      .then(() => user.seesThatTitleOfWorkoutIs(Workout.WORKOUT_PREFIX + ' New Workout'))
       .then(() => user.seesEmptyElementsText())
       .then(() => user.createsMuscleGroups('cHesT; tRICEPS,ShOulders. BiCePs'))
       .then(() => user.seesSelectableMuscleGroups(selectableMuscleGroups))
       .then(() => user.selectsMuscleGroup('Chest'))
-      .then(() => user.seesThatTitleOfWorkoutIs('Chest'))
+      .then(() => user.seesThatTitleOfWorkoutIs(Workout.WORKOUT_PREFIX + ' Chest'))
       .then(() => user.addsExercisesToMuscleGroup('bENCH PrEsS; 2#dumbbell BENch PrEss', 'Chest'))
       .then(() => user.seesThatMuscleGroupHasExercisesToSelect('Chest', ['Bench Press', 'Dumbbell Bench Press']))
-      .then(() => user.selectsMuscleGroup('Chest'))
       .then(() => user.selectsExercise('Dumbbell Bench Press'))
       .then(() => user.seesThatMuscleGroupHasExercisesToSelect('Chest', ['Bench Press']))
       .then(() => user.addsSetsTo('Dumbbell Bench Press', [
@@ -34,17 +34,14 @@ describe('A workout user', () => {
         {name: 'Chest', expectedValue: 25 * 10 * 2, isRoot: false},
         {name: 'Chest', expectedValue: 25 * 10 * 2, isRoot: true},
       ]))
-      // continue test here
-      .then(() => user.createsNewWorkout())
-      .then(() => user.deletesSelectableMuscleGroupsWithNames(selectableMuscleGroups))
-      .then(() => user.navigatesToWorkoutOverview())
-      .then(() => user.deletesAllWorkouts())
     ;
   });
 
 
   function cleanUpWorkoutsAndMuscleGroups() {
-    user.createsNewWorkout()
+    user.navigatesToWorkoutOverview()
+      .then(() => user.deletesAllWorkouts())
+      .then(() => user.createsNewWorkout())
       .then(() => user.deletesSelectableMuscleGroupsWithNames(selectableMuscleGroups))
       .then(() => user.navigatesToWorkoutOverview())
       .then(() => user.deletesAllWorkouts())

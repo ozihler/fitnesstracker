@@ -49,7 +49,8 @@ export class CreateWorkout {
   }
 
   selectWorkoutTreeNodeWithName(nodeName: string) {
-    return new Button('select-' + CreateWorkout.format(nodeName) + '-editable-node').click();
+    return new Button('select-' + CreateWorkout.format(nodeName) + '-editable-node')
+      .clickIfUnselected();
   }
 
   addSet(set: Set[]) {
