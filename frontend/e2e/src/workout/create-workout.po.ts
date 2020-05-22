@@ -3,7 +3,7 @@ import {InputField} from '../page_elements/input-field.pe';
 import {Span} from '../page_elements/span.pe';
 import {ReplacePipe} from '../../../src/app/workout/shared/pipes/replace.pipe';
 import {Set} from '../../../src/app/workout/shared/set';
-import {CumulatedWeight} from '../users/workout-user';
+import {CumulatedWeight} from '../utils/cumulated-weight';
 
 export class CreateWorkout {
 

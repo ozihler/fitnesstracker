@@ -2,6 +2,7 @@ import {FitnessTypeSelection} from '../fitness-type-selection.po';
 import {WorkoutsOverview} from '../workout/workouts-overview.po';
 import {CreateWorkout} from '../workout/create-workout.po';
 import {Set} from '../../../src/app/workout/shared/set';
+import {CumulatedWeight} from '../utils/cumulated-weight';
 
 export class WorkoutUser {
 
@@ -45,7 +46,7 @@ export class WorkoutUser {
   }
 
   addsExercisesToMuscleGroup(exercisesToAdd: string, muscleGroup: string) {
-    return this.createWorkout.selectWorkoutTreeNodeWithName(muscleGroup)
+    return this.selectNodeInWorkoutTreeWithName(muscleGroup)
       .then(() => this.createsExercises(exercisesToAdd));
   }
 
@@ -75,7 +76,7 @@ export class WorkoutUser {
   }
 
   seesThatMuscleGroupHasExercisesToSelect(muscleGroup: string, exercises: string[]) {
-    return this.createWorkout.selectWorkoutTreeNodeWithName(muscleGroup)
+    return this.selectNodeInWorkoutTreeWithName(muscleGroup)
       .then(() => this.seesSelectableExercises(exercises));
   }
 
@@ -94,18 +95,17 @@ export class WorkoutUser {
   }
 
   addsSetsTo(exercise: string, sets: Set[]) {
-    this.createWorkout.selectWorkoutTreeNodeWithName(exercise)
+    return this.selectNodeInWorkoutTreeWithName(exercise)
       .then(() => this.createWorkout.addSet(sets));
   }
 
-  seesCorrectCumulatedWeightsFor(expectedValues: CumulatedWeight[]) {
-    return this.createWorkout.seesCorrectCumulatedWeightsFor(expectedValues); // todo continue;
+  selectNodeInWorkoutTreeWithName(name: string) {
+    return this.createWorkout.selectWorkoutTreeNodeWithName(name);
+  }
+
+  seesCumulatedWeights(expectedValues: CumulatedWeight[]) {
+    return this.createWorkout.seesCorrectCumulatedWeightsFor(expectedValues);
   }
 
 }
 
-export class CumulatedWeight {
-  name: string;
-  expectedValue: number;
-  isRoot: boolean;
-}
