@@ -54,6 +54,7 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.route.paramMap.subscribe(params => {
       const workoutId = params.get('workoutId');
       this.workoutService.createNewOrFetchWorkoutWithId(workoutId)
@@ -61,7 +62,7 @@ export class CreateWorkoutComponent implements OnInit {
             this.workoutTree = new WorkoutTree(workout);
             this.fetchMuscleGroupsAndFilterOut(this.workoutTree.childrenOfCurrentSelection.map(c => c.name));
           },
-          error => console.log(error));
+          error => console.error(error));
     });
   }
 
