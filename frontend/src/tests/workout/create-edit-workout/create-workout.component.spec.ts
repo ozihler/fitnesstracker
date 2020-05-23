@@ -129,8 +129,20 @@ fdescribe('Create Workout', () => {
     // continue here
     const selectChestEditableNode = new Button(find('#select-' + chest + '-editable-node'));
 
+    expect(selectChestEditableNode.label).toContain('(0)');
     expect(selectChestEditableNode.label).toContain(muscleGroupsArray[0].name);
 
+    const root = new Button(find('#select-root-editable-node'));
+    expect(root.label).toContain('(1)');
+    expect(root.label).toContain('Chest');
+
+    const biceps = replace(muscleGroupsArray[1].name);
+    const selectBicepsButton = new Button(find('#ft-select-' + biceps + '-button'));
+    expect(selectBicepsButton.label).toContain(muscleGroupsArray[1].name);
+
+    const triceps = replace(muscleGroupsArray[2].name);
+    const selectTricepsButton = new Button(find('#ft-select-' + triceps + '-button'));
+    expect(selectTricepsButton.label).toContain(muscleGroupsArray[2].name);
   }));
 });
 

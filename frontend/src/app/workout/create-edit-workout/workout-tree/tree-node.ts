@@ -15,7 +15,7 @@ export abstract class TreeNode implements Cumulatable {
   }
 
   get isRoot(): boolean {
-    return !parent;
+    return this.type === Type.Workout;
   }
 
   get parent(): TreeNode {
