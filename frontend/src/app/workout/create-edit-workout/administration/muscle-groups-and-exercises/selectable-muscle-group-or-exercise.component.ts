@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {TreeNode} from "../../workout-tree/tree-node";
+import {TreeNode} from '../../workout-tree/tree-node';
 
 @Component({
   selector: 'app-selectable-muscle-group-or-exercise',

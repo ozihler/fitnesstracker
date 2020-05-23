@@ -1,20 +1,20 @@
 import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
-import {MuscleGroup} from "../muscle-group";
-import {MuscleGroupFactory} from "../muscle-group.factory";
-import {HttpClient} from "@angular/common/http";
-import {map} from "rxjs/operators";
-import {environment} from "../../../../environments/environment";
-import {MuscleGroupsRaw} from "../muscle-groups-raw";
-import {ExerciseFactory} from "../exercise.factory";
-import {ExercisesRaw} from "../exercises-raw";
-import {Exercise} from "../exercise";
-import {Set} from "../set";
-import {SetRaw} from "../set-raw";
-import {SetFactory} from "../set.factory";
-import {WorkoutId} from "../workout-id";
-import {MuscleGroupRaw} from "../muscle-group-raw";
-import {ExerciseRaw} from "../exercise-raw";
+import {Observable} from 'rxjs';
+import {MuscleGroup} from '../muscle-group';
+import {MuscleGroupFactory} from '../muscle-group.factory';
+import {HttpClient} from '@angular/common/http';
+import {map} from 'rxjs/operators';
+import {environment} from '../../../../environments/environment';
+import {MuscleGroupsRaw} from '../muscle-groups-raw';
+import {ExerciseFactory} from '../exercise.factory';
+import {ExercisesRaw} from '../exercises-raw';
+import {Exercise} from '../exercise';
+import {Set} from '../set';
+import {SetRaw} from '../set-raw';
+import {SetFactory} from '../set.factory';
+import {WorkoutId} from '../workout-id';
+import {MuscleGroupRaw} from '../muscle-group-raw';
+import {ExerciseRaw} from '../exercise-raw';
 
 
 @Injectable({
@@ -31,7 +31,7 @@ export class SelectionService {
     return this.httpClient.post<MuscleGroupsRaw>(
       `${this.baseUrl}/muscle-groups`,
       {
-        muscleGroupNames: muscleGroupNames
+        muscleGroupNames
       }
     ).pipe(
       map(
@@ -54,7 +54,7 @@ export class SelectionService {
   }
 
   fetchExercisesFor(muscleGroupName: string) {
-    return this.httpClient.get<ExercisesRaw>(this.baseUrl + "/muscle-groups/" + muscleGroupName + "/exercises")
+    return this.httpClient.get<ExercisesRaw>(this.baseUrl + '/muscle-groups/' + muscleGroupName + '/exercises')
       .pipe(map(exercises => ExerciseFactory.fromMultiple(exercises.exercises)));
   }
 
@@ -69,12 +69,12 @@ export class SelectionService {
   }
 
   deleteMuscleGroup(muscleGroupName: string): Observable<MuscleGroup> {
-    return this.httpClient.delete<MuscleGroupRaw>(this.baseUrl + "/muscle-groups/" + muscleGroupName)
+    return this.httpClient.delete<MuscleGroupRaw>(this.baseUrl + '/muscle-groups/' + muscleGroupName)
       .pipe(map(muscleGroup => MuscleGroupFactory.from(muscleGroup)));
   }
 
   deleteExercise(name: string): Observable<Exercise> {
-    return this.httpClient.delete<ExerciseRaw>(this.baseUrl + "/exercises/" + name)
+    return this.httpClient.delete<ExerciseRaw>(this.baseUrl + '/exercises/' + name)
       .pipe(map(exercise => ExerciseFactory.from(exercise)));
   }
 }
