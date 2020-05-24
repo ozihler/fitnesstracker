@@ -154,19 +154,18 @@ describe('a user', () => {
     user.seesWorkoutContainsElementWith(muscleGroupsArray[1].name, [muscleGroupsArray[1].name, '(0)']);
     user.seesEmptyElementsText();
 
+    // removes biceps
     user.removesSelection(muscleGroupsArray[1].name);
-
     titleElements = titleElements.filter(m => m !== muscleGroupsArray[1].name);
     user.seesWorkoutTitleContains(titleElements);
     user.seesWorkoutContainsElementWith('root', [...titleElements, '(1)']);
     user.seesWorkoutContainsElementWith(muscleGroupsArray[0].name, [muscleGroupsArray[0].name, '(0)']);
-
-    selectionServiceMock.newMuscleGroup = (m) => of([new MuscleGroup(undefined, m, [])]);
     user.seesSelectableMuscleGroups([muscleGroupsArray[1]]);
 
+    // removes chest
     user.removesSelection(muscleGroupsArray[0].name);
-
-    user.seesWorkoutTitleContains([]);
+    titleElements = titleElements.filter(m => m !== muscleGroupsArray[0].name); // empty array []
+    user.seesWorkoutTitleContains(titleElements);
     user.seesWorkoutContainsElementWith('root', [Workout.WORKOUT_INITIAL_TITLE, '(0)']);
     user.seesSelectableMuscleGroups([muscleGroupsArray[0], muscleGroupsArray[1]]);
   }));
