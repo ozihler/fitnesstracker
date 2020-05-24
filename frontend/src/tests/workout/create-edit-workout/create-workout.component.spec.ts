@@ -1,4 +1,4 @@
-import {ComponentFixture, ComponentFixtureAutoDetect, fakeAsync, TestBed} from '@angular/core/testing';
+import {ComponentFixtureAutoDetect, fakeAsync, TestBed} from '@angular/core/testing';
 import {CreateWorkoutComponent} from '../../../app/workout/create-edit-workout/create-workout.component';
 import {LOCALE_ID, NO_ERRORS_SCHEMA} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
@@ -23,16 +23,10 @@ import {SetValuesComponent} from '../../../app/workout/create-edit-workout/admin
 // tslint:disable-next-line:max-line-length
 import {SelectableMuscleGroupOrExerciseComponent} from '../../../app/workout/create-edit-workout/administration/muscle-groups-and-exercises/selectable-muscle-group-or-exercise.component';
 import {SetFormatPipe} from '../../../app/workout/shared/pipes/set-format.pipe';
-import {Button} from '../../unit_test_page_elements/button.utpe';
 import {CreateWorkoutComponentPageObject} from '../../unit_test_page_objects/create-workout-component.utpo';
 import {CreateWorkoutComponentUser} from '../../unit_test_users/create-workout-component-user.utu';
-import {ElementsToId} from '../../unit_test_page_objects/elements-to-id';
-import {FindElement} from '../../unit_test_page_objects/find-element';
 
 fdescribe('Create Workout', () => {
-
-  let component: CreateWorkoutComponent;
-  let fixture: ComponentFixture<CreateWorkoutComponent>;
   let user: CreateWorkoutComponentUser;
 
   class MockRoute {
@@ -86,12 +80,9 @@ fdescribe('Create Workout', () => {
         ReactiveFormsModule
       ],
       schemas: [NO_ERRORS_SCHEMA]
-    })
-      .compileComponents();
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(CreateWorkoutComponent);
-    component = fixture.componentInstance;
-    user = new CreateWorkoutComponentUser(new CreateWorkoutComponentPageObject(fixture));
+    user = new CreateWorkoutComponentUser(new CreateWorkoutComponentPageObject(TestBed.createComponent(CreateWorkoutComponent)));
   });
 
   it('add muscle groups to workout', fakeAsync(() => {
@@ -102,27 +93,11 @@ fdescribe('Create Workout', () => {
     user.seesEmptyElementsText();
     user.createsMuscleGroupsToSelect(muscleGroupNames);
     user.seesSelectableMuscleGroupsWithNames(muscleGroupsArray);
-    
-    const chest = ElementsToId.replace(muscleGroupsArray[0].name);
-    const selectChestButton = new Button(new FindElement(fixture).by('#ft-select-' + chest + '-button'));
-    selectChestButton.click();
 
-    const selectChestEditableNode = new Button(new FindElement(fixture).by('#select-' + chest + '-editable-node'));
-
-    expect(selectChestEditableNode.label).toContain('(0)');
-    expect(selectChestEditableNode.label).toContain(muscleGroupsArray[0].name);
-
-    const root = new Button(new FindElement(fixture).by('#select-root-editable-node'));
-    expect(root.label).toContain('(1)');
-    expect(root.label).toContain('Chest');
-
-    const biceps = ElementsToId.replace(muscleGroupsArray[1].name);
-    const selectBicepsButton = new Button(new FindElement(fixture).by('#ft-select-' + biceps + '-button'));
-    expect(selectBicepsButton.label).toContain(muscleGroupsArray[1].name);
-
-    const triceps = ElementsToId.replace(muscleGroupsArray[2].name);
-    const selectTricepsButton = new Button(new FindElement(fixture).by('#ft-select-' + triceps + '-button'));
-    expect(selectTricepsButton.label).toContain(muscleGroupsArray[2].name);
+    user.selects(muscleGroupsArray[0].name);
+    user.seesWorkoutContains('root', [muscleGroupsArray[0].name, '(1)']);
+    user.seesWorkoutContains(muscleGroupsArray[0].name, [muscleGroupsArray[0].name, '(0)']);
+    user.seesSelectableMuscleGroupsWithNames(muscleGroupsArray.filter(m => m.name !== muscleGroupsArray[0].name));
   }));
 });
 

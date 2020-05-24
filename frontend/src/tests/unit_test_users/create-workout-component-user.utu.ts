@@ -23,4 +23,13 @@ export class CreateWorkoutComponentUser {
   seesSelectableMuscleGroupsWithNames(muscleGroupsArray: MuscleGroup[]) {
     this.createWorkoutComponent.expectSelectableMuscleGroupsToContain(muscleGroupsArray);
   }
+
+  selects(selectableElement: string) {
+    this.createWorkoutComponent.selectSelectableElement(selectableElement);
+
+  }
+
+  seesWorkoutContains(element: string, stringsItShouldContain: string[]) {
+    this.createWorkoutComponent.expectWorkoutTreeToContain(element, stringsItShouldContain);
+  }
 }

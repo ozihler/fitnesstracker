@@ -54,4 +54,17 @@ export class CreateWorkoutComponentPageObject {
         .toEqual(muscleGroup.name);
     });
   }
+
+  selectSelectableElement(selectableElement: string) {
+    const selectableElementIdName = ElementsToId.replace(selectableElement);
+    const selectElementButton = new Button(this.findElement.by('#ft-select-' + selectableElementIdName + '-button'));
+    selectElementButton.click();
+  }
+
+  expectWorkoutTreeToContain(elementName: string, stringsItShouldContain: string[]) {
+    const treeNodeButton = new Button(this.findElement.by('#select-' + ElementsToId.replace(elementName) + '-editable-node'));
+    for (const stringTheElementShouldContain of stringsItShouldContain) {
+      expect(treeNodeButton.label).toContain(stringTheElementShouldContain);
+    }
+  }
 }
