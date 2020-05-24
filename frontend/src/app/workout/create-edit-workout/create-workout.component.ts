@@ -175,7 +175,9 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
   private removeFromSelectableElements(selectedElement: TreeNode) {
-    this.selectableChildrenOfSelectedWorkoutTreeNode = this.selectableChildrenOfSelectedWorkoutTreeNode.filter(s => s.name !== selectedElement.name);
+    this.selectableChildrenOfSelectedWorkoutTreeNode
+      = this.selectableChildrenOfSelectedWorkoutTreeNode
+      .filter(s => s.name !== selectedElement.name);
   }
 
   private contains(node: TreeNode) {

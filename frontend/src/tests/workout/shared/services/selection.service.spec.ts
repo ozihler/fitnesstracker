@@ -1,8 +1,8 @@
-import {SelectionService} from "../../../../app/workout/shared/services/selection.service";
-import {of} from "rxjs";
-import {HttpClient} from "@angular/common/http";
-import {MuscleGroup} from "../../../../app/workout/shared/muscle-group";
-import {TestBed, inject} from "@angular/core/testing";
+import {SelectionService} from '../../../../app/workout/shared/services/selection.service';
+import {of} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {MuscleGroup} from '../../../../app/workout/shared/muscle-group';
+import {inject, TestBed} from '@angular/core/testing';
 
 describe(`SelectionService`, () => {
   const expectedMuscleGroups = {

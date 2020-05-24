@@ -22,8 +22,8 @@ import {TreeNode} from '../../workout-tree/tree-node';
 export class SelectableMuscleGroupOrExerciseComponent implements OnInit {
 
   @Input() element: TreeNode;
-  @Output() selectElementEvent = new EventEmitter<TreeNode>()
-  @Output() deleteElementEvent = new EventEmitter<TreeNode>()
+  @Output() selectElementEvent = new EventEmitter<TreeNode>();
+  @Output() deleteElementEvent = new EventEmitter<TreeNode>();
 
   constructor() {
   }

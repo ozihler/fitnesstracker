@@ -30,7 +30,7 @@ describe('a user', () => {
   let user: CreateWorkoutComponentUser;
 
   let selectionServiceMock;
-  const toMuscleGroups = (muscleGroupNames) => muscleGroupNames.split(',').map(m => new MuscleGroup(undefined, m, []));
+  const toMuscleGroups = (muscleGroupNames) => muscleGroupNames.split(',').map(m => new MuscleGroup(undefined, m.trim(), []));
 
   beforeEach(() => {
 
@@ -52,7 +52,8 @@ describe('a user', () => {
       getMuscleGroups: () => of([]),
       newMuscleGroup: (muscleGroupNames: string) => {
         return of(toMuscleGroups(muscleGroupNames));
-      }
+      },
+      deleteMuscleGroup: (muscleGroupToDelete) => of(muscleGroupToDelete)
     };
     registerLocaleData(localeDe);
     TestBed.configureTestingModule({
@@ -140,7 +141,7 @@ describe('a user', () => {
     user.seesEmptyElementsText();
   }));
 
-  fit('can remove multiple muscle groups from a workout', fakeAsync(() => {
+  it('can remove multiple muscle groups from a workout', fakeAsync(() => {
     const muscleGroupNames = 'Chest, Biceps';
     const muscleGroupsArray = toMuscleGroups(muscleGroupNames);
     user.createsMuscleGroupsToSelect(muscleGroupNames);
@@ -155,7 +156,7 @@ describe('a user', () => {
     user.seesEmptyElementsText();
 
     // removes biceps
-    user.removesSelection(muscleGroupsArray[1].name);
+    user.removesItemFromWorkoutTree(muscleGroupsArray[1].name);
     titleElements = titleElements.filter(m => m !== muscleGroupsArray[1].name);
     user.seesWorkoutTitleContains(titleElements);
     user.seesWorkoutContainsElementWith('root', [...titleElements, '(1)']);
@@ -163,11 +164,26 @@ describe('a user', () => {
     user.seesSelectableMuscleGroups([muscleGroupsArray[1]]);
 
     // removes chest
-    user.removesSelection(muscleGroupsArray[0].name);
+    user.removesItemFromWorkoutTree(muscleGroupsArray[0].name);
     titleElements = titleElements.filter(m => m !== muscleGroupsArray[0].name); // empty array []
     user.seesWorkoutTitleContains(titleElements);
     user.seesWorkoutContainsElementWith('root', [Workout.WORKOUT_INITIAL_TITLE, '(0)']);
     user.seesSelectableMuscleGroups([muscleGroupsArray[0], muscleGroupsArray[1]]);
   }));
+
+  it('can delete a selectable muscle group', () => {
+    const muscleGroupNames = 'Chest, Biceps';
+    const muscleGroupsArray = toMuscleGroups(muscleGroupNames);
+    user.createsMuscleGroupsToSelect(muscleGroupNames);
+    user.seesSelectableMuscleGroups(muscleGroupsArray);
+
+    selectionServiceMock.getMuscleGroups = () => of([new MuscleGroup(undefined, muscleGroupsArray[1].name, [])]);
+    user.deletesSelectableItem(muscleGroupsArray[0].name);
+    selectionServiceMock.getMuscleGroups = () => of([]);
+    user.seesSelectableMuscleGroups([muscleGroupsArray[1]]);
+    user.deletesSelectableItem('biceps');
+    user.seesEmptyElementsText();
+  });
+
 });
 

@@ -1,7 +1,7 @@
-import {Set} from "./set";
-import {TreeNode} from "../create-edit-workout/workout-tree/tree-node";
-import {MuscleGroup} from "./muscle-group";
-import {Type} from "./type";
+import {Set} from './set';
+import {TreeNode} from '../create-edit-workout/workout-tree/tree-node';
+import {MuscleGroup} from './muscle-group';
+import {Type} from './type';
 
 export class Exercise extends TreeNode {
   private _multiplier: number = 1;//Default value is 1
@@ -28,11 +28,7 @@ export class Exercise extends TreeNode {
     if (!this.children || this.children.length === 0) {
       return 0;
     }
-    return this.children.map(node => {
-      let cumulated = node.cumulateWeight() * this.multiplier;
-      console.log("Exercise " + this.name + ": " + node.cumulateWeight() + "*" + this.multiplier + "=" + cumulated);
-      return cumulated
-    })
+    return this.children.map(node => node.cumulateWeight() * this.multiplier)
       .reduce((before, after) => before + after);
   }
 }

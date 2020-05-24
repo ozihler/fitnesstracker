@@ -70,7 +70,11 @@ export class SelectionService {
 
   deleteMuscleGroup(muscleGroupName: string): Observable<MuscleGroup> {
     return this.httpClient.delete<MuscleGroupRaw>(this.baseUrl + '/muscle-groups/' + muscleGroupName)
-      .pipe(map(muscleGroup => MuscleGroupFactory.from(muscleGroup)));
+      .pipe(
+        map(
+          muscleGroup => MuscleGroupFactory.from(muscleGroup)
+        )
+      );
   }
 
   deleteExercise(name: string): Observable<Exercise> {

@@ -7,6 +7,6 @@ export class Button {
   }
 
   click() {
-    return this.button.click();
+    this.button.click();
   }
 }

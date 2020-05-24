@@ -72,4 +72,9 @@ export class CreateWorkoutComponentPageObject {
       expect(treeNodeButton.label).toContain(stringTheElementShouldContain);
     }
   }
+
+  deleteSelectableItem(selectableElementToDelete: string) {
+    const selector = '#ft-delete-' + ElementsToId.replace(selectableElementToDelete) + '-button';
+    new Button(this.findElement.by(selector)).click();
+  }
 }

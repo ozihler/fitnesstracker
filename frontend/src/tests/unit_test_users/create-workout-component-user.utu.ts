@@ -32,7 +32,11 @@ export class CreateWorkoutComponentUser {
     this.createWorkoutComponent.expectWorkoutTreeToContain(workoutTreeElementName, stringsItShouldContain);
   }
 
-  removesSelection(elementToRemove: string) {
+  removesItemFromWorkoutTree(elementToRemove: string) {
     this.createWorkoutComponent.removeSelectedElementFromWorkoutTree(elementToRemove);
+  }
+
+  deletesSelectableItem(selectableElementToDelete: string) {
+    this.createWorkoutComponent.deleteSelectableItem(selectableElementToDelete);
   }
 }
