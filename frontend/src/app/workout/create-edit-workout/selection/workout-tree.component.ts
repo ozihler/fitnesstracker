@@ -27,7 +27,7 @@ import {Type} from '../../shared/type';
       </button>
 
       <button
-        id="remove-node-from-workout-tree"
+        id="remove-node-{{(!node?.isRoot? (node?.name | replace : ' ': '-' |lowercase): 'root')}}-from-workout-tree"
         class="uk-button uk-button-danger uk-width-1-3"
         *ngIf="!isWorkout()"
         (click)="removeFromWorkout(node)">

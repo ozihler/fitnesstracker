@@ -26,9 +26,8 @@ export class CreateWorkoutComponentPageObject {
       = new Button(this.findElement.by('#ft-show-form-to-input-new-muscle-group-or-exercise-button'));
   }
 
-  expectTitleToBe(workoutTitle: string) {
-    expect(this.editWorkoutTitleButton.label)
-      .toContain(workoutTitle);
+  expectTitleToContain(elementsTitleShouldContain: string[]) {
+    elementsTitleShouldContain.forEach(element => expect(this.editWorkoutTitleButton.label).toContain(element));
   }
 
   expectEmptyElementsText() {
@@ -58,6 +57,12 @@ export class CreateWorkoutComponentPageObject {
   selectSelectableElement(selectableElement: string) {
     const selectableElementIdName = ElementsToId.replace(selectableElement);
     const selectElementButton = new Button(this.findElement.by('#ft-select-' + selectableElementIdName + '-button'));
+    selectElementButton.click();
+  }
+
+  removeSelectedElementFromWorkoutTree(selectedElementToRemove: string) {
+    const selectedElementIdName = ElementsToId.replace(selectedElementToRemove);
+    const selectElementButton = new Button(this.findElement.by('#remove-node-' + selectedElementIdName + '-from-workout-tree'));
     selectElementButton.click();
   }
 

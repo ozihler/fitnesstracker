@@ -91,7 +91,7 @@ fdescribe('a user', () => {
     const muscleGroupNames = 'Chest, Biceps, Triceps';
     const muscleGroupsArray = toMuscleGroups(muscleGroupNames);
 
-    user.seesWorkoutTitleIs(Workout.WORKOUT_PREFIX + ' New Workout');
+    user.seesWorkoutTitleContains([Workout.WORKOUT_PREFIX, 'New Workout']);
     user.seesEmptyElementsText();
     user.createsMuscleGroupsToSelect(muscleGroupNames);
     user.seesSelectableMuscleGroups(muscleGroupsArray);
@@ -102,7 +102,7 @@ fdescribe('a user', () => {
     user.createsMuscleGroupsToSelect(muscleGroupName);
 
     user.selects(muscleGroupName);
-    user.seesWorkoutTitleIs(Workout.WORKOUT_PREFIX + ' ' + muscleGroupName);
+    user.seesWorkoutTitleContains([Workout.WORKOUT_PREFIX, muscleGroupName]);
     user.seesWorkoutContainsElementWith('root', [muscleGroupName, '(1)']);
     user.seesWorkoutContainsElementWith(muscleGroupName, [muscleGroupName, '(0)']);
     user.seesEmptyElementsText();
@@ -115,16 +115,16 @@ fdescribe('a user', () => {
 
     // selects chest
     user.selects(muscleGroupsArray[0].name);
-    let newTitle = Workout.WORKOUT_PREFIX + ' ' + muscleGroupsArray[0].name;
-    user.seesWorkoutTitleIs(newTitle);
+    const titleElements = [muscleGroupsArray[0].name];
+    user.seesWorkoutTitleContains(titleElements);
     user.seesWorkoutContainsElementWith('root', [muscleGroupsArray[0].name, '(1)']);
     user.seesWorkoutContainsElementWith(muscleGroupsArray[0].name, [muscleGroupsArray[0].name, '(0)']);
     user.seesSelectableMuscleGroups([muscleGroupsArray[1], muscleGroupsArray[2]]);
 
     // selects biceps
     user.selects(muscleGroupsArray[1].name);
-    newTitle += ' ' + muscleGroupsArray[1].name;
-    user.seesWorkoutTitleIs(newTitle);
+    titleElements.push(muscleGroupsArray[1].name);
+    user.seesWorkoutTitleContains(titleElements);
     user.seesWorkoutContainsElementWith('root', [muscleGroupsArray[0].name, muscleGroupsArray[1].name, '(2)']);
     user.seesWorkoutContainsElementWith(muscleGroupsArray[0].name, [muscleGroupsArray[0].name, '(0)']);
     user.seesWorkoutContainsElementWith(muscleGroupsArray[1].name, [muscleGroupsArray[1].name, '(0)']);
@@ -132,14 +132,50 @@ fdescribe('a user', () => {
 
     // selects Triceps
     user.selects(muscleGroupsArray[2].name);
-    newTitle += ' ' + muscleGroupsArray[2].name;
-    user.seesWorkoutTitleIs(newTitle);
+    titleElements.push(muscleGroupsArray[2].name);
+    user.seesWorkoutTitleContains(titleElements);
     user.seesWorkoutContainsElementWith('root', [muscleGroupsArray[0].name, muscleGroupsArray[1].name, muscleGroupsArray[2].name, '(3)']);
     user.seesWorkoutContainsElementWith(muscleGroupsArray[0].name, [muscleGroupsArray[0].name, '(0)']);
     user.seesWorkoutContainsElementWith(muscleGroupsArray[1].name, [muscleGroupsArray[1].name, '(0)']);
     user.seesWorkoutContainsElementWith(muscleGroupsArray[2].name, [muscleGroupsArray[2].name, '(0)']);
     user.seesEmptyElementsText();
 
+  }));
+
+  it('can remove multiple muscle groups from a workout', fakeAsync(() => {
+    const muscleGroupNames = 'Chest, Biceps';
+    const muscleGroupsArray = toMuscleGroups(muscleGroupNames);
+    user.createsMuscleGroupsToSelect(muscleGroupNames);
+    user.selects(muscleGroupsArray[0].name);
+    user.selects(muscleGroupsArray[1].name);
+
+    let titleElements = [muscleGroupsArray[0].name, muscleGroupsArray[1].name];
+    user.seesWorkoutTitleContains([...titleElements]);
+    user.seesWorkoutContainsElementWith('root', [...titleElements, '(2)']);
+    user.seesWorkoutContainsElementWith(muscleGroupsArray[0].name, [muscleGroupsArray[0].name, '(0)']);
+    user.seesWorkoutContainsElementWith(muscleGroupsArray[1].name, [muscleGroupsArray[1].name, '(0)']);
+    user.seesEmptyElementsText();
+
+    user.removesSelection(muscleGroupsArray[1].name);
+
+    titleElements = titleElements.filter(m => m !== muscleGroupsArray[1].name);
+    console.log(titleElements);
+    user.seesWorkoutTitleContains(titleElements);
+    user.seesWorkoutContainsElementWith('root', [...titleElements, '(1)']);
+    user.seesWorkoutContainsElementWith(muscleGroupsArray[0].name, [muscleGroupsArray[0].name, '(0)']);
+    /*  user.seesSelectableMuscleGroups([muscleGroupsArray[1]]);
+
+
+     // selects biceps
+     user.selects(muscleGroupsArray[1].name);
+     title += ' ' + muscleGroupsArray[1].name;
+     user.seesWorkoutTitleIs(title);
+     user.seesWorkoutContainsElementWith('root', [muscleGroupsArray[0].name, muscleGroupsArray[1].name, '(2)']);
+     user.seesWorkoutContainsElementWith(muscleGroupsArray[0].name, [muscleGroupsArray[0].name, '(0)']);
+     user.seesWorkoutContainsElementWith(muscleGroupsArray[1].name, [muscleGroupsArray[1].name, '(0)']);
+     user.seesSelectableMuscleGroups([muscleGroupsArray[2]]);
+
+ */
   }));
 });
 

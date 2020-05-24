@@ -6,8 +6,8 @@ export class CreateWorkoutComponentUser {
 
   }
 
-  seesWorkoutTitleIs(workoutTitle: string) {
-    this.createWorkoutComponent.expectTitleToBe(workoutTitle);
+  seesWorkoutTitleContains(elementsTitleShouldContain: string[]) {
+    this.createWorkoutComponent.expectTitleToContain(elementsTitleShouldContain);
   }
 
   seesEmptyElementsText() {
@@ -30,5 +30,9 @@ export class CreateWorkoutComponentUser {
 
   seesWorkoutContainsElementWith(workoutTreeElementName: string, stringsItShouldContain: string[]) {
     this.createWorkoutComponent.expectWorkoutTreeToContain(workoutTreeElementName, stringsItShouldContain);
+  }
+
+  removesSelection(elementToRemove: string) {
+    this.createWorkoutComponent.removeSelectedElementFromWorkoutTree(elementToRemove);
   }
 }
