@@ -10,10 +10,6 @@ export class CreateWorkoutComponentUser {
     this.createWorkoutComponent.expectTitleToContain(elementsTitleShouldContain);
   }
 
-  seesEmptyElementsText() {
-    this.createWorkoutComponent.expectEmptyElementsText();
-  }
-
   createsMuscleGroupsToSelect(muscleGroupNames: string) {
     this.createWorkoutComponent.showMuscleGroupInputForm();
     this.createWorkoutComponent.enterMuscleGroups(muscleGroupNames);
@@ -24,8 +20,8 @@ export class CreateWorkoutComponentUser {
     this.createWorkoutComponent.expectSelectableMuscleGroupsToContain(muscleGroupsArray);
   }
 
-  selects(selectableElement: string) {
-    this.createWorkoutComponent.selectSelectableElement(selectableElement);
+  choosesFromSelectableMuscleGroups(selectableElement: string) {
+    this.createWorkoutComponent.chooseSelectableElement(selectableElement);
   }
 
   seesWorkoutContainsElementWith(workoutTreeElementName: string, stringsItShouldContain: string[]) {
@@ -38,5 +34,17 @@ export class CreateWorkoutComponentUser {
 
   deletesSelectableItem(selectableElementToDelete: string) {
     this.createWorkoutComponent.deleteSelectableItem(selectableElementToDelete);
+  }
+
+  selectsMuscleGroupFromWorkout(workoutTreeNodeName: string) {
+    this.createWorkoutComponent.selectWorkoutTreeNodeWithName(workoutTreeNodeName);
+  }
+
+  seesEmptyMuscleGroupsText() {
+    this.createWorkoutComponent.expectEmptyElementsText('Muscle Group');
+  }
+
+  seesEmptyExercisesText() {
+    this.createWorkoutComponent.expectEmptyElementsText('Exercise');
   }
 }

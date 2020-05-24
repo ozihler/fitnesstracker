@@ -92,7 +92,7 @@ describe('a user', () => {
     const muscleGroupsArray = toMuscleGroups(muscleGroupNames);
 
     user.seesWorkoutTitleContains([Workout.WORKOUT_PREFIX, Workout.WORKOUT_INITIAL_TITLE]);
-    user.seesEmptyElementsText();
+    user.seesEmptyMuscleGroupsText();
     user.createsMuscleGroupsToSelect(muscleGroupNames);
     user.seesSelectableMuscleGroups(muscleGroupsArray);
   }));
@@ -101,11 +101,11 @@ describe('a user', () => {
     const muscleGroupName = 'Chest';
     user.createsMuscleGroupsToSelect(muscleGroupName);
 
-    user.selects(muscleGroupName);
+    user.choosesFromSelectableMuscleGroups(muscleGroupName);
     user.seesWorkoutTitleContains([Workout.WORKOUT_PREFIX, muscleGroupName]);
     user.seesWorkoutContainsElementWith('root', [muscleGroupName, '(1)']);
     user.seesWorkoutContainsElementWith(muscleGroupName, [muscleGroupName, '(0)']);
-    user.seesEmptyElementsText();
+    user.seesEmptyMuscleGroupsText();
   }));
 
   it('can add multiple muscle groups to a workout', fakeAsync(() => {
@@ -114,7 +114,7 @@ describe('a user', () => {
     user.createsMuscleGroupsToSelect(muscleGroupNames);
 
     // selects chest
-    user.selects(muscleGroupsArray[0].name);
+    user.choosesFromSelectableMuscleGroups(muscleGroupsArray[0].name);
     const titleElements = [muscleGroupsArray[0].name];
     user.seesWorkoutTitleContains(titleElements);
     user.seesWorkoutContainsElementWith('root', [muscleGroupsArray[0].name, '(1)']);
@@ -122,7 +122,7 @@ describe('a user', () => {
     user.seesSelectableMuscleGroups([muscleGroupsArray[1], muscleGroupsArray[2]]);
 
     // selects biceps
-    user.selects(muscleGroupsArray[1].name);
+    user.choosesFromSelectableMuscleGroups(muscleGroupsArray[1].name);
     titleElements.push(muscleGroupsArray[1].name);
     user.seesWorkoutTitleContains(titleElements);
     user.seesWorkoutContainsElementWith('root', [muscleGroupsArray[0].name, muscleGroupsArray[1].name, '(2)']);
@@ -131,29 +131,29 @@ describe('a user', () => {
     user.seesSelectableMuscleGroups([muscleGroupsArray[2]]);
 
     // selects Triceps
-    user.selects(muscleGroupsArray[2].name);
+    user.choosesFromSelectableMuscleGroups(muscleGroupsArray[2].name);
     titleElements.push(muscleGroupsArray[2].name);
     user.seesWorkoutTitleContains(titleElements);
     user.seesWorkoutContainsElementWith('root', [muscleGroupsArray[0].name, muscleGroupsArray[1].name, muscleGroupsArray[2].name, '(3)']);
     user.seesWorkoutContainsElementWith(muscleGroupsArray[0].name, [muscleGroupsArray[0].name, '(0)']);
     user.seesWorkoutContainsElementWith(muscleGroupsArray[1].name, [muscleGroupsArray[1].name, '(0)']);
     user.seesWorkoutContainsElementWith(muscleGroupsArray[2].name, [muscleGroupsArray[2].name, '(0)']);
-    user.seesEmptyElementsText();
+    user.seesEmptyMuscleGroupsText();
   }));
 
   it('can remove multiple muscle groups from a workout', fakeAsync(() => {
     const muscleGroupNames = 'Chest, Biceps';
     const muscleGroupsArray = toMuscleGroups(muscleGroupNames);
     user.createsMuscleGroupsToSelect(muscleGroupNames);
-    user.selects(muscleGroupsArray[0].name);
-    user.selects(muscleGroupsArray[1].name);
+    user.choosesFromSelectableMuscleGroups(muscleGroupsArray[0].name);
+    user.choosesFromSelectableMuscleGroups(muscleGroupsArray[1].name);
 
     let titleElements = [muscleGroupsArray[0].name, muscleGroupsArray[1].name];
     user.seesWorkoutTitleContains([...titleElements]);
     user.seesWorkoutContainsElementWith('root', [...titleElements, '(2)']);
     user.seesWorkoutContainsElementWith(muscleGroupsArray[0].name, [muscleGroupsArray[0].name, '(0)']);
     user.seesWorkoutContainsElementWith(muscleGroupsArray[1].name, [muscleGroupsArray[1].name, '(0)']);
-    user.seesEmptyElementsText();
+    user.seesEmptyMuscleGroupsText();
 
     // removes biceps
     user.removesItemFromWorkoutTree(muscleGroupsArray[1].name);
@@ -183,7 +183,24 @@ describe('a user', () => {
 
     selectionServiceMock.getMuscleGroups = () => of([]);
     user.deletesSelectableItem('biceps');
-    user.seesEmptyElementsText();
+    user.seesEmptyMuscleGroupsText();
+  });
+
+  it('can create exercises for a muscle group', () => {
+    const muscleGroupNames = 'Chest, Biceps';
+    const muscleGroups = toMuscleGroups(muscleGroupNames);
+    const exercisesOfMuscleGroups = [];
+    // exercisesOfMuscleGroups[muscleGroups[0].name] = ['Bench Press'];
+
+    selectionServiceMock
+      .fetchExercisesFor = (muscleGroupName) => of([]);
+
+    user.createsMuscleGroupsToSelect(muscleGroupNames);
+    user.choosesFromSelectableMuscleGroups(muscleGroups[0].name);
+    user.choosesFromSelectableMuscleGroups(muscleGroups[1].name);
+
+    user.selectsMuscleGroupFromWorkout(muscleGroups[0].name);
+    user.seesEmptyExercisesText();
   });
 
 });

@@ -1,7 +1,7 @@
-import {async, TestBed} from "@angular/core/testing";
-import {NO_ERRORS_SCHEMA} from "@angular/core";
-import {CreateMuscleGroupsOrExercisesComponent} from "../../../../../app/workout/create-edit-workout/administration/muscle-groups-and-exercises/create-muscle-groups-or-exercises.component";
-import {ReactiveFormsModule} from "@angular/forms";
+import {async, TestBed} from '@angular/core/testing';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {CreateMuscleGroupsOrExercisesComponent} from '../../../../../app/workout/create-edit-workout/administration/muscle-groups-and-exercises/create-muscle-groups-or-exercises.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 describe('CreateMuscleGroupsOrExercisesComponent', () => {

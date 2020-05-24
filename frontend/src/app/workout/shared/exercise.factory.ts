@@ -10,7 +10,7 @@ export class ExerciseFactory {
     return exercise;
   }
 
-  static fromMultiple(exercises: ExerciseRaw[]) {
+  static fromMultiple(exercises: ExerciseRaw[]): Exercise[] {
     return exercises ? exercises.map(exercise => ExerciseFactory.from(exercise)) : [];
   }
 }

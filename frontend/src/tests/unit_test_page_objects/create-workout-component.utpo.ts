@@ -13,7 +13,6 @@ export class CreateWorkoutComponentPageObject {
 
   //  page objects
   private editWorkoutTitleButton;
-  private emptyElementsTextSpan;
   private showFormToInputNewMuscleGroupOrExerciseButton;
 
   constructor(private fixture: ComponentFixture<CreateWorkoutComponent>) {
@@ -21,7 +20,6 @@ export class CreateWorkoutComponentPageObject {
     this.findElement = new FindElement(fixture);
 
     this.editWorkoutTitleButton = new Button(this.findElement.by('#edit-workout-title-button'));
-    this.emptyElementsTextSpan = new Span(this.findElement.by('#empty-elements-text'));
     this.showFormToInputNewMuscleGroupOrExerciseButton
       = new Button(this.findElement.by('#ft-show-form-to-input-new-muscle-group-or-exercise-button'));
   }
@@ -30,9 +28,9 @@ export class CreateWorkoutComponentPageObject {
     elementsTitleShouldContain.forEach(element => expect(this.editWorkoutTitleButton.label).toContain(element));
   }
 
-  expectEmptyElementsText() {
-    expect(this.emptyElementsTextSpan.text)
-      .toContain('Create a new one first!');
+  expectEmptyElementsText(elementType: string) {
+    expect(new Span(this.findElement.by('#empty-elements-text')).text)
+      .toContain('No ' + elementType + ' to select. Create a new one first!');
   }
 
   showMuscleGroupInputForm() {
@@ -54,7 +52,7 @@ export class CreateWorkoutComponentPageObject {
     });
   }
 
-  selectSelectableElement(selectableElement: string) {
+  chooseSelectableElement(selectableElement: string) {
     const selectableElementIdName = ElementsToId.replace(selectableElement);
     const selectElementButton = new Button(this.findElement.by('#ft-select-' + selectableElementIdName + '-button'));
     selectElementButton.click();
@@ -75,6 +73,11 @@ export class CreateWorkoutComponentPageObject {
 
   deleteSelectableItem(selectableElementToDelete: string) {
     const selector = '#ft-delete-' + ElementsToId.replace(selectableElementToDelete) + '-button';
+    new Button(this.findElement.by(selector)).click();
+  }
+
+  selectWorkoutTreeNodeWithName(workoutTreeNodeName: string) {
+    const selector = '#select-' + ElementsToId.replace(workoutTreeNodeName) + '-editable-node';
     new Button(this.findElement.by(selector)).click();
   }
 }
