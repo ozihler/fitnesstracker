@@ -179,8 +179,9 @@ describe('a user', () => {
 
     selectionServiceMock.getMuscleGroups = () => of([new MuscleGroup(undefined, muscleGroupsArray[1].name, [])]);
     user.deletesSelectableItem(muscleGroupsArray[0].name);
-    selectionServiceMock.getMuscleGroups = () => of([]);
     user.seesSelectableMuscleGroups([muscleGroupsArray[1]]);
+
+    selectionServiceMock.getMuscleGroups = () => of([]);
     user.deletesSelectableItem('biceps');
     user.seesEmptyElementsText();
   });
