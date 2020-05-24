@@ -22,8 +22,8 @@ export class CreateWorkoutComponentPageObject {
 
     this.editWorkoutTitleButton = new Button(this.findElement.by('#edit-workout-title-button'));
     this.emptyElementsTextSpan = new Span(this.findElement.by('#empty-elements-text'));
-    // tslint:disable-next-line:max-line-length
-    this.showFormToInputNewMuscleGroupOrExerciseButton = new Button(this.findElement.by('#ft-show-form-to-input-new-muscle-group-or-exercise-button'));
+    this.showFormToInputNewMuscleGroupOrExerciseButton
+      = new Button(this.findElement.by('#ft-show-form-to-input-new-muscle-group-or-exercise-button'));
   }
 
   expectTitleToBe(workoutTitle: string) {
