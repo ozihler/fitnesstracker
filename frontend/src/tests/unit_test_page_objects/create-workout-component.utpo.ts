@@ -61,8 +61,8 @@ export class CreateWorkoutComponentPageObject {
     selectElementButton.click();
   }
 
-  expectWorkoutTreeToContain(elementName: string, stringsItShouldContain: string[]) {
-    const treeNodeButton = new Button(this.findElement.by('#select-' + ElementsToId.replace(elementName) + '-editable-node'));
+  expectWorkoutTreeToContain(workoutTreeElementName: string, stringsItShouldContain: string[]) {
+    const treeNodeButton = new Button(this.findElement.by('#select-' + ElementsToId.replace(workoutTreeElementName) + '-editable-node'));
     for (const stringTheElementShouldContain of stringsItShouldContain) {
       expect(treeNodeButton.label).toContain(stringTheElementShouldContain);
     }

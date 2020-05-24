@@ -28,7 +28,7 @@ export class CreateWorkoutComponentUser {
     this.createWorkoutComponent.selectSelectableElement(selectableElement);
   }
 
-  seesWorkoutContains(element: string, stringsItShouldContain: string[]) {
-    this.createWorkoutComponent.expectWorkoutTreeToContain(element, stringsItShouldContain);
+  seesWorkoutContains(workoutTreeElementName: string, stringsItShouldContain: string[]) {
+    this.createWorkoutComponent.expectWorkoutTreeToContain(workoutTreeElementName, stringsItShouldContain);
   }
 }
