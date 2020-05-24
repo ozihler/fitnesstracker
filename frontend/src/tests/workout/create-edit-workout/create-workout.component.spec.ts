@@ -26,33 +26,34 @@ import {SetFormatPipe} from '../../../app/workout/shared/pipes/set-format.pipe';
 import {CreateWorkoutComponentPageObject} from '../../unit_test_page_objects/create-workout-component.utpo';
 import {CreateWorkoutComponentUser} from '../../unit_test_users/create-workout-component-user.utu';
 
-fdescribe('Create Workout', () => {
+fdescribe('a user', () => {
   let user: CreateWorkoutComponentUser;
-
-  class MockRoute {
-    public paramMap = of({
-      get(x: string) {
-        return undefined;
-      }
-    });
-  }
-
-  const workoutServiceMock = {
-    createNewOrFetchWorkoutWithId: (workoutId: string) => of(
-      new Workout(WorkoutId.from('1234'), new Date(), Workout.WORKOUT_INITIAL_TITLE, undefined)),
-    updateWorkout: (workout: Workout) => of(workout)
-  };
-  const muscleGroups = [];
-  const selectionServiceMock = {
-    getMuscleGroups: () => of(muscleGroups),
-    newMuscleGroup: (muscleGroupNames: string) => {
-      return of(toMuscleGroups(muscleGroupNames));
-    }
-  };
 
   const toMuscleGroups = (muscleGroupNames) => muscleGroupNames.split(',').map(m => new MuscleGroup(undefined, m, []));
 
   beforeEach(() => {
+
+    class MockRoute {
+      public paramMap = of({
+        get(x: string) {
+          return undefined;
+        }
+      });
+    }
+
+    const workoutServiceMock = {
+      createNewOrFetchWorkoutWithId: (workoutId: string) => of(
+        new Workout(WorkoutId.from('1234'), new Date(), Workout.WORKOUT_INITIAL_TITLE, undefined)),
+      updateWorkout: (workout: Workout) => of(workout)
+    };
+
+    const selectionServiceMock = {
+      getMuscleGroups: () => of([]),
+      newMuscleGroup: (muscleGroupNames: string) => {
+        return of(toMuscleGroups(muscleGroupNames));
+      }
+    };
+
     registerLocaleData(localeDe);
     TestBed.configureTestingModule({
       declarations: [
@@ -85,19 +86,57 @@ fdescribe('Create Workout', () => {
     user = new CreateWorkoutComponentUser(new CreateWorkoutComponentPageObject(TestBed.createComponent(CreateWorkoutComponent)));
   });
 
-  it('add muscle groups to workout', fakeAsync(() => {
+
+  it('can create muscle groups', fakeAsync(() => {
     const muscleGroupNames = 'Chest, Biceps, Triceps';
     const muscleGroupsArray = toMuscleGroups(muscleGroupNames);
 
     user.seesWorkoutTitleIs(Workout.WORKOUT_PREFIX + ' New Workout');
     user.seesEmptyElementsText();
     user.createsMuscleGroupsToSelect(muscleGroupNames);
-    user.seesSelectableMuscleGroupsWithNames(muscleGroupsArray);
+    user.seesSelectableMuscleGroups(muscleGroupsArray);
+  }));
 
+  it('can add a single muscle group to a workout', fakeAsync(() => {
+    const muscleGroupName = 'Chest';
+    user.createsMuscleGroupsToSelect(muscleGroupName);
+
+    user.selects(muscleGroupName);
+    user.seesWorkoutTitleIs(Workout.WORKOUT_PREFIX + ' ' + muscleGroupName);
+    user.seesWorkoutContains('root', [muscleGroupName, '(1)']);
+    user.seesWorkoutContains(muscleGroupName, [muscleGroupName, '(0)']);
+    user.seesEmptyElementsText();
+  }));
+
+  it('can add multiple muscle groups to a workout', fakeAsync(() => {
+    const muscleGroupNames = 'Chest, Biceps, Triceps';
+    const muscleGroupsArray = toMuscleGroups(muscleGroupNames);
+    user.createsMuscleGroupsToSelect(muscleGroupNames);
+
+    // selects chest
     user.selects(muscleGroupsArray[0].name);
+    user.seesWorkoutTitleIs(Workout.WORKOUT_PREFIX + ' ' + muscleGroupsArray[0].name);
     user.seesWorkoutContains('root', [muscleGroupsArray[0].name, '(1)']);
     user.seesWorkoutContains(muscleGroupsArray[0].name, [muscleGroupsArray[0].name, '(0)']);
-    user.seesSelectableMuscleGroupsWithNames(muscleGroupsArray.filter(m => m.name !== muscleGroupsArray[0].name));
+    user.seesSelectableMuscleGroups([muscleGroupsArray[1], muscleGroupsArray[2]]);
+
+    // selects biceps
+    user.selects(muscleGroupsArray[1].name);
+    user.seesWorkoutTitleIs(Workout.WORKOUT_PREFIX + ' ' + muscleGroupsArray[0].name + ' ' + muscleGroupsArray[1].name);
+    user.seesWorkoutContains('root', [muscleGroupsArray[0].name, muscleGroupsArray[1].name, '(2)']);
+    user.seesWorkoutContains(muscleGroupsArray[0].name, [muscleGroupsArray[0].name, '(0)']);
+    user.seesWorkoutContains(muscleGroupsArray[1].name, [muscleGroupsArray[1].name, '(0)']);
+    user.seesSelectableMuscleGroups([muscleGroupsArray[2]]);
+
+    // selects Triceps
+    user.selects(muscleGroupsArray[2].name);
+    user.seesWorkoutTitleIs(Workout.WORKOUT_PREFIX + ' ' + muscleGroupsArray[0].name + ' ' + muscleGroupsArray[1].name + ' ' + muscleGroupsArray[2].name);
+    user.seesWorkoutContains('root', [muscleGroupsArray[0].name, muscleGroupsArray[1].name, muscleGroupsArray[2].name, '(3)']);
+    user.seesWorkoutContains(muscleGroupsArray[0].name, [muscleGroupsArray[0].name, '(0)']);
+    user.seesWorkoutContains(muscleGroupsArray[1].name, [muscleGroupsArray[1].name, '(0)']);
+    user.seesWorkoutContains(muscleGroupsArray[2].name, [muscleGroupsArray[2].name, '(0)']);
+    user.seesEmptyElementsText();
+
   }));
 });
 
