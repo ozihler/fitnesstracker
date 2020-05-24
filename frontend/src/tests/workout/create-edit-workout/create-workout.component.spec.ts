@@ -24,13 +24,16 @@ import {SetValuesComponent} from '../../../app/workout/create-edit-workout/admin
 import {SelectableMuscleGroupOrExerciseComponent} from '../../../app/workout/create-edit-workout/administration/muscle-groups-and-exercises/selectable-muscle-group-or-exercise.component';
 import {SetFormatPipe} from '../../../app/workout/shared/pipes/set-format.pipe';
 import {Button} from '../../unit_test_page_elements/button.utpe';
-import {InputField} from '../../unit_test_page_elements/input-field.utpe';
-import {Span} from '../../unit_test_page_elements/span.utbp';
+import {CreateWorkoutComponentPageObject} from '../../unit_test_page_objects/create-workout-component.utpo';
+import {CreateWorkoutComponentUser} from '../../unit_test_users/create-workout-component-user.utu';
+import {ElementsToId} from '../../unit_test_page_objects/elements-to-id';
+import {FindElement} from '../../unit_test_page_objects/find-element';
 
 fdescribe('Create Workout', () => {
 
   let component: CreateWorkoutComponent;
   let fixture: ComponentFixture<CreateWorkoutComponent>;
+  let user: CreateWorkoutComponentUser;
 
   class MockRoute {
     public paramMap = of({
@@ -54,10 +57,6 @@ fdescribe('Create Workout', () => {
   };
 
   const toMuscleGroups = (muscleGroupNames) => muscleGroupNames.split(',').map(m => new MuscleGroup(undefined, m, []));
-
-  function find(htmlElementName: string) {
-    return fixture.nativeElement.querySelector(htmlElementName);
-  }
 
   beforeEach(() => {
     registerLocaleData(localeDe);
@@ -92,56 +91,37 @@ fdescribe('Create Workout', () => {
 
     fixture = TestBed.createComponent(CreateWorkoutComponent);
     component = fixture.componentInstance;
-
+    user = new CreateWorkoutComponentUser(new CreateWorkoutComponentPageObject(fixture));
   });
 
-  function replace(input: string, stringToReplace: string = ' ', replacement: string = '-') {
-    return new ReplacePipe().transform(input, stringToReplace, replacement).toLowerCase();
-  }
-
-
   it('add muscle groups to workout', fakeAsync(() => {
-    const editWorkoutTitleButton = new Button(find('#edit-workout-title-button'));
-    const emptyElementsTextSpan = new Span(find('#empty-elements-text'));
-    const showFormToInputNewMuscleGroupOrExerciseButton = new Button(find('#ft-show-form-to-input-new-muscle-group-or-exercise-button'));
-
     const muscleGroupNames = 'Chest, Biceps, Triceps';
     const muscleGroupsArray = toMuscleGroups(muscleGroupNames);
 
-    expect(editWorkoutTitleButton.label).toContain(Workout.WORKOUT_PREFIX + ' New Workout');
-    expect(emptyElementsTextSpan.text).toContain('Create a new one first!');
-    showFormToInputNewMuscleGroupOrExerciseButton.click();
-
-    const inputFieldToCreateNewMuscleGroupOrExercise = new InputField(find('#ft-input-field-to-create-new-muscle-group-or-exercise'));
-    inputFieldToCreateNewMuscleGroupOrExercise.text = muscleGroupNames;
-
-    const buttonToSubmitNewMuscleGroupOrExercise = new Button(find('#ft-button-to-submit-new-muscle-group-or-exercise'));
-    buttonToSubmitNewMuscleGroupOrExercise.click();
-
-    muscleGroupsArray.forEach(muscleGroup => {
-      expect(new Button(find('#ft-select-' + replace(muscleGroup.name) + '-button')).label).toEqual(muscleGroup.name);
-    });
-
-    const chest = replace(muscleGroupsArray[0].name);
-    const selectChestButton = new Button(find('#ft-select-' + chest + '-button'));
+    user.seesWorkoutTitleIs(Workout.WORKOUT_PREFIX + ' New Workout');
+    user.seesEmptyElementsText();
+    user.createsMuscleGroupsToSelect(muscleGroupNames);
+    user.seesSelectableMuscleGroupsWithNames(muscleGroupsArray);
+    
+    const chest = ElementsToId.replace(muscleGroupsArray[0].name);
+    const selectChestButton = new Button(new FindElement(fixture).by('#ft-select-' + chest + '-button'));
     selectChestButton.click();
 
-    // continue here
-    const selectChestEditableNode = new Button(find('#select-' + chest + '-editable-node'));
+    const selectChestEditableNode = new Button(new FindElement(fixture).by('#select-' + chest + '-editable-node'));
 
     expect(selectChestEditableNode.label).toContain('(0)');
     expect(selectChestEditableNode.label).toContain(muscleGroupsArray[0].name);
 
-    const root = new Button(find('#select-root-editable-node'));
+    const root = new Button(new FindElement(fixture).by('#select-root-editable-node'));
     expect(root.label).toContain('(1)');
     expect(root.label).toContain('Chest');
 
-    const biceps = replace(muscleGroupsArray[1].name);
-    const selectBicepsButton = new Button(find('#ft-select-' + biceps + '-button'));
+    const biceps = ElementsToId.replace(muscleGroupsArray[1].name);
+    const selectBicepsButton = new Button(new FindElement(fixture).by('#ft-select-' + biceps + '-button'));
     expect(selectBicepsButton.label).toContain(muscleGroupsArray[1].name);
 
-    const triceps = replace(muscleGroupsArray[2].name);
-    const selectTricepsButton = new Button(find('#ft-select-' + triceps + '-button'));
+    const triceps = ElementsToId.replace(muscleGroupsArray[2].name);
+    const selectTricepsButton = new Button(new FindElement(fixture).by('#ft-select-' + triceps + '-button'));
     expect(selectTricepsButton.label).toContain(muscleGroupsArray[2].name);
   }));
 });
