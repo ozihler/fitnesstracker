@@ -7,7 +7,7 @@
     "start": "ng serve --configuration=production",
     "buildLocal": "ng build",
     "build": "ng build --configuration=production",
-    "test": "ng test",
+    "test": "ng test --code-coverage=true",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

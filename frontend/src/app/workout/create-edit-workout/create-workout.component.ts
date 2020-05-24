@@ -29,7 +29,7 @@ import {Workout} from '../shared/workout';
     <hr class="uk-divider-icon"/>
     <app-muscle-group-or-exercise-selection
       [currentSelection]="workoutTree?.currentSelection"
-      [selectableElements]="selectableChildrenOfSelectedNode"
+      [selectableElements]="selectableChildrenOfSelectedWorkoutTreeNode"
       (addNodeEvent)="addSelectedItemToTree($event)"
       (createsChildEvent)="createSelectableElement($event)"
       (deleteNodeEvent)="deleteSelectableElement($event)">
@@ -47,7 +47,7 @@ export class CreateWorkoutComponent implements OnInit {
 
   // todo rename to "edit Workout component" or similar, see angular book
   workoutTree: WorkoutTree;
-  selectableChildrenOfSelectedNode: TreeNode[] = [];
+  selectableChildrenOfSelectedWorkoutTreeNode: TreeNode[] = [];
 
   private static isSelectableElement(selectedElement: TreeNode) {
     return selectedElement.type !== Type.Set;
@@ -79,8 +79,10 @@ export class CreateWorkoutComponent implements OnInit {
     }
   }
 
-  private removeFromSelectableElements(selectedElement: TreeNode) {
-    this.selectableChildrenOfSelectedNode = this.selectableChildrenOfSelectedNode.filter(s => s.name !== selectedElement.name);
+  removeNodeFromWorkout(nodeToDelete: TreeNode) {
+    this.deleteMuscleGroupFromTitle(nodeToDelete);
+    this.workoutTree.delete(nodeToDelete.name);
+    this.selectableChildrenOfSelectedWorkoutTreeNode.push(nodeToDelete);
   }
 
   createSelectableElement(elements: string) {
@@ -172,12 +174,12 @@ export class CreateWorkoutComponent implements OnInit {
     this.workoutTree.root.name += ' ' + selectedElement.name;
   }
 
-  private contains(node: TreeNode) {
-    return this.selectableChildrenOfSelectedNode.map(s => s.name).indexOf(node.name) >= 0;
+  private removeFromSelectableElements(selectedElement: TreeNode) {
+    this.selectableChildrenOfSelectedWorkoutTreeNode = this.selectableChildrenOfSelectedWorkoutTreeNode.filter(s => s.name !== selectedElement.name);
   }
 
-  private updateSelectableElements(nodes: TreeNode[], selectedChildren: string[]) {
-    return this.selectableChildrenOfSelectedNode = nodes.filter(node => selectedChildren.indexOf(node.name) < 0);
+  private contains(node: TreeNode) {
+    return this.selectableChildrenOfSelectedWorkoutTreeNode.map(s => s.name).indexOf(node.name) >= 0;
   }
 
   private addSetToExercise(sets: Set[]) {
@@ -204,19 +206,17 @@ export class CreateWorkoutComponent implements OnInit {
     }
   }
 
+  private updateSelectableElements(nodes: TreeNode[], selectedChildren: string[]) {
+    return this.selectableChildrenOfSelectedWorkoutTreeNode = nodes.filter(node => selectedChildren.indexOf(node.name) < 0);
+  }
+
   private updateSelectableNodes(nodes: TreeNode[]) {
     this.updateParents(nodes, this.workoutTree.currentSelection);
 
     nodes.forEach(node => {
       if (!this.contains(node)) {
-        this.selectableChildrenOfSelectedNode.push(node);
+        this.selectableChildrenOfSelectedWorkoutTreeNode.push(node);
       }
     });
-  }
-
-  removeNodeFromWorkout(nodeToDelete: TreeNode) {
-    this.deleteMuscleGroupFromTitle(nodeToDelete);
-    this.workoutTree.delete(nodeToDelete.name);
-    this.fetchChildrenOf(this.workoutTree.currentSelection);
   }
 }

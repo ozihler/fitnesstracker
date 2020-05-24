@@ -26,9 +26,10 @@ import {SetFormatPipe} from '../../../app/workout/shared/pipes/set-format.pipe';
 import {CreateWorkoutComponentPageObject} from '../../unit_test_page_objects/create-workout-component.utpo';
 import {CreateWorkoutComponentUser} from '../../unit_test_users/create-workout-component-user.utu';
 
-fdescribe('a user', () => {
+describe('a user', () => {
   let user: CreateWorkoutComponentUser;
 
+  let selectionServiceMock;
   const toMuscleGroups = (muscleGroupNames) => muscleGroupNames.split(',').map(m => new MuscleGroup(undefined, m, []));
 
   beforeEach(() => {
@@ -47,13 +48,12 @@ fdescribe('a user', () => {
       updateWorkout: (workout: Workout) => of(workout)
     };
 
-    const selectionServiceMock = {
+    selectionServiceMock = {
       getMuscleGroups: () => of([]),
       newMuscleGroup: (muscleGroupNames: string) => {
         return of(toMuscleGroups(muscleGroupNames));
       }
     };
-
     registerLocaleData(localeDe);
     TestBed.configureTestingModule({
       declarations: [
@@ -86,12 +86,11 @@ fdescribe('a user', () => {
     user = new CreateWorkoutComponentUser(new CreateWorkoutComponentPageObject(TestBed.createComponent(CreateWorkoutComponent)));
   });
 
-
   it('can create muscle groups', fakeAsync(() => {
     const muscleGroupNames = 'Chest, Biceps, Triceps';
     const muscleGroupsArray = toMuscleGroups(muscleGroupNames);
 
-    user.seesWorkoutTitleContains([Workout.WORKOUT_PREFIX, 'New Workout']);
+    user.seesWorkoutTitleContains([Workout.WORKOUT_PREFIX, Workout.WORKOUT_INITIAL_TITLE]);
     user.seesEmptyElementsText();
     user.createsMuscleGroupsToSelect(muscleGroupNames);
     user.seesSelectableMuscleGroups(muscleGroupsArray);
@@ -139,10 +138,9 @@ fdescribe('a user', () => {
     user.seesWorkoutContainsElementWith(muscleGroupsArray[1].name, [muscleGroupsArray[1].name, '(0)']);
     user.seesWorkoutContainsElementWith(muscleGroupsArray[2].name, [muscleGroupsArray[2].name, '(0)']);
     user.seesEmptyElementsText();
-
   }));
 
-  it('can remove multiple muscle groups from a workout', fakeAsync(() => {
+  fit('can remove multiple muscle groups from a workout', fakeAsync(() => {
     const muscleGroupNames = 'Chest, Biceps';
     const muscleGroupsArray = toMuscleGroups(muscleGroupNames);
     user.createsMuscleGroupsToSelect(muscleGroupNames);
@@ -159,23 +157,18 @@ fdescribe('a user', () => {
     user.removesSelection(muscleGroupsArray[1].name);
 
     titleElements = titleElements.filter(m => m !== muscleGroupsArray[1].name);
-    console.log(titleElements);
     user.seesWorkoutTitleContains(titleElements);
     user.seesWorkoutContainsElementWith('root', [...titleElements, '(1)']);
     user.seesWorkoutContainsElementWith(muscleGroupsArray[0].name, [muscleGroupsArray[0].name, '(0)']);
-    /*  user.seesSelectableMuscleGroups([muscleGroupsArray[1]]);
 
+    selectionServiceMock.newMuscleGroup = (m) => of([new MuscleGroup(undefined, m, [])]);
+    user.seesSelectableMuscleGroups([muscleGroupsArray[1]]);
 
-     // selects biceps
-     user.selects(muscleGroupsArray[1].name);
-     title += ' ' + muscleGroupsArray[1].name;
-     user.seesWorkoutTitleIs(title);
-     user.seesWorkoutContainsElementWith('root', [muscleGroupsArray[0].name, muscleGroupsArray[1].name, '(2)']);
-     user.seesWorkoutContainsElementWith(muscleGroupsArray[0].name, [muscleGroupsArray[0].name, '(0)']);
-     user.seesWorkoutContainsElementWith(muscleGroupsArray[1].name, [muscleGroupsArray[1].name, '(0)']);
-     user.seesSelectableMuscleGroups([muscleGroupsArray[2]]);
+    user.removesSelection(muscleGroupsArray[0].name);
 
- */
+    user.seesWorkoutTitleContains([]);
+    user.seesWorkoutContainsElementWith('root', [Workout.WORKOUT_INITIAL_TITLE, '(0)']);
+    user.seesSelectableMuscleGroups([muscleGroupsArray[0], muscleGroupsArray[1]]);
   }));
 });
 
