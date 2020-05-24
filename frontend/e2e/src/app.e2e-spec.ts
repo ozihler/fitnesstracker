@@ -54,7 +54,7 @@ describe('A workout user', () => {
         {name: '25-kg,-10-#,-0-s', expectedValue: 25 * 10, isRoot: false}, // todo fix this value (2) multiplier
         {name: 'Dumbbell Bench Press', expectedValue: 25 * 10 * 2, isRoot: false},
         {name: 'Chest', expectedValue: 25 * 10 * 2, isRoot: false},
-        {name: '(W) Chest Triceps', expectedValue: 25 * 10 * 2, isRoot: true},
+        {name: 'root', expectedValue: 25 * 10 * 2, isRoot: true},
       ]))
     // todo continue
     ;
