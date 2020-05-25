@@ -11,8 +11,9 @@ import {WorkoutId} from '../shared/workout-id';
               class="uk-button uk-button-danger uk-width-1-5 ft-delete-workout-button">
         <i class="fa fa-trash-o"></i>
       </button>
-      <button routerLink="/workout/create-workout/{{workoutId?.value}}"
-              class="uk-button uk-button-default uk-width-3-5">
+      <button id="select-workout-{{workoutId?.value}}-button"
+              routerLink="/workout/create-workout/{{workoutId?.value}}"
+              class="uk-button uk-button-default uk-width-3-5 workout-selection-button">
         {{creationDate | date: 'dd.MM.yy' : '':'de'}} {{title}}
       </button>
       <button (click)="copy()"

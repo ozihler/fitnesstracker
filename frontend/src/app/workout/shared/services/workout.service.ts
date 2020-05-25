@@ -90,7 +90,11 @@ export class WorkoutService {
 
   fetchAllWorkouts() {
     return this.httpClient.get<WorkoutEntriesRaw>(`${this.baseUrl}/workouts/overview`)
-      .pipe(map(workoutsSimpleRaw => WorkoutEntryFactory.fromMultiple(workoutsSimpleRaw)));
+      .pipe(
+        map(
+          workoutsSimpleRaw => WorkoutEntryFactory.fromMultiple(workoutsSimpleRaw)
+        )
+      );
   }
 
   private toJson(muscleGroup: MuscleGroup) {

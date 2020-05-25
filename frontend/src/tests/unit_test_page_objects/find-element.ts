@@ -8,4 +8,7 @@ export class FindElement {
     return this.fixture.nativeElement.querySelector(selector);
   }
 
+  allWith(selector: string): NodeList {
+    return this.fixture.nativeElement.querySelectorAll(selector);
+  }
 }

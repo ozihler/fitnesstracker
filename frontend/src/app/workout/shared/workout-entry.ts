@@ -1,9 +1,11 @@
-import {WorkoutId} from "./workout-id";
+import {WorkoutId} from './workout-id';
 
 export class WorkoutEntry {
+  // tslint:disable-next-line:variable-name
   constructor(private _workoutId: WorkoutId, private  _title: string, private _creationDate: Date) {
 
   }
+
   get workoutId(): WorkoutId {
     return this._workoutId;
   }

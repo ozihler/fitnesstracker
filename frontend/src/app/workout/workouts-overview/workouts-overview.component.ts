@@ -45,7 +45,16 @@ export class WorkoutsOverviewComponent implements OnInit {
 
   ngOnInit() {
     this.workoutService.fetchAllWorkouts()
-      .subscribe(workouts => this.workouts = workouts);
+      .subscribe(workouts => this.workouts = workouts
+        .sort((a, b) => {
+          if (a.creationDate > b.creationDate) {
+            return -1;
+          } else if (b.creationDate > a.creationDate) {
+            return 1;
+          } else {
+            return 0;
+          }
+        }));
   }
 
   openDownloadLink() {
