@@ -10,7 +10,8 @@ import {environment} from '../../../environments/environment';
   template: `
     <h3>Select or create a workout</h3>
     <div>
-      <a routerLink="/fitness-type-selection">Back</a>
+      <a id='back-to-fitness-type-selection-link'
+         routerLink="/fitness-type-selection">Back</a>
     </div>
     <div>
       <button
