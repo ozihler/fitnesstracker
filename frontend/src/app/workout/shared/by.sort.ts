@@ -7,5 +7,5 @@ export class By {
     } else {
       return 0;
     }
-  };
+  }
 }
