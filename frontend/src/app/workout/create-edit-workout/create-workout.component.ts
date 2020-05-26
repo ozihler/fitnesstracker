@@ -94,6 +94,7 @@ export class CreateWorkoutComponent implements OnInit {
           this.updateSelectableNodes(createdMuscleGroups);
         });
     } else if (Type.Muscle_Group === type) {
+      console.log('Current selection: ', this.workoutTree.currentSelection);
       this.selectionService.createExercises(this.workoutTree.currentSelection, elements)
         .subscribe(createdExercises => this.updateSelectableNodes(createdExercises));
     } else if (Type.Exercise === type) {

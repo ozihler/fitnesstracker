@@ -25,12 +25,14 @@ import {SelectableMuscleGroupOrExerciseComponent} from '../../../app/workout/cre
 import {SetFormatPipe} from '../../../app/workout/shared/pipes/set-format.pipe';
 import {CreateWorkoutComponentPageObject} from '../../unit_test_page_objects/create-workout-component.utpo';
 import {CreateWorkoutComponentUser} from '../../unit_test_users/create-workout-component-user.utu';
+import {Exercise} from '../../../app/workout/shared/exercise';
 
-describe('a user', () => {
+describe('a create workout user', () => {
   let user: CreateWorkoutComponentUser;
 
   let selectionServiceMock;
   const toMuscleGroups = (muscleGroupNames) => muscleGroupNames.split(',').map(m => new MuscleGroup(undefined, m.trim(), []));
+  const toExercises = (exerciseNames) => exerciseNames.split(',').map(m => new Exercise(undefined, m.trim(), []));
 
   beforeEach(() => {
 
@@ -53,7 +55,8 @@ describe('a user', () => {
       newMuscleGroup: (muscleGroupNames: string) => {
         return of(toMuscleGroups(muscleGroupNames));
       },
-      deleteMuscleGroup: (muscleGroupToDelete) => of(muscleGroupToDelete)
+      deleteMuscleGroup: (muscleGroupToDelete) => of(muscleGroupToDelete),
+      createExercises: (muscleGroup, exercises) => of(toExercises(exercises))
     };
     registerLocaleData(localeDe);
     TestBed.configureTestingModule({
@@ -189,8 +192,8 @@ describe('a user', () => {
   it('can create exercises for a muscle group', () => {
     const muscleGroupNames = 'Chest, Biceps';
     const muscleGroups = toMuscleGroups(muscleGroupNames);
-    const exercisesOfMuscleGroups = [];
-    // exercisesOfMuscleGroups[muscleGroups[0].name] = ['Bench Press'];
+    const exerciseNames = 'Bench Press, Dumbbell Flys';
+    const exercises = toExercises(exerciseNames);
 
     selectionServiceMock
       .fetchExercisesFor = (muscleGroupName) => of([]);
@@ -201,6 +204,13 @@ describe('a user', () => {
 
     user.selectsMuscleGroupFromWorkout(muscleGroups[0].name);
     user.seesEmptyExercisesText();
+
+    user.createsExercisesToSelect(exerciseNames);
+    user.seesSelectableExercises(exercises);
+  });
+
+  it('can create sets for an exercise', () => {
+
   });
 
 });

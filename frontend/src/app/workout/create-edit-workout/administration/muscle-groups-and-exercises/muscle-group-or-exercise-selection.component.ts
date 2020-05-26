@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Type} from "../../../shared/type";
-import {TreeNode} from "../../workout-tree/tree-node";
-import {ReplacePipe} from "../../../shared/pipes/replace.pipe";
+import {Type} from '../../../shared/type';
+import {TreeNode} from '../../workout-tree/tree-node';
+import {ReplacePipe} from '../../../shared/pipes/replace.pipe';
 
 @Component({
   selector: 'app-muscle-group-or-exercise-selection',

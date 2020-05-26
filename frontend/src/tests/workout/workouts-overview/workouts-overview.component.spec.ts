@@ -19,7 +19,7 @@ const workoutServiceMock = {
 };
 let user: WorkoutsOverviewUser;
 
-describe('A WorkoutsOverview', () => {
+describe('A workouts overview user', () => {
   let component;
   let fixture;
   let location;
@@ -64,7 +64,7 @@ describe('A WorkoutsOverview', () => {
     user.seesCreateNewWorkoutPage();
   }));
 
-  it('shows all workouts listed from top to bottom, sorted by creation date', () => {
+  it('sees all workouts listed from top to bottom, sorted by creation date', () => {
     user.seesWorkoutsSortedByCreationDate();
   });
 });

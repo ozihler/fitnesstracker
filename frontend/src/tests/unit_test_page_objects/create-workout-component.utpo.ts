@@ -6,6 +6,7 @@ import {InputField} from '../unit_test_page_elements/input-field.utpe';
 import {MuscleGroup} from '../../app/workout/shared/muscle-group';
 import {ElementsToId} from './elements-to-id';
 import {FindElement} from './find-element';
+import {Exercise} from '../../app/workout/shared/exercise';
 
 export class CreateWorkoutComponentPageObject {
   private findElement: FindElement;
@@ -13,15 +14,13 @@ export class CreateWorkoutComponentPageObject {
 
   //  page objects
   private editWorkoutTitleButton;
-  private showFormToInputNewMuscleGroupOrExerciseButton;
 
   constructor(private fixture: ComponentFixture<CreateWorkoutComponent>) {
     this.component = fixture.componentInstance;
     this.findElement = new FindElement(fixture);
 
     this.editWorkoutTitleButton = new Button(this.findElement.by('#edit-workout-title-button'));
-    this.showFormToInputNewMuscleGroupOrExerciseButton
-      = new Button(this.findElement.by('#ft-show-form-to-input-new-muscle-group-or-exercise-button'));
+
   }
 
   expectTitleToContain(elementsTitleShouldContain: string[]) {
@@ -34,14 +33,26 @@ export class CreateWorkoutComponentPageObject {
   }
 
   showMuscleGroupInputForm() {
-    this.showFormToInputNewMuscleGroupOrExerciseButton.click();
+    new Button(this.findElement.by('#ft-show-form-to-input-new-muscle-group-or-exercise-button')).click();
+  }
+
+  showExercisesInputForm() {
+    new Button(this.findElement.by('#ft-show-form-to-input-new-muscle-group-or-exercise-button')).click();
   }
 
   enterMuscleGroups(muscleGroupNames: string) {
     new InputField(this.findElement.by('#ft-input-field-to-create-new-muscle-group-or-exercise')).text = muscleGroupNames;
   }
 
+  enterExercises(exerciseNames: string) {
+    new InputField(this.findElement.by('#ft-input-field-to-create-new-muscle-group-or-exercise')).text = exerciseNames;
+  }
+
   submitMuscleGroups() {
+    new Button(this.findElement.by('#ft-button-to-submit-new-muscle-group-or-exercise')).click();
+  }
+
+  submitExercises() {
     new Button(this.findElement.by('#ft-button-to-submit-new-muscle-group-or-exercise')).click();
   }
 
@@ -49,6 +60,14 @@ export class CreateWorkoutComponentPageObject {
     muscleGroupsArray.forEach(muscleGroup => {
       expect(new Button(this.findElement.by('#ft-select-' + ElementsToId.replace(muscleGroup.name) + '-button')).label)
         .toEqual(muscleGroup.name);
+    });
+  }
+
+  expectSelectableExercisesToContain(selectableExercises: Exercise[]) {
+    selectableExercises.forEach(exercise => {
+      expect(new Button(
+        this.findElement.by('#ft-select-' + ElementsToId.replace(exercise.name) + '-button')).label)
+        .toEqual(exercise.name);
     });
   }
 

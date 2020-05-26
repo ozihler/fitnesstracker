@@ -1,5 +1,6 @@
 import {CreateWorkoutComponentPageObject} from '../unit_test_page_objects/create-workout-component.utpo';
 import {MuscleGroup} from '../../app/workout/shared/muscle-group';
+import {Exercise} from '../../app/workout/shared/exercise';
 
 export class CreateWorkoutComponentUser {
   constructor(private createWorkoutComponent: CreateWorkoutComponentPageObject) {
@@ -16,8 +17,18 @@ export class CreateWorkoutComponentUser {
     this.createWorkoutComponent.submitMuscleGroups();
   }
 
+  createsExercisesToSelect(exerciseNames: string) {
+    this.createWorkoutComponent.showExercisesInputForm();
+    this.createWorkoutComponent.enterExercises(exerciseNames);
+    this.createWorkoutComponent.submitExercises();
+  }
+
   seesSelectableMuscleGroups(muscleGroupsArray: MuscleGroup[]) {
     this.createWorkoutComponent.expectSelectableMuscleGroupsToContain(muscleGroupsArray);
+  }
+
+  seesSelectableExercises(selectableExercises: Exercise[]) {
+    this.createWorkoutComponent.expectSelectableExercisesToContain(selectableExercises);
   }
 
   choosesFromSelectableMuscleGroups(selectableElement: string) {
