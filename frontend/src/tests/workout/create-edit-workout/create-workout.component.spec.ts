@@ -29,7 +29,7 @@ import {Exercise} from '../../../app/workout/shared/exercise';
 import {Set} from '../../../app/workout/shared/set';
 import {StringifyPipePipe} from '../../../app/workout/shared/pipes/stringify.pipe';
 
-fdescribe('a create workout user', () => {
+describe('a create workout user', () => {
   let user: CreateWorkoutComponentUser;
 
   let selectionServiceMock;
@@ -37,30 +37,27 @@ fdescribe('a create workout user', () => {
   const toExercises = (exerciseNames) => exerciseNames.split(',').map(m => new Exercise(undefined, m.trim(), []));
 
   function setOf(exercise, setDetails: string) {
-    const parts = setDetails.split(',');
+    const parts = setDetails.split('_');
 
     // tslint:disable-next-line:one-variable-per-declaration
-    let weight, unit, reps, waitingTime, waitingTimeUnit;
+    let weight, reps, waitingTime;
     if (parts.length >= 1) {
-
-      weight = parseFloat(parts[0].split(' ')[0]);
-      unit = parts[0].split(' ')[1];
+      weight = parseFloat(parts[0]);
     }
     if (parts.length >= 2) {
       reps = parseFloat(parts[1]);
     }
 
     if (parts.length >= 3) {
-      waitingTime = parseFloat(parts[2].split(' ')[0]);
-      waitingTimeUnit = parts[2].split(' ')[1];
+      waitingTime = parseFloat(parts[2]);
     }
 
     return new Set(
       weight,
-      unit,
+      'kg',
       reps,
       waitingTime,
-      waitingTimeUnit,
+      's',
       exercise
     );
   }
@@ -76,16 +73,15 @@ fdescribe('a create workout user', () => {
     }
 
     const workoutServiceMock = {
-      createNewOrFetchWorkoutWithId: (workoutId: string) => of(
-        new Workout(WorkoutId.from('1234'), new Date(), Workout.WORKOUT_INITIAL_TITLE, undefined)),
+      createNewOrFetchWorkoutWithId: (workoutId: string) =>
+        of(new Workout(WorkoutId.from('1234'), new Date(), Workout.WORKOUT_INITIAL_TITLE, undefined)),
       updateWorkout: (workout: Workout) => of(workout)
     };
 
+    // todo maybe use spy for selectionService mock and override methods as needed...
     selectionServiceMock = {
       getMuscleGroups: () => of([]),
-      newMuscleGroup: (muscleGroupNames: string) => {
-        return of(toMuscleGroups(muscleGroupNames));
-      },
+      newMuscleGroup: (muscleGroupNames: string) => of(toMuscleGroups(muscleGroupNames)),
       deleteMuscleGroup: (muscleGroupToDelete) => of(muscleGroupToDelete),
       createExercises: (muscleGroup, exercises) => of(toExercises(exercises)),
       addSetToExerciseExercise: (workoutId, exercise, setDetails) => of(setOf(exercise, setDetails))
@@ -106,10 +102,10 @@ fdescribe('a create workout user', () => {
         StringifyPipePipe
       ],
       providers: [
+        {provide: ComponentFixtureAutoDetect, useValue: true},
         {provide: ActivatedRoute, useClass: MockRoute},
         {provide: WorkoutService, useValue: workoutServiceMock},
         {provide: SelectionService, useValue: selectionServiceMock},
-        {provide: ComponentFixtureAutoDetect, useValue: true},
         {provide: LOCALE_ID, useValue: localeDe},
         {provide: DatePipe},
         {provide: ReplacePipe},
@@ -242,8 +238,7 @@ fdescribe('a create workout user', () => {
     user.seesSelectableExercises(exercises);
   });
 
-
-  it('can create and add sets to an exercise', () => {
+  fit('can create and add sets to an exercise', fakeAsync(() => {
     const muscleGroupNames = 'Chest, Biceps';
     const muscleGroups = toMuscleGroups(muscleGroupNames);
     const exerciseNames = 'Bench Press, Dumbbell Flys';
@@ -285,18 +280,30 @@ fdescribe('a create workout user', () => {
 
     user.configuresSetWithValues(weights, repetitions, waitingTimes);
     user.addsSetToExercise();
-    user.seesThatSetWasAddedToExercise(exercises[0].name, new Set(user.sumOf(weights), 'kg', user.sumOf(repetitions), user.sumOf(repetitions), 's', undefined));
+    user.seesThatSetWasAddedToExercise(exercises[0].name,
+      new Set(user.sumOf(weights), 'kg', user.sumOf(repetitions), user.sumOf(waitingTimes), 's', undefined));
 
-    user.configuresSetByDirectInputtingValues(25, 12, 45);
+    // can add set twice without inputting data again by just clicking button
     user.addsSetToExercise();
-    user.seesThatSetWasAddedToExercise(exercises[0].name, new Set(25, 'kg', 12, 45, 's', undefined));
+    user.seesThatSetWasAddedToExercise(exercises[0].name,
+      new Set(user.sumOf(weights), 'kg', user.sumOf(repetitions), user.sumOf(waitingTimes), 's', undefined));
 
-  });
+    const nextSet = new Set(34, 'kg', 9, 87, 's', undefined);
+    user.configuresSetByDirectInputtingValues(nextSet.weight, nextSet.numberOfRepetitions, nextSet.waitingTime);
+    user.addsSetToExercise();
+    user.seesThatSetWasAddedToExercise(exercises[0].name, nextSet);
+
+  }));
 
   it('can adapt title', () => {
+    user.opensTitleEditing();
+
+  });
+  it('can cancel the edit of the title / date without causing any change to the initial title', () => {
 
 
   });
+
   it('can adapt creation date', () => {
 
 

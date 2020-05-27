@@ -2,6 +2,7 @@ import {CreateWorkoutComponentPageObject, SetButtonValues} from '../unit_test_pa
 import {MuscleGroup} from '../../app/workout/shared/muscle-group';
 import {Exercise} from '../../app/workout/shared/exercise';
 import {Set} from '../../app/workout/shared/set';
+import {ReplacePipe} from '../../app/workout/shared/pipes/replace.pipe';
 
 export class CreateWorkoutComponentUser {
   constructor(private createWorkoutComponent: CreateWorkoutComponentPageObject) {
@@ -121,14 +122,20 @@ export class CreateWorkoutComponentUser {
 
     this.configuresWaitingTime(waitingTimes);
     this.seesWaitingTimeIs(this.sumOf(waitingTimes));
-    this.seesCurrentSetValuesToAddAre(new Set(this.sumOf(weights), 'kg', this.sumOf(repetitions), this.sumOf(repetitions), 's', undefined));
+    this.seesCurrentSetValuesToAddAre(new Set(this.sumOf(weights), 'kg', this.sumOf(repetitions), this.sumOf(waitingTimes), 's', undefined));
 
     this.togglesSetParts();
     this.seesAllSetPartsAreHidden();
   }
 
-  seesThatSetWasAddedToExercise(exerciseName: string, finalSet: Set) {
+  seesThatSetWasAddedToExercise(exerciseName: string, set: Set) {
+    this.createWorkoutComponent.expectWorkoutTreeToContain(this.convert(set), [set.weight.toString(), set.numberOfRepetitions.toString(), set.waitingTime.toString()]);
+  }
 
+  configuresSetByDirectInputtingValues(weight: number, repetitions: number, waitingTime: number) {
+    this.createWorkoutComponent.inputSetValue('weight', weight);
+    this.createWorkoutComponent.inputSetValue('repetitions', repetitions);
+    this.createWorkoutComponent.inputSetValue('waitingTime', waitingTime);
   }
 
   sumOf(weights: SetButtonValues[]) {
@@ -139,7 +146,16 @@ export class CreateWorkoutComponentUser {
     return sum;
   }
 
-  configuresSetByDirectInputtingValues(weight: number, repetitions: number, waitingTime: number) {
+  opensTitleEditing() {
+    this.createWorkoutComponent.clickButtonWithId('edit-workout-title-button');
+  }
 
+  private convert(set: Set) {
+    return new ReplacePipe().transform(set.weight.toString(), '.', '-')
+      + '-kg-'
+      + set.numberOfRepetitions
+      + '--'
+      + set.waitingTime
+      + '-s';
   }
 }

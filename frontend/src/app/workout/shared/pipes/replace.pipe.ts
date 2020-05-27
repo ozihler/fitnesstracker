@@ -12,7 +12,7 @@ export class ReplacePipe implements PipeTransform {
       return '';
     }
 
-    if (!stringToReplace || !replacement) {
+    if (!stringToReplace) {
       return value;
     }
 

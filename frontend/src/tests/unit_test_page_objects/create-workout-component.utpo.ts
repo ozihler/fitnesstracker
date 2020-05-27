@@ -49,11 +49,11 @@ export class CreateWorkoutComponentPageObject {
   }
 
   enterMuscleGroups(muscleGroupNames: string) {
-    new InputField(this.findElement.by('#ft-input-field-to-create-new-muscle-group-or-exercise')).text = muscleGroupNames;
+    new InputField(this.findElement.by('#ft-input-field-to-create-new-muscle-group-or-exercise')).input = muscleGroupNames;
   }
 
   enterExercises(exerciseNames: string) {
-    new InputField(this.findElement.by('#ft-input-field-to-create-new-muscle-group-or-exercise')).text = exerciseNames;
+    new InputField(this.findElement.by('#ft-input-field-to-create-new-muscle-group-or-exercise')).input = exerciseNames;
   }
 
   submitMuscleGroups() {
@@ -92,7 +92,8 @@ export class CreateWorkoutComponentPageObject {
   }
 
   expectWorkoutTreeToContain(workoutTreeElementName: string, stringsItShouldContain: string[]) {
-    const treeNodeButton = new Button(this.findElement.by('#select-' + ElementsToId.replace(workoutTreeElementName) + '-editable-node'));
+    const selector = 'select-' + ElementsToId.replace(workoutTreeElementName) + '-editable-node';
+    const treeNodeButton = new Button(this.findElement.byId(selector));
     for (const stringTheElementShouldContain of stringsItShouldContain) {
       expect(treeNodeButton.label).toContain(stringTheElementShouldContain);
     }
@@ -130,7 +131,7 @@ export class CreateWorkoutComponentPageObject {
 
   expectSetValueToBe(setValueType: string, cumulatedWeight: number) {
     const setValueInputField = new InputField(this.findElement.by('#' + setValueType + '-input'));
-    const inputWeight = parseFloat(setValueInputField.text);
+    const inputWeight = parseFloat(setValueInputField.input);
     expect(inputWeight).toBe(cumulatedWeight);
   }
 
@@ -154,6 +155,11 @@ export class CreateWorkoutComponentPageObject {
 
   clickButtonWithId(buttonId: string) {
     new Button(this.findElement.byId(buttonId)).click();
+  }
+
+  inputSetValue(id: string, value: number) {
+    new Button(this.findElement.byId(`change-${id}-button`)).click();
+    new InputField(this.findElement.byId(`${id}-input`)).change = value ? value.toString() : '';
   }
 }
 

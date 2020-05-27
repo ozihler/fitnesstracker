@@ -2,12 +2,18 @@ export class InputField {
   constructor(private _inputField: HTMLInputElement) {
   }
 
-  get text(): string {
+  get input(): string {
     return this._inputField.value;
   }
 
-  set text(value: string) {
+  set input(value: string) {
     this._inputField.value = value;
     this._inputField.dispatchEvent(new Event('input'));
   }
+
+  set change(value: string) {
+    this._inputField.value = value;
+    this._inputField.dispatchEvent(new Event('change'));
+  }
+
 }

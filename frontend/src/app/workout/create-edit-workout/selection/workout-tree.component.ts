@@ -7,7 +7,7 @@ import {Type} from '../../shared/type';
   template: `
     <div class="uk-grid uk-grid-collapse" *ngIf="node?.isEnabled">
       <button
-        id="select-{{(!node?.isRoot? (node?.name | replace : ' ': '-' |lowercase): 'root')}}-editable-node"
+        id="select-{{(!node?.isRoot? (node?.name | replace: ',':''| replace: '#':''|replace: '.':'-'|replace : ' ': '-' |lowercase): 'root')}}-editable-node"
         class="uk-button uk-text-truncate"
         [ngClass]="levelDependentClasses"
         [disabled]="node.isLeaf"
