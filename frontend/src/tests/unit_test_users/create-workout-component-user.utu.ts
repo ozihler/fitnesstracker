@@ -1,4 +1,4 @@
-import {CreateWorkoutComponentPageObject} from '../unit_test_page_objects/create-workout-component.utpo';
+import {CreateWorkoutComponentPageObject, SetButtonValues} from '../unit_test_page_objects/create-workout-component.utpo';
 import {MuscleGroup} from '../../app/workout/shared/muscle-group';
 import {Exercise} from '../../app/workout/shared/exercise';
 
@@ -31,8 +31,12 @@ export class CreateWorkoutComponentUser {
     this.createWorkoutComponent.expectSelectableExercisesToContain(selectableExercises);
   }
 
-  choosesFromSelectableMuscleGroups(selectableElement: string) {
-    this.createWorkoutComponent.chooseSelectableElement(selectableElement);
+  choosesFromSelectableMuscleGroups(selectableMuscleGroup: string) {
+    this.createWorkoutComponent.chooseSelectableElement(selectableMuscleGroup);
+  }
+
+  choosesFromSelectableExercises(selectableExercise: string) {
+    this.createWorkoutComponent.chooseSelectableElement(selectableExercise);
   }
 
   seesWorkoutContainsElementWith(workoutTreeElementName: string, stringsItShouldContain: string[]) {
@@ -47,8 +51,12 @@ export class CreateWorkoutComponentUser {
     this.createWorkoutComponent.deleteSelectableItem(selectableElementToDelete);
   }
 
-  selectsMuscleGroupFromWorkout(workoutTreeNodeName: string) {
+  selectsMuscleGroupInWorkout(workoutTreeNodeName: string) {
     this.createWorkoutComponent.selectWorkoutTreeNodeWithName(workoutTreeNodeName);
+  }
+
+  selectsExerciseInMuscleGroup(exerciseInMuscleGroup: string) {
+    this.createWorkoutComponent.selectWorkoutTreeNodeWithName(exerciseInMuscleGroup);
   }
 
   seesEmptyMuscleGroupsText() {
@@ -57,5 +65,9 @@ export class CreateWorkoutComponentUser {
 
   seesEmptyExercisesText() {
     this.createWorkoutComponent.expectEmptyElementsText('Exercise');
+  }
+
+  setsWeightWithValues(weightButtonValues: SetButtonValues[]) {
+    this.createWorkoutComponent.setSetValues('weight', weightButtonValues);
   }
 }

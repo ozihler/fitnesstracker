@@ -99,4 +99,34 @@ export class CreateWorkoutComponentPageObject {
     const selector = '#select-' + ElementsToId.replace(workoutTreeNodeName) + '-editable-node';
     new Button(this.findElement.by(selector)).click();
   }
+
+  setSetValues(setButtonType: string, setButtonValues: SetButtonValues[]) {
+    new Button(this.findElement.by('#change-' + setButtonType + '-button')).click();
+
+    setButtonValues.forEach(weightButtonValue => {
+      const selector = '#' + setButtonType + this.addOrSubtract(weightButtonValue)
+        + weightButtonValue.value.toString().replace('.', '-')
+        + '-button';
+      console.log(selector);
+      const setButton = new Button(this.findElement.by(selector));
+      for (let i = 0; i < weightButtonValue.times; ++i) {
+        setButton.click();
+      }
+    });
+
+  }
+
+  private addOrSubtract(weightButtonValue: SetButtonValues) {
+    return parseFloat(weightButtonValue.value) > 0 ? '-add-' : '-subtract-';
+  }
+}
+
+export class SetButtonValues {
+  value: string;
+  times: number;
+
+  constructor(value: string, times: number) {
+    this.value = value;
+    this.times = times;
+  }
 }

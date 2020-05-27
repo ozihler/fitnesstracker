@@ -195,23 +195,41 @@ describe('a create workout user', () => {
     const exerciseNames = 'Bench Press, Dumbbell Flys';
     const exercises = toExercises(exerciseNames);
 
-    selectionServiceMock
-      .fetchExercisesFor = (muscleGroupName) => of([]);
+    selectionServiceMock.fetchExercisesFor = (muscleGroupName) => of([]);
 
     user.createsMuscleGroupsToSelect(muscleGroupNames);
     user.choosesFromSelectableMuscleGroups(muscleGroups[0].name);
     user.choosesFromSelectableMuscleGroups(muscleGroups[1].name);
 
-    user.selectsMuscleGroupFromWorkout(muscleGroups[0].name);
+    user.selectsMuscleGroupInWorkout(muscleGroups[0].name);
     user.seesEmptyExercisesText();
 
     user.createsExercisesToSelect(exerciseNames);
     user.seesSelectableExercises(exercises);
   });
 
-  it('can create sets for an exercise', () => {
+  fit('can create sets for an exercise', fakeAsync(() => {
+    const muscleGroupNames = 'Chest, Biceps';
+    const muscleGroups = toMuscleGroups(muscleGroupNames);
+    const exerciseNames = 'Bench Press, Dumbbell Flys';
+    const exercises = toExercises(exerciseNames);
 
-  });
+    selectionServiceMock.fetchExercisesFor = (muscleGroupName) => of([]);
+
+    user.createsMuscleGroupsToSelect(muscleGroupNames);
+    user.choosesFromSelectableMuscleGroups(muscleGroups[0].name);
+    user.selectsMuscleGroupInWorkout(muscleGroups[0].name);
+    user.createsExercisesToSelect(exerciseNames);
+    user.choosesFromSelectableExercises(exercises[0].name);
+    user.seesWorkoutContainsElementWith(exercises[0].name, ['(0)', exercises[0].name]);
+    user.selectsExerciseInMuscleGroup(exercises[0].name);
+    user.setsWeightWithValues([
+      {value: '10', times: 2},
+      {value: '1', times: 5},
+      {value: '0.5', times: 3}
+    ]);
+
+  }));
 
 });
 
