@@ -9,7 +9,7 @@ import {SetFormValues} from './set-form-values';
     <div *ngIf="!formValues?.isDisabled" class="uk-flex-center" uk-grid>
       <form [formGroup]="form">
         <button *ngFor="let v of formValues?.negativeValues"
-                id="{{titlePrefix}}-subtract{{formatDecimalValues(v)}}-button"
+                id="{{titlePrefix}}-subtract{{v.toString() | replace: '.' :'-'}}-button"
                 class="uk-button uk-width-1-3"
                 (click)="changeValue(v)">-
         </button>
@@ -25,7 +25,7 @@ import {SetFormValues} from './set-form-values';
         </div>
 
         <button *ngFor="let v of formValues?.positiveValues"
-                id="{{titlePrefix}}-add-{{formatDecimalValues(v)}}-button"
+                id="{{titlePrefix}}-add-{{v.toString() | replace: '.' :'-'}}-button"
                 class="uk-button uk-width-1-3"
                 (click)="changeValue(v)">+
         </button>
@@ -78,10 +78,5 @@ export class SetValuesComponent implements OnInit {
 
   changeValueDirectly() {
     this.changeValue(0);
-  }
-
-  formatDecimalValues(v: number) {
-    // todo replace with pipe
-    return v.toString().replace('.', '-');
   }
 }
