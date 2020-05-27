@@ -62,6 +62,7 @@ describe('a create workout user', () => {
     );
   }
 
+  let workoutServiceMock;
   beforeEach(() => {
 
     class MockRoute {
@@ -72,7 +73,7 @@ describe('a create workout user', () => {
       });
     }
 
-    const workoutServiceMock = {
+    workoutServiceMock = {
       createNewOrFetchWorkoutWithId: (workoutId: string) =>
         of(new Workout(WorkoutId.from('1234'), new Date(), Workout.WORKOUT_INITIAL_TITLE, undefined)),
       updateWorkout: (workout: Workout) => of(workout)
@@ -238,7 +239,7 @@ describe('a create workout user', () => {
     user.seesSelectableExercises(exercises);
   });
 
-  fit('can create and add sets to an exercise', fakeAsync(() => {
+  it('can create and add sets to an exercise', fakeAsync(() => {
     const muscleGroupNames = 'Chest, Biceps';
     const muscleGroups = toMuscleGroups(muscleGroupNames);
     const exerciseNames = 'Bench Press, Dumbbell Flys';
@@ -288,11 +289,14 @@ describe('a create workout user', () => {
     user.seesThatSetWasAddedToExercise(exercises[0].name,
       new Set(user.sumOf(weights), 'kg', user.sumOf(repetitions), user.sumOf(waitingTimes), 's', undefined));
 
-    const nextSet = new Set(34, 'kg', 9, 87, 's', undefined);
-    user.configuresSetByDirectInputtingValues(nextSet.weight, nextSet.numberOfRepetitions, nextSet.waitingTime);
+    const directlyEnteredSet = new Set(34, 'kg', 9, 87, 's', undefined);
+    user.configuresSetByDirectInputtingValues(
+      directlyEnteredSet.weight,
+      directlyEnteredSet.numberOfRepetitions,
+      directlyEnteredSet.waitingTime
+    );
     user.addsSetToExercise();
-    user.seesThatSetWasAddedToExercise(exercises[0].name, nextSet);
-
+    user.seesThatSetWasAddedToExercise(exercises[0].name, directlyEnteredSet);
   }));
 
   it('can adapt title', () => {
@@ -303,10 +307,6 @@ describe('a create workout user', () => {
 
 
   });
-
-  it('can adapt creation date', () => {
-
-
-  });
+ 
 });
 
