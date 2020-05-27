@@ -80,7 +80,7 @@ export class CreateWorkoutComponentUser {
     this.createWorkoutComponent.expectCurrentSetInputMarkToContainValuesOf(set);
   }
 
-  configureRepetitionsWithValues(repetitions: SetButtonValues[]) {
+  configuresRepetitionsWithValues(repetitions: SetButtonValues[]) {
     this.createWorkoutComponent.setSetValues('repetitions', repetitions);
   }
 
@@ -108,5 +108,38 @@ export class CreateWorkoutComponentUser {
 
   addsSetToExercise() {
     this.createWorkoutComponent.clickButtonWithId('ft-add-set-to-exercise');
+  }
+
+  configuresSetWithValues(weights: SetButtonValues[], repetitions: SetButtonValues[], waitingTimes: SetButtonValues[]) {
+    this.configuresWeightWithValues(weights);
+    this.seesWeightIs(this.sumOf(weights));
+    this.seesCurrentSetValuesToAddAre(new Set(this.sumOf(weights), 'kg', undefined, undefined, undefined, undefined));
+
+    this.configuresRepetitionsWithValues(repetitions);
+    this.seesRepetitionsAre(this.sumOf(repetitions));
+    this.seesCurrentSetValuesToAddAre(new Set(this.sumOf(weights), 'kg', this.sumOf(repetitions), undefined, undefined, undefined));
+
+    this.configuresWaitingTime(waitingTimes);
+    this.seesWaitingTimeIs(this.sumOf(waitingTimes));
+    this.seesCurrentSetValuesToAddAre(new Set(this.sumOf(weights), 'kg', this.sumOf(repetitions), this.sumOf(repetitions), 's', undefined));
+
+    this.togglesSetParts();
+    this.seesAllSetPartsAreHidden();
+  }
+
+  seesThatSetWasAddedToExercise(exerciseName: string, finalSet: Set) {
+
+  }
+
+  sumOf(weights: SetButtonValues[]) {
+    let sum = 0;
+    for (const weight of weights) {
+      sum += parseFloat(weight.value) * weight.times;
+    }
+    return sum;
+  }
+
+  configuresSetByDirectInputtingValues(weight: number, repetitions: number, waitingTime: number) {
+
   }
 }

@@ -23,13 +23,13 @@ import {SetValuesComponent} from '../../../app/workout/create-edit-workout/admin
 // tslint:disable-next-line:max-line-length
 import {SelectableMuscleGroupOrExerciseComponent} from '../../../app/workout/create-edit-workout/administration/muscle-groups-and-exercises/selectable-muscle-group-or-exercise.component';
 import {SetFormatPipe} from '../../../app/workout/shared/pipes/set-format.pipe';
-import {CreateWorkoutComponentPageObject, SetButtonValues} from '../../unit_test_page_objects/create-workout-component.utpo';
+import {CreateWorkoutComponentPageObject} from '../../unit_test_page_objects/create-workout-component.utpo';
 import {CreateWorkoutComponentUser} from '../../unit_test_users/create-workout-component-user.utu';
 import {Exercise} from '../../../app/workout/shared/exercise';
 import {Set} from '../../../app/workout/shared/set';
 import {StringifyPipePipe} from '../../../app/workout/shared/pipes/stringify.pipe';
 
-describe('a create workout user', () => {
+fdescribe('a create workout user', () => {
   let user: CreateWorkoutComponentUser;
 
   let selectionServiceMock;
@@ -39,6 +39,7 @@ describe('a create workout user', () => {
   function setOf(exercise, setDetails: string) {
     const parts = setDetails.split(',');
 
+    // tslint:disable-next-line:one-variable-per-declaration
     let weight, unit, reps, waitingTime, waitingTimeUnit;
     if (parts.length >= 1) {
 
@@ -241,29 +242,13 @@ describe('a create workout user', () => {
     user.seesSelectableExercises(exercises);
   });
 
-  function sumOf(weights: SetButtonValues[]) {
-    let sum = 0;
-    for (const weight of weights) {
-      sum += parseFloat(weight.value) * weight.times;
-    }
-    return sum;
-  }
 
-  fit('can create and add sets to an exercise', fakeAsync(() => {
+  it('can create and add sets to an exercise', () => {
     const muscleGroupNames = 'Chest, Biceps';
     const muscleGroups = toMuscleGroups(muscleGroupNames);
     const exerciseNames = 'Bench Press, Dumbbell Flys';
     const exercises = toExercises(exerciseNames);
 
-    selectionServiceMock.fetchExercisesFor = (muscleGroupName) => of([]);
-
-    user.createsMuscleGroupsToSelect(muscleGroupNames);
-    user.choosesFromSelectableMuscleGroups(muscleGroups[0].name);
-    user.selectsMuscleGroupInWorkout(muscleGroups[0].name);
-    user.createsExercisesToSelect(exerciseNames);
-    user.choosesFromSelectableExercises(exercises[0].name);
-    user.seesWorkoutContainsElementWith(exercises[0].name, ['(0)', exercises[0].name]);
-    user.selectsExerciseInMuscleGroup(exercises[0].name);
     const weights = [
       {value: '10', times: 3},
       {value: '1', times: 5},
@@ -272,9 +257,7 @@ describe('a create workout user', () => {
       {value: '-1', times: 2},
       {value: '-10', times: 1},
     ];
-    user.configuresWeightWithValues(weights);
-    user.seesWeightIs(sumOf(weights));
-    user.seesCurrentSetValuesToAddAre(new Set(sumOf(weights), 'kg', undefined, undefined, undefined, undefined));
+
     const repetitions = [
       {value: '5', times: 3},
       {value: '2', times: 2},
@@ -283,10 +266,6 @@ describe('a create workout user', () => {
       {value: '-2', times: 1},
       {value: '-1', times: 1},
     ];
-    user.configureRepetitionsWithValues(repetitions);
-    user.seesRepetitionsAre(sumOf(repetitions));
-    user.seesCurrentSetValuesToAddAre(new Set(sumOf(weights), 'kg', sumOf(repetitions), undefined, undefined, undefined));
-
     const waitingTimes = [
       {value: '10', times: 10},
       {value: '5', times: 3},
@@ -295,15 +274,32 @@ describe('a create workout user', () => {
       {value: '-5', times: 4},
       {value: '-1', times: 4},
     ];
-    user.configuresWaitingTime(waitingTimes);
-    user.seesWaitingTimeIs(sumOf(waitingTimes));
-    user.seesCurrentSetValuesToAddAre(new Set(sumOf(weights), 'kg', sumOf(repetitions), sumOf(repetitions), 's', undefined));
+    selectionServiceMock.fetchExercisesFor = (muscleGroupName) => of([]);
+    user.createsMuscleGroupsToSelect(muscleGroupNames);
+    user.choosesFromSelectableMuscleGroups(muscleGroups[0].name);
+    user.selectsMuscleGroupInWorkout(muscleGroups[0].name);
+    user.createsExercisesToSelect(exerciseNames);
+    user.choosesFromSelectableExercises(exercises[0].name);
+    user.seesWorkoutContainsElementWith(exercises[0].name, ['(0)', exercises[0].name]);
+    user.selectsExerciseInMuscleGroup(exercises[0].name);
 
-    user.togglesSetParts();
-    user.seesAllSetPartsAreHidden();
-
+    user.configuresSetWithValues(weights, repetitions, waitingTimes);
     user.addsSetToExercise();
-  }));
+    user.seesThatSetWasAddedToExercise(exercises[0].name, new Set(user.sumOf(weights), 'kg', user.sumOf(repetitions), user.sumOf(repetitions), 's', undefined));
 
+    user.configuresSetByDirectInputtingValues(25, 12, 45);
+    user.addsSetToExercise();
+    user.seesThatSetWasAddedToExercise(exercises[0].name, new Set(25, 'kg', 12, 45, 's', undefined));
+
+  });
+
+  it('can adapt title', () => {
+
+
+  });
+  it('can adapt creation date', () => {
+
+
+  });
 });
 
