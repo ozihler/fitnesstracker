@@ -7,13 +7,11 @@ import {MuscleGroup} from '../../app/workout/shared/muscle-group';
 import {ElementsToId} from './elements-to-id';
 import {FindElement} from './find-element';
 import {Exercise} from '../../app/workout/shared/exercise';
+import {Set} from '../../app/workout/shared/set';
+import {Mark} from '../unit_test_page_elements/mark.utbp';
+
 
 export class CreateWorkoutComponentPageObject {
-  private findElement: FindElement;
-  private component: CreateWorkoutComponent;
-
-  //  page objects
-  private editWorkoutTitleButton;
 
   constructor(private fixture: ComponentFixture<CreateWorkoutComponent>) {
     this.component = fixture.componentInstance;
@@ -21,6 +19,16 @@ export class CreateWorkoutComponentPageObject {
 
     this.editWorkoutTitleButton = new Button(this.findElement.by('#edit-workout-title-button'));
 
+  }
+
+  private findElement: FindElement;
+  private component: CreateWorkoutComponent;
+
+  //  page objects
+  private editWorkoutTitleButton;
+
+  private static emptyOr(weight: any) {
+    return weight ? weight.toString() : '';
   }
 
   expectTitleToContain(elementsTitleShouldContain: string[]) {
@@ -105,7 +113,7 @@ export class CreateWorkoutComponentPageObject {
 
     setButtonValues.forEach(weightButtonValue => {
       const selector = '#' + setButtonType + this.addOrSubtract(weightButtonValue)
-        + weightButtonValue.value.toString().replace('.', '-')
+        + weightButtonValue.value.toString().replace('-', '').replace('.', '-')
         + '-button';
       console.log(selector);
       const setButton = new Button(this.findElement.by(selector));
@@ -118,6 +126,34 @@ export class CreateWorkoutComponentPageObject {
 
   private addOrSubtract(weightButtonValue: SetButtonValues) {
     return parseFloat(weightButtonValue.value) > 0 ? '-add-' : '-subtract-';
+  }
+
+  expectSetValueToBe(setValueType: string, cumulatedWeight: number) {
+    const setValueInputField = new InputField(this.findElement.by('#' + setValueType + '-input'));
+    const inputWeight = parseFloat(setValueInputField.text);
+    expect(inputWeight).toBe(cumulatedWeight);
+  }
+
+  expectCurrentSetInputMarkToContainValuesOf(set: Set) {
+    const setInputMarkText = new Mark(this.findElement.by('#current-set-input-mark')).text;
+    expect(setInputMarkText).toContain(CreateWorkoutComponentPageObject.emptyOr(set.weight).toString());
+    expect(setInputMarkText).toContain(CreateWorkoutComponentPageObject.emptyOr(set.weightUnit).toString());
+    expect(setInputMarkText).toContain(CreateWorkoutComponentPageObject.emptyOr(set.numberOfRepetitions).toString());
+    expect(setInputMarkText).toContain(CreateWorkoutComponentPageObject.emptyOr(set.waitingTime).toString());
+    expect(setInputMarkText).toContain(CreateWorkoutComponentPageObject.emptyOr(set.waitingTimeUnit).toString());
+  }
+
+  toggleSetParts() {
+    new Button(this.findElement.byId('toggle-set-parts-button')).click();
+  }
+
+  expectChangeButtonToBeShown(setPartType: string) {
+    expect(new Button(this.findElement.byId('change-' + setPartType + '-button')).hidden)
+      .toBe(false);
+  }
+
+  clickButtonWithId(buttonId: string) {
+    new Button(this.findElement.byId(buttonId)).click();
   }
 }
 

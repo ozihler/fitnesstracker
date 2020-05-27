@@ -11,4 +11,8 @@ export class FindElement {
   allWith(selector: string): NodeList {
     return this.fixture.nativeElement.querySelectorAll(selector);
   }
+
+  byId(id: string) {
+    return this.by('#' + id);
+  }
 }

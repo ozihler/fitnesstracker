@@ -8,8 +8,9 @@ import {SetFormValues} from './set-form-values';
   template: `
     <div *ngIf="!formValues?.isDisabled" class="uk-flex-center" uk-grid>
       <form [formGroup]="form">
+        <!-- todo extract component for button-->
         <button *ngFor="let v of formValues?.negativeValues"
-                id="{{titlePrefix}}-subtract{{v.toString() | replace: '.' :'-'}}-button"
+                id="{{titlePrefix}}-subtract{{v | stringify | replace: '.' :'-'}}-button"
                 class="uk-button uk-width-1-3"
                 (click)="changeValue(v)">-
         </button>
@@ -25,7 +26,7 @@ import {SetFormValues} from './set-form-values';
         </div>
 
         <button *ngFor="let v of formValues?.positiveValues"
-                id="{{titlePrefix}}-add-{{v.toString() | replace: '.' :'-'}}-button"
+                id="{{titlePrefix}}-add-{{v | stringify | replace: '.' :'-'}}-button"
                 class="uk-button uk-width-1-3"
                 (click)="changeValue(v)">+
         </button>

@@ -13,6 +13,7 @@ import {WorkoutTitleComponent} from './create-edit-workout/title/workout-title.c
 import {ReactiveFormsModule} from '@angular/forms';
 import {SetFormatPipe} from './shared/pipes/set-format.pipe';
 import {ReplacePipe} from './shared/pipes/replace.pipe';
+import {StringifyPipePipe} from './shared/pipes/stringify.pipe';
 
 
 @NgModule({
@@ -31,9 +32,13 @@ import {ReplacePipe} from './shared/pipes/replace.pipe';
     SelectableMuscleGroupOrExerciseComponent,
     WorkoutTitleComponent,
     SetFormatPipe,
-    ReplacePipe
+    ReplacePipe,
+    StringifyPipePipe
   ],
-  providers: [ReplacePipe]
+  providers: [
+    ReplacePipe,
+    StringifyPipePipe
+  ]
 })
 export class WorkoutModule {
 }

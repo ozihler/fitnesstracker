@@ -6,7 +6,7 @@ import {SetChangeValue} from './set-change-value';
   selector: 'app-create-set',
   template: `
     <div class="uk-flex-center">
-      <mark>{{currentValues}}</mark>
+      <mark id="current-set-input-mark">{{currentValues}}</mark>
       <button id="ft-add-set-to-exercise"
               class="uk-button uk-button-primary uk-width-1-1"
               *ngIf="showButton"
@@ -37,7 +37,8 @@ import {SetChangeValue} from './set-change-value';
       </app-set-values>
     </div>
     <div>
-      <button class="uk-button uk-width-1-1 uk-text-truncate"
+      <button id="toggle-set-parts-button"
+              class="uk-button uk-width-1-1 uk-text-truncate"
               (click)="disableOtherUpdates('NONE')">Toggle Set Parts
       </button>
     </div>

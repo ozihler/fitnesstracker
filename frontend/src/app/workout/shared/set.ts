@@ -1,7 +1,6 @@
-import {TreeNode} from "../create-edit-workout/workout-tree/tree-node";
-import {Type} from "./type";
-import {Exercise} from "./exercise";
-import {Cumulatable} from "./cumulatable";
+import {TreeNode} from '../create-edit-workout/workout-tree/tree-node';
+import {Type} from './type';
+import {Exercise} from './exercise';
 
 export class Set extends TreeNode {
 

@@ -1,6 +1,7 @@
 import {CreateWorkoutComponentPageObject, SetButtonValues} from '../unit_test_page_objects/create-workout-component.utpo';
 import {MuscleGroup} from '../../app/workout/shared/muscle-group';
 import {Exercise} from '../../app/workout/shared/exercise';
+import {Set} from '../../app/workout/shared/set';
 
 export class CreateWorkoutComponentUser {
   constructor(private createWorkoutComponent: CreateWorkoutComponentPageObject) {
@@ -67,7 +68,45 @@ export class CreateWorkoutComponentUser {
     this.createWorkoutComponent.expectEmptyElementsText('Exercise');
   }
 
-  setsWeightWithValues(weightButtonValues: SetButtonValues[]) {
+  configuresWeightWithValues(weightButtonValues: SetButtonValues[]) {
     this.createWorkoutComponent.setSetValues('weight', weightButtonValues);
+  }
+
+  seesWeightIs(weight: number) {
+    this.createWorkoutComponent.expectSetValueToBe('weight', weight);
+  }
+
+  seesCurrentSetValuesToAddAre(set: Set) {
+    this.createWorkoutComponent.expectCurrentSetInputMarkToContainValuesOf(set);
+  }
+
+  configureRepetitionsWithValues(repetitions: SetButtonValues[]) {
+    this.createWorkoutComponent.setSetValues('repetitions', repetitions);
+  }
+
+  configuresWaitingTime(waitingTimes: SetButtonValues[]) {
+    this.createWorkoutComponent.setSetValues('waitingTime', waitingTimes);
+  }
+
+  seesRepetitionsAre(repetitions: number) {
+    this.createWorkoutComponent.expectSetValueToBe('repetitions', repetitions);
+  }
+
+  seesWaitingTimeIs(waitingTime: number) {
+    this.createWorkoutComponent.expectSetValueToBe('waitingTime', waitingTime);
+  }
+
+  togglesSetParts() {
+    this.createWorkoutComponent.toggleSetParts();
+  }
+
+  seesAllSetPartsAreHidden() {
+    this.createWorkoutComponent.expectChangeButtonToBeShown('weight');
+    this.createWorkoutComponent.expectChangeButtonToBeShown('repetitions');
+    this.createWorkoutComponent.expectChangeButtonToBeShown('waitingTime');
+  }
+
+  addsSetToExercise() {
+    this.createWorkoutComponent.clickButtonWithId('ft-add-set-to-exercise');
   }
 }

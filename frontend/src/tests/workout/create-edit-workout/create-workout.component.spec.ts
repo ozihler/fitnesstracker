@@ -23,9 +23,11 @@ import {SetValuesComponent} from '../../../app/workout/create-edit-workout/admin
 // tslint:disable-next-line:max-line-length
 import {SelectableMuscleGroupOrExerciseComponent} from '../../../app/workout/create-edit-workout/administration/muscle-groups-and-exercises/selectable-muscle-group-or-exercise.component';
 import {SetFormatPipe} from '../../../app/workout/shared/pipes/set-format.pipe';
-import {CreateWorkoutComponentPageObject} from '../../unit_test_page_objects/create-workout-component.utpo';
+import {CreateWorkoutComponentPageObject, SetButtonValues} from '../../unit_test_page_objects/create-workout-component.utpo';
 import {CreateWorkoutComponentUser} from '../../unit_test_users/create-workout-component-user.utu';
 import {Exercise} from '../../../app/workout/shared/exercise';
+import {Set} from '../../../app/workout/shared/set';
+import {StringifyPipePipe} from '../../../app/workout/shared/pipes/stringify.pipe';
 
 describe('a create workout user', () => {
   let user: CreateWorkoutComponentUser;
@@ -33,6 +35,34 @@ describe('a create workout user', () => {
   let selectionServiceMock;
   const toMuscleGroups = (muscleGroupNames) => muscleGroupNames.split(',').map(m => new MuscleGroup(undefined, m.trim(), []));
   const toExercises = (exerciseNames) => exerciseNames.split(',').map(m => new Exercise(undefined, m.trim(), []));
+
+  function setOf(exercise, setDetails: string) {
+    const parts = setDetails.split(',');
+
+    let weight, unit, reps, waitingTime, waitingTimeUnit;
+    if (parts.length >= 1) {
+
+      weight = parseFloat(parts[0].split(' ')[0]);
+      unit = parts[0].split(' ')[1];
+    }
+    if (parts.length >= 2) {
+      reps = parseFloat(parts[1]);
+    }
+
+    if (parts.length >= 3) {
+      waitingTime = parseFloat(parts[2].split(' ')[0]);
+      waitingTimeUnit = parts[2].split(' ')[1];
+    }
+
+    return new Set(
+      weight,
+      unit,
+      reps,
+      waitingTime,
+      waitingTimeUnit,
+      exercise
+    );
+  }
 
   beforeEach(() => {
 
@@ -56,7 +86,8 @@ describe('a create workout user', () => {
         return of(toMuscleGroups(muscleGroupNames));
       },
       deleteMuscleGroup: (muscleGroupToDelete) => of(muscleGroupToDelete),
-      createExercises: (muscleGroup, exercises) => of(toExercises(exercises))
+      createExercises: (muscleGroup, exercises) => of(toExercises(exercises)),
+      addSetToExerciseExercise: (workoutId, exercise, setDetails) => of(setOf(exercise, setDetails))
     };
     registerLocaleData(localeDe);
     TestBed.configureTestingModule({
@@ -70,7 +101,8 @@ describe('a create workout user', () => {
         SelectableMuscleGroupOrExerciseComponent,
         WorkoutTitleComponent,
         SetFormatPipe,
-        ReplacePipe
+        ReplacePipe,
+        StringifyPipePipe
       ],
       providers: [
         {provide: ActivatedRoute, useClass: MockRoute},
@@ -80,6 +112,7 @@ describe('a create workout user', () => {
         {provide: LOCALE_ID, useValue: localeDe},
         {provide: DatePipe},
         {provide: ReplacePipe},
+        {provide: StringifyPipePipe}
       ],
       imports: [
         ReactiveFormsModule
@@ -208,7 +241,15 @@ describe('a create workout user', () => {
     user.seesSelectableExercises(exercises);
   });
 
-  fit('can create sets for an exercise', fakeAsync(() => {
+  function sumOf(weights: SetButtonValues[]) {
+    let sum = 0;
+    for (const weight of weights) {
+      sum += parseFloat(weight.value) * weight.times;
+    }
+    return sum;
+  }
+
+  fit('can create and add sets to an exercise', fakeAsync(() => {
     const muscleGroupNames = 'Chest, Biceps';
     const muscleGroups = toMuscleGroups(muscleGroupNames);
     const exerciseNames = 'Bench Press, Dumbbell Flys';
@@ -223,12 +264,45 @@ describe('a create workout user', () => {
     user.choosesFromSelectableExercises(exercises[0].name);
     user.seesWorkoutContainsElementWith(exercises[0].name, ['(0)', exercises[0].name]);
     user.selectsExerciseInMuscleGroup(exercises[0].name);
-    user.setsWeightWithValues([
-      {value: '10', times: 2},
+    const weights = [
+      {value: '10', times: 3},
       {value: '1', times: 5},
-      {value: '0.5', times: 3}
-    ]);
+      {value: '0.5', times: 3},
+      {value: '-0.5', times: 2},
+      {value: '-1', times: 2},
+      {value: '-10', times: 1},
+    ];
+    user.configuresWeightWithValues(weights);
+    user.seesWeightIs(sumOf(weights));
+    user.seesCurrentSetValuesToAddAre(new Set(sumOf(weights), 'kg', undefined, undefined, undefined, undefined));
+    const repetitions = [
+      {value: '5', times: 3},
+      {value: '2', times: 2},
+      {value: '1', times: 1},
+      {value: '-5', times: 1},
+      {value: '-2', times: 1},
+      {value: '-1', times: 1},
+    ];
+    user.configureRepetitionsWithValues(repetitions);
+    user.seesRepetitionsAre(sumOf(repetitions));
+    user.seesCurrentSetValuesToAddAre(new Set(sumOf(weights), 'kg', sumOf(repetitions), undefined, undefined, undefined));
 
+    const waitingTimes = [
+      {value: '10', times: 10},
+      {value: '5', times: 3},
+      {value: '1', times: 4},
+      {value: '-10', times: 2},
+      {value: '-5', times: 4},
+      {value: '-1', times: 4},
+    ];
+    user.configuresWaitingTime(waitingTimes);
+    user.seesWaitingTimeIs(sumOf(waitingTimes));
+    user.seesCurrentSetValuesToAddAre(new Set(sumOf(weights), 'kg', sumOf(repetitions), sumOf(repetitions), 's', undefined));
+
+    user.togglesSetParts();
+    user.seesAllSetPartsAreHidden();
+
+    user.addsSetToExercise();
   }));
 
 });

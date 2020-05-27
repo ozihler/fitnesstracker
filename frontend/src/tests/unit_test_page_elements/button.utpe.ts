@@ -6,6 +6,10 @@ export class Button {
     return this.button.textContent;
   }
 
+  get hidden() {
+    return this.button.hidden;
+  }
+
   click() {
     this.button.click();
   }
