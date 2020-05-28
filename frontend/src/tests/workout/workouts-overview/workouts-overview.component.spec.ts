@@ -58,7 +58,7 @@ describe('A workouts overview user', () => {
     tick();
     user.seesFitnessTypeSelectionPage();
   }));
-  it('can navigate back to create new workout page', fakeAsync(() => {
+  it('can navigate to create new workout page', fakeAsync(() => {
     user.clicksNewWorkoutButton();
     tick();
     user.seesCreateNewWorkoutPage();
