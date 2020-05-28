@@ -16,24 +16,27 @@ export class CreateWorkoutComponentPageObject {
   constructor(private fixture: ComponentFixture<CreateWorkoutComponent>) {
     this.component = fixture.componentInstance;
     this.findElement = new FindElement(fixture);
-
-    this.editWorkoutTitleButton = new Button(this.findElement.by('#edit-workout-title-button'));
-
   }
 
   private findElement: FindElement;
   private component: CreateWorkoutComponent;
-
-  //  page objects
-  private editWorkoutTitleButton;
 
   private static emptyOr(weight: any) {
     return weight ? weight.toString() : '';
   }
 
   expectTitleToContain(elementsTitleShouldContain: string[]) {
-    elementsTitleShouldContain.forEach(element => expect(this.editWorkoutTitleButton.label).toContain(element));
+    elementsTitleShouldContain.forEach(element =>
+      expect(new Button(this.findElement.by('#edit-workout-title-button')).label)
+        .toContain(element));
   }
+
+  expectTitleNotToContain(elementsTitleShouldNOTContain: string[]) {
+    elementsTitleShouldNOTContain.forEach(element =>
+      expect(new Button(this.findElement.by('#edit-workout-title-button')).label)
+        .not.toContain(element));
+  }
+
 
   expectEmptyElementsText(elementType: string) {
     expect(new Span(this.findElement.by('#empty-elements-text')).text)
@@ -55,6 +58,7 @@ export class CreateWorkoutComponentPageObject {
   enterExercises(exerciseNames: string) {
     new InputField(this.findElement.by('#ft-input-field-to-create-new-muscle-group-or-exercise')).input = exerciseNames;
   }
+
 
   submitMuscleGroups() {
     new Button(this.findElement.by('#ft-button-to-submit-new-muscle-group-or-exercise')).click();
@@ -85,12 +89,12 @@ export class CreateWorkoutComponentPageObject {
     selectElementButton.click();
   }
 
+
   removeSelectedElementFromWorkoutTree(selectedElementToRemove: string) {
     const selectedElementIdName = ElementsToId.replace(selectedElementToRemove);
     const selectElementButton = new Button(this.findElement.by('#remove-node-' + selectedElementIdName + '-from-workout-tree'));
     selectElementButton.click();
   }
-
 
   expectWorkoutTreeToContain(workoutTreeElementName: string, stringsItShouldContain: string[]) {
     const selector = 'select-' + ElementsToId.replace(workoutTreeElementName) + '-editable-node';
@@ -164,6 +168,10 @@ export class CreateWorkoutComponentPageObject {
 
   expectWorkoutTreeNotToContain(id: string) {
     expect(this.findElement.byId(`select-${id}-editable-node`)).toBeNull();
+  }
+
+  inputTitle(newTitle: string) {
+    new InputField(this.findElement.byId('workout-title-input-box')).input = newTitle;
   }
 }
 

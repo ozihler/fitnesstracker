@@ -1,4 +1,4 @@
-import {ComponentFixtureAutoDetect, fakeAsync, TestBed} from '@angular/core/testing';
+import {ComponentFixtureAutoDetect, fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {CreateWorkoutComponent} from '../../../app/workout/create-edit-workout/create-workout.component';
 import {LOCALE_ID, NO_ERRORS_SCHEMA} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
@@ -301,10 +301,23 @@ describe('a create workout user', () => {
     user.seesThatSetWasAddedToExercise(exercises[0].name, directlyEnteredSet);
   }));
 
-  it('can adapt title', () => {
+  it('can adapt title', fakeAsync(() => {
     user.opensTitleEditing();
+    const aNewTitle = 'A New Title';
+    user.updatesTitleTo(aNewTitle);
+    user.submitsTitleUpdateForm();
+    tick();
+    user.seesWorkoutTitleContains([aNewTitle]);
+  }));
 
-  });
+  it('can cancel title adaption title', fakeAsync(() => {
+    user.opensTitleEditing();
+    const aNewTitle = 'A New Title';
+    user.updatesTitleTo(aNewTitle);
+    user.cancelsUpdateTitle();
+    tick();
+    user.seesWorkoutTitleDoesNotContains([aNewTitle]);
+  }));
 
   it('can cancel the edit of the title / date without causing any change to the initial title', () => {
 

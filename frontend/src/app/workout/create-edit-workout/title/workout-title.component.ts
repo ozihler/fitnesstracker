@@ -17,14 +17,31 @@ import {DatePipe} from '@angular/common';
       </button>
       <div *ngIf="editing">
         <form [formGroup]="editForm" (ngSubmit)="saveEditing()">
-          <input class="uk-input" type="text" [value]="title" formControlName="workoutTitle">
-          <input class="uk-input" type="date" [value]="formattedDate" formControlName="workoutCreationDate">
+          <input
+            id="workout-title-input-box"
+            class="uk-input"
+            type="text"
+            [value]="title"
+            formControlName="workoutTitle"/>
 
-          <button class="uk-button uk-button-primary uk-width-1-2" type="submit">
+          <input
+            id="workout-date-input-box"
+            class="uk-input"
+            type="date"
+            [value]="formattedDate"
+            formControlName="workoutCreationDate"/>
+
+          <button
+            id="submit-title-update-button"
+            class="uk-button uk-button-primary uk-width-1-2"
+            type="submit">
             <i class="fa fa-save"></i>
           </button>
 
-          <button class="uk-button uk-button-default uk-width-1-2" (click)="cancelEditing()">
+          <button
+            id="cancel-title-update-button"
+            class="uk-button uk-button-default uk-width-1-2"
+            (click)="cancelEditing()">
             <i class="fa fa-times"></i>
           </button>
         </form>

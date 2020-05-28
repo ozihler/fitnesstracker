@@ -166,4 +166,20 @@ export class CreateWorkoutComponentUser {
   seesWorkoutDoesNotContain(treeElementName: string) {
     this.createWorkoutComponent.expectWorkoutTreeNotToContain(treeElementName);
   }
+
+  updatesTitleTo(newTitle: string) {
+    this.createWorkoutComponent.inputTitle(newTitle);
+  }
+
+  submitsTitleUpdateForm() {
+    this.createWorkoutComponent.clickButtonWithId('submit-title-update-button');
+  }
+
+  cancelsUpdateTitle() {
+    this.createWorkoutComponent.clickButtonWithId('cancel-title-update-button');
+  }
+
+  seesWorkoutTitleDoesNotContains(stringsTitleShouldNOTContain: string[]) {
+    this.createWorkoutComponent.expectTitleNotToContain(stringsTitleShouldNOTContain);
+  }
 }
