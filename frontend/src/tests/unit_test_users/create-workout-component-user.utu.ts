@@ -159,7 +159,7 @@ export class CreateWorkoutComponentUser {
     return sum;
   }
 
-  opensTitleEditing() {
+  opensWorkoutTitleAndDateEditing() {
     this.createWorkoutComponent.clickButtonWithId('edit-workout-title-button');
   }
 
@@ -181,5 +181,13 @@ export class CreateWorkoutComponentUser {
 
   seesWorkoutTitleDoesNotContains(stringsTitleShouldNOTContain: string[]) {
     this.createWorkoutComponent.expectTitleNotToContain(stringsTitleShouldNOTContain);
+  }
+
+  setsWorkoutDateTo(newDate: Date) {
+    this.createWorkoutComponent.setWorkoutDateTo(newDate);
+  }
+
+  seesWorkoutDateIs(newDate: Date) {
+    this.createWorkoutComponent.expectWorkoutDateToBe(newDate);
   }
 }

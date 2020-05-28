@@ -1,4 +1,4 @@
 export interface WorkoutTitleUpdate {
-  workoutTitle: string,
-  workoutCreationDate: any
+  workoutTitle: string;
+  workoutCreationDate: any;
 }

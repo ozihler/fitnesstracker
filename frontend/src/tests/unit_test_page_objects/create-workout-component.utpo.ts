@@ -32,9 +32,9 @@ export class CreateWorkoutComponentPageObject {
   }
 
   expectTitleNotToContain(elementsTitleShouldNOTContain: string[]) {
+    const workoutTitleInputBox = new InputField(this.findElement.byId('workout-title-input-box'));
     elementsTitleShouldNOTContain.forEach(element =>
-      expect(new Button(this.findElement.by('#edit-workout-title-button')).label)
-        .not.toContain(element));
+      expect(workoutTitleInputBox.input).not.toContain(element));
   }
 
 
@@ -172,6 +172,18 @@ export class CreateWorkoutComponentPageObject {
 
   inputTitle(newTitle: string) {
     new InputField(this.findElement.byId('workout-title-input-box')).input = newTitle;
+  }
+
+  setWorkoutDateTo(newDate: Date) {
+    console.log('Input: ', new InputField(this.findElement.byId('workout-date-input-box')).input);
+    console.log('New Date: ', newDate.toJSON().split('T')[0]);
+    new InputField(this.findElement.byId('workout-date-input-box')).input
+      = newDate.toJSON().split('T')[0];
+  }
+
+  expectWorkoutDateToBe(date: Date) {
+    const dateString = new InputField(this.findElement.byId('workout-date-input-box')).input;
+    expect(new Date(dateString).toDateString()).toEqual(date.toDateString());
   }
 }
 

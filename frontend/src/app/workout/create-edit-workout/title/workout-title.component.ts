@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
-import {WorkoutTitleUpdate} from './workout-title-update';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 
@@ -7,6 +6,7 @@ import {DatePipe} from '@angular/common';
   selector: 'app-workout-title',
   template: `
     <div class="uk-grid uk-grid-collapse">
+
       <button
         id="edit-workout-title-button"
         class="uk-button uk-button-default uk-width-1-1"
@@ -15,21 +15,21 @@ import {DatePipe} from '@angular/common';
         {{workoutTitle}}
         <i class="fa fa-edit uk-align-right"></i>
       </button>
+
       <div *ngIf="editing">
-        <form [formGroup]="editForm" (ngSubmit)="saveEditing()">
+        <form [formGroup]="editWorkoutForm"
+              (ngSubmit)="saveEditing()">
           <input
             id="workout-title-input-box"
             class="uk-input"
             type="text"
-            [value]="title"
-            formControlName="workoutTitle"/>
+            formControlName="title"/>
 
           <input
             id="workout-date-input-box"
             class="uk-input"
             type="date"
-            [value]="formattedDate"
-            formControlName="workoutCreationDate"/>
+            formControlName="creationDate"/>
 
           <button
             id="submit-title-update-button"
@@ -53,29 +53,27 @@ export class WorkoutTitleComponent implements OnChanges {
 
   @Input() workoutCreationDate: Date = new Date();
   @Input() workoutTitle = '';
-  @Input() workoutId = '';
+  @Input() workoutId;
   @Output() changeTitleEvent = new EventEmitter<any>();
+
   editing = false;
-  editForm: FormGroup;
+  editWorkoutForm: FormGroup;
 
   constructor(private datePipe: DatePipe,
               private formBuilder: FormBuilder) {
   }
 
   get formattedDate() {
-    return this.workoutCreationDate ? this.datePipe.transform(this.workoutCreationDate, 'yyyy-MM-dd', '', 'de') : '';
-  }
-
-  get title() {
-    return this.workoutTitle ? this.workoutTitle : '';
+    return this.datePipe.transform(this.workoutCreationDate, 'yyyy-MM-dd', '', 'de');
   }
 
   ngOnChanges() {
-    this.editForm = this.formBuilder.group({
-        workoutTitle: [this.title, Validators.required],
-        workoutCreationDate: [this.formattedDate, Validators.required]
-      }
-    );
+    this.editWorkoutForm = this.formBuilder
+      .group({
+          title: [this.workoutTitle, Validators.required],
+          creationDate: [this.formattedDate, Validators.required]
+        }
+      );
   }
 
   enableEditing() {
@@ -84,19 +82,26 @@ export class WorkoutTitleComponent implements OnChanges {
 
   saveEditing() {
     // todo fix value propagation when untouched...
-    let update: WorkoutTitleUpdate = {
-      workoutTitle: this.valueOf('workoutTitle') ? this.valueOf('workoutTitle') : this.workoutTitle,
-      workoutCreationDate: this.valueOf('workoutCreationDate') ? this.valueOf('workoutCreationDate') : this.workoutCreationDate
-    };
-    this.changeTitleEvent.emit(update);
-    this.cancelEditing();
-  }
-
-  private valueOf(path: string) {
-    return this.editForm.get(path).value;
+    this.changeTitleEvent.emit(
+      {
+        workoutTitle: this.valueOf('title') ? this.valueOf('title') : this.workoutTitle,
+        workoutCreationDate: this.valueOf('creationDate') ? this.valueOf('creationDate') : this.workoutCreationDate
+      });
+    this.disableEditing();
   }
 
   cancelEditing() {
+    this.editWorkoutForm.get('title').setValue(this.workoutTitle);
+    this.editWorkoutForm.get('creationDate').setValue(this.formattedDate);
+
+    this.disableEditing();
+  }
+
+  private valueOf(path: string) {
+    return this.editWorkoutForm.get(path).value;
+  }
+
+  private disableEditing() {
     this.editing = false;
   }
 }

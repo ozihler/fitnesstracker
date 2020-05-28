@@ -302,7 +302,7 @@ describe('a create workout user', () => {
   }));
 
   it('can adapt title', fakeAsync(() => {
-    user.opensTitleEditing();
+    user.opensWorkoutTitleAndDateEditing();
     const aNewTitle = 'A New Title';
     user.updatesTitleTo(aNewTitle);
     user.submitsTitleUpdateForm();
@@ -310,17 +310,40 @@ describe('a create workout user', () => {
     user.seesWorkoutTitleContains([aNewTitle]);
   }));
 
-  it('can cancel title adaption title', fakeAsync(() => {
-    user.opensTitleEditing();
+  it('can cancel title adaption', fakeAsync(() => {
+    user.opensWorkoutTitleAndDateEditing();
+    tick();
     const aNewTitle = 'A New Title';
     user.updatesTitleTo(aNewTitle);
     user.cancelsUpdateTitle();
     tick();
+    user.opensWorkoutTitleAndDateEditing();
+    tick();
     user.seesWorkoutTitleDoesNotContains([aNewTitle]);
   }));
 
-  it('can cancel the edit of the title / date without causing any change to the initial title', () => {
+  it('can adapt the date of the workout', fakeAsync(() => {
+    user.opensWorkoutTitleAndDateEditing();
+    user.seesWorkoutDateIs(new Date());
+    const newDate = new Date('1986-08-13');
+    user.setsWorkoutDateTo(newDate);
+    user.submitsTitleUpdateForm();
+    tick();
+    user.opensWorkoutTitleAndDateEditing();
+    user.seesWorkoutDateIs(newDate);
+  }));
 
-  });
+  it('can cancel date adaption', fakeAsync(() => {
+    user.opensWorkoutTitleAndDateEditing();
+    const oldDate = new Date();
+    user.seesWorkoutDateIs(oldDate);
+    const newDate = new Date('1986-08-13');
+    user.setsWorkoutDateTo(newDate);
+    user.cancelsUpdateTitle();
+    tick();
+    user.opensWorkoutTitleAndDateEditing();
+    user.seesWorkoutDateIs(oldDate);
+  }));
+
 });
 
