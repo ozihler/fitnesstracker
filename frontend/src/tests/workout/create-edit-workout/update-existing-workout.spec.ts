@@ -138,6 +138,30 @@ describe('a user updating an existing workout', () => {
     user = new CreateWorkoutComponentUser(new CreateWorkoutComponentPageObject(TestBed.createComponent(CreateWorkoutComponent)));
   });
 
+  it('can remove muscle groups from workout', () => {
+    user.seesWorkoutContainsElementWith('chest', ['(1)', 'Chest', '1550 kg']);
+    user.seesWorkoutContainsElementWith('triceps', ['(0)', 'Triceps', '0 kg']);
+
+    user.selectsMuscleGroupInWorkout('chest');
+    user.seesWorkoutContainsElementWith('root', ['(2)', 'New Workout', '1550 kg']);
+    user.seesWorkoutContainsElementWith('chest', ['(1)', 'Chest', '1550 kg']);
+    user.seesWorkoutContainsElementWith('bench press', ['(3)', 'Bench Press', '1550 kg']);
+    user.seesWorkoutContainsElementWith('triceps', ['(0)', 'Triceps', '0 kg']);
+    user.removesItemFromWorkoutTree('chest');
+    user.seesWorkoutContainsElementWith('root', ['(1)', 'New Workout', '0 kg']);
+    user.seesWorkoutDoesNotContain('chest');
+  });
+
+  it('can remove exercises from muscle group in workout', () => {
+    user.selectsMuscleGroupInWorkout('chest');
+    user.seesWorkoutContainsElementWith('chest', ['(1)', 'Chest', '1550 kg']);
+    user.seesWorkoutContainsElementWith('bench press', ['(3)', 'Bench Press', '1550 kg']);
+
+    user.removesItemFromWorkoutTree('bench press');
+    user.seesWorkoutContainsElementWith('chest', ['(0)', 'Chest', '0 kg']);
+    user.seesWorkoutDoesNotContain('bench press');
+  });
+
   it('can remove sets from exercises in muscle group of workout', () => {
     user.selectsMuscleGroupInWorkout('chest');
     user.selectsExerciseInMuscleGroup('bench press');
@@ -163,29 +187,6 @@ describe('a user updating an existing workout', () => {
     user.cannotSeeSetOfExerciseWithValues(set1);
     user.cannotSeeSetOfExerciseWithValues(set2);
     user.cannotSeeSetOfExerciseWithValues(set3);
-  });
-
-  it('can remove exercises from muscle group in workout', () => {
-    user.selectsMuscleGroupInWorkout('chest');
-    user.seesWorkoutContainsElementWith('chest', ['(1)', 'Chest', '1550 kg']);
-    user.seesWorkoutContainsElementWith('bench press', ['(3)', 'Bench Press', '1550 kg']);
-
-    user.removesItemFromWorkoutTree('bench press');
-    user.seesWorkoutContainsElementWith('chest', ['(0)', 'Chest', '0 kg']);
-    user.seesWorkoutDoesNotContain('bench press');
-  });
-  it('can remove muscle groups from workout', () => {
-    user.seesWorkoutContainsElementWith('chest', ['(1)', 'Chest', '1550 kg']);
-    user.seesWorkoutContainsElementWith('triceps', ['(0)', 'Triceps', '0 kg']);
-
-    user.selectsMuscleGroupInWorkout('chest');
-    user.seesWorkoutContainsElementWith('root', ['(2)', 'New Workout', '1550 kg']);
-    user.seesWorkoutContainsElementWith('chest', ['(1)', 'Chest', '1550 kg']);
-    user.seesWorkoutContainsElementWith('bench press', ['(3)', 'Bench Press', '1550 kg']);
-    user.seesWorkoutContainsElementWith('triceps', ['(0)', 'Triceps', '0 kg']);
-    user.removesItemFromWorkoutTree('chest');
-    user.seesWorkoutContainsElementWith('root', ['(1)', 'New Workout', '0 kg']);
-    user.seesWorkoutDoesNotContain('chest');
   });
 });
 
