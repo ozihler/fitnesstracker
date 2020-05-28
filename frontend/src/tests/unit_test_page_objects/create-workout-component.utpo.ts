@@ -91,6 +91,7 @@ export class CreateWorkoutComponentPageObject {
     selectElementButton.click();
   }
 
+
   expectWorkoutTreeToContain(workoutTreeElementName: string, stringsItShouldContain: string[]) {
     const selector = 'select-' + ElementsToId.replace(workoutTreeElementName) + '-editable-node';
     const treeNodeButton = new Button(this.findElement.byId(selector));
@@ -116,7 +117,6 @@ export class CreateWorkoutComponentPageObject {
       const selector = '#' + setButtonType + this.addOrSubtract(weightButtonValue)
         + weightButtonValue.value.toString().replace('-', '').replace('.', '-')
         + '-button';
-      console.log(selector);
       const setButton = new Button(this.findElement.by(selector));
       for (let i = 0; i < weightButtonValue.times; ++i) {
         setButton.click();
@@ -160,6 +160,10 @@ export class CreateWorkoutComponentPageObject {
   inputSetValue(id: string, value: number) {
     new Button(this.findElement.byId(`change-${id}-button`)).click();
     new InputField(this.findElement.byId(`${id}-input`)).change = value ? value.toString() : '';
+  }
+
+  expectWorkoutTreeNotToContain(id: string) {
+    expect(this.findElement.byId(`select-${id}-editable-node`)).toBeNull();
   }
 }
 

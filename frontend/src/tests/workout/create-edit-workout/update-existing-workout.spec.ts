@@ -28,8 +28,9 @@ import {CreateWorkoutComponentUser} from '../../unit_test_users/create-workout-c
 import {Exercise} from '../../../app/workout/shared/exercise';
 import {Set} from '../../../app/workout/shared/set';
 import {StringifyPipePipe} from '../../../app/workout/shared/pipes/stringify.pipe';
+import {ConvertToId} from '../../unit_test_page_objects/convert-to-id';
 
-describe('a create workout user', () => {
+describe('a user updating an existing workout', () => {
   let user: CreateWorkoutComponentUser;
 
   let selectionServiceMock;
@@ -95,9 +96,9 @@ describe('a create workout user', () => {
       updateWorkout: (w: Workout) => of(w)
     };
 
-    // todo maybe use spy for selectionService mock and override methods as needed...
     selectionServiceMock = {
       getMuscleGroups: () => of([]),
+      fetchExercisesFor: () => of(),
       newMuscleGroup: (muscleGroupNames: string) => of(toMuscleGroups(muscleGroupNames)),
       deleteMuscleGroup: (muscleGroupToDelete) => of(muscleGroupToDelete),
       createExercises: (muscleGroup, exercises) => of(toExercises(exercises)),
@@ -137,9 +138,54 @@ describe('a create workout user', () => {
     user = new CreateWorkoutComponentUser(new CreateWorkoutComponentPageObject(TestBed.createComponent(CreateWorkoutComponent)));
   });
 
-  fit('can delete set from exercise', () => {
+  it('can remove sets from exercises in muscle group of workout', () => {
+    user.selectsMuscleGroupInWorkout('chest');
+    user.selectsExerciseInMuscleGroup('bench press');
+    const set1 = new Set(50, 'kg', 12, 50, 's', undefined);
+    const set2 = new Set(60, 'kg', 10, 50, 's', undefined);
+    const set3 = new Set(70, 'kg', 5, 50, 's', undefined);
 
+    user.seesSetOfExercise('bench press', set1);
+    user.seesSetOfExercise('bench press', set2);
+    user.seesSetOfExercise('bench press', set3);
 
+    user.removesItemFromWorkoutTree(ConvertToId.set(set3));
+    user.seesSetOfExercise('bench press', new Set(50, 'kg', 12, 50, 's', undefined));
+    user.seesSetOfExercise('bench press', new Set(60, 'kg', 10, 50, 's', undefined));
+    user.cannotSeeSetOfExerciseWithValues(set3);
+
+    user.removesItemFromWorkoutTree(ConvertToId.set(set2));
+    user.seesSetOfExercise('bench press', new Set(50, 'kg', 12, 50, 's', undefined));
+    user.cannotSeeSetOfExerciseWithValues(set2);
+    user.cannotSeeSetOfExerciseWithValues(set3);
+
+    user.removesItemFromWorkoutTree(ConvertToId.set(set1));
+    user.cannotSeeSetOfExerciseWithValues(set1);
+    user.cannotSeeSetOfExerciseWithValues(set2);
+    user.cannotSeeSetOfExerciseWithValues(set3);
+  });
+
+  it('can remove exercises from muscle group in workout', () => {
+    user.selectsMuscleGroupInWorkout('chest');
+    user.seesWorkoutContainsElementWith('chest', ['(1)', 'Chest', '1550 kg']);
+    user.seesWorkoutContainsElementWith('bench press', ['(3)', 'Bench Press', '1550 kg']);
+
+    user.removesItemFromWorkoutTree('bench press');
+    user.seesWorkoutContainsElementWith('chest', ['(0)', 'Chest', '0 kg']);
+    user.seesWorkoutDoesNotContain('bench press');
+  });
+  it('can remove muscle groups from workout', () => {
+    user.seesWorkoutContainsElementWith('chest', ['(1)', 'Chest', '1550 kg']);
+    user.seesWorkoutContainsElementWith('triceps', ['(0)', 'Triceps', '0 kg']);
+
+    user.selectsMuscleGroupInWorkout('chest');
+    user.seesWorkoutContainsElementWith('root', ['(2)', 'New Workout', '1550 kg']);
+    user.seesWorkoutContainsElementWith('chest', ['(1)', 'Chest', '1550 kg']);
+    user.seesWorkoutContainsElementWith('bench press', ['(3)', 'Bench Press', '1550 kg']);
+    user.seesWorkoutContainsElementWith('triceps', ['(0)', 'Triceps', '0 kg']);
+    user.removesItemFromWorkoutTree('chest');
+    user.seesWorkoutContainsElementWith('root', ['(1)', 'New Workout', '0 kg']);
+    user.seesWorkoutDoesNotContain('chest');
   });
 });
 

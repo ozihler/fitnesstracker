@@ -271,6 +271,8 @@ describe('a create workout user', () => {
       {value: '-1', times: 4},
     ];
     selectionServiceMock.fetchExercisesFor = (muscleGroupName) => of([]);
+
+    // test
     user.createsMuscleGroupsToSelect(muscleGroupNames);
     user.choosesFromSelectableMuscleGroups(muscleGroups[0].name);
     user.selectsMuscleGroupInWorkout(muscleGroups[0].name);
@@ -303,10 +305,9 @@ describe('a create workout user', () => {
     user.opensTitleEditing();
 
   });
+
   it('can cancel the edit of the title / date without causing any change to the initial title', () => {
 
-
   });
- 
 });
 

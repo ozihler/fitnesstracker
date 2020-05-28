@@ -2,7 +2,7 @@ import {CreateWorkoutComponentPageObject, SetButtonValues} from '../unit_test_pa
 import {MuscleGroup} from '../../app/workout/shared/muscle-group';
 import {Exercise} from '../../app/workout/shared/exercise';
 import {Set} from '../../app/workout/shared/set';
-import {ReplacePipe} from '../../app/workout/shared/pipes/replace.pipe';
+import {ConvertToId} from '../unit_test_page_objects/convert-to-id';
 
 export class CreateWorkoutComponentUser {
   constructor(private createWorkoutComponent: CreateWorkoutComponentPageObject) {
@@ -122,14 +122,27 @@ export class CreateWorkoutComponentUser {
 
     this.configuresWaitingTime(waitingTimes);
     this.seesWaitingTimeIs(this.sumOf(waitingTimes));
-    this.seesCurrentSetValuesToAddAre(new Set(this.sumOf(weights), 'kg', this.sumOf(repetitions), this.sumOf(waitingTimes), 's', undefined));
+    this.seesCurrentSetValuesToAddAre(
+      new Set(this.sumOf(weights), 'kg', this.sumOf(repetitions), this.sumOf(waitingTimes), 's', undefined));
 
     this.togglesSetParts();
     this.seesAllSetPartsAreHidden();
   }
 
+
+  cannotSeeSetOfExerciseWithValues(set: Set) {
+    this.createWorkoutComponent.expectWorkoutTreeNotToContain(ConvertToId.set(set));
+  }
+
+  seesSetOfExercise(exerciseName: string, set: Set) {
+    this.createWorkoutComponent.expectWorkoutTreeToContain(
+      ConvertToId.set(set),
+      [set.weight.toString(), set.numberOfRepetitions.toString(), set.waitingTime.toString()]);
+  }
+
   seesThatSetWasAddedToExercise(exerciseName: string, set: Set) {
-    this.createWorkoutComponent.expectWorkoutTreeToContain(this.convert(set), [set.weight.toString(), set.numberOfRepetitions.toString(), set.waitingTime.toString()]);
+    this.createWorkoutComponent.expectWorkoutTreeToContain(ConvertToId.set(set),
+      [set.weight.toString(), set.numberOfRepetitions.toString(), set.waitingTime.toString()]);
   }
 
   configuresSetByDirectInputtingValues(weight: number, repetitions: number, waitingTime: number) {
@@ -150,12 +163,7 @@ export class CreateWorkoutComponentUser {
     this.createWorkoutComponent.clickButtonWithId('edit-workout-title-button');
   }
 
-  private convert(set: Set) {
-    return new ReplacePipe().transform(set.weight.toString(), '.', '-')
-      + '-kg-'
-      + set.numberOfRepetitions
-      + '--'
-      + set.waitingTime
-      + '-s';
+  seesWorkoutDoesNotContain(treeElementName: string) {
+    this.createWorkoutComponent.expectWorkoutTreeNotToContain(treeElementName);
   }
 }
