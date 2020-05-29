@@ -83,9 +83,9 @@ describe('a user updating an existing workout', () => {
     const chestBenchPress = new Exercise(chest, 'Bench Press', []);
     chest.children.push(chestBenchPress);
 
-    const chestBenchPressSet1 = new Set(50, 'kg', 12, 50, 's', chestBenchPress);
-    const chestBenchPressSet2 = new Set(60, 'kg', 10, 50, 's', chestBenchPress);
-    const chestBenchPressSet3 = new Set(70, 'kg', 5, 50, 's', chestBenchPress);
+    const chestBenchPressSet1 = new Set(50, 'kg', 12, 50, 's', chestBenchPress, 0);
+    const chestBenchPressSet2 = new Set(60, 'kg', 10, 50, 's', chestBenchPress, 1);
+    const chestBenchPressSet3 = new Set(70, 'kg', 5, 50, 's', chestBenchPress, 2);
     chestBenchPress.children.push(chestBenchPressSet1);
     chestBenchPress.children.push(chestBenchPressSet2);
     chestBenchPress.children.push(chestBenchPressSet3);
@@ -143,20 +143,23 @@ describe('a user updating an existing workout', () => {
 
     user.selectsMuscleGroupInWorkout('chest');
     user.seesWorkoutContainsElementWith(new Workout(WorkoutId.from('1-1'), new Date(), 'Workout', []), ['(2)', 'New Workout', '1550 kg']);
-    user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Chest', []), ['(1)', 'Chest', '1550 kg']);
+    const chest = new MuscleGroup(undefined, 'Chest', []);
+    user.seesWorkoutContainsElementWith(chest, ['(1)', 'Chest', '1550 kg']);
     user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Bench Press', []), ['(3)', 'Bench Press', '1550 kg']);
     user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Triceps', []), ['(0)', 'Triceps', '0 kg']);
-    user.removesItemFromWorkoutTree('chest');
+
+    user.removesItemFromWorkoutTree(chest);
     user.seesWorkoutContainsElementWith(new Workout(WorkoutId.from('1-1'), new Date(), 'Workout', []), ['(1)', 'New Workout', '0 kg']);
     user.seesWorkoutDoesNotContain('chest');
   });
 
   it('can remove exercises from muscle group in workout', () => {
+    const benchPress = new MuscleGroup(undefined, 'Bench Press', []);
     user.selectsMuscleGroupInWorkout('chest');
     user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Chest', []), ['(1)', 'Chest', '1550 kg']);
-    user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Bench Press', []), ['(3)', 'Bench Press', '1550 kg']);
 
-    user.removesItemFromWorkoutTree('bench press');
+    user.seesWorkoutContainsElementWith(benchPress, ['(3)', 'Bench Press', '1550 kg']);
+    user.removesItemFromWorkoutTree(benchPress);
     user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Chest', []), ['(0)', 'Chest', '0 kg']);
     user.seesWorkoutDoesNotContain('bench press');
   });
@@ -164,25 +167,26 @@ describe('a user updating an existing workout', () => {
   it('can remove sets from exercises in muscle group of workout', () => {
     user.selectsMuscleGroupInWorkout('chest');
     user.selectsExerciseInMuscleGroup('bench press');
-    const set1 = new Set(50, 'kg', 12, 50, 's', undefined);
-    const set2 = new Set(60, 'kg', 10, 50, 's', undefined);
-    const set3 = new Set(70, 'kg', 5, 50, 's', undefined);
+    const benchPress = new Exercise(new MuscleGroup(undefined, 'Chest', []), 'Bench Press', []);
+    const set1 = new Set(50, 'kg', 12, 50, 's', benchPress, 0);
+    const set2 = new Set(60, 'kg', 10, 50, 's', benchPress, 1);
+    const set3 = new Set(70, 'kg', 5, 50, 's', benchPress, 2);
 
     user.seesSetOfExercise('bench press', set1);
     user.seesSetOfExercise('bench press', set2);
     user.seesSetOfExercise('bench press', set3);
 
-    user.removesItemFromWorkoutTree(set3.id);
-    user.seesSetOfExercise('bench press', new Set(50, 'kg', 12, 50, 's', undefined));
-    user.seesSetOfExercise('bench press', new Set(60, 'kg', 10, 50, 's', undefined));
+    user.removesItemFromWorkoutTree(set3);
+    user.seesSetOfExercise('bench press', set1);
+    user.seesSetOfExercise('bench press', set2);
     user.cannotSeeSetOfExerciseWithValues(set3);
 
-    user.removesItemFromWorkoutTree(set2.id);
-    user.seesSetOfExercise('bench press', new Set(50, 'kg', 12, 50, 's', undefined));
+    user.removesItemFromWorkoutTree(set2);
+    user.seesSetOfExercise('bench press', set1);
     user.cannotSeeSetOfExerciseWithValues(set2);
     user.cannotSeeSetOfExerciseWithValues(set3);
 
-    user.removesItemFromWorkoutTree(set1.id);
+    user.removesItemFromWorkoutTree(set1);
     user.cannotSeeSetOfExerciseWithValues(set1);
     user.cannotSeeSetOfExerciseWithValues(set2);
     user.cannotSeeSetOfExerciseWithValues(set3);

@@ -91,15 +91,14 @@ export class CreateWorkoutComponentPageObject {
   }
 
 
-  removeSelectedElementFromWorkoutTree(selectedElementToRemove: string) {
-    const selectedElementIdName = ElementsToId.replace(selectedElementToRemove);
-    const selectElementButton = new Button(this.findElement.by('#remove-node-' + selectedElementIdName + '-from-workout-tree'));
+  removeSelectedElementFromWorkoutTree(selectedElementToRemove: TreeNode) {
+    console.log('Remove ', selectedElementToRemove.id);
+    const selectElementButton = new Button(this.findElement.byId('remove-node-' + selectedElementToRemove.id + '-from-workout-tree'));
     selectElementButton.click();
   }
 
   expectWorkoutTreeToContain(workoutTreeElement: TreeNode, stringsItShouldContain: string[]) {
     const selector = 'select-' + workoutTreeElement.id + '-editable-node';
-    console.error('Button to select is: ' + selector);
     const treeNodeButton = new Button(this.findElement.byId(selector));
     for (const stringTheElementShouldContain of stringsItShouldContain) {
       expect(treeNodeButton.label).toContain(stringTheElementShouldContain);
@@ -188,10 +187,13 @@ export class CreateWorkoutComponentPageObject {
     expect(new Date(dateString).toDateString()).toEqual(date.toDateString());
   }
 
-  expectExerciseToHaveSets(sets: Set[]) {
-    const selector = `#select-${sets[0].id}-editable-node`;
-    expect(this.findElement.allWith(selector).length)
-      .toBe(sets.length);
+  expectExerciseToHaveSets(sets: TreeNode[]) {
+    for (const set of sets) {
+      const selector = `select-${set.id}-editable-node`;
+      console.log('Select: ', selector);
+      expect(new Button(this.findElement.byId(selector)).label)
+        .toContain(set.name);
+    }
   }
 }
 

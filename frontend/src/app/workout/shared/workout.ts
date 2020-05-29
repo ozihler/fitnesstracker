@@ -41,4 +41,9 @@ export class Workout extends TreeNode {
   get creationDate(): Date {
     return this._creationDate;
   }
+
+
+  get id(): string {
+    return 'root';
+  }
 }

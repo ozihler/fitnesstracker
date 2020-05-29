@@ -58,7 +58,8 @@ describe('a create workout user', () => {
       reps,
       waitingTime,
       's',
-      exercise
+      exercise,
+      exercise.children.length
     );
   }
 
@@ -195,7 +196,7 @@ describe('a create workout user', () => {
     user.seesEmptyMuscleGroupsText();
 
     // removes biceps
-    user.removesItemFromWorkoutTree(muscleGroupsArray[1].name);
+    user.removesItemFromWorkoutTree(muscleGroupsArray[1]);
     titleElements = titleElements.filter(m => m !== muscleGroupsArray[1].name);
     user.seesWorkoutTitleContains(titleElements);
     user.seesWorkoutContainsElementWith(workout, [...titleElements, '(1)']);
@@ -203,7 +204,7 @@ describe('a create workout user', () => {
     user.seesSelectableMuscleGroups([muscleGroupsArray[1]]);
 
     // removes chest
-    user.removesItemFromWorkoutTree(muscleGroupsArray[0].name);
+    user.removesItemFromWorkoutTree(muscleGroupsArray[0]);
     titleElements = titleElements.filter(m => m !== muscleGroupsArray[0].name); // empty array []
     user.seesWorkoutTitleContains(titleElements);
     user.seesWorkoutContainsElementWith(workout, [Workout.WORKOUT_INITIAL_TITLE, '(0)']);
@@ -289,14 +290,14 @@ describe('a create workout user', () => {
     user.configuresSetWithValues(weights, repetitions, waitingTimes);
     user.addsSetToExercise();
     user.seesThatSetWasAddedToExercise(exercises[0].name,
-      new Set(user.sumOf(weights), 'kg', user.sumOf(repetitions), user.sumOf(waitingTimes), 's', undefined));
+      new Set(user.sumOf(weights), 'kg', user.sumOf(repetitions), user.sumOf(waitingTimes), 's', exercises[0], 0));
 
     // can add set twice without inputting data again by just clicking button
     user.addsSetToExercise();
     user.seesThatSetWasAddedToExercise(exercises[0].name,
-      new Set(user.sumOf(weights), 'kg', user.sumOf(repetitions), user.sumOf(waitingTimes), 's', undefined));
+      new Set(user.sumOf(weights), 'kg', user.sumOf(repetitions), user.sumOf(waitingTimes), 's', exercises[0], 1));
 
-    const directlyEnteredSet = new Set(34, 'kg', 9, 87, 's', undefined);
+    const directlyEnteredSet = new Set(34, 'kg', 9, 87, 's', exercises[0], 2);
     user.configuresSetByDirectInputtingValues(
       directlyEnteredSet.weight,
       directlyEnteredSet.numberOfRepetitions,
@@ -374,34 +375,44 @@ describe('a create workout user', () => {
     user.addsSetToExercise();
 
 
+    const benchPressExercise = new Exercise(
+      new MuscleGroup(undefined, 'Chest', []),
+      'Bench Press',
+      []);
+    benchPressExercise.children = [
+      new Set(20, 'kg', 12, 50, 's', benchPressExercise, 0),
+      new Set(20, 'kg', 12, 50, 's', benchPressExercise, 1),
+      new Set(20, 'kg', 12, 50, 's', benchPressExercise, 2)
+    ];
     user.selectsExerciseInMuscleGroup('Bench Press');
+    user.seesThatExerciseHasSets('Bench Press', benchPressExercise.children);
+
+    const dumbbellBenchPress = new Exercise(
+      new MuscleGroup(undefined, 'Chest', []),
+      'Dumbbell Bench Press',
+      []);
+
+    dumbbellBenchPress.children = [
+      new Set(20, 'kg', 12, 50, 's', dumbbellBenchPress, 0),
+      new Set(20, 'kg', 12, 50, 's', dumbbellBenchPress, 1),
+      new Set(20, 'kg', 12, 50, 's', dumbbellBenchPress, 2)
+    ];
+    user.selectsExerciseInMuscleGroup('Dumbbell Bench Press');
+    user.seesThatExerciseHasSets('Dumbbell Bench Press', dumbbellBenchPress.children);
+
+    user.selectsExerciseInMuscleGroup('Bench Press');
+    user.removesItemFromWorkoutTree(benchPressExercise.children[0]);
+
     user.seesThatExerciseHasSets('Bench Press', [
-      new Set(20, 'kg', 12, 50, 's', undefined),
-      new Set(20, 'kg', 12, 50, 's', undefined),
-      new Set(20, 'kg', 12, 50, 's', undefined)
+      new Set(20, 'kg', 12, 50, 's', benchPressExercise, 1),
+      new Set(20, 'kg', 12, 50, 's', benchPressExercise, 2)
     ]);
 
     user.selectsExerciseInMuscleGroup('Dumbbell Bench Press');
     user.seesThatExerciseHasSets('Dumbbell Bench Press', [
-      new Set(20, 'kg', 12, 50, 's', undefined),
-      new Set(20, 'kg', 12, 50, 's', undefined),
-      new Set(20, 'kg', 12, 50, 's', undefined)
-    ]);
-
-    user.selectsExerciseInMuscleGroup('Bench Press');
-    // todo fix this to add tree node instead of string
-    user.removesItemFromWorkoutTree(new Set(20, 'kg', 12, 50, 's', undefined).id);
-
-    user.seesThatExerciseHasSets('Bench Press', [
-      new Set(20, 'kg', 12, 50, 's', undefined),
-      new Set(20, 'kg', 12, 50, 's', undefined)
-    ]);
-
-    user.selectsExerciseInMuscleGroup('Dumbbell Bench Press');
-    user.seesThatExerciseHasSets('Dumbbell Bench Press', [
-      new Set(20, 'kg', 12, 50, 's', undefined),
-      new Set(20, 'kg', 12, 50, 's', undefined),
-      new Set(20, 'kg', 12, 50, 's', undefined)
+      new Set(20, 'kg', 12, 50, 's', dumbbellBenchPress, 0),
+      new Set(20, 'kg', 12, 50, 's', dumbbellBenchPress, 1),
+      new Set(20, 'kg', 12, 50, 's', dumbbellBenchPress, 2)
     ]);
   }));
 

@@ -52,7 +52,7 @@ export class CreateWorkoutComponentUser {
     this.createWorkoutComponent.expectWorkoutTreeToContain(workoutTreeElementName, stringsItShouldContain);
   }
 
-  removesItemFromWorkoutTree(elementToRemove: string) {
+  removesItemFromWorkoutTree(elementToRemove: TreeNode) {
     this.createWorkoutComponent.removeSelectedElementFromWorkoutTree(elementToRemove);
   }
 
@@ -197,7 +197,7 @@ export class CreateWorkoutComponentUser {
     this.createWorkoutComponent.expectWorkoutDateToBe(newDate);
   }
 
-  seesThatExerciseHasSets(exerciseName: string, sets: Set[]) {
+  seesThatExerciseHasSets(exerciseName: string, sets: TreeNode[]) {
     this.createWorkoutComponent.expectExerciseToHaveSets(sets);
   }
 }

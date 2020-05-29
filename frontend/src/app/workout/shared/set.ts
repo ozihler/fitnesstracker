@@ -11,8 +11,9 @@ export class Set extends TreeNode {
     private _numberOfRepetitions: number,
     private _waitingTime: number,
     private _waitingTimeUnit: string,
-    parent: Exercise) {
-    super(parent, ``, undefined);
+    parent: Exercise,
+    private _index_in_exercise = 0) {
+    super(parent, _index_in_exercise + '', undefined);
   }
 
   get type(): Type {
@@ -39,8 +40,18 @@ export class Set extends TreeNode {
     return this._waitingTimeUnit;
   }
 
-  get name(): any {
+  get name(): string {
     return new SetFormatPipe().transform(this);
+  }
+
+  get id(): string {
+    let idString = '';
+    idString += this._index_in_exercise + '-';
+    if (this.parent) {
+      idString += this.parent.id + '-';
+    }
+    idString += super.id;
+    return idString;
   }
 
   cumulateWeight(): number {

@@ -4,7 +4,13 @@ import {SetFactory} from './set.factory';
 
 export class ExerciseFactory {
   static from(exerciseRaw: ExerciseRaw): Exercise {
-    const sets = exerciseRaw.sets ? exerciseRaw.sets.map(set => SetFactory.from(set)) : [];
+    const sets = [];
+    const setRaws = exerciseRaw.sets;
+    if (setRaws) {
+      for (let i = 0; i < setRaws.length; ++i) {
+        sets.push(SetFactory.from(setRaws[i], i));
+      }
+    }
     const exercise = new Exercise(undefined, exerciseRaw.name, sets);
     exercise.multiplier = exerciseRaw.multiplier;
     return exercise;

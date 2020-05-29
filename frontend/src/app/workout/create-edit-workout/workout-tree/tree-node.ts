@@ -68,9 +68,6 @@ export abstract class TreeNode implements Cumulatable {
   }
 
   get id(): string {
-    if (Type.Workout === this.type) {
-      return 'root';
-    }
     return this.name
       .replace(/#+/g, '')
       .replace(/[\s\,\.]+/g, '-')

@@ -64,8 +64,9 @@ export class SelectionService {
   }
 
   addSetToExerciseExercise(workoutId: WorkoutId, exercise: Exercise, setDetails: string): Observable<Set> {
-    return this.httpClient.post<SetRaw>(`${this.baseUrl}/workouts/${workoutId.value}/exercises/${exercise.name}/sets`, {setDetails: setDetails})
-      .pipe(map(e => SetFactory.from(e)));
+    return this.httpClient.post<SetRaw>(`${this.baseUrl}/workouts/${workoutId.value}/exercises/${exercise.name}/sets`,
+      {setDetails: setDetails})
+      .pipe(map(e => SetFactory.from(e, exercise.children.length)));
   }
 
   deleteMuscleGroup(muscleGroupName: string): Observable<MuscleGroup> {
