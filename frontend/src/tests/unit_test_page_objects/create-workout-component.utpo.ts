@@ -9,7 +9,6 @@ import {FindElement} from './find-element';
 import {Exercise} from '../../app/workout/shared/exercise';
 import {Set} from '../../app/workout/shared/set';
 import {Mark} from '../unit_test_page_elements/mark.utbp';
-import {SetValues} from '../unit_test_users/create-workout-component-user.utu';
 import {TreeNode} from '../../app/workout/create-edit-workout/workout-tree/tree-node';
 
 
@@ -189,10 +188,10 @@ export class CreateWorkoutComponentPageObject {
     expect(new Date(dateString).toDateString()).toEqual(date.toDateString());
   }
 
-  expectExerciseToHaveSets(setValues: SetValues[]) {
-    const value = setValues[0];
-    expect(this.findElement.allWith(`#select-${value.weight}-kg-${value.repetitions}--${value.waitingTime}-s-editable-node`).length)
-      .toBe(setValues.length);
+  expectExerciseToHaveSets(sets: Set[]) {
+    const selector = `#select-${sets[0].id}-editable-node`;
+    expect(this.findElement.allWith(selector).length)
+      .toBe(sets.length);
   }
 }
 

@@ -197,7 +197,7 @@ export class CreateWorkoutComponentUser {
     this.createWorkoutComponent.expectWorkoutDateToBe(newDate);
   }
 
-  seesThatExerciseHasSets(exerciseName: string, setValues: SetValues[]) {
-    this.createWorkoutComponent.expectExerciseToHaveSets(setValues);
+  seesThatExerciseHasSets(exerciseName: string, sets: Set[]) {
+    this.createWorkoutComponent.expectExerciseToHaveSets(sets);
   }
 }

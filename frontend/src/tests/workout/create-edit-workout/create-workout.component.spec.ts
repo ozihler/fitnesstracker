@@ -350,7 +350,7 @@ describe('a create workout user', () => {
     user.seesWorkoutDateIs(oldDate);
   }));
 
-  it('can remove any set without affecting other sets with the same values', fakeAsync(() => {
+  fit('can remove any set without affecting other sets with the same values', fakeAsync(() => {
     user.createsMuscleGroupsToSelect('Chest, Triceps');
     user.choosesFromSelectableMuscleGroups('chest');
     user.choosesFromSelectableMuscleGroups('triceps');
@@ -376,31 +376,32 @@ describe('a create workout user', () => {
 
     user.selectsExerciseInMuscleGroup('Bench Press');
     user.seesThatExerciseHasSets('Bench Press', [
-      {weight: 20, repetitions: 12, waitingTime: 50},
-      {weight: 20, repetitions: 12, waitingTime: 50},
-      {weight: 20, repetitions: 12, waitingTime: 50}
+      new Set(20, 'kg', 12, 50, 's', undefined),
+      new Set(20, 'kg', 12, 50, 's', undefined),
+      new Set(20, 'kg', 12, 50, 's', undefined)
     ]);
 
     user.selectsExerciseInMuscleGroup('Dumbbell Bench Press');
     user.seesThatExerciseHasSets('Dumbbell Bench Press', [
-      {weight: 20, repetitions: 12, waitingTime: 50},
-      {weight: 20, repetitions: 12, waitingTime: 50},
-      {weight: 20, repetitions: 12, waitingTime: 50}
+      new Set(20, 'kg', 12, 50, 's', undefined),
+      new Set(20, 'kg', 12, 50, 's', undefined),
+      new Set(20, 'kg', 12, 50, 's', undefined)
     ]);
 
     user.selectsExerciseInMuscleGroup('Bench Press');
-    user.removesItemFromWorkoutTree('20-kg-12--50-s');
+    // todo fix this to add tree node instead of string
+    user.removesItemFromWorkoutTree(new Set(20, 'kg', 12, 50, 's', undefined).id);
 
     user.seesThatExerciseHasSets('Bench Press', [
-      {weight: 20, repetitions: 12, waitingTime: 50},
-      {weight: 20, repetitions: 12, waitingTime: 50}
+      new Set(20, 'kg', 12, 50, 's', undefined),
+      new Set(20, 'kg', 12, 50, 's', undefined)
     ]);
 
     user.selectsExerciseInMuscleGroup('Dumbbell Bench Press');
     user.seesThatExerciseHasSets('Dumbbell Bench Press', [
-      {weight: 20, repetitions: 12, waitingTime: 50},
-      {weight: 20, repetitions: 12, waitingTime: 50},
-      {weight: 20, repetitions: 12, waitingTime: 50}
+      new Set(20, 'kg', 12, 50, 's', undefined),
+      new Set(20, 'kg', 12, 50, 's', undefined),
+      new Set(20, 'kg', 12, 50, 's', undefined)
     ]);
   }));
 
