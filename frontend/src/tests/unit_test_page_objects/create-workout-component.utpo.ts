@@ -72,7 +72,7 @@ export class CreateWorkoutComponentPageObject {
 
   expectSelectableMuscleGroupsToContain(muscleGroupsArray: MuscleGroup[]) {
     muscleGroupsArray.forEach(muscleGroup => {
-      expect(new Button(this.findElement.by('#ft-select-' + ElementsToId.replace(muscleGroup.name) + '-button')).label)
+      expect(new Button(this.findElement.by('#ft-select-' + muscleGroup.id + '-button')).label)
         .toEqual(muscleGroup.name);
     });
   }
@@ -80,7 +80,7 @@ export class CreateWorkoutComponentPageObject {
   expectSelectableExercisesToContain(selectableExercises: Exercise[]) {
     selectableExercises.forEach(exercise => {
       expect(new Button(
-        this.findElement.by('#ft-select-' + ElementsToId.replace(exercise.name) + '-button')).label)
+        this.findElement.by('#ft-select-' + exercise.id + '-button')).label)
         .toEqual(exercise.name);
     });
   }
@@ -99,7 +99,7 @@ export class CreateWorkoutComponentPageObject {
   }
 
   expectWorkoutTreeToContain(workoutTreeElement: TreeNode, stringsItShouldContain: string[]) {
-    const selector = 'select-' + ElementsToId.replaceTreeNode(workoutTreeElement) + '-editable-node';
+    const selector = 'select-' + workoutTreeElement.id + '-editable-node';
     console.error('Button to select is: ' + selector);
     const treeNodeButton = new Button(this.findElement.byId(selector));
     for (const stringTheElementShouldContain of stringsItShouldContain) {

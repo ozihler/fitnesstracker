@@ -67,6 +67,16 @@ export abstract class TreeNode implements Cumulatable {
     return sizeOf(this.children);
   }
 
+  get id(): string {
+    if (Type.Workout === this.type) {
+      return 'root';
+    }
+    return this.name
+      .replace(/#+/g, '')
+      .replace(/[\s\,\.]+/g, '-')
+      .toLowerCase();
+  }
+
 
   set parent(value: TreeNode) {
     this._parent = value;

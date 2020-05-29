@@ -2,7 +2,6 @@ import {CreateWorkoutComponentPageObject, SetButtonValues} from '../unit_test_pa
 import {MuscleGroup} from '../../app/workout/shared/muscle-group';
 import {Exercise} from '../../app/workout/shared/exercise';
 import {Set} from '../../app/workout/shared/set';
-import {ElementsToId} from '../../app/workout/shared/elements-to-id';
 import {TreeNode} from '../../app/workout/create-edit-workout/workout-tree/tree-node';
 
 export class SetValues {
@@ -139,7 +138,7 @@ export class CreateWorkoutComponentUser {
 
 
   cannotSeeSetOfExerciseWithValues(set: Set) {
-    this.createWorkoutComponent.expectWorkoutTreeNotToContain(ElementsToId.replace(set.name));
+    this.createWorkoutComponent.expectWorkoutTreeNotToContain(set.id);
   }
 
   seesSetOfExercise(exerciseName: string, set: Set) {

@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {TreeNode} from '../workout-tree/tree-node';
 import {Type} from '../../shared/type';
-import {ElementsToId} from '../../shared/elements-to-id';
 
 @Component({
   selector: 'app-workout-tree',
@@ -99,18 +98,6 @@ export class WorkoutTreeComponent {
   }
 
   get nodeId() {
-    return (this.node?.isRoot ? 'root' : ElementsToId.replace(this.node?.name));
-  }
-
-  private formatParents(node: TreeNode) {
-    const nameConcat = '';
-    if (!node) {
-      return nameConcat;
-    }
-    if (!node.parent) {
-      return nameConcat;
-    } else {
-      return this.formatParents(node.parent) + '-' + ElementsToId.replace(node.name);
-    }
+    return this.node.id;
   }
 }
