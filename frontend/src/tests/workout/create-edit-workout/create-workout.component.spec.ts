@@ -132,18 +132,20 @@ describe('a create workout user', () => {
     user.seesSelectableMuscleGroups(muscleGroupsArray);
   }));
 
+  const workout = new Workout(WorkoutId.from('1-1'), new Date(), 'Workout', []);
+
   it('can add a single muscle group to a workout', fakeAsync(() => {
     const muscleGroupName = 'Chest';
     user.createsMuscleGroupsToSelect(muscleGroupName);
 
     user.choosesFromSelectableMuscleGroups(muscleGroupName);
     user.seesWorkoutTitleContains([Workout.WORKOUT_PREFIX, muscleGroupName]);
-    user.seesWorkoutContainsElementWith(undefined, [muscleGroupName, '(1)']);
+    user.seesWorkoutContainsElementWith(workout, [muscleGroupName, '(1)']);
     user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, muscleGroupName, []), [muscleGroupName, '(0)']);
     user.seesEmptyMuscleGroupsText();
   }));
 
-  fit('can add multiple muscle groups to a workout', fakeAsync(() => {
+  it('can add multiple muscle groups to a workout', fakeAsync(() => {
     const muscleGroupNames = 'Chest, Biceps, Triceps';
     const muscleGroupsArray = toMuscleGroups(muscleGroupNames);
     user.createsMuscleGroupsToSelect(muscleGroupNames);
@@ -152,7 +154,7 @@ describe('a create workout user', () => {
     user.choosesFromSelectableMuscleGroups(muscleGroupsArray[0].name);
     const titleElements = [muscleGroupsArray[0].name];
     user.seesWorkoutTitleContains(titleElements);
-    user.seesWorkoutContainsElementWith(undefined, [muscleGroupsArray[0].name, '(1)']);
+    user.seesWorkoutContainsElementWith(workout, [muscleGroupsArray[0].name, '(1)']);
     user.seesWorkoutContainsElementWith(muscleGroupsArray[0], [muscleGroupsArray[0].name, '(0)']);
     user.seesSelectableMuscleGroups([muscleGroupsArray[1], muscleGroupsArray[2]]);
 
@@ -160,7 +162,8 @@ describe('a create workout user', () => {
     user.choosesFromSelectableMuscleGroups(muscleGroupsArray[1].name);
     titleElements.push(muscleGroupsArray[1].name);
     user.seesWorkoutTitleContains(titleElements);
-    user.seesWorkoutContainsElementWith(undefined, [muscleGroupsArray[0].name, muscleGroupsArray[1].name, '(2)']);
+    user.seesWorkoutContainsElementWith(workout,
+      [muscleGroupsArray[0].name, muscleGroupsArray[1].name, '(2)']);
     user.seesWorkoutContainsElementWith(muscleGroupsArray[0], [muscleGroupsArray[0].name, '(0)']);
     user.seesWorkoutContainsElementWith(muscleGroupsArray[1], [muscleGroupsArray[1].name, '(0)']);
     user.seesSelectableMuscleGroups([muscleGroupsArray[2]]);
@@ -169,7 +172,7 @@ describe('a create workout user', () => {
     user.choosesFromSelectableMuscleGroups(muscleGroupsArray[2].name);
     titleElements.push(muscleGroupsArray[2].name);
     user.seesWorkoutTitleContains(titleElements);
-    user.seesWorkoutContainsElementWith(undefined,
+    user.seesWorkoutContainsElementWith(workout,
       [muscleGroupsArray[0].name, muscleGroupsArray[1].name, muscleGroupsArray[2].name, '(3)']);
     user.seesWorkoutContainsElementWith(muscleGroupsArray[0], [muscleGroupsArray[0].name, '(0)']);
     user.seesWorkoutContainsElementWith(muscleGroupsArray[1], [muscleGroupsArray[1].name, '(0)']);
@@ -186,7 +189,7 @@ describe('a create workout user', () => {
 
     let titleElements = [muscleGroupsArray[0].name, muscleGroupsArray[1].name];
     user.seesWorkoutTitleContains([...titleElements]);
-    user.seesWorkoutContainsElementWith(undefined, [...titleElements, '(2)']);
+    user.seesWorkoutContainsElementWith(workout, [...titleElements, '(2)']);
     user.seesWorkoutContainsElementWith(muscleGroupsArray[0], [muscleGroupsArray[0].name, '(0)']);
     user.seesWorkoutContainsElementWith(muscleGroupsArray[1], [muscleGroupsArray[1].name, '(0)']);
     user.seesEmptyMuscleGroupsText();
@@ -195,7 +198,7 @@ describe('a create workout user', () => {
     user.removesItemFromWorkoutTree(muscleGroupsArray[1].name);
     titleElements = titleElements.filter(m => m !== muscleGroupsArray[1].name);
     user.seesWorkoutTitleContains(titleElements);
-    user.seesWorkoutContainsElementWith(undefined, [...titleElements, '(1)']);
+    user.seesWorkoutContainsElementWith(workout, [...titleElements, '(1)']);
     user.seesWorkoutContainsElementWith(muscleGroupsArray[0], [muscleGroupsArray[0].name, '(0)']);
     user.seesSelectableMuscleGroups([muscleGroupsArray[1]]);
 
@@ -203,7 +206,7 @@ describe('a create workout user', () => {
     user.removesItemFromWorkoutTree(muscleGroupsArray[0].name);
     titleElements = titleElements.filter(m => m !== muscleGroupsArray[0].name); // empty array []
     user.seesWorkoutTitleContains(titleElements);
-    user.seesWorkoutContainsElementWith(undefined, [Workout.WORKOUT_INITIAL_TITLE, '(0)']);
+    user.seesWorkoutContainsElementWith(workout, [Workout.WORKOUT_INITIAL_TITLE, '(0)']);
     user.seesSelectableMuscleGroups([muscleGroupsArray[0], muscleGroupsArray[1]]);
   }));
 
@@ -280,7 +283,7 @@ describe('a create workout user', () => {
     user.selectsMuscleGroupInWorkout(muscleGroups[0].name);
     user.createsExercisesToSelect(exerciseNames);
     user.choosesFromSelectableExercises(exercises[0].name);
-    user.seesWorkoutContainsElementWith(exercises[0].name, ['(0)', exercises[0].name]);
+    user.seesWorkoutContainsElementWith(exercises[0], ['(0)', exercises[0].name]);
     user.selectsExerciseInMuscleGroup(exercises[0].name);
 
     user.configuresSetWithValues(weights, repetitions, waitingTimes);

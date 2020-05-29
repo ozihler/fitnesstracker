@@ -143,13 +143,12 @@ export class CreateWorkoutComponentUser {
   }
 
   seesSetOfExercise(exerciseName: string, set: Set) {
-    this.createWorkoutComponent.expectWorkoutTreeToContain(
-      ElementsToId.replace(set.name),
+    this.createWorkoutComponent.expectWorkoutTreeToContain(set,
       [set.weight.toString(), set.numberOfRepetitions.toString(), set.waitingTime.toString()]);
   }
 
   seesThatSetWasAddedToExercise(exerciseName: string, set: Set) {
-    this.createWorkoutComponent.expectWorkoutTreeToContain(ElementsToId.replace(set.name),
+    this.createWorkoutComponent.expectWorkoutTreeToContain(set,
       [set.weight.toString(), set.numberOfRepetitions.toString(), set.waitingTime.toString()]);
   }
 

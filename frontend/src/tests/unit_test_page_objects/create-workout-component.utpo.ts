@@ -99,7 +99,7 @@ export class CreateWorkoutComponentPageObject {
   }
 
   expectWorkoutTreeToContain(workoutTreeElement: TreeNode, stringsItShouldContain: string[]) {
-    const selector = 'select-' + ElementsToId.replace(workoutTreeElement.name) + '-editable-node';
+    const selector = 'select-' + ElementsToId.replaceTreeNode(workoutTreeElement) + '-editable-node';
     console.error('Button to select is: ' + selector);
     const treeNodeButton = new Button(this.findElement.byId(selector));
     for (const stringTheElementShouldContain of stringsItShouldContain) {

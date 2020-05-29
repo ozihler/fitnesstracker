@@ -139,26 +139,26 @@ describe('a user updating an existing workout', () => {
   });
 
   it('can remove muscle groups from workout', () => {
-    user.seesWorkoutContainsElementWith('chest', ['(1)', 'Chest', '1550 kg']);
-    user.seesWorkoutContainsElementWith('triceps', ['(0)', 'Triceps', '0 kg']);
+    user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Chest', []), ['(1)', 'Chest', '1550 kg']);
+    user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Triceps', []), ['(0)', 'Triceps', '0 kg']);
 
     user.selectsMuscleGroupInWorkout('chest');
-    user.seesWorkoutContainsElementWith('root', ['(2)', 'New Workout', '1550 kg']);
-    user.seesWorkoutContainsElementWith('chest', ['(1)', 'Chest', '1550 kg']);
-    user.seesWorkoutContainsElementWith('bench press', ['(3)', 'Bench Press', '1550 kg']);
-    user.seesWorkoutContainsElementWith('triceps', ['(0)', 'Triceps', '0 kg']);
+    user.seesWorkoutContainsElementWith(new Workout(WorkoutId.from('1-1'), new Date(), 'Workout', []), ['(2)', 'New Workout', '1550 kg']);
+    user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Chest', []), ['(1)', 'Chest', '1550 kg']);
+    user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Bench Press', []), ['(3)', 'Bench Press', '1550 kg']);
+    user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Triceps', []), ['(0)', 'Triceps', '0 kg']);
     user.removesItemFromWorkoutTree('chest');
-    user.seesWorkoutContainsElementWith('root', ['(1)', 'New Workout', '0 kg']);
+    user.seesWorkoutContainsElementWith(new Workout(WorkoutId.from('1-1'), new Date(), 'Workout', []), ['(1)', 'New Workout', '0 kg']);
     user.seesWorkoutDoesNotContain('chest');
   });
 
   it('can remove exercises from muscle group in workout', () => {
     user.selectsMuscleGroupInWorkout('chest');
-    user.seesWorkoutContainsElementWith('chest', ['(1)', 'Chest', '1550 kg']);
-    user.seesWorkoutContainsElementWith('bench press', ['(3)', 'Bench Press', '1550 kg']);
+    user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Chest', []), ['(1)', 'Chest', '1550 kg']);
+    user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Bench Press', []), ['(3)', 'Bench Press', '1550 kg']);
 
     user.removesItemFromWorkoutTree('bench press');
-    user.seesWorkoutContainsElementWith('chest', ['(0)', 'Chest', '0 kg']);
+    user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Chest', []), ['(0)', 'Chest', '0 kg']);
     user.seesWorkoutDoesNotContain('bench press');
   });
 
