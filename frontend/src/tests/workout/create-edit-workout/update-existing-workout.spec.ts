@@ -173,17 +173,17 @@ describe('a user updating an existing workout', () => {
     user.seesSetOfExercise('bench press', set2);
     user.seesSetOfExercise('bench press', set3);
 
-    user.removesItemFromWorkoutTree(ElementsToId.formatSet(set3));
+    user.removesItemFromWorkoutTree(ElementsToId.replace(set3.name));
     user.seesSetOfExercise('bench press', new Set(50, 'kg', 12, 50, 's', undefined));
     user.seesSetOfExercise('bench press', new Set(60, 'kg', 10, 50, 's', undefined));
     user.cannotSeeSetOfExerciseWithValues(set3);
 
-    user.removesItemFromWorkoutTree(ElementsToId.formatSet(set2));
+    user.removesItemFromWorkoutTree(ElementsToId.replace(set2.name));
     user.seesSetOfExercise('bench press', new Set(50, 'kg', 12, 50, 's', undefined));
     user.cannotSeeSetOfExerciseWithValues(set2);
     user.cannotSeeSetOfExerciseWithValues(set3);
 
-    user.removesItemFromWorkoutTree(ElementsToId.formatSet(set1));
+    user.removesItemFromWorkoutTree(ElementsToId.replace(set1.name));
     user.cannotSeeSetOfExerciseWithValues(set1);
     user.cannotSeeSetOfExerciseWithValues(set2);
     user.cannotSeeSetOfExerciseWithValues(set3);

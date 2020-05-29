@@ -10,6 +10,7 @@ import {Exercise} from '../../app/workout/shared/exercise';
 import {Set} from '../../app/workout/shared/set';
 import {Mark} from '../unit_test_page_elements/mark.utbp';
 import {SetValues} from '../unit_test_users/create-workout-component-user.utu';
+import {TreeNode} from '../../app/workout/create-edit-workout/workout-tree/tree-node';
 
 
 export class CreateWorkoutComponentPageObject {
@@ -97,8 +98,8 @@ export class CreateWorkoutComponentPageObject {
     selectElementButton.click();
   }
 
-  expectWorkoutTreeToContain(workoutTreeElementName: string, stringsItShouldContain: string[]) {
-    const selector = 'select-' + ElementsToId.replace(workoutTreeElementName) + '-editable-node';
+  expectWorkoutTreeToContain(workoutTreeElement: TreeNode, stringsItShouldContain: string[]) {
+    const selector = 'select-' + ElementsToId.replace(workoutTreeElement.name) + '-editable-node';
     console.error('Button to select is: ' + selector);
     const treeNodeButton = new Button(this.findElement.byId(selector));
     for (const stringTheElementShouldContain of stringsItShouldContain) {

@@ -3,6 +3,7 @@ import {MuscleGroup} from '../../app/workout/shared/muscle-group';
 import {Exercise} from '../../app/workout/shared/exercise';
 import {Set} from '../../app/workout/shared/set';
 import {ElementsToId} from '../../app/workout/shared/elements-to-id';
+import {TreeNode} from '../../app/workout/create-edit-workout/workout-tree/tree-node';
 
 export class SetValues {
   weight: number;
@@ -48,7 +49,7 @@ export class CreateWorkoutComponentUser {
     this.createWorkoutComponent.chooseSelectableElement(selectableExercise);
   }
 
-  seesWorkoutContainsElementWith(workoutTreeElementName: string, stringsItShouldContain: string[]) {
+  seesWorkoutContainsElementWith(workoutTreeElementName: TreeNode, stringsItShouldContain: string[]) {
     this.createWorkoutComponent.expectWorkoutTreeToContain(workoutTreeElementName, stringsItShouldContain);
   }
 
@@ -138,17 +139,17 @@ export class CreateWorkoutComponentUser {
 
 
   cannotSeeSetOfExerciseWithValues(set: Set) {
-    this.createWorkoutComponent.expectWorkoutTreeNotToContain(ElementsToId.formatSet(set));
+    this.createWorkoutComponent.expectWorkoutTreeNotToContain(ElementsToId.replace(set.name));
   }
 
   seesSetOfExercise(exerciseName: string, set: Set) {
     this.createWorkoutComponent.expectWorkoutTreeToContain(
-      ElementsToId.formatSet(set),
+      ElementsToId.replace(set.name),
       [set.weight.toString(), set.numberOfRepetitions.toString(), set.waitingTime.toString()]);
   }
 
   seesThatSetWasAddedToExercise(exerciseName: string, set: Set) {
-    this.createWorkoutComponent.expectWorkoutTreeToContain(ElementsToId.formatSet(set),
+    this.createWorkoutComponent.expectWorkoutTreeToContain(ElementsToId.replace(set.name),
       [set.weight.toString(), set.numberOfRepetitions.toString(), set.waitingTime.toString()]);
   }
 
