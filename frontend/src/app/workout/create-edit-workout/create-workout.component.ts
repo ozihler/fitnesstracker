@@ -82,7 +82,9 @@ export class CreateWorkoutComponent implements OnInit {
   removeNodeFromWorkout(nodeToDelete: TreeNode) {
     this.deleteMuscleGroupFromTitleIfItIsAMuscleGroup(nodeToDelete);
     this.workoutTree.delete(nodeToDelete.id);
-    this.selectableChildrenOfSelectedWorkoutTreeNode.push(nodeToDelete);
+    if ([Type.Muscle_Group, Type.Exercise].indexOf(nodeToDelete.type) > 0) {
+      this.selectableChildrenOfSelectedWorkoutTreeNode.push(nodeToDelete);
+    }
   }
 
   createSelectableElement(elements: string) {
