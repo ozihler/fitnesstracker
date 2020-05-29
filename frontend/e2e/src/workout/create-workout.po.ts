@@ -1,9 +1,9 @@
 import {Button} from '../page_elements/button.pe';
 import {InputField} from '../page_elements/input-field.pe';
 import {Span} from '../page_elements/span.pe';
-import {ReplacePipe} from '../../../src/app/workout/shared/pipes/replace.pipe';
 import {Set} from '../../../src/app/workout/shared/set';
 import {CumulatedWeight} from '../utils/cumulated-weight';
+import {ElementsToId} from '../../../src/app/workout/shared/elements-to-id';
 
 export class CreateWorkout {
 
@@ -20,10 +20,6 @@ export class CreateWorkout {
 
   private weightInputField = new InputField('weight-input');
   private repetitionsInputField = new InputField('repetitions-input');
-
-  private static format(value: string) {
-    return new ReplacePipe().transform(value, ' ', '-').toLowerCase();
-  }
 
   getWorkoutTitle() {
     return this.editWorkoutTitleButton.visibleTitleText();
@@ -46,19 +42,19 @@ export class CreateWorkout {
   }
 
   selectItem(item: string) {
-    return new Button('ft-select-' + CreateWorkout.format(item) + '-button').click();
+    return new Button('ft-select-' + ElementsToId.replace(item) + '-button').click();
   }
 
   deleteSelectableItem(item: string) {
-    return new Button('ft-delete-' + CreateWorkout.format(item) + '-button').click();
+    return new Button('ft-delete-' + ElementsToId.replace(item) + '-button').click();
   }
 
   getSelectableItemsAsButtons(selectableItems: string[]): Button[] {
-    return selectableItems.map(s => new Button('ft-select-' + CreateWorkout.format(s) + '-button'));
+    return selectableItems.map(s => new Button('ft-select-' + ElementsToId.replace(s) + '-button'));
   }
 
   selectWorkoutTreeNodeWithName(nodeName: string) {
-    return new Button('select-' + CreateWorkout.format(nodeName) + '-editable-node')
+    return new Button('select-' + ElementsToId.replace(nodeName) + '-editable-node')
       .clickIfUnselected();
   }
 
@@ -76,7 +72,7 @@ export class CreateWorkout {
   seesCorrectCumulatedWeightsFor(expectedValues: CumulatedWeight[]) {
     let promise;
     for (const expectedValue of expectedValues) {
-      const button = new Button('select-' + CreateWorkout.format(expectedValue.name) + '-editable-node');
+      const button = new Button('select-' + ElementsToId.replace(expectedValue.name) + '-editable-node');
       expect(button.visibleTitleText()).toContain('(' + expectedValue.expectedValue + ' kg)');
       promise = button.visibleTitleText(); // only here to return a promise
     }

@@ -48,10 +48,11 @@ describe('A workout user', () => {
       .then(() => user.seesThatMuscleGroupHasExercisesToSelect('Triceps', []))
       .then(() => user.seesEmptyElementsText());
 
+    const setToAdd = new Set(25, 'kg', 10, 0, 's', undefined);
     user.selectNodeInWorkoutTreeWithName('Chest')
-      .then(() => user.addsSetsTo('Dumbbell Bench Press', [new Set(25, 'kg', 10, 0, 's', undefined)]))
+      .then(() => user.addsSetsTo('Dumbbell Bench Press', [setToAdd]))
       .then(() => user.seesCumulatedWeights([
-        {name: '25-kg,-10-#,-0-s', expectedValue: 25 * 10, isRoot: false}, // todo fix this value (2) multiplier
+        {name: setToAdd.name, expectedValue: 25 * 10, isRoot: false}, // todo fix this value (2) multiplier
         {name: 'Dumbbell Bench Press', expectedValue: 25 * 10 * 2, isRoot: false},
         {name: 'Chest', expectedValue: 25 * 10 * 2, isRoot: false},
         {name: 'root', expectedValue: 25 * 10 * 2, isRoot: true},

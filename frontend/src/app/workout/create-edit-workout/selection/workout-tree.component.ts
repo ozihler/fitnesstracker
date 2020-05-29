@@ -99,26 +99,18 @@ export class WorkoutTreeComponent {
   }
 
   get nodeId() {
-    return (this.node?.isRoot ? 'root' : this.format(this.node?.name));
-  }
-
-  private format(name: any) {
-    console.error('name is ', name);
-    const nameAfterFormatting = ElementsToId.replace(name);
-
-    console.error('Name after formatting is ', nameAfterFormatting);
-    return nameAfterFormatting;
+    return (this.node?.isRoot ? 'root' : ElementsToId.replace(this.node?.name));
   }
 
   private formatParents(node: TreeNode) {
-    let nameConcat = '';
+    const nameConcat = '';
     if (!node) {
       return nameConcat;
     }
     if (!node.parent) {
       return nameConcat;
     } else {
-      return this.formatParents(node.parent) + '-' + this.format(node.name);
+      return this.formatParents(node.parent) + '-' + ElementsToId.replace(node.name);
     }
   }
 }
