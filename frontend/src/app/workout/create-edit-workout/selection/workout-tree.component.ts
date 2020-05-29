@@ -1,13 +1,14 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {TreeNode} from '../workout-tree/tree-node';
 import {Type} from '../../shared/type';
+import {ElementsToId} from '../../shared/elements-to-id';
 
 @Component({
   selector: 'app-workout-tree',
   template: `
     <div class="uk-grid uk-grid-collapse" *ngIf="node?.isEnabled">
       <button
-        id="select-{{(!node?.isRoot? (node?.name | replace: ',':''| replace: '#':''|replace: '.':'-'|replace : ' ': '-' |lowercase): 'root')}}-editable-node"
+        id="select-{{nodeId}}-editable-node"
         class="uk-button uk-text-truncate"
         [ngClass]="levelDependentClasses"
         [disabled]="node.isLeaf"
@@ -27,7 +28,7 @@ import {Type} from '../../shared/type';
       </button>
 
       <button
-        id="remove-node-{{(!node?.isRoot? (node?.name | replace: ',':''| replace: '#':''|replace: '.':'-'|replace : ' ': '-' |lowercase): 'root')}}-from-workout-tree"
+        id="remove-node-{{nodeId}}-from-workout-tree"
         class="uk-button uk-button-danger uk-width-1-3"
         *ngIf="!isWorkout()"
         (click)="removeFromWorkout(node)">
@@ -95,5 +96,29 @@ export class WorkoutTreeComponent {
 
   isWorkout() {
     return this.node && this.node.type === Type.Workout;
+  }
+
+  get nodeId() {
+    return (this.node?.isRoot ? 'root' : this.format(this.node?.name));
+  }
+
+  private format(name: any) {
+    console.error('name is ', name);
+    const nameAfterFormatting = ElementsToId.replace(name);
+
+    console.error('Name after formatting is ', nameAfterFormatting);
+    return nameAfterFormatting;
+  }
+
+  private formatParents(node: TreeNode) {
+    let nameConcat = '';
+    if (!node) {
+      return nameConcat;
+    }
+    if (!node.parent) {
+      return nameConcat;
+    } else {
+      return this.formatParents(node.parent) + '-' + this.format(node.name);
+    }
   }
 }

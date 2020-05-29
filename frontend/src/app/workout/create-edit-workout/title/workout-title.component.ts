@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 
+// todo split?
 @Component({
   selector: 'app-workout-title',
   template: `

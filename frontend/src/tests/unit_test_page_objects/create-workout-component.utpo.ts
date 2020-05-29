@@ -4,11 +4,12 @@ import {Button} from '../unit_test_page_elements/button.utpe';
 import {Span} from '../unit_test_page_elements/span.utbp';
 import {InputField} from '../unit_test_page_elements/input-field.utpe';
 import {MuscleGroup} from '../../app/workout/shared/muscle-group';
-import {ElementsToId} from './elements-to-id';
+import {ElementsToId} from '../../app/workout/shared/elements-to-id';
 import {FindElement} from './find-element';
 import {Exercise} from '../../app/workout/shared/exercise';
 import {Set} from '../../app/workout/shared/set';
 import {Mark} from '../unit_test_page_elements/mark.utbp';
+import {SetValues} from '../unit_test_users/create-workout-component-user.utu';
 
 
 export class CreateWorkoutComponentPageObject {
@@ -98,6 +99,7 @@ export class CreateWorkoutComponentPageObject {
 
   expectWorkoutTreeToContain(workoutTreeElementName: string, stringsItShouldContain: string[]) {
     const selector = 'select-' + ElementsToId.replace(workoutTreeElementName) + '-editable-node';
+    console.error('Button to select is: ' + selector);
     const treeNodeButton = new Button(this.findElement.byId(selector));
     for (const stringTheElementShouldContain of stringsItShouldContain) {
       expect(treeNodeButton.label).toContain(stringTheElementShouldContain);
@@ -184,6 +186,12 @@ export class CreateWorkoutComponentPageObject {
   expectWorkoutDateToBe(date: Date) {
     const dateString = new InputField(this.findElement.byId('workout-date-input-box')).input;
     expect(new Date(dateString).toDateString()).toEqual(date.toDateString());
+  }
+
+  expectExerciseToHaveSets(setValues: SetValues[]) {
+    const value = setValues[0];
+    expect(this.findElement.allWith(`#select-${value.weight}-kg-${value.repetitions}--${value.waitingTime}-s-editable-node`).length)
+      .toBe(setValues.length);
   }
 }
 

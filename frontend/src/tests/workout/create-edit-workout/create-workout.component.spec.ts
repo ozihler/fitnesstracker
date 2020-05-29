@@ -81,6 +81,7 @@ describe('a create workout user', () => {
 
     // todo maybe use spy for selectionService mock and override methods as needed...
     selectionServiceMock = {
+      fetchExercisesFor: (muscleGroup) => of([]),
       getMuscleGroups: () => of([]),
       newMuscleGroup: (muscleGroupNames: string) => of(toMuscleGroups(muscleGroupNames)),
       deleteMuscleGroup: (muscleGroupToDelete) => of(muscleGroupToDelete),
@@ -343,6 +344,60 @@ describe('a create workout user', () => {
     tick();
     user.opensWorkoutTitleAndDateEditing();
     user.seesWorkoutDateIs(oldDate);
+  }));
+
+  it('can remove any set without affecting other sets with the same values', fakeAsync(() => {
+    user.createsMuscleGroupsToSelect('Chest, Triceps');
+    user.choosesFromSelectableMuscleGroups('chest');
+    user.choosesFromSelectableMuscleGroups('triceps');
+    user.selectsMuscleGroupInWorkout('chest');
+    user.createsExercisesToSelect('Bench Press, Dumbbell Bench Press');
+    user.choosesFromSelectableExercises('Bench Press');
+    user.choosesFromSelectableExercises('Dumbbell Bench Press');
+    user.selectsExerciseInMuscleGroup('Bench Press');
+    user.configuresSetByDirectInputtingValues(20, 12, 50);
+    user.addsSetToExercise();
+    user.configuresSetByDirectInputtingValues(20, 12, 50);
+    user.addsSetToExercise();
+    user.configuresSetByDirectInputtingValues(20, 12, 50);
+    user.addsSetToExercise();
+    user.selectsExerciseInMuscleGroup('Dumbbell Bench Press');
+    user.configuresSetByDirectInputtingValues(20, 12, 50);
+    user.addsSetToExercise();
+    user.configuresSetByDirectInputtingValues(20, 12, 50);
+    user.addsSetToExercise();
+    user.configuresSetByDirectInputtingValues(20, 12, 50);
+    user.addsSetToExercise();
+
+
+    user.selectsExerciseInMuscleGroup('Bench Press');
+    user.seesThatExerciseHasSets('Bench Press', [
+      {weight: 20, repetitions: 12, waitingTime: 50},
+      {weight: 20, repetitions: 12, waitingTime: 50},
+      {weight: 20, repetitions: 12, waitingTime: 50}
+    ]);
+
+    user.selectsExerciseInMuscleGroup('Dumbbell Bench Press');
+    user.seesThatExerciseHasSets('Dumbbell Bench Press', [
+      {weight: 20, repetitions: 12, waitingTime: 50},
+      {weight: 20, repetitions: 12, waitingTime: 50},
+      {weight: 20, repetitions: 12, waitingTime: 50}
+    ]);
+
+    user.selectsExerciseInMuscleGroup('Bench Press');
+    user.removesItemFromWorkoutTree('20-kg-12--50-s');
+
+    user.seesThatExerciseHasSets('Bench Press', [
+      {weight: 20, repetitions: 12, waitingTime: 50},
+      {weight: 20, repetitions: 12, waitingTime: 50}
+    ]);
+
+    user.selectsExerciseInMuscleGroup('Dumbbell Bench Press');
+    user.seesThatExerciseHasSets('Dumbbell Bench Press', [
+      {weight: 20, repetitions: 12, waitingTime: 50},
+      {weight: 20, repetitions: 12, waitingTime: 50},
+      {weight: 20, repetitions: 12, waitingTime: 50}
+    ]);
   }));
 
 });

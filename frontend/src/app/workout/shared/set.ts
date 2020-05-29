@@ -1,6 +1,7 @@
 import {TreeNode} from '../create-edit-workout/workout-tree/tree-node';
 import {Type} from './type';
 import {Exercise} from './exercise';
+import {SetFormatPipe} from './pipes/set-format.pipe';
 
 export class Set extends TreeNode {
 
@@ -11,11 +12,7 @@ export class Set extends TreeNode {
     private _waitingTime: number,
     private _waitingTimeUnit: string,
     parent: Exercise) {
-    super(parent, `${Set.formatEntries(_numberOfRepetitions, _weight, _weightUnit, _waitingTime, _waitingTimeUnit)}`, undefined);
-  }
-
-  cumulateWeight(): number {
-    return this.weight * this.numberOfRepetitions /* *this.multiplier*/;
+    super(parent, ``, undefined);
   }
 
   get type(): Type {
@@ -42,9 +39,11 @@ export class Set extends TreeNode {
     return this._waitingTimeUnit;
   }
 
-  static formatEntries(repetitions, weight: number, unitOfMeasurement: string, waitingTime: number, unitOfTime: string) {
-    return `${weight} ${unitOfMeasurement}, ${repetitions} #, ${waitingTime} ${unitOfTime}`;
+  get name(): any {
+    return new SetFormatPipe().transform(this);
   }
 
-
+  cumulateWeight(): number {
+    return this.weight * this.numberOfRepetitions /* *this.multiplier*/;
+  }
 }
