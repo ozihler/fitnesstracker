@@ -49,8 +49,8 @@ export class CreateWorkoutComponent implements OnInit {
   workoutTree: WorkoutTree;
   selectableChildrenOfSelectedWorkoutTreeNode: TreeNode[] = [];
 
-  private static isSelectableElement(selectedElement: TreeNode) {
-    return selectedElement.type !== Type.Set;
+  private static isSelectableItem(nodeToDelete: TreeNode) {
+    return [Type.Muscle_Group, Type.Exercise].indexOf(nodeToDelete.type) >= 0;
   }
 
   ngOnInit() {
@@ -82,7 +82,7 @@ export class CreateWorkoutComponent implements OnInit {
   removeNodeFromWorkout(nodeToDelete: TreeNode) {
     this.deleteMuscleGroupFromTitleIfItIsAMuscleGroup(nodeToDelete);
     this.workoutTree.delete(nodeToDelete.id);
-    if ([Type.Muscle_Group, Type.Exercise].indexOf(nodeToDelete.type) > 0) {
+    if (CreateWorkoutComponent.isSelectableItem(nodeToDelete)) {
       this.selectableChildrenOfSelectedWorkoutTreeNode.push(nodeToDelete);
     }
   }
@@ -112,7 +112,7 @@ export class CreateWorkoutComponent implements OnInit {
     const addedNode = this.workoutTree.addNode(selectedElement);
 
     if (addedNode) {
-      if (CreateWorkoutComponent.isSelectableElement(selectedElement)) {
+      if (CreateWorkoutComponent.isSelectableItem(selectedElement)) {
         this.removeFromSelectableElements(selectedElement);
       }
 
