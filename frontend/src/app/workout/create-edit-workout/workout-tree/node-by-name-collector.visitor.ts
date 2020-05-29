@@ -21,7 +21,7 @@ export class NodeByNameCollectorVisitor implements NodeVisitor {
   }
 
   visit(node: TreeNode) {
-    if (node.name === this.nodeName) {
+    if (node.id === this.nodeName) {
       this.foundNode = node;
       return;
     }

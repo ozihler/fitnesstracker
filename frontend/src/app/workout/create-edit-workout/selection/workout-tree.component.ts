@@ -90,6 +90,7 @@ export class WorkoutTreeComponent {
   }
 
   removeFromWorkout(node: TreeNode) {
+    console.log('Remove from workout: ', node.id);
     this.removeFromWorkoutEvent.emit(node);
   }
 

@@ -6,7 +6,6 @@ import {Set} from '../../../../app/workout/shared/set';
 import {MuscleGroup} from '../../../../app/workout/shared/muscle-group';
 import {Exercise} from '../../../../app/workout/shared/exercise';
 import {TreeNode} from '../../../../app/workout/create-edit-workout/workout-tree/tree-node';
-import {SetFormatPipe} from '../../../../app/workout/shared/pipes/set-format.pipe';
 
 describe('Workout Tree', () => {
 
@@ -24,26 +23,26 @@ describe('Workout Tree', () => {
     const muscleGroup = new MuscleGroup(undefined, 'Chest', []);
     workoutTree.addNode(muscleGroup);
 
-    const nodeOfMuscleGroup = workoutTree.findNodeByName('Chest');
-    expect(nodeOfMuscleGroup.name).toBe('Chest');
-    expect(nodeOfMuscleGroup.type).toBe(Type.Muscle_Group);
+    const nodeOfMuscleGroup = workoutTree.findNodeById(muscleGroup.id);
+    expect(nodeOfMuscleGroup.name).toBe(muscleGroup.name);
+    expect(nodeOfMuscleGroup.type).toBe(muscleGroup.type);
     expect(nodeOfMuscleGroup.parent.name).toBe(workout.name);
 
     const exercise = new Exercise(muscleGroup, 'Bench Press', []);
     workoutTree.addNode(exercise);
 
-    const nodeOfExercise = workoutTree.findNodeByName('Bench Press');
-    expect(nodeOfExercise.name).toBe('Bench Press');
-    expect(nodeOfExercise.type).toBe(Type.Exercise);
+    const nodeOfExercise = workoutTree.findNodeById(exercise.id);
+    expect(nodeOfExercise.name).toBe(exercise.name);
+    expect(nodeOfExercise.type).toBe(exercise.type);
     expect(nodeOfExercise.parent.name).toBe(muscleGroup.name);
 
 
     const set = new Set(50, 'kg', 12, 45, 's', exercise);
     workoutTree.addNode(set);
 
-    const setInExercise = workoutTree.findNodeByName(new SetFormatPipe().transform(set));
+    const setInExercise = workoutTree.findNodeById(set.id);
     expect(setInExercise.parent.name).toBe(exercise.name);
-    expect(setInExercise.type).toBe(Type.Set);
+    expect(setInExercise.type).toBe(set.type);
   });
 
   it('should correctly delete sets', () => {
@@ -57,41 +56,43 @@ describe('Workout Tree', () => {
                  /\          /        /  \         \
                set set1    set2   set3  set4      set5
        */
-    const {workout, chest, benchPress, set, set1, dumbbellBP, set2, triceps, latPull, set3, set4, overheadLatPull, set5, workoutTree} = createSimpleTree();
-      workoutTree.select(set.name);
+      const {workout, chest, benchPress, set, set1, dumbbellBP, set2, triceps, latPull, set3, set4, overheadLatPull, set5, workoutTree}
+        = createSimpleTree();
+      workoutTree.select(set.id);
 
 
-      expect(workoutTree.findNodeByName(set2.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(latPull.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(set3.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(set4.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(overheadLatPull.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(set5.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(workout.name)).toBeDefined();
+      expect(workoutTree.findNodeById(set2.id)).toBeDefined();
+      expect(workoutTree.findNodeById(latPull.id)).toBeDefined();
+      expect(workoutTree.findNodeById(set3.id)).toBeDefined();
+      expect(workoutTree.findNodeById(set4.id)).toBeDefined();
+      expect(workoutTree.findNodeById(overheadLatPull.id)).toBeDefined();
+      expect(workoutTree.findNodeById(set5.id)).toBeDefined();
+      expect(workoutTree.findNodeById(workout.id)).toBeDefined();
 
-      expect(workoutTree.findNodeByName(chest.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(triceps.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(benchPress.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(dumbbellBP.name)).toBeDefined();
-    expect(workoutTree.findNodeByName(set1.name)).toBeDefined();
-    expect(workoutTree.findNodeByName(set.name).isEnabled).toBe(true);
+      expect(workoutTree.findNodeById(chest.id)).toBeDefined();
+      expect(workoutTree.findNodeById(triceps.id)).toBeDefined();
+      expect(workoutTree.findNodeById(benchPress.id)).toBeDefined();
+      expect(workoutTree.findNodeById(dumbbellBP.id)).toBeDefined();
+      expect(workoutTree.findNodeById(set1.id)).toBeDefined();
+      expect(workoutTree.findNodeById(set.id).isEnabled).toBe(true);
 
-      workoutTree.delete(set.name);
+      workoutTree.delete(set.id);
 
-      expect(workoutTree.findNodeByName(set2.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(latPull.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(set3.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(set4.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(overheadLatPull.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(set5.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(workout.name)).toBeDefined();
+      expect(workoutTree.findNodeById(set2.id)).toBeDefined();
+      expect(workoutTree.findNodeById(latPull.id)).toBeDefined();
+      expect(workoutTree.findNodeById(set3.id)).toBeDefined();
+      expect(workoutTree.findNodeById(set4.id)).toBeDefined();
+      expect(workoutTree.findNodeById(overheadLatPull.id)).toBeDefined();
+      expect(workoutTree.findNodeById(set5.id)).toBeDefined();
+      expect(workoutTree.findNodeById(workout.id)).toBeDefined();
 
-      expect(workoutTree.findNodeByName(chest.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(triceps.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(benchPress.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(dumbbellBP.name)).toBeDefined();
-    expect(workoutTree.findNodeByName(set1.name)).toBeDefined();
-    expect(workoutTree.findNodeByName(set.name)).not.toBeDefined();
+      expect(workoutTree.findNodeById(chest.id)).toBeDefined();
+      expect(workoutTree.findNodeById(triceps.id)).toBeDefined();
+      expect(workoutTree.findNodeById(benchPress.id)).toBeDefined();
+      expect(workoutTree.findNodeById(dumbbellBP.id)).toBeDefined();
+      expect(workoutTree.findNodeById(set1.id)).toBeDefined();
+      expect(workoutTree.findNodeById(set.id)).not.toBeDefined();
+      console.log('workout tree\n', workoutTree);
 
     }
   );
@@ -110,46 +111,46 @@ describe('Workout Tree', () => {
                  /\          /        /  \         \
                set set1    set2   set3  set4      set5
        */
-    const {workout, chest, benchPress, set, set1, dumbbellBP, set2, triceps, latPull, set3, set4, overheadLatPull, set5, workoutTree} = createSimpleTree();
-      workoutTree.select(chest.name);
+      const {workout, chest, benchPress, set, set1, dumbbellBP, set2, triceps, latPull, set3, set4, overheadLatPull, set5, workoutTree} = createSimpleTree();
+      workoutTree.select(chest.id);
 
 
-      expect(workoutTree.findNodeByName(set2.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(set3.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(set4.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(set5.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(latPull.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(overheadLatPull.name)).toBeDefined();
+      expect(workoutTree.findNodeById(set2.id)).toBeDefined();
+      expect(workoutTree.findNodeById(set3.id)).toBeDefined();
+      expect(workoutTree.findNodeById(set4.id)).toBeDefined();
+      expect(workoutTree.findNodeById(set5.id)).toBeDefined();
+      expect(workoutTree.findNodeById(latPull.id)).toBeDefined();
+      expect(workoutTree.findNodeById(overheadLatPull.id)).toBeDefined();
 
-      expect(workoutTree.findNodeByName(workout.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(chest.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(triceps.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(benchPress.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(dumbbellBP.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(set1.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(set.name)).toBeDefined();
+      expect(workoutTree.findNodeById(workout.id)).toBeDefined();
+      expect(workoutTree.findNodeById(chest.id)).toBeDefined();
+      expect(workoutTree.findNodeById(triceps.id)).toBeDefined();
+      expect(workoutTree.findNodeById(benchPress.id)).toBeDefined();
+      expect(workoutTree.findNodeById(dumbbellBP.id)).toBeDefined();
+      expect(workoutTree.findNodeById(set1.id)).toBeDefined();
+      expect(workoutTree.findNodeById(set.id)).toBeDefined();
 
-      workoutTree.delete(chest.name);
+      workoutTree.delete(chest.id);
 
-      expect(workoutTree.findNodeByName(workout.name)).toBeDefined();
+      expect(workoutTree.findNodeById(workout.id)).toBeDefined();
 
       // Remove chest sub tree
-      expect(workoutTree.findNodeByName(chest.name)).not.toBeDefined();
-      expect(workoutTree.findNodeByName(benchPress.name)).not.toBeDefined();
-      expect(workoutTree.findNodeByName(dumbbellBP.name)).not.toBeDefined();
-      expect(workoutTree.findNodeByName(set1.name)).not.toBeDefined();
-    expect(workoutTree.findNodeByName(set2.name)).not.toBeDefined();
-    expect(workoutTree.findNodeByName(set.name)).not.toBeDefined();
+      expect(workoutTree.findNodeById(chest.id)).not.toBeDefined();
+      expect(workoutTree.findNodeById(benchPress.id)).not.toBeDefined();
+      expect(workoutTree.findNodeById(dumbbellBP.id)).not.toBeDefined();
+      expect(workoutTree.findNodeById(set1.id)).not.toBeDefined();
+      expect(workoutTree.findNodeById(set2.id)).not.toBeDefined();
+      expect(workoutTree.findNodeById(set.id)).not.toBeDefined();
 
       // enable triceps
-      expect(workoutTree.findNodeByName(triceps.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(latPull.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(overheadLatPull.name)).toBeDefined();
+      expect(workoutTree.findNodeById(triceps.id)).toBeDefined();
+      expect(workoutTree.findNodeById(latPull.id)).toBeDefined();
+      expect(workoutTree.findNodeById(overheadLatPull.id)).toBeDefined();
 
       // disable children of exercises of triceps
-      expect(workoutTree.findNodeByName(set3.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(set4.name)).toBeDefined();
-      expect(workoutTree.findNodeByName(set5.name)).toBeDefined();
+      expect(workoutTree.findNodeById(set3.id)).toBeDefined();
+      expect(workoutTree.findNodeById(set4.id)).toBeDefined();
+      expect(workoutTree.findNodeById(set5.id)).toBeDefined();
     }
   );
 
@@ -164,18 +165,18 @@ describe('Workout Tree', () => {
                  /\          /        /  \         \
                set set1    set2   set3  set4      set5
        */
-    const {workout, chest, benchPress, set, set1, dumbbellBP, set2, triceps, latPull, set3, set4, overheadLatPull, set5, workoutTree} = createSimpleTree();
-      workoutTree.select(latPull.name);
+      const {workout, chest, benchPress, set, set1, dumbbellBP, set2, triceps, latPull, set3, set4, overheadLatPull, set5, workoutTree} = createSimpleTree();
+      workoutTree.select(latPull.id);
 
-      expect(workoutTree.findNodeByName(benchPress.name)).toBeDefined();
+      expect(workoutTree.findNodeById(benchPress.id)).toBeDefined();
 
-      workoutTree.delete(benchPress.name);
+      workoutTree.delete(benchPress.id);
 
 
       // Remove bench press sub tree
-      expect(workoutTree.findNodeByName(benchPress.name)).not.toBeDefined();
-      expect(workoutTree.findNodeByName(set.name)).not.toBeDefined();
-      expect(workoutTree.findNodeByName(set1.name)).not.toBeDefined();
+      expect(workoutTree.findNodeById(benchPress.id)).not.toBeDefined();
+      expect(workoutTree.findNodeById(set.id)).not.toBeDefined();
+      expect(workoutTree.findNodeById(set1.id)).not.toBeDefined();
 
     }
   );
@@ -196,7 +197,7 @@ describe('Workout Tree', () => {
           set set1    set2       set3  set4      set5
    */
 
-    workoutTree.enable(workout.name);
+    workoutTree.enable(workout.id);
     assertDisabled([benchPress, set, set1, dumbbellBP, set2, latPull, set3, set4, overheadLatPull, set5]);
     assertEnabled([workout, chest, triceps]);
     //
@@ -211,7 +212,7 @@ describe('Workout Tree', () => {
     //        set set1    set2       set3  set4      set5
     // */
     //
-    workoutTree.enable(chest.name);
+    workoutTree.enable(chest.id);
     assertDisabled([set, set1, set2, latPull, set3, set4, overheadLatPull, set5]);
     assertEnabled([workout, chest, triceps, benchPress, dumbbellBP]);
     //  /*
@@ -225,7 +226,7 @@ describe('Workout Tree', () => {
     //      -set -set1    set2       set3  set4      set5
     // */
     //
-    workoutTree.enable(benchPress.name);
+    workoutTree.enable(benchPress.id);
     assertDisabled([set2, latPull, set3, set4, overheadLatPull, set5]);
     assertEnabled([workout, chest, dumbbellBP, set, set1, benchPress, triceps]);
     //
@@ -240,7 +241,7 @@ describe('Workout Tree', () => {
     //           /\          /        /  \         \
     //        set set1    set2    -set3  set4[x]   set5
     // */
-    workoutTree.enable(set4.name);
+    workoutTree.enable(set4.id);
     assertDisabled([benchPress, set, set1, dumbbellBP, set2, set5]);
     assertEnabled([workout, chest, triceps, latPull, set3, set4, overheadLatPull]);
   });
@@ -259,19 +260,19 @@ describe('Workout Tree', () => {
 
     const chest = new MuscleGroup(workout, 'Chest', []);
     const benchPress = new Exercise(chest, 'Bench Press', []);
-    const set = new Set(50, 'kg', 12, 55, 's', benchPress);
-    const set1 = new Set(50, 'kg', 12, 60, 's', benchPress);
+    const set = new Set(50, 'kg', 12, 55, 's', benchPress, 0);
+    const set1 = new Set(50, 'kg', 12, 60, 's', benchPress, 1);
 
     const dumbbellBP = new Exercise(chest, 'Dumbbell Bench Press', []);
-    const set2 = new Set(50, 'kg', 12, 50, 's', dumbbellBP);
+    const set2 = new Set(50, 'kg', 12, 50, 's', dumbbellBP, 0);
 
     const triceps = new MuscleGroup(workout, 'Triceps', []);
     const latPull = new Exercise(triceps, 'Lat Pull', []);
-    const set3 = new Set(20, 'kg', 12, 45, 's', latPull);
-    const set4 = new Set(15, 'kg', 12, 55, 's', latPull);
+    const set3 = new Set(20, 'kg', 12, 45, 's', latPull, 0);
+    const set4 = new Set(15, 'kg', 12, 55, 's', latPull, 1);
 
     const overheadLatPull = new Exercise(triceps, 'Overhead Lat Pull', []);
-    const set5 = new Set(10, 'kg', 12, 40, 's', overheadLatPull);
+    const set5 = new Set(10, 'kg', 12, 40, 's', overheadLatPull, 0);
 
     const workoutTree = new WorkoutTree(workout);
     workoutTree.addNode(chest);

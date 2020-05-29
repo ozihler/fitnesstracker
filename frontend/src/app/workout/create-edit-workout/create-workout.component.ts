@@ -67,7 +67,7 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
   changeTreeNode(node: TreeNode) {
-    this.workoutTree.select(node.name);
+    this.workoutTree.select(node.id);
     this.fetchChildrenOf(node);
   }
 
@@ -80,8 +80,8 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
   removeNodeFromWorkout(nodeToDelete: TreeNode) {
-    this.deleteMuscleGroupFromTitle(nodeToDelete);
-    this.workoutTree.delete(nodeToDelete.name);
+    this.deleteMuscleGroupFromTitleIfItIsAMuscleGroup(nodeToDelete);
+    this.workoutTree.delete(nodeToDelete.id);
     this.selectableChildrenOfSelectedWorkoutTreeNode.push(nodeToDelete);
   }
 
@@ -123,7 +123,7 @@ export class CreateWorkoutComponent implements OnInit {
     this.workoutService.updateWorkout(this.workoutTree.root)
       .subscribe(workout => {
         this.workoutTree.root = workout;
-        this.workoutTree.enable(selectedElement.name);
+        this.workoutTree.enable(selectedElement.id);
       });
   }
 
@@ -202,7 +202,7 @@ export class CreateWorkoutComponent implements OnInit {
       });
   }
 
-  private deleteMuscleGroupFromTitle(element: TreeNode) {
+  private deleteMuscleGroupFromTitleIfItIsAMuscleGroup(element: TreeNode) {
     this.workoutTree.root.name = this.workoutTree.root.name.replace(element.name, ``).trim();
     if (this.workoutTree.root.name.replace(Workout.WORKOUT_PREFIX, '').trim().length === 0) {
       this.workoutTree.root.name = Workout.WORKOUT_INITIAL_TITLE;

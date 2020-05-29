@@ -7,7 +7,7 @@ import {Type} from '../../shared/type';
 
 export class WorkoutTree {
   constructor(private _root: Workout) {
-    this.select(_root.name);
+    this.select(_root.id);
   }
 
   private _currentSelection: TreeNode;
@@ -36,14 +36,14 @@ export class WorkoutTree {
     return this.currentSelection.children && this.currentSelection.children.some(value => value.isEnabled);
   }
 
-  enable(nodeName: string): void {
-    if (!nodeName) {
+  enable(nodeId: string): void {
+    if (!nodeId) {
       return;
     }
 
     this.disableAllNodes();
 
-    const enableNodeVisitor = EnableNodeVisitor.find(nodeName, this.root);
+    const enableNodeVisitor = EnableNodeVisitor.find(nodeId, this.root);
 
     enableNodeVisitor.enableNodes();
   }
@@ -57,7 +57,7 @@ export class WorkoutTree {
     if (nodeToAdd.type === Type.Muscle_Group) {
       return this.link(nodeToAdd, this.root);
     }
-    const foundParentOfNode = this.findNodeByName(nodeToAdd.parent.name);
+    const foundParentOfNode = this.findNodeById(nodeToAdd.parent.id);
     if (foundParentOfNode) {
       return this.link(nodeToAdd, foundParentOfNode);
     } else {
@@ -65,40 +65,40 @@ export class WorkoutTree {
     }
   }
 
-  findNodeByName(nodeName: string): TreeNode {
-    const nodeByNameCollectorVisitor = new NodeByNameCollectorVisitor(nodeName);
+  findNodeById(nodeId: string): TreeNode {
+    const nodeByNameCollectorVisitor = new NodeByNameCollectorVisitor(nodeId);
     this.root.accept(nodeByNameCollectorVisitor);
     return nodeByNameCollectorVisitor.foundNode;
   }
 
-  select(nodeName: string) {
-    this.currentSelection = this.findNodeByName(nodeName);
+  select(nodeId: string) {
+    this.currentSelection = this.findNodeById(nodeId);
 
     if (this.currentSelection.isEnabled && this.someChildrenAreEnabled) {
       this.disableChildrenOf(this.currentSelection);
     } else {
-      this.enable(this.currentSelection.name);
+      this.enable(this.currentSelection.id);
     }
   }
 
-  private link(nodeToAdd: TreeNode, parent: TreeNode) {
-    nodeToAdd.linkToParent(parent);
-    this.enable(nodeToAdd.name);
-    return true;
+  delete(nodeId: string) {
+    const treeNode = this.findNodeById(nodeId);
+    console.log('delete found tree node: ', treeNode);
+    this.removeFromParent(treeNode);
+
+    if (treeNode.parent) {
+      this.currentSelection = treeNode.parent;
+    }
   }
 
   private disableChildrenOf(currentSelection: TreeNode) {
     currentSelection.children.forEach(child => child.accept(new DisableAllNodesVisitor()));
   }
 
-  delete(nodeName: string) {
-    const treeNode = this.findNodeByName(nodeName);
-
-    this.removeFromParent(treeNode);
-
-    if (treeNode.parent) {
-      this.currentSelection = treeNode.parent;
-    }
+  private link(nodeToAdd: TreeNode, parent: TreeNode) {
+    nodeToAdd.linkToParent(parent);
+    this.enable(nodeToAdd.id);
+    return true;
   }
 
   private isSet(treeNode: TreeNode) {

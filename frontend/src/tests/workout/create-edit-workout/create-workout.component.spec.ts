@@ -351,7 +351,7 @@ describe('a create workout user', () => {
     user.seesWorkoutDateIs(oldDate);
   }));
 
-  fit('can remove any set without affecting other sets with the same values', fakeAsync(() => {
+  it('can remove any set without affecting other sets with the same values', fakeAsync(() => {
     user.createsMuscleGroupsToSelect('Chest, Triceps');
     user.choosesFromSelectableMuscleGroups('chest');
     user.choosesFromSelectableMuscleGroups('triceps');

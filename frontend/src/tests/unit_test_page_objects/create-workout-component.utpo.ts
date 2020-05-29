@@ -93,7 +93,10 @@ export class CreateWorkoutComponentPageObject {
 
   removeSelectedElementFromWorkoutTree(selectedElementToRemove: TreeNode) {
     console.log('Remove ', selectedElementToRemove.id);
-    const selectElementButton = new Button(this.findElement.byId('remove-node-' + selectedElementToRemove.id + '-from-workout-tree'));
+    const button = this.findElement.byId('remove-node-' + selectedElementToRemove.id + '-from-workout-tree');
+    console.log('Remove ', button);
+    const selectElementButton = new Button(button);
+    console.log('Remove button, ', selectElementButton);
     selectElementButton.click();
   }
 

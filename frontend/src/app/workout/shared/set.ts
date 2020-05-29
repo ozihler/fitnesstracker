@@ -45,12 +45,11 @@ export class Set extends TreeNode {
   }
 
   get id(): string {
-    let idString = '';
-    idString += this._index_in_exercise + '-';
+    let idString = 'set-';
+    idString += (this._index_in_exercise + 1);
     if (this.parent) {
-      idString += this.parent.id + '-';
+      idString += '-of-' + this.parent.id;
     }
-    idString += super.id;
     return idString;
   }
 
