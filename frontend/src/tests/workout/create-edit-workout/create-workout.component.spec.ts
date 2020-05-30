@@ -352,21 +352,22 @@ describe('a create workout user', () => {
   }));
 
   it('can remove any set without affecting other sets with the same values', fakeAsync(() => {
+
+    user.seesWorkoutContainsElementWith(workout, ['(0)']);
     user.createsMuscleGroupsToSelect('Chest, Triceps');
     user.choosesFromSelectableMuscleGroups('chest');
+    user.seesWorkoutContainsElementWith(workout, ['(1)']);
     user.choosesFromSelectableMuscleGroups('triceps');
+    user.seesWorkoutContainsElementWith(workout, ['(2)']);
     user.selectsMuscleGroupInWorkout('chest');
     user.createsExercisesToSelect('Bench Press, Dumbbell Bench Press');
     user.choosesFromSelectableExercises('Bench Press');
+    user.seesWorkoutContainsElementWith(workout, ['(2)']);
+    user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Chest'), ['(1)']);
     user.choosesFromSelectableExercises('Dumbbell Bench Press');
+    user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Chest'), ['(2)']);
     user.selectsExerciseInMuscleGroup('Bench Press');
-    user.configuresSetByDirectInputtingValues(20, 12, 50);
-    user.addsSetToExercise();
-    user.configuresSetByDirectInputtingValues(20, 12, 50);
-    user.addsSetToExercise();
-    user.configuresSetByDirectInputtingValues(20, 12, 50);
-    user.addsSetToExercise();
-    user.selectsExerciseInMuscleGroup('Dumbbell Bench Press');
+    user.seesWorkoutContainsElementWith(new Exercise(undefined, 'Bench Press'), ['(0)']);
     user.configuresSetByDirectInputtingValues(20, 12, 50);
     user.addsSetToExercise();
     user.configuresSetByDirectInputtingValues(20, 12, 50);
@@ -374,6 +375,19 @@ describe('a create workout user', () => {
     user.configuresSetByDirectInputtingValues(20, 12, 50);
     user.addsSetToExercise();
 
+    user.seesWorkoutContainsElementWith(workout, ['(2)', (3 * 20 * 12) + '']);
+    user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Chest'), ['(2)', (3 * 20 * 12) + '']);
+    user.seesWorkoutContainsElementWith(new Exercise(undefined, 'Bench Press'), ['(3)', (3 * 20 * 12) + '']);
+
+    user.selectsExerciseInMuscleGroup('Dumbbell Bench Press');
+    user.seesWorkoutContainsElementWith(new Exercise(undefined, 'Dumbbell Bench Press'), ['(0)']);
+    user.configuresSetByDirectInputtingValues(20, 12, 50);
+    user.addsSetToExercise();
+    user.configuresSetByDirectInputtingValues(20, 12, 50);
+    user.addsSetToExercise();
+    user.configuresSetByDirectInputtingValues(20, 12, 50);
+    user.addsSetToExercise();
+    user.seesWorkoutContainsElementWith(new Exercise(undefined, 'Dumbbell Bench Press'), ['(3)', (3 * 20 * 12) + '']);
 
     const benchPressExercise = new Exercise(
       new MuscleGroup(undefined, 'Chest', []),
