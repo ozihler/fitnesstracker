@@ -362,32 +362,22 @@ describe('a create workout user', () => {
     user.selectsMuscleGroupInWorkout('chest');
     user.createsExercisesToSelect('Bench Press, Dumbbell Bench Press');
     user.choosesFromSelectableExercises('Bench Press');
-    user.seesWorkoutContainsElementWith(workout, ['(2)']);
-    user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Chest'), ['(1)']);
     user.choosesFromSelectableExercises('Dumbbell Bench Press');
-    user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Chest'), ['(2)']);
     user.selectsExerciseInMuscleGroup('Bench Press');
-    user.seesWorkoutContainsElementWith(new Exercise(undefined, 'Bench Press'), ['(0)']);
     user.configuresSetByDirectInputtingValues(20, 12, 50);
     user.addsSetToExercise();
     user.configuresSetByDirectInputtingValues(20, 12, 50);
     user.addsSetToExercise();
     user.configuresSetByDirectInputtingValues(20, 12, 50);
     user.addsSetToExercise();
-
-    user.seesWorkoutContainsElementWith(workout, ['(2)', (3 * 20 * 12) + '']);
-    user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Chest'), ['(2)', (3 * 20 * 12) + '']);
-    user.seesWorkoutContainsElementWith(new Exercise(undefined, 'Bench Press'), ['(3)', (3 * 20 * 12) + '']);
 
     user.selectsExerciseInMuscleGroup('Dumbbell Bench Press');
-    user.seesWorkoutContainsElementWith(new Exercise(undefined, 'Dumbbell Bench Press'), ['(0)']);
     user.configuresSetByDirectInputtingValues(20, 12, 50);
     user.addsSetToExercise();
     user.configuresSetByDirectInputtingValues(20, 12, 50);
     user.addsSetToExercise();
     user.configuresSetByDirectInputtingValues(20, 12, 50);
     user.addsSetToExercise();
-    user.seesWorkoutContainsElementWith(new Exercise(undefined, 'Dumbbell Bench Press'), ['(3)', (3 * 20 * 12) + '']);
 
     const benchPressExercise = new Exercise(
       new MuscleGroup(undefined, 'Chest', []),
@@ -429,6 +419,66 @@ describe('a create workout user', () => {
       new Set(20, 'kg', 12, 50, 's', dumbbellBenchPress, 2)
     ]);
   }));
+
+  it('sees how adding muscle groups, exercises, and sets affects displayed numbers and weights in workout tree node labels',
+    fakeAsync(() => {
+      user.seesWorkoutContainsElementWith(workout, ['(0)']);
+      user.createsMuscleGroupsToSelect('Chest, Triceps');
+      user.choosesFromSelectableMuscleGroups('chest');
+      user.seesWorkoutContainsElementWith(workout, ['(1)']);
+      user.choosesFromSelectableMuscleGroups('triceps');
+      user.seesWorkoutContainsElementWith(workout, ['(2)']);
+      user.selectsMuscleGroupInWorkout('chest');
+      user.createsExercisesToSelect('Bench Press, Dumbbell Bench Press');
+      user.choosesFromSelectableExercises('Bench Press');
+      user.seesWorkoutContainsElementWith(workout, ['(2)']);
+      user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Chest'), ['(1)']);
+      user.choosesFromSelectableExercises('Dumbbell Bench Press');
+      user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Chest'), ['(2)']);
+      user.selectsExerciseInMuscleGroup('Bench Press');
+      user.seesWorkoutContainsElementWith(new Exercise(undefined, 'Bench Press'), ['(0)']);
+
+      user.configuresSetByDirectInputtingValues(20, 12, 50);
+      user.addsSetToExercise();
+      user.seesWorkoutContainsElementWith(workout, ['(2)', (20 * 12) + '']);
+      user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Chest'), ['(2)', (20 * 12) + '']);
+      user.seesWorkoutContainsElementWith(new Exercise(undefined, 'Bench Press'), ['(1)', (20 * 12) + '']);
+
+      user.configuresSetByDirectInputtingValues(20, 12, 50);
+      user.addsSetToExercise();
+      user.seesWorkoutContainsElementWith(workout, ['(2)', (2 * 20 * 12) + '']);
+      user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Chest'), ['(2)', (2 * 20 * 12) + '']);
+      user.seesWorkoutContainsElementWith(new Exercise(undefined, 'Bench Press'), ['(2)', (2 * 20 * 12) + '']);
+
+      user.configuresSetByDirectInputtingValues(20, 12, 50);
+      user.addsSetToExercise();
+      user.seesWorkoutContainsElementWith(workout, ['(2)', (3 * 20 * 12) + '']);
+      user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Chest'), ['(2)', (3 * 20 * 12) + '']);
+      user.seesWorkoutContainsElementWith(new Exercise(undefined, 'Bench Press'), ['(3)', (3 * 20 * 12) + '']);
+
+      user.selectsExerciseInMuscleGroup('Dumbbell Bench Press');
+      user.seesWorkoutContainsElementWith(new Exercise(undefined, 'Dumbbell Bench Press'), ['(0)']);
+
+      user.configuresSetByDirectInputtingValues(20, 12, 50);
+      user.addsSetToExercise();
+      user.seesWorkoutContainsElementWith(workout, ['(2)', (4 * 20 * 12) + '']);
+      user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Chest'), ['(2)', (4 * 20 * 12) + '']);
+      user.seesWorkoutContainsElementWith(new Exercise(undefined, 'Dumbbell Bench Press'), ['(1)', (20 * 12) + '']);
+
+      user.configuresSetByDirectInputtingValues(20, 12, 50);
+      user.addsSetToExercise();
+      user.seesWorkoutContainsElementWith(workout, ['(2)', (5 * 20 * 12) + '']);
+      user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Chest'), ['(2)', (5 * 20 * 12) + '']);
+      user.seesWorkoutContainsElementWith(new Exercise(undefined, 'Dumbbell Bench Press'), ['(2)', (2 * 20 * 12) + '']);
+
+      user.configuresSetByDirectInputtingValues(20, 12, 50);
+      user.addsSetToExercise();
+      user.seesWorkoutContainsElementWith(workout, ['(2)', (6 * 20 * 12) + '']);
+      user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Chest'), ['(2)', (6 * 20 * 12) + '']);
+      user.seesWorkoutContainsElementWith(new Exercise(undefined, 'Dumbbell Bench Press'), ['(3)', (3 * 20 * 12) + '']);
+
+      // continue with removing nodes again
+    }));
 
 });
 
