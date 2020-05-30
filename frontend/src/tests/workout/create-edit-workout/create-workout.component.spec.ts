@@ -352,13 +352,9 @@ describe('a create workout user', () => {
   }));
 
   it('can remove any set without affecting other sets with the same values', fakeAsync(() => {
-
-    user.seesWorkoutContainsElementWith(workout, ['(0)']);
     user.createsMuscleGroupsToSelect('Chest, Triceps');
     user.choosesFromSelectableMuscleGroups('chest');
-    user.seesWorkoutContainsElementWith(workout, ['(1)']);
     user.choosesFromSelectableMuscleGroups('triceps');
-    user.seesWorkoutContainsElementWith(workout, ['(2)']);
     user.selectsMuscleGroupInWorkout('chest');
     user.createsExercisesToSelect('Bench Press, Dumbbell Bench Press');
     user.choosesFromSelectableExercises('Bench Press');
