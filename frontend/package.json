@@ -28,6 +28,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.13.0",
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@ngrx/effects": "^9.2.0",
+    "@ngrx/schematics": "^9.2.0",
     "@ngrx/store": "^9.2.0",
     "@ngrx/store-devtools": "^9.2.0",
     "font-awesome": "^4.7.0",
