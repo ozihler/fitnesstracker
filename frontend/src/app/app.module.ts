@@ -11,6 +11,10 @@ import {DatePipe, registerLocaleData} from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import {WorkoutModule} from './workout/workout.module';
 import {WorkoutEntryComponent} from './workout/workouts-overview/workout-entry.component';
+import {StoreModule} from '@ngrx/store';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {environment} from '../environments/environment';
+import {EffectsModule} from '@ngrx/effects';
 
 
 @NgModule({
@@ -19,7 +23,10 @@ import {WorkoutEntryComponent} from './workout/workouts-overview/workout-entry.c
     AppRoutingModule,
     HttpClientModule,
     FontAwesomeModule,
-    WorkoutModule
+    WorkoutModule,
+    StoreModule.forRoot({}, {}),
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
+    EffectsModule.forRoot([])
   ],
   declarations: [
     AppComponent,
