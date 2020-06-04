@@ -1,13 +1,13 @@
-import {async, TestBed} from "@angular/core/testing";
-import {MuscleGroupOrExerciseSelectionComponent} from "../../../../../app/workout/create-edit-workout/administration/muscle-groups-and-exercises/muscle-group-or-exercise-selection.component";
-import {NO_ERRORS_SCHEMA} from "@angular/core";
-import {ReactiveFormsModule} from "@angular/forms";
-import {SelectableMuscleGroupOrExerciseComponent} from "../../../../../app/workout/create-edit-workout/administration/muscle-groups-and-exercises/selectable-muscle-group-or-exercise.component";
-import {CreateMuscleGroupsOrExercisesComponent} from "../../../../../app/workout/create-edit-workout/administration/muscle-groups-and-exercises/create-muscle-groups-or-exercises.component";
-import {MuscleGroup} from "../../../../../app/workout/shared/muscle-group";
-import {Workout} from "../../../../../app/workout/shared/workout";
-import {WorkoutId} from "../../../../../app/workout/shared/workout-id";
-import {ReplacePipe} from "../../../../../app/workout/shared/pipes/replace.pipe";
+import {async, TestBed} from '@angular/core/testing';
+import {MuscleGroupOrExerciseSelectionComponent} from '../../../../../app/workout/create-edit-workout/administration/muscle-groups-and-exercises/muscle-group-or-exercise-selection.component';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {ReactiveFormsModule} from '@angular/forms';
+import {SelectableMuscleGroupOrExerciseComponent} from '../../../../../app/workout/create-edit-workout/administration/muscle-groups-and-exercises/selectable-muscle-group-or-exercise.component';
+import {CreateMuscleGroupsOrExercisesComponent} from '../../../../../app/workout/create-edit-workout/administration/muscle-groups-and-exercises/create-muscle-groups-or-exercises.component';
+import {MuscleGroup} from '../../../../../app/workout/shared/muscle-group';
+import {Workout} from '../../../../../app/workout/shared/workout';
+import {WorkoutId} from '../../../../../app/workout/shared/workout-id';
+import {ReplacePipe} from '../../../../../app/workout/shared/pipes/replace.pipe';
 
 describe('MuscleGroupOrExerciseSelectionComponent', () => {
   let fixture;
@@ -26,7 +26,7 @@ describe('MuscleGroupOrExerciseSelectionComponent', () => {
       schemas: [
         NO_ERRORS_SCHEMA
       ]
-    }).compileComponents()
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MuscleGroupOrExerciseSelectionComponent);
     component = fixture.componentInstance;
@@ -58,57 +58,57 @@ describe('MuscleGroupOrExerciseSelectionComponent', () => {
   });
 
   it('shows existing muscle groups, exercises, or sets', () => {
-    let workout: Workout =
+    const workout: Workout =
       new Workout(
-        WorkoutId.from("Workout"),
+        WorkoutId.from('Workout'),
         new Date(),
-        "Workout",
+        'Workout',
         [
-          new MuscleGroup(undefined, "Chest", []),
-          new MuscleGroup(undefined, "Triceps", []),
-          new MuscleGroup(undefined, "Shoulders", [])
+          new MuscleGroup(undefined, 'Chest', []),
+          new MuscleGroup(undefined, 'Triceps', []),
+          new MuscleGroup(undefined, 'Shoulders', [])
         ]
       );
-    component.currentSelection = workout
+    component.currentSelection = workout;
     component.selectableElements = workout.children;
     fixture.detectChanges();
 
-    let nativeElement = fixture.debugElement.nativeElement;
+    const nativeElement = fixture.debugElement.nativeElement;
     expect(nativeElement.querySelector('#ft-select-chest-button').innerHTML)
-      .toEqual("Chest");
+      .toEqual('Chest');
     expect(nativeElement.querySelector('#ft-select-triceps-button').innerHTML)
-      .toEqual("Triceps");
+      .toEqual('Triceps');
     expect(nativeElement.querySelector('#ft-select-shoulders-button').innerHTML)
-      .toEqual("Shoulders");
+      .toEqual('Shoulders');
 
   });
 
   it('can create a new muscle group to select', () => {
     let receivedEmittedMuscleGroup;
-    let expectedEmittedMuscleGroup ="Chest";
+    const expectedEmittedMuscleGroup = 'Chest';
     component.createsChildEvent.subscribe(emittedElement => receivedEmittedMuscleGroup = emittedElement);
 
     showCreateMuscleGroupOrExerciseInputField();
     inputMuscleGroup(expectedEmittedMuscleGroup);
     submitMuscleGroup();
 
-    expect(receivedEmittedMuscleGroup).toEqual(expectedEmittedMuscleGroup)
+    expect(receivedEmittedMuscleGroup).toEqual(expectedEmittedMuscleGroup);
   });
 
   function showCreateMuscleGroupOrExerciseInputField() {
-    fixture.nativeElement.querySelector('#ft-show-form-to-input-new-muscle-group-or-exercise-button').click()
+    fixture.nativeElement.querySelector('#ft-show-form-to-input-new-muscle-group-or-exercise-button').click();
     fixture.detectChanges();
   }
 
   function inputMuscleGroup(expectedEmittedMuscleGroup: string) {
-    let inputField: HTMLInputElement = fixture.nativeElement
+    const inputField: HTMLInputElement = fixture.nativeElement
       .querySelector('#ft-input-field-to-create-new-muscle-group-or-exercise');
     inputField.value = expectedEmittedMuscleGroup;
     inputField.dispatchEvent(new Event('input'));
   }
 
   function submitMuscleGroup() {
-    let submitButton: HTMLButtonElement = fixture.nativeElement
+    const submitButton: HTMLButtonElement = fixture.nativeElement
       .querySelector('#ft-button-to-submit-new-muscle-group-or-exercise');
     submitButton.click();
     fixture.detectChanges();
