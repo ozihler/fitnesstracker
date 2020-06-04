@@ -57,7 +57,7 @@ describe('MuscleGroupOrExerciseSelectionComponent', () => {
       .toBeGreaterThan(0);
   });
 
-  it('shows existing muscle groups, exercises, or sets', () => {
+  fit('shows existing muscle groups, exercises, or sets', () => {
     const workout: Workout =
       new Workout(
         WorkoutId.from('Workout'),

@@ -31,8 +31,7 @@ import {ReplacePipe} from '../../../shared/pipes/replace.pipe';
           (createSet)="createChild($event)">
         </app-create-set>
       </div>
-    </div>  `,
-  styles: []
+    </div>  `
 })
 export class MuscleGroupOrExerciseSelectionComponent implements OnInit {
 
@@ -41,7 +40,6 @@ export class MuscleGroupOrExerciseSelectionComponent implements OnInit {
   @Output() addNodeEvent = new EventEmitter<TreeNode>();
   @Output() deleteNodeEvent = new EventEmitter<TreeNode>();
   @Output() createsChildEvent = new EventEmitter<string>();
-
 
   constructor(private replacePipe: ReplacePipe) {
 
@@ -61,32 +59,35 @@ export class MuscleGroupOrExerciseSelectionComponent implements OnInit {
   createChild(elementsString: string) {
     this.createsChildEvent.emit(elementsString);
   }
+
   get hasSelectableElements() {
     return this.selectableElements && this.selectableElements.length > 0;
   }
 
   get title() {
     if (!this.currentSelection) {
-      return "";
+      return '';
     }
 
-    return "Add " + this.child + " to " + this.currentSelection.name;
+    return `Add ${this.child} to ${this.currentSelection.name}`;
   }
 
   get emptyElementsText() {
     if (!this.currentSelection || this.childrenAreLeafs) {
-      return "";
+      return '';
     }
 
-    return "No " + this.child + " to select. Create a new one first!";
+    return `No ${this.child} to select. Create a new one first!`;
   }
 
   get child() {
-    return this.replacePipe.transform(this.childTypeName(), "_", " ");
+    return this.replacePipe.transform(this.childTypeName(), '_', ' ');
   }
 
   get childrenAreLeafs() {
-    return this.currentSelection && this.currentSelection.children && this.currentSelection.children.some(value => value.isLeaf)
+    return this.currentSelection
+      && this.currentSelection.children
+      && this.currentSelection.children.some(value => value.isLeaf)
       || this.isExercise && this.currentSelection.children.length === 0;
   }
 
