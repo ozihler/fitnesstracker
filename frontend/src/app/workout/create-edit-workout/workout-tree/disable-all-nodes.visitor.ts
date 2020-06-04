@@ -1,5 +1,5 @@
-import {NodeVisitor} from "./node.visitor";
-import {TreeNode} from "./tree-node";
+import {NodeVisitor} from './node.visitor';
+import {TreeNode} from './tree-node';
 
 export class DisableAllNodesVisitor implements NodeVisitor {
   visit(node: TreeNode) {

@@ -46,6 +46,16 @@ import {SetChangeValue} from './set-change-value';
 })
 export class CreateSetComponent {
 
+  showButton = true;
+
+  constructor() {
+
+  }
+
+  get concatenateValues() {
+    return `${this.formValues.weight.currentValue}_${this.formValues.repetitions.currentValue}_${this.formValues.waitingTime.currentValue}`;
+  }
+
   formValues = {
     weight: SetFormValues.of(
       [-.5, -1, -10],
@@ -69,21 +79,6 @@ export class CreateSetComponent {
 
   @Output() createSet = new EventEmitter<string>();
 
-  showButton: boolean = true;
-
-  constructor() {
-
-  }
-
-  submit() {
-    this.emitNewSetEvent(this.concatenateValues);
-  }
-
-
-  get concatenateValues() {
-    return `${this.formValues.weight.currentValue}_${this.formValues.repetitions.currentValue}_${this.formValues.waitingTime.currentValue}`;
-  }
-
   get currentValues() {
 
     // make pipe
@@ -95,6 +90,10 @@ export class CreateSetComponent {
 
   private static format(values: SetFormValues) {
     return values.currentValue ? values.currentValue + ' ' + values.unit + ', ' : '';
+  }
+
+  submit() {
+    this.emitNewSetEvent(this.concatenateValues);
   }
 
   private emitNewSetEvent(createdElements: string) {

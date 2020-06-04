@@ -1,6 +1,6 @@
-import {TreeNode} from "./tree-node";
-import {NodeByNameCollectorVisitor} from "./node-by-name-collector.visitor";
-import {NodeVisitor} from "./node.visitor";
+import {TreeNode} from './tree-node';
+import {NodeByNameCollectorVisitor} from './node-by-name-collector.visitor';
+import {NodeVisitor} from './node.visitor';
 
 export class EnableNodeVisitor implements NodeVisitor {
   private readonly nodeCollector: NodeByNameCollectorVisitor;
@@ -25,7 +25,7 @@ export class EnableNodeVisitor implements NodeVisitor {
 
   enableNodes(): void {
     this.treeNode.accept(this.nodeCollector);
-    let foundNode = this.nodeCollector.foundNode;
+    const foundNode = this.nodeCollector.foundNode;
 
     if (foundNode) {
       foundNode.accept(this);

@@ -50,7 +50,7 @@ export class CreateMuscleGroupsOrExercisesComponent implements OnInit {
   @Output() createElementsEvent = new EventEmitter<string>();
   @Input() typename: string;
 
-  showButton: boolean = true;
+  showButton = true;
   form: FormGroup;
 
   constructor(private location: Location,

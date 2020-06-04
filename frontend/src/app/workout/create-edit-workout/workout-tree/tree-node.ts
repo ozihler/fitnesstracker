@@ -44,7 +44,7 @@ export abstract class TreeNode implements Cumulatable {
   }
 
   get isLeaf(): boolean {
-    return this.type == Type.Set;
+    return this.type === Type.Set;
   }
 
   get isEnabled(): boolean {
