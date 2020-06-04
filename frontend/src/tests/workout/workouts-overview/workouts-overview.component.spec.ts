@@ -39,7 +39,7 @@ describe('A workouts overview user', () => {
       imports: [RouterTestingModule.withRoutes(
         [
           {path: 'fitness-type-selection', component: FitnessTypeSelectionComponent},
-          {path: 'workout/create-workout', component: CreateWorkoutComponent}
+          {path: 'create-workout', component: CreateWorkoutComponent}
         ]
       )]
     }).compileComponents();
@@ -58,6 +58,7 @@ describe('A workouts overview user', () => {
     tick();
     user.seesFitnessTypeSelectionPage();
   }));
+
   it('can navigate to create new workout page', fakeAsync(() => {
     user.clicksNewWorkoutButton();
     tick();

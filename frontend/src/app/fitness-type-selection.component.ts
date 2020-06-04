@@ -10,7 +10,7 @@ import {map} from 'rxjs/operators';
     <h3>Select a fitness type</h3>
     <button
       id="select-workout-button"
-      routerLink="/workout/overview"
+      routerLink="/overview"
       class="uk-button
     uk-button-default
     uk-width-1-1

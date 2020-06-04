@@ -17,7 +17,7 @@ import {By} from '../shared/by.sort';
     <div>
       <button
         id="create-new-workout-button"
-        routerLink="/workout/create-workout"
+        routerLink="/create-workout"
         class="uk-button uk-button-danger uk-width-1-1 uk-margin-small-bottom">New Workout
       </button>
     </div>
@@ -59,7 +59,7 @@ export class WorkoutsOverviewComponent implements OnInit {
   copyWorkoutWithId(workoutId: WorkoutId) {
     this.workoutService.copyWorkoutWithId(workoutId)
       .subscribe(copiedWorkoutId =>
-        this.router.navigate(['workout/create-workout', copiedWorkoutId.value]));
+        this.router.navigate(['/create-workout', copiedWorkoutId.value]));
   }
 
   deleteWorkoutWithId(workoutId: WorkoutId) {

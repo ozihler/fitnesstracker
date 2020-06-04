@@ -28,7 +28,7 @@ export class WorkoutsOverviewUser {
   }
 
   seesCreateNewWorkoutPage() {
-    this.workoutOverviewComponent.assertPathIs('/workout/create-workout');
+    this.workoutOverviewComponent.assertPathIs('/create-workout');
   }
 
   seesWorkoutsSortedByCreationDate() {

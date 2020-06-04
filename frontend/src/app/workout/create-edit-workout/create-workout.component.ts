@@ -35,7 +35,7 @@ import {Workout} from '../shared/workout';
       (deleteNodeEvent)="deleteSelectableElement($event)">
     </app-muscle-group-or-exercise-selection>
     <hr class="uk-divider-icon"/>
-    <a routerLink="/workout/overview">Back to Overview</a>
+    <a routerLink="/overview">Back to Overview</a>
   `
 })
 export class CreateWorkoutComponent implements OnInit {

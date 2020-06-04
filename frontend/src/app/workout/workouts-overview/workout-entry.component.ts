@@ -12,7 +12,7 @@ import {WorkoutId} from '../shared/workout-id';
         <i class="fa fa-trash-o"></i>
       </button>
       <button id="select-workout-{{workoutId?.value}}-button"
-              routerLink="/workout/create-workout/{{workoutId?.value}}"
+              routerLink="/create-workout/{{workoutId?.value}}"
               class="uk-button uk-button-default uk-width-3-5 workout-selection-button">
         {{creationDate | date: 'dd.MM.yy' : '':'de'}} {{title}}
       </button>

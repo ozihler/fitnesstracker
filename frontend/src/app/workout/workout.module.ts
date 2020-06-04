@@ -14,13 +14,15 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {SetFormatPipe} from './shared/pipes/set-format.pipe';
 import {ReplacePipe} from './shared/pipes/replace.pipe';
 import {StringifyPipePipe} from './shared/pipes/stringify.pipe';
+import {WorkoutsOverviewModule} from './workouts-overview/workouts-overview.module';
 
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    WorkoutRoutingModule
+    WorkoutRoutingModule,
+    WorkoutsOverviewModule
   ],
   declarations: [
     CreateWorkoutComponent,
