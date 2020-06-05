@@ -1,7 +1,6 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.resources;
 
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets.AddSetToExercisesController;
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets.requests.SetDetails;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.SetViewModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SetsResource {
     private static final Logger logger = LoggerFactory.getLogger(SetsResource.class);
 
-    private AddSetToExercisesController addSetToExerciseController;
+    private final AddSetToExercisesController addSetToExerciseController;
 
     public SetsResource(AddSetToExercisesController addSetToExerciseController) {
         this.addSetToExerciseController = addSetToExerciseController;
@@ -25,11 +24,11 @@ public class SetsResource {
     public ResponseEntity<SetViewModel> addSetToExercise(
             @PathVariable("workoutId") String workoutId,
             @PathVariable("exerciseName") String exerciseName,
-            @RequestBody() SetDetails setDetails) {
+            @RequestBody() SetViewModel setToAdd) {
 
-        var addedSet = addSetToExerciseController.addSetToExercise(workoutId, exerciseName, setDetails);
+        var addedSet = addSetToExerciseController.addSetToExercise(workoutId, exerciseName, setToAdd);
 
-        logger.info("add set {} to exercise {}, response {}", setDetails, exerciseName, addedSet.getBody());
+        logger.info("add set {} to exercise {}, response {}", setToAdd, exerciseName, addedSet.getBody());
 
         return addedSet;
     }

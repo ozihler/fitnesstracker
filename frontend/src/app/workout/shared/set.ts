@@ -53,6 +53,7 @@ export class Set extends TreeNode {
     return idString;
   }
 
+
   cumulateWeight(): number {
     return this.weight * this.numberOfRepetitions /* *this.multiplier*/;
   }

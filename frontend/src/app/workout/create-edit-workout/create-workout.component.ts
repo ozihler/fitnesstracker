@@ -87,22 +87,24 @@ export class CreateWorkoutComponent implements OnInit {
     }
   }
 
-  createSelectableElement(elements: string) {
+  // todo instead of string, use Exercise and MuscleGroup! (define union type of MuscleGroup | Exercise | Set)
+  createSelectableElement(elements: string | Set) {
     const {type} = this.workoutTree.currentSelection;
 
     if (type === Type.Workout) {
-      this.selectionService.newMuscleGroup(elements)
+      this.selectionService.newMuscleGroup(elements as string)
         .subscribe(createdMuscleGroups => {
           this.updateSelectableNodes(createdMuscleGroups);
         });
     } else if (Type.Muscle_Group === type) {
       console.log('Current selection: ', this.workoutTree.currentSelection);
-      this.selectionService.createExercises(this.workoutTree.currentSelection, elements)
+      this.selectionService.createExercises(this.workoutTree.currentSelection, elements as string)
         .subscribe(createdExercises => this.updateSelectableNodes(createdExercises));
     } else if (Type.Exercise === type) {
       this.selectionService.addSetToExerciseExercise(
         this.workoutTree.root.workoutId,
-        this.workoutTree.currentSelection as Exercise, elements)
+        this.workoutTree.currentSelection as Exercise,
+        elements as Set)
         .subscribe(createdSet => this.addSetToExercise([createdSet]));
     }
   }

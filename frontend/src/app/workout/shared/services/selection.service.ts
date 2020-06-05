@@ -63,9 +63,14 @@ export class SelectionService {
       .pipe(map(e => ExerciseFactory.fromMultiple(e.exercises)));
   }
 
-  addSetToExerciseExercise(workoutId: WorkoutId, exercise: Exercise, setDetails: string): Observable<Set> {
-    return this.httpClient.post<SetRaw>(`${this.baseUrl}/workouts/${workoutId.value}/exercises/${exercise.name}/sets`,
-      {setDetails: setDetails})
+  addSetToExerciseExercise(workoutId: WorkoutId, exercise: Exercise, setToAdd: Set): Observable<Set> {
+    return this.httpClient.post<SetRaw>(`${this.baseUrl}/workouts/${workoutId.value}/exercises/${exercise.name}/sets`, {
+      weight: setToAdd.weight,
+      weightUnit: setToAdd.weightUnit,
+      numberOfRepetitions: setToAdd.numberOfRepetitions,
+      waitingTime: setToAdd.waitingTime,
+      waitingTimeUnit: setToAdd.waitingTimeUnit
+    })
       .pipe(map(e => SetFactory.from(e, exercise.children.length)));
   }
 

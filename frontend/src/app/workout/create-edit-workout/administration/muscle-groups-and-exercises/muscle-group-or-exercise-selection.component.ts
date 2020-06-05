@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Type} from '../../../shared/type';
 import {TreeNode} from '../../workout-tree/tree-node';
 import {ReplacePipe} from '../../../shared/pipes/replace.pipe';
+import {Set} from '../../../shared/set';
 
 @Component({
   selector: 'app-muscle-group-or-exercise-selection',
@@ -39,7 +40,7 @@ export class MuscleGroupOrExerciseSelectionComponent implements OnInit {
   @Input() selectableElements: TreeNode[];
   @Output() addNodeEvent = new EventEmitter<TreeNode>();
   @Output() deleteNodeEvent = new EventEmitter<TreeNode>();
-  @Output() createsChildEvent = new EventEmitter<string>();
+  @Output() createsChildEvent = new EventEmitter<string | Set>();
 
   constructor(private replacePipe: ReplacePipe) {
 
@@ -56,7 +57,7 @@ export class MuscleGroupOrExerciseSelectionComponent implements OnInit {
     this.deleteNodeEvent.emit(element);
   }
 
-  createChild(elementsString: string) {
+  createChild(elementsString: string | Set) {
     this.createsChildEvent.emit(elementsString);
   }
 

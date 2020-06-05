@@ -1,7 +1,6 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets;
 
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets.inputs.AddSetToExerciseInput;
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets.requests.SetDetails;
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.sets.RestSetPresenter;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.SetViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreSet;
@@ -13,14 +12,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class AddSetToExercisesController {
 
-    private AddSetToExercise addSetToExercise;
+    private final AddSetToExercise addSetToExercise;
 
     public AddSetToExercisesController(StoreSet storeSet) {
         addSetToExercise = new AddSetToExerciseUseCase(storeSet);
     }
 
-    public ResponseEntity<SetViewModel> addSetToExercise(String workoutId, String exerciseName, SetDetails setDetails) {
-        var input = new AddSetToExerciseInput(workoutId, exerciseName, setDetails);
+    public ResponseEntity<SetViewModel> addSetToExercise(String workoutId, String exerciseName, SetViewModel setToAdd) {
+        var input = new AddSetToExerciseInput(workoutId, exerciseName, setToAdd);
         var output = new RestSetPresenter();
 
         addSetToExercise.invokeWith(input.workoutId(), input.exerciseName(), input.set(), output);

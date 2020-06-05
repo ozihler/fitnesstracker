@@ -36,33 +36,6 @@ describe('a create workout user', () => {
   const toMuscleGroups = (muscleGroupNames) => muscleGroupNames.split(',').map(m => new MuscleGroup(undefined, m.trim(), []));
   const toExercises = (exerciseNames) => exerciseNames.split(',').map(m => new Exercise(undefined, m.trim(), []));
 
-  function setOf(exercise, setDetails: string) {
-    const parts = setDetails.split('_');
-
-    // tslint:disable-next-line:one-variable-per-declaration
-    let weight, reps, waitingTime;
-    if (parts.length >= 1) {
-      weight = parseFloat(parts[0]);
-    }
-    if (parts.length >= 2) {
-      reps = parseFloat(parts[1]);
-    }
-
-    if (parts.length >= 3) {
-      waitingTime = parseFloat(parts[2]);
-    }
-
-    return new Set(
-      weight,
-      'kg',
-      reps,
-      waitingTime,
-      's',
-      exercise,
-      exercise.children.length
-    );
-  }
-
   let workoutServiceMock;
   beforeEach(() => {
 
@@ -87,7 +60,16 @@ describe('a create workout user', () => {
       newMuscleGroup: (muscleGroupNames: string) => of(toMuscleGroups(muscleGroupNames)),
       deleteMuscleGroup: (muscleGroupToDelete) => of(muscleGroupToDelete),
       createExercises: (muscleGroup, exercises) => of(toExercises(exercises)),
-      addSetToExerciseExercise: (workoutId, exercise, setDetails) => of(setOf(exercise, setDetails))
+      addSetToExerciseExercise: (workoutId, exercise, setDetails: Set) => of(
+        new Set(
+          setDetails.weight,
+          setDetails.weightUnit,
+          setDetails.numberOfRepetitions,
+          setDetails.waitingTime,
+          setDetails.waitingTimeUnit,
+          exercise,
+          exercise.children.length
+        ))
     };
     registerLocaleData(localeDe);
     TestBed.configureTestingModule({

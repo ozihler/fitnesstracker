@@ -3,6 +3,7 @@ import {SetFormValues} from './set-form-values';
 import {SetChangeValue} from './set-change-value';
 import {SetFormData} from './set-form-data';
 import {SetFormatPipe} from '../../../shared/pipes/set-format.pipe';
+import {Set} from '../../../shared/set';
 
 @Component({
   selector: 'app-create-set',
@@ -56,28 +57,20 @@ export class CreateSetComponent {
     SetFormValues.of([-1, -5, -10], [1, 5, 10], true, 's', 'waitingTime'));
 
 
+  @Output() createSet = new EventEmitter<Set>();
+
+
   constructor(private setFormatPipe: SetFormatPipe) {
 
   }
-
-  get concatenateValues() {
-    // todo make pipe? or class?
-    return `${this.formValues.weight.currentValue}_${this.formValues.repetitions.currentValue}_${this.formValues.waitingTime.currentValue}`;
-  }
-
-  @Output() createSet = new EventEmitter<string>();
 
   get currentValues() {
     return this.setFormatPipe.transform(this.formValues.asMinimalSetWithoutParentOrIndex());
   }
 
   submit() {
-    this.emitNewSetEvent(this.concatenateValues);
-  }
-
-  private emitNewSetEvent(createdElements: string) {
     this.showButton = true;
-    this.createSet.emit(createdElements);
+    this.createSet.emit(this.formValues.asMinimalSetWithoutParentOrIndex());
   }
 
   update(changedValue: SetChangeValue) {

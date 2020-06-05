@@ -103,6 +103,8 @@ export class CreateWorkoutComponentPageObject {
 
   expectWorkoutTreeToContain(workoutTreeElement: TreeNode, stringsItShouldContain: string[]) {
     const selector = 'select-' + workoutTreeElement.id + '-editable-node';
+    console.log('Button to select: ', selector);
+    console.log('Strings it should contain: ', stringsItShouldContain);
     const treeNodeButton = new Button(this.findElement.byId(selector));
     for (const stringTheElementShouldContain of stringsItShouldContain) {
       expect(treeNodeButton.label).toContain(stringTheElementShouldContain);
@@ -143,7 +145,6 @@ export class CreateWorkoutComponentPageObject {
   expectCurrentSetInputMarkToContainValuesOf(set: Set) {
     const setInputMarkText = new Mark(this.findElement.by('#current-set-input-mark')).text;
     const expected = new SetFormatPipe().transform(set);
-    console.log('Expected text: ', expected);
     expect(setInputMarkText).toContain(expected);
   }
 
