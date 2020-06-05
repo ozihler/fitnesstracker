@@ -39,7 +39,8 @@ import {WorkoutsOverviewModule} from './workouts-overview/workouts-overview.modu
   ],
   providers: [
     ReplacePipe,
-    StringifyPipePipe
+    StringifyPipePipe,
+    SetFormatPipe
   ]
 })
 export class WorkoutModule {

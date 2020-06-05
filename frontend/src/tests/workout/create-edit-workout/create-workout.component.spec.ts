@@ -77,7 +77,7 @@ describe('a create workout user', () => {
     workoutServiceMock = {
       createNewOrFetchWorkoutWithId: (workoutId: string) =>
         of(new Workout(WorkoutId.from('1234'), new Date(), Workout.WORKOUT_INITIAL_TITLE, undefined)),
-      updateWorkout: (workout: Workout) => of(workout)
+      updateWorkout: (w: Workout) => of(w)
     };
 
     // todo maybe use spy for selectionService mock and override methods as needed...
@@ -102,7 +102,8 @@ describe('a create workout user', () => {
         WorkoutTitleComponent,
         SetFormatPipe,
         ReplacePipe,
-        StringifyPipePipe
+        StringifyPipePipe,
+        SetFormatPipe
       ],
       providers: [
         {provide: ComponentFixtureAutoDetect, useValue: true},
@@ -112,7 +113,8 @@ describe('a create workout user', () => {
         {provide: LOCALE_ID, useValue: localeDe},
         {provide: DatePipe},
         {provide: ReplacePipe},
-        {provide: StringifyPipePipe}
+        {provide: StringifyPipePipe},
+        {provide: SetFormatPipe}
       ],
       imports: [
         ReactiveFormsModule
@@ -288,9 +290,12 @@ describe('a create workout user', () => {
     user.selectsExerciseInMuscleGroup(exercises[0].name);
 
     user.configuresSetWithValues(weights, repetitions, waitingTimes);
+    const expected = new Set(user.sumOf(weights), 'kg', user.sumOf(repetitions), user.sumOf(waitingTimes), 's', exercises[0], 0);
+
+    console.log('expected set values: ', expected);
+    user.seesCurrentSetValuesToAddAre(expected);
     user.addsSetToExercise();
-    user.seesThatSetWasAddedToExercise(exercises[0].name,
-      new Set(user.sumOf(weights), 'kg', user.sumOf(repetitions), user.sumOf(waitingTimes), 's', exercises[0], 0));
+    user.seesThatSetWasAddedToExercise(exercises[0].name, expected);
 
     // can add set twice without inputting data again by just clicking button
     user.addsSetToExercise();

@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {SetFormValues} from './set-form-values';
 import {SetChangeValue} from './set-change-value';
+import {SetFormData} from './set-form-data';
+import {SetFormatPipe} from '../../../shared/pipes/set-format.pipe';
 
 @Component({
   selector: 'app-create-set',
@@ -48,48 +50,25 @@ export class CreateSetComponent {
 
   showButton = true;
 
-  constructor() {
+  formValues = new SetFormData(
+    SetFormValues.of([-.5, -1, -10], [.5, 1, 10], true, 'kg', 'weight'),
+    SetFormValues.of([-1, -2, -5], [1, 2, 5], true, '#', 'repetitions'),
+    SetFormValues.of([-1, -5, -10], [1, 5, 10], true, 's', 'waitingTime'));
+
+
+  constructor(private setFormatPipe: SetFormatPipe) {
 
   }
 
   get concatenateValues() {
+    // todo make pipe? or class?
     return `${this.formValues.weight.currentValue}_${this.formValues.repetitions.currentValue}_${this.formValues.waitingTime.currentValue}`;
   }
-
-  formValues = {
-    weight: SetFormValues.of(
-      [-.5, -1, -10],
-      [.5, 1, 10],
-      true,
-      'kg',
-      'weight'),
-    repetitions: SetFormValues.of(
-      [-1, -2, -5],
-      [1, 2, 5],
-      true,
-      '#',
-      'repetitions'),
-    waitingTime: SetFormValues.of(
-      [-1, -5, -10],
-      [1, 5, 10],
-      true,
-      's',
-      'waitingTime')
-  };
 
   @Output() createSet = new EventEmitter<string>();
 
   get currentValues() {
-
-    // make pipe
-    return CreateSetComponent.format(this.formValues.weight)
-      + CreateSetComponent.format(this.formValues.repetitions)
-      + CreateSetComponent.format(this.formValues.waitingTime);
-
-  }
-
-  private static format(values: SetFormValues) {
-    return values.currentValue ? values.currentValue + ' ' + values.unit + ', ' : '';
+    return this.setFormatPipe.transform(this.formValues.toMinimalSetWithoutParentOrIndex());
   }
 
   submit() {
@@ -110,3 +89,4 @@ export class CreateSetComponent {
       .forEach(name => this.formValues[name].isDisabled = name !== otherValuesName);
   }
 }
+

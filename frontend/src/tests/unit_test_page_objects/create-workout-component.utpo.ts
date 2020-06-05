@@ -10,6 +10,7 @@ import {Exercise} from '../../app/workout/shared/exercise';
 import {Set} from '../../app/workout/shared/set';
 import {Mark} from '../unit_test_page_elements/mark.utbp';
 import {TreeNode} from '../../app/workout/create-edit-workout/workout-tree/tree-node';
+import {SetFormatPipe} from '../../app/workout/shared/pipes/set-format.pipe';
 
 
 export class CreateWorkoutComponentPageObject {
@@ -22,8 +23,8 @@ export class CreateWorkoutComponentPageObject {
   private findElement: FindElement;
   private component: CreateWorkoutComponent;
 
-  private static emptyOr(weight: any) {
-    return weight ? weight.toString() : '';
+  private static addOrSubtract(weightButtonValue: SetButtonValues) {
+    return parseFloat(weightButtonValue.value) > 0 ? '-add-' : '-subtract-';
   }
 
   expectTitleToContain(elementsTitleShouldContain: string[]) {
@@ -122,7 +123,7 @@ export class CreateWorkoutComponentPageObject {
     new Button(this.findElement.by('#change-' + setButtonType + '-button')).click();
 
     setButtonValues.forEach(weightButtonValue => {
-      const selector = '#' + setButtonType + this.addOrSubtract(weightButtonValue)
+      const selector = '#' + setButtonType + CreateWorkoutComponentPageObject.addOrSubtract(weightButtonValue)
         + weightButtonValue.value.toString().replace('-', '').replace('.', '-')
         + '-button';
       const setButton = new Button(this.findElement.by(selector));
@@ -133,10 +134,6 @@ export class CreateWorkoutComponentPageObject {
 
   }
 
-  private addOrSubtract(weightButtonValue: SetButtonValues) {
-    return parseFloat(weightButtonValue.value) > 0 ? '-add-' : '-subtract-';
-  }
-
   expectSetValueToBe(setValueType: string, cumulatedWeight: number) {
     const setValueInputField = new InputField(this.findElement.by('#' + setValueType + '-input'));
     const inputWeight = parseFloat(setValueInputField.input);
@@ -145,11 +142,9 @@ export class CreateWorkoutComponentPageObject {
 
   expectCurrentSetInputMarkToContainValuesOf(set: Set) {
     const setInputMarkText = new Mark(this.findElement.by('#current-set-input-mark')).text;
-    expect(setInputMarkText).toContain(CreateWorkoutComponentPageObject.emptyOr(set.weight).toString());
-    expect(setInputMarkText).toContain(CreateWorkoutComponentPageObject.emptyOr(set.weightUnit).toString());
-    expect(setInputMarkText).toContain(CreateWorkoutComponentPageObject.emptyOr(set.numberOfRepetitions).toString());
-    expect(setInputMarkText).toContain(CreateWorkoutComponentPageObject.emptyOr(set.waitingTime).toString());
-    expect(setInputMarkText).toContain(CreateWorkoutComponentPageObject.emptyOr(set.waitingTimeUnit).toString());
+    const expected = new SetFormatPipe().transform(set);
+    console.log('Expected text: ', expected);
+    expect(setInputMarkText).toContain(expected);
   }
 
   toggleSetParts() {

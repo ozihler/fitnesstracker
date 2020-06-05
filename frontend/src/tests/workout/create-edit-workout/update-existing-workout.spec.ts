@@ -116,7 +116,8 @@ describe('a user updating an existing workout', () => {
         WorkoutTitleComponent,
         SetFormatPipe,
         ReplacePipe,
-        StringifyPipePipe
+        StringifyPipePipe,
+        SetFormatPipe
       ],
       providers: [
         {provide: ComponentFixtureAutoDetect, useValue: true},
@@ -126,7 +127,8 @@ describe('a user updating an existing workout', () => {
         {provide: LOCALE_ID, useValue: localeDe},
         {provide: DatePipe},
         {provide: ReplacePipe},
-        {provide: StringifyPipePipe}
+        {provide: StringifyPipePipe},
+        {provide: SetFormatPipe}
       ],
       imports: [
         ReactiveFormsModule
