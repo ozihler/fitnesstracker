@@ -12,7 +12,7 @@ export class SetFormData {
     this.waitingTime = waitingTime;
   }
 
-  toMinimalSetWithoutParentOrIndex(): Set {
+  asMinimalSetWithoutParentOrIndex(): Set {
     return new Set(
       this.weight.currentValue,
       this.weight.unit,

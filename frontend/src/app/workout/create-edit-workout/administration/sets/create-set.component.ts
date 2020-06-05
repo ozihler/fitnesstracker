@@ -68,7 +68,7 @@ export class CreateSetComponent {
   @Output() createSet = new EventEmitter<string>();
 
   get currentValues() {
-    return this.setFormatPipe.transform(this.formValues.toMinimalSetWithoutParentOrIndex());
+    return this.setFormatPipe.transform(this.formValues.asMinimalSetWithoutParentOrIndex());
   }
 
   submit() {
