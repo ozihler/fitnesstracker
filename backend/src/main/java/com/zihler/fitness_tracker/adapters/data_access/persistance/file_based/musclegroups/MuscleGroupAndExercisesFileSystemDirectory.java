@@ -3,19 +3,14 @@ package com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.m
 import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.FileSystemDirectory;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.outputs.MuscleGroupsFilesOutput;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.workouts.inputs.MuscleGroupsFilesInput;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.ExerciseViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.MuscleGroupViewModel;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.SetViewModel;
-import com.zihler.fitness_tracker.domain.entities.Set;
-import com.zihler.fitness_tracker.domain.values.*;
+import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-
 public class MuscleGroupAndExercisesFileSystemDirectory {
 
-    private FileSystemDirectory<MuscleGroupViewModel> fileSystemDirectory;
+    private final FileSystemDirectory<MuscleGroupViewModel> fileSystemDirectory;
 
     public static MuscleGroupAndExercisesFileSystemDirectory mkDir(String muscleGroupsAndExercisesDirectory) {
         return new MuscleGroupAndExercisesFileSystemDirectory(muscleGroupsAndExercisesDirectory);
@@ -45,6 +40,6 @@ public class MuscleGroupAndExercisesFileSystemDirectory {
     }
 
     public void clearFolder() {
-        fileSystemDirectory.clearFolder();
+        fileSystemDirectory.deleteFolder();
     }
 }

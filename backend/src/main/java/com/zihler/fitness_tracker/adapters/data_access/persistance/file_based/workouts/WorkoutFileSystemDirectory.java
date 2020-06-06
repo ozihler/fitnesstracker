@@ -9,7 +9,7 @@ import com.zihler.fitness_tracker.domain.values.Workouts;
 
 public class WorkoutFileSystemDirectory {
 
-    private FileSystemDirectory<WorkoutViewModel> fileSystemDirectory;
+    private final FileSystemDirectory<WorkoutViewModel> fileSystemDirectory;
 
     private WorkoutFileSystemDirectory(String folderName) {
         this.fileSystemDirectory = FileSystemDirectory.mkDir(folderName, WorkoutViewModel.class);
@@ -30,7 +30,7 @@ public class WorkoutFileSystemDirectory {
         return workout;
     }
 
-    public void clearFolder() {
-        this.fileSystemDirectory.clearFolder();
+    public void deleteFolder() {
+        this.fileSystemDirectory.deleteFolder();
     }
 }

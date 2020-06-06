@@ -22,7 +22,7 @@ public class FileSystemDirectory<T extends Namable> {
     private static final String APP_NAME = "fitness-tracker";
 
     private Path pathToFolder;
-    private Class<T> classToConvertFileInto;
+    private final Class<T> classToConvertFileInto;
 
     private FileSystemDirectory(String folderName, Class<T> classToConvertFileInto) {
         createFolderWith(folderName);
@@ -93,7 +93,7 @@ public class FileSystemDirectory<T extends Namable> {
         return jsonFileWriter;
     }
 
-    public void clearFolder() {
+    public void deleteFolder() {
         try {
             Files.walk(pathToFolder.toAbsolutePath())
                     .filter(Files::isRegularFile)
