@@ -15,16 +15,16 @@ public class CreationDate {
         this.creationDate = creationDate;
     }
 
-    public static CreationDate from(LocalDate creationDate) {
+    public static CreationDate of(LocalDate creationDate) {
         return new CreationDate(creationDate);
     }
 
-    public static CreationDate from(long creationDateInMillis) {
-        return from(LocalDate.from(Instant.ofEpochMilli(creationDateInMillis).atZone(zone)));
+    public static CreationDate of(long creationDateInMillis) {
+        return of(LocalDate.from(Instant.ofEpochMilli(creationDateInMillis).atZone(zone)));
     }
 
     public static CreationDate now() {
-        return from(LocalDate.now());
+        return of(LocalDate.now());
     }
 
     public LocalDate toLocalDate() {

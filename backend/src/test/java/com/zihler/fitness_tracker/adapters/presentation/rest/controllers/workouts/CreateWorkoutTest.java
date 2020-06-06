@@ -21,7 +21,7 @@ class CreateWorkoutTest {
         StoreWorkout storeWorkout = workout -> workout;
         var controller = new CreateWorkoutController(storeWorkout, () -> WorkoutId.of("12345"));
         WorkoutToCreate request = new WorkoutToCreate("Title");
-        CreationDate before = CreationDate.from(LocalDate.now());
+        CreationDate before = CreationDate.of(LocalDate.now());
 
         // when
         WorkoutAndMuscleGroupNamesViewModel result = controller.createWorkout(request).getBody();

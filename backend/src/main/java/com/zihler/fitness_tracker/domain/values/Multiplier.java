@@ -21,6 +21,10 @@ public class Multiplier {
         return of(1);
     }
 
+    public static Multiplier ofTwo() {
+        return of(2);
+    }
+
     public int value() {
         return value;
     }

@@ -19,7 +19,7 @@ public class Workout {
     }
 
     public static Workout of(WorkoutId workoutId, WorkoutTitle workoutTitle, MuscleGroups muscleGroups) {
-        return of(workoutId, CreationDate.from(LocalDate.now()), workoutTitle, muscleGroups);
+        return of(workoutId, CreationDate.of(LocalDate.now()), workoutTitle, muscleGroups);
     }
 
     public static Workout of(WorkoutId workoutId, CreationDate creationDate, WorkoutTitle workoutTitle, MuscleGroups muscleGroups) {
