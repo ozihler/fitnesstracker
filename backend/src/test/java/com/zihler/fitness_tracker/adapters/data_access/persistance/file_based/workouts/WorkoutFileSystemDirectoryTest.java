@@ -5,7 +5,6 @@ import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.*;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import static com.zihler.fitness_tracker.domain.values.MuscleGroups.muscleGroups;
@@ -16,18 +15,25 @@ class WorkoutFileSystemDirectoryTest {
     void test() {
         WorkoutFileSystemDirectory directory = WorkoutFileSystemDirectory.mkDir("test-workouts");
 
-        final Exercise[] bench_presses = new Exercise[]{new Exercise(Name.of("Bench Press"), Sets.of(List.of(
-                Set.withValues(Weight.of(55, UnitOfMeasurement.KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS)),
-                Set.withValues(Weight.of(50, UnitOfMeasurement.KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS)),
-                Set.withValues(Weight.of(45, UnitOfMeasurement.KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS))
-                )
-        ), Multiplier.ofOne())};
-        final Exercises of = Exercises.of(bench_presses);
+        final Exercise[] bench_presses = new Exercise[]{
+                new Exercise(
+                        Name.of("Bench Press"),
+                        Sets.of(List.of(
+                                Set.withValues(Weight.of(55, UnitOfMeasurement.KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS)),
+                                Set.withValues(Weight.of(50, UnitOfMeasurement.KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS)),
+                                Set.withValues(Weight.of(45, UnitOfMeasurement.KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS))
+                        )),
+                        Multiplier.ofOne())
+        };
+
         Workout workout = Workout.of(
                 WorkoutId.of("x-1-2"),
-                CreationDate.from(LocalDate.now()), WorkoutTitle.of("WORKOUT TITLE"),
+                CreationDate.now(),
+                WorkoutTitle.of("WORKOUT TITLE"),
                 muscleGroups(
-                        new MuscleGroup(Name.of("Chest"), of)));
+                        new MuscleGroup(
+                                Name.of("Chest"),
+                                Exercises.of(bench_presses))));
 
 
         directory.save(workout);

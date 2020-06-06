@@ -1,6 +1,9 @@
 package com.zihler.fitness_tracker.domain.values;
 
-import java.time.*;
+import java.time.Clock;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Objects;
 
 public class CreationDate {
@@ -18,6 +21,10 @@ public class CreationDate {
 
     public static CreationDate from(long creationDateInMillis) {
         return from(LocalDate.from(Instant.ofEpochMilli(creationDateInMillis).atZone(zone)));
+    }
+
+    public static CreationDate now() {
+        return from(LocalDate.now());
     }
 
     public LocalDate toLocalDate() {
