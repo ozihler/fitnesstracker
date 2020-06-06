@@ -6,14 +6,14 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 public class Names {
-    private List<Name> names;
+    private final List<Name> names;
 
     private Names(List<Name> names) {
         this.names = names;
     }
 
     public static Names in(String namesString) {
-        String[] names = namesString.split("[;,.]+");
+        String[] names = namesString.trim().split("[;,.]+");
 
         return new Names(Arrays.stream(names)
                 .map(String::trim)
