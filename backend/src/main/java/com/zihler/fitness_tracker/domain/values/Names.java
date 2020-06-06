@@ -1,5 +1,7 @@
 package com.zihler.fitness_tracker.domain.values;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,6 +19,7 @@ public class Names {
 
         return new Names(Arrays.stream(names)
                 .map(String::trim)
+                .filter(StringUtils::isNoneBlank)
                 .map(Name::of)
                 .collect(toList()));
     }
