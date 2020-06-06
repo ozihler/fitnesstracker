@@ -9,20 +9,20 @@ import java.time.LocalDate;
 
 public class Workout {
     private final WorkoutId workoutId;
-    private CreationDate creationDate;
-    private WorkoutTitle workoutTitle;
-    private MuscleGroups muscleGroups;
+    private final CreationDate creationDate;
+    private final WorkoutTitle workoutTitle;
+    private final MuscleGroups muscleGroups;
     private boolean isDeleted;
 
-    public static Workout from(WorkoutId workoutId, WorkoutTitle workoutTitle) {
-        return from(workoutId, workoutTitle, new MuscleGroups());
+    public static Workout of(WorkoutId workoutId, WorkoutTitle workoutTitle) {
+        return of(workoutId, workoutTitle, new MuscleGroups());
     }
 
-    public static Workout from(WorkoutId workoutId, WorkoutTitle workoutTitle, MuscleGroups muscleGroups) {
-        return from(workoutId, CreationDate.from(LocalDate.now()), workoutTitle, muscleGroups);
+    public static Workout of(WorkoutId workoutId, WorkoutTitle workoutTitle, MuscleGroups muscleGroups) {
+        return of(workoutId, CreationDate.from(LocalDate.now()), workoutTitle, muscleGroups);
     }
 
-    public static Workout from(WorkoutId workoutId, CreationDate creationDate, WorkoutTitle workoutTitle, MuscleGroups muscleGroups) {
+    public static Workout of(WorkoutId workoutId, CreationDate creationDate, WorkoutTitle workoutTitle, MuscleGroups muscleGroups) {
         return new Workout(workoutId, creationDate, workoutTitle, muscleGroups);
     }
 

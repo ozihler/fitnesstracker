@@ -1,16 +1,22 @@
 package com.zihler.fitness_tracker.domain.values;
 
+import com.zihler.fitness_tracker.domain.exceptions.IllegalWorkoutIdException;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Objects;
 
 public class WorkoutId {
-    private String id;
+    private final String id;
 
     private WorkoutId(String id) {
+        if (StringUtils.isBlank(id)) {
+            throw new IllegalWorkoutIdException("Workout ID cannot be empty!");
+        }
         this.id = id;
     }
 
     public static WorkoutId of(String identifier) {
-        return new WorkoutId(String.format("%s", identifier));
+        return new WorkoutId(identifier);
     }
 
     @Override

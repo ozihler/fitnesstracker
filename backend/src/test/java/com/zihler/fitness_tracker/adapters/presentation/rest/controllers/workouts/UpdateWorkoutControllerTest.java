@@ -1,10 +1,10 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts;
 
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutToUpdate;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.ExerciseViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.MuscleGroupViewModel;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutViewModel;
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutToUpdate;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.SetViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchWorkout;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorkout;
 import com.zihler.fitness_tracker.domain.entities.Workout;
@@ -14,8 +14,8 @@ import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -28,7 +28,7 @@ class UpdateWorkoutControllerTest {
         LocalDate workoutCreationTime = LocalDate.now();
 
         CreationDate creationDate = CreationDate.from(workoutCreationTime);
-        FetchWorkout fetchWorkout = id ->   Workout.from(id, creationDate, WorkoutTitle.of("Title"), new MuscleGroups(new ArrayList<>()));
+        FetchWorkout fetchWorkout = id -> Workout.of(id, creationDate, WorkoutTitle.of("Title"), new MuscleGroups(new ArrayList<>()));
         StoreWorkout storeWorkout = workout -> workout;
 
         var controller = new UpdateWorkoutController(fetchWorkout, storeWorkout);

@@ -24,7 +24,7 @@ public class WorkoutToCopy {
     }
 
     public WorkoutToCopy makeCopy() {
-        Workout copyOfWorkout = Workout.from(newWorkoutId(), copyOfWorkoutTitle(), copyOfMuscleGroups());
+        Workout copyOfWorkout = Workout.of(newWorkoutId(), copyOfWorkoutTitle(), copyOfMuscleGroups());
         Workout storedCopyOfWorkout = storeWorkout.withValues(copyOfWorkout);
         idOfCopiedWorkout = storedCopyOfWorkout.getWorkoutId();
         return this;

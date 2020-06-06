@@ -17,7 +17,7 @@ public class AddSetToExerciseInput {
     }
 
     public SetDocument set() {
-        if (!hasAllRequiredParts(setToAdd)) {
+        if (setToAdd == null || !hasAllRequiredParts(setToAdd)) {
             throw new IllegalSetDetailsException("Sets need to have at least weight and repetitions set! Received: " + setToAdd);
         }
 

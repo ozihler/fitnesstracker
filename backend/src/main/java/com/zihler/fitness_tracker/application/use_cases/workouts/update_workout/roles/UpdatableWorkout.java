@@ -13,8 +13,8 @@ import static java.util.stream.Collectors.toList;
 
 public class UpdatableWorkout {
     private Workout self;
-    private StoreWorkout storeWorkout;
-    private WorkoutPresenter output;
+    private final StoreWorkout storeWorkout;
+    private final WorkoutPresenter output;
 
     public UpdatableWorkout(Workout self, StoreWorkout storeWorkout, WorkoutPresenter output) {
         this.self = self;
@@ -37,7 +37,7 @@ public class UpdatableWorkout {
             }
         }
 
-        self = Workout.from(self.getWorkoutId(), update.getCreationDate(), update.getWorkoutTitle(), workoutMuscleGroups);
+        self = Workout.of(self.getWorkoutId(), update.getCreationDate(), update.getWorkoutTitle(), workoutMuscleGroups);
     }
 
     public void store() {

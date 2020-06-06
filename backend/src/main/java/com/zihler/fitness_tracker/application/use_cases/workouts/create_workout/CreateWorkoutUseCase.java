@@ -9,8 +9,8 @@ import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
 
 public class CreateWorkoutUseCase implements CreateWorkout {
-    private StoreWorkout workouts;
-    private GenerateWorkoutId generateWorkoutId;
+    private final StoreWorkout workouts;
+    private final GenerateWorkoutId generateWorkoutId;
 
 
     public CreateWorkoutUseCase(StoreWorkout workouts, GenerateWorkoutId generateWorkoutId) {
@@ -20,7 +20,7 @@ public class CreateWorkoutUseCase implements CreateWorkout {
 
     @Override
     public void invokeWith(WorkoutTitle workoutTitle, WorkoutPresenter output) {
-        Workout workout = Workout.from(generateWorkoutId.next(), workoutTitle);
+        Workout workout = Workout.of(generateWorkoutId.next(), workoutTitle);
         Workout stored = workouts.withValues(workout);
         output.present(WorkoutDocument.of(stored));
     }
