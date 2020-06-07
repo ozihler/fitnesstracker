@@ -1,13 +1,15 @@
 package com.zihler.fitness_tracker.domain.entities;
 
-import com.zihler.fitness_tracker.domain.values.WaitingTime;
 import com.zihler.fitness_tracker.domain.values.Repetitions;
+import com.zihler.fitness_tracker.domain.values.WaitingTime;
 import com.zihler.fitness_tracker.domain.values.Weight;
 
+import java.util.Objects;
+
 public class Set {
-    private Weight weight;
-    private Repetitions repetitions;
-    private WaitingTime waitingTime;
+    private final Weight weight;
+    private final Repetitions repetitions;
+    private final WaitingTime waitingTime;
 
     public Set(Weight weight, Repetitions repetitions, WaitingTime waitingTime) {
         this.weight = weight;
@@ -30,5 +32,20 @@ public class Set {
 
     public WaitingTime getWaitingTime() {
         return waitingTime;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Set set = (Set) o;
+        return Objects.equals(weight, set.weight) &&
+                Objects.equals(repetitions, set.repetitions) &&
+                Objects.equals(waitingTime, set.waitingTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(weight, repetitions, waitingTime);
     }
 }

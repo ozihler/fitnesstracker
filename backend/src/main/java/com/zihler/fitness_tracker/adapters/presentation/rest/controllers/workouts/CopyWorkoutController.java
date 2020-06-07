@@ -1,8 +1,9 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts;
 
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.inputs.WorkoutIdInput;
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutIdRequest;
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout.WorkoutIdPresenter;
-import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutIdViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchWorkout;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.GenerateWorkoutId;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorkout;
@@ -14,14 +15,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CopyWorkoutController {
-    private CopyWorkout copyWorkout;
+    private final CopyWorkout copyWorkout;
 
     @Autowired
     public CopyWorkoutController(FetchWorkout fetchWorkout, StoreWorkout storeWorkout, GenerateWorkoutId generateWorkoutId) {
         this.copyWorkout = new CopyWorkoutUseCase(fetchWorkout, storeWorkout, generateWorkoutId);
     }
 
-    public ResponseEntity<WorkoutViewModel> copyWorkout(WorkoutViewModel request) {
+    public ResponseEntity<WorkoutIdViewModel> copyWorkout(WorkoutIdRequest request) {
         var input = new WorkoutIdInput(request);
         var output = new WorkoutIdPresenter();
 

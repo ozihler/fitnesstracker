@@ -2,10 +2,10 @@ package com.zihler.fitness_tracker.domain.values;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.List;
+import java.util.Objects;
 
 public class Exercises {
-    private List<Exercise> exercises;
+    private final List<Exercise> exercises;
 
     private Exercises(List<Exercise> exercises) {
         this.exercises = exercises;
@@ -31,4 +31,16 @@ public class Exercises {
         exercises.add(exercise);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Exercises exercises1 = (Exercises) o;
+        return Objects.equals(exercises, exercises1.exercises);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(exercises);
+    }
 }

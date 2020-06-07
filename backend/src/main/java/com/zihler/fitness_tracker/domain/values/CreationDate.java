@@ -7,7 +7,7 @@ import java.time.ZoneId;
 import java.util.Objects;
 
 public class CreationDate {
-    private static final ZoneId zone = Clock.systemDefaultZone().getZone();
+    public static final ZoneId USED_ZONE = Clock.systemDefaultZone().getZone();
 
     private final LocalDate creationDate;
 
@@ -20,7 +20,7 @@ public class CreationDate {
     }
 
     public static CreationDate of(long creationDateInMillis) {
-        return of(LocalDate.from(Instant.ofEpochMilli(creationDateInMillis).atZone(zone)));
+        return of(LocalDate.from(Instant.ofEpochMilli(creationDateInMillis).atZone(USED_ZONE)));
     }
 
     public static CreationDate now() {
@@ -32,7 +32,11 @@ public class CreationDate {
     }
 
     public long toMillis() {
-        return toLocalDate().atStartOfDay(zone).toInstant().toEpochMilli();
+        return toLocalDate().atStartOfDay(USED_ZONE).toInstant().toEpochMilli();
+    }
+
+    public boolean isBefore(CreationDate creationDate) {
+        return this.toLocalDate().isBefore(creationDate.toLocalDate());
     }
 
     @Override

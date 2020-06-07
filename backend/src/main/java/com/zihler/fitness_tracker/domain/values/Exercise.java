@@ -5,9 +5,9 @@ import com.zihler.fitness_tracker.domain.entities.Set;
 import java.util.Objects;
 
 public class Exercise {
-    private Name name;
+    private final Name name;
     private Sets sets;
-    private Multiplier multiplier;
+    private final Multiplier multiplier;
     private boolean isSelectable = true;
 
     public Exercise(Name name, Sets sets, Multiplier multiplier) {
@@ -62,5 +62,13 @@ public class Exercise {
         return isSelectable;
     }
 
-
+    @Override
+    public String toString() {
+        return "Exercise{" +
+                "name=" + name +
+                ", sets=" + sets +
+                ", multiplier=" + multiplier +
+                ", isSelectable=" + isSelectable +
+                '}';
+    }
 }

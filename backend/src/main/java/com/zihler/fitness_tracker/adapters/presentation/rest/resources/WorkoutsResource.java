@@ -1,10 +1,11 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.resources;
 
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.DeleteWorkoutController;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.*;
+import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutIdRequest;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutToCreate;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutToUpdate;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutAndMuscleGroupNamesViewModel;
+import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutIdViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutsViewModel;
 import org.slf4j.Logger;
@@ -20,13 +21,13 @@ import java.util.Objects;
 public class WorkoutsResource {
 
     private static final Logger logger = LoggerFactory.getLogger(WorkoutsResource.class);
-    private CreateWorkoutController createWorkoutController;
-    private UpdateWorkoutController updateWorkoutController;
-    private ViewAllWorkoutsController viewAllWorkoutsController;
-    private DownloadAllWorkoutsController downloadAllWorkoutsController;
-    private ViewSingleWorkoutController viewSingleWorkoutController;
-    private CopyWorkoutController copyWorkoutController;
-    private DeleteWorkoutController deleteWorkoutController;
+    private final CreateWorkoutController createWorkoutController;
+    private final UpdateWorkoutController updateWorkoutController;
+    private final ViewAllWorkoutsController viewAllWorkoutsController;
+    private final DownloadAllWorkoutsController downloadAllWorkoutsController;
+    private final ViewSingleWorkoutController viewSingleWorkoutController;
+    private final CopyWorkoutController copyWorkoutController;
+    private final DeleteWorkoutController deleteWorkoutController;
 
     @Autowired
     public WorkoutsResource(
@@ -91,8 +92,8 @@ public class WorkoutsResource {
     }
 
     @PostMapping(path = "/api/workouts/copy")
-    public ResponseEntity<WorkoutViewModel> copyWorkout(@RequestBody WorkoutViewModel request) {
-        ResponseEntity<WorkoutViewModel> idOfCopiedWorkout = copyWorkoutController.copyWorkout(request);
+    public ResponseEntity<WorkoutIdViewModel> copyWorkout(@RequestBody WorkoutIdRequest request) {
+        ResponseEntity<WorkoutIdViewModel> idOfCopiedWorkout = copyWorkoutController.copyWorkout(request);
 
         logger.info("id of copied workout:{}", idOfCopiedWorkout);
 

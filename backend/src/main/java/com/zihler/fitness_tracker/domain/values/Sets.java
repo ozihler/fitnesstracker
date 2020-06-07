@@ -4,6 +4,7 @@ import com.zihler.fitness_tracker.domain.entities.Set;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Sets {
 
@@ -31,5 +32,18 @@ public class Sets {
 
     public void add(Set set) {
         sets.add(set);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Sets sets1 = (Sets) o;
+        return Objects.equals(sets, sets1.sets);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sets);
     }
 }
