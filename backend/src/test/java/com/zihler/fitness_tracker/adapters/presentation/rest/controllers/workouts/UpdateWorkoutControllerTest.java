@@ -28,7 +28,7 @@ class UpdateWorkoutControllerTest {
         LocalDate workoutCreationTime = LocalDate.now();
 
         CreationDate creationDate = CreationDate.of(workoutCreationTime);
-        FetchWorkout fetchWorkout = id -> Workout.of(id, creationDate, WorkoutTitle.of("Title"), new MuscleGroups(new ArrayList<>()));
+        FetchWorkout fetchWorkout = id -> new Workout(id, creationDate, WorkoutTitle.of("Title"), new MuscleGroups(new ArrayList<>()));
         StoreWorkout storeWorkout = workout -> workout;
 
         var controller = new UpdateWorkoutController(fetchWorkout, storeWorkout);

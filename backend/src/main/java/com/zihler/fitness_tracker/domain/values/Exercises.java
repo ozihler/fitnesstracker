@@ -1,5 +1,7 @@
 package com.zihler.fitness_tracker.domain.values;
 
+import com.zihler.fitness_tracker.domain.entities.Exercise;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

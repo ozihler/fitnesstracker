@@ -18,11 +18,7 @@ public class WorkoutFileInput {
     }
 
     public Workout workout() {
-        return Workout.of(
-                WorkoutId.of(workoutFile.getWorkoutId()),
-                CreationDate.of(LocalDate.from(Instant.ofEpochMilli(workoutFile.getCreationDate()).atZone(Clock.systemDefaultZone().getZone()))), WorkoutTitle.of(workoutFile.getTitle()),
-                new MuscleGroupsFilesInput(workoutFile.getMuscleGroups()).muscleGroups()
-        );
+        return new Workout(WorkoutId.of(workoutFile.getWorkoutId()), CreationDate.of(LocalDate.from(Instant.ofEpochMilli(workoutFile.getCreationDate()).atZone(Clock.systemDefaultZone().getZone()))), WorkoutTitle.of(workoutFile.getTitle()), new MuscleGroupsFilesInput(workoutFile.getMuscleGroups()).muscleGroups());
     }
 
 }

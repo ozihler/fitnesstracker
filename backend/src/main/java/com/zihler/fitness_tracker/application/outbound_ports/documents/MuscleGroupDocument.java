@@ -1,7 +1,7 @@
 package com.zihler.fitness_tracker.application.outbound_ports.documents;
 
 
-import com.zihler.fitness_tracker.domain.values.MuscleGroup;
+import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
 import com.zihler.fitness_tracker.domain.values.Name;
 
 import java.util.Objects;
@@ -9,9 +9,9 @@ import java.util.Objects;
 import static java.util.stream.Collectors.toList;
 
 public class MuscleGroupDocument {
-    private Name name;
-    private ExercisesDocument exercises;
-    private boolean isSelectable;
+    private final Name name;
+    private final ExercisesDocument exercises;
+    private final boolean isSelectable;
 
     public ExercisesDocument getExercises() {
         return exercises;

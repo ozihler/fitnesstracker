@@ -3,8 +3,13 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workou
 import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.workouts.InMemoryWorkoutRepository;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutIdRequest;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutIdViewModel;
+import com.zihler.fitness_tracker.domain.entities.Exercise;
+import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
 import com.zihler.fitness_tracker.domain.entities.Workout;
-import com.zihler.fitness_tracker.domain.values.*;
+import com.zihler.fitness_tracker.domain.values.CreationDate;
+import com.zihler.fitness_tracker.domain.values.Name;
+import com.zihler.fitness_tracker.domain.values.Sets;
+import com.zihler.fitness_tracker.domain.values.WorkoutId;
 import com.zihler.fitness_tracker.fixtures.WorkoutFixtures;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;

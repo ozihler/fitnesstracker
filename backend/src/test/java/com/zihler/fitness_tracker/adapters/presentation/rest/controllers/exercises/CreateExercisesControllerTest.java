@@ -5,7 +5,11 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.Exercise
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.ExercisesViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchMuscleGroup;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreExercises;
-import com.zihler.fitness_tracker.domain.values.*;
+import com.zihler.fitness_tracker.domain.entities.Exercise;
+import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
+import com.zihler.fitness_tracker.domain.values.Exercises;
+import com.zihler.fitness_tracker.domain.values.Multiplier;
+import com.zihler.fitness_tracker.domain.values.Name;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 
@@ -42,11 +46,11 @@ class CreateExercisesControllerTest {
 
         Exercise e1 = storedMuscleGroup.getExercises().getExercises().get(0);
         assertEquals(Name.of("Bench Press"), e1.getName());
-        assertEquals(Multiplier.ofOne(), e1.getMultiplier());
+        assertEquals(Multiplier.ONE, e1.getMultiplier());
 
         Exercise e2 = storedMuscleGroup.getExercises().getExercises().get(1);
         assertEquals(Name.of("Dumbbell Flys"), e2.getName());
-        assertEquals(Multiplier.of(2), e2.getMultiplier());
+        assertEquals(Multiplier.TWO, e2.getMultiplier());
 
         Set<String> viewModelExerciseNames = Objects.requireNonNull(exercises.getBody())
                 .getExercises()

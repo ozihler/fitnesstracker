@@ -1,6 +1,8 @@
-package com.zihler.fitness_tracker.domain.values;
+package com.zihler.fitness_tracker.domain.entities;
 
-import com.zihler.fitness_tracker.domain.entities.Set;
+import com.zihler.fitness_tracker.domain.values.Multiplier;
+import com.zihler.fitness_tracker.domain.values.Name;
+import com.zihler.fitness_tracker.domain.values.Sets;
 
 import java.util.Objects;
 

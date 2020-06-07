@@ -5,9 +5,13 @@ import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGro
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorkout;
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.WorkoutPresenter;
+import com.zihler.fitness_tracker.domain.entities.Exercise;
+import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
 import com.zihler.fitness_tracker.domain.entities.Set;
 import com.zihler.fitness_tracker.domain.entities.Workout;
-import com.zihler.fitness_tracker.domain.values.*;
+import com.zihler.fitness_tracker.domain.values.Exercises;
+import com.zihler.fitness_tracker.domain.values.MuscleGroups;
+import com.zihler.fitness_tracker.domain.values.Sets;
 
 import static java.util.stream.Collectors.toList;
 
@@ -37,7 +41,7 @@ public class UpdatableWorkout {
             }
         }
 
-        self = Workout.of(self.getWorkoutId(), update.getCreationDate(), update.getWorkoutTitle(), workoutMuscleGroups);
+        self = new Workout(self.getWorkoutId(), update.getCreationDate(), update.getWorkoutTitle(), workoutMuscleGroups);
     }
 
     public void store() {

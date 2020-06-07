@@ -4,7 +4,11 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.Exercise
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.ExercisesViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchExercises;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchMuscleGroup;
-import com.zihler.fitness_tracker.domain.values.*;
+import com.zihler.fitness_tracker.domain.entities.Exercise;
+import com.zihler.fitness_tracker.domain.entities.ExerciseFactory;
+import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
+import com.zihler.fitness_tracker.domain.values.Exercises;
+import com.zihler.fitness_tracker.domain.values.Name;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 

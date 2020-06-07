@@ -1,7 +1,11 @@
 package com.zihler.fitness_tracker.adapters.gateways.json;
 
 import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.musclegroups.MuscleGroupAndExercisesFileSystemDirectory;
-import com.zihler.fitness_tracker.domain.values.*;
+import com.zihler.fitness_tracker.domain.entities.Exercise;
+import com.zihler.fitness_tracker.domain.entities.ExerciseFactory;
+import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
+import com.zihler.fitness_tracker.domain.values.Exercises;
+import com.zihler.fitness_tracker.domain.values.Name;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

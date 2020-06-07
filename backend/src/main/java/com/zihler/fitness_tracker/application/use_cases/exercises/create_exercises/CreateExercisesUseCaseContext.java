@@ -6,7 +6,7 @@ import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreExerc
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.ExercisesPresenter;
 import com.zihler.fitness_tracker.application.use_cases.UseCaseContext;
 import com.zihler.fitness_tracker.application.use_cases.exercises.create_exercises.roles.MuscleGroupToExtend;
-import com.zihler.fitness_tracker.domain.values.ExerciseFactory;
+import com.zihler.fitness_tracker.domain.entities.ExerciseFactory;
 import com.zihler.fitness_tracker.domain.values.Exercises;
 
 import static java.util.stream.Collectors.toList;

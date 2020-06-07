@@ -1,7 +1,12 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.musclegroups;
 
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.*;
-import com.zihler.fitness_tracker.domain.values.*;
+import com.zihler.fitness_tracker.domain.entities.Exercise;
+import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
+import com.zihler.fitness_tracker.domain.values.Exercises;
+import com.zihler.fitness_tracker.domain.values.MuscleGroupName;
+import com.zihler.fitness_tracker.domain.values.MuscleGroups;
+import com.zihler.fitness_tracker.domain.values.Name;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

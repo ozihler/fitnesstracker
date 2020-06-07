@@ -5,12 +5,12 @@ import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchExerc
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreExercise;
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.ExerciseNamePresenter;
 import com.zihler.fitness_tracker.application.use_cases.exercises.make_exercise_unselectable.inbound_port.MakeExerciseUnselectable;
-import com.zihler.fitness_tracker.domain.values.Exercise;
+import com.zihler.fitness_tracker.domain.entities.Exercise;
 import com.zihler.fitness_tracker.domain.values.Name;
 
 public class MakeExerciseUnselectableUseCase implements MakeExerciseUnselectable {
-    private FetchExercise fetchExercise;
-    private StoreExercise storeExercise;
+    private final FetchExercise fetchExercise;
+    private final StoreExercise storeExercise;
 
     public MakeExerciseUnselectableUseCase(FetchExercise fetchExercise, StoreExercise storeExercise) {
         this.fetchExercise = fetchExercise;

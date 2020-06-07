@@ -6,18 +6,18 @@ import com.zihler.fitness_tracker.application.outbound_ports.documents.SetDocume
 import com.zihler.fitness_tracker.application.outbound_ports.documents.SetsDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreExercises;
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.ExercisesPresenter;
-import com.zihler.fitness_tracker.domain.values.Exercise;
+import com.zihler.fitness_tracker.domain.entities.Exercise;
+import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
 import com.zihler.fitness_tracker.domain.values.Exercises;
-import com.zihler.fitness_tracker.domain.values.MuscleGroup;
 
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
 public class MuscleGroupToExtend {
-    private MuscleGroup self;
-    private StoreExercises storeExercises;
-    private ExercisesPresenter output;
+    private final MuscleGroup self;
+    private final StoreExercises storeExercises;
+    private final ExercisesPresenter output;
     private Exercises appendedExercises;
 
     public MuscleGroupToExtend(MuscleGroup self, StoreExercises storeExercises, ExercisesPresenter output) {

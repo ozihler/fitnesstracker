@@ -1,4 +1,8 @@
-package com.zihler.fitness_tracker.domain.values;
+package com.zihler.fitness_tracker.domain.entities;
+
+import com.zihler.fitness_tracker.domain.values.Multiplier;
+import com.zihler.fitness_tracker.domain.values.Name;
+import com.zihler.fitness_tracker.domain.values.Sets;
 
 import java.util.regex.Pattern;
 
@@ -9,7 +13,7 @@ public class ExerciseFactory {
         // whereas it gets pretty adventurous to wield two barbells at the same time ;)
         // So double wielding are >>always<< dumbbell for now.
         if (isSingleWieldingExercise(inputValue)) {
-            return new Exercise(Name.of(inputValue), Sets.empty(), Multiplier.ofOne());
+            return new Exercise(Name.of(inputValue), Sets.empty(), Multiplier.ONE);
         } else {
             return dualWieldingDumbbellExercise(inputValue);
         }

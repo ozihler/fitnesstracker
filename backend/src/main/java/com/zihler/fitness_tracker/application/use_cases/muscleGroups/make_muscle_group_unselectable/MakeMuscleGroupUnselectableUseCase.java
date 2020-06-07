@@ -5,12 +5,12 @@ import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGro
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.FetchMuscleGroup;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreMuscleGroup;
 import com.zihler.fitness_tracker.application.use_cases.muscleGroups.make_muscle_group_unselectable.inbound_port.MakeMuscleGroupUnselectable;
-import com.zihler.fitness_tracker.domain.values.MuscleGroup;
+import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
 import com.zihler.fitness_tracker.domain.values.MuscleGroupName;
 
 public class MakeMuscleGroupUnselectableUseCase implements MakeMuscleGroupUnselectable {
-    private FetchMuscleGroup fetchMuscleGroup;
-    private StoreMuscleGroup storeMuscleGroup;
+    private final FetchMuscleGroup fetchMuscleGroup;
+    private final StoreMuscleGroup storeMuscleGroup;
 
     public MakeMuscleGroupUnselectableUseCase(
             FetchMuscleGroup fetchMuscleGroup,

@@ -1,45 +1,27 @@
 package com.zihler.fitness_tracker.domain.values;
 
-import java.util.Objects;
+public enum Multiplier {
+    ONE(1), TWO(2);
 
-public class Multiplier {
     private final int value;
 
-    private Multiplier(int value) {
+    Multiplier(int value) {
         this.value = value;
     }
 
-    public static Multiplier of(String valueAsString) {
-        return of(Integer.parseInt(valueAsString));
+    public static Multiplier of(int multiplier) {
+        if (multiplier == 2) {
+            return TWO;
+        }
+        return ONE;
     }
 
-    public static Multiplier of(int value) {
-        return new Multiplier(value);
-    }
-
-    public static Multiplier ofOne() {
-        return of(1);
-    }
-
-    public static Multiplier ofTwo() {
-        return of(2);
+    public static Multiplier of(String multiplier) {
+        return of(Integer.parseInt(multiplier));
     }
 
     public int value() {
         return value;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Multiplier that = (Multiplier) o;
-        return value == that.value;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
     }
 
     @Override

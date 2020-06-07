@@ -1,12 +1,15 @@
-package com.zihler.fitness_tracker.domain.values;
+package com.zihler.fitness_tracker.domain.entities;
 
+
+import com.zihler.fitness_tracker.domain.values.Exercises;
+import com.zihler.fitness_tracker.domain.values.Name;
 
 import java.util.Objects;
 
 public class MuscleGroup {
     // replace with muscle group name
-    private Name name;
-    private Exercises exercises;
+    private final Name name;
+    private final Exercises exercises;
     private boolean isSelectable = true;
 
     public MuscleGroup(Name name, Exercises exercises) {

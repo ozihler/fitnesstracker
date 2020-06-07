@@ -6,6 +6,8 @@ import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorko
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.WorkoutPresenter;
 import com.zihler.fitness_tracker.application.use_cases.workouts.create_workout.inbound_port.CreateWorkout;
 import com.zihler.fitness_tracker.domain.entities.Workout;
+import com.zihler.fitness_tracker.domain.values.CreationDate;
+import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
 
 public class CreateWorkoutUseCase implements CreateWorkout {
@@ -20,7 +22,7 @@ public class CreateWorkoutUseCase implements CreateWorkout {
 
     @Override
     public void invokeWith(WorkoutTitle workoutTitle, WorkoutPresenter output) {
-        Workout workout = Workout.of(generateWorkoutId.next(), workoutTitle);
+        Workout workout = new Workout(generateWorkoutId.next(), CreationDate.now(), workoutTitle, new MuscleGroups());
         Workout stored = workouts.withValues(workout);
         output.present(WorkoutDocument.of(stored));
     }

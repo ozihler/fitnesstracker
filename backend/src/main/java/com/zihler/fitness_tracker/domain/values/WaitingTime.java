@@ -1,5 +1,7 @@
 package com.zihler.fitness_tracker.domain.values;
 
+import com.zihler.fitness_tracker.domain.exceptions.IllegalWaitingTimeException;
+
 import java.util.Objects;
 
 public class WaitingTime {
@@ -7,6 +9,9 @@ public class WaitingTime {
     private final UnitOfTime unitOfTime;
 
     private WaitingTime(int waitingTime, UnitOfTime unitOfTime) {
+        if (waitingTime < 0) {
+            throw new IllegalWaitingTimeException("Waiting time cannot be below 0. Got " + waitingTime);
+        }
         this.waitingTime = waitingTime;
         this.unitOfTime = unitOfTime;
     }

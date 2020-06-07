@@ -1,14 +1,15 @@
 package com.zihler.fitness_tracker.domain.values;
 
 
+import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.joining;
 
 public class MuscleGroups {
-    private List<MuscleGroup> muscleGroups;
+    private final List<MuscleGroup> muscleGroups;
 
     public MuscleGroups(List<MuscleGroup> muscleGroups) {
         this.muscleGroups = muscleGroups;

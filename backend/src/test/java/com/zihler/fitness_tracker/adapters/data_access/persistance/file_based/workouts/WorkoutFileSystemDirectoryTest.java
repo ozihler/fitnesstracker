@@ -1,5 +1,7 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.workouts;
 
+import com.zihler.fitness_tracker.domain.entities.Exercise;
+import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
 import com.zihler.fitness_tracker.domain.entities.Set;
 import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.*;
@@ -23,17 +25,13 @@ class WorkoutFileSystemDirectoryTest {
                                 Set.withValues(Weight.of(50, UnitOfMeasurement.KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS)),
                                 Set.withValues(Weight.of(45, UnitOfMeasurement.KILOGRAMM), Repetitions.of(12), WaitingTime.of(45, UnitOfTime.SECONDS))
                         )),
-                        Multiplier.ofOne())
+                        Multiplier.ONE)
         };
 
-        Workout workout = Workout.of(
-                WorkoutId.of("x-1-2"),
-                CreationDate.now(),
-                WorkoutTitle.of("WORKOUT TITLE"),
-                muscleGroups(
-                        new MuscleGroup(
-                                Name.of("Chest"),
-                                Exercises.of(bench_presses))));
+        Workout workout = new Workout(WorkoutId.of("x-1-2"), CreationDate.now(), WorkoutTitle.of("WORKOUT TITLE"), muscleGroups(
+                new MuscleGroup(
+                        Name.of("Chest"),
+                        Exercises.of(bench_presses))));
 
 
         directory.save(workout);

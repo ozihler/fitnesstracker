@@ -1,10 +1,10 @@
 package com.zihler.fitness_tracker.application.use_cases.workouts.copy_workout.roles;
 
-import com.zihler.fitness_tracker.domain.values.MuscleGroup;
+import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
 import com.zihler.fitness_tracker.domain.values.Name;
 
 public class MuscleGroupToCopy {
-    private MuscleGroup muscleGroup;
+    private final MuscleGroup muscleGroup;
 
     public MuscleGroupToCopy(MuscleGroup muscleGroup) {
         this.muscleGroup = muscleGroup;

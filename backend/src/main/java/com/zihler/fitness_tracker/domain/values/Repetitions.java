@@ -1,11 +1,16 @@
 package com.zihler.fitness_tracker.domain.values;
 
+import com.zihler.fitness_tracker.domain.exceptions.IllegalRepetitionsException;
+
 import java.util.Objects;
 
 public class Repetitions {
     private final int numberOfRepetitions;
 
     private Repetitions(int numberOfRepetitions) {
+        if (numberOfRepetitions < 0) {
+            throw new IllegalRepetitionsException("Repetiotions cannot be below 0. Got " + numberOfRepetitions);
+        }
         this.numberOfRepetitions = numberOfRepetitions;
     }
 

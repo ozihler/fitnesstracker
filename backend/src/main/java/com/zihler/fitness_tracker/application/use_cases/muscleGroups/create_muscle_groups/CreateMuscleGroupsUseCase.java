@@ -5,8 +5,8 @@ import com.zihler.fitness_tracker.application.outbound_ports.documents.MuscleGro
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreMuscleGroups;
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.MuscleGroupsPresenter;
 import com.zihler.fitness_tracker.application.use_cases.muscleGroups.create_muscle_groups.inbound_port.CreateMuscleGroups;
+import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
 import com.zihler.fitness_tracker.domain.values.Exercises;
-import com.zihler.fitness_tracker.domain.values.MuscleGroup;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 public class CreateMuscleGroupsUseCase implements CreateMuscleGroups {
-    private StoreMuscleGroups store;
+    private final StoreMuscleGroups store;
 
     public CreateMuscleGroupsUseCase(StoreMuscleGroups store) {
         this.store = store;

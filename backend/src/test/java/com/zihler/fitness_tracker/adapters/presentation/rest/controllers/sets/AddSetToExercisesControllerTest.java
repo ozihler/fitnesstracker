@@ -2,6 +2,8 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets;
 
 import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.workouts.InMemoryWorkoutRepository;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.SetViewModel;
+import com.zihler.fitness_tracker.domain.entities.Exercise;
+import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
 import com.zihler.fitness_tracker.domain.entities.Set;
 import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.*;
@@ -19,17 +21,14 @@ class AddSetToExercisesControllerTest {
         var exercise = "Bench Press";
 
         InMemoryWorkoutRepository repo = new InMemoryWorkoutRepository();
-        var existingWorkout = Workout.of(
-                WorkoutId.of(workoutId),
-                WorkoutTitle.of("W Chest"),
-                muscleGroups(
-                        new MuscleGroup(
-                                Name.of("Chest"),
-                                Exercises.of(
-                                        new Exercise(
-                                                Name.of("Bench Press"),
-                                                Sets.empty(),
-                                                Multiplier.ofOne())))));
+        var existingWorkout = new Workout(WorkoutId.of(workoutId), CreationDate.now(), WorkoutTitle.of("W Chest"), muscleGroups(
+                new MuscleGroup(
+                        Name.of("Chest"),
+                        Exercises.of(
+                                new Exercise(
+                                        Name.of("Bench Press"),
+                                        Sets.empty(),
+                                        Multiplier.ONE)))));
 
         repo.withValues(existingWorkout);
 

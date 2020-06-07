@@ -5,6 +5,7 @@ import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorko
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.CopiedWorkoutPresenter;
 import com.zihler.fitness_tracker.application.use_cases.workouts.copy_workout.roles.exceptions.WorkoutNotCopiedYetException;
 import com.zihler.fitness_tracker.domain.entities.Workout;
+import com.zihler.fitness_tracker.domain.values.CreationDate;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 import com.zihler.fitness_tracker.domain.values.WorkoutId;
 import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
@@ -24,7 +25,7 @@ public class WorkoutToCopy {
     }
 
     public WorkoutToCopy makeCopy() {
-        Workout copyOfWorkout = Workout.of(newWorkoutId(), copyOfWorkoutTitle(), copyOfMuscleGroups());
+        Workout copyOfWorkout = new Workout(newWorkoutId(), CreationDate.now(), copyOfWorkoutTitle(), copyOfMuscleGroups());
         Workout storedCopyOfWorkout = storeWorkout.withValues(copyOfWorkout);
         idOfCopiedWorkout = storedCopyOfWorkout.getWorkoutId();
         return this;

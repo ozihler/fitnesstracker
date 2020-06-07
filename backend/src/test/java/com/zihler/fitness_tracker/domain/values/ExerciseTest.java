@@ -1,5 +1,7 @@
 package com.zihler.fitness_tracker.domain.values;
 
+import com.zihler.fitness_tracker.domain.entities.Exercise;
+import com.zihler.fitness_tracker.domain.entities.ExerciseFactory;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,14 +12,14 @@ class ExerciseTest {
     void testNameCorrect() {
         Exercise testee = ExerciseFactory.createExerciseFrom("hello");
         assertEquals(Name.of("Hello"), testee.getName());
-        assertEquals(Multiplier.ofOne(), testee.getMultiplier());
+        assertEquals(Multiplier.ONE, testee.getMultiplier());
     }
 
     @Test
     void testTrimInput() {
         Exercise testee = ExerciseFactory.createExerciseFrom(" 2#hello");
         assertEquals(Name.of("Hello"), testee.getName());
-        assertEquals(Multiplier.of(2), testee.getMultiplier());
+        assertEquals(Multiplier.TWO, testee.getMultiplier());
     }
 
     @Test
@@ -31,31 +33,31 @@ class ExerciseTest {
     void testPatternOnlyWorksIfHashTagIsRightAfterNumberAtTheBeginning() {
         Exercise testee = ExerciseFactory.createExerciseFrom("#2#hello");
         assertEquals(Name.of("#2#hello"), testee.getName());
-        assertEquals(Multiplier.ofOne(), testee.getMultiplier());
+        assertEquals(Multiplier.ONE, testee.getMultiplier());
     }
 
     @Test
     void testPatternDoesNotWorkForNumbersUnequal2FollowedByHashtag() {
         Exercise testee = ExerciseFactory.createExerciseFrom("1#hello");
         assertEquals(Name.of("1#hello"), testee.getName());
-        assertEquals(Multiplier.ofOne(), testee.getMultiplier());
+        assertEquals(Multiplier.ONE, testee.getMultiplier());
 
         testee = ExerciseFactory.createExerciseFrom("3#hello");
         assertEquals(Name.of("3#hello"), testee.getName());
-        assertEquals(Multiplier.ofOne(), testee.getMultiplier());
+        assertEquals(Multiplier.ONE, testee.getMultiplier());
     }
 
     @Test
     void testPatternDoesNotWorkForCharactersFollowedByHashtag() {
         Exercise testee = ExerciseFactory.createExerciseFrom("x#hello");
         assertEquals(Name.of("x#hello"), testee.getName());
-        assertEquals(Multiplier.ofOne(), testee.getMultiplier());
+        assertEquals(Multiplier.ONE, testee.getMultiplier());
     }
 
     @Test
     void testPatternDoesNotWorkForDecimalNumbersFollowedByHashtag() {
         Exercise testee = ExerciseFactory.createExerciseFrom("1.2#hello");
         assertEquals(Name.of("1.2#hello"), testee.getName());
-        assertEquals(Multiplier.ofOne(), testee.getMultiplier());
+        assertEquals(Multiplier.ONE, testee.getMultiplier());
     }
 }
