@@ -6,24 +6,24 @@ import {TreeNode} from '../../workout-tree/tree-node';
   template: `
     <div class="uk-grid uk-grid-collapse">
       <button
-        id="ft-select-{{element?.name | replace : ' ': '-' | lowercase}}-button"
+        id="ft-select-{{item?.name | replace : ' ': '-' | lowercase}}-button"
         class="uk-button uk-button-default uk-width-2-3 uk-text-truncate"
-        (click)="select(element)">{{element?.name}}</button>
+        (click)="select(item)">{{item?.name}}</button>
 
       <!-- todo delete-muscle-group-or-exercise.component-->
       <button
-        id="ft-delete-{{element?.name | replace : ' ': '-' | lowercase}}-button"
+        id="ft-delete-{{item?.name | replace : ' ': '-' | lowercase}}-button"
         class="uk-button uk-button-danger uk-width-1-3"
-        (click)="delete(element)">
+        (click)="delete(item)">
         <i class="fa fa-trash"></i>
       </button>
     </div>`
 })
 export class SelectableMuscleGroupOrExerciseComponent implements OnInit {
 
-  @Input() element: TreeNode;
-  @Output() selectElementEvent = new EventEmitter<TreeNode>();
-  @Output() deleteElementEvent = new EventEmitter<TreeNode>();
+  @Input() item: TreeNode;
+  @Output() selectItemEvent = new EventEmitter<TreeNode>();
+  @Output() deleteItemEvent = new EventEmitter<TreeNode>();
 
   constructor() {
   }
@@ -33,11 +33,11 @@ export class SelectableMuscleGroupOrExerciseComponent implements OnInit {
 
   select(element: TreeNode) {
     if (element) {
-      this.selectElementEvent.emit(element);
+      this.selectItemEvent.emit(element);
     }
   }
 
   delete(element: TreeNode) {
-    this.deleteElementEvent.emit(element);
+    this.deleteItemEvent.emit(element);
   }
 }

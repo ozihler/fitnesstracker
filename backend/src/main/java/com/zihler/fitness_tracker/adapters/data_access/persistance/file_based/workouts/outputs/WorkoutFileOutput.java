@@ -18,7 +18,6 @@ public class WorkoutFileOutput {
     public WorkoutViewModel file() {
         return WorkoutViewModel.of(
                 this.workout.getWorkoutId().toString(),
-                this.workout.getWorkoutTitle().toString(),
                 workout.getCreationDate().toMillis(),
                 new MuscleGroupsFilesOutput(this.workout.getMuscleGroups()).files()
         );

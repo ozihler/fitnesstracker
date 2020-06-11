@@ -4,8 +4,8 @@ import {Type} from './type';
 import {MuscleGroup} from './muscle-group';
 
 export class Workout extends TreeNode {
-  static WORKOUT_PREFIX = '(W)'; // currently the only way to make sure the muscle group with the same name is selected only
-  static WORKOUT_INITIAL_TITLE = Workout.WORKOUT_PREFIX + ' ' + 'New Workout';
+// currently the only way to make sure the muscle group with the same name is selected only
+  static WORKOUT_INITIAL_TITLE = 'New Workout';
 
   constructor(private _workoutId: WorkoutId,
               private _creationDate: Date,
@@ -14,16 +14,8 @@ export class Workout extends TreeNode {
     super(undefined, name, muscleGroups);
   }
 
-  get type(): Type {
+  get typeOfCurrentlySelection(): Type {
     return Type.Workout;
-  }
-
-  get title() {
-    return this.name;
-  }
-
-  set title(value: string) {
-    this.name = value;
   }
 
   get workoutId(): WorkoutId {
@@ -42,8 +34,16 @@ export class Workout extends TreeNode {
     return this._creationDate;
   }
 
-
   get id(): string {
     return 'root';
+  }
+
+
+  get name() {
+    return super.name ? super.name : Workout.WORKOUT_INITIAL_TITLE;
+  }
+
+  set name(value) {
+    super.name = value;
   }
 }

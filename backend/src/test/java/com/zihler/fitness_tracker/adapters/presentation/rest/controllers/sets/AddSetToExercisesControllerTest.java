@@ -21,7 +21,7 @@ class AddSetToExercisesControllerTest {
         var exercise = "Bench Press";
 
         InMemoryWorkoutRepository repo = new InMemoryWorkoutRepository();
-        var existingWorkout = new Workout(WorkoutId.of(workoutId), CreationDate.now(), WorkoutTitle.of("W Chest"), muscleGroups(
+        var existingWorkout = new Workout(WorkoutId.of(workoutId), CreationDate.now(), muscleGroups(
                 new MuscleGroup(
                         Name.of("Chest"),
                         Exercises.of(

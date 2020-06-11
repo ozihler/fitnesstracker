@@ -12,27 +12,24 @@ public class WorkoutViewModel implements Namable {
     private String workoutId;
     @JsonProperty("creationDate")
     private long creationDate;
-    @JsonProperty("title")
-    private String title;
     @JsonProperty("muscleGroups")
     private List<MuscleGroupViewModel> muscleGroups;
 
     public WorkoutViewModel() {
     }
 
-    public WorkoutViewModel(String workoutId, long creationDate, String title) {
-        this(workoutId, creationDate, title, new ArrayList<>());
+    public WorkoutViewModel(String workoutId, long creationDate) {
+        this(workoutId, creationDate, new ArrayList<>());
     }
 
-    public WorkoutViewModel(String workoutId, long creationDate, String title, List<MuscleGroupViewModel> muscleGroups) {
+    public WorkoutViewModel(String workoutId, long creationDate, List<MuscleGroupViewModel> muscleGroups) {
         this.workoutId = workoutId;
         this.creationDate = creationDate;
-        this.title = title;
         this.muscleGroups = muscleGroups;
     }
 
-    public static WorkoutViewModel of(String workoutId, String title, long creationDate, List<MuscleGroupViewModel> muscleGroups) {
-        return new WorkoutViewModel(workoutId, creationDate, title, new ArrayList<>(muscleGroups));
+    public static WorkoutViewModel of(String workoutId, long creationDate, List<MuscleGroupViewModel> muscleGroups) {
+        return new WorkoutViewModel(workoutId, creationDate, new ArrayList<>(muscleGroups));
     }
 
     public String getWorkoutId() {
@@ -41,10 +38,6 @@ public class WorkoutViewModel implements Namable {
 
     public long getCreationDate() {
         return creationDate;
-    }
-
-    public String getTitle() {
-        return title;
     }
 
     public List<MuscleGroupViewModel> getMuscleGroups() {
@@ -62,7 +55,6 @@ public class WorkoutViewModel implements Namable {
         return "FullWorkoutViewModel{" +
                 "workoutId='" + workoutId + '\'' +
                 ", creationDate=" + creationDate +
-                ", title='" + title + '\'' +
                 ", muscleGroups=" + muscleGroups +
                 '}';
     }

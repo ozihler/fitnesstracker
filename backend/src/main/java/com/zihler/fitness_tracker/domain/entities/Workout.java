@@ -3,20 +3,20 @@ package com.zihler.fitness_tracker.domain.entities;
 import com.zihler.fitness_tracker.domain.values.CreationDate;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 import com.zihler.fitness_tracker.domain.values.WorkoutId;
-import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
+
+import java.util.Objects;
 
 public class Workout {
     private final WorkoutId workoutId;
     private final CreationDate creationDate;
-    private final WorkoutTitle workoutTitle;
     private final MuscleGroups muscleGroups;
     private boolean isDeleted;
 
-    public Workout(WorkoutId workoutId, CreationDate creationDate, WorkoutTitle workoutTitle, MuscleGroups muscleGroups) {
+    public Workout(WorkoutId workoutId, CreationDate creationDate, MuscleGroups muscleGroups) {
         this.workoutId = workoutId;
-        this.creationDate = creationDate;
-        this.workoutTitle = workoutTitle;
-        this.muscleGroups = muscleGroups;
+        this.creationDate = Objects.requireNonNullElseGet(creationDate, CreationDate::now);
+        this.muscleGroups = Objects.requireNonNullElseGet(muscleGroups, MuscleGroups::new);
+        this.isDeleted = false;
     }
 
     public WorkoutId getWorkoutId() {
@@ -25,10 +25,6 @@ public class Workout {
 
     public CreationDate getCreationDate() {
         return creationDate;
-    }
-
-    public WorkoutTitle getWorkoutTitle() {
-        return workoutTitle;
     }
 
     public MuscleGroups getMuscleGroups() {
@@ -48,7 +44,6 @@ public class Workout {
         return "Workout{" +
                 "workoutId=" + workoutId +
                 ", creationDate=" + creationDate +
-                ", workoutTitle=" + workoutTitle +
                 ", muscleGroups=" + muscleGroups +
                 '}';
     }

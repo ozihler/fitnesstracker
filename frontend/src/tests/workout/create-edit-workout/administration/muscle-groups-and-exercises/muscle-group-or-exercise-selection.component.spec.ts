@@ -1,5 +1,5 @@
 import {async, TestBed} from '@angular/core/testing';
-import {MuscleGroupOrExerciseSelectionComponent} from '../../../../../app/workout/create-edit-workout/administration/muscle-groups-and-exercises/muscle-group-or-exercise-selection.component';
+import {SelectableItemsComponent} from '../../../../../app/workout/create-edit-workout/administration/muscle-groups-and-exercises/selectable-items.component';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 import {SelectableMuscleGroupOrExerciseComponent} from '../../../../../app/workout/create-edit-workout/administration/muscle-groups-and-exercises/selectable-muscle-group-or-exercise.component';
@@ -17,7 +17,7 @@ describe('MuscleGroupOrExerciseSelectionComponent', () => {
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule],
       declarations: [
-        MuscleGroupOrExerciseSelectionComponent,
+        SelectableItemsComponent,
         SelectableMuscleGroupOrExerciseComponent,
         CreateMuscleGroupsOrExercisesComponent,
         ReplacePipe
@@ -28,7 +28,7 @@ describe('MuscleGroupOrExerciseSelectionComponent', () => {
       ]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MuscleGroupOrExerciseSelectionComponent);
+    fixture = TestBed.createComponent(SelectableItemsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
@@ -70,7 +70,7 @@ describe('MuscleGroupOrExerciseSelectionComponent', () => {
         ]
       );
     component.currentSelection = workout;
-    component.selectableElements = workout.children;
+    component.selectableItems = workout.children;
     fixture.detectChanges();
 
     const nativeElement = fixture.debugElement.nativeElement;

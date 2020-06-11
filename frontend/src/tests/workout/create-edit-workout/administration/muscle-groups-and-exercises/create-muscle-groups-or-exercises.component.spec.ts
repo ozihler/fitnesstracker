@@ -67,7 +67,7 @@ describe('CreateMuscleGroupsOrExercisesComponent', () => {
       inputField.dispatchEvent(new Event('input'))
       fixture.detectChanges()
 
-      component.createElementsEvent
+      component.createItemsEvent
         .subscribe(inputFormValue => receivedInputValue = inputFormValue);
 
       submitButton.click();

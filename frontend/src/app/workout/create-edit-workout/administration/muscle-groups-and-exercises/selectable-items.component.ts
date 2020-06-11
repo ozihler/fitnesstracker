@@ -5,24 +5,24 @@ import {ReplacePipe} from '../../../shared/pipes/replace.pipe';
 import {Set} from '../../../shared/set';
 
 @Component({
-  selector: 'app-muscle-group-or-exercise-selection',
+  selector: 'app-selectable-items',
   template: `
     <div class="uk-text-center">
       <span
         id="empty-elements-text"
-        *ngIf="!hasSelectableElements">{{emptyElementsText}}</span>
+        *ngIf="!hasSelectableItems">{{emptyItemsText}}</span>
 
       <div *ngIf="!isExercise">
-        <div *ngFor="let element of selectableElements">
+        <div *ngFor="let item of selectableItems">
           <app-selectable-muscle-group-or-exercise
-            [element]="element"
-            (selectElementEvent)="select($event)"
-            (deleteElementEvent)="delete($event)">
+            [item]="item"
+            (selectItemEvent)="select($event)"
+            (deleteItemEvent)="delete($event)">
           </app-selectable-muscle-group-or-exercise>
         </div>
         <hr/>
         <app-create-muscle-groups-and-exercises
-          (createElementsEvent)="createChild($event)"
+          (createItemsEvent)="createChild($event)"
           [typename]="child">
         </app-create-muscle-groups-and-exercises>
       </div>
@@ -34,10 +34,10 @@ import {Set} from '../../../shared/set';
       </div>
     </div>  `
 })
-export class MuscleGroupOrExerciseSelectionComponent implements OnInit {
+export class SelectableItemsComponent implements OnInit {
 
   @Input() currentSelection: TreeNode;
-  @Input() selectableElements: TreeNode[];
+  @Input() selectableItems: TreeNode[];
   @Output() addNodeEvent = new EventEmitter<TreeNode>();
   @Output() deleteNodeEvent = new EventEmitter<TreeNode>();
   @Output() createsChildEvent = new EventEmitter<string | Set>();
@@ -49,20 +49,20 @@ export class MuscleGroupOrExerciseSelectionComponent implements OnInit {
   ngOnInit() {
   }
 
-  select(element: TreeNode) {
-    this.addNodeEvent.emit(element);
+  select(item: TreeNode) {
+    this.addNodeEvent.emit(item);
   }
 
-  delete(element: TreeNode) {
-    this.deleteNodeEvent.emit(element);
+  delete(item: TreeNode) {
+    this.deleteNodeEvent.emit(item);
   }
 
-  createChild(elementsString: string | Set) {
-    this.createsChildEvent.emit(elementsString);
+  createChild(itemsString: string | Set) {
+    this.createsChildEvent.emit(itemsString);
   }
 
-  get hasSelectableElements() {
-    return this.selectableElements && this.selectableElements.length > 0;
+  get hasSelectableItems() {
+    return this.selectableItems && this.selectableItems.length > 0;
   }
 
   get title() {
@@ -73,7 +73,7 @@ export class MuscleGroupOrExerciseSelectionComponent implements OnInit {
     return `Add ${this.child} to ${this.currentSelection.name}`;
   }
 
-  get emptyElementsText() {
+  get emptyItemsText() {
     if (!this.currentSelection || this.childrenAreLeafs) {
       return '';
     }
@@ -93,10 +93,10 @@ export class MuscleGroupOrExerciseSelectionComponent implements OnInit {
   }
 
   get isExercise() {
-    return this.currentSelection && this.currentSelection.type === Type.Exercise;
+    return this.currentSelection && this.currentSelection.typeOfCurrentlySelection === Type.Exercise;
   }
 
   childTypeName() {
-    return Type[this.currentSelection ? this.currentSelection.type + 1 : 0];
+    return Type[this.currentSelection ? this.currentSelection.typeOfCurrentlySelection + 1 : 0];
   }
 }

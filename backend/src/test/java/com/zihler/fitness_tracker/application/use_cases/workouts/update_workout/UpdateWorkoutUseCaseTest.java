@@ -45,7 +45,7 @@ class UpdateWorkoutUseCaseTest {
                 List.of(new MuscleGroupDocument(Name.of("Chest"))
                         .add(new ExerciseDocument(Name.of("Bench Press"), sets, Multiplier.ONE, true))));
 
-        WorkoutDocument updatedWorkoutInput = new WorkoutDocument(initialWorkout.getWorkoutId(), initialWorkout.getCreationDate(), WorkoutTitle.of("New Title"), muscleGroups, false);
+        WorkoutDocument updatedWorkoutInput = new WorkoutDocument(initialWorkout.getWorkoutId(), initialWorkout.getCreationDate(), muscleGroups, false);
         updateWorkoutUseCase.invokeWith(updatedWorkoutInput, output);
 
         WorkoutDocument updatedWorkoutOutput = output.workoutDocument;
@@ -53,8 +53,6 @@ class UpdateWorkoutUseCaseTest {
 
         assertIdEqualsBetween(updatedWorkoutInput, updatedWorkoutOutput, storedWorkout, initialWorkout);
         assertCreationTimeEqualsBetween(updatedWorkoutInput, updatedWorkoutOutput, storedWorkout, initialWorkout);
-        assertTitleEqualsBetween(updatedWorkoutInput, updatedWorkoutOutput, storedWorkout);
-        assertTitleNotEqualBetween(initialWorkout, updatedWorkoutInput, updatedWorkoutOutput, storedWorkout);
 
         assertEquals(0, initialWorkout.getMuscleGroups().count());
         assertEquals(1, updatedWorkoutInput.getMuscleGroups().count());
@@ -95,17 +93,6 @@ class UpdateWorkoutUseCaseTest {
                 .collect(Collectors.toList());
     }
 
-    private void assertTitleNotEqualBetween(WorkoutDocument initialWorkout, WorkoutDocument updatedWorkoutInput, WorkoutDocument updatedWorkoutOutput, Workout storedWorkout) {
-        assertNotEquals(storedWorkout.getWorkoutTitle(), initialWorkout.getWorkoutTitle());
-        assertNotEquals(updatedWorkoutOutput.getWorkoutTitle(), initialWorkout.getWorkoutTitle());
-        assertNotEquals(updatedWorkoutInput.getWorkoutTitle(), initialWorkout.getWorkoutTitle());
-    }
-
-    private void assertTitleEqualsBetween(WorkoutDocument updatedWorkoutInput, WorkoutDocument updatedWorkoutOutput, Workout storedWorkout) {
-        assertEquals(storedWorkout.getWorkoutTitle(), updatedWorkoutInput.getWorkoutTitle());
-        assertEquals(storedWorkout.getWorkoutTitle(), updatedWorkoutOutput.getWorkoutTitle());
-    }
-
     private void assertCreationTimeEqualsBetween(WorkoutDocument updatedWorkoutInput, WorkoutDocument updatedWorkoutOutput, Workout storedWorkout, WorkoutDocument initialWorkout) {
         assertEquals(storedWorkout.getCreationDate(), updatedWorkoutInput.getCreationDate());
         assertEquals(storedWorkout.getCreationDate(), updatedWorkoutOutput.getCreationDate());
@@ -121,7 +108,7 @@ class UpdateWorkoutUseCaseTest {
     private WorkoutDocument initWorkout(StoreWorkout repo) {
         CreateWorkout createWorkout = new CreateWorkoutUseCase(repo, () -> WorkoutId.of("987654L"));
         TestWorkoutPresenter output = new TestWorkoutPresenter();
-        createWorkout.invokeWith(WorkoutTitle.of("Start Title"), output);
+        createWorkout.invokeWith(output);
         return output.workoutDocument;
     }
 

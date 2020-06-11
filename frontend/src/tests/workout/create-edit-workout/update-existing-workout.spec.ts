@@ -7,10 +7,10 @@ import {SelectionService} from '../../../app/workout/shared/services/selection.s
 import {of} from 'rxjs';
 import {Workout} from '../../../app/workout/shared/workout';
 import {WorkoutId} from '../../../app/workout/shared/workout-id';
-import {WorkoutTitleComponent} from '../../../app/workout/create-edit-workout/title/workout-title.component';
+import {WorkoutHeaderComponent} from '../../../app/workout/create-edit-workout/title/workout-header.component';
 import {WorkoutTreeComponent} from '../../../app/workout/create-edit-workout/selection/workout-tree.component';
 // tslint:disable-next-line:max-line-length
-import {MuscleGroupOrExerciseSelectionComponent} from '../../../app/workout/create-edit-workout/administration/muscle-groups-and-exercises/muscle-group-or-exercise-selection.component';
+import {SelectableItemsComponent} from '../../../app/workout/create-edit-workout/administration/muscle-groups-and-exercises/selectable-items.component';
 import {DatePipe, registerLocaleData} from '@angular/common';
 import {ReactiveFormsModule} from '@angular/forms';
 import {ReplacePipe} from '../../../app/workout/shared/pipes/replace.pipe';
@@ -91,12 +91,12 @@ describe('a user updating an existing workout', () => {
       declarations: [
         CreateWorkoutComponent,
         CreateMuscleGroupsOrExercisesComponent,
-        MuscleGroupOrExerciseSelectionComponent,
+        SelectableItemsComponent,
         CreateSetComponent,
         WorkoutTreeComponent,
         SetValuesComponent,
         SelectableMuscleGroupOrExerciseComponent,
-        WorkoutTitleComponent,
+        WorkoutHeaderComponent,
         SetFormatPipe,
         ReplacePipe,
         StringifyPipePipe,

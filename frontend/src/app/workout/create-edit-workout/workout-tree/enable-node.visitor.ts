@@ -5,16 +5,16 @@ import {NodeVisitor} from './node.visitor';
 export class EnableNodeVisitor implements NodeVisitor {
   private readonly nodeCollector: NodeByNameCollectorVisitor;
 
-  private constructor(nodeName: string, private _treeNode: TreeNode) {
-    this.nodeCollector = new NodeByNameCollectorVisitor(nodeName);
+  private constructor(nodeId: string, private _treeNode: TreeNode) {
+    this.nodeCollector = new NodeByNameCollectorVisitor(nodeId);
   }
 
   get treeNode(): TreeNode {
     return this._treeNode;
   }
 
-  static find(nodeName: string, treeNode: TreeNode): EnableNodeVisitor {
-    return new EnableNodeVisitor(nodeName, treeNode);
+  static find(nodeId: string, treeNode: TreeNode): EnableNodeVisitor {
+    return new EnableNodeVisitor(nodeId, treeNode);
   }
 
   private static enableIfNeeded(node: TreeNode) {

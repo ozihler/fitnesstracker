@@ -8,7 +8,6 @@ import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.CreationDate;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 import com.zihler.fitness_tracker.domain.values.WorkoutId;
-import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
 
 public class WorkoutToCopy {
     private final Workout self;
@@ -25,7 +24,7 @@ public class WorkoutToCopy {
     }
 
     public WorkoutToCopy makeCopy() {
-        Workout copyOfWorkout = new Workout(newWorkoutId(), CreationDate.now(), copyOfWorkoutTitle(), copyOfMuscleGroups());
+        Workout copyOfWorkout = new Workout(newWorkoutId(), CreationDate.now(), copyOfMuscleGroups());
         Workout storedCopyOfWorkout = storeWorkout.withValues(copyOfWorkout);
         idOfCopiedWorkout = storedCopyOfWorkout.getWorkoutId();
         return this;
@@ -37,10 +36,6 @@ public class WorkoutToCopy {
 
     private WorkoutId newWorkoutId() {
         return generateWorkoutId.next();
-    }
-
-    private WorkoutTitle copyOfWorkoutTitle() {
-        return WorkoutTitle.of(self.getWorkoutTitle().toString());
     }
 
     public void presentCopiedWorkoutId() {

@@ -9,15 +9,12 @@ public class WorkoutAndMuscleGroupNamesViewModel {
     private String workoutId;
     @JsonProperty("creationDate")
     private long creationDate;
-    @JsonProperty("title")
-    private String title;
     @JsonProperty("muscleGroups")
     private List<MuscleGroupViewModel> muscleGroups;
 
-    public WorkoutAndMuscleGroupNamesViewModel(String workoutId, long creationDate, String title, List<MuscleGroupViewModel> muscleGroups) {
+    public WorkoutAndMuscleGroupNamesViewModel(String workoutId, long creationDate, List<MuscleGroupViewModel> muscleGroups) {
         this.workoutId = workoutId;
         this.creationDate = creationDate;
-        this.title = title;
         this.muscleGroups = muscleGroups;
     }
 
@@ -32,9 +29,6 @@ public class WorkoutAndMuscleGroupNamesViewModel {
         return creationDate;
     }
 
-    public String getTitle() {
-        return title;
-    }
 
     public List<MuscleGroupViewModel> getMuscleGroups() {
         return muscleGroups;
@@ -42,7 +36,7 @@ public class WorkoutAndMuscleGroupNamesViewModel {
 
     @Override
     public String toString() {
-        return String.format("WorkoutViewModel{workoutId=%s, creationDate=%d, title='%s', muscleGroups=%s}", workoutId, creationDate, title, muscleGroups);
+        return String.format("WorkoutViewModel{workoutId=%s, creationDate=%d, muscleGroups=%s}", workoutId, creationDate, muscleGroups);
     }
 
 

@@ -20,7 +20,6 @@ public class WorkoutOutput {
         return new WorkoutAndMuscleGroupNamesViewModel(
                 workoutDocument.getWorkoutId().toString(),
                 workoutDocument.getCreationDate().toMillis(),
-                workoutDocument.getWorkoutTitle().toString(),
                 toViewModel(workoutDocument.getMuscleGroups())
         );
     }

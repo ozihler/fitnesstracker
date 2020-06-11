@@ -45,7 +45,6 @@ class CopyWorkoutControllerTest {
 
         assertTrue(fullWorkout.getCreationDate().isBefore(copyOfWorkouts.getCreationDate()));
         assertEquals(CreationDate.now(), copyOfWorkouts.getCreationDate());
-        assertEquals(fullWorkout.getWorkoutTitle(), copyOfWorkouts.getWorkoutTitle());
 
         for (int i = 0; i < fullWorkout.getMuscleGroups().getMuscleGroups().size(); ++i) {
             MuscleGroup muscleGroupOfFullWorkout = fullWorkout.getMuscleGroups().getMuscleGroups().get(i);

@@ -9,6 +9,9 @@ describe('A workout user', () => {
   let user: WorkoutUser;
 
   beforeEach(() => {
+    // RUN ON UBUNTU:
+    // Run sudo webdriver-manager start
+    // Run protractor frontend/protractor.conf.js
     user = new WorkoutUser();
   });
 
@@ -20,16 +23,16 @@ describe('A workout user', () => {
   it('can create a workout with multiple muscle groups and exercises', () => {
     // user creates new workout
     user.createsNewWorkout()
-      .then(() => user.seesThatTitleOfWorkoutIs(Workout.WORKOUT_PREFIX + ' New Workout'))
+      .then(() => user.seesThatTitleOfWorkoutIs('New Workout'))
       .then(() => user.seesEmptyElementsText());
 
     // user adds muscle groups to workout
     user.createsMuscleGroups('cHesT; tRICEPS,ShOulders. BiCePs')
       .then(() => user.seesSelectableMuscleGroups(selectableMuscleGroups))
       .then(() => user.selectsMuscleGroup('Chest'))
-      .then(() => user.seesThatTitleOfWorkoutIs(Workout.WORKOUT_PREFIX + ' Chest'))
+      .then(() => user.seesThatTitleOfWorkoutIs(  'Chest'))
       .then(() => user.selectsMuscleGroup('Triceps'))
-      .then(() => user.seesThatTitleOfWorkoutIs(Workout.WORKOUT_PREFIX + ' Chest ' + 'Triceps'));
+      .then(() => user.seesThatTitleOfWorkoutIs('Chest ' + 'Triceps'));
 
     // user adds exercises to chest
     user.addsExercisesToMuscleGroup('bENCH PrEsS; 2#dumbbell BENch PrEss', 'Chest')

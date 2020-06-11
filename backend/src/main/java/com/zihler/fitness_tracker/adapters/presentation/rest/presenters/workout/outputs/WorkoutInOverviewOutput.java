@@ -13,8 +13,7 @@ public class WorkoutInOverviewOutput {
     public WorkoutViewModel toViewModel() {
         return new WorkoutViewModel(
                 workout.getWorkoutId().toString(),
-                workout.getCreationDate().toMillis(),
-                workout.getWorkoutTitle().toString());
+                workout.getCreationDate().toMillis());
     }
 
 }

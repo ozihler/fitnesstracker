@@ -2,7 +2,7 @@ import {TreeNode} from './tree-node';
 import {NodeVisitor} from './node.visitor';
 
 export class NodeByNameCollectorVisitor implements NodeVisitor {
-  constructor(private _nodeName: string) {
+  constructor(private _nodeId: string) {
 
   }
 
@@ -16,12 +16,12 @@ export class NodeByNameCollectorVisitor implements NodeVisitor {
     this._foundNode = value;
   }
 
-  get nodeName(): string {
-    return this._nodeName;
+  get nodeId(): string {
+    return this._nodeId;
   }
 
   visit(node: TreeNode) {
-    if (node.id === this.nodeName) {
+    if (node.id === this.nodeId) {
       this.foundNode = node;
       return;
     }

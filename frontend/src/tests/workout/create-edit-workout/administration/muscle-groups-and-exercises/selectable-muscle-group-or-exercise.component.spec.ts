@@ -1,4 +1,4 @@
-import {async, TestBed} from "@angular/core/testing";
+import {async, ComponentFixtureAutoDetect, TestBed} from "@angular/core/testing";
 import {SelectableMuscleGroupOrExerciseComponent} from "../../../../../app/workout/create-edit-workout/administration/muscle-groups-and-exercises/selectable-muscle-group-or-exercise.component";
 import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {TreeNode} from "../../../../../app/workout/create-edit-workout/workout-tree/tree-node";
@@ -29,12 +29,12 @@ describe('SelectableMuscleGroupOrExerciseComponent', () => {
   it('sends a select event for the element currently present in the component', () => {
     let receivedElement: TreeNode;
 
-    component.element = new Exercise(undefined, "Bench Press", []);
+    component.item = new Exercise(undefined, "Bench Press", []);
+
+    component.selectItemEvent
+      .subscribe((elementToSelect) => receivedElement = elementToSelect);
 
     fixture.detectChanges();
-
-    component.selectElementEvent
-      .subscribe((elementToSelect) => receivedElement = elementToSelect);
 
     let debugElement = fixture.nativeElement
       .querySelector('#ft-select-bench-press-button');
@@ -44,18 +44,18 @@ describe('SelectableMuscleGroupOrExerciseComponent', () => {
     expect(receivedElement.name).toBe('Bench Press');
   });
 
-  it('sents a delete event for the element currently present in the component', () => {
+  it('sends a delete event for the element currently present in the component', () => {
     let receivedElement: TreeNode;
 
-    component.element = new MuscleGroup(
+    component.item = new MuscleGroup(
       undefined,
       "Chest",
       []);
 
-    fixture.detectChanges();
-
-    component.deleteElementEvent
+    component.deleteItemEvent
       .subscribe((elementToDelete) => receivedElement = elementToDelete);
+
+    fixture.detectChanges();
 
     let debugElement = fixture.nativeElement
       .querySelector('#ft-delete-chest-button');

@@ -14,10 +14,6 @@ export abstract class TreeNode implements Cumulatable {
     this.linkToChildren();
   }
 
-  get isRoot(): boolean {
-    return this.type === Type.Workout;
-  }
-
   get parent(): TreeNode {
     return this._parent;
   }
@@ -44,7 +40,7 @@ export abstract class TreeNode implements Cumulatable {
   }
 
   get isLeaf(): boolean {
-    return this.type === Type.Set;
+    return this.typeOfCurrentlySelection === Type.Set;
   }
 
   get isEnabled(): boolean {
@@ -79,7 +75,7 @@ export abstract class TreeNode implements Cumulatable {
     this._parent = value;
   }
 
-  abstract get type(): Type;
+  abstract get typeOfCurrentlySelection(): Type;
 
   accept(visitor: NodeVisitor) {
     visitor.visit(this);

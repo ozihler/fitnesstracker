@@ -37,6 +37,7 @@ export class WorkoutTree {
   }
 
   enable(nodeId: string): void {
+    console.log("Enable, ", nodeId)
     if (!nodeId) {
       return;
     }
@@ -52,9 +53,10 @@ export class WorkoutTree {
     this.root.accept(new DisableAllNodesVisitor());
   }
 
-  // Todo this should not have a parameter of type tree node but only names and a type --> should create a node and return it
+  // Todo this should not have a parameter of type tree
+  //  node but only names and a type --> should create a node and return it
   addNode(nodeToAdd: TreeNode): boolean {
-    if (nodeToAdd.type === Type.Muscle_Group) {
+    if (nodeToAdd.typeOfCurrentlySelection === Type.Muscle_Group) {
       return this.link(nodeToAdd, this.root);
     }
     const foundParentOfNode = this.findNodeById(nodeToAdd.parent.id);
@@ -72,8 +74,9 @@ export class WorkoutTree {
   }
 
   select(nodeId: string) {
+    console.log("Node to find: ", nodeId)
     this.currentSelection = this.findNodeById(nodeId);
-
+    console.log("current selection: ", this.currentSelection.id)
     if (this.currentSelection.isEnabled && this.someChildrenAreEnabled) {
       this.disableChildrenOf(this.currentSelection);
     } else {
@@ -83,8 +86,7 @@ export class WorkoutTree {
 
   delete(nodeId: string) {
     const treeNode = this.findNodeById(nodeId);
-    console.log('delete found tree node: ', treeNode);
-    this.removeFromParent(treeNode);
+    WorkoutTree.removeFromParent(treeNode);
 
     if (treeNode.parent) {
       this.currentSelection = treeNode.parent;
@@ -101,15 +103,15 @@ export class WorkoutTree {
     return true;
   }
 
-  private isSet(treeNode: TreeNode) {
-    return treeNode.type === Type.Set;
+  private static isSet(treeNode: TreeNode) {
+    return treeNode.typeOfCurrentlySelection === Type.Set;
   }
 
-  private hasSiblings(treeNode: TreeNode) {
+  private static hasSiblings(treeNode: TreeNode) {
     return treeNode.parent.children.length > 0;
   }
 
-  private removeFromParent(treeNode: TreeNode) {
+  private static removeFromParent(treeNode: TreeNode) {
     const count = 0;
     const treeNodeIndex = treeNode.parent.children.indexOf(treeNode);
     if (treeNodeIndex >= 0) {
@@ -117,7 +119,11 @@ export class WorkoutTree {
     }
   }
 
+  setCurrentSelectionAsParentOf(nodes: TreeNode[]) {
+    nodes.forEach(node => node.parent = this.currentSelection);
+  }
+
   public getCumulativeWeight(): number {
-    return 0;
+    throw new Error("Not implemented yet!");
   }
 }

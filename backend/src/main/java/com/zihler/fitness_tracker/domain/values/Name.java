@@ -14,7 +14,7 @@ public class Name implements Comparable<Name> {
         if (StringUtils.isBlank(name)) {
             throw new IllegalNameException("Name cannot be empty!");
         }
-        this.name = WordUtils.capitalize(name.toLowerCase(), ' ');
+        this.name = WordUtils.capitalize(name.trim().toLowerCase(), ' ');
     }
 
     public static Name of(String name) {

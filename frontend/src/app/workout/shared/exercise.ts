@@ -10,7 +10,7 @@ export class Exercise extends TreeNode {
     super(parent, name, sets);
   }
 
-  get type(): Type {
+  get typeOfCurrentlySelection(): Type {
     return Type.Exercise;
   }
 

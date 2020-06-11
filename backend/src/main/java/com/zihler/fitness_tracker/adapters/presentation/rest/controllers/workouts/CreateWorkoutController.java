@@ -1,7 +1,5 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts;
 
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.inputs.WorkoutToCreateInput;
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutToCreate;
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout.RestWorkoutPresenter;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutAndMuscleGroupNamesViewModel;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.GenerateWorkoutId;
@@ -21,11 +19,10 @@ public class CreateWorkoutController {
         createWorkout = new CreateWorkoutUseCase(workouts, generateWorkoutId);
     }
 
-    public ResponseEntity<WorkoutAndMuscleGroupNamesViewModel> createWorkout(WorkoutToCreate request) {
-        var input = new WorkoutToCreateInput(request);
+    public ResponseEntity<WorkoutAndMuscleGroupNamesViewModel> createWorkout() {
         var output = new RestWorkoutPresenter();
 
-        createWorkout.invokeWith(input.workoutTitle(), output);
+        createWorkout.invokeWith(output);
 
         return output.getResponse();
     }

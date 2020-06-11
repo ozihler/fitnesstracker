@@ -16,7 +16,7 @@ export class Set extends TreeNode {
     super(parent, _index_in_exercise + '', undefined);
   }
 
-  get type(): Type {
+  get typeOfCurrentlySelection(): Type {
     return Type.Set;
   }
 

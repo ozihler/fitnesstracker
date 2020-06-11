@@ -2,7 +2,6 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.resources;
 
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.*;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutIdRequest;
-import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutToCreate;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts.requests.WorkoutToUpdate;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutAndMuscleGroupNamesViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutIdViewModel;
@@ -47,8 +46,8 @@ public class WorkoutsResource {
     }
 
     @PostMapping(path = "/api/workouts")
-    public ResponseEntity<WorkoutAndMuscleGroupNamesViewModel> createWorkout(@RequestBody WorkoutToCreate request) {
-        ResponseEntity<WorkoutAndMuscleGroupNamesViewModel> createdWorkout = createWorkoutController.createWorkout(request);
+    public ResponseEntity<WorkoutAndMuscleGroupNamesViewModel> createWorkout() {
+        ResponseEntity<WorkoutAndMuscleGroupNamesViewModel> createdWorkout = createWorkoutController.createWorkout();
 
         logger.info("All workouts:{}", createdWorkout.getBody());
 

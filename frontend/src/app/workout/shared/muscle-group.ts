@@ -9,7 +9,7 @@ export class MuscleGroup extends TreeNode {
     super(parent, name, exercises);
   }
 
-  get type(): Type {
+  get typeOfCurrentlySelection(): Type {
     return Type.Muscle_Group;
   }
 

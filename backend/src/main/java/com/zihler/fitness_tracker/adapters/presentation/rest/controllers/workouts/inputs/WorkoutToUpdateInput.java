@@ -6,7 +6,6 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutV
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutDocument;
 import com.zihler.fitness_tracker.domain.values.CreationDate;
 import com.zihler.fitness_tracker.domain.values.WorkoutId;
-import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
 
 public class WorkoutToUpdateInput {
     private final WorkoutToUpdate request;
@@ -21,7 +20,6 @@ public class WorkoutToUpdateInput {
         return new WorkoutDocument(
                 WorkoutId.of(workout.getWorkoutId()),
                 CreationDate.of(workout.getCreationDate()),
-                WorkoutTitle.of(workout.getTitle()),
                 new MuscleGroupsFullInput(workout.getMuscleGroups()).toDocument(),
                 false
         );

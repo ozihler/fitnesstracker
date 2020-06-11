@@ -6,7 +6,6 @@ import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutDo
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutsDocument;
 import com.zihler.fitness_tracker.domain.values.CreationDate;
 import com.zihler.fitness_tracker.domain.values.WorkoutId;
-import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -17,10 +16,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class SortWorkoutsInOverviewTest {
     @Test
     void sortsFromNewestToLowest() {
-        var w1 = new WorkoutDocument(WorkoutId.of("1"), CreationDate.of(LocalDate.of(2014, 1, 1)), WorkoutTitle.of("1"), null, false);
-        var w2 = new WorkoutDocument(WorkoutId.of("2"), CreationDate.of(LocalDate.of(2018, 1, 1)), WorkoutTitle.of("2"), null, false);
-        var w3 = new WorkoutDocument(WorkoutId.of("3"), CreationDate.of(LocalDate.of(2020, 1, 1)), WorkoutTitle.of("3"), null, false);
-        var w4 = new WorkoutDocument(WorkoutId.of("4"), CreationDate.of(LocalDate.of(2016, 1, 1)), WorkoutTitle.of("4"), null, false);
+        var w1 = new WorkoutDocument(WorkoutId.of("1"), CreationDate.of(LocalDate.of(2014, 1, 1)), null, false);
+        var w2 = new WorkoutDocument(WorkoutId.of("2"), CreationDate.of(LocalDate.of(2018, 1, 1)), null, false);
+        var w3 = new WorkoutDocument(WorkoutId.of("3"), CreationDate.of(LocalDate.of(2020, 1, 1)), null, false);
+        var w4 = new WorkoutDocument(WorkoutId.of("4"), CreationDate.of(LocalDate.of(2016, 1, 1)), null, false);
 
         var output = new WorkoutsInOverviewOutput(new WorkoutsDocument(List.of(w2, w1, w4, w3)));
 

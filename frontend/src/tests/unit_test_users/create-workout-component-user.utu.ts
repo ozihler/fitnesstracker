@@ -177,12 +177,12 @@ export class CreateWorkoutComponentUser {
     this.createWorkoutComponent.inputTitle(newTitle);
   }
 
-  submitsTitleUpdateForm() {
-    this.createWorkoutComponent.clickButtonWithId('submit-title-update-button');
+  submitsDateUpdate() {
+    this.createWorkoutComponent.clickButtonWithId('submit-header-update-button');
   }
 
-  cancelsUpdateTitle() {
-    this.createWorkoutComponent.clickButtonWithId('cancel-title-update-button');
+  cancelsDateUpdate() {
+    this.createWorkoutComponent.clickButtonWithId('cancel-header-update-button');
   }
 
   seesWorkoutTitleDoesNotContains(stringsTitleShouldNOTContain: string[]) {

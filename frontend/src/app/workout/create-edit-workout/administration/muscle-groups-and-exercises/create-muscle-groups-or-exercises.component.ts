@@ -47,7 +47,7 @@ import {Location} from '@angular/common';
 })
 export class CreateMuscleGroupsOrExercisesComponent implements OnInit {
 
-  @Output() createElementsEvent = new EventEmitter<string>();
+  @Output() createItemsEvent = new EventEmitter<string>();
   @Input() typename: string;
 
   showButton = true;
@@ -62,24 +62,24 @@ export class CreateMuscleGroupsOrExercisesComponent implements OnInit {
     this.initForm();
   }
 
-  currentElementValue() {
+  currentItemValue() {
     return this.form.get('muscleGroupsOrExercisesInput').value ? this.form.get('muscleGroupsOrExercisesInput').value.trim() : '';
   }
 
   createMuscleGroupsOrExercises() {
     if (this.hasEnteredAnything()) {
-      this.emit(this.currentElementValue());
+      this.emit(this.currentItemValue());
     }
   }
 
-  private emit(createdElements: string) {
+  private emit(createdItems: string) {
     this.showButton = true;
     this.form.reset();
-    this.createElementsEvent.emit(createdElements);
+    this.createItemsEvent.emit(createdItems);
   }
 
   private hasEnteredAnything() {
-    return !!this.currentElementValue();
+    return !!this.currentItemValue();
   }
 
   private initForm() {

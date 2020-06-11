@@ -7,10 +7,10 @@ import {SelectionService} from '../../../app/workout/shared/services/selection.s
 import {of} from 'rxjs';
 import {Workout} from '../../../app/workout/shared/workout';
 import {WorkoutId} from '../../../app/workout/shared/workout-id';
-import {WorkoutTitleComponent} from '../../../app/workout/create-edit-workout/title/workout-title.component';
+import {WorkoutHeaderComponent} from '../../../app/workout/create-edit-workout/title/workout-header.component';
 import {WorkoutTreeComponent} from '../../../app/workout/create-edit-workout/selection/workout-tree.component';
 // tslint:disable-next-line:max-line-length
-import {MuscleGroupOrExerciseSelectionComponent} from '../../../app/workout/create-edit-workout/administration/muscle-groups-and-exercises/muscle-group-or-exercise-selection.component';
+import {SelectableItemsComponent} from '../../../app/workout/create-edit-workout/administration/muscle-groups-and-exercises/selectable-items.component';
 import {DatePipe, registerLocaleData} from '@angular/common';
 import {ReactiveFormsModule} from '@angular/forms';
 import {ReplacePipe} from '../../../app/workout/shared/pipes/replace.pipe';
@@ -76,12 +76,12 @@ describe('a create workout user', () => {
       declarations: [
         CreateWorkoutComponent,
         CreateMuscleGroupsOrExercisesComponent,
-        MuscleGroupOrExerciseSelectionComponent,
+        SelectableItemsComponent,
         CreateSetComponent,
         WorkoutTreeComponent,
         SetValuesComponent,
         SelectableMuscleGroupOrExerciseComponent,
-        WorkoutTitleComponent,
+        WorkoutHeaderComponent,
         SetFormatPipe,
         ReplacePipe,
         StringifyPipePipe,
@@ -111,7 +111,7 @@ describe('a create workout user', () => {
     const muscleGroupNames = 'Chest, Biceps, Triceps';
     const muscleGroupsArray = toMuscleGroups(muscleGroupNames);
 
-    user.seesWorkoutTitleContains([Workout.WORKOUT_PREFIX, Workout.WORKOUT_INITIAL_TITLE]);
+    user.seesWorkoutTitleContains([Workout.WORKOUT_INITIAL_TITLE]);
     user.seesEmptyMuscleGroupsText();
     user.createsMuscleGroupsToSelect(muscleGroupNames);
     user.seesSelectableMuscleGroups(muscleGroupsArray);
@@ -124,7 +124,7 @@ describe('a create workout user', () => {
     user.createsMuscleGroupsToSelect(muscleGroupName);
 
     user.choosesFromSelectableMuscleGroups(muscleGroupName);
-    user.seesWorkoutTitleContains([Workout.WORKOUT_PREFIX, muscleGroupName]);
+    user.seesWorkoutTitleContains([muscleGroupName]);
     user.seesWorkoutContainsElementWith(workout, [muscleGroupName, '(1)']);
     user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, muscleGroupName, []), [muscleGroupName, '(0)']);
     user.seesEmptyMuscleGroupsText();
@@ -294,33 +294,12 @@ describe('a create workout user', () => {
     user.seesThatSetWasAddedToExercise(exercises[0].name, directlyEnteredSet);
   }));
 
-  it('can adapt title', fakeAsync(() => {
-    user.opensWorkoutTitleAndDateEditing();
-    const aNewTitle = 'A New Title';
-    user.updatesTitleTo(aNewTitle);
-    user.submitsTitleUpdateForm();
-    tick();
-    user.seesWorkoutTitleContains([aNewTitle]);
-  }));
-
-  it('can cancel title adaption', fakeAsync(() => {
-    user.opensWorkoutTitleAndDateEditing();
-    tick();
-    const aNewTitle = 'A New Title';
-    user.updatesTitleTo(aNewTitle);
-    user.cancelsUpdateTitle();
-    tick();
-    user.opensWorkoutTitleAndDateEditing();
-    tick();
-    user.seesWorkoutTitleDoesNotContains([aNewTitle]);
-  }));
-
   it('can adapt the date of the workout', fakeAsync(() => {
     user.opensWorkoutTitleAndDateEditing();
     user.seesWorkoutDateIs(new Date());
     const newDate = new Date('1986-08-13');
     user.setsWorkoutDateTo(newDate);
-    user.submitsTitleUpdateForm();
+    user.submitsDateUpdate();
     tick();
     user.opensWorkoutTitleAndDateEditing();
     user.seesWorkoutDateIs(newDate);
@@ -332,7 +311,7 @@ describe('a create workout user', () => {
     user.seesWorkoutDateIs(oldDate);
     const newDate = new Date('1986-08-13');
     user.setsWorkoutDateTo(newDate);
-    user.cancelsUpdateTitle();
+    user.cancelsDateUpdate();
     tick();
     user.opensWorkoutTitleAndDateEditing();
     user.seesWorkoutDateIs(oldDate);

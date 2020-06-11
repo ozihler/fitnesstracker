@@ -11,7 +11,7 @@ import {Type} from '../../shared/type';
         class="uk-button uk-text-truncate"
         [ngClass]="levelDependentClasses"
         [disabled]="node.isLeaf"
-        (click)="changeSelection()">
+        (click)="changeSelection(this.node)">
 
         <span *ngIf="node && !node?.isLeaf">
           ({{node?.numberOfChildren}})
@@ -38,9 +38,9 @@ import {Type} from '../../shared/type';
     <div *ngIf="node?.hasChildren">
       <div *ngFor="let child of node?.children">
         <app-workout-tree
-          [currentSelectionName]="currentSelectionName"
+          [currentSelectionId]="currentSelectionId"
           [node]="child"
-          (changeSelectionEvent)="this.changeSelectionEvent.emit($event);"
+          (changeSelectionEvent)="changeSelection($event)"
           (removeFromWorkoutEvent)="removeFromWorkout($event)">
         </app-workout-tree>
       </div>
@@ -49,7 +49,7 @@ import {Type} from '../../shared/type';
 })
 export class WorkoutTreeComponent {
   @Input() node: TreeNode;
-  @Input() currentSelectionName: string;
+  @Input() currentSelectionId: string;
   @Output() changeSelectionEvent = new EventEmitter<TreeNode>();
   @Output() removeFromWorkoutEvent = new EventEmitter<TreeNode>();
 
@@ -63,11 +63,11 @@ export class WorkoutTreeComponent {
     }
 
     if (this.node) {
-      if (TreeNode.LEVEL_CLASSES[this.node.type]) {
-        classes.push(TreeNode.LEVEL_CLASSES[this.node.type]);
+      if (TreeNode.LEVEL_CLASSES[this.node.typeOfCurrentlySelection]) {
+        classes.push(TreeNode.LEVEL_CLASSES[this.node.typeOfCurrentlySelection]);
       }
 
-      if (this.node.type === Type.Workout) {
+      if (this.node.typeOfCurrentlySelection === Type.Workout) {
         classes.push('uk-width-1-1');
       } else {
         classes.push('uk-width-2-3');
@@ -77,25 +77,27 @@ export class WorkoutTreeComponent {
     return classes;
   }
 
-  changeSelection() {
-    if (!this.node) {
+  changeSelection(node: TreeNode) {
+    if (!node) {
       return;
     }
 
-    this.changeSelectionEvent.emit(this.node);
+    this.changeSelectionEvent.emit(node);
   }
 
   private isSelectedNode() {
-    return this.currentSelectionName && this.node && this.currentSelectionName === this.node.name;
+    //console.error("isSelectedNode, currentSelectionID: ", this.currentSelectionId + ", nodeid: " + this.node.id);
+    return this.currentSelectionId
+      && this.node
+      && this.currentSelectionId === this.node.id;
   }
 
   removeFromWorkout(node: TreeNode) {
-    console.log('Remove from workout: ', node.id);
     this.removeFromWorkoutEvent.emit(node);
   }
 
   isWorkout() {
-    return this.node && this.node.type === Type.Workout;
+    return this.node && this.node.typeOfCurrentlySelection === Type.Workout;
   }
 
   get nodeId() {

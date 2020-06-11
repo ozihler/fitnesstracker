@@ -15,7 +15,6 @@ public class FullWorkoutOutput {
         return new WorkoutViewModel(
                 document.getWorkoutId().toString(),
                 document.getCreationDate().toMillis(),
-                document.getWorkoutTitle().toString(),
                 new FullMuscleGroupsOutput(document.getMuscleGroups()).toViewModel()
         );
     }

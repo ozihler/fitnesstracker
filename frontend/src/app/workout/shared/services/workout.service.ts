@@ -37,13 +37,13 @@ export class WorkoutService {
   }
 
   createNewOrFetchWorkoutWithId(workoutId: string): Observable<Workout> {
-    return this.createWorkoutRequest(workoutId)
+    return this.createOrFetchWorkout(workoutId)
       .pipe(map(data => WorkoutFactory.fromRaw(data)));
   }
 
-  private createWorkoutRequest(workoutId: string) {
+  private createOrFetchWorkout(workoutId: string) {
     if (!workoutId) {
-      return this.createNewWorkoutRequest();
+      return this.createNewWorkout();
     } else {
       return this.fetchWorkoutByIdRequest(workoutId);
     }
@@ -54,7 +54,6 @@ export class WorkoutService {
       workout: {
         workoutId: workout.workoutId.value,
         creationDate: new Date(workout.creationDate).getTime(),
-        title: workout.title,
         muscleGroups: workout.children.map(value => this.toJson(value))
       }
     };
@@ -67,10 +66,8 @@ export class WorkoutService {
     return this.httpClient.get<WorkoutRaw>(url);
   }
 
-  private createNewWorkoutRequest() {
-    const url = `${this.baseUrl}/workouts`;
-    const body = {title: Workout.WORKOUT_INITIAL_TITLE};
-    return this.httpClient.post<WorkoutRaw>(url, body);
+  private createNewWorkout() {
+    return this.httpClient.post<WorkoutRaw>(`${this.baseUrl}/workouts`, {});
   }
 
   copyWorkoutWithId(workoutId: WorkoutId): Observable<WorkoutId> {

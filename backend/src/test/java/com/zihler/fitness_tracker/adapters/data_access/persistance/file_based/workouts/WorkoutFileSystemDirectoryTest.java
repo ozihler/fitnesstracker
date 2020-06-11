@@ -28,7 +28,7 @@ class WorkoutFileSystemDirectoryTest {
                         Multiplier.ONE)
         };
 
-        Workout workout = new Workout(WorkoutId.of("x-1-2"), CreationDate.now(), WorkoutTitle.of("WORKOUT TITLE"), muscleGroups(
+        Workout workout = new Workout(WorkoutId.of("x-1-2"), CreationDate.now(), muscleGroups(
                 new MuscleGroup(
                         Name.of("Chest"),
                         Exercises.of(bench_presses))));

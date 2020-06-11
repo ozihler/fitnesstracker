@@ -10,7 +10,6 @@ import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreWorko
 import com.zihler.fitness_tracker.domain.entities.Workout;
 import com.zihler.fitness_tracker.domain.values.CreationDate;
 import com.zihler.fitness_tracker.domain.values.MuscleGroups;
-import com.zihler.fitness_tracker.domain.values.WorkoutTitle;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -28,16 +27,15 @@ class UpdateWorkoutControllerTest {
         LocalDate workoutCreationTime = LocalDate.now();
 
         CreationDate creationDate = CreationDate.of(workoutCreationTime);
-        FetchWorkout fetchWorkout = id -> new Workout(id, creationDate, WorkoutTitle.of("Title"), new MuscleGroups(new ArrayList<>()));
+        FetchWorkout fetchWorkout = id -> new Workout(id, creationDate, new MuscleGroups(new ArrayList<>()));
         StoreWorkout storeWorkout = workout -> workout;
 
         var controller = new UpdateWorkoutController(fetchWorkout, storeWorkout);
 
 
         String workoutId = "1234L";
-        String newTitle = "New Title";
 
-        var updatedWorkoutRequest = new WorkoutViewModel(workoutId, creationDate.toMillis(), newTitle, List.of(
+        var updatedWorkoutRequest = new WorkoutViewModel(workoutId, creationDate.toMillis(), List.of(
                 new MuscleGroupViewModel("Chest", List.of(
                         new ExerciseViewModel("Bench Press", List.of(
                                 SetViewModel.of(50, 12, 45),
@@ -68,7 +66,6 @@ class UpdateWorkoutControllerTest {
         // Workout
         assertNotNull(fullWorkoutViewModel);
         assertEquals(workoutId, fullWorkoutViewModel.getWorkoutId());
-        assertEquals(newTitle, fullWorkoutViewModel.getTitle());
         assertEquals(creationDate.toMillis(), fullWorkoutViewModel.getCreationDate());
 
         // Muscle groups
