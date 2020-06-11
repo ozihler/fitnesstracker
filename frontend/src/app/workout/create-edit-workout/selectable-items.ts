@@ -1,17 +1,25 @@
 import {TreeNode} from "./workout-tree/tree-node";
+import {Type} from "../shared/type";
 
 export class SelectableItems {
   selectableItems: TreeNode[] = [];
 
   add(node: TreeNode) {
-    if (this.contains(node)) {
-      return; // it's a set...
+    if (!this.isSelectableItem(node) || this.contains(node)) {
+      return;
     }
 
     this.selectableItems.push(node)
   }
 
+  private isSelectableItem(nodeToDelete: TreeNode) {
+    return [Type.Muscle_Group, Type.Exercise].indexOf(nodeToDelete.typeOfCurrentlySelection) >= 0;
+  }
+
   remove(node: TreeNode) {
+    if (!this.isSelectableItem(node)) {
+      return;
+    }
     this.selectableItems = this.selectableItems.filter(s => s.id !== node.id);
   }
 

@@ -75,6 +75,7 @@ export abstract class TreeNode implements Cumulatable {
     this._parent = value;
   }
 
+  // todo this method does not belong here...
   abstract get typeOfCurrentlySelection(): Type;
 
   accept(visitor: NodeVisitor) {

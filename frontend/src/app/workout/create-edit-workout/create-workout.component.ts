@@ -10,7 +10,6 @@ import {WorkoutHeaderUpdate} from './title/workout-header-update';
 import {Exercise} from '../shared/exercise';
 import {Workout} from '../shared/workout';
 import {SelectableItems} from "./selectable-items";
-import set = Reflect.set;
 
 @Component({
   selector: 'app-create-workout',
@@ -83,9 +82,7 @@ export class CreateWorkoutComponent implements OnInit {
   removeNodeFromWorkout(nodeToDelete: TreeNode) {
     this.deleteMuscleGroupFromTitleIfItIsAMuscleGroup(nodeToDelete);
     this.workoutTree.delete(nodeToDelete.id);
-    if (CreateWorkoutComponent.isSelectableItem(nodeToDelete)) {
-      this.selectableItems.add(nodeToDelete);
-    }
+    this.selectableItems.add(nodeToDelete);
   }
 
   // todo instead of string, use Exercise and MuscleGroup! (define union type of MuscleGroup | Exercise | Set)
@@ -106,7 +103,7 @@ export class CreateWorkoutComponent implements OnInit {
       this.workoutTree.root.workoutId,
       this.workoutTree.currentSelection as Exercise,
       elements as Set)
-      .subscribe(createdSet => this.addToExercise([createdSet]));
+      .subscribe(createdSet => this.addToExercise(createdSet));
   }
 
   private createExercises(elements: string) {
@@ -123,27 +120,20 @@ export class CreateWorkoutComponent implements OnInit {
 
 // todo do enable selected Item (or not, test whats better and make a list)
   addSelectedItemToTree(selectedElement: TreeNode) {
-    console.log("Added node ", selectedElement.name)
-    const addedNode = this.workoutTree.addNode(selectedElement);
-
-    if (addedNode) {
-      if (CreateWorkoutComponent.isSelectableItem(selectedElement)) {
-        this.selectableItems.remove(selectedElement);
-      }
-
-      this.updateWorkoutAndEnable(selectedElement);
+    if (!this.workoutTree.addNode(selectedElement)) {
+      return;
     }
-  }
 
-  private updateWorkoutAndEnable(selectedElement: TreeNode) {
-    this.updateWorkoutTitleAfterSelectingMuscleGroup(selectedElement);
+    console.log("Added node ", selectedElement.name)
+
     this.workoutService.updateWorkout(this.workoutTree.root)
       .subscribe(workout => {
         this.workoutTree.root = workout;
+        this.selectableItems.remove(selectedElement);
         this.workoutTree.enable(selectedElement.id);
+        this.updateWorkoutTitleAfterSelectingMuscleGroup(selectedElement);
       });
   }
-
   deleteSelectableElement(element: TreeNode) {
     if (element.typeOfCurrentlySelection === Type.Muscle_Group) {
       this.selectionService.deleteMuscleGroup(element.name)
@@ -169,7 +159,12 @@ export class CreateWorkoutComponent implements OnInit {
 
   updateWorkoutHeader(updatedWorkout: WorkoutHeaderUpdate) {
     this.workoutTree.root.creationDate = updatedWorkout.workoutCreationDate;
-    this.updateWorkoutAndEnable(this.workoutTree.currentSelection);
+    this.updateWorkoutTitleAfterSelectingMuscleGroup(this.workoutTree.currentSelection);
+    this.workoutService.updateWorkout(this.workoutTree.root)
+      .subscribe(workout => {
+        this.workoutTree.root = workout;
+        this.workoutTree.enable(this.workoutTree.currentSelection.id);
+      });
   }
 
   private updateWorkoutTitleAfterSelectingMuscleGroup(selectedElement: TreeNode) {
@@ -193,9 +188,9 @@ export class CreateWorkoutComponent implements OnInit {
     this.workoutTree.root.name += ' ' + selectedElement.name;
   }
 
-  private addToExercise(sets: Set[]) {
-    this.workoutTree.setCurrentSelectionAsParentOf(sets);
-    sets.forEach(set => this.addSelectedItemToTree(set));
+  private addToExercise(set: Set) {
+    this.workoutTree.setCurrentSelectionAsParentOf([set]);
+    this.addSelectedItemToTree(set);
   }
 
   private fetchExercisesForAndFilterOut(name: string, children: string[] = []) {
