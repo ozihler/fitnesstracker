@@ -9,6 +9,7 @@ import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.workout.
 import com.zihler.fitness_tracker.application.outbound_ports.documents.WorkoutsDocument;
 import com.zihler.fitness_tracker.application.outbound_ports.presenters.WorkoutsPresenter;
 import com.zihler.fitness_tracker.domain.values.CreationDate;
+import com.zihler.fitness_tracker.domain.values.CreationDateTime;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,8 @@ public class RestDownloadedWorkoutsPresenter
         implements WorkoutsPresenter {
 
 
+    public static final String FILE_NAME_TEMPLATE = "allWorkouts_%s.json";
+
     @Override
     public void present(WorkoutsDocument workouts) {
         try {
@@ -32,11 +35,15 @@ public class RestDownloadedWorkoutsPresenter
             this.response = ResponseEntity.ok()
                     .contentLength(workoutsAsBytes.length)
                     .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                    .header("Content-Disposition", "attachment; filename=\"allWorkouts_"+System.currentTimeMillis()+".json\"")
+                    .header("Content-Disposition", String.format("attachment; filename=\"%s\"", fileName()))
                     .body(new InputStreamResource(new ByteArrayInputStream(workoutsAsBytes)));
 
         } catch (Exception e) {
             throw new CouldNotMapWorkoutsToBytesException(e);
         }
+    }
+
+    private String fileName() {
+        return String.format(FILE_NAME_TEMPLATE, CreationDate.of(System.currentTimeMillis()).toString());
     }
 }
