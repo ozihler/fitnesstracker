@@ -44,6 +44,6 @@ public class RestDownloadedWorkoutsPresenter
     }
 
     private String fileName() {
-        return String.format(FILE_NAME_TEMPLATE, CreationDate.of(System.currentTimeMillis()).toString());
+        return String.format(FILE_NAME_TEMPLATE, CreationDate.now().toString());
     }
 }
