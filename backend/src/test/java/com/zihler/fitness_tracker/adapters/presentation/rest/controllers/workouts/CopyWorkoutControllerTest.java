@@ -25,7 +25,7 @@ class CopyWorkoutControllerTest {
 
     @Test
     void canCopyWorkout() {
-        Workout fullWorkout = WorkoutFixtures.FULL_WORKOUT;
+        Workout fullWorkout = WorkoutFixtures.FULL_CHEST_TRICEPS_WORKOUT;
 
         InMemoryWorkoutRepository repo = new InMemoryWorkoutRepository();
         repo.withValues(fullWorkout);

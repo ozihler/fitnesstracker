@@ -20,7 +20,6 @@ public class ViewAllWorkoutsContext implements UseCaseContext {
 
     @Override
     public void enactUseCase() {
-        var displayableWorkouts = new DisplayableWorkouts(fetchWorkouts, output);
-        displayableWorkouts.present();
+        new DisplayableWorkouts(fetchWorkouts, output).present();
     }
 }
