@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class Exercise {
     private final Name name;
-    private Sets sets;
+    private final Sets sets;
     private final Multiplier multiplier;
     private boolean isSelectable = true;
 
@@ -18,10 +18,6 @@ public class Exercise {
         this.multiplier = multiplier;
     }
 
-
-    public void add(Set set) {
-        sets.add(set);
-    }
 
     public Name getName() {
         return name;
@@ -33,10 +29,6 @@ public class Exercise {
 
     public Multiplier getMultiplier() {
         return multiplier;
-    }
-
-    public void addAll(Sets sets) {
-        this.sets = sets;
     }
 
     public void setSelectable(boolean isSelectable) {

@@ -32,6 +32,7 @@ public class MuscleGroups {
         return muscleGroups;
     }
 
+    // todo kill this
     public void add(MuscleGroup muscleGroup) {
         muscleGroups.add(muscleGroup);
     }
