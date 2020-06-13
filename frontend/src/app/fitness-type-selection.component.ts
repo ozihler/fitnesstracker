@@ -51,11 +51,11 @@ class InstantiationTimeService {
   }
 
   getInstantiationTime() {
-    return this.http.get<number>(environment.baseUrl + "/admin/instantiationTime")
+    return this.http.get<string>(environment.baseUrl + "/admin/instantiationTime")
       .pipe(
-        map(timeAsUnixTimeStamp => {
+        map(timeAsString => {
           return this.datePipe.transform(
-            new Date(timeAsUnixTimeStamp),
+            new Date(timeAsString),
             'long',
             '',
             'de'

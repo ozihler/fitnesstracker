@@ -44,6 +44,7 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-test')
     implementation('com.h2database:h2:1.4.200')
     implementation('org.apache.commons:commons-text:1.8')
+    implementation('org.springframework.boot:spring-boot-devtools')
     testCompile 'org.junit.jupiter:junit-jupiter-api:5.3.1'
     testCompile 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
     testCompile("org.assertj:assertj-core:3.11.1")
