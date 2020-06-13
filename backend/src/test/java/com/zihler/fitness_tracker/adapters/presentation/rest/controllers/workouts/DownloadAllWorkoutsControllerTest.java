@@ -1,20 +1,16 @@
 package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.workouts;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.workouts.FileSystemInMemoryWorkoutRepository;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.file_based.workouts.InMemoryWorkoutRepository;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutViewModel;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.WorkoutsViewModel;
-import com.zihler.fitness_tracker.fixtures.WorkoutFixtures;
 import org.junit.jupiter.api.Test;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
 import java.util.List;
 
-import static com.zihler.fitness_tracker.fixtures.WorkoutFixtures.*;
 import static com.zihler.fitness_tracker.fixtures.WorkoutFixtures.FULL_BACK_BICEPS_WORKOUT;
+import static com.zihler.fitness_tracker.fixtures.WorkoutFixtures.FULL_CHEST_TRICEPS_WORKOUT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DownloadAllWorkoutsControllerTest {
@@ -33,7 +29,7 @@ class DownloadAllWorkoutsControllerTest {
         List<WorkoutViewModel> workouts = viewModel.getWorkouts();
 
         assertEquals(List.of(FULL_BACK_BICEPS_WORKOUT, FULL_CHEST_TRICEPS_WORKOUT).size(), workouts.size());
-
+        //todo add equals for comparing workouts with workoutsViewModel
     }
 
 }
