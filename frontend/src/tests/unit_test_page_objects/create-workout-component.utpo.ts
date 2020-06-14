@@ -103,8 +103,6 @@ export class CreateWorkoutComponentPageObject {
 
   expectWorkoutTreeToContain(workoutTreeElement: TreeNode, stringsItShouldContain: string[]) {
     const selector = 'select-' + workoutTreeElement.id + '-editable-node';
-    console.log('Button to select: ', selector);
-    console.log('Strings it should contain: ', stringsItShouldContain);
     const treeNodeButton = new Button(this.findElement.byId(selector));
     for (const stringTheElementShouldContain of stringsItShouldContain) {
       expect(treeNodeButton.label).toContain(stringTheElementShouldContain);
@@ -193,6 +191,12 @@ export class CreateWorkoutComponentPageObject {
       expect(new Button(this.findElement.byId(selector)).label)
         .toContain(set.name);
     }
+  }
+
+  expectSelectedWorkoutTreeItemToBe(workoutTreeNode: TreeNode) {
+    const selector = 'select-' + workoutTreeNode.id + '-editable-node';
+    const treeNodeButton = new Button(this.findElement.byId(selector));
+    expect(treeNodeButton.cssClasses()).toContain('uk-button-danger');
   }
 }
 

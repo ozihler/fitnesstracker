@@ -37,7 +37,6 @@ export class WorkoutTree {
   }
 
   enable(nodeId: string): void {
-    console.log("Enable, ", nodeId)
     if (!nodeId) {
       return;
     }
@@ -74,9 +73,7 @@ export class WorkoutTree {
   }
 
   select(nodeId: string) {
-    console.log("Node to find: ", nodeId)
     this.currentSelection = this.findNodeById(nodeId);
-    console.log("current selection: ", this.currentSelection.id)
     if (this.currentSelection.isEnabled && this.someChildrenAreEnabled) {
       this.disableChildrenOf(this.currentSelection);
     } else {
@@ -124,6 +121,6 @@ export class WorkoutTree {
   }
 
   public getCumulativeWeight(): number {
-    throw new Error("Not implemented yet!");
+    throw new Error('Not implemented yet!');
   }
 }

@@ -60,6 +60,7 @@ export class CreateWorkoutComponentUser {
     this.createWorkoutComponent.deleteSelectableItem(selectableElementToDelete);
   }
 
+  // todo replace all name strings with TreeNode::id
   selectsMuscleGroupInWorkout(workoutTreeNodeName: string) {
     this.createWorkoutComponent.selectWorkoutTreeNodeWithName(workoutTreeNodeName);
   }
@@ -199,5 +200,9 @@ export class CreateWorkoutComponentUser {
 
   seesThatExerciseHasSets(exerciseName: string, sets: TreeNode[]) {
     this.createWorkoutComponent.expectExerciseToHaveSets(sets);
+  }
+
+  seesSelectedItemInWorkoutTreeIs(workoutTreeNode: TreeNode) {
+    this.createWorkoutComponent.expectSelectedWorkoutTreeItemToBe(workoutTreeNode);
   }
 }

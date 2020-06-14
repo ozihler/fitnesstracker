@@ -9,7 +9,7 @@ import {SelectionService} from '../shared/services/selection.service';
 import {WorkoutHeaderUpdate} from './title/workout-header-update';
 import {Exercise} from '../shared/exercise';
 import {Workout} from '../shared/workout';
-import {SelectableItems} from "./selectable-items";
+import {SelectableItems} from './selectable-items';
 
 @Component({
   selector: 'app-create-workout',
@@ -23,7 +23,7 @@ import {SelectableItems} from "./selectable-items";
     <hr class="uk-divider-icon"/>
     <app-workout-tree
       [node]="workoutTree?.root"
-      [currentSelectionId]="workoutTree?.root?.id"
+      [currentSelectionId]="workoutTree?.currentSelection?.id"
       (changeSelectionEvent)="changeSelectedWorkoutTreeNode($event)"
       (removeFromWorkoutEvent)="removeNodeFromWorkout($event)">
     </app-workout-tree>
@@ -49,10 +49,6 @@ export class CreateWorkoutComponent implements OnInit {
               private route: ActivatedRoute) {
   }
 
-  private static isSelectableItem(nodeToDelete: TreeNode) {
-    return [Type.Muscle_Group, Type.Exercise].indexOf(nodeToDelete.typeOfCurrentlySelection) >= 0;
-  }
-
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const workoutId = params.get('workoutId');
@@ -66,7 +62,6 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
   changeSelectedWorkoutTreeNode(node: TreeNode) {
-    console.log("Select ", node.id);
     this.workoutTree.select(node.id);
     this.fetchSelectableItemsOf(node);
   }
@@ -124,8 +119,6 @@ export class CreateWorkoutComponent implements OnInit {
       return;
     }
 
-    console.log("Added node ", selectedElement.name)
-
     this.workoutService.updateWorkout(this.workoutTree.root)
       .subscribe(workout => {
         this.workoutTree.root = workout;
@@ -134,6 +127,7 @@ export class CreateWorkoutComponent implements OnInit {
         this.updateWorkoutTitleAfterSelectingMuscleGroup(selectedElement);
       });
   }
+
   deleteSelectableElement(element: TreeNode) {
     if (element.typeOfCurrentlySelection === Type.Muscle_Group) {
       this.selectionService.deleteMuscleGroup(element.name)
@@ -145,7 +139,6 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
   private isInitialWorkoutTitle() {
-    console.log(this.workoutTree.root.name);
     return this.workoutTree.root.name === Workout.WORKOUT_INITIAL_TITLE;
   }
 
@@ -212,4 +205,5 @@ export class CreateWorkoutComponent implements OnInit {
     this.workoutTree.setCurrentSelectionAsParentOf(nodes);
     nodes.forEach(node => this.selectableItems.add(node));
   }
+
 }

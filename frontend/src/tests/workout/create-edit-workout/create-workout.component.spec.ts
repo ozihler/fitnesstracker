@@ -121,8 +121,8 @@ describe('a create workout user', () => {
 
   it('can add a single muscle group to a workout', fakeAsync(() => {
     const muscleGroupName = 'Chest';
+    user.seesSelectedItemInWorkoutTreeIs(workout);
     user.createsMuscleGroupsToSelect(muscleGroupName);
-
     user.choosesFromSelectableMuscleGroups(muscleGroupName);
     user.seesWorkoutTitleContains([muscleGroupName]);
     user.seesWorkoutContainsElementWith(workout, [muscleGroupName, '(1)']);
@@ -221,8 +221,10 @@ describe('a create workout user', () => {
     user.createsMuscleGroupsToSelect(muscleGroupNames);
     user.choosesFromSelectableMuscleGroups(muscleGroups[0].name);
     user.choosesFromSelectableMuscleGroups(muscleGroups[1].name);
+    user.seesSelectedItemInWorkoutTreeIs(workout);
 
     user.selectsMuscleGroupInWorkout(muscleGroups[0].name);
+    user.seesSelectedItemInWorkoutTreeIs(muscleGroups[0]);
     user.seesEmptyExercisesText();
 
     user.createsExercisesToSelect(exerciseNames);
@@ -266,15 +268,16 @@ describe('a create workout user', () => {
     user.createsMuscleGroupsToSelect(muscleGroupNames);
     user.choosesFromSelectableMuscleGroups(muscleGroups[0].name);
     user.selectsMuscleGroupInWorkout(muscleGroups[0].name);
+    user.seesSelectedItemInWorkoutTreeIs(muscleGroups[0]);
     user.createsExercisesToSelect(exerciseNames);
     user.choosesFromSelectableExercises(exercises[0].name);
     user.seesWorkoutContainsElementWith(exercises[0], ['(0)', exercises[0].name]);
     user.selectsExerciseInMuscleGroup(exercises[0].name);
+    user.seesSelectedItemInWorkoutTreeIs(exercises[0]);
 
     user.configuresSetWithValues(weights, repetitions, waitingTimes);
     const expected = new Set(user.sumOf(weights), 'kg', user.sumOf(repetitions), user.sumOf(waitingTimes), 's', exercises[0], 0);
 
-    console.log('expected set values: ', expected);
     user.seesCurrentSetValuesToAddAre(expected);
     user.addsSetToExercise();
     user.seesThatSetWasAddedToExercise(exercises[0].name, expected);
@@ -351,6 +354,7 @@ describe('a create workout user', () => {
       new Set(20, 'kg', 12, 50, 's', benchPressExercise, 2)
     ];
     user.selectsExerciseInMuscleGroup('Bench Press');
+    user.seesSelectedItemInWorkoutTreeIs(new Exercise(undefined, 'Bench Press'));
     user.seesThatExerciseHasSets('Bench Press', benchPressExercise.children);
 
     const dumbbellBenchPress = new Exercise(
@@ -367,6 +371,7 @@ describe('a create workout user', () => {
     user.seesThatExerciseHasSets('Dumbbell Bench Press', dumbbellBenchPress.children);
 
     user.selectsExerciseInMuscleGroup('Bench Press');
+    user.seesSelectedItemInWorkoutTreeIs(new Exercise(undefined, 'Bench Press'));
     user.removesItemFromWorkoutTree(benchPressExercise.children[0]);
 
     user.seesThatExerciseHasSets('Bench Press', [
@@ -375,6 +380,7 @@ describe('a create workout user', () => {
     ]);
 
     user.selectsExerciseInMuscleGroup('Dumbbell Bench Press');
+    user.seesSelectedItemInWorkoutTreeIs(new Exercise(undefined, 'Dumbbell Bench Press'));
     user.seesThatExerciseHasSets('Dumbbell Bench Press', [
       new Set(20, 'kg', 12, 50, 's', dumbbellBenchPress, 0),
       new Set(20, 'kg', 12, 50, 's', dumbbellBenchPress, 1),
@@ -384,13 +390,17 @@ describe('a create workout user', () => {
 
   it('sees how adding muscle groups, exercises, and sets affects displayed numbers and weights in workout tree node labels',
     fakeAsync(() => {
+      user.seesSelectedItemInWorkoutTreeIs(workout);
       user.seesWorkoutContainsElementWith(workout, ['(0)']);
       user.createsMuscleGroupsToSelect('Chest, Triceps');
       user.choosesFromSelectableMuscleGroups('chest');
       user.seesWorkoutContainsElementWith(workout, ['(1)']);
       user.choosesFromSelectableMuscleGroups('triceps');
+
       user.seesWorkoutContainsElementWith(workout, ['(2)']);
       user.selectsMuscleGroupInWorkout('chest');
+      user.seesSelectedItemInWorkoutTreeIs(new MuscleGroup(undefined, 'Chest'));
+
       user.createsExercisesToSelect('Bench Press, Dumbbell Bench Press');
       user.choosesFromSelectableExercises('Bench Press');
       user.seesWorkoutContainsElementWith(workout, ['(2)']);
@@ -398,8 +408,9 @@ describe('a create workout user', () => {
       user.choosesFromSelectableExercises('Dumbbell Bench Press');
       user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, 'Chest'), ['(2)']);
       user.selectsExerciseInMuscleGroup('Bench Press');
-      user.seesWorkoutContainsElementWith(new Exercise(undefined, 'Bench Press'), ['(0)']);
+      user.seesSelectedItemInWorkoutTreeIs(new Exercise(undefined, 'Bench Press'));
 
+      user.seesWorkoutContainsElementWith(new Exercise(undefined, 'Bench Press'), ['(0)']);
       user.configuresSetByDirectInputtingValues(20, 12, 50);
       user.addsSetToExercise();
       user.seesWorkoutContainsElementWith(workout, ['(2)', (20 * 12) + '']);
@@ -419,6 +430,8 @@ describe('a create workout user', () => {
       user.seesWorkoutContainsElementWith(new Exercise(undefined, 'Bench Press'), ['(3)', (3 * 20 * 12) + '']);
 
       user.selectsExerciseInMuscleGroup('Dumbbell Bench Press');
+      user.seesSelectedItemInWorkoutTreeIs(new Exercise(undefined, 'Dumbbell Bench Press'));
+
       user.seesWorkoutContainsElementWith(new Exercise(undefined, 'Dumbbell Bench Press'), ['(0)']);
 
       user.configuresSetByDirectInputtingValues(20, 12, 50);

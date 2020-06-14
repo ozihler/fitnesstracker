@@ -86,7 +86,6 @@ export class WorkoutTreeComponent {
   }
 
   private isSelectedNode() {
-    //console.error("isSelectedNode, currentSelectionID: ", this.currentSelectionId + ", nodeid: " + this.node.id);
     return this.currentSelectionId
       && this.node
       && this.currentSelectionId === this.node.id;

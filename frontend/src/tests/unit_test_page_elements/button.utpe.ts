@@ -13,4 +13,8 @@ export class Button {
   click() {
     this.button.click();
   }
+
+  cssClasses() {
+    return this.button.getAttribute('class');
+  }
 }
