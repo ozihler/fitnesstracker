@@ -205,4 +205,8 @@ export class CreateWorkoutComponentUser {
   seesSelectedItemInWorkoutTreeIs(workoutTreeNode: TreeNode) {
     this.createWorkoutComponent.expectSelectedWorkoutTreeItemToBe(workoutTreeNode);
   }
+
+  seesSelectedItemInWorkoutTreeIsNot(workoutTreeNode: TreeNode) {
+    this.createWorkoutComponent.expectSelectedWorkoutTreeItemNotToBe(workoutTreeNode);
+  }
 }

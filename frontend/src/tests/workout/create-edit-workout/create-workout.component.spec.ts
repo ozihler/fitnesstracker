@@ -121,13 +121,18 @@ describe('a create workout user', () => {
 
   it('can add a single muscle group to a workout', fakeAsync(() => {
     const muscleGroupName = 'Chest';
+    const chest = new MuscleGroup(undefined, muscleGroupName, []);
     user.seesSelectedItemInWorkoutTreeIs(workout);
-    user.createsMuscleGroupsToSelect(muscleGroupName);
-    user.choosesFromSelectableMuscleGroups(muscleGroupName);
-    user.seesWorkoutTitleContains([muscleGroupName]);
-    user.seesWorkoutContainsElementWith(workout, [muscleGroupName, '(1)']);
-    user.seesWorkoutContainsElementWith(new MuscleGroup(undefined, muscleGroupName, []), [muscleGroupName, '(0)']);
+    user.createsMuscleGroupsToSelect(chest.name);
+    user.choosesFromSelectableMuscleGroups(chest.name);
+    user.seesWorkoutTitleContains([chest.name]);
+    user.seesWorkoutContainsElementWith(workout, [chest.name, '(1)']);
+    user.seesWorkoutContainsElementWith(chest, [chest.name, '(0)']);
     user.seesEmptyMuscleGroupsText();
+    user.selectsMuscleGroupInWorkout(chest.name);
+    user.seesSelectedItemInWorkoutTreeIsNot(workout);
+    user.seesSelectedItemInWorkoutTreeIs(chest);
+
   }));
 
   it('can add multiple muscle groups to a workout', fakeAsync(() => {

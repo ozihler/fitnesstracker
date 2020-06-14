@@ -198,6 +198,12 @@ export class CreateWorkoutComponentPageObject {
     const treeNodeButton = new Button(this.findElement.byId(selector));
     expect(treeNodeButton.cssClasses()).toContain('uk-button-danger');
   }
+
+  expectSelectedWorkoutTreeItemNotToBe(workoutTreeNode: TreeNode) {
+    const selector = 'select-' + workoutTreeNode.id + '-editable-node';
+    const treeNodeButton = new Button(this.findElement.byId(selector));
+    expect(treeNodeButton.cssClasses()).not.toContain('uk-button-danger');
+  }
 }
 
 export class SetButtonValues {
