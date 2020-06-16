@@ -1,7 +1,6 @@
 import {browser, logging} from 'protractor';
 import {WorkoutUser} from './users/workout-user';
 import {Set} from '../../src/app/workout/shared/set';
-import {Workout} from '../../src/app/workout/shared/workout';
 import {Exercise} from '../../src/app/workout/shared/exercise';
 
 
@@ -17,9 +16,6 @@ describe('A workout user', () => {
 
   const selectableMuscleGroups = ['Chest', 'Triceps', 'Shoulders', 'Biceps'];
 
-  function getSetToAdd(exerciseName: string) {
-  }
-
   it('can create a workout with multiple muscle groups and exercises', () => {
     // user creates new workout
     user.createsNewWorkout()
@@ -30,7 +26,7 @@ describe('A workout user', () => {
     user.createsMuscleGroups('cHesT; tRICEPS,ShOulders. BiCePs')
       .then(() => user.seesSelectableMuscleGroups(selectableMuscleGroups))
       .then(() => user.selectsMuscleGroup('Chest'))
-      .then(() => user.seesThatTitleOfWorkoutIs(  'Chest'))
+      .then(() => user.seesThatTitleOfWorkoutIs('Chest'))
       .then(() => user.selectsMuscleGroup('Triceps'))
       .then(() => user.seesThatTitleOfWorkoutIs('Chest ' + 'Triceps'));
 
@@ -62,14 +58,38 @@ describe('A workout user', () => {
     user.selectNodeInWorkoutTreeWithName('Chest')
       .then(() => user.addsSetsTo('Dumbbell Bench Press', [setToAdd]))
       .then(() => user.seesCumulatedWeights([
-        {name: setToAdd.id, expectedValue: 25 * 10, isRoot: false}, // todo fix this value (2) multiplier
-        {name: 'Dumbbell Bench Press', expectedValue: 25 * 10 * 2, isRoot: false},
-        {name: 'Chest', expectedValue: 25 * 10 * 2, isRoot: false},
-        {name: 'root', expectedValue: 25 * 10 * 2, isRoot: true},
-      ]))
-    // todo continue
-    ;
+        // todo fix this value (2) multiplier
+        {name: setToAdd.id, expectedValue: calculateCumulatedWeight([setToAdd], 1), isRoot: false},
+        {name: 'Dumbbell Bench Press', expectedValue: calculateCumulatedWeight([setToAdd], 2), isRoot: false},
+        {name: 'Chest', expectedValue: calculateCumulatedWeight([setToAdd], 2), isRoot: false},
+        {name: 'root', expectedValue: calculateCumulatedWeight([setToAdd], 2), isRoot: true},
+      ]));
+
+    const setToAdd2 = new Set(27.5, 'kg', 8, 0, 's', exercise, 1);
+    user.addsSetsTo('Dumbbell Bench Press', [setToAdd2])
+      .then(() => user.seesCumulatedWeights([
+        // todo fix this value (2) multiplier
+        {name: setToAdd2.id, expectedValue: calculateCumulatedWeight([setToAdd2], 1), isRoot: false},
+        {name: 'Dumbbell Bench Press', expectedValue: calculateCumulatedWeight([setToAdd, setToAdd2], 2), isRoot: false},
+        {name: 'Chest', expectedValue: calculateCumulatedWeight([setToAdd, setToAdd2], 2), isRoot: false},
+        {name: 'root', expectedValue: calculateCumulatedWeight([setToAdd, setToAdd2], 2), isRoot: true},
+      ]));
+
+    const setToAdd3 = new Set(30, 'kg', 6, 0, 's', exercise, 2);
+    user.addsSetsTo('Dumbbell Bench Press', [setToAdd3])
+      .then(() => user.seesCumulatedWeights([
+        // todo fix this value (2) multiplier
+        {name: setToAdd3.id, expectedValue: calculateCumulatedWeight([setToAdd3], 1), isRoot: false},
+        {name: 'Dumbbell Bench Press', expectedValue: calculateCumulatedWeight([setToAdd, setToAdd2, setToAdd3], 2), isRoot: false},
+        {name: 'Chest', expectedValue: calculateCumulatedWeight([setToAdd, setToAdd2, setToAdd3], 2), isRoot: false},
+        {name: 'root', expectedValue: calculateCumulatedWeight([setToAdd, setToAdd2, setToAdd3], 2), isRoot: true},
+      ]));
   });
+
+  function calculateCumulatedWeight(sets: Set[], multiplier: number) {
+    return multiplier * sets.map(set => set.numberOfRepetitions * set.weight)
+      .reduce((p, v) => (p + v));
+  }
 
 
   function cleanUpWorkoutsAndMuscleGroups() {

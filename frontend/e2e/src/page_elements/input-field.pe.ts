@@ -8,6 +8,7 @@ export class InputField {
   }
 
   enterText(text: string) {
-    this.inputField.sendKeys(text);
+    return this.inputField.clear()
+      .then(() => this.inputField.sendKeys(text));
   }
 }

@@ -17,10 +17,6 @@ export class WorkoutUser {
   private workoutsOverview: WorkoutsOverview;
   private readonly createWorkout: CreateWorkout;
 
-  static random(base, multi) {
-    return base + (Math.round(Math.random() * multi));
-  }
-
   createsNewWorkout() {
     return this.navigatesToWorkoutOverview()
       .then(() => this.workoutsOverview.clickNewWorkoutButton());
