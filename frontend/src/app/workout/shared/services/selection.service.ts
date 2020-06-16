@@ -70,8 +70,7 @@ export class SelectionService {
       numberOfRepetitions: setToAdd.numberOfRepetitions,
       waitingTime: setToAdd.waitingTime,
       waitingTimeUnit: setToAdd.waitingTimeUnit
-    })
-      .pipe(map(e => SetFactory.from(e, exercise.children.length)));
+    }).pipe(map(e => SetFactory.from(e, exercise.children.length, exercise.multiplier)));
   }
 
   deleteMuscleGroup(muscleGroupName: string): Observable<MuscleGroup> {

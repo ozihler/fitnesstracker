@@ -8,7 +8,7 @@ export class ExerciseFactory {
     const setRaws = exerciseRaw.sets;
     if (setRaws) {
       for (let i = 0; i < setRaws.length; ++i) {
-        sets.push(SetFactory.from(setRaws[i], i));
+        sets.push(SetFactory.from(setRaws[i], i, exerciseRaw.multiplier));
       }
     }
     const exercise = new Exercise(undefined, exerciseRaw.name, sets);

@@ -3,6 +3,7 @@ import {Type} from '../../../shared/type';
 import {TreeNode} from '../../workout-tree/tree-node';
 import {ReplacePipe} from '../../../shared/pipes/replace.pipe';
 import {Set} from '../../../shared/set';
+import {Exercise} from '../../../shared/exercise';
 
 @Component({
   selector: 'app-selectable-items',
@@ -29,6 +30,7 @@ import {Set} from '../../../shared/set';
 
       <div *ngIf="isExercise">
         <app-create-set
+          [multiplier]="multiplier"
           (createSet)="createChild($event)">
         </app-create-set>
       </div>
@@ -38,8 +40,8 @@ export class SelectableItemsComponent implements OnInit {
 
   @Input() currentSelection: TreeNode;
   @Input() selectableItems: TreeNode[];
-  @Output() addNodeEvent = new EventEmitter<TreeNode>();
-  @Output() deleteNodeEvent = new EventEmitter<TreeNode>();
+  @Output() addItemEvent = new EventEmitter<TreeNode>();
+  @Output() deleteItemEvent = new EventEmitter<TreeNode>();
   @Output() createsChildEvent = new EventEmitter<string | Set>();
 
   constructor(private replacePipe: ReplacePipe) {
@@ -49,12 +51,16 @@ export class SelectableItemsComponent implements OnInit {
   ngOnInit() {
   }
 
-  select(item: TreeNode) {
-    this.addNodeEvent.emit(item);
+  get isExercise() {
+    return this.currentSelection && this.currentSelection.type === Type.Exercise;
   }
 
-  delete(item: TreeNode) {
-    this.deleteNodeEvent.emit(item);
+  get multiplier() {
+    if (this.currentSelection.type === Type.Exercise) {
+      return (this.currentSelection as Exercise).multiplier;
+    } else {
+      return undefined;
+    }
   }
 
   createChild(itemsString: string | Set) {
@@ -92,11 +98,15 @@ export class SelectableItemsComponent implements OnInit {
       || this.isExercise && this.currentSelection.children.length === 0;
   }
 
-  get isExercise() {
-    return this.currentSelection && this.currentSelection.typeOfCurrentlySelection === Type.Exercise;
+  select(item: TreeNode) {
+    this.addItemEvent.emit(item);
+  }
+
+  delete(item: TreeNode) {
+    this.deleteItemEvent.emit(item);
   }
 
   childTypeName() {
-    return Type[this.currentSelection ? this.currentSelection.typeOfCurrentlySelection + 1 : 0];
+    return Type[this.currentSelection ? this.currentSelection.type + 1 : 0];
   }
 }

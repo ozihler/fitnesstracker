@@ -85,8 +85,8 @@ export class CreateWorkoutComponentUser {
     this.createWorkoutComponent.expectSetValueToBe('weight', weight);
   }
 
-  seesCurrentSetValuesToAddAre(set: Set) {
-    this.createWorkoutComponent.expectCurrentSetInputMarkToContainValuesOf(set);
+  seesCurrentSetValuesToAddAre(set: Set, multiplier: number) {
+    this.createWorkoutComponent.expectCurrentSetInputMarkToContainValuesOf(set, multiplier);
   }
 
   configuresRepetitionsWithValues(repetitions: SetButtonValues[]) {
@@ -119,19 +119,19 @@ export class CreateWorkoutComponentUser {
     this.createWorkoutComponent.clickButtonWithId('ft-add-set-to-exercise');
   }
 
-  configuresSetWithValues(weights: SetButtonValues[], repetitions: SetButtonValues[], waitingTimes: SetButtonValues[]) {
+  configuresSetWithValues(weights: SetButtonValues[], repetitions: SetButtonValues[], waitingTimes: SetButtonValues[], multiplier: number) {
     this.configuresWeightWithValues(weights);
     this.seesWeightIs(this.sumOf(weights));
-    this.seesCurrentSetValuesToAddAre(new Set(this.sumOf(weights), 'kg', undefined, undefined, undefined, undefined));
+    this.seesCurrentSetValuesToAddAre(new Set(this.sumOf(weights), 'kg', undefined, undefined, undefined, undefined), multiplier);
 
     this.configuresRepetitionsWithValues(repetitions);
     this.seesRepetitionsAre(this.sumOf(repetitions));
-    this.seesCurrentSetValuesToAddAre(new Set(this.sumOf(weights), 'kg', this.sumOf(repetitions), undefined, undefined, undefined));
+    this.seesCurrentSetValuesToAddAre(new Set(this.sumOf(weights), 'kg', this.sumOf(repetitions), undefined, undefined, undefined), multiplier);
 
     this.configuresWaitingTime(waitingTimes);
     this.seesWaitingTimeIs(this.sumOf(waitingTimes));
     this.seesCurrentSetValuesToAddAre(
-      new Set(this.sumOf(weights), 'kg', this.sumOf(repetitions), this.sumOf(waitingTimes), 's', undefined));
+      new Set(this.sumOf(weights), 'kg', this.sumOf(repetitions), this.sumOf(waitingTimes), 's', undefined), multiplier);
 
     this.togglesSetParts();
     this.seesAllSetPartsAreHidden();

@@ -14,7 +14,7 @@ export class Workout extends TreeNode {
     super(undefined, name, muscleGroups);
   }
 
-  get typeOfCurrentlySelection(): Type {
+  get type(): Type {
     return Type.Workout;
   }
 

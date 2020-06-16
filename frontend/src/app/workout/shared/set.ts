@@ -4,6 +4,16 @@ import {Exercise} from './exercise';
 import {SetFormatPipe} from './pipes/set-format.pipe';
 
 export class Set extends TreeNode {
+  private _multiplier: number;
+
+  get multiplier(): number {
+    return this._multiplier;
+  }
+
+  set multiplier(value: number) {
+    console.log('Multiplier in Set: ' + this.multiplier + ', new value: ' + value);
+    this._multiplier = value;
+  }
 
   constructor(
     private _weight: number,
@@ -16,7 +26,7 @@ export class Set extends TreeNode {
     super(parent, _index_in_exercise + '', undefined);
   }
 
-  get typeOfCurrentlySelection(): Type {
+  get type(): Type {
     return Type.Set;
   }
 
@@ -41,7 +51,8 @@ export class Set extends TreeNode {
   }
 
   get name(): string {
-    return new SetFormatPipe().transform(this);
+    console.log('Multiplier in name: ', this.multiplier);
+    return new SetFormatPipe().transform(this, this.multiplier);
   }
 
   get id(): string {

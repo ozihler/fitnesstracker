@@ -93,11 +93,8 @@ export class CreateWorkoutComponentPageObject {
 
 
   removeSelectedElementFromWorkoutTree(selectedElementToRemove: TreeNode) {
-    console.log('Remove ', selectedElementToRemove.id);
     const button = this.findElement.byId('remove-node-' + selectedElementToRemove.id + '-from-workout-tree');
-    console.log('Remove ', button);
     const selectElementButton = new Button(button);
-    console.log('Remove button, ', selectElementButton);
     selectElementButton.click();
   }
 
@@ -140,9 +137,9 @@ export class CreateWorkoutComponentPageObject {
     expect(inputWeight).toBe(cumulatedWeight);
   }
 
-  expectCurrentSetInputMarkToContainValuesOf(set: Set) {
+  expectCurrentSetInputMarkToContainValuesOf(set: Set, multiplier: number) {
     const setInputMarkText = new Mark(this.findElement.by('#current-set-input-mark')).text;
-    const expected = new SetFormatPipe().transform(set);
+    const expected = new SetFormatPipe().transform(set, multiplier);
     expect(setInputMarkText).toContain(expected);
   }
 
@@ -173,8 +170,6 @@ export class CreateWorkoutComponentPageObject {
   }
 
   setWorkoutDateTo(newDate: Date) {
-    console.log('Input: ', new InputField(this.findElement.byId('workout-date-input-box')).input);
-    console.log('New Date: ', newDate.toJSON().split('T')[0]);
     new InputField(this.findElement.byId('workout-date-input-box')).input
       = newDate.toJSON().split('T')[0];
   }
@@ -187,9 +182,7 @@ export class CreateWorkoutComponentPageObject {
   expectExerciseToHaveSets(sets: TreeNode[]) {
     for (const set of sets) {
       const selector = `select-${set.id}-editable-node`;
-      console.log('Select: ', selector);
-      expect(new Button(this.findElement.byId(selector)).label)
-        .toContain(set.name);
+      expect(new Button(this.findElement.byId(selector)).label).toContain(set.name);
     }
   }
 

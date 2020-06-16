@@ -21,8 +21,8 @@ import {Type} from '../../shared/type';
           {{node?.name}}
         </span>
 
-        <span>
-          ({{node?.cumulateWeight()}} kg)
+        <span *ngIf="shouldShowCumulatedWeight">
+          ({{(node?.cumulateWeight())}} kg)
         </span>
       </button>
 
@@ -53,6 +53,10 @@ export class WorkoutTreeComponent {
   @Output() changeSelectionEvent = new EventEmitter<TreeNode>();
   @Output() removeFromWorkoutEvent = new EventEmitter<TreeNode>();
 
+  get shouldShowCumulatedWeight() {
+    return this.node && this.node.type !== Type.Set && this.node.cumulateWeight() > 0;
+  }
+
   constructor() {
   }
 
@@ -63,11 +67,11 @@ export class WorkoutTreeComponent {
     }
 
     if (this.node) {
-      if (TreeNode.LEVEL_CLASSES[this.node.typeOfCurrentlySelection]) {
-        classes.push(TreeNode.LEVEL_CLASSES[this.node.typeOfCurrentlySelection]);
+      if (TreeNode.LEVEL_CLASSES[this.node.type]) {
+        classes.push(TreeNode.LEVEL_CLASSES[this.node.type]);
       }
 
-      if (this.node.typeOfCurrentlySelection === Type.Workout) {
+      if (this.node.type === Type.Workout) {
         classes.push('uk-width-1-1');
       } else {
         classes.push('uk-width-2-3');
@@ -96,7 +100,7 @@ export class WorkoutTreeComponent {
   }
 
   isWorkout() {
-    return this.node && this.node.typeOfCurrentlySelection === Type.Workout;
+    return this.node && this.node.type === Type.Workout;
   }
 
   get nodeId() {

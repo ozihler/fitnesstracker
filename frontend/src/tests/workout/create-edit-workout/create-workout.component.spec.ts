@@ -280,10 +280,11 @@ describe('a create workout user', () => {
     user.selectsExerciseInMuscleGroup(exercises[0].name);
     user.seesSelectedItemInWorkoutTreeIs(exercises[0]);
 
-    user.configuresSetWithValues(weights, repetitions, waitingTimes);
-    const expected = new Set(user.sumOf(weights), 'kg', user.sumOf(repetitions), user.sumOf(waitingTimes), 's', exercises[0], 0);
+    const multiplier = 1;
+    user.configuresSetWithValues(weights, repetitions, waitingTimes, multiplier);
 
-    user.seesCurrentSetValuesToAddAre(expected);
+    const expected = new Set(user.sumOf(weights), 'kg', user.sumOf(repetitions), user.sumOf(waitingTimes), 's', exercises[0], 0);
+    user.seesCurrentSetValuesToAddAre(expected, multiplier);
     user.addsSetToExercise();
     user.seesThatSetWasAddedToExercise(exercises[0].name, expected);
 

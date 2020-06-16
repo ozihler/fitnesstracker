@@ -1,5 +1,5 @@
-import {TreeNode} from "./workout-tree/tree-node";
-import {Type} from "../shared/type";
+import {TreeNode} from './workout-tree/tree-node';
+import {Type} from '../shared/type';
 
 export class SelectableItems {
   selectableItems: TreeNode[] = [];
@@ -9,11 +9,11 @@ export class SelectableItems {
       return;
     }
 
-    this.selectableItems.push(node)
+    this.selectableItems.push(node);
   }
 
   private isSelectableItem(nodeToDelete: TreeNode) {
-    return [Type.Muscle_Group, Type.Exercise].indexOf(nodeToDelete.typeOfCurrentlySelection) >= 0;
+    return [Type.Muscle_Group, Type.Exercise].indexOf(nodeToDelete.type) >= 0;
   }
 
   remove(node: TreeNode) {

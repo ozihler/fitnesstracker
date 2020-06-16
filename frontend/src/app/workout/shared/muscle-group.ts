@@ -1,7 +1,7 @@
-import {Exercise} from "./exercise";
-import {TreeNode} from "../create-edit-workout/workout-tree/tree-node";
-import {Type} from "./type";
-import {Workout} from "./workout";
+import {Exercise} from './exercise';
+import {TreeNode} from '../create-edit-workout/workout-tree/tree-node';
+import {Type} from './type';
+import {Workout} from './workout';
 
 export class MuscleGroup extends TreeNode {
 
@@ -9,7 +9,7 @@ export class MuscleGroup extends TreeNode {
     super(parent, name, exercises);
   }
 
-  get typeOfCurrentlySelection(): Type {
+  get type(): Type {
     return Type.Muscle_Group;
   }
 

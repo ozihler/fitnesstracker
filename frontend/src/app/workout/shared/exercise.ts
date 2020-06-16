@@ -4,13 +4,13 @@ import {MuscleGroup} from './muscle-group';
 import {Type} from './type';
 
 export class Exercise extends TreeNode {
-  private _multiplier: number = 1;//Default value is 1
+  private _multiplier: number = 1; // Default value is 1
 
   constructor(parent: MuscleGroup, name: string, sets: Set[] = []) {
     super(parent, name, sets);
   }
 
-  get typeOfCurrentlySelection(): Type {
+  get type(): Type {
     return Type.Exercise;
   }
 

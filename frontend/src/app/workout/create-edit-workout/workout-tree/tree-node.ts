@@ -40,7 +40,7 @@ export abstract class TreeNode implements Cumulatable {
   }
 
   get isLeaf(): boolean {
-    return this.typeOfCurrentlySelection === Type.Set;
+    return this.type === Type.Set;
   }
 
   get isEnabled(): boolean {
@@ -76,7 +76,7 @@ export abstract class TreeNode implements Cumulatable {
   }
 
   // todo this method does not belong here...
-  abstract get typeOfCurrentlySelection(): Type;
+  abstract get type(): Type;
 
   accept(visitor: NodeVisitor) {
     visitor.visit(this);

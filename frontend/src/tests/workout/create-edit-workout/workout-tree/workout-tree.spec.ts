@@ -13,7 +13,7 @@ describe('Workout Tree', () => {
   it('should have a workout node as tree', () => {
     const workout = new Workout(WorkoutId.from('1'), new Date(Date.now()), 'Workout', []);
     const workoutTree = new WorkoutTree(workout);
-    expect(workoutTree.root.typeOfCurrentlySelection).toBe(Type.Workout);
+    expect(workoutTree.root.type).toBe(Type.Workout);
   });
 
   it('can add nodes to tree', () => {
@@ -25,7 +25,7 @@ describe('Workout Tree', () => {
 
     const nodeOfMuscleGroup = workoutTree.findNodeById(muscleGroup.id);
     expect(nodeOfMuscleGroup.name).toBe(muscleGroup.name);
-    expect(nodeOfMuscleGroup.typeOfCurrentlySelection).toBe(muscleGroup.typeOfCurrentlySelection);
+    expect(nodeOfMuscleGroup.type).toBe(muscleGroup.type);
     expect(nodeOfMuscleGroup.parent.name).toBe(workout.name);
 
     const exercise = new Exercise(muscleGroup, 'Bench Press', []);
@@ -33,7 +33,7 @@ describe('Workout Tree', () => {
 
     const nodeOfExercise = workoutTree.findNodeById(exercise.id);
     expect(nodeOfExercise.name).toBe(exercise.name);
-    expect(nodeOfExercise.typeOfCurrentlySelection).toBe(exercise.typeOfCurrentlySelection);
+    expect(nodeOfExercise.type).toBe(exercise.type);
     expect(nodeOfExercise.parent.name).toBe(muscleGroup.name);
 
 
@@ -42,7 +42,7 @@ describe('Workout Tree', () => {
 
     const setInExercise = workoutTree.findNodeById(set.id);
     expect(setInExercise.parent.name).toBe(exercise.name);
-    expect(setInExercise.typeOfCurrentlySelection).toBe(set.typeOfCurrentlySelection);
+    expect(setInExercise.type).toBe(set.type);
   });
 
   it('should correctly delete sets', () => {
@@ -92,7 +92,6 @@ describe('Workout Tree', () => {
       expect(workoutTree.findNodeById(dumbbellBP.id)).toBeDefined();
       expect(workoutTree.findNodeById(set1.id)).toBeDefined();
       expect(workoutTree.findNodeById(set.id)).not.toBeDefined();
-      console.log('workout tree\n', workoutTree);
 
     }
   );

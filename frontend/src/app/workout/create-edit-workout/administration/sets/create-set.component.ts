@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {SetFormValues} from './set-form-values';
 import {SetChangeValue} from './set-change-value';
 import {SetFormData} from './set-form-data';
@@ -48,8 +48,11 @@ import {Set} from '../../../shared/set';
   `
 })
 export class CreateSetComponent {
+  @Input() multiplier = 1;
+  @Output() createSet = new EventEmitter<Set>();
 
   showButton = true;
+
 
   formValues = new SetFormData(
     SetFormValues.of([-.5, -1, -10], [.5, 1, 10], true, 'kg', 'weight'),
@@ -57,20 +60,22 @@ export class CreateSetComponent {
     SetFormValues.of([-1, -5, -10], [1, 5, 10], true, 's', 'waitingTime'));
 
 
-  @Output() createSet = new EventEmitter<Set>();
-
-
   constructor(private setFormatPipe: SetFormatPipe) {
 
   }
 
   get currentValues() {
-    return this.setFormatPipe.transform(this.formValues.asMinimalSetWithoutParentOrIndex());
+    return this.setFormatPipe.transform(this.formValues.asMinimalSetWithoutParentOrIndex(), this.multiplier);
   }
 
   submit() {
     this.showButton = true;
     this.createSet.emit(this.formValues.asMinimalSetWithoutParentOrIndex());
+  }
+
+  get currentCumulatedValues() {
+    const set = this.formValues.asMinimalSetWithoutParentOrIndex();
+    return set.weight * set.numberOfRepetitions * this.multiplier;
   }
 
   update(changedValue: SetChangeValue) {

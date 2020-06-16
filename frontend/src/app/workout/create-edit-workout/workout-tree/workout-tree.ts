@@ -4,13 +4,13 @@ import {EnableNodeVisitor} from './enable-node.visitor';
 import {DisableAllNodesVisitor} from './disable-all-nodes.visitor';
 import {NodeByNameCollectorVisitor} from './node-by-name-collector.visitor';
 import {Type} from '../../shared/type';
+import {Set} from '../../shared/set';
+import {Exercise} from '../../shared/exercise';
 
 export class WorkoutTree {
   constructor(private _root: Workout) {
     this.select(_root.id);
   }
-
-  private _currentSelection: TreeNode;
 
   get currentSelection(): TreeNode {
     return this._currentSelection;
@@ -36,6 +36,24 @@ export class WorkoutTree {
     return this.currentSelection.children && this.currentSelection.children.some(value => value.isEnabled);
   }
 
+  private _currentSelection: TreeNode;
+
+  private static isSet(treeNode: TreeNode) {
+    return treeNode.type === Type.Set;
+  }
+
+  private static hasSiblings(treeNode: TreeNode) {
+    return treeNode.parent.children.length > 0;
+  }
+
+  private static removeFromParent(treeNode: TreeNode) {
+    const count = 0;
+    const treeNodeIndex = treeNode.parent.children.indexOf(treeNode);
+    if (treeNodeIndex >= 0) {
+      treeNode.parent.children.splice(treeNodeIndex, 1);
+    }
+  }
+
   enable(nodeId: string): void {
     if (!nodeId) {
       return;
@@ -52,13 +70,14 @@ export class WorkoutTree {
     this.root.accept(new DisableAllNodesVisitor());
   }
 
-  // Todo this should not have a parameter of type tree
-  //  node but only names and a type --> should create a node and return it
   addNode(nodeToAdd: TreeNode): boolean {
-    if (nodeToAdd.typeOfCurrentlySelection === Type.Muscle_Group) {
+    if (nodeToAdd.type === Type.Muscle_Group) {
       return this.link(nodeToAdd, this.root);
     }
     const foundParentOfNode = this.findNodeById(nodeToAdd.parent.id);
+
+    this.addExerciseMultiplierToSet(foundParentOfNode, nodeToAdd);
+
     if (foundParentOfNode) {
       return this.link(nodeToAdd, foundParentOfNode);
     } else {
@@ -100,19 +119,9 @@ export class WorkoutTree {
     return true;
   }
 
-  private static isSet(treeNode: TreeNode) {
-    return treeNode.typeOfCurrentlySelection === Type.Set;
-  }
-
-  private static hasSiblings(treeNode: TreeNode) {
-    return treeNode.parent.children.length > 0;
-  }
-
-  private static removeFromParent(treeNode: TreeNode) {
-    const count = 0;
-    const treeNodeIndex = treeNode.parent.children.indexOf(treeNode);
-    if (treeNodeIndex >= 0) {
-      treeNode.parent.children.splice(treeNodeIndex, 1);
+  private addExerciseMultiplierToSet(assumedExerciseParent: TreeNode, assumedSet: TreeNode) {
+    if (assumedExerciseParent.type === Type.Exercise && assumedSet.type === Type.Set) {
+      (assumedSet as Set).multiplier = (assumedExerciseParent as Exercise).multiplier;
     }
   }
 

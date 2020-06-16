@@ -53,40 +53,45 @@ describe('A workout user', () => {
       .then(() => user.seesEmptyElementsText());
 
     const exercise = new Exercise(undefined, 'Dumbbell Bench Press', []);
+    exercise.multiplier = 2;
     const setToAdd = new Set(25, 'kg', 10, 0, 's', exercise, 0);
 
     user.selectNodeInWorkoutTreeWithName('Chest')
       .then(() => user.addsSetsTo('Dumbbell Bench Press', [setToAdd]))
       .then(() => user.seesCumulatedWeights([
         // todo fix this value (2) multiplier
-        {name: setToAdd.id, expectedValue: calculateCumulatedWeight([setToAdd], 1), isRoot: false},
-        {name: 'Dumbbell Bench Press', expectedValue: calculateCumulatedWeight([setToAdd], 2), isRoot: false},
-        {name: 'Chest', expectedValue: calculateCumulatedWeight([setToAdd], 2), isRoot: false},
-        {name: 'root', expectedValue: calculateCumulatedWeight([setToAdd], 2), isRoot: true},
+        {name: setToAdd.id, expectedValue: cumulatedWeightOf([setToAdd], exercise.multiplier), isRoot: false},
+        {name: 'Dumbbell Bench Press', expectedValue: cumulatedWeightOf([setToAdd], exercise.multiplier), isRoot: false},
+        {name: 'Chest', expectedValue: cumulatedWeightOf([setToAdd], exercise.multiplier), isRoot: false},
+        {name: 'root', expectedValue: cumulatedWeightOf([setToAdd], exercise.multiplier), isRoot: true},
       ]));
 
     const setToAdd2 = new Set(27.5, 'kg', 8, 0, 's', exercise, 1);
     user.addsSetsTo('Dumbbell Bench Press', [setToAdd2])
       .then(() => user.seesCumulatedWeights([
         // todo fix this value (2) multiplier
-        {name: setToAdd2.id, expectedValue: calculateCumulatedWeight([setToAdd2], 1), isRoot: false},
-        {name: 'Dumbbell Bench Press', expectedValue: calculateCumulatedWeight([setToAdd, setToAdd2], 2), isRoot: false},
-        {name: 'Chest', expectedValue: calculateCumulatedWeight([setToAdd, setToAdd2], 2), isRoot: false},
-        {name: 'root', expectedValue: calculateCumulatedWeight([setToAdd, setToAdd2], 2), isRoot: true},
+        {name: setToAdd2.id, expectedValue: cumulatedWeightOf([setToAdd2], exercise.multiplier), isRoot: false},
+        {name: 'Dumbbell Bench Press', expectedValue: cumulatedWeightOf([setToAdd, setToAdd2], exercise.multiplier), isRoot: false},
+        {name: 'Chest', expectedValue: cumulatedWeightOf([setToAdd, setToAdd2], exercise.multiplier), isRoot: false},
+        {name: 'root', expectedValue: cumulatedWeightOf([setToAdd, setToAdd2], exercise.multiplier), isRoot: true},
       ]));
 
     const setToAdd3 = new Set(30, 'kg', 6, 0, 's', exercise, 2);
     user.addsSetsTo('Dumbbell Bench Press', [setToAdd3])
       .then(() => user.seesCumulatedWeights([
         // todo fix this value (2) multiplier
-        {name: setToAdd3.id, expectedValue: calculateCumulatedWeight([setToAdd3], 1), isRoot: false},
-        {name: 'Dumbbell Bench Press', expectedValue: calculateCumulatedWeight([setToAdd, setToAdd2, setToAdd3], 2), isRoot: false},
-        {name: 'Chest', expectedValue: calculateCumulatedWeight([setToAdd, setToAdd2, setToAdd3], 2), isRoot: false},
-        {name: 'root', expectedValue: calculateCumulatedWeight([setToAdd, setToAdd2, setToAdd3], 2), isRoot: true},
+        {name: setToAdd3.id, expectedValue: cumulatedWeightOf([setToAdd3], exercise.multiplier), isRoot: false},
+        {
+          name: 'Dumbbell Bench Press',
+          expectedValue: cumulatedWeightOf([setToAdd, setToAdd2, setToAdd3], exercise.multiplier),
+          isRoot: false
+        },
+        {name: 'Chest', expectedValue: cumulatedWeightOf([setToAdd, setToAdd2, setToAdd3], exercise.multiplier), isRoot: false},
+        {name: 'root', expectedValue: cumulatedWeightOf([setToAdd, setToAdd2, setToAdd3], exercise.multiplier), isRoot: true}
       ]));
   });
 
-  function calculateCumulatedWeight(sets: Set[], multiplier: number) {
+  function cumulatedWeightOf(sets: Set[], multiplier: number) {
     return multiplier * sets.map(set => set.numberOfRepetitions * set.weight)
       .reduce((p, v) => (p + v));
   }

@@ -6,12 +6,13 @@ import {Set} from '../set';
 })
 export class SetFormatPipe implements PipeTransform {
 
-  transform(value: Set): string {
+  transform(value: Set, multiplier: number = 1): string {
     return (value.weight ? value.weight + ' ' + (value.weightUnit ? value.weightUnit : 'kg') : '')
       + (value.weight && value.numberOfRepetitions ? ', ' : '') +
       (value.numberOfRepetitions ? value.numberOfRepetitions + ' #' : '')
       + ((value.weight && value.waitingTime) || (value.numberOfRepetitions && value.waitingTime) ? ', ' : '') +
-      (value.waitingTime ? value.waitingTime + ' ' + (value.waitingTimeUnit ? value.waitingTimeUnit : 's') : '');
+      (value.waitingTime ? value.waitingTime + ' ' + (value.waitingTimeUnit ? value.waitingTimeUnit : 's') : '')
+      + (value.weight && value.numberOfRepetitions ? ' (' + (value.weight * value.numberOfRepetitions * multiplier) + ' kg)' : '');
   }
 
 }
