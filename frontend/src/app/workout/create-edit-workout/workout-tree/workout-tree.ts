@@ -76,8 +76,6 @@ export class WorkoutTree {
     }
     const foundParentOfNode = this.findNodeById(nodeToAdd.parent.id);
 
-    this.addExerciseMultiplierToSet(foundParentOfNode, nodeToAdd);
-
     if (foundParentOfNode) {
       return this.link(nodeToAdd, foundParentOfNode);
     } else {

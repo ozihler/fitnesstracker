@@ -4,9 +4,7 @@ import {MuscleGroup} from './muscle-group';
 import {Type} from './type';
 
 export class Exercise extends TreeNode {
-  private _multiplier: number = 1; // Default value is 1
-
-  constructor(parent: MuscleGroup, name: string, sets: Set[] = []) {
+  constructor(parent: MuscleGroup, name: string, sets: Set[] = [], private _multiplier = 1) {
     super(parent, name, sets);
   }
 
@@ -28,7 +26,7 @@ export class Exercise extends TreeNode {
     if (!this.children || this.children.length === 0) {
       return 0;
     }
-    return this.children.map(node => node.cumulateWeight() * this.multiplier)
+    return this.children.map(node => node.cumulateWeight())
       .reduce((before, after) => before + after);
   }
 }

@@ -11,9 +11,7 @@ export class ExerciseFactory {
         sets.push(SetFactory.from(setRaws[i], i, exerciseRaw.multiplier));
       }
     }
-    const exercise = new Exercise(undefined, exerciseRaw.name, sets);
-    exercise.multiplier = exerciseRaw.multiplier;
-    return exercise;
+    return new Exercise(undefined, exerciseRaw.name, sets, exerciseRaw.multiplier);
   }
 
   static fromMultiple(exercises: ExerciseRaw[]): Exercise[] {

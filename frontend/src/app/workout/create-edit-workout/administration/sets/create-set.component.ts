@@ -48,7 +48,7 @@ import {Set} from '../../../shared/set';
   `
 })
 export class CreateSetComponent {
-  @Input() multiplier = 1;
+  @Input() multiplier;
   @Output() createSet = new EventEmitter<Set>();
 
   showButton = true;
@@ -65,17 +65,16 @@ export class CreateSetComponent {
   }
 
   get currentValues() {
-    return this.setFormatPipe.transform(this.formValues.asMinimalSetWithoutParentOrIndex(), this.multiplier);
+
+    console.log('Multiplier is ', this.multiplier);
+    const set = this.formValues.asMinimalSetWithoutParentOrIndex(this.multiplier);
+    console.log('set is ', set);
+    return this.setFormatPipe.transform(set);
   }
 
   submit() {
     this.showButton = true;
-    this.createSet.emit(this.formValues.asMinimalSetWithoutParentOrIndex());
-  }
-
-  get currentCumulatedValues() {
-    const set = this.formValues.asMinimalSetWithoutParentOrIndex();
-    return set.weight * set.numberOfRepetitions * this.multiplier;
+    this.createSet.emit(this.formValues.asMinimalSetWithoutParentOrIndex(this.multiplier));
   }
 
   update(changedValue: SetChangeValue) {

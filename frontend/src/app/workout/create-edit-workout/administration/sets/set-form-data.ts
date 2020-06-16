@@ -12,14 +12,16 @@ export class SetFormData {
     this.waitingTime = waitingTime;
   }
 
-  asMinimalSetWithoutParentOrIndex(): Set {
+  asMinimalSetWithoutParentOrIndex(multiplier: number): Set {
     return new Set(
       this.weight.currentValue,
       this.weight.unit,
       this.repetitions.currentValue,
       this.waitingTime.currentValue,
       this.waitingTime.unit,
-      undefined
+      undefined,
+      0,
+      multiplier
     );
   }
 }

@@ -4,14 +4,12 @@ import {Exercise} from './exercise';
 import {SetFormatPipe} from './pipes/set-format.pipe';
 
 export class Set extends TreeNode {
-  private _multiplier: number;
 
   get multiplier(): number {
     return this._multiplier;
   }
 
   set multiplier(value: number) {
-    console.log('Multiplier in Set: ' + this.multiplier + ', new value: ' + value);
     this._multiplier = value;
   }
 
@@ -22,7 +20,8 @@ export class Set extends TreeNode {
     private _waitingTime: number,
     private _waitingTimeUnit: string,
     parent: Exercise,
-    private _index_in_exercise = 0) {
+    private _index_in_exercise = 0,
+    private _multiplier: number = 1) {
     super(parent, _index_in_exercise + '', undefined);
   }
 
@@ -52,7 +51,7 @@ export class Set extends TreeNode {
 
   get name(): string {
     console.log('Multiplier in name: ', this.multiplier);
-    return new SetFormatPipe().transform(this, this.multiplier);
+    return new SetFormatPipe().transform(this);
   }
 
   get id(): string {
@@ -66,6 +65,6 @@ export class Set extends TreeNode {
 
 
   cumulateWeight(): number {
-    return this.weight * this.numberOfRepetitions /* *this.multiplier*/;
+    return this.weight * this.numberOfRepetitions * this.multiplier;
   }
 }

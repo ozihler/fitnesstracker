@@ -52,8 +52,7 @@ describe('A workout user', () => {
       .then(() => user.seesThatMuscleGroupHasExercisesToSelect('Triceps', []))
       .then(() => user.seesEmptyElementsText());
 
-    const exercise = new Exercise(undefined, 'Dumbbell Bench Press', []);
-    exercise.multiplier = 2;
+    const exercise = new Exercise(undefined, 'Dumbbell Bench Press', [], 2);
     const setToAdd = new Set(25, 'kg', 10, 0, 's', exercise, 0);
 
     user.selectNodeInWorkoutTreeWithName('Chest')

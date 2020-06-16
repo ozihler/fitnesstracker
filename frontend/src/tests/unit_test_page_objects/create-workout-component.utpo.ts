@@ -139,7 +139,7 @@ export class CreateWorkoutComponentPageObject {
 
   expectCurrentSetInputMarkToContainValuesOf(set: Set, multiplier: number) {
     const setInputMarkText = new Mark(this.findElement.by('#current-set-input-mark')).text;
-    const expected = new SetFormatPipe().transform(set, multiplier);
+    const expected = new SetFormatPipe().transform(set);
     expect(setInputMarkText).toContain(expected);
   }
 
