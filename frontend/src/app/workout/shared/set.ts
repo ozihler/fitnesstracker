@@ -50,7 +50,6 @@ export class Set extends TreeNode {
   }
 
   get name(): string {
-    console.log('Multiplier in name: ', this.multiplier);
     return new SetFormatPipe().transform(this);
   }
 

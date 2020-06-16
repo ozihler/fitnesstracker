@@ -34,7 +34,15 @@ describe('a create workout user', () => {
 
   let selectionServiceMock;
   const toMuscleGroups = (muscleGroupNames) => muscleGroupNames.split(',').map(m => new MuscleGroup(undefined, m.trim(), []));
-  const toExercises = (exerciseNames) => exerciseNames.split(',').map(m => new Exercise(undefined, m.trim(), []));
+  const toExercises = (exerciseNames) => {
+    const exercises = exerciseNames.split(',');
+
+    return exercises.map(name => {
+      const multiplier = name.indexOf('2#') >= 0 ? 2 : 1;
+      const replacedName = name.replace('2#', '').trim();
+      return new Exercise(undefined, replacedName, [], multiplier);
+    });
+  };
 
   let workoutServiceMock;
   beforeEach(() => {
@@ -68,7 +76,8 @@ describe('a create workout user', () => {
           setDetails.waitingTime,
           setDetails.waitingTimeUnit,
           exercise,
-          exercise.children.length
+          exercise.children.length,
+          exercise.multiplier
         ))
     };
     registerLocaleData(localeDe);
@@ -331,7 +340,7 @@ describe('a create workout user', () => {
     user.choosesFromSelectableMuscleGroups('chest');
     user.choosesFromSelectableMuscleGroups('triceps');
     user.selectsMuscleGroupInWorkout('chest');
-    user.createsExercisesToSelect('Bench Press, Dumbbell Bench Press');
+    user.createsExercisesToSelect('Bench Press, 2#Dumbbell Bench Press');
     user.choosesFromSelectableExercises('Bench Press');
     user.choosesFromSelectableExercises('Dumbbell Bench Press');
     user.selectsExerciseInMuscleGroup('Bench Press');
@@ -366,13 +375,15 @@ describe('a create workout user', () => {
     const dumbbellBenchPress = new Exercise(
       new MuscleGroup(undefined, 'Chest', []),
       'Dumbbell Bench Press',
-      []);
+      [],
+      2);
 
     dumbbellBenchPress.children = [
-      new Set(20, 'kg', 12, 50, 's', dumbbellBenchPress, 0),
-      new Set(20, 'kg', 12, 50, 's', dumbbellBenchPress, 1),
-      new Set(20, 'kg', 12, 50, 's', dumbbellBenchPress, 2)
+      new Set(20, 'kg', 12, 50, 's', dumbbellBenchPress, 0, 2),
+      new Set(20, 'kg', 12, 50, 's', dumbbellBenchPress, 1, 2),
+      new Set(20, 'kg', 12, 50, 's', dumbbellBenchPress, 2, 2)
     ];
+
     user.selectsExerciseInMuscleGroup('Dumbbell Bench Press');
     user.seesThatExerciseHasSets('Dumbbell Bench Press', dumbbellBenchPress.children);
 
@@ -381,16 +392,16 @@ describe('a create workout user', () => {
     user.removesItemFromWorkoutTree(benchPressExercise.children[0]);
 
     user.seesThatExerciseHasSets('Bench Press', [
-      new Set(20, 'kg', 12, 50, 's', benchPressExercise, 1),
-      new Set(20, 'kg', 12, 50, 's', benchPressExercise, 2)
+      new Set(20, 'kg', 12, 50, 's', benchPressExercise, 1, 1),
+      new Set(20, 'kg', 12, 50, 's', benchPressExercise, 2, 1)
     ]);
 
     user.selectsExerciseInMuscleGroup('Dumbbell Bench Press');
     user.seesSelectedItemInWorkoutTreeIs(new Exercise(undefined, 'Dumbbell Bench Press'));
     user.seesThatExerciseHasSets('Dumbbell Bench Press', [
-      new Set(20, 'kg', 12, 50, 's', dumbbellBenchPress, 0),
-      new Set(20, 'kg', 12, 50, 's', dumbbellBenchPress, 1),
-      new Set(20, 'kg', 12, 50, 's', dumbbellBenchPress, 2)
+      new Set(20, 'kg', 12, 50, 's', dumbbellBenchPress, 0, 2),
+      new Set(20, 'kg', 12, 50, 's', dumbbellBenchPress, 1, 2),
+      new Set(20, 'kg', 12, 50, 's', dumbbellBenchPress, 2, 2)
     ]);
   }));
 

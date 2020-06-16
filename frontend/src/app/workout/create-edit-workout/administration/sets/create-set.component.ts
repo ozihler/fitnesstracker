@@ -65,10 +65,7 @@ export class CreateSetComponent {
   }
 
   get currentValues() {
-
-    console.log('Multiplier is ', this.multiplier);
     const set = this.formValues.asMinimalSetWithoutParentOrIndex(this.multiplier);
-    console.log('set is ', set);
     return this.setFormatPipe.transform(set);
   }
 
