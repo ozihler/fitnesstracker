@@ -40,10 +40,10 @@ export class Workout extends TreeNode {
 
 
   get name() {
-    return super.name ? super.name : Workout.WORKOUT_INITIAL_TITLE;
+    return this._name ? this._name : Workout.WORKOUT_INITIAL_TITLE;
   }
 
   set name(value) {
-    super.name = value;
+    this._name = value;
   }
 }

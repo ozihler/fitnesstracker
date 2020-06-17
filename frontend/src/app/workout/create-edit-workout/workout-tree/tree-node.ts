@@ -9,7 +9,7 @@ export abstract class TreeNode implements Cumulatable {
   private _isEnabled: boolean = false;
 
   protected constructor(private _parent: TreeNode,
-                        private _name,
+                        protected _name,
                         private _children: TreeNode[]) {
     this.linkToChildren();
   }
