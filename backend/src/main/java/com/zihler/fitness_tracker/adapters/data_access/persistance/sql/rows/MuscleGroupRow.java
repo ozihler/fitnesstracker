@@ -68,4 +68,15 @@ public class MuscleGroupRow {
         this.exercises = exercises;
         exercises.forEach(e -> e.setMuscleGroup(this));
     }
+
+    @Override
+    public String toString() {
+        return "MuscleGroupRow{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", isSelectable=" + isSelectable +
+                ", workout=" + workout +
+                ", exercises=" + exercises +
+                '}';
+    }
 }
