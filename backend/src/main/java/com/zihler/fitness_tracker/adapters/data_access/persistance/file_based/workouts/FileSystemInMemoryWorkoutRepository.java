@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Repository
-@Profile("prod")
+@Profile("dev")
 public class FileSystemInMemoryWorkoutRepository
         implements
         GenerateWorkoutId,
