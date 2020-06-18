@@ -1,0 +1,77 @@
+package com.zihler.fitness_tracker.adapters.data_access.persistance.sql.rows;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "set")
+public class SetRow {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @Column(name = "weight", nullable = false)
+    private float weight;
+
+    @Column(name = "weight_unit", nullable = false)
+    private String weightUnit;
+
+    @Column(name = "repetitions", nullable = false)
+    private int repetitions;
+
+    @Column(name = "waiting_time")
+    private int waitingTime;
+
+    @Column(name = "waiting_time_unit")
+    private String waitingTimeUnit;
+
+    public SetRow() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public float getWeight() {
+        return weight;
+    }
+
+    public void setWeight(float weight) {
+        this.weight = weight;
+    }
+
+    public String getWeightUnit() {
+        return weightUnit;
+    }
+
+    public void setWeightUnit(String weightUnit) {
+        this.weightUnit = weightUnit;
+    }
+
+    public int getRepetitions() {
+        return repetitions;
+    }
+
+    public void setRepetitions(int repetitions) {
+        this.repetitions = repetitions;
+    }
+
+    public int getWaitingTime() {
+        return waitingTime;
+    }
+
+    public void setWaitingTime(int waitingTime) {
+        this.waitingTime = waitingTime;
+    }
+
+    public String getWaitingTimeUnit() {
+        return waitingTimeUnit;
+    }
+
+    public void setWaitingTimeUnit(String waitingTimeUnit) {
+        this.waitingTimeUnit = waitingTimeUnit;
+    }
+}

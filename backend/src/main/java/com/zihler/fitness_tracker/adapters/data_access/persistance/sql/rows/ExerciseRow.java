@@ -9,8 +9,14 @@ public class ExerciseRow {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "name", unique = true)
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
+
+    @Column(name = "multiplier", nullable = false)
+    private int multiplier;
+
+    @Column(name = "is_selectable")
+    private int isSelectable;
 
     public ExerciseRow() {
     }
@@ -29,5 +35,13 @@ public class ExerciseRow {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getMultiplier() {
+        return multiplier;
+    }
+
+    public void setMultiplier(int multiplier) {
+        this.multiplier = multiplier;
     }
 }

@@ -1,0 +1,3088 @@
+{
+  "workouts": [
+    {
+      "workoutId": "1-14",
+      "creationDate": 1590105600000,
+      "title": "New Workout",
+      "muscleGroups": []
+    },
+    {
+      "workoutId": "1-15",
+      "creationDate": 1590278400000,
+      "title": "Back Biceps",
+      "muscleGroups": [
+        {
+          "isSelectable": true,
+          "name": "Back",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Deadlift",
+              "sets": [
+                {
+                  "weight": 65.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 65.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 65.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Rowing Standing",
+              "sets": [
+                {
+                  "weight": 45.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 45.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 45.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Dumbbell Bench Rowing",
+              "sets": [
+                {
+                  "weight": 32.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 32.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 32.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Hantelscheiben Pull",
+              "sets": [
+                {
+                  "weight": 30.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 30.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "isSelectable": true,
+          "name": "Biceps",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Dumbbell Curls",
+              "sets": [
+                {
+                  "weight": 17.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 17.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 17.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 10,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Barbell Curls",
+              "sets": [
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Hammer Curls",
+              "sets": [
+                {
+                  "weight": 17.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "workoutId": "1-12",
+      "creationDate": 1590019200000,
+      "title": "Legs",
+      "muscleGroups": [
+        {
+          "isSelectable": true,
+          "name": "Legs",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Deep Squats",
+              "sets": [
+                {
+                  "weight": 30.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 30.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 30.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Lunges",
+              "sets": [
+                {
+                  "weight": 10.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 10.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 10.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "workoutId": "1-13",
+      "creationDate": 1590105600000,
+      "title": "Chest Triceps",
+      "muscleGroups": [
+        {
+          "isSelectable": true,
+          "name": "Chest",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Bench Press",
+              "sets": [
+                {
+                  "weight": 60.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 9,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 55.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 8,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 55.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 8,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Dumbbell Bench Press",
+              "sets": [
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 9,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Dumbbell Flys",
+              "sets": [
+                {
+                  "weight": 17.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 17.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 17.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 2
+            }
+          ]
+        },
+        {
+          "isSelectable": true,
+          "name": "Triceps",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Dips",
+              "sets": [
+                {
+                  "weight": 37.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 40.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 40.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Overhead Dumbbell Pull",
+              "sets": [
+                {
+                  "weight": 32.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 9,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Kickbacks",
+              "sets": [
+                {
+                  "weight": 12.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 12.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 12.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "workoutId": "1-10",
+      "creationDate": 1589673600000,
+      "title": "Back Biceps",
+      "muscleGroups": [
+        {
+          "isSelectable": true,
+          "name": "Back",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Deadlift",
+              "sets": [
+                {
+                  "weight": 60.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 60.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 60.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Rowing Standing",
+              "sets": [
+                {
+                  "weight": 45.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 40.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 40.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Dumbbell Bench Rowing",
+              "sets": [
+                {
+                  "weight": 32.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 8,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 30.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Hantelscheiben Pull",
+              "sets": [
+                {
+                  "weight": 20.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "isSelectable": true,
+          "name": "Biceps",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Dumbbell Curls",
+              "sets": [
+                {
+                  "weight": 17.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 17.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 17.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 9,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Barbell Curls",
+              "sets": [
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Hammer Curls",
+              "sets": [
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "workoutId": "1-11",
+      "creationDate": 1589846400000,
+      "title": "Shoulders",
+      "muscleGroups": [
+        {
+          "isSelectable": true,
+          "name": "Shoulders",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Barbell Standing Shoulder Press",
+              "sets": [
+                {
+                  "weight": 40.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 5,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 30.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 30.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Barbell Kneeling Shoulder Press",
+              "sets": [
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Arnold Press",
+              "sets": [
+                {
+                  "weight": 12.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 12.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 10,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 12.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 10,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Side Front Raise",
+              "sets": [
+                {
+                  "weight": 6.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 5.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 5.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Wide Barebell Raise",
+              "sets": [
+                {
+                  "weight": 20.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "workoutId": "1-20",
+      "creationDate": 1592006400000,
+      "title": "Shoulders",
+      "muscleGroups": [
+        {
+          "isSelectable": true,
+          "name": "Shoulders",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Barbell Standing Shoulder Press",
+              "sets": [
+                {
+                  "weight": 32.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 30.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 30.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 8,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Barbell Kneeling Shoulder Press",
+              "sets": [
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Arnold Press",
+              "sets": [
+                {
+                  "weight": 12.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 8,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 12.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 10,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 12.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 8,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Side Front Raise",
+              "sets": [
+                {
+                  "weight": 5.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 5.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 5.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Wide Barebell Raise",
+              "sets": [
+                {
+                  "weight": 10.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 10.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 10.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "workoutId": "1-1",
+      "creationDate": 1588464000000,
+      "title": "Back Biceps",
+      "muscleGroups": [
+        {
+          "isSelectable": true,
+          "name": "Back",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Deadlift",
+              "sets": [
+                {
+                  "weight": 50.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 50.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 50.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Rowing Standing",
+              "sets": [
+                {
+                  "weight": 35.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 35.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 35.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Dumbbell Bench Rowing",
+              "sets": [
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "isSelectable": true,
+          "name": "Biceps",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Dumbbell Curls",
+              "sets": [
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Barbell Curls",
+              "sets": [
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Hammer Curls",
+              "sets": [
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "workoutId": "1-18",
+      "creationDate": 1591315200000,
+      "title": "Back Biceps",
+      "muscleGroups": [
+        {
+          "isSelectable": true,
+          "name": "Back",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Deadlift",
+              "sets": [
+                {
+                  "weight": 70.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 70.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 70.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Rowing Standing",
+              "sets": [
+                {
+                  "weight": 50.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 50.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 50.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Dumbbell Bench Rowing",
+              "sets": [
+                {
+                  "weight": 32.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 32.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 32.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Hantelscheiben Pull",
+              "sets": [
+                {
+                  "weight": 30.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 30.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 30.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "isSelectable": true,
+          "name": "Biceps",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Dumbbell Curls",
+              "sets": [
+                {
+                  "weight": 17.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 17.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Barbell Curls",
+              "sets": [
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Hammer Curls",
+              "sets": [
+                {
+                  "weight": 17.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "workoutId": "1-2",
+      "creationDate": 1588636800000,
+      "title": "Shoulders",
+      "muscleGroups": [
+        {
+          "isSelectable": true,
+          "name": "Shoulders",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Barbell Standing Shoulder Press",
+              "sets": [
+                {
+                  "weight": 20.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 20.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 20.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Barbell Kneeling Shoulder Press",
+              "sets": [
+                {
+                  "weight": 10.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Arnold Press",
+              "sets": [
+                {
+                  "weight": 7.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 7.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 7.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Wide Barebell Raise",
+              "sets": [
+                {
+                  "weight": 5.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 5.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 5.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Side Front Raise",
+              "sets": [
+                {
+                  "weight": 5.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 5.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 5.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "workoutId": "1-19",
+      "creationDate": 1591488000000,
+      "title": "Chest Triceps",
+      "muscleGroups": [
+        {
+          "isSelectable": true,
+          "name": "Chest",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Bench Press",
+              "sets": [
+                {
+                  "weight": 65.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 7,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 60.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 8,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 57.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 10,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Dumbbell Bench Press",
+              "sets": [
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 10,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 10,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 10,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Dumbbell Flys",
+              "sets": [
+                {
+                  "weight": 17.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 17.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 17.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 2
+            }
+          ]
+        },
+        {
+          "isSelectable": true,
+          "name": "Triceps",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Dips",
+              "sets": [
+                {
+                  "weight": 45.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 45.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 45.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Overhead Dumbbell Pull",
+              "sets": [
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Kickbacks",
+              "sets": [
+                {
+                  "weight": 12.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 12.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 12.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "workoutId": "1-3",
+      "creationDate": 1588809600000,
+      "title": "Chest Triceps",
+      "muscleGroups": [
+        {
+          "isSelectable": true,
+          "name": "Chest",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Bench Press",
+              "sets": [
+                {
+                  "weight": 50.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 50.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 50.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 8,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Dumbbell Bench Press",
+              "sets": [
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 8,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 22.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 22.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Dumbbell Flys",
+              "sets": [
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "isSelectable": true,
+          "name": "Triceps",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Dips",
+              "sets": [
+                {
+                  "weight": 32.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 32.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 32.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Overhead Dumbbell Pull",
+              "sets": [
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Kickbacks",
+              "sets": [
+                {
+                  "weight": 10.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 10.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 10.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "workoutId": "1-16",
+      "creationDate": 1590537600000,
+      "title": "Shoulders",
+      "muscleGroups": [
+        {
+          "isSelectable": true,
+          "name": "Shoulders",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Barbell Standing Shoulder Press",
+              "sets": [
+                {
+                  "weight": 40.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 6,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 35.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 8,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 32.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Barbell Kneeling Shoulder Press",
+              "sets": [
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Arnold Press",
+              "sets": [
+                {
+                  "weight": 12.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 12.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 12.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Side Front Raise",
+              "sets": [
+                {
+                  "weight": 6.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 6.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 6.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Wide Barebell Raise",
+              "sets": [
+                {
+                  "weight": 20.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 20.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 20.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "workoutId": "1-4",
+      "creationDate": 1588896000000,
+      "title": "Legs",
+      "muscleGroups": [
+        {
+          "isSelectable": true,
+          "name": "Legs",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Deep Squats",
+              "sets": [
+                {
+                  "weight": 30.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 30.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 30.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Lunges",
+              "sets": [
+                {
+                  "weight": 10.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 10.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 10.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "workoutId": "1-17",
+      "creationDate": 1590883200000,
+      "title": "Chest Triceps",
+      "muscleGroups": [
+        {
+          "isSelectable": true,
+          "name": "Chest",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Bench Press",
+              "sets": [
+                {
+                  "weight": 60.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 10,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 55.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 9,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 55.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 6,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Dumbbell Bench Press",
+              "sets": [
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 6,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 8,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Dumbbell Flys",
+              "sets": [
+                {
+                  "weight": 17.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 17.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 17.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 2
+            }
+          ]
+        },
+        {
+          "isSelectable": true,
+          "name": "Triceps",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Dips",
+              "sets": [
+                {
+                  "weight": 45.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 45.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 45.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Overhead Dumbbell Pull",
+              "sets": [
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Kickbacks",
+              "sets": [
+                {
+                  "weight": 12.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 12.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 12.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "workoutId": "1-5",
+      "creationDate": 1589068800000,
+      "title": "Back Biceps",
+      "muscleGroups": [
+        {
+          "isSelectable": true,
+          "name": "Back",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Deadlift",
+              "sets": [
+                {
+                  "weight": 55.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 55.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 55.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Rowing Standing",
+              "sets": [
+                {
+                  "weight": 40.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 40.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 40.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Dumbbell Bench Rowing",
+              "sets": [
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Hantelscheiben Pull",
+              "sets": [
+                {
+                  "weight": 20.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 20.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 20.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "isSelectable": true,
+          "name": "Biceps",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Dumbbell Curls",
+              "sets": [
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Barbell Curls",
+              "sets": [
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Hammer Curls",
+              "sets": [
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "workoutId": "1-6",
+      "creationDate": 1578787200000,
+      "title": "-----------todelete",
+      "muscleGroups": [
+        {
+          "isSelectable": true,
+          "name": "Chest",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Bench Press",
+              "sets": [
+                {
+                  "weight": 50.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 50.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 50.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 8,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Dumbbell Bench Press",
+              "sets": [
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 8,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Dumbbell Flys",
+              "sets": [
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "isSelectable": true,
+          "name": "Triceps",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Dips",
+              "sets": [
+                {
+                  "weight": 32.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 32.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 32.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Overhead Dumbbell Pull",
+              "sets": [
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Kickbacks",
+              "sets": [
+                {
+                  "weight": 10.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 10.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 10.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "workoutId": "1-7",
+      "creationDate": 1589241600000,
+      "title": "Shoulders",
+      "muscleGroups": [
+        {
+          "isSelectable": true,
+          "name": "Shoulders",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Barbell Standing Shoulder Press",
+              "sets": [
+                {
+                  "weight": 30.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 8,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Barbell Kneeling Shoulder Press",
+              "sets": [
+                {
+                  "weight": 20.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 20.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 20.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Arnold Press",
+              "sets": [
+                {
+                  "weight": 10.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 10.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 10.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Side Front Raise",
+              "sets": [
+                {
+                  "weight": 5.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 5.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 5.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Wide Barebell Raise",
+              "sets": [
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "workoutId": "1-8",
+      "creationDate": 1589414400000,
+      "title": "New Workout",
+      "muscleGroups": []
+    },
+    {
+      "workoutId": "1-9",
+      "creationDate": 1589500800000,
+      "title": "Chest Triceps",
+      "muscleGroups": [
+        {
+          "isSelectable": true,
+          "name": "Chest",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Bench Press",
+              "sets": [
+                {
+                  "weight": 55.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 52.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 8,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 50.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 10,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Dumbbell Bench Press",
+              "sets": [
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 8,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 25.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 8,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Dumbbell Flys",
+              "sets": [
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 15.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "isSelectable": true,
+          "name": "Triceps",
+          "exercises": [
+            {
+              "isSelectable": true,
+              "name": "Dips",
+              "sets": [
+                {
+                  "weight": 35.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 35.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 35.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Overhead Dumbbell Pull",
+              "sets": [
+                {
+                  "weight": 30.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 27.5,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 9,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            },
+            {
+              "isSelectable": true,
+              "name": "Kickbacks",
+              "sets": [
+                {
+                  "weight": 11.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 11.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                },
+                {
+                  "weight": 11.0,
+                  "weightUnit": "kg",
+                  "numberOfRepetitions": 12,
+                  "waitingTime": 0,
+                  "waitingTimeUnit": "s"
+                }
+              ],
+              "multiplier": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

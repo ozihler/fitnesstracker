@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS WORKOUT, MUSCLE_GROUP, EXERCISE, SET;
+
 CREATE TABLE WORKOUT(
     id serial primary key,
     workout_id varchar(255) unique not null,

@@ -11,8 +11,11 @@ public class MuscleGroupRow {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "name", unique = true)
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
+
+    @Column(name = "is_selectable")
+    private int isSelectable;
 
     public MuscleGroupRow() {
     }
