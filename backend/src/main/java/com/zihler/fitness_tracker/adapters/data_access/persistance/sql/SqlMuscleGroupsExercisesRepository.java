@@ -1,5 +1,6 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.sql;
 
+import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.inputs.MuscleGroupsFromSqlInput;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.*;
 import com.zihler.fitness_tracker.domain.entities.Exercise;
 import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
@@ -9,6 +10,7 @@ import com.zihler.fitness_tracker.domain.values.MuscleGroups;
 import com.zihler.fitness_tracker.domain.values.Name;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
@@ -25,9 +27,24 @@ public class SqlMuscleGroupsExercisesRepository implements
         StoreExercise {
     private static final Logger logger = LoggerFactory.getLogger(SqlMuscleGroupsExercisesRepository.class);
 
+    private final JpaMuscleGroupsRepository muscleGroupsRepository;
+    private final JpaExerciseRepository exerciseRepository;
+
+    @Autowired
+    public SqlMuscleGroupsExercisesRepository(
+            JpaMuscleGroupsRepository muscleGroupsRepository,
+            JpaExerciseRepository exerciseRepository) {
+        this.muscleGroupsRepository = muscleGroupsRepository;
+        this.exerciseRepository = exerciseRepository;
+    }
+
     @Override
     public MuscleGroups fetchAll() {
-        return null;
+        var muscleGroupRows = muscleGroupsRepository.findAll();
+
+        var input = new MuscleGroupsFromSqlInput(muscleGroupRows);
+
+        return input.getMuscleGroups();
     }
 
     @Override
