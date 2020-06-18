@@ -15,9 +15,17 @@ public class MuscleGroupRow {
     private String name;
 
     @Column(name = "is_selectable")
-    private int isSelectable;
+    private boolean isSelectable;
+
+    @ManyToOne
+    @JoinColumn(name = "workout_id", nullable = false)
+    private WorkoutRow workout;
+
+    @OneToMany(mappedBy = "muscleGroup")
+    private List<ExerciseRow> exercises;
 
     public MuscleGroupRow() {
+
     }
 
     public long getId() {
@@ -38,5 +46,26 @@ public class MuscleGroupRow {
 
     public List<ExerciseRow> getExercises() {
         return new ArrayList<>();
+    }
+
+    public boolean isSelectable() {
+        return isSelectable;
+    }
+
+    public void setSelectable(boolean selectable) {
+        isSelectable = selectable;
+    }
+
+    public WorkoutRow getWorkout() {
+        return workout;
+    }
+
+    public void setWorkout(WorkoutRow workout) {
+        this.workout = workout;
+    }
+
+    public void setExercises(List<ExerciseRow> exercises) {
+        this.exercises = exercises;
+        exercises.forEach(e -> e.setMuscleGroup(this));
     }
 }

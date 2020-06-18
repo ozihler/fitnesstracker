@@ -1,6 +1,7 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.sql.rows;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "exercise")
@@ -16,9 +17,17 @@ public class ExerciseRow {
     private int multiplier;
 
     @Column(name = "is_selectable")
-    private int isSelectable;
+    private boolean isSelectable;
+
+    @ManyToOne
+    @JoinColumn(name = "muscle_group_id", nullable = false)
+    private MuscleGroupRow muscleGroup;
+
+    @OneToMany(mappedBy = "exercise")
+    private List<SetRow> sets;
 
     public ExerciseRow() {
+
     }
 
     public long getId() {
@@ -43,5 +52,31 @@ public class ExerciseRow {
 
     public void setMultiplier(int multiplier) {
         this.multiplier = multiplier;
+    }
+
+
+    public MuscleGroupRow getMuscleGroup() {
+        return muscleGroup;
+    }
+
+    public void setMuscleGroup(MuscleGroupRow muscleGroup) {
+        this.muscleGroup = muscleGroup;
+    }
+
+    public List<SetRow> getSets() {
+        return sets;
+    }
+
+    public void setSets(List<SetRow> sets) {
+        this.sets = sets;
+        sets.forEach(setRow -> setRow.setExercise(this));
+    }
+
+    public boolean isSelectable() {
+        return isSelectable;
+    }
+
+    public void setSelectable(boolean selectable) {
+        isSelectable = selectable;
     }
 }

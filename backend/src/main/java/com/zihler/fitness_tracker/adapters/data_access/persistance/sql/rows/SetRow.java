@@ -24,6 +24,10 @@ public class SetRow {
     @Column(name = "waiting_time_unit")
     private String waitingTimeUnit;
 
+    @ManyToOne
+    @JoinColumn(name = "exercise_id", nullable = false)
+    private ExerciseRow exercise;
+
     public SetRow() {
     }
 
@@ -73,5 +77,13 @@ public class SetRow {
 
     public void setWaitingTimeUnit(String waitingTimeUnit) {
         this.waitingTimeUnit = waitingTimeUnit;
+    }
+
+    public ExerciseRow getExercise() {
+        return exercise;
+    }
+
+    public void setExercise(ExerciseRow exercise) {
+        this.exercise = exercise;
     }
 }

@@ -1,4 +1,4 @@
-package com.zihler.fitness_tracker.adapters.data_access.data_loading;
+package com.zihler.fitness_tracker.adapters.data_access.persistance.data_loading;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

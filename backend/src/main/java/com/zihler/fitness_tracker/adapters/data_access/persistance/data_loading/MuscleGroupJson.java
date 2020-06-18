@@ -1,21 +1,18 @@
-package com.zihler.fitness_tracker.adapters.data_access.data_loading;
+package com.zihler.fitness_tracker.adapters.data_access.persistance.data_loading;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class ExerciseJson {
-
+public class MuscleGroupJson {
     @JsonProperty("name")
     private String name;
-    @JsonProperty("sets")
-    private List<SetJson> sets;
-    @JsonProperty("multiplier")
-    private int multiplier;
+    @JsonProperty("exercises")
+    private List<ExerciseJson> exercises;
     @JsonProperty("isSelectable")
     private boolean isSelectable;
 
-    public ExerciseJson() {
+    public MuscleGroupJson() {
     }
 
     public String getName() {
@@ -26,20 +23,12 @@ public class ExerciseJson {
         this.name = name;
     }
 
-    public List<SetJson> getSets() {
-        return sets;
+    public List<ExerciseJson> getExercises() {
+        return exercises;
     }
 
-    public void setSets(List<SetJson> sets) {
-        this.sets = sets;
-    }
-
-    public int getMultiplier() {
-        return multiplier;
-    }
-
-    public void setMultiplier(int multiplier) {
-        this.multiplier = multiplier;
+    public void setExercises(List<ExerciseJson> exercises) {
+        this.exercises = exercises;
     }
 
     public boolean isSelectable() {
@@ -52,10 +41,9 @@ public class ExerciseJson {
 
     @Override
     public String toString() {
-        return "ExerciseJson{" +
+        return "MuscleGroupJson{" +
                 "name='" + name + '\'' +
-                ", sets=" + sets +
-                ", multiplier=" + multiplier +
+                ", exercises=" + exercises +
                 ", isSelectable=" + isSelectable +
                 '}';
     }
