@@ -5,6 +5,8 @@ import com.zihler.fitness_tracker.domain.values.Exercises;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 public class ExercisesFromSqlInput {
     private final List<ExerciseRow> exercises;
 
@@ -13,6 +15,11 @@ public class ExercisesFromSqlInput {
     }
 
     public Exercises getExercises() {
-        return Exercises.of();
+        return Exercises.of(
+                exercises.stream()
+                        .map(ExerciseFromSqlInput::new)
+                        .map(ExerciseFromSqlInput::getExercise)
+                        .collect(toList())
+        );
     }
 }

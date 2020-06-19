@@ -12,9 +12,11 @@ public class MuscleGroupFromSqlInput {
     }
 
     public MuscleGroup getMuscleGroup() {
-        return new MuscleGroup(
+        var muscleGroup = new MuscleGroup(
                 Name.of(muscleGroupRow.getName()),
-                new ExercisesFromSqlInput(muscleGroupRow.getExercises()).getExercises()
-        );
+                new ExercisesFromSqlInput(muscleGroupRow.getExercises()).getExercises());
+        muscleGroup.setSelectable(muscleGroupRow.isSelectable());
+
+        return muscleGroup;
     }
 }

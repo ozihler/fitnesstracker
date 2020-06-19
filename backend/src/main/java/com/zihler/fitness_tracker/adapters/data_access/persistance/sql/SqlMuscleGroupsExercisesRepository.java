@@ -1,6 +1,9 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.sql;
 
-import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.inputs.MuscleGroupsFromSqlInput;
+import com.zihler.fitness_tracker.adapters.data_access.exceptions.ExerciseNotFoundException;
+import com.zihler.fitness_tracker.adapters.data_access.exceptions.MuscleGroupNotFoundException;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.inputs.*;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.rows.MuscleGroupRow;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.*;
 import com.zihler.fitness_tracker.domain.entities.Exercise;
 import com.zihler.fitness_tracker.domain.entities.MuscleGroup;
@@ -49,21 +52,33 @@ public class SqlMuscleGroupsExercisesRepository implements
 
     @Override
     public Exercise byName(Name exerciseName) {
-        return null;
+        return this.exerciseRepository.findByName(exerciseName.toString())
+                .map(ExerciseFromSqlInput::new)
+                .map(ExerciseFromSqlInput::getExercise)
+                .orElseThrow(() -> new ExerciseNotFoundException("Could not find Exercise with name " + exerciseName.toString()));
     }
 
     @Override
     public Exercises forMuscleGroup(MuscleGroupName muscleGroupName) {
-        return null;
+        return muscleGroupsRepository.findByName(muscleGroupName.toString())
+                .map(MuscleGroupRow::getExercises)
+                .map(ExercisesFromSqlInput::new)
+                .map(ExercisesFromSqlInput::getExercises)
+                .orElseThrow(() -> new MuscleGroupNotFoundException("Could not find Muscle Group with name " + muscleGroupName.toString()));
     }
 
     @Override
     public MuscleGroup by(Name name) {
-        return null;
+        return muscleGroupsRepository.findByName(name.toString())
+                .map(MuscleGroupFromSqlInput::new)
+                .map(MuscleGroupFromSqlInput::getMuscleGroup)
+                .orElseThrow(() -> new MuscleGroupNotFoundException("Could not find Muscle Group with name " + name.toString()));
     }
+
 
     @Override
     public Exercise withValues(Exercise exercise) {
+        new ExerciseRowInput(exercise).getRow();
         return null;
     }
 
