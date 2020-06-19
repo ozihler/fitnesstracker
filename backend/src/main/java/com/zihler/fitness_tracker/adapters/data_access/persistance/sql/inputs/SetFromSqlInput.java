@@ -13,9 +13,9 @@ public class SetFromSqlInput {
 
     public Set getSet() {
         return new Set(
-                Weight.of(setRow.getWeight(), UnitOfMeasurement.valueOf(setRow.getWeightUnit())),
+                Weight.of(setRow.getWeight(), UnitOfMeasurement.fromShortName(setRow.getWeightUnit())),
                 Repetitions.of(setRow.getRepetitions()),
-                WaitingTime.of(setRow.getWaitingTime(), UnitOfTime.valueOf(setRow.getWaitingTimeUnit()))
+                WaitingTime.of(setRow.getWaitingTime(), UnitOfTime.fromShortName(setRow.getWaitingTimeUnit()))
         );
     }
 }

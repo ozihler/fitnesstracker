@@ -14,6 +14,7 @@ public class MuscleGroupToSqlOutput {
         var muscleGroupRow = new MuscleGroupRow();
         muscleGroupRow.setName(muscleGroup.getName().toString());
         muscleGroupRow.setSelectable(muscleGroup.isSelectable());
+        // todo don't set exercises here ... ?
         return muscleGroupRow;
     }
 }

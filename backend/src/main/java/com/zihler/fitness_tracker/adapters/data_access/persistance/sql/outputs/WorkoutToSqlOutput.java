@@ -15,7 +15,7 @@ public class WorkoutToSqlOutput {
         row.setDeleted(workout.isDeleted());
         row.setCreationDate(workout.getCreationDate().toLocalDate());
         row.setWorkoutId(workout.getWorkoutId().toString());
-        row.setMuscleGroups(new MuscleGroupsToSqlOutput(workout.getMuscleGroups()).getRows());
+        // no muscle groups here because we need to see if muscle groups already exist or not
         return row;
     }
 }

@@ -60,7 +60,6 @@ public class MuscleGroupRow {
 
     public void setExercises(List<ExerciseRow> exercises) {
         this.exercises = exercises;
-        exercises.forEach(e -> e.setMuscleGroup(this));
     }
 
     public List<WorkoutRow> getWorkouts() {

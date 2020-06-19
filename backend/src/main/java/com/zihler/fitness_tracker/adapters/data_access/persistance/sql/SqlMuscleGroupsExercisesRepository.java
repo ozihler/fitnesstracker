@@ -20,7 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
-import java.util.stream.Collectors;
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Repository
 @Profile("prod")
@@ -85,6 +87,8 @@ public class SqlMuscleGroupsExercisesRepository implements
         rowToUpdate.setSelectable(exercise.isSelectable());
         rowToUpdate.setMultiplier(exercise.getMultiplier().value());
 
+        // todo do not add sets here ...?
+
         var updatedRow = exerciseRepository.save(rowToUpdate);
 
         return new ExerciseFromSqlInput(updatedRow)
@@ -94,9 +98,17 @@ public class SqlMuscleGroupsExercisesRepository implements
     @Override
     public Exercises ofMuscleGroup(Name muscleGroupName, Exercises exercises) {
         var muscleGroupRowToAppendExercises = this.muscleGroupsRepository.findByNameOrThrow(muscleGroupName.toString());
-        var exerciseRowsToStore = new ExercisesToSqlOutput(muscleGroupRowToAppendExercises, exercises.getExercises()).getRows();
-        var storedExerciseRows = this.exerciseRepository.saveAll(exerciseRowsToStore);
-        return new ExercisesFromSqlInput(storedExerciseRows).getExercises();
+        var newExercisesToStore = filterOutExistingExercises(exercises);
+        var exerciseRowsToStore = new ExercisesToSqlOutput(muscleGroupRowToAppendExercises, newExercisesToStore).getRows();
+        this.exerciseRepository.saveAll(exerciseRowsToStore);
+        var updatedMuscleGroup = this.muscleGroupsRepository.findByNameOrThrow(muscleGroupName.toString());
+        return new ExercisesFromSqlInput(updatedMuscleGroup.getExercises()).getExercises();
+    }
+
+    private List<Exercise> filterOutExistingExercises(Exercises exercises) {
+        return exercises.getExercises().stream()
+                .filter(e -> this.exerciseRepository.findByName(e.getName().toString()).isEmpty())
+                .collect(toList());
     }
 
     @Override
@@ -118,7 +130,7 @@ public class SqlMuscleGroupsExercisesRepository implements
     private MuscleGroup updateMuscleGroup(MuscleGroupRow muscleGroupRow, MuscleGroup newData) {
         muscleGroupRow.setName(newData.getName().toString());
         muscleGroupRow.setSelectable(newData.isSelectable());
-        muscleGroupRow.setExercises(new ExercisesToSqlOutput(muscleGroupRow, newData.getExercises().getExercises()).getRows());
+        // todo Don't update exercises here... ?
         return newData;
     }
 
@@ -127,6 +139,6 @@ public class SqlMuscleGroupsExercisesRepository implements
         return MuscleGroups.of(muscleGroups.getMuscleGroups()
                 .stream()
                 .map(this::withValues)
-                .collect(Collectors.toList()));
+                .collect(toList()));
     }
 }

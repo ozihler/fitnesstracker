@@ -19,6 +19,8 @@ public class ExerciseToSqlOutput {
         row.setSelectable(exercise.isSelectable());
         row.setMuscleGroup(muscleGroupRowToAppendExercises);
         row.setMultiplier(exercise.getMultiplier().value());
+
+        // todo no sets added here (?)
         return row;
     }
 }
