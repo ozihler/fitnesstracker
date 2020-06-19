@@ -16,7 +16,7 @@ public class WorkoutRowOutput {
         workoutRow.setWorkoutId(workoutJson.getWorkoutId());
         workoutRow.setCreationDate(CreationDate.of(workoutJson.getCreationDate()).toLocalDate());
         workoutRow.setDeleted(false);
-        workoutRow.setMuscleGroups(new MuscleGroupsRawOutput(workoutJson.getMuscleGroups()).getRows());
+        workoutRow.setMuscleGroups(new MuscleGroupsRowOutput(workoutJson.getMuscleGroups()).getRows());
         return workoutRow;
     }
 }

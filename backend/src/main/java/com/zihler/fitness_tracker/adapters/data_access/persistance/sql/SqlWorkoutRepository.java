@@ -1,7 +1,10 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.sql;
 
+import com.zihler.fitness_tracker.adapters.data_access.exceptions.ExerciseNotFoundException;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.inputs.WorkoutFromSqlInput;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.inputs.WorkoutsFromSqlInput;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.outputs.SetToSqlOutput;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.outputs.WorkoutToSqlOutput;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.rows.MuscleGroupRow;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.rows.WorkoutRow;
 import com.zihler.fitness_tracker.application.outbound_ports.gateways.*;
@@ -14,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
+
 @Repository
 @Profile("prod")
 public class SqlWorkoutRepository implements
@@ -21,7 +26,7 @@ public class SqlWorkoutRepository implements
         FetchWorkout,
         FetchWorkouts,
         StoreWorkout,
-        StoreSet {
+        AddSetToWorkout {
 
     private final JpaWorkoutRepository workoutRepository;
 
@@ -58,15 +63,28 @@ public class SqlWorkoutRepository implements
     @Override
     public Set withValues(WorkoutId workoutId, Name exerciseName, Set setToStore) {
         var workout = workoutRepository.findByWorkoutIdOrThrow(workoutId.toString());
-        for (MuscleGroupRow m : workout.getMuscleGroups()) {
-            var exercises = m.getExercises();
-            exercises.stream().filter(e -> e.getName().equalsIgnoreCase(exerciseName.toString()));
-        }
-        return null;
+        var row = new SetToSqlOutput(setToStore).getRow();
+        workout.getMuscleGroups()
+                .stream()
+                .map(MuscleGroupRow::getExercises)
+                .flatMap(Collection::stream)
+                .filter(e -> e.getName().equalsIgnoreCase(exerciseName.toString()))
+                .findFirst()
+                .orElseThrow(() -> new ExerciseNotFoundException("Could not find Exercise with name " + exerciseName + " in workout " + workoutId + " to add set"))
+                .getSets()
+                .add(row);
+
+        this.workoutRepository.save(workout);
+
+        return setToStore;
     }
 
     @Override
     public Workout withValues(Workout workout) {
-        return null;
+        var workoutToSaveRow = new WorkoutToSqlOutput(workout).getRow();
+        var storedWorkoutRow = this.workoutRepository.save(workoutToSaveRow);
+
+        return new WorkoutFromSqlInput(storedWorkoutRow)
+                .getWorkout();
     }
 }

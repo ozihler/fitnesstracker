@@ -24,7 +24,7 @@ public class FileSystemInMemoryWorkoutRepository
         FetchWorkout,
         FetchWorkouts,
         StoreWorkout,
-        StoreSet {
+        AddSetToWorkout {
 
     private static int currentId = 1;
     private final int userId = 1;

@@ -3,7 +3,7 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets;
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets.inputs.AddSetToExerciseInput;
 import com.zihler.fitness_tracker.adapters.presentation.rest.presenters.sets.RestSetPresenter;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.SetViewModel;
-import com.zihler.fitness_tracker.application.outbound_ports.gateways.StoreSet;
+import com.zihler.fitness_tracker.application.outbound_ports.gateways.AddSetToWorkout;
 import com.zihler.fitness_tracker.application.use_cases.exercises.add_set_to_exercise.AddSetToExerciseUseCase;
 import com.zihler.fitness_tracker.application.use_cases.exercises.add_set_to_exercise.inbound_port.AddSetToExercise;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +14,8 @@ public class AddSetToExercisesController {
 
     private final AddSetToExercise addSetToExercise;
 
-    public AddSetToExercisesController(StoreSet storeSet) {
-        addSetToExercise = new AddSetToExerciseUseCase(storeSet);
+    public AddSetToExercisesController(AddSetToWorkout addSetToWorkout) {
+        addSetToExercise = new AddSetToExerciseUseCase(addSetToWorkout);
     }
 
     public ResponseEntity<SetViewModel> addSetToExercise(String workoutId, String exerciseName, SetViewModel setToAdd) {

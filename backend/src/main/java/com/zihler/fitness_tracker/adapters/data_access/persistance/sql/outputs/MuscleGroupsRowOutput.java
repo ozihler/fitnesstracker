@@ -7,10 +7,10 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public class MuscleGroupsRawOutput {
+public class MuscleGroupsRowOutput {
     private final List<MuscleGroupJson> muscleGroups;
 
-    public MuscleGroupsRawOutput(List<MuscleGroupJson> muscleGroups) {
+    public MuscleGroupsRowOutput(List<MuscleGroupJson> muscleGroups) {
         this.muscleGroups = muscleGroups;
     }
 
