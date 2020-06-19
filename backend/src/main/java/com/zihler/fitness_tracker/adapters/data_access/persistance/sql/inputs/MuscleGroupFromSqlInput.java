@@ -15,8 +15,8 @@ public class MuscleGroupFromSqlInput {
         var muscleGroup = new MuscleGroup(
                 Name.of(muscleGroupRow.getName()),
                 new ExercisesFromSqlInput(muscleGroupRow.getExercises()).getExercises());
-        muscleGroup.setSelectable(muscleGroupRow.isSelectable());
 
+        muscleGroup.setSelectable(muscleGroupRow.isSelectable());
         return muscleGroup;
     }
 }

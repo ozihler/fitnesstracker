@@ -1,6 +1,7 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.sql.rows;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,7 +28,7 @@ public class ExerciseRow {
     @OneToMany(mappedBy = "exercise",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    private List<SetRow> sets;
+    private List<SetRow> sets = new ArrayList<>();
 
     public ExerciseRow() {
 
@@ -64,6 +65,7 @@ public class ExerciseRow {
 
     public void setMuscleGroup(MuscleGroupRow muscleGroup) {
         this.muscleGroup = muscleGroup;
+        this.muscleGroup.getExercises().add(this);
     }
 
     public List<SetRow> getSets() {

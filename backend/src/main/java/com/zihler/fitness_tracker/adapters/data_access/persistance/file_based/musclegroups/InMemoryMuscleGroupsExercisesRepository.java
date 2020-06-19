@@ -28,7 +28,7 @@ public class InMemoryMuscleGroupsExercisesRepository
         FetchExercises,
         StoreExercises,
         FetchExercise,
-        StoreExercise {
+        UpdateExistingExercise {
     private static final Logger logger = LoggerFactory.getLogger(InMemoryMuscleGroupsExercisesRepository.class);
 
     private Map<Name, MuscleGroup> muscleGroupsAndExercises;
@@ -73,7 +73,7 @@ public class InMemoryMuscleGroupsExercisesRepository
     }
 
     @Override
-    public Exercises forMuscleGroup(Name muscleGroupName, Exercises exercises) {
+    public Exercises ofMuscleGroup(Name muscleGroupName, Exercises exercises) {
         MuscleGroup muscleGroup = muscleGroupsAndExercises.get(muscleGroupName);
 
         if (muscleGroup == null) {
@@ -116,7 +116,7 @@ public class InMemoryMuscleGroupsExercisesRepository
                 .get();
 
 
-        return forMuscleGroup(muscleGroup.getName(), Exercises.of(List.of(exercise)))
+        return ofMuscleGroup(muscleGroup.getName(), Exercises.of(List.of(exercise)))
                 .getExercises()
                 .stream()
                 .findFirst()

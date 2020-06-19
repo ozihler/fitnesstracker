@@ -2,6 +2,7 @@ package com.zihler.fitness_tracker.adapters.data_access.persistance.sql.rows;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,7 +28,7 @@ public class WorkoutRow {
             joinColumns = {@JoinColumn(name = "workout_id")},
             inverseJoinColumns = {@JoinColumn(name = "muscle_group_id")}
     )
-    private List<MuscleGroupRow> muscleGroups;
+    private List<MuscleGroupRow> muscleGroups = new ArrayList<>();
 
     public WorkoutRow() {
     }

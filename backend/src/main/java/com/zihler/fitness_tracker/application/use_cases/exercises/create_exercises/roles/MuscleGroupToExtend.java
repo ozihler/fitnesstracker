@@ -27,7 +27,7 @@ public class MuscleGroupToExtend {
     }
 
     public void addAndStore(Exercises exercises) {
-        appendedExercises = storeExercises.forMuscleGroup(self.getName(), exercises);
+        appendedExercises = storeExercises.ofMuscleGroup(self.getName(), exercises);
     }
 
     public void present() {

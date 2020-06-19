@@ -29,7 +29,7 @@ public class FileSystemInMemoryMuscleGroupsExercisesRepository
         FetchExercises,
         StoreExercises,
         FetchExercise,
-        StoreExercise {
+        UpdateExistingExercise {
     private static final Logger logger = LoggerFactory.getLogger(FileSystemInMemoryMuscleGroupsExercisesRepository.class);
 
     private MuscleGroupAndExercisesFileSystemDirectory fileSystemDirectory;
@@ -84,7 +84,7 @@ public class FileSystemInMemoryMuscleGroupsExercisesRepository
     }
 
     @Override
-    public Exercises forMuscleGroup(Name muscleGroupName, Exercises exercises) {
+    public Exercises ofMuscleGroup(Name muscleGroupName, Exercises exercises) {
         MuscleGroup muscleGroup = muscleGroupsAndExercises.get(muscleGroupName);
 
         if (muscleGroup == null) {
@@ -128,7 +128,7 @@ public class FileSystemInMemoryMuscleGroupsExercisesRepository
                 .get();
 
 
-        return forMuscleGroup(muscleGroup.getName(), Exercises.of(List.of(exercise)))
+        return ofMuscleGroup(muscleGroup.getName(), Exercises.of(List.of(exercise)))
                 .getExercises()
                 .stream()
                 .findFirst()

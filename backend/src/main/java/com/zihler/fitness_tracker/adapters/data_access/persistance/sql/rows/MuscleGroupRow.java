@@ -1,6 +1,7 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.sql.rows;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,12 +19,12 @@ public class MuscleGroupRow {
     private boolean isSelectable;
 
     @ManyToMany(mappedBy = "muscleGroups")
-    private List<WorkoutRow> workouts;
+    private List<WorkoutRow> workouts = new ArrayList<>();
 
     @OneToMany(mappedBy = "muscleGroup",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    private List<ExerciseRow> exercises;
+    private List<ExerciseRow> exercises = new ArrayList<>();
 
     public MuscleGroupRow() {
 
