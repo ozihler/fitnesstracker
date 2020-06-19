@@ -3,7 +3,7 @@ package com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets.i
 import com.zihler.fitness_tracker.adapters.presentation.rest.controllers.sets.exceptions.IllegalSetDetailsException;
 import com.zihler.fitness_tracker.adapters.presentation.rest.viewmodels.SetViewModel;
 import com.zihler.fitness_tracker.domain.exceptions.IllegalNameException;
-import com.zihler.fitness_tracker.domain.exceptions.IllegalWorkoutIdException;
+import com.zihler.fitness_tracker.domain.exceptions.WorkoutIdNotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -71,11 +71,11 @@ class AddSetToExerciseInputTest {
     void throwsExceptionWhenWorkoutIdIsInvalid() {
         var input = new AddSetToExerciseInput(null, null, null);
 
-        assertThrows(IllegalWorkoutIdException.class, input::workoutId);
+        assertThrows(WorkoutIdNotFoundException.class, input::workoutId);
 
         var input2 = new AddSetToExerciseInput("", null, null);
 
-        assertThrows(IllegalWorkoutIdException.class, input2::workoutId);
+        assertThrows(WorkoutIdNotFoundException.class, input2::workoutId);
     }
 
     @Test
