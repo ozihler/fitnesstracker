@@ -1,6 +1,7 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.sql.rows;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "set")
@@ -24,7 +25,7 @@ public class SetRow {
     @Column(name = "waiting_time_unit")
     private String waitingTimeUnit;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "exercise_id", nullable = false)
     private ExerciseRow exercise;
 
@@ -85,5 +86,18 @@ public class SetRow {
 
     public void setExercise(ExerciseRow exercise) {
         this.exercise = exercise;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SetRow setRow = (SetRow) o;
+        return id == setRow.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

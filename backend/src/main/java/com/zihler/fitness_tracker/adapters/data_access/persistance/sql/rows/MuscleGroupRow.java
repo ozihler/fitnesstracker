@@ -1,8 +1,8 @@
 package com.zihler.fitness_tracker.adapters.data_access.persistance.sql.rows;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "muscle_group")
@@ -17,11 +17,12 @@ public class MuscleGroupRow {
     @Column(name = "is_selectable")
     private boolean isSelectable;
 
-    @ManyToOne
-    @JoinColumn(name = "workout_id", nullable = false)
-    private WorkoutRow workout;
+    @ManyToMany(mappedBy = "muscleGroups")
+    private List<WorkoutRow> workouts;
 
-    @OneToMany(mappedBy = "muscleGroup")
+    @OneToMany(mappedBy = "muscleGroup",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     private List<ExerciseRow> exercises;
 
     public MuscleGroupRow() {
@@ -45,7 +46,7 @@ public class MuscleGroupRow {
     }
 
     public List<ExerciseRow> getExercises() {
-        return new ArrayList<>();
+        return exercises;
     }
 
     public boolean isSelectable() {
@@ -56,27 +57,29 @@ public class MuscleGroupRow {
         isSelectable = selectable;
     }
 
-    public WorkoutRow getWorkout() {
-        return workout;
-    }
-
-    public void setWorkout(WorkoutRow workout) {
-        this.workout = workout;
-    }
-
     public void setExercises(List<ExerciseRow> exercises) {
         this.exercises = exercises;
         exercises.forEach(e -> e.setMuscleGroup(this));
     }
 
+    public List<WorkoutRow> getWorkouts() {
+        return workouts;
+    }
+
+    public void setWorkouts(List<WorkoutRow> workouts) {
+        this.workouts = workouts;
+    }
+
     @Override
-    public String toString() {
-        return "MuscleGroupRow{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", isSelectable=" + isSelectable +
-                ", workout=" + workout +
-                ", exercises=" + exercises +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MuscleGroupRow that = (MuscleGroupRow) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

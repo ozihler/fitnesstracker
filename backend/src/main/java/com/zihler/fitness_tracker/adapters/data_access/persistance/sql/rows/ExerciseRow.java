@@ -2,6 +2,7 @@ package com.zihler.fitness_tracker.adapters.data_access.persistance.sql.rows;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "exercise")
@@ -19,11 +20,13 @@ public class ExerciseRow {
     @Column(name = "is_selectable")
     private boolean isSelectable;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "muscle_group_id", nullable = false)
     private MuscleGroupRow muscleGroup;
 
-    @OneToMany(mappedBy = "exercise")
+    @OneToMany(mappedBy = "exercise",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     private List<SetRow> sets;
 
     public ExerciseRow() {
@@ -78,5 +81,18 @@ public class ExerciseRow {
 
     public void setSelectable(boolean selectable) {
         isSelectable = selectable;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ExerciseRow that = (ExerciseRow) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

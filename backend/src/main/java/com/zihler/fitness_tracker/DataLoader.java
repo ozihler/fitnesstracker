@@ -8,7 +8,7 @@ import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.JpaMuscle
 import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.JpaSetRepository;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.JpaWorkoutRepository;
 import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.outputs.WorkoutRowOutput;
-import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.rows.WorkoutRow;
+import com.zihler.fitness_tracker.adapters.data_access.persistance.sql.rows.ExerciseRow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,6 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.Optional;
 
 @Component
 public class DataLoader implements ApplicationRunner {
@@ -43,29 +42,28 @@ public class DataLoader implements ApplicationRunner {
     public void run(ApplicationArguments args) {
 
         var workoutsJson = loadExistingWorkouts();
-        Optional<WorkoutRow> workoutO = workoutRepository.findByWorkoutId(workoutsJson.getWorkouts().get(0).getWorkoutId());
-        if (workoutO.isEmpty()) {
-            workoutsJson.getWorkouts().forEach(
-                    workoutJson -> {
-                        var workoutRow = new WorkoutRowOutput(workoutJson).getRow();
-                        workoutRepository.save(workoutRow);
-                        var muscleGroups = workoutRow.getMuscleGroups();
-                        muscleGroups.forEach(muscleGroupRow -> {
-                            logger.info("Storing musclegroup row: " + muscleGroupRow);
-                            if (muscleGroupsRepository.findByName(muscleGroupRow.getName()).isEmpty()) {
-                                muscleGroupsRepository.save(muscleGroupRow);
-                            }
-                            var exercises = muscleGroupRow.getExercises();
-                            exercises.forEach(exerciseRow -> {
-                                if (exerciseRepository.findByName(muscleGroupRow.getName()).isEmpty()) {
-                                    exerciseRepository.save(exerciseRow);
-                                }
-                                setRepository.saveAll(exerciseRow.getSets());
-                            });
-                        });
-                    }
-            );
-        }
+        workoutsJson.getWorkouts().forEach(workoutJson -> {
+            new WorkoutRowOutput(workoutJson).getRow().getMuscleGroups().stream().filter(muscleGroup -> muscleGroupsRepository.findByName(muscleGroup.getName()).isEmpty()).forEach(muscleGroupsRepository::save);
+        });
+        workoutsJson.getWorkouts().forEach(workoutJson -> {
+            new WorkoutRowOutput(workoutJson).getRow().getMuscleGroups().stream().filter(muscleGroup -> muscleGroupsRepository.findByName(muscleGroup.getName()).isPresent()).forEach(muscleGroupRow -> muscleGroupRow.getExercises().stream().filter(exerciseRow -> exerciseRepository.findByName(exerciseRow.getName()).isEmpty()).forEach(exerciseRepository::save));
+        });
+        workoutsJson.getWorkouts().forEach(workoutJson -> {
+            // todo: fetch stored workout/muscle group/exercise/ set individually (because each has an own id) ==> Implement Adapters and call adapter methods!
+            new WorkoutRowOutput(workoutJson).getRow().getMuscleGroups().forEach(muscleGroupRow -> {
+                muscleGroupRow.getExercises().stream().map(ExerciseRow::getSets).forEach(entities -> {
+                    entities.forEach(entity -> {
+                        logger.info("Exercise is stored? : " + exerciseRepository.findByName(entity.getExercise().getName()).isPresent());
+                        logger.info("Storing " + entity.getId() + " of exercise " + entity.getExercise().getName());
+                        setRepository.save(entity);
+                    });
+                });
+            });
+        });
+        workoutsJson.getWorkouts().stream()
+                .filter(workoutJson -> workoutRepository.findByWorkoutId(workoutJson.getWorkoutId()).isEmpty()).forEach(workoutJson -> {
+            workoutRepository.save(new WorkoutRowOutput(workoutJson).getRow());
+        });
     }
 
     private WorkoutsJson loadExistingWorkouts() {

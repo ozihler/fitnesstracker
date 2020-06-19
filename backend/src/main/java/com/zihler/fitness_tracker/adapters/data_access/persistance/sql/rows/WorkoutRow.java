@@ -3,6 +3,7 @@ package com.zihler.fitness_tracker.adapters.data_access.persistance.sql.rows;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "workout")
@@ -20,7 +21,12 @@ public class WorkoutRow {
     @Column(name = "is_deleted")
     private boolean isDeleted;
 
-    @OneToMany(mappedBy = "workout")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "workout_to_muscle_group",
+            joinColumns = {@JoinColumn(name = "workout_id")},
+            inverseJoinColumns = {@JoinColumn(name = "muscle_group_id")}
+    )
     private List<MuscleGroupRow> muscleGroups;
 
     public WorkoutRow() {
@@ -64,6 +70,18 @@ public class WorkoutRow {
 
     public void setMuscleGroups(List<MuscleGroupRow> muscleGroups) {
         this.muscleGroups = muscleGroups;
-        muscleGroups.forEach(muscleGroup -> muscleGroup.setWorkout(this));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WorkoutRow that = (WorkoutRow) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
