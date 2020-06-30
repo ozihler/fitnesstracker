@@ -6,8 +6,6 @@ import com.zihler.fitness_tracker.domain.values.Multiplier;
 import com.zihler.fitness_tracker.domain.values.Name;
 import com.zihler.fitness_tracker.domain.values.Sets;
 
-import static java.util.stream.Collectors.toList;
-
 public class ExerciseFromSqlInput {
     private final ExerciseRow exerciseRow;
 
@@ -18,7 +16,7 @@ public class ExerciseFromSqlInput {
     public Exercise getExercise() {
         var exercise = new Exercise(
                 Name.of(exerciseRow.getName()),
-                Sets.of(exerciseRow.getSets().stream().map(SetFromSqlInput::new).map(SetFromSqlInput::getSet).collect(toList())),
+                Sets.empty(),
                 Multiplier.of(exerciseRow.getMultiplier())
         );
 

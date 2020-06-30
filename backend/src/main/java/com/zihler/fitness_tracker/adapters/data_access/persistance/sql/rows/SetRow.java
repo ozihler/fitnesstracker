@@ -29,7 +29,16 @@ public class SetRow {
     @JoinColumn(name = "exercise_id", nullable = false)
     private ExerciseRow exercise;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "exercise_muscle_group_id", nullable = false)
+    private MuscleGroupRow muscleGroup;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "workout_id", nullable = false)
+    private WorkoutRow workout;
+
     public SetRow() {
+
     }
 
     public long getId() {
@@ -88,6 +97,14 @@ public class SetRow {
         this.exercise = exercise;
     }
 
+    public WorkoutRow getWorkout() {
+        return workout;
+    }
+
+    public void setWorkout(WorkoutRow workout) {
+        this.workout = workout;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -99,5 +116,13 @@ public class SetRow {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public MuscleGroupRow getMuscleGroup() {
+        return muscleGroup;
+    }
+
+    public void setMuscleGroup(MuscleGroupRow muscleGroup) {
+        this.muscleGroup = muscleGroup;
     }
 }

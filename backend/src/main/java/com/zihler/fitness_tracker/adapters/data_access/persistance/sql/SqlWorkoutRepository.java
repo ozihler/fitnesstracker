@@ -57,8 +57,9 @@ public class SqlWorkoutRepository implements
     @Override
     public Workout by(WorkoutId id) {
         WorkoutRow row = workoutRepository.findByWorkoutIdOrThrow(id.toString());
+        var allSets = setRepository.findAllByWorkout(row);
         //todo append all muscle groups, exercises, and sets here....
-        return new WorkoutFromSqlInput(row).getWorkout();
+        return new WorkoutFromSqlInput(row, allSets).getWorkout();
     }
 
     @Override
@@ -81,7 +82,7 @@ public class SqlWorkoutRepository implements
     public Set withValues(WorkoutId workoutId, Name exerciseName, Set setToStore) {
         var workout = workoutRepository.findByWorkoutIdOrThrow(workoutId.toString());
         var exerciseRow = exerciseRepository.findByNameOrThrow(exerciseName.toString());
-        var row = new SetToSqlOutput(setToStore, exerciseRow).getRow();
+        var row = new SetToSqlOutput(setToStore, exerciseRow, workout).getRow();
         workout.getMuscleGroups()
                 .stream()
                 .map(MuscleGroupRow::getExercises)
@@ -102,14 +103,15 @@ public class SqlWorkoutRepository implements
         var workoutToSaveRow = new WorkoutToSqlOutput(workout).getRow();
         assureAllMuscleGroupsExistIn(workout); // assure the muscle group exists
         assureAllExercisesOfMuscleGroupsExistIn(workout);
-        storeAllSetsOf(workout);
         var storedWorkoutRow = this.workoutRepository.save(workoutToSaveRow);
+        storeAllSetsOf(workout);
 
-        return new WorkoutFromSqlInput(storedWorkoutRow)
+        return new WorkoutFromSqlInput(storedWorkoutRow, allSets)
                 .getWorkout();
     }
 
     private void storeAllSetsOf(Workout workout) {
+        var workoutRow = workoutRepository.findByWorkoutIdOrThrow(workout.getWorkoutId().toString());
         for (MuscleGroup muscleGroup : workout.getMuscleGroups().getMuscleGroups()) {
             Exercises exercises = muscleGroup.getExercises();
             List<Exercise> exercisesExercises = exercises.getExercises();
@@ -118,7 +120,7 @@ public class SqlWorkoutRepository implements
 
                 var setRowsToStore = exercise.getSets().getSets()
                         .stream()
-                        .map(set -> new SetToSqlOutput(set, exerciseRow))
+                        .map(set -> new SetToSqlOutput(set, exerciseRow, workoutRow))
                         .map(SetToSqlOutput::getRow)
                         .collect(Collectors.toList());
                 setRepository.saveAll(setRowsToStore);

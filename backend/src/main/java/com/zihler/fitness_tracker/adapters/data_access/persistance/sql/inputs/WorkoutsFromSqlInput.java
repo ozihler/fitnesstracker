@@ -16,7 +16,7 @@ public class WorkoutsFromSqlInput {
 
     public Workouts getWorkouts() {
         return Workouts.of(rows.stream()
-                .map(WorkoutFromSqlInput::new)
+                .map(row -> new WorkoutFromSqlInput(row, allSets))
                 .map(WorkoutFromSqlInput::getWorkout)
                 .collect(toList()));
     }

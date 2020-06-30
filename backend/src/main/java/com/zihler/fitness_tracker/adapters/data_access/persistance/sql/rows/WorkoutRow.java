@@ -30,6 +30,13 @@ public class WorkoutRow {
     )
     private List<MuscleGroupRow> muscleGroups = new ArrayList<>();
 
+    @OneToMany(
+            mappedBy = "workout",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<SetRow> sets = new ArrayList<>();
+
     public WorkoutRow() {
     }
 
@@ -71,6 +78,15 @@ public class WorkoutRow {
 
     public void setMuscleGroups(List<MuscleGroupRow> muscleGroups) {
         this.muscleGroups = muscleGroups;
+    }
+
+    public List<SetRow> getSets() {
+        return sets;
+    }
+
+    public void setSets(List<SetRow> sets) {
+        this.sets = sets;
+        this.sets.forEach(setRow -> setRow.setWorkout(this));
     }
 
     @Override
