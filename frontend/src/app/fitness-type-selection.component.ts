@@ -2,7 +2,7 @@ import {Component, Injectable, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {DatePipe} from '@angular/common';
 import {environment} from '../environments/environment';
-import {map} from 'rxjs/operators';
+import {map, take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-fitness-type-selection',
@@ -34,6 +34,7 @@ export class FitnessTypeSelectionComponent implements OnInit {
 
   constructor(private instantiationTimeService: InstantiationTimeService) {
     this.instantiationTimeService.getInstantiationTime()
+      .pipe(take(1))
       .subscribe(time => this.time = time);
   }
 
