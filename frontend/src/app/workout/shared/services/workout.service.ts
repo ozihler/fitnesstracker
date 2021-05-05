@@ -38,7 +38,9 @@ export class WorkoutService {
 
   createNewOrFetchWorkoutWithId(workoutId: string): Observable<Workout> {
     return this.createOrFetchWorkout(workoutId)
-      .pipe(map((data: WorkoutRaw) => WorkoutFactory.fromRaw(data)));
+      .pipe(
+        take(1),
+        map((data: WorkoutRaw) => WorkoutFactory.fromRaw(data)));
   }
 
   private createOrFetchWorkout(workoutId: string) {
@@ -58,7 +60,9 @@ export class WorkoutService {
       }
     };
     return this.httpClient.put<WorkoutRaw>(`${this.baseUrl}/workouts`, body)
-      .pipe(map((data:WorkoutRaw) => WorkoutFactory.fromRaw(data)));
+      .pipe(
+        take(1),
+        map((data:WorkoutRaw) => WorkoutFactory.fromRaw(data)));
   }
 
   private fetchWorkoutByIdRequest(workoutId: string) {
@@ -81,6 +85,7 @@ export class WorkoutService {
     return this.httpClient.delete<WorkoutRaw>(
       `${this.baseUrl}/workouts/${workoutId.value}`)
       .pipe(
+        take(1),
         map((deletedWorkoutRaw:WorkoutRaw) => WorkoutFactory.fromRaw(deletedWorkoutRaw))
       );
   }
@@ -88,6 +93,7 @@ export class WorkoutService {
   fetchAllWorkouts() {
     return this.httpClient.get<WorkoutEntriesRaw>(`${this.baseUrl}/workouts/overview`)
       .pipe(
+        take(1),
         map(
           (workoutsSimpleRaw:WorkoutEntriesRaw) => WorkoutEntryFactory.fromMultiple(workoutsSimpleRaw)
         )

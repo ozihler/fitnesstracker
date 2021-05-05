@@ -54,6 +54,7 @@ class InstantiationTimeService {
   getInstantiationTime() {
     return this.http.get<string>(environment.baseUrl + "/admin/instantiationTime")
       .pipe(
+        take(1),
         map(timeAsString => {
           return this.datePipe.transform(
             new Date(timeAsString as string),
