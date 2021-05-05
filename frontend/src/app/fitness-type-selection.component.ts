@@ -56,7 +56,7 @@ class InstantiationTimeService {
       .pipe(
         map(timeAsString => {
           return this.datePipe.transform(
-            new Date(timeAsString),
+            new Date(timeAsString as string),
             'long',
             '',
             'de'

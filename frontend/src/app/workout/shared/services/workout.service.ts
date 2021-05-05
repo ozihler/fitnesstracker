@@ -4,7 +4,7 @@ import {MuscleGroup} from '../muscle-group';
 import {Workout} from '../workout';
 import {WorkoutFactory} from '../workout.factory';
 import {HttpClient} from '@angular/common/http';
-import {map} from 'rxjs/operators';
+import {map, take} from 'rxjs/operators';
 import {WorkoutRaw} from '../workout-raw';
 import {environment} from '../../../../environments/environment';
 import {Exercise} from '../exercise';
@@ -38,7 +38,7 @@ export class WorkoutService {
 
   createNewOrFetchWorkoutWithId(workoutId: string): Observable<Workout> {
     return this.createOrFetchWorkout(workoutId)
-      .pipe(map(data => WorkoutFactory.fromRaw(data)));
+      .pipe(map((data: WorkoutRaw) => WorkoutFactory.fromRaw(data)));
   }
 
   private createOrFetchWorkout(workoutId: string) {
@@ -58,7 +58,7 @@ export class WorkoutService {
       }
     };
     return this.httpClient.put<WorkoutRaw>(`${this.baseUrl}/workouts`, body)
-      .pipe(map(data => WorkoutFactory.fromRaw(data)));
+      .pipe(map((data:WorkoutRaw) => WorkoutFactory.fromRaw(data)));
   }
 
   private fetchWorkoutByIdRequest(workoutId: string) {
@@ -74,14 +74,14 @@ export class WorkoutService {
     return this.httpClient.post<WorkoutIdRaw>(
       `${this.baseUrl}/workouts/copy`,
       {workoutId: workoutId.value})
-      .pipe(map(copiedWorkoutId => WorkoutId.from(copiedWorkoutId.workoutId)));
+      .pipe(take(1), map((copiedWorkoutId:WorkoutIdRaw) => WorkoutId.from(copiedWorkoutId.workoutId)));
   }
 
   deleteWorkoutWithId(workoutId: WorkoutId) {
     return this.httpClient.delete<WorkoutRaw>(
       `${this.baseUrl}/workouts/${workoutId.value}`)
       .pipe(
-        map(deletedWorkoutRaw => WorkoutFactory.fromRaw(deletedWorkoutRaw))
+        map((deletedWorkoutRaw:WorkoutRaw) => WorkoutFactory.fromRaw(deletedWorkoutRaw))
       );
   }
 
@@ -89,7 +89,7 @@ export class WorkoutService {
     return this.httpClient.get<WorkoutEntriesRaw>(`${this.baseUrl}/workouts/overview`)
       .pipe(
         map(
-          workoutsSimpleRaw => WorkoutEntryFactory.fromMultiple(workoutsSimpleRaw)
+          (workoutsSimpleRaw:WorkoutEntriesRaw) => WorkoutEntryFactory.fromMultiple(workoutsSimpleRaw)
         )
       );
   }
